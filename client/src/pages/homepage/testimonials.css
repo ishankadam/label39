@@ -1,0 +1,21 @@
+.dark-background {
+  background-color: #006a19 !important; /* Removed quotes */
+  color: #fff; /* Removed quotes */
+}
+.light-background {
+  background-color: #f0f0f0 !important; /* Removed quotes */
+  color: #000; /* Removed quotes */
+}
+
+.testimonials-container {
+  width: 600px; /* Adjust width for two columns */
+  height: 520px;
+}
+.testimonials-wrapper {
+  display: flex;
+  justify-content: center; /* Removed quotes */
+}
+
+.testimonials-content {
+  display: flex;
+}

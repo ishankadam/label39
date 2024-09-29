@@ -1,0 +1,28 @@
+.featured-container {
+  display: flex;
+  justify-content: center; /* Ensure centered alignment */
+}
+
+.video-container {
+  position: relative;
+  width: 450px;
+  height: 640px;
+  margin: 40px;
+  overflow: hidden; /* Prevent video overflow */
+  border-radius: 10px; /* Optional: add a rounded border */
+}
+
+.centered-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the video fits well within the container */
+}
+
+.label-button-wrapper {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 10%;
+  left: 0;
+  width: 100%; /* Ensures the button wrapper is stretched across the container */
+}
