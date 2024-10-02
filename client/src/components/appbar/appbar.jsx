@@ -19,11 +19,15 @@ import PermIdentityRoundedIcon from "@mui/icons-material/PermIdentityRounded";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import "./appbar.css";
+import { useShopContext } from "../../context/shopContext";
+
 const CustomAppbar = () => {
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
   const [isAdmin] = useState(false);
   const [country, setCountry] = useState("india");
+  const { openDialog, closeDialog } = useShopContext(); // Ensure these functions are correct
   const navigate = useNavigate();
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -37,6 +41,7 @@ const CustomAppbar = () => {
   };
 
   const handleChange = () => {};
+
   return (
     <>
       <div className="notification wrapper">
@@ -75,7 +80,9 @@ const CustomAppbar = () => {
               <Button
                 color="inherit"
                 onClick={() => handlePageChange("shop")}
-                sx={{ fontWeight: "bold" }}
+                // onMouseEnter={openDialog} // Open dialog on hover
+                // onMouseLeave={closeDialog} // Close dialog when mouse leaves
+                sx={{ fontWeight: "bold", cursor: "pointer" }}
               >
                 Shop
               </Button>
@@ -108,10 +115,10 @@ const CustomAppbar = () => {
                 config={{ field: "country" }}
                 handleEdit={handleChange}
                 optionList={countries}
-              ></SelectDropdown>
-              <PermIdentityRoundedIcon></PermIdentityRoundedIcon>
-              <SearchOutlinedIcon></SearchOutlinedIcon>
-              <ShoppingCartOutlinedIcon></ShoppingCartOutlinedIcon>
+              />
+              <PermIdentityRoundedIcon />
+              <SearchOutlinedIcon />
+              <ShoppingCartOutlinedIcon />
               {isAdmin && (
                 <Box sx={{ flexGrow: 0 }}>
                   <Tooltip title="Open settings">

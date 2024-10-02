@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import MainCorousel from "./mainCorousel";
 import CategorySection from "./categorySection";
 import FeaturedSection from "./featuredSection";
@@ -7,8 +7,9 @@ import AsSeenOn from "./asSeenOn";
 import Testimonials from "./testimonials";
 import Footer from "./footer";
 import FindUs from "./findUs";
+import ShopDialog from "./shopDialog";
 
-const Home = () => {
+const Home = (props) => {
   return (
     <div>
       <MainCorousel></MainCorousel>

@@ -26,9 +26,9 @@ const FeaturedSection = () => {
         FEATURED
       </Typography>
       <div className="featured-container">
-        {featured.map((item) => {
+        {featured.map((item, index) => {
           return (
-            <div className="video-container">
+            <div className="video-container" key={`featured=${index}`}>
               {/* <img
                 src={category.imgSrc}
                 alt="Example"
