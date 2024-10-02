@@ -1,0 +1,53 @@
+@import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap");
+
+.findus-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0; /* Added margin for spacing */
+}
+
+.card-container {
+  max-width: 70%; /* Make the card responsive */
+  margin: 20px auto; /* Center the card horizontally */
+  border-radius: 8px; /* Rounded corners */
+  transition: transform 0.2s; /* Smooth scaling effect on hover */
+  display: flex;
+  padding: 20px; /* Reduced padding */
+  background-color: #f2f5f9 !important;
+  border: 2px solid #dcdcdc;
+}
+
+.card-image {
+  width: 100%; /* Make the image responsive */
+  border-radius: 5px;
+  height: 100%;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column; /* Arrange items vertically */
+  justify-content: center; /* Center items vertically */
+  align-items: center; /* Align items to the left */
+  padding: 20px; /* Padding for content */
+}
+
+body {
+  background-color: #f9f9f9; /* Light background for the page */
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+  .findus-container {
+    flex-direction: column; /* Stack the buttons on small screens */
+    align-items: stretch; /* Stretch items to fill the container */
+  }
+
+  .card-container {
+    padding: 15px; /* Adjust padding for smaller screens */
+  }
+
+  .content-container {
+    align-items: center; /* Center content in small screens */
+  }
+}

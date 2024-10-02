@@ -1,0 +1,98 @@
+.container {
+  font-family: Arial, sans-serif;
+  /* padding: 20px; */
+  background-color: #f7f7f7;
+}
+
+.footer-links-header {
+  padding: 0;
+  font-family: "Cinzel", serif !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: rgba(55, 65, 81, 1);
+}
+
+ul {
+  padding: 0;
+  font-family: "Cinzel", serif;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 20px 0;
+  line-height: 35px;
+}
+
+ul li {
+  text-decoration: none !important;
+  list-style-type: none !important;
+  padding-bottom: 15px;
+}
+
+.footer-links {
+  color: rgba(55, 65, 81, 0.6) !important;
+  text-decoration: none !important;
+}
+
+ul li:hover,
+.footer-icon:hover {
+  color: #ff7d4d !important;
+}
+
+.top-section {
+  display: flex;
+  justify-content: space-around;
+  background-color: #2f3e4e;
+  padding: 20px;
+  color: white;
+}
+
+.top-item {
+  text-align: center;
+}
+
+.top-item i {
+  font-size: 24px;
+}
+
+.subscribe {
+  background-color: #e5eaf1;
+  /* display: flex; */
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.subscribe-title {
+  font-family: "Berkshire Swash", serif;
+  font-weight: 400;
+  font-size: 20px;
+  margin-bottom: 20px !important;
+  margin-top: 0px !important;
+
+  color: #374151;
+}
+.subscribe input {
+  flex-grow: 1;
+  padding: 10px;
+  border-radius: 5px 0 0 5px;
+  border: 1px solid #ccc;
+  /* margin-bottom: 20px; */
+}
+
+.subscribe button {
+  border: 1px solid #ccc;
+
+  background-color: #374151;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin-bottom: 20px;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+
+.subscribe-text {
+  margin-bottom: 20px;
+  font-family: "Cinzel", serif !important;
+  font-size: 16px;
+  font-weight: 600 !important;
+  color: #777;
+}
