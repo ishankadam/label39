@@ -5,6 +5,8 @@ import bestSeller3 from "../../assets/bestseller3.jpeg";
 import bestSeller4 from "../../assets/bestseller4.jpeg";
 import bestSeller5 from "../../assets/bestseller5.JPG";
 import bestSeller5hover from "../../assets/bestseller5-hover.JPG";
+import bestSeller6 from "../../assets/bestseller6.jpeg";
+import bestSeller6Hover from "../../assets/bestseller6-hover.jpeg";
 
 import { Typography } from "@mui/material";
 import Slider from "react-slick";
@@ -22,7 +24,8 @@ const BestSellerSection = () => {
     },
     {
       label: "Sapphire Applique Kurta Set",
-      imgSrc: bestSeller2,
+      imgSrc: bestSeller6,
+      hoverImgSrc: bestSeller6Hover,
       price: 9999,
     },
     {

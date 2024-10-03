@@ -8,6 +8,7 @@ import bestSeller1 from "../../assets/bestseller1.jpeg";
 import bestSeller3 from "../../assets/bestseller3.jpeg";
 import "./../../css/asSeenOn.css";
 import { Button, Typography } from "@mui/material";
+import as_seen_on_hoverImg from "../../assets/as_seen_on_hover.jpeg";
 
 const AsSeenOn = () => {
   const [slideNumber, setSlideNumber] = useState(0);
@@ -29,6 +30,7 @@ const AsSeenOn = () => {
       imgSrc: bestSeller1,
       price: 9999,
       videoSrc: video2,
+      hoverImgSrc: as_seen_on_hoverImg,
     },
     {
       label: "Sapphire Applique Kurta Set",

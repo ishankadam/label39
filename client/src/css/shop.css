@@ -1,0 +1,35 @@
+.shop-container {
+  display: flex;
+  padding: 10px 20px;
+  gap: 30px; /* Space between filter and product section */
+}
+
+.shop-filter-wrapper {
+  width: 10%; /* 20% of the width for the filter section */
+  font-family: "Inter", sans-serif;
+}
+
+.category-filter,
+.price-filter,
+.color-filter {
+  margin-bottom: 20px; /* Space between filters */
+}
+
+.MuiTypography-h6 {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.MuiListItemButton {
+  padding: 8px;
+  font-size: 0.9rem;
+}
+
+/* Products layout on the right */
+.product-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 product cards per row */
+  gap: 0px; /* Space between product cards */
+  width: 90%; /* 80% of the width for the product section */
+}

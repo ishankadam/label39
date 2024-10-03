@@ -10,7 +10,7 @@
 }
 
 .product-card img:hover {
-  transition: opacity 0.5s ease-in-out; /* Smooth transition for fading */
+  transition: opacity 0.1s ease-in-out; /* Smooth transition for fading */
 }
 
 /* Media query for tablets */
