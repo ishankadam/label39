@@ -1,0 +1,41 @@
+/* Slider Wrapper */
+.slider-wrapper {
+  position: relative;
+  padding: 0 100px; /* Creates space for arrows on both sides of the slider */
+}
+
+.slick-prev,
+.slick-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  width: 30px; /* Adjust width */
+  height: 30px; /* Adjust height */
+  background-color: rgba(0, 255, 0, 0.3); /* Your custom arrow background */
+  border-radius: 50%; /* Make the container round */
+}
+
+.slide-item {
+  align-items: center !important;
+}
+.css-1iw08ks-MuiButtonBase-root-MuiIconButton-root {
+  left: -50px !important;
+}
+
+.css-1up78ly-MuiButtonBase-root-MuiIconButton-root {
+  right: -50px !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .slider-wrapper {
+    padding: 0px; /* Less padding for tablets, as arrows are hidden */
+  }
+}
+
+@media (max-width: 600px) {
+  .slider-wrapper {
+    padding: 0; /* Remove padding for mobile as arrows are hidden */
+  }
+}

@@ -1,7 +1,7 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import _ from "lodash";
 import React from "react";
-import "./selectDropdown.css";
+import "./../../css/selectDropdown.css";
 const SelectDropdown = (props) => {
   const handleChange = (e) => {
     props.handleEdit(e.target.value, props.config.field);

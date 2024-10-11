@@ -1,0 +1,11 @@
+.product-card {
+  max-width: 100%; /* Ensure cards do not exceed their container width */
+  overflow: hidden; /* Hide overflow to prevent layout issues */
+}
+
+.title-border {
+  height: 2px;
+  width: 50%;
+  background-color: #000; /* Example border style */
+  margin: 0 auto;
+}

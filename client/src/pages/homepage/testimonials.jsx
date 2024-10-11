@@ -5,38 +5,37 @@ import testimonials2 from "../../assets/bestseller2.jpeg"; // Add another image
 import NavigateNextOutlinedIcon from "@mui/icons-material/NavigateNextOutlined";
 import NavigateBeforeOutlinedIcon from "@mui/icons-material/NavigateBeforeOutlined";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
-import "./testimonials.css";
+import "./../../css/testimonials.css";
 
 const slides = [
   {
     content:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-    author: "Anthony Bahringer",
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book unchanged.",
+    author: "- Anthony Bahringer",
     rating: 5,
     imgSrc: testimonials1,
   },
   {
     content:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-    author: "Jane Doe",
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book unchanged.",
+    author: "- Jane Doe",
     rating: 4,
     imgSrc: testimonials2,
   },
   {
     content:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-    author: "Jane Doe",
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book unchanged.",
+    author: "- Jane Doe",
     rating: 4,
     imgSrc: testimonials2,
   },
   {
     content:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-    author: "Anthony Bahringer",
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book unchanged.",
+    author: "- Anthony Bahringer",
     rating: 5,
     imgSrc: testimonials1,
   },
-
   // Add more slides here
 ];
 
@@ -55,20 +54,27 @@ const Testimonials = () => {
     );
   };
 
-  const renderStars = (rating, elIndex) => {
+  const renderStars = (rating) => {
     return Array.from({ length: rating }, (_, index) => (
-      <StarRateRoundedIcon
-        key={index}
-        color={elIndex % 2 === 0 ? "light-background" : "dark-background"}
-      />
+      <StarRateRoundedIcon key={index} />
     ));
   };
 
   return (
     <div>
       <Box>
-        <Typography variant="h4" align="center">
-          What Our Customers Say
+        <Typography
+          variant="h4"
+          sx={{
+            textAlign: "center",
+            mb: 2,
+            mt: 4,
+            fontFamily: "'cinzel', serif",
+            fontWeight: "600",
+          }}
+        >
+          WHAT OUR CUSTOMER SAY
+          <div className="title-border" />
         </Typography>
         <Box display="flex" justifyContent="center" flexWrap="wrap">
           {slides.slice(currentSlide, currentSlide + 2).map((slide, index) => (
@@ -80,22 +86,60 @@ const Testimonials = () => {
               sx={{ margin: 1 }} // Add some margin between cards
             >
               <CardContent className="testimonials-wrapper">
-                <div className="testimonial-content">
-                  <Box display="flex" alignItems="center">
-                    {renderStars(slide.rating, index)}{" "}
-                    {/* Render stars based on rating */}
+                <Box className="testimonial-content" display="flex">
+                  <Box
+                    display="flex"
+                    flexDirection="column"
+                    justifyContent="center" // Vertically center the left content
+                    alignItems="flex-start" // Align the items to the left
+                    sx={{ flex: 1, paddingRight: 2 }} // Add spacing on the right side
+                  >
+                    <Box
+                      display="flex"
+                      alignItems="center"
+                      sx={{ margin: "0 15px" }}
+                    >
+                      {renderStars(slide.rating)}{" "}
+                      {/* Render stars based on rating */}
+                    </Box>
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        fontFamily: "'Roboto Serif', serif",
+                        fontWeight: "600 !important",
+                        textTransform: "capitalize",
+                        fontSize: "16px",
+                        margin: "15px",
+                        color: "#111111",
+                      }}
+                    >
+                      {slide.content}
+                    </Typography>
+                    <Typography
+                      variant="subtitle1"
+                      sx={{
+                        fontStyle: "italic",
+                        fontFamily: "'Roboto Serif', serif",
+                        fontWeight: "600",
+                        margin: "0 15px",
+                        color: "#494949",
+                      }}
+                    >
+                      {slide.author}
+                    </Typography>
                   </Box>
-                  <Typography variant="body1">{slide.content}</Typography>
-                  <Typography variant="subtitle2" sx={{ fontStyle: "italic" }}>
-                    {slide.author}
-                  </Typography>
-                </div>
-                <CardMedia
-                  component="img"
-                  height="500"
-                  image={slide.imgSrc}
-                  alt={`slide-${currentSlide + index}`}
-                />
+                  <CardMedia
+                    component="img"
+                    height="400"
+                    image={slide.imgSrc}
+                    alt={`slide-${currentSlide + index}`}
+                    sx={{
+                      flex: 1,
+                      padding: 0,
+                      display: { xs: "none", sm: "block" },
+                    }} // Remove padding from the image side
+                  />
+                </Box>
               </CardContent>
             </Card>
           ))}
@@ -104,16 +148,33 @@ const Testimonials = () => {
           <NavigateBeforeOutlinedIcon
             onClick={handlePrevSlide}
             sx={{
+              borderRadius: "50%",
+              backgroundColor: "white",
+              boxShadow: "0 2px 5px rgba(0,0,0,0.3)",
+              "&:hover": {
+                backgroundColor: "#f0f0f0",
+              },
+              padding: "5px",
               cursor: currentSlide === 0 ? "not-allowed" : "pointer",
-              opacity: currentSlide === 0 ? 0.5 : 1,
+              margin: "10px",
+              // opacity: currentSlide === 0 ? 0.5 : 1,
             }}
           />
           <NavigateNextOutlinedIcon
             onClick={handleNextSlide}
             sx={{
+              borderRadius: "50%",
+              backgroundColor: "white",
+              boxShadow: "0 2px 5px rgba(0,0,0,0.3)",
+              "&:hover": {
+                backgroundColor: "#f0f0f0",
+              },
+              padding: "5px",
               cursor:
                 currentSlide >= slides.length - 2 ? "not-allowed" : "pointer",
-              opacity: currentSlide >= slides.length - 2 ? 0.5 : 1,
+              margin: "10px",
+
+              // opacity: currentSlide >= slides.length - 2 ? 0.5 : 1,
             }}
           />
         </Box>

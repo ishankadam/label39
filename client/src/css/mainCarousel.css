@@ -1,0 +1,76 @@
+.hero-section {
+  width: 100vw;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.slick-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel-item {
+  cursor: pointer;
+}
+
+.slick-dots {
+  color: white !important;
+  position: absolute;
+  bottom: 10px;
+  left: 95%;
+  transform: translateX(-50%);
+}
+
+.slick-dots li {
+  margin: 0 3px !important;
+}
+
+.slick-dots li.slick-active button {
+  background-color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+.slick-dots li button {
+  border: 2px solid white !important;
+  width: 5px !important;
+  height: 5px !important;
+  border-radius: 50% !important;
+  opacity: 0.5 !important;
+  transition: opacity 0.3s !important;
+}
+
+.slick-dots li button:hover {
+  opacity: 0.7 !important;
+}
+
+.slick-dots li button:before {
+  display: none !important;
+}
+
+/* Media Queries */
+
+/* For tablets and larger devices */
+@media (min-width: 600px) {
+  .slick-dots li button {
+    border: 2px solid white !important;
+    width: 5px !important;
+    height: 5px !important;
+  }
+}
+
+/* For laptops and desktops */
+@media (min-width: 1024px) {
+  .slick-dots li button {
+    border: 2px solid white !important;
+    width: 8px !important;
+    height: 8px !important;
+  }
+}
+
+/* For smaller mobile devices */
+@media (max-width: 599px) {
+  .slick-dots {
+    display: none !important;
+  }
+}
