@@ -11,26 +11,35 @@ import React, { useState } from "react";
 import "./shop.css";
 import {
   availableColors,
-  bestSellers,
   categories,
   fabrics,
   priceRanges,
   products,
 } from "../../common";
 import CircleIcon from "@mui/icons-material/Circle";
-import BestSellerSection from "../homepage/bestSellerSection";
 import ProductCard from "../../components/card/productCard";
 import Footer from "../homepage/footer";
+import ViewProductModal from "../product/viewProduct";
 
 const Shop = (props) => {
   const [title, setTitle] = useState(props.title || "SHIRTS");
-
+  const [showModal, setShowModal] = useState({
+    open: false,
+    data: {},
+  });
   const [filter, setFilter] = useState({
     category: "",
     fabric: { type: "", subType: "" },
     price: "",
     color: "",
   });
+  const handleViewProduct = (product) => {
+    console.log(product);
+    setShowModal({
+      open: true,
+      data: product,
+    });
+  };
 
   const handleFilterChange = (value, field, fabricType) => {
     if (field === "category") {
@@ -117,11 +126,6 @@ const Shop = (props) => {
                         {options.map((option, optionIndex) => {
                           const isSelected =
                             filter.fabric.subType === option.label;
-                          console.log(
-                            isSelected,
-                            filter.fabric.subType,
-                            option.label
-                          );
                           return (
                             <ListItem key={optionIndex}>
                               <ListItemButton
@@ -240,13 +244,24 @@ const Shop = (props) => {
           <Grid2 container spacing={2} className="product-container">
             {products.map((product, index) => (
               <Grid2 item={{ xs: 1, sm: 6, md: 4 }} key={`product=${index}`}>
-                <ProductCard product={product} />
+                <ProductCard
+                  product={product}
+                  handleViewProduct={handleViewProduct}
+                />
               </Grid2>
             ))}
           </Grid2>
         </div>
       </div>
       <Footer></Footer>
+
+      {showModal.open ? (
+        <ViewProductModal
+          open={showModal.open}
+          product={showModal.data}
+          setShowModal={setShowModal}
+        ></ViewProductModal>
+      ) : null}
     </>
   );
 };

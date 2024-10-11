@@ -124,7 +124,10 @@ const CustomAppbar = () => {
                 className="nav-options"
                 key={item.text}
                 color="inherit"
-                onClick={() => handlePageChange(item.page)}
+                onClick={() => handlePageChange("shop")}
+                onMouseEnter={openDialog} // Open dialog on hover
+                onMouseLeave={closeDialog} // Close dialog when mouse leaves
+                sx={{ fontWeight: "bold", cursor: "pointer" }}
               >
                 {item.text}
               </Button>

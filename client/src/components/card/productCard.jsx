@@ -19,11 +19,14 @@ const ProductCard = (props) => {
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={() => {
+        props.handleViewProduct(props.product);
+      }}
     >
       <CardMedia
         component="img"
         height="500"
-        image={isHovered ? props.product.hoverImgSrc : props.product.imgSrc} // Change image on hover
+        image={isHovered ? props.product.hoverImgSrc : props.product.imgSrc[0]} // Change image on hover
         alt={props.product.label}
       />
       <CardContent

@@ -104,42 +104,82 @@ export const bestSellers = [
 export const products = [
   {
     label: "Sapphire Applique Kurta Set",
-    imgSrc: bestSeller1,
+    imgSrc: [bestSeller1, bestSeller2, bestSeller3, bestSeller4, bestSeller1],
     price: 9999,
+    sizes: ["S", "M", "L", "XL"],
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged",
+    garmentDetails: ["100% cotton", "machine washable.", "Printed"],
+    deliveryInfo: "Delivered in 5-7 business days.",
   },
   {
     label: "Sapphire Applique Kurta Set",
-    imgSrc: bestSeller2,
+    imgSrc: [bestSeller2],
     price: 9999,
+    sizes: ["S", "M", "L", "XL"],
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged",
+    garmentDetails: ["100% cotton", "machine washable.", "Printed"],
+    deliveryInfo: "Delivered in 5-7 business days.",
   },
   {
     label: "Sapphire Applique Kurta Set",
-    imgSrc: bestSeller3,
+    imgSrc: [bestSeller3],
     price: 9999,
+    sizes: ["S", "M", "L", "XL"],
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged",
+    garmentDetails: ["100% cotton", "machine washable.", "Printed"],
+    deliveryInfo: "Delivered in 5-7 business days.",
   },
   {
     label: "Sapphire Applique Kurta Set",
-    imgSrc: bestSeller4,
+    imgSrc: [bestSeller4],
     price: 9999,
+    sizes: ["S", "M", "L", "XL"],
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged",
+    garmentDetails: ["100% cotton", "machine washable.", "Printed"],
+    deliveryInfo: "Delivered in 5-7 business days.",
   },
   {
     label: "Sapphire Applique Kurta Set",
-    imgSrc: bestSeller1,
+    imgSrc: [bestSeller1],
     price: 9999,
+    sizes: ["S", "M", "L", "XL"],
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged",
+    garmentDetails: ["100% cotton", "machine washable.", "Printed"],
+    deliveryInfo: "Delivered in 5-7 business days.",
   },
   {
     label: "Sapphire Applique Kurta Set",
-    imgSrc: bestSeller2,
+    imgSrc: [bestSeller2],
     price: 9999,
+    sizes: ["S", "M", "L", "XL"],
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged",
+    garmentDetails: ["100% cotton", "machine washable.", "Printed"],
+    deliveryInfo: "Delivered in 5-7 business days.",
   },
   {
     label: "Sapphire Applique Kurta Set",
-    imgSrc: bestSeller3,
+    imgSrc: [bestSeller3],
     price: 9999,
+    sizes: ["S", "M", "L", "XL"],
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged",
+    garmentDetails: ["100% cotton", "machine washable.", "Printed"],
+    deliveryInfo: "Delivered in 5-7 business days.",
   },
   {
     label: "Sapphire Applique Kurta Set",
-    imgSrc: bestSeller4,
+    imgSrc: [bestSeller4],
     price: 9999,
+    sizes: ["S", "M", "L", "XL"],
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged",
+    garmentDetails: ["100% cotton", "machine washable.", "Printed"],
+    deliveryInfo: "Delivered in 5-7 business days.",
   },
 ];

@@ -1,11 +1,21 @@
 .shop-menu-container {
-  display: flex;
-  .category-list {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  .shop-menu-wrapper {
     display: flex;
-    flex-direction: column;
-    gap: 10px; /* Adds space between buttons */
-    align-items: center; /* Center the buttons */
-    margin-bottom: 20px; /* Space between categories and featured sections */
+    .category-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 20px;
+    }
   }
 
   .shop-image {

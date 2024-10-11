@@ -1,8 +1,4 @@
 import React from "react";
-
-import bestSeller5 from "../../assets/bestseller5.JPG";
-import bestSeller5hover from "../../assets/bestseller5-hover.JPG";
-
 import { Typography } from "@mui/material";
 import Slider from "react-slick";
 import ProductCard from "../../components/card/productCard";
@@ -11,40 +7,6 @@ import "../../css/main.css";
 import { bestSellers } from "../../common";
 
 const BestSellerSection = () => {
-  const bestSellers = [
-    {
-      label: "Sapphire Applique Kurta Set",
-      imgSrc: bestSeller5,
-      hoverImgSrc: bestSeller5hover,
-      price: 9999,
-    },
-    {
-      label: "Sapphire Applique Kurta Set",
-      imgSrc: bestSeller2,
-      price: 9999,
-    },
-    {
-      label: "Sapphire Applique Kurta Set",
-      imgSrc: bestSeller3,
-      price: 9999,
-    },
-    {
-      label: "Sapphire Applique Kurta Set",
-      imgSrc: bestSeller4,
-      price: 9999,
-    },
-    {
-      label: "Sapphire Applique Kurta Set",
-      imgSrc: bestSeller1,
-      price: 9999,
-    },
-    {
-      label: "Sapphire Applique Kurta Set",
-      imgSrc: bestSeller3,
-      price: 9999,
-    },
-  ];
-
   // Slick Slider settings
   const settings = {
     dots: false,

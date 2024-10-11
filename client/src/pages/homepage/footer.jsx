@@ -7,28 +7,30 @@ import woven from "../../assets/woven.png";
 import mindful from "../../assets/mindful.png";
 import sustainable from "../../assets/sustainable.png";
 
-const Footer = () => {
+const Footer = (props) => {
   return (
     <div className="container">
       {/* Top Section */}
-      <div className="top-section">
-        <div className="top-item">
-          <img src={textile} alt="textile" />
-          <Typography>Textile Revival</Typography>
+      {props.topSection && (
+        <div className="top-section">
+          <div className="top-item">
+            <img src={textile} alt="textile" />
+            <Typography>Textile Revival</Typography>
+          </div>
+          <div className="top-item">
+            <img src={woven} alt="textile" />
+            <Typography>Woven by Hand</Typography>
+          </div>
+          <div className="top-item">
+            <img src={mindful} alt="textile" />
+            <Typography>Mindful Design</Typography>
+          </div>
+          <div className="top-item">
+            <img src={sustainable} alt="textile" />
+            <Typography>Sustainable Practices</Typography>
+          </div>
         </div>
-        <div className="top-item">
-          <img src={woven} alt="textile" />
-          <Typography>Woven by Hand</Typography>
-        </div>
-        <div className="top-item">
-          <img src={mindful} alt="textile" />
-          <Typography>Mindful Design</Typography>
-        </div>
-        <div className="top-item">
-          <img src={sustainable} alt="textile" />
-          <Typography>Sustainable Practices</Typography>
-        </div>
-      </div>
+      )}
       <footer
         style={{ backgroundColor: "#F5F5F6", padding: "40px 0", color: "#fff" }}
       >
