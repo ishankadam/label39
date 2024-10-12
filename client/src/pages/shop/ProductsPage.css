@@ -35,14 +35,6 @@
   border-right: 1px solid #ccc;
 }
 
-ul li {
-  padding-bottom: 0 !important;
-}
-
-.css-1edfpdg-MuiTypography-root {
-  font-size: 15px !important;
-}
-
 .products-container {
   margin: 0 !important;
   display: grid;
@@ -119,13 +111,5 @@ ul li {
     width: 100%;
 
     grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media screen and (max-width: 1380px) and (min-width: 1024px) {
-  .products-container {
-    width: 100%;
-
-    grid-template-columns: repeat(3, 1fr);
   }
 }

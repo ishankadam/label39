@@ -71,7 +71,7 @@ const BestSellerSection = () => {
       {
         breakpoint: 600, // Mobile
         settings: {
-          slidesToShow: 1, // Show 1 card on mobile
+          slidesToShow: 2, // Show 1 card on mobile
           slidesToScroll: 1,
           arrows: false, // Hide arrows on mobile
         },

@@ -83,6 +83,7 @@ export const bestSellers = [
     label: "Sapphire Applique Kurta Set",
     imgSrc: bestSeller1,
     price: 9999,
+    bestSeller: true,
   },
   {
     label: "Sapphire Applique Kurta Set",
@@ -111,11 +112,13 @@ export const products = [
     label: "Sapphire Applique Kurta Set",
     imgSrc: bestSeller2,
     price: 9999,
+    bestSeller: true,
   },
   {
     label: "Sapphire Applique Kurta Set",
     imgSrc: bestSeller3,
     price: 9999,
+    soldOut: true,
   },
   {
     label: "Sapphire Applique Kurta Set",

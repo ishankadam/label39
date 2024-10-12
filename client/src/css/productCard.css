@@ -1,28 +1,43 @@
 .product-card {
-  margin: 20px;
   text-align: center;
+  position: relative;
 }
 
 .product-card img {
   object-fit: cover;
-  max-height: 400px; /* Default max height */
-  transition: opacity 0.5s ease-in-out; /* Smooth transition for fading */
+  max-height: 400px;
+  /* transition: all 300ms ease-in-out; */
+  transition: transform 300ms ease-in-out; /* Smooth zoom transition */
 }
 
 .product-card img:hover {
-  transition: opacity 0.1s ease-in-out; /* Smooth transition for fading */
+  transform: scale(1.2);
+}
+
+/* Grayscale filter for sold-out products */
+.product-card .grayscale {
+  filter: grayscale(100%);
+}
+
+.css-lvx08l-MuiCardContent-root:last-child {
+  padding-bottom: 8px !important;
+}
+
+.button-wrapper {
+  transform: translateY(100%); /* Hide buttons initially */
+  transition: transform 300ms ease-in-out;
 }
 
 /* Media query for tablets */
 @media (max-width: 1024px) {
   .product-card img {
-    max-height: 300px; /* Reduced height for tablets */
+    max-height: 300px;
   }
 }
 
 /* Media query for mobile devices */
 @media (max-width: 600px) {
   .product-card img {
-    max-height: 350px; /* Further reduced height for mobile */
+    max-height: 350px;
   }
 }
