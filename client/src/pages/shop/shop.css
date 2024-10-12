@@ -1,0 +1,12 @@
+.shop-container {
+  display: flex;
+  .shop-filter-wrapper {
+    display: block;
+    width: 20%;
+  }
+  .product-container {
+    display: flex;
+    max-height: 590px;
+    min-width: 500px;
+  }
+}

@@ -25,11 +25,14 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
 import "./../../css/appbar.css";
 
+import { useShopContext } from "../../context/shopContext";
+
 const CustomAppbar = () => {
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
   const [isAdmin] = useState(false);
   const [country, setCountry] = useState("india");
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { openDialog, closeDialog } = useShopContext(); // Ensure these functions are correct
   const navigate = useNavigate();
 
   const handleOpenUserMenu = (event) => {
@@ -121,7 +124,10 @@ const CustomAppbar = () => {
                 className="nav-options"
                 key={item.text}
                 color="inherit"
-                onClick={() => handlePageChange(item.page)}
+                onClick={() => handlePageChange("shop")}
+                onMouseEnter={openDialog} // Open dialog on hover
+                onMouseLeave={closeDialog} // Close dialog when mouse leaves
+                sx={{ fontWeight: "bold", cursor: "pointer" }}
               >
                 {item.text}
               </Button>

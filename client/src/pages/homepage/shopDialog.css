@@ -1,0 +1,34 @@
+.shop-menu-container {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  .shop-menu-wrapper {
+    display: flex;
+    .category-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+  }
+
+  .shop-image {
+    display: flex;
+    justify-content: center; /* Centers the image horizontally */
+    margin-top: 20px; /* Adds spacing above the image */
+  }
+
+  .centered-image {
+    max-width: 100%; /* Ensure the image does not exceed the container width */
+    height: auto; /* Maintain aspect ratio */
+  }
+  .shop-button {
+    color: black;
+  }
+}

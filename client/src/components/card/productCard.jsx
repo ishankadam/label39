@@ -32,6 +32,9 @@ const ProductCard = (props) => {
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={() => {
+        props.handleViewProduct(props.product);
+      }}
     >
       {/* Conditional Tag (Sold Out or Best Seller) */}
       {(props.product.soldOut || props.product.bestSeller) && (

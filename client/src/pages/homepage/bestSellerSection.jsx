@@ -13,6 +13,7 @@ import Slider from "react-slick";
 import ProductCard from "../../components/card/productCard";
 import { NextArrow, PrevArrow } from "../../components/arrow-component"; // Update the import path as needed
 import "../../css/main.css";
+import { bestSellers } from "../../common";
 
 const BestSellerSection = () => {
   const bestSellers = [
