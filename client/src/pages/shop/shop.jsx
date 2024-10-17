@@ -7,7 +7,7 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./shop.css";
 import {
   availableColors,
@@ -20,8 +20,10 @@ import CircleIcon from "@mui/icons-material/Circle";
 import ProductCard from "../../components/card/productCard";
 import Footer from "../homepage/footer";
 import ViewProductModal from "../product/viewProduct";
+import { getAllProducts } from "../../api";
 
 const Shop = (props) => {
+  const [allProduct, setAllProduct] = useState([]);
   const [title, setTitle] = useState(props.title || "SHIRTS");
   const [showModal, setShowModal] = useState({
     open: false,
@@ -63,6 +65,14 @@ const Shop = (props) => {
       };
     });
   };
+
+  useEffect(() => {
+    getAllProducts(setAllProduct);
+  }, []);
+
+  useEffect(() => {
+    console.log(allProduct);
+  }, [allProduct]);
 
   return (
     <>

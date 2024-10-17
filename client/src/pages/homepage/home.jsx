@@ -19,7 +19,7 @@ const Home = (props) => {
       <AsSeenOn></AsSeenOn>
       <Testimonials></Testimonials>
       <FindUs></FindUs>
-      <Footer></Footer>
+      <Footer topSection={true}></Footer>
     </div>
   );
 };

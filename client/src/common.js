@@ -78,25 +78,35 @@ export const availableColors = [
   { label: "Black", value: "black" },
 ];
 
+export const availableSizes = [
+  { label: "XS", value: "xs" },
+  { label: "S", value: "s" },
+  { label: "M", value: "m" },
+  { label: "L", value: "l" },
+  { label: "XL", value: "xl" },
+  { label: "XXL", value: "xxl" },
+];
+export const garmentDetails = ["100% cotton", "Machine washable.", "Printed"];
+export const deliveryIn = ["Available", "In 2-3 days", "In a week"];
 export const bestSellers = [
   {
     label: "Sapphire Applique Kurta Set",
-    imgSrc: bestSeller1,
+    imgSrc: [bestSeller1],
     price: 9999,
   },
   {
     label: "Sapphire Applique Kurta Set",
-    imgSrc: bestSeller2,
+    imgSrc: [bestSeller2],
     price: 9999,
   },
   {
     label: "Sapphire Applique Kurta Set",
-    imgSrc: bestSeller3,
+    imgSrc: [bestSeller3],
     price: 9999,
   },
   {
     label: "Sapphire Applique Kurta Set",
-    imgSrc: bestSeller4,
+    imgSrc: [bestSeller4],
     price: 9999,
   },
 ];
@@ -183,3 +193,20 @@ export const products = [
     deliveryInfo: "Delivered in 5-7 business days.",
   },
 ];
+
+export const handleMiddleTruncation = (value) => {
+  if (value && value.length > 50) {
+    const string1 = value.substr(0, 23);
+    const string2 = value.substr(value.length - 23, value.length);
+    const truncatedValue = string1 + "..." + string2;
+    return truncatedValue;
+  } else {
+    return value;
+  }
+};
+
+export const getUrl = () => {
+  const url = new URL(window.location.origin);
+  url.port = 5000;
+  return url;
+};

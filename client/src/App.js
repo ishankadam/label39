@@ -5,12 +5,12 @@ import Home from "./pages/homepage/home";
 import Shop from "./pages/shop/shop";
 import AboutUs from "./pages/about-us/aboutUs";
 import ContactUs from "./pages/contact-us/contactUs";
-import ShopDialog from "./pages/homepage/shopDialog";
 import { ShopProvider } from "./context/shopContext";
 import ViewProduct from "./pages/product/viewProduct";
-import Login from "./pages/login/login";
-import Signup from "./pages/login/signup";
 import OurStory from "./pages/our-story/ourStory";
+import Login from "./form/login/login";
+import Signup from "./form/signup/signup";
+import AddProduct from "./form/addProduct/addProduct";
 
 const App = () => {
   return (
@@ -26,6 +26,7 @@ const App = () => {
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/signup" element={<Signup />} />
           <Route exact path="/ourstory" element={<OurStory />} />
+          <Route exact path="/addProduct" element={<AddProduct />} />
         </Routes>
       </div>
     </ShopProvider>

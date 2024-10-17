@@ -1,0 +1,172 @@
+[
+  {
+    "productId": 1001,
+    "name": "Vintage Denim Jacket",
+    "price": 120,
+    "description": "A stylish vintage denim jacket perfect for casual wear.",
+    "sizes": [
+      { "size": "S", "quantity": 15 },
+      { "size": "M", "quantity": 20 },
+      { "size": "L", "quantity": 10 }
+    ],
+    "garmentDetails": [
+      "100% cotton",
+      "Machine washable",
+      "Printed design on the back"
+    ],
+    "deliveryIn": "7-10 business days"
+  },
+  {
+    "productId": 1002,
+    "name": "Vintage Denim Jacket",
+    "price": 120,
+    "description": "A stylish vintage denim jacket perfect for casual wear.",
+    "sizes": [
+      { "size": "S", "quantity": 15 },
+      { "size": "M", "quantity": 20 },
+      { "size": "L", "quantity": 10 }
+    ],
+    "garmentDetails": [
+      "100% cotton",
+      "Machine washable",
+      "Printed design on the back"
+    ],
+    "deliveryIn": "7-10 business days"
+  },
+  {
+    "productId": 1003,
+    "name": "Vintage Denim Jacket",
+    "price": 120,
+    "description": "A stylish vintage denim jacket perfect for casual wear.",
+    "sizes": [
+      { "size": "S", "quantity": 15 },
+      { "size": "M", "quantity": 20 },
+      { "size": "L", "quantity": 10 }
+    ],
+    "garmentDetails": [
+      "100% cotton",
+      "Machine washable",
+      "Printed design on the back"
+    ],
+    "deliveryIn": "7-10 business days"
+  },
+  {
+    "productId": 1004,
+    "name": "Vintage Denim Jacket",
+    "price": 120,
+    "description": "A stylish vintage denim jacket perfect for casual wear.",
+    "sizes": [
+      { "size": "S", "quantity": 15 },
+      { "size": "M", "quantity": 20 },
+      { "size": "L", "quantity": 10 }
+    ],
+    "garmentDetails": [
+      "100% cotton",
+      "Machine washable",
+      "Printed design on the back"
+    ],
+    "deliveryIn": "7-10 business days"
+  },
+  {
+    "productId": 1005,
+    "name": "Vintage Denim Jacket",
+    "price": 120,
+    "description": "A stylish vintage denim jacket perfect for casual wear.",
+    "sizes": [
+      { "size": "S", "quantity": 15 },
+      { "size": "M", "quantity": 20 },
+      { "size": "L", "quantity": 10 }
+    ],
+    "garmentDetails": [
+      "100% cotton",
+      "Machine washable",
+      "Printed design on the back"
+    ],
+    "deliveryIn": "7-10 business days"
+  },
+  {
+    "productId": 1006,
+    "name": "Vintage Denim Jacket",
+    "price": 120,
+    "description": "A stylish vintage denim jacket perfect for casual wear.",
+    "sizes": [
+      { "size": "S", "quantity": 15 },
+      { "size": "M", "quantity": 20 },
+      { "size": "L", "quantity": 10 }
+    ],
+    "garmentDetails": [
+      "100% cotton",
+      "Machine washable",
+      "Printed design on the back"
+    ],
+    "deliveryIn": "7-10 business days"
+  },
+  {
+    "productId": 1007,
+    "name": "Vintage Denim Jacket",
+    "price": 120,
+    "description": "A stylish vintage denim jacket perfect for casual wear.",
+    "sizes": [
+      { "size": "S", "quantity": 15 },
+      { "size": "M", "quantity": 20 },
+      { "size": "L", "quantity": 10 }
+    ],
+    "garmentDetails": [
+      "100% cotton",
+      "Machine washable",
+      "Printed design on the back"
+    ],
+    "deliveryIn": "7-10 business days"
+  },
+  {
+    "productId": 1008,
+    "name": "Vintage Denim Jacket",
+    "price": 120,
+    "description": "A stylish vintage denim jacket perfect for casual wear.",
+    "sizes": [
+      { "size": "S", "quantity": 15 },
+      { "size": "M", "quantity": 20 },
+      { "size": "L", "quantity": 10 }
+    ],
+    "garmentDetails": [
+      "100% cotton",
+      "Machine washable",
+      "Printed design on the back"
+    ],
+    "deliveryIn": "7-10 business days"
+  },
+  {
+    "productId": 1009,
+    "name": "Vintage Denim Jacket",
+    "price": 120,
+    "description": "A stylish vintage denim jacket perfect for casual wear.",
+    "sizes": [
+      { "size": "S", "quantity": 15 },
+      { "size": "M", "quantity": 20 },
+      { "size": "L", "quantity": 10 }
+    ],
+    "garmentDetails": [
+      "100% cotton",
+      "Machine washable",
+      "Printed design on the back"
+    ],
+    "deliveryIn": "7-10 business days"
+  },
+  {
+    "productId": 1010,
+    "name": "Vintage Denim Jacket",
+    "price": 120,
+    "description": "A stylish vintage denim jacket perfect for casual wear.",
+    "sizes": [
+      { "size": "S", "quantity": 15 },
+      { "size": "M", "quantity": 20 },
+      { "size": "L", "quantity": 10 }
+    ],
+    "garmentDetails": [
+      "100% cotton",
+      "Machine washable",
+      "Printed design on the back"
+    ],
+    "deliveryIn": "7-10 business days"
+  }
+]

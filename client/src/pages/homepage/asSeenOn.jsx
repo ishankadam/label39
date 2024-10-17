@@ -26,13 +26,13 @@ const AsSeenOn = () => {
   const asSeenOn = [
     {
       label: "Sapphire Applique Kurta Set",
-      imgSrc: bestSeller1,
+      imgSrc: [bestSeller1],
       price: 9999,
       videoSrc: video2,
     },
     {
       label: "Sapphire Applique Kurta Set",
-      imgSrc: bestSeller3,
+      imgSrc: [bestSeller3],
       price: 9999,
       videoSrc: video1,
     },

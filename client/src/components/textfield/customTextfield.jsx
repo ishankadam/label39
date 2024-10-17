@@ -15,6 +15,7 @@ const CustomTextfield = (props) => {
 
   const handleTextfieldValue = (value) => {
     const inputValue = props.type === "number" ? Number(value) : value;
+    console.log(inputValue);
     setTextValue(inputValue);
     // let errObj = {
     //   isError: props.error,
@@ -50,8 +51,8 @@ const CustomTextfield = (props) => {
 
     // setTextValue(value);
     // if (props.handleEdit) {
-    //   props.handleEdit(value, props.config.field);
     // }
+    props.handleEdit(value, props.config.field);
   };
 
   useEffect(() => {
@@ -80,7 +81,7 @@ const CustomTextfield = (props) => {
       required={props.config?.isRequired}
       onChange={(e) => handleTextfieldValue(e.target.value)}
       inputProps={props.inputProps}
-      multiple={props.multiple ? props.multiple : false}
+      multiline={props.multiline ? props.multiline : false}
     ></TextField>
   );
 };
