@@ -49,8 +49,10 @@ ul li:hover,
   text-align: center;
 }
 
-.top-item i {
-  font-size: 24px;
+.bottom-icons {
+  width: auto;
+  height: auto;
+  /* font-size: 94px !important; */
 }
 
 .subscribe {
@@ -70,6 +72,7 @@ ul li:hover,
   color: #374151;
 }
 .subscribe input {
+  width: 70%;
   flex-grow: 1;
   padding: 10px;
   border-radius: 5px 0 0 5px;

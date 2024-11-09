@@ -179,6 +179,11 @@ const Testimonials = () => {
           />
         </Box>
       </Box>
+
+      <hr
+        className="footer-line"
+        style={{ marginTop: "24px", borderTop: "1px solid #d6d6d6 !important" }}
+      />
     </div>
   );
 };

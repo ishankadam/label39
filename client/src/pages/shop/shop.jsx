@@ -1,70 +1,45 @@
+import React, { useState } from "react";
 import {
-  Divider,
-  Grid2,
+  Typography,
   List,
   ListItem,
   ListItemButton,
   ListItemText,
-  Typography,
+  Drawer,
+  Button,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import "./shop.css";
-import {
-  availableColors,
-  categories,
-  fabrics,
-  priceRanges,
-  products,
-} from "../../common";
-import CircleIcon from "@mui/icons-material/Circle";
+import "../../css/shop.css";
 import ProductCard from "../../components/card/productCard";
+import { products } from "../../common";
+import CircleIcon from "@mui/icons-material/Circle";
 import Footer from "../homepage/footer";
-import ViewProductModal from "../product/viewProduct";
+import FilterListIcon from "@mui/icons-material/FilterList";
 import { getAllProducts } from "../../api";
 
-const Shop = (props) => {
+const ProductsPage = () => {
   const [allProduct, setAllProduct] = useState([]);
-  const [title, setTitle] = useState(props.title || "SHIRTS");
-  const [showModal, setShowModal] = useState({
-    open: false,
-    data: {},
-  });
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const toggleDrawer = (open) => (event) => {
+    setIsDrawerOpen(open);
+  };
+
   const [filter, setFilter] = useState({
-    category: "",
-    fabric: { type: "", subType: "" },
+    category: "Shirts",
     price: "",
     color: "",
   });
-  const handleViewProduct = (product) => {
-    console.log(product);
-    setShowModal({
-      open: true,
-      data: product,
-    });
+
+  const handleFilterChange = (value, field) => {
+    setFilter((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
   };
 
-  const handleFilterChange = (value, field, fabricType) => {
-    if (field === "category") {
-      setTitle(value);
-    }
-
-    setFilter((prev) => {
-      if (field === "fabric") {
-        return {
-          ...prev,
-          fabric: {
-            type: fabricType,
-            subType: value,
-          },
-        };
-      }
-
-      return {
-        ...prev,
-        [field]: value,
-      };
-    });
-  };
+  const categories = ["Shirts", "Co-ords", "Kurtas", "Suits"];
+  const priceRanges = ["Under 10000", "10000-15000", "15000-20000"];
+  const availableColors = ["Red", "Black", "Blue", "Green", "Yellow"];
 
   useEffect(() => {
     getAllProducts(setAllProduct);
@@ -75,135 +50,178 @@ const Shop = (props) => {
   }, [allProduct]);
 
   return (
-    <>
-      <div>
+    <div className="products-page">
+      <div className="header">
         <Typography
-          variant="h2"
-          sx={{ display: "flex", justifyContent: "center" }}
+          variant="h4"
+          sx={{
+            fontSize: { xs: "21px", sm: "28px", md: "32px" },
+            textAlign: "center",
+            // mb: 2,
+            // mt: 2,
+            marginLeft: { xs: "6px", sm: "12px", md: "16px" },
+
+            fontFamily: "'Cinzel', serif",
+            fontWeight: "600",
+            color: "#292929",
+          }}
         >
-          {title}
+          SHIRTS
+          {/* <div className="title-border" /> */}
         </Typography>
+        <Button
+          variant="outlined"
+          color="success"
+          className="filter-button"
+          onClick={toggleDrawer(true)}
+          sx={{
+            fontSize: { xs: "11px", sm: "12px", md: "16px" },
+
+            marginRight: { xs: "6px", sm: "12px", md: "16px" },
+            textTransform: "capitalize",
+          }}
+          startIcon={<FilterListIcon />}
+        >
+          Filters
+        </Button>
       </div>
-      <div className="shop-container">
-        <div className="shop-filter-wrapper">
+      <hr
+        className="footer-line"
+        style={{
+          marginTop: "20px",
+          marginBottom: "0px",
+          borderTop: "1px solid #d6d6d6 !important",
+        }}
+      />
+
+      <div className="content">
+        {/* Filter section for larger screens */}
+        <div className="filter-section">
           <div className="category-filter">
-            <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+            <Typography
+              variant="h5"
+              sx={{
+                color: "#494949",
+                fontWeight: "600",
+                fontSize: "16px",
+                fontFamily: " 'Roboto Serif', serif",
+                textTransform: "uppercase",
+                padding: "10px",
+                borderBottom: "1px solid #ccc",
+              }}
+            >
               Category
             </Typography>
-            {categories.map((category) => {
-              const isSelected = filter.category === category.label;
+            <List>
+              {categories.map((category, index) => {
+                const isSelected = filter.category === category;
 
-              return (
-                <ListItem key={category.value} disablePadding>
-                  <ListItemButton
-                    onClick={() =>
-                      handleFilterChange(category.label, "category")
-                    }
-                  >
-                    {isSelected && (
-                      <CircleIcon
-                        sx={{
-                          color: "black",
-                          fontSize: "small",
-                          marginRight: "8px",
+                return (
+                  <ListItem key={index} disablePadding>
+                    <ListItemButton
+                      onClick={() => handleFilterChange(category, "category")}
+                      sx={{
+                        margin: "0 !important",
+                        Color: isSelected
+                          ? "rgba(0, 106, 25, 0.1)"
+                          : "transparent", // Apply green background when selected
+                        "&:focus": {
+                          fontWeight: "bold !important",
+                          Color: "rgba(0, 106, 25, 0.1) !important", // On focus
+                        },
+                        "&:hover": {
+                          backgroundColor: isSelected
+                            ? "rgba(0, 106, 25, 0.15)"
+                            : "#efefef", // Change hover effect when selected
+                        },
+                      }}
+                    >
+                      {isSelected && (
+                        <CircleIcon
+                          sx={{
+                            color: "#006A19",
+                            fontSize: "8px",
+                            marginRight: "8px",
+                          }}
+                        />
+                      )}
+                      <ListItemText
+                        primary={category}
+                        primaryTypographyProps={{
+                          fontFamily: " 'Roboto Serif', serif",
+                          fontSize: isSelected ? "16px" : "15px",
+                          fontWeight: isSelected ? "600" : "normal",
+                          color: isSelected ? "#006a19" : "black",
+                          margin: "0 !important", // Override margin
+                          padding: "0 !important", // Override padding
                         }}
                       />
-                    )}
-                    <ListItemText
-                      primary={category.label}
-                      sx={{ fontWeight: isSelected ? "bold" : "normal" }}
-                    />
-                  </ListItemButton>
-                </ListItem>
-              );
-            })}
-          </div>
-          <Divider sx={{ backgroundColor: "black", height: "2px" }} />
-
-          <div className="fabrics-filter">
-            <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-              Fabrics
-            </Typography>
-            <List>
-              {fabrics.map((fabricObj, index) => (
-                <div key={index}>
-                  {Object.entries(fabricObj).map(([fabricType, options]) => (
-                    <div key={fabricType}>
-                      <Typography variant="body1" sx={{ fontWeight: "bold" }}>
-                        {fabricType}
-                      </Typography>
-                      <List>
-                        {options.map((option, optionIndex) => {
-                          const isSelected =
-                            filter.fabric.subType === option.label;
-                          return (
-                            <ListItem key={optionIndex}>
-                              <ListItemButton
-                                onClick={() =>
-                                  handleFilterChange(
-                                    option.label,
-                                    "fabric",
-                                    fabricType
-                                  )
-                                }
-                              >
-                                {isSelected && (
-                                  <CircleIcon
-                                    sx={{
-                                      color: "black",
-                                      fontSize: "small",
-                                      marginRight: "8px",
-                                    }}
-                                  />
-                                )}
-                                <ListItemText
-                                  primary={option.label}
-                                  sx={{
-                                    fontWeight: isSelected ? "bold" : "normal",
-                                  }}
-                                />
-                              </ListItemButton>
-                            </ListItem>
-                          );
-                        })}
-                      </List>
-                    </div>
-                  ))}
-                </div>
-              ))}
+                    </ListItemButton>
+                  </ListItem>
+                );
+              })}
             </List>
           </div>
-          <Divider sx={{ backgroundColor: "black", height: "2px" }} />
 
           <div className="price-filter">
             <Typography
-              variant="h6"
-              sx={{ fontWeight: "bold", marginBottom: 2 }}
+              variant="h5"
+              sx={{
+                color: "#494949",
+                fontWeight: "600",
+                fontSize: "16px",
+                fontFamily: " 'Roboto Serif', serif",
+                textTransform: "uppercase",
+                padding: "10px",
+                borderTop: "1px solid #ccc",
+                borderBottom: "1px solid #ccc",
+              }}
             >
               Price Range
             </Typography>
             <List>
               {priceRanges.map((priceRange, index) => {
-                const isSelected = filter.price === priceRange.label;
+                const isSelected = filter.price === priceRange;
+
                 return (
-                  <ListItem key={index}>
+                  <ListItem key={index} disablePadding>
                     <ListItemButton
-                      onClick={() =>
-                        handleFilterChange(priceRange.label, "price")
-                      }
+                      onClick={() => handleFilterChange(priceRange, "price")}
+                      sx={{
+                        margin: "0 !important",
+                        Color: isSelected
+                          ? "rgba(0, 106, 25, 0.1)"
+                          : "transparent", // Apply green background when selected
+                        "&:focus": {
+                          fontWeight: "bold !important",
+                          Color: "rgba(0, 106, 25, 0.1) !important", // On focus
+                        },
+                        "&:hover": {
+                          backgroundColor: isSelected
+                            ? "rgba(0, 106, 25, 0.15)"
+                            : "#efefef", // Change hover effect when selected
+                        },
+                      }}
                     >
                       {isSelected && (
                         <CircleIcon
                           sx={{
-                            color: "black",
-                            fontSize: "small",
+                            color: "#006A19",
+                            fontSize: "8px",
                             marginRight: "8px",
                           }}
                         />
                       )}
                       <ListItemText
-                        primary={priceRange.label}
-                        sx={{ fontWeight: isSelected ? "bold" : "normal" }}
+                        primary={priceRange}
+                        primaryTypographyProps={{
+                          fontFamily: " 'Roboto Serif', serif",
+                          fontSize: isSelected ? "16px" : "15px",
+                          fontWeight: isSelected ? "600" : "normal",
+                          color: isSelected ? "#006a19" : "black",
+                          margin: "0 !important", // Override margin
+                          padding: "0 !important", // Override padding
+                        }}
                       />
                     </ListItemButton>
                   </ListItem>
@@ -211,36 +229,66 @@ const Shop = (props) => {
               })}
             </List>
           </div>
-          <Divider sx={{ backgroundColor: "black", height: "2px" }} />
 
           <div className="color-filter">
             <Typography
-              variant="h6"
-              sx={{ fontWeight: "bold", marginBottom: 2 }}
+              variant="h5"
+              sx={{
+                color: "#494949",
+                fontWeight: "600",
+                fontSize: "16px",
+                fontFamily: " 'Roboto Serif', serif",
+                textTransform: "uppercase",
+                padding: "10px",
+                borderTop: "1px solid #ccc",
+                borderBottom: "1px solid #ccc",
+              }}
             >
               Color
             </Typography>
             <List>
               {availableColors.map((color, index) => {
-                const isSelected = filter.color === color.label;
+                const isSelected = filter.color === color;
 
                 return (
-                  <ListItem key={index}>
+                  <ListItem key={index} disablePadding>
                     <ListItemButton
-                      onClick={() => handleFilterChange(color.label, "color")}
+                      onClick={() => handleFilterChange(color, "color")}
+                      sx={{
+                        margin: "0 !important",
+                        Color: isSelected
+                          ? "rgba(0, 106, 25, 0.1)"
+                          : "transparent", // Apply green background when selected
+                        "&:focus": {
+                          fontWeight: "bold !important",
+                          Color: "rgba(0, 106, 25, 0.1) !important", // On focus
+                        },
+                        "&:hover": {
+                          backgroundColor: isSelected
+                            ? "rgba(0, 106, 25, 0.15)"
+                            : "#efefef", // Change hover effect when selected
+                        },
+                      }}
                     >
                       {isSelected && (
                         <CircleIcon
                           sx={{
-                            color: "black",
-                            fontSize: "small",
+                            color: "#006A19",
+                            fontSize: "8px",
                             marginRight: "8px",
                           }}
                         />
                       )}
                       <ListItemText
-                        primary={color.label}
-                        sx={{ fontWeight: isSelected ? "bold" : "normal" }}
+                        primary={color}
+                        primaryTypographyProps={{
+                          fontFamily: " 'Roboto Serif', serif",
+                          fontSize: isSelected ? "16px" : "15px",
+                          fontWeight: isSelected ? "600" : "normal",
+                          color: isSelected ? "#006a19" : "black",
+                          margin: "0 !important", // Override margin
+                          padding: "0 !important", // Override padding
+                        }}
                       />
                     </ListItemButton>
                   </ListItem>
@@ -248,32 +296,228 @@ const Shop = (props) => {
               })}
             </List>
           </div>
-          <Divider sx={{ backgroundColor: "black", height: "2px" }} />
         </div>
-        <div className="product-container">
-          <Grid2 container spacing={2} className="product-container">
-            {products.map((product, index) => (
-              <Grid2 item={{ xs: 1, sm: 6, md: 4 }} key={`product=${index}`}>
-                <ProductCard
-                  product={product}
-                  handleViewProduct={handleViewProduct}
-                />
-              </Grid2>
-            ))}
-          </Grid2>
+
+        {/* Products card container */}
+        <div className="products-container">
+          {products.slice(0, 8).map((product, index) => (
+            <ProductCard key={index} product={product} />
+          ))}
         </div>
       </div>
-      <Footer></Footer>
 
-      {showModal.open ? (
-        <ViewProductModal
-          open={showModal.open}
-          product={showModal.data}
-          setShowModal={setShowModal}
-        ></ViewProductModal>
-      ) : null}
-    </>
+      {/* Drawer for tablet/phone filter */}
+      <Drawer anchor="right" open={isDrawerOpen} onClose={toggleDrawer(false)}>
+        <div className="drawer-content">
+          <div className="category-filter">
+            <Typography
+              variant="h5"
+              sx={{
+                color: "#494949",
+                fontWeight: "600",
+                fontSize: { xs: "12px", sm: "12px", md: "16px" },
+                fontFamily: " 'Roboto Serif', serif",
+                textTransform: "uppercase",
+                padding: "10px",
+                borderBottom: "1px solid #ccc",
+              }}
+            >
+              Category
+            </Typography>
+            <List>
+              {categories.map((category, index) => {
+                const isSelected = filter.category === category;
+
+                return (
+                  <ListItem key={index} disablePadding>
+                    <ListItemButton
+                      onClick={() => handleFilterChange(category, "category")}
+                      sx={{
+                        margin: "0 !important",
+                        Color: isSelected
+                          ? "rgba(0, 106, 25, 0.1)"
+                          : "transparent", // Apply green background when selected
+                        "&:focus": {
+                          fontWeight: "bold !important",
+                          Color: "rgba(0, 106, 25, 0.1) !important", // On focus
+                        },
+                        "&:hover": {
+                          backgroundColor: isSelected
+                            ? "rgba(0, 106, 25, 0.15)"
+                            : "#efefef", // Change hover effect when selected
+                        },
+                      }}
+                    >
+                      {isSelected && (
+                        <CircleIcon
+                          sx={{
+                            color: "#006A19",
+                            fontSize: "8px",
+                            marginRight: "8px",
+                          }}
+                        />
+                      )}
+                      <ListItemText
+                        primary={category}
+                        primaryTypographyProps={{
+                          fontFamily: " 'Roboto Serif', serif",
+                          fontSize: isSelected
+                            ? { xs: "12px", sm: "12px", md: "16px" }
+                            : { xs: "11px", sm: "11px", md: "15px" },
+                          fontWeight: isSelected ? "600" : "normal",
+                          color: isSelected ? "#006a19" : "black",
+                          margin: "0 !important", // Override margin
+                          padding: "0 !important", // Override padding
+                        }}
+                      />
+                    </ListItemButton>
+                  </ListItem>
+                );
+              })}
+            </List>
+          </div>
+
+          <div className="price-filter">
+            <Typography
+              variant="h5"
+              sx={{
+                color: "#494949",
+                fontWeight: "600",
+                fontSize: { xs: "12px", sm: "12px", md: "16px" },
+                fontFamily: " 'Roboto Serif', serif",
+                textTransform: "uppercase",
+                padding: "10px",
+                borderTop: "1px solid #ccc",
+                borderBottom: "1px solid #ccc",
+              }}
+            >
+              Price Range
+            </Typography>
+            <List>
+              {priceRanges.map((priceRange, index) => {
+                const isSelected = filter.price === priceRange;
+
+                return (
+                  <ListItem key={index} disablePadding>
+                    <ListItemButton
+                      onClick={() => handleFilterChange(priceRange, "price")}
+                      sx={{
+                        margin: "0 !important",
+                        Color: isSelected
+                          ? "rgba(0, 106, 25, 0.1)"
+                          : "transparent", // Apply green background when selected
+                        "&:focus": {
+                          fontWeight: "bold !important",
+                          Color: "rgba(0, 106, 25, 0.1) !important", // On focus
+                        },
+                        "&:hover": {
+                          backgroundColor: isSelected
+                            ? "rgba(0, 106, 25, 0.15)"
+                            : "#efefef", // Change hover effect when selected
+                        },
+                      }}
+                    >
+                      {isSelected && (
+                        <CircleIcon
+                          sx={{
+                            color: "#006A19",
+                            fontSize: "8px",
+                            marginRight: "8px",
+                          }}
+                        />
+                      )}
+                      <ListItemText
+                        primary={priceRange}
+                        primaryTypographyProps={{
+                          fontFamily: " 'Roboto Serif', serif",
+                          fontSize: isSelected
+                            ? { xs: "12px", sm: "12px", md: "16px" }
+                            : { xs: "11px", sm: "11px", md: "15px" },
+                          fontWeight: isSelected ? "600" : "normal",
+                          color: isSelected ? "#006a19" : "black",
+                          margin: "0 !important", // Override margin
+                          padding: "0 !important", // Override padding
+                        }}
+                      />
+                    </ListItemButton>
+                  </ListItem>
+                );
+              })}
+            </List>
+          </div>
+
+          <div className="color-filter">
+            <Typography
+              variant="h5"
+              sx={{
+                color: "#494949",
+                fontWeight: "600",
+                fontSize: { xs: "12px", sm: "12px", md: "16px" },
+                fontFamily: " 'Roboto Serif', serif",
+                textTransform: "uppercase",
+                padding: "10px",
+                borderTop: "1px solid #ccc",
+                borderBottom: "1px solid #ccc",
+              }}
+            >
+              Color
+            </Typography>
+            <List>
+              {availableColors.map((color, index) => {
+                const isSelected = filter.color === color;
+
+                return (
+                  <ListItem key={index} disablePadding>
+                    <ListItemButton
+                      onClick={() => handleFilterChange(color, "color")}
+                      sx={{
+                        margin: "0 !important",
+                        Color: isSelected
+                          ? "rgba(0, 106, 25, 0.1)"
+                          : "transparent", // Apply green background when selected
+                        "&:focus": {
+                          fontWeight: "bold !important",
+                          Color: "rgba(0, 106, 25, 0.1) !important", // On focus
+                        },
+                        "&:hover": {
+                          backgroundColor: isSelected
+                            ? "rgba(0, 106, 25, 0.15)"
+                            : "#efefef", // Change hover effect when selected
+                        },
+                      }}
+                    >
+                      {isSelected && (
+                        <CircleIcon
+                          sx={{
+                            color: "#006A19",
+                            fontSize: "8px",
+                            marginRight: "8px",
+                          }}
+                        />
+                      )}
+                      <ListItemText
+                        primary={color}
+                        primaryTypographyProps={{
+                          fontFamily: " 'Roboto Serif', serif",
+                          fontSize: isSelected
+                            ? { xs: "12px", sm: "12px", md: "16px" }
+                            : { xs: "11px", sm: "11px", md: "15px" },
+                          fontWeight: isSelected ? "600" : "normal",
+                          color: isSelected ? "#006a19" : "black",
+                          margin: "0 !important", // Override margin
+                          padding: "0 !important", // Override padding
+                        }}
+                      />
+                    </ListItemButton>
+                  </ListItem>
+                );
+              })}
+            </List>
+          </div>
+        </div>
+      </Drawer>
+    </div>
   );
 };
 
-export default Shop;
+export default ProductsPage;

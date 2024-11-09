@@ -7,14 +7,19 @@ import {
   Divider,
   Typography,
   Grid,
+  Container,
+  Grid2,
+  IconButton,
+  Link,
 } from "@mui/material";
+
 import React, { useState } from "react";
 import findUs1 from "../../assets/findus1.png";
 import "./../../css/findUs.css";
 import NavigateNextOutlinedIcon from "@mui/icons-material/NavigateNextOutlined";
 import NavigateBeforeOutlinedIcon from "@mui/icons-material/NavigateBeforeOutlined";
-import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
-import Instagram from "@mui/icons-material/Instagram";
+import { Twitter, Facebook, Instagram, LinkedIn } from "@mui/icons-material";
+
 import CustomTextfield from "../../components/textfield/customTextfield";
 
 const FindUs = () => {
@@ -40,7 +45,21 @@ const FindUs = () => {
         <div className="title-border" />
       </Typography>
       <div className="findus-container">
-        <NavigateBeforeOutlinedIcon onClick={handleSlideChange} />
+        <NavigateBeforeOutlinedIcon
+          onClick={handleSlideChange}
+          sx={{
+            borderRadius: "50%",
+            backgroundColor: "white",
+            boxShadow: "0 2px 5px rgba(0,0,0,0.3)",
+            "&:hover": {
+              backgroundColor: "#f0f0f0",
+            },
+            padding: "5px",
+            cursor: "pointer",
+            margin: "100px",
+            // opacity: currentSlide === 0 ? 0.5 : 1,
+          }}
+        />
         <Card className="card-container">
           <Grid container>
             <Grid item xs={12} sm={6}>
@@ -114,24 +133,93 @@ const FindUs = () => {
                   </>
                 ) : (
                   <>
-                    <CustomTextfield
-                      multiple={true}
-                      sx={{ width: "250px", margin: "0 20px" }}
-                    ></CustomTextfield>
-                    <Button variant="contained" color="success">
-                      Submit
-                    </Button>
-                    <Divider sx={{ margin: "15px" }} />
-                    <Typography>Follow us</Typography>
-                    <FacebookRoundedIcon />
-                    <Instagram />
+                    <div
+                      style={{
+                        position: "relative", // Parent should be relative for absolute positioning
+                        width: "fit-content", // Shrinks the parent width to the content's size
+                      }}
+                    >
+                      <CustomTextfield
+                        multiple={true}
+                        sx={{
+                          width: "300px",
+                          height: "100px", // Set the desired height
+                          margin: "0 20px",
+                        }}
+                      ></CustomTextfield>
+                      <Button
+                        variant="contained"
+                        color="success"
+                        sx={{
+                          position: "absolute", // Absolutely position the button
+                          top: "-50px", // Align to the top of the parent div
+                          right: "20px", // Slightly offset to the right of the textfield
+                        }}
+                      >
+                        Submit
+                      </Button>
+                    </div>
+                    <Divider sx={{ margin: "50px 15px 15px 15px" }} />
+                    <Typography
+                      variant="body1"
+                      sx={{
+                        fontFamily: " 'Berkshire Swash', serif",
+                        fontWeight: "400",
+                        fontSize: "20px",
+                      }}
+                    >
+                      Follow us
+                    </Typography>
+                    <IconButton
+                      className="findus-icon"
+                      sx={{
+                        color: "#7D818D",
+                        fontSize: "28px",
+                        // marginRight: "12px",
+                        padding: "0px 0px !important",
+                      }}
+                      component={Link}
+                      href="#"
+                      aria-label="Facebook"
+                    >
+                      <Facebook />
+                    </IconButton>
+                    <IconButton
+                      className="findus-icon"
+                      sx={{
+                        color: "#7D818D",
+                        fontSize: "28px",
+
+                        // marginRight: "12px",
+                      }}
+                      component={Link}
+                      href="#"
+                      aria-label="Instagram"
+                    >
+                      <Instagram />
+                    </IconButton>
                   </>
                 )}
               </CardContent>
             </Grid>
           </Grid>
         </Card>
-        <NavigateNextOutlinedIcon onClick={handleSlideChange} />
+        <NavigateNextOutlinedIcon
+          onClick={handleSlideChange}
+          sx={{
+            borderRadius: "50%",
+            backgroundColor: "white",
+            boxShadow: "0 2px 5px rgba(0,0,0,0.3)",
+            "&:hover": {
+              backgroundColor: "#f0f0f0",
+            },
+            padding: "5px",
+            cursor: "pointer",
+            margin: "100px",
+
+            // opacity: currentSlide >= slides.length - 2 ? 0.5 : 1,
+          }}
+        />
       </div>
     </div>
   );

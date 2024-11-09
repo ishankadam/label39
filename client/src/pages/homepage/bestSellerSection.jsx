@@ -1,4 +1,13 @@
 import React from "react";
+import bestSeller1 from "../../assets/bestseller1.jpeg";
+import bestSeller2 from "../../assets/bestseller2.jpeg";
+import bestSeller3 from "../../assets/bestseller3.jpeg";
+import bestSeller4 from "../../assets/bestseller4.jpeg";
+import bestSeller5 from "../../assets/bestseller5.JPG";
+import bestSeller5hover from "../../assets/bestseller5-hover.JPG";
+import bestSeller6 from "../../assets/bestseller6.jpeg";
+import bestSeller6Hover from "../../assets/bestseller6-hover.jpeg";
+
 import { Typography } from "@mui/material";
 import Slider from "react-slick";
 import ProductCard from "../../components/card/productCard";
@@ -7,6 +16,41 @@ import "../../css/main.css";
 import { bestSellers } from "../../common";
 
 const BestSellerSection = () => {
+  const bestSellers = [
+    {
+      label: "Sapphire Applique Kurta Set",
+      imgSrc: bestSeller5,
+      hoverImgSrc: bestSeller5hover,
+      price: 9999,
+    },
+    {
+      label: "Sapphire Applique Kurta Set",
+      imgSrc: bestSeller6,
+      hoverImgSrc: bestSeller6Hover,
+      price: 9999,
+    },
+    {
+      label: "Sapphire Applique Kurta Set",
+      imgSrc: bestSeller3,
+      price: 9999,
+    },
+    {
+      label: "Sapphire Applique Kurta Set",
+      imgSrc: bestSeller4,
+      price: 9999,
+    },
+    {
+      label: "Sapphire Applique Kurta Set",
+      imgSrc: bestSeller1,
+      price: 9999,
+    },
+    {
+      label: "Sapphire Applique Kurta Set",
+      imgSrc: bestSeller3,
+      price: 9999,
+    },
+  ];
+
   // Slick Slider settings
   const settings = {
     dots: false,
@@ -28,7 +72,7 @@ const BestSellerSection = () => {
       {
         breakpoint: 600, // Mobile
         settings: {
-          slidesToShow: 1, // Show 1 card on mobile
+          slidesToShow: 2, // Show 1 card on mobile
           slidesToScroll: 1,
           arrows: false, // Hide arrows on mobile
         },

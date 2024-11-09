@@ -85,10 +85,10 @@ const CategorySection = () => {
                   // border: "1px solid #d6d6d6",
                   transition: "0.2s ease", // Smooth transition for hover effect
                   "&:hover": {
-                    backgroundColor: "#FAFDFF", // Background color on hover
-                    color: "#121212", // Text color on hover
-                    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)", // Add shadow on hover
-                    transform: "translate(-50%, -50%) scale(1.1)", // Slightly scale the button on hover
+                    backgroundColor: "#FAFDFF",
+                    color: "#121212",
+                    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+                    transform: "translate(-50%, -50%) scale(1.1)",
                   },
                 }}
               >

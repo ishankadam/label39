@@ -51,3 +51,7 @@ body {
     align-items: center; /* Center content in small screens */
   }
 }
+
+.findus-icon:hover {
+  color: #006a19 !important;
+}
