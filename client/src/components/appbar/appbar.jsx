@@ -27,7 +27,7 @@ import "./../../css/appbar.css";
 
 import { useShopContext } from "../../context/shopContext";
 
-const CustomAppbar = () => {
+const CustomAppbar = (props) => {
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [isAdmin] = useState(false);
   const [country, setCountry] = useState("india");
@@ -65,6 +65,13 @@ const CustomAppbar = () => {
     { text: "About Us", page: "aboutus" },
     { text: "Contact Us", page: "contactus" },
   ];
+
+  const handleOpenCart = () => {
+    props.setCartDetails((prev) => ({
+      ...prev,
+      open: true,
+    }));
+  };
 
   return (
     <>
@@ -169,7 +176,7 @@ const CustomAppbar = () => {
               <PermIdentityRoundedIcon />
             </IconButton>
             <IconButton color="inherit" sx={{ opacity: 0.7 }}>
-              <ShoppingCartOutlinedIcon />
+              <ShoppingCartOutlinedIcon onClick={handleOpenCart} />
             </IconButton>
 
             {/* User Menu for Admins */}

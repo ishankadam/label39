@@ -11,12 +11,22 @@ import OurStory from "./pages/our-story/ourStory";
 import Login from "./form/login/login";
 import Signup from "./form/signup/signup";
 import AddProduct from "./form/addProduct/addProduct";
+import CustomDrawer from "./components/drawer/drawer";
+import { useState } from "react";
+import Cart from "./pages/cart/cart";
 
 const App = () => {
+  const [cartDetails, setCartDetails] = useState({
+    open: false,
+    data: [],
+  });
   return (
     <ShopProvider>
       <div>
-        <CustomAppbar />
+        <CustomAppbar
+          cartDetails={cartDetails}
+          setCartDetails={setCartDetails}
+        />
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/shop" element={<Shop />} />
@@ -27,7 +37,12 @@ const App = () => {
           <Route exact path="/signup" element={<Signup />} />
           <Route exact path="/ourstory" element={<OurStory />} />
           <Route exact path="/addProduct" element={<AddProduct />} />
+          <Route exact path="/cart" element={<Cart />} />
         </Routes>
+        <CustomDrawer
+          cartDetails={cartDetails}
+          setCartDetails={setCartDetails}
+        ></CustomDrawer>
       </div>
     </ShopProvider>
   );
