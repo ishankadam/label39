@@ -7,31 +7,11 @@ import {
   Button,
   TextField,
 } from "@mui/material";
-import React, { useEffect } from "react";
+import React from "react";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
-import bestseller1 from "../../assets/bestseller1.jpeg";
-import bestseller2 from "../../assets/bestseller2.jpeg";
+import { cartItems } from "../../common";
 const Cart = () => {
-  const cartItems = [
-    {
-      id: 1,
-      image: bestseller1,
-      title: "Prajakta Koli in Marble Cape Set",
-      price: 49900,
-      quantity: 1,
-      size: "XS",
-    },
-    {
-      id: 2,
-      image: bestseller2,
-      title: "Genelia Deshmukh in Gulshan Anarkali with Embroidered Jacket",
-      price: 59900,
-      quantity: 1,
-      size: "M",
-    },
-  ];
-
   const handleQuantityChange = (id, action) => {
     console.log(`Change quantity of item ${id} with action ${action}`);
   };

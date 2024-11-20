@@ -14,6 +14,7 @@ import AddProduct from "./form/addProduct/addProduct";
 import CustomDrawer from "./components/drawer/drawer";
 import { useState } from "react";
 import Cart from "./pages/cart/cart";
+import Checkout from "./pages/checkout/checkout";
 
 const App = () => {
   const [cartDetails, setCartDetails] = useState({
@@ -37,6 +38,7 @@ const App = () => {
           <Route exact path="/signup" element={<Signup />} />
           <Route exact path="/ourstory" element={<OurStory />} />
           <Route exact path="/addProduct" element={<AddProduct />} />
+          <Route exact path="/checkout" element={<Checkout />} />
           <Route exact path="/cart" element={<Cart />} />
         </Routes>
         <CustomDrawer

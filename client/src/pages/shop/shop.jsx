@@ -12,7 +12,6 @@ import "../../css/shop.css";
 import ProductCard from "../../components/card/productCard";
 import { products } from "../../common";
 import CircleIcon from "@mui/icons-material/Circle";
-import Footer from "../homepage/footer";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { getAllProducts } from "../../api";
 

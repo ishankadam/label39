@@ -86,6 +86,25 @@ export const availableSizes = [
   { label: "XL", value: "xl" },
   { label: "XXL", value: "xxl" },
 ];
+
+export const cartItems = [
+  {
+    id: 1,
+    image: bestSeller1,
+    title: "Prajakta Koli in Marble Cape Set",
+    price: 49900,
+    quantity: 1,
+    size: "XS",
+  },
+  {
+    id: 2,
+    image: bestSeller2,
+    title: "Genelia Deshmukh in Gulshan Anarkali with Embroidered Jacket",
+    price: 59900,
+    quantity: 1,
+    size: "M",
+  },
+];
 export const garmentDetails = ["100% cotton", "Machine washable.", "Printed"];
 export const deliveryIn = ["Available", "In 2-3 days", "In a week"];
 export const bestSellers = [
