@@ -1,11 +1,11 @@
 import React from "react";
-import bestSeller1 from "../../assets/bestseller1.jpeg";
-import bestSeller2 from "../../assets/bestseller2.jpeg";
-import bestSeller3 from "../../assets/bestseller3.jpeg";
-import bestSeller4 from "../../assets/bestseller4.jpeg";
-import bestSeller5 from "../../assets/bestseller5.JPG";
+import bestSeller1 from "../../assets/bestSellerP1.jpg";
+import bestSeller2 from "../../assets/bestSellerP2.jpg";
+import bestSeller3 from "../../assets/bestSellerP3.jpg";
+import bestSeller4 from "../../assets/bestSellerP4.jpg";
+import bestSeller5 from "../../assets/bestSellerP5.jpg";
 import bestSeller5hover from "../../assets/bestseller5-hover.JPG";
-import bestSeller6 from "../../assets/bestseller6.jpeg";
+import bestSeller6 from "../../assets/bestSellerP6.jpg";
 import bestSeller6Hover from "../../assets/bestseller6-hover.jpeg";
 
 import { Typography } from "@mui/material";
@@ -85,15 +85,25 @@ const BestSellerSection = () => {
       <Typography
         variant="h4"
         sx={{
+          color: "#2f3e4e",
           textAlign: "center",
-          mb: 1,
+          mb: 4,
           mt: 4,
           fontFamily: "'cinzel', serif",
           fontWeight: "600",
         }}
       >
-        Best Sellers
-        <div className="title-border" />
+        best sellers
+        <div
+          className="title-border"
+          style={{
+            width: "80px",
+            height: "3.5px",
+            borderRadius: "100px",
+            backgroundColor: "#2f3e4e",
+            margin: "0 auto",
+          }}
+        />
       </Typography>
       <div className="slider-wrapper">
         <Slider {...settings}>

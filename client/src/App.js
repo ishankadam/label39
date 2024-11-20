@@ -15,6 +15,7 @@ import CustomDrawer from "./components/drawer/drawer";
 import { useState } from "react";
 import Cart from "./pages/cart/cart";
 import Checkout from "./pages/checkout/checkout";
+import FindUs from "./pages/homepage/findUs";
 
 const App = () => {
   const [cartDetails, setCartDetails] = useState({
@@ -32,7 +33,7 @@ const App = () => {
           <Route exact path="/" element={<Home />} />
           <Route exact path="/shop" element={<Shop />} />
           <Route exact path="/aboutus" element={<AboutUs />} />
-          <Route exact path="/contactus" element={<ContactUs />} />
+          <Route exact path="/contactus" element={<FindUs />} />
           <Route exact path="/product" element={<ViewProduct />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/signup" element={<Signup />} />

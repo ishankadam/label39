@@ -1,104 +1,322 @@
-import { Button, Card, Link, Typography } from "@mui/material";
-import React from "react";
+import React, { useState, useEffect } from "react";
+import "../../css/login2.css";
+import LoginImg from "../../assets/login.png";
+import SignupImg from "../../assets/signup.png";
+import { Button, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 import CustomTextfield from "../../components/textfield/customTextfield";
-import login from "../../assets/login.png";
-import { useNavigate } from "react-router-dom";
+import backgroundImage from "../../assets/leaf-bg2.jpg"; // Import your background image
+import TextField from "@mui/material/TextField";
 
 const Login = () => {
-  const navigate = useNavigate();
+  const [isSignUpMode, setIsSignUpMode] = useState(false);
+  const [activeSlide, setActiveSlide] = useState(0); // 0-based index for the first image
+
+  const images = [LoginImg, SignupImg];
+
+  const handleToggle = () => {
+    setIsSignUpMode(!isSignUpMode);
+  };
+
+  // Function to automatically slide the images
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveSlide((prevSlide) => (prevSlide + 1) % images.length);
+    }, 2000); // Change slide every 2 seconds
+
+    return () => clearInterval(interval); // Cleanup the interval on component unmount
+  }, [images.length]);
   return (
-    <Card
-      sx={{
-        display: "flex",
-        height: "70%",
-        width: "70%",
-        justifyContent: "center",
-        alignItems: "center",
-        margin: "30px",
+    <div
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        minHeight: "100vh", // Ensure it covers the full viewport height
+        padding: "20px 0px", // Optional: Add some padding
       }}
     >
-      {/* Image Section */}
-      <div
-        style={{
-          flex: 1,
-          maxWidth: "50%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <img
-          key={`login-Thumbnail`}
-          src={login}
-          alt={`login-Thumbnail`}
-          style={{
-            width: "400px",
-            height: "600px",
-            borderRadius: "2%",
-            objectFit: "cover",
-          }}
-        />
-      </div>
+      <main id="main" className={isSignUpMode ? "sign-up-mode" : ""}>
+        <div className="box">
+          <div className="inner-box">
+            <div className="forms-wrap">
+              {/* Sign In Form */}
+              <form
+                id="forms"
+                action="index.html"
+                autoComplete="off"
+                className="sign-in-form"
+              >
+                <div className="heading">
+                  <Typography
+                    sx={{
+                      fontSize: "28px",
+                      fontWeight: "bold",
+                      fontFamily: "'Cinzel Serif', serif ",
+                      textAlign: "center",
+                      color: "#2f3e4e",
+                    }}
+                  >
+                    LOGIN
+                  </Typography>
+                </div>
 
-      {/* Form Section */}
-      <div
-        style={{
-          flex: 1,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          padding: "20px",
-          maxWidth: "50%",
-        }}
-      >
-        <Typography variant="body1" sx={{ marginBottom: "20px" }}>
-          LOGIN TO YOUR ACCOUNT
-        </Typography>
-        <Typography
-          variant="h4"
-          sx={{
-            marginBottom: "20px",
-            fontWeight: "bold",
-            display: "flex",
-            justifyContent: "left",
-          }}
-        >
-          WELCOME BACK!
-        </Typography>
-        <CustomTextfield label="Email" sx={{ marginTop: "20px" }} />
-        <CustomTextfield
-          label="Password"
-          sx={{ marginTop: "20px", marginBottom: "10px" }}
-        />
+                <div className="actual-form">
+                  <div className="form">
+                    {/* <Typography
+                      sx={{
+                        fontSize: "14px",
+                        fontWeight: "700",
+                        fontFamily: "'Roboto Serif', serif ",
+                        textAlign: "center",
+                        marginBottom: "18px",
+                      }}
+                    >
+                      LOGIN
+                    </Typography> */}
+                    <div className="input-wrap">
+                      <TextField
+                        label="Email ID"
+                        variant="outlined"
+                        color="success"
+                        fullWidth
+                        sx={{
+                          "& .MuiOutlinedInput-root": {
+                            fontSize: "15px", // Set the font size
+                          },
+                        }}
+                      />
+                    </div>
 
-        <Button
-          color="success"
-          variant="contained"
-          sx={{ marginTop: "20px", marginBottom: "10px" }}
-        >
-          LOGIN
-        </Button>
-        <Link href="#" sx={{ marginBottom: "20px" }}>
-          Forgot Password?
-        </Link>
+                    <div className="input-wrap">
+                      <TextField
+                        label="Password"
+                        variant="outlined"
+                        color="success"
+                        fullWidth
+                        sx={{
+                          "& .MuiOutlinedInput-root": {
+                            fontSize: "15px", // Set the font size
+                          },
+                        }}
+                      />
+                      <Link href="#">
+                        <Typography
+                          sx={{
+                            fontSize: "13px",
+                            color: "grey",
+                            display: "flex",
+                            justifyContent: "right",
+                            margin: "5px 0",
+                          }}
+                        >
+                          Forgot Password?
+                        </Typography>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+                <div className="form">
+                  <Button
+                    variant="contained"
+                    color="success"
+                    type="submit"
+                    value="Log In"
+                    className="sign-btn"
+                    sx={
+                      {
+                        // marginTop: 5,
+                      }
+                    }
+                  >
+                    Log In
+                  </Button>
 
-        <Typography align="center" sx={{ margin: "10px 0" }}>
-          or
-        </Typography>
+                  <Typography
+                    sx={{
+                      fontSize: "14px",
+                      color: "grey",
+                      display: "flex",
+                      justifyContent: "center",
+                      margin: "20px 0",
+                    }}
+                  >
+                    Don't have an account?{"    "}
+                    <Link onClick={handleToggle}>
+                      {" "}
+                      <Typography
+                        sx={{
+                          fontSize: "14px",
+                          marginLeft: "0.4rem",
+                          fontWeight: "bold",
+                          fontFamily: "'Roboto Serif', serif ",
+                          color: "#2f3e4e",
+                        }}
+                      >
+                        Register Here
+                      </Typography>
+                    </Link>
+                  </Typography>
+                </div>
+              </form>
 
-        <Typography align="center">
-          Don't have an account?{" "}
-          <Link
-            underline="hover"
-            onClick={() => {
-              navigate("/signup");
-            }}
-          >
-            REGISTER HERE
-          </Link>
-        </Typography>
-      </div>
-    </Card>
+              {/* Sign Up Form */}
+              <form
+                action="index.html"
+                autoComplete="off"
+                id="forms"
+                className={`sign-up-form ${
+                  isSignUpMode ? "" : "opacity-0 pointer-events-none"
+                }`}
+              >
+                <div className="heading">
+                  <Typography
+                    sx={{
+                      fontSize: {
+                        xs: "18px",
+                        sm: "24px",
+                        md: "28px",
+                        lg: "28px",
+                      },
+                      fontWeight: "bold",
+                      fontFamily: "'Cinzel Serif', serif ",
+                      textAlign: "center",
+                      color: "#2f3e4e",
+                    }}
+                  >
+                    CREATE AN ACCOUNT
+                  </Typography>
+                </div>
+
+                <div className="actual-form">
+                  <div className="form">
+                    {/* <Typography
+                      sx={{
+                        fontSize: "14px",
+                        fontWeight: "700",
+                        fontFamily: "'Roboto Serif', serif ",
+                        textAlign: "center",
+                        marginBottom: "18px",
+                      }}
+                    >
+                      REGISTER
+                    </Typography> */}
+                    <div className="input-wrap">
+                      <TextField
+                        label="Name"
+                        variant="outlined"
+                        color="success"
+                        fullWidth
+                        sx={{
+                          "& .MuiOutlinedInput-root": {
+                            fontSize: "15px", // Set the font size
+                          },
+                        }}
+                      />
+                    </div>
+                    <div className="input-wrap">
+                      <TextField
+                        label="Email ID"
+                        variant="outlined"
+                        color="success"
+                        fullWidth
+                        sx={{
+                          "& .MuiOutlinedInput-root": {
+                            fontSize: "15px", // Set the font size
+                          },
+                        }}
+                      />
+                    </div>
+                    <div className="input-wrap">
+                      <TextField
+                        label="Contact No"
+                        variant="outlined"
+                        color="success"
+                        fullWidth
+                        sx={{
+                          "& .MuiOutlinedInput-root": {
+                            fontSize: "15px", // Set the font size
+                          },
+                        }}
+                      />
+                    </div>
+
+                    <div className="input-wrap">
+                      <TextField
+                        label="Password"
+                        variant="outlined"
+                        color="success"
+                        fullWidth
+                        sx={{
+                          "& .MuiOutlinedInput-root": {
+                            fontSize: "15px", // Set the font size
+                          },
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="form">
+                  <Button
+                    variant="contained"
+                    color="success"
+                    type="submit"
+                    value="Sign In"
+                    className="sign-btn"
+                    sx={
+                      {
+                        // marginTop: 5,
+                      }
+                    }
+                  >
+                    GET STARTED
+                  </Button>
+
+                  <Typography
+                    sx={{
+                      fontSize: "14px",
+                      color: "grey",
+                      display: "flex",
+                      justifyContent: "center",
+                      marginTop: "20px",
+                    }}
+                  >
+                    Already have an account?{"    "}
+                    <Link onClick={handleToggle} color="inherit">
+                      <Typography
+                        sx={{
+                          fontSize: "14px",
+                          marginLeft: "0.4rem",
+                          fontWeight: "bold",
+                          fontFamily: "'Roboto Serif', serif ",
+                          color: "#2f3e4e",
+                        }}
+                      >
+                        Login Here
+                      </Typography>
+                    </Link>
+                  </Typography>
+                </div>
+              </form>
+            </div>
+
+            {/* Carousel */}
+            <div className="carousel">
+              <div className="images-wrapper">
+                {images.map((image, index) => (
+                  <img
+                    key={index}
+                    src={image}
+                    className={`image ${activeSlide === index ? "show" : ""}`}
+                    alt={`Slide ${index + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
   );
 };
 

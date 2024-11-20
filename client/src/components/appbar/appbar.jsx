@@ -62,7 +62,7 @@ const CustomAppbar = (props) => {
   const menuItems = [
     { text: "Home", page: "" },
     { text: "Shop", page: "shop" },
-    { text: "About Us", page: "aboutus" },
+    { text: "About Us", page: "ourStory" },
     { text: "Contact Us", page: "contactus" },
   ];
 

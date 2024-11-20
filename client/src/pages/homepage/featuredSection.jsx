@@ -49,15 +49,25 @@ const FeaturedSection = () => {
       <Typography
         variant="h4"
         sx={{
+          color: "#2f3e4e",
           textAlign: "center",
-          mb: 3,
+          mb: 4,
           mt: 4,
-          fontFamily: "'Cinzel', serif",
+          fontFamily: "'cinzel', serif",
           fontWeight: "600",
         }}
       >
-        SHOP BY VIDEOS
-        <div className="title-border" />
+        shop by videos
+        <div
+          className="title-border"
+          style={{
+            width: "80px",
+            height: "3.5px",
+            borderRadius: "100px",
+            backgroundColor: "#2f3e4e",
+            margin: "0 auto",
+          }}
+        />
       </Typography>
 
       <div

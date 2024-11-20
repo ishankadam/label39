@@ -1,17 +1,46 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import {
-  Grid,
   Box,
   Typography,
   IconButton,
   Button,
   TextField,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  useMediaQuery,
+  Stack,
 } from "@mui/material";
-import React from "react";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
-import { cartItems } from "../../common";
+import bestseller1 from "../../assets/bestSellerP5.jpg";
+import bestseller2 from "../../assets/bestSellerP4.jpg";
+import { useTheme } from "@mui/system";
+
 const Cart = () => {
+  const cartItems = [
+    {
+      id: 1,
+      image: bestseller1,
+      title: "Prajakta Koli in Marble Cape Set",
+      price: 49900,
+      quantity: 1,
+      size: "XS",
+    },
+    {
+      id: 2,
+      image: bestseller2,
+      title: "Genelia Deshmukh in Gulshan Anarkali",
+      price: 59900,
+      quantity: 1,
+      size: "M",
+    },
+  ];
+
   const handleQuantityChange = (id, action) => {
     console.log(`Change quantity of item ${id} with action ${action}`);
   };
@@ -24,132 +53,354 @@ const Cart = () => {
     (total, item) => total + item.price * item.quantity,
     0
   );
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
-    <div>
-      <Box sx={{ padding: 3, maxWidth: 800, margin: "auto" }}>
-        <Typography variant="h4" gutterBottom align="center">
-          Cart
-        </Typography>
+    <Box sx={{ padding: 3, maxWidth: 1000, margin: "auto" }}>
+      {/* Title */}
+      <Typography
+        variant="h4"
+        sx={{
+          color: "#2f3e4e",
+          textAlign: "center",
+          mb: 4,
+          mt: 2,
+          fontFamily: "'cinzel', serif",
+          fontWeight: "600",
+        }}
+      >
+        CART
+        <div
+          className="title-border"
+          style={{
+            width: "80px",
+            height: "3.5px",
+            borderRadius: "100px",
+            backgroundColor: "#2f3e4e",
+            margin: "0 auto",
+          }}
+        />
+      </Typography>
 
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <Typography variant="subtitle1" color="textSecondary">
-              Product
-            </Typography>
-          </Grid>
-          <Grid item xs={3} textAlign="center">
-            <Typography variant="subtitle1" color="textSecondary">
-              Quantity
-            </Typography>
-          </Grid>
-          <Grid item xs={3} textAlign="right">
-            <Typography variant="subtitle1" color="textSecondary">
-              Total
-            </Typography>
-          </Grid>
-
+      {/* Desktop/Tablet Layout */}
+      {!isMobile ? (
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell
+                  sx={{
+                    color: "#2f3e4e",
+                    fontSize: "16px",
+                    fontFamily: "'cinzel', serif",
+                    fontWeight: "700",
+                  }}
+                >
+                  product
+                </TableCell>
+                <TableCell
+                  align="center"
+                  sx={{
+                    color: "#2f3e4e",
+                    fontSize: "16px",
+                    fontFamily: "'cinzel', serif",
+                    fontWeight: "700",
+                  }}
+                >
+                  quantity
+                </TableCell>
+                <TableCell
+                  align="right"
+                  sx={{
+                    color: "#2f3e4e",
+                    fontSize: "16px",
+                    fontFamily: "'cinzel', serif",
+                    fontWeight: "700",
+                  }}
+                >
+                  total
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {cartItems.map((item) => (
+                <TableRow key={item.id}>
+                  <TableCell>
+                    <Box display="flex" alignItems="center">
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        style={{
+                          width: 120,
+                          height: "auto",
+                          marginRight: 16,
+                          borderRadius: "2px",
+                        }}
+                      />
+                      <Box>
+                        <Typography
+                          sx={{
+                            fontFamily: "'Roboto Serif', serif",
+                            fontWeight: "400",
+                            fontSize: { xs: "11px", sm: "12px", md: "16px" },
+                          }}
+                        >
+                          {item.title}
+                        </Typography>
+                        <Typography
+                          // variant="body2"
+                          color="textSecondary"
+                          sx={{
+                            fontFamily: "'Roboto Serif', serif",
+                            fontWeight: "400",
+                            fontSize: { xs: "11px", sm: "12px", md: "16px" },
+                          }}
+                        >
+                          {`Rs. ${item.price.toLocaleString()}`}
+                        </Typography>
+                        <Typography
+                          sx={{
+                            fontFamily: "'Roboto Serif', serif",
+                            fontWeight: "400",
+                            fontSize: { xs: "11px", sm: "12px", md: "16px" },
+                          }}
+                          color="textSecondary"
+                        >
+                          Size: {item.size}
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </TableCell>
+                  <TableCell align="center">
+                    <IconButton
+                      onClick={() => handleQuantityChange(item.id, "decrease")}
+                      size="small"
+                      sx={{
+                        border: "1px solid #ccc", // Outlined style
+                        borderRadius: "4px",
+                        padding: "4px",
+                        mr: 1,
+                      }}
+                    >
+                      <RemoveIcon />
+                    </IconButton>
+                    <Typography variant="body1" component="span" sx={{ mx: 1 }}>
+                      {item.quantity}
+                    </Typography>
+                    <IconButton
+                      onClick={() => handleQuantityChange(item.id, "increase")}
+                      size="small"
+                      sx={{
+                        border: "1px solid #ccc", // Outlined style
+                        borderRadius: "4px",
+                        padding: "4px",
+                        ml: 1,
+                      }}
+                    >
+                      <AddIcon />
+                    </IconButton>
+                    <br />
+                    <Button
+                      onClick={() => handleRemoveItem(item.id)}
+                      color="textSecondary"
+                      size="small"
+                      sx={{
+                        fontFamily: "'Roboto Serif', serif",
+                        fontWeight: "400",
+                        fontSize: { xs: "11px", sm: "12px", md: "13px" },
+                        mt: 1,
+                        textDecoration: "underline !important",
+                      }}
+                    >
+                      Remove
+                    </Button>
+                  </TableCell>
+                  <TableCell align="right">
+                    <Typography
+                      sx={{
+                        fontFamily: "'Roboto Serif', serif",
+                        fontWeight: "400",
+                        fontSize: { xs: "11px", sm: "12px", md: "16px" },
+                      }}
+                    >
+                      {`Rs. ${(item.price * item.quantity).toLocaleString()}`}
+                    </Typography>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      ) : (
+        // Mobile Layout
+        <Box>
           {cartItems.map((item) => (
-            <Grid
-              container
+            <Stack
               key={item.id}
               spacing={2}
-              sx={{ borderBottom: "1px solid #ccc", paddingY: 2 }}
+              sx={{
+                mb: 2,
+                padding: 2,
+                border: "1px solid #ccc",
+                borderRadius: "8px",
+              }}
             >
-              <Grid item xs={6} sx={{ display: "flex" }}>
+              <Box display="flex">
                 <img
                   src={item.image}
                   alt={item.title}
-                  style={{ width: 120, height: 150, marginRight: 16 }}
+                  style={{
+                    width: 80,
+                    height: "auto",
+                    marginRight: 16,
+                    borderRadius: "2px",
+                  }}
                 />
                 <Box>
                   <Typography variant="body1">{item.title}</Typography>
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                  >{`Rs. ${item.price.toLocaleString()}`}</Typography>
                   <Typography variant="body2" color="textSecondary">
-                    {item.size}
+                    {`Rs. ${item.price.toLocaleString()}`}
                   </Typography>
+                  <Box
+                    display="flex"
+                    alignItems="center"
+                    sx={{ mt: 1, gap: 1 }}
+                  >
+                    <IconButton
+                      onClick={() => handleQuantityChange(item.id, "decrease")}
+                      size="small"
+                    >
+                      <RemoveIcon />
+                    </IconButton>
+                    <Typography variant="body1" component="span">
+                      {item.quantity}
+                    </Typography>
+                    <IconButton
+                      onClick={() => handleQuantityChange(item.id, "increase")}
+                      size="small"
+                    >
+                      <AddIcon />
+                    </IconButton>
+                  </Box>
+                  <Button
+                    onClick={() => handleRemoveItem(item.id)}
+                    color="error"
+                    size="small"
+                    sx={{ mt: 1 }}
+                  >
+                    Remove
+                  </Button>
                 </Box>
-              </Grid>
-              <Grid
-                item
-                xs={3}
-                textAlign="center"
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <IconButton
-                  onClick={() => handleQuantityChange(item.id, "decrease")}
-                >
-                  <RemoveIcon fontSize="small" />
-                </IconButton>
-                <Typography variant="body1" sx={{ mx: 1 }}>
-                  {item.quantity}
-                </Typography>
-                <IconButton
-                  onClick={() => handleQuantityChange(item.id, "increase")}
-                >
-                  <AddIcon fontSize="small" />
-                </IconButton>
-                <Button
-                  onClick={() => handleRemoveItem(item.id)}
-                  color="primary"
-                  size="small"
-                >
-                  Remove
-                </Button>
-              </Grid>
-              <Grid item xs={3} textAlign="right">
-                <Typography variant="body1">{`Rs. ${(
-                  item.price * item.quantity
-                ).toLocaleString()}`}</Typography>
-              </Grid>
-            </Grid>
+              </Box>
+            </Stack>
           ))}
+        </Box>
+      )}
 
-          {/* Order Note */}
-          <Grid container spacing={2}>
-            {/* Add order note section */}
-            <Grid item xs={6} sx={{ mt: 2 }}>
-              <Typography variant="subtitle1" gutterBottom>
-                Add order note
-              </Typography>
-              <TextField
-                fullWidth
-                multiline
-                rows={3}
-                variant="outlined"
-                placeholder="How can we help you?"
-              />
-            </Grid>
+      <Box sx={{ mt: 4 }}>
+        {/* Top Row: Add Order Note and Total Price */}
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "row", sm: "row" },
+            justifyContent: "space-between",
+            alignItems: "center",
+            mb: 2,
+          }}
+        >
+          <Typography
+            variant="subtitle1"
+            gutterBottom
+            sx={{ fontFamily: "'Roboto Serif', serif", fontWeight: "400" }}
+          >
+            Add order note
+          </Typography>
+          <Typography
+            variant="h6"
+            gutterBottom
+            sx={{ fontFamily: "'Roboto Serif', serif", fontWeight: "400" }}
+          >
+            {`Total: Rs. ${totalPrice.toLocaleString()}`}
+          </Typography>
+        </Box>
 
-            {/* Total and checkout section */}
-            <Grid item xs={6} textAlign="right" sx={{ mt: 2 }}>
-              <Typography variant="h6" gutterBottom>
-                {`Total: Rs. ${totalPrice.toLocaleString()}`}
-              </Typography>
-              <Typography variant="caption" display="block" sx={{ mb: 2 }}>
-                Taxes and{" "}
-                <a href="#" style={{ color: "#007bff" }}>
-                  shipping
-                </a>{" "}
-                calculated at checkout
-              </Typography>
-              <Typography variant="caption" display="block" sx={{ mb: 2 }}>
-                By clicking checkout, you agree to terms and conditions
-              </Typography>
-              <Button variant="contained" fullWidth>
-                Checkout
-              </Button>
-            </Grid>
-          </Grid>
-        </Grid>
+        {/* Main Content: Input Box and Summary */}
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", sm: "row" },
+            gap: 2,
+            alignItems: "stretch", // Ensures equal height
+          }}
+        >
+          {/* Order Note Input */}
+          <TextField
+            fullWidth
+            multiline
+            rows={3}
+            variant="outlined"
+            placeholder="How can we help you?"
+            sx={{
+              fontFamily: "'Roboto Serif', serif !important",
+              fontWeight: "400",
+              flex: 1,
+              height: { sm: "auto" }, // Ensures height matches the summary content
+            }}
+          />
+
+          {/* Summary Section */}
+          <Box
+            sx={{
+              flex: 1,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              alignItems: { xs: "flex-start", sm: "flex-end" }, // Align to the right for tablets/laptops
+              textAlign: { xs: "left", sm: "right" }, // Text alignment for different screen sizes
+            }}
+          >
+            <Typography
+              variant="subtitle2"
+              display="block"
+              sx={{ fontFamily: "'Roboto Serif', serif", fontWeight: "400" }}
+            >
+              Taxes and{" "}
+              <a href="#" style={{ color: "#007bff" }}>
+                shipping
+              </a>{" "}
+              calculated at checkout
+            </Typography>
+            <Typography
+              variant="subtitle2"
+              display="block"
+              sx={{ fontFamily: "'Roboto Serif', serif", fontWeight: "400" }}
+            >
+              By checking out, you agree to terms & conditions
+            </Typography>
+            <Button
+              variant="contained"
+              color="success"
+              sx={{
+                letterSpacing: "2px",
+                fontFamily: "'cinzel', serif",
+                fontWeight: "700",
+                borderRadius: 0,
+                padding: "8px 5px",
+                width: { xs: "100%", sm: 150 }, // Responsive width
+                // backgroundColor: "green",
+                color: "#fff",
+                boxShadow: "none",
+                alignSelf: { xs: "stretch", sm: "flex-end" }, // Align button to the right for tablets/laptops
+              }}
+            >
+              checkout
+            </Button>
+          </Box>
+        </Box>
       </Box>
-    </div>
+    </Box>
   );
 };
 

@@ -1,7 +1,8 @@
 import React from "react";
-import heroImage from "../../assets/hero.png";
-import heroImage2 from "../../assets/hero2.jpeg";
-import heroImage3 from "../../assets/hero3.jpeg";
+import heroImage from "../../assets/hero.jpg";
+import heroImage2 from "../../assets/hero2.jpg";
+import heroImage3 from "../../assets/hero3.jpg";
+import heroImage4 from "../../assets/hero4.jpg";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -46,14 +47,16 @@ const MainCarousel = () => {
     <div className="hero-section">
       <Slider {...settings}>
         <div className="carousel-item">
-          <img src={heroImage3} width="100%" height="570px" alt="hero-image" />
-        </div>
-        {/* Add more images as needed */}
-        <div className="carousel-item">
-          <img src={heroImage} width="100%" height="570px" alt="hero-image" />
+          <img src={heroImage} width="100%" alt="hero-image" />
         </div>
         <div className="carousel-item">
-          <img src={heroImage2} width="100%" height="570px" alt="hero-image" />
+          <img src={heroImage2} width="100%" alt="hero-image" />
+        </div>
+        <div className="carousel-item">
+          <img src={heroImage3} width="100%" alt="hero-image" />
+        </div>
+        <div className="carousel-item">
+          <img src={heroImage4} width="100%" alt="hero-image" />
         </div>
       </Slider>
     </div>

@@ -66,16 +66,27 @@ const Testimonials = () => {
         <Typography
           variant="h4"
           sx={{
+            color: "#2f3e4e",
             textAlign: "center",
-            mb: 2,
+            mb: 4,
             mt: 4,
             fontFamily: "'cinzel', serif",
             fontWeight: "600",
           }}
         >
-          WHAT OUR CUSTOMER SAY
-          <div className="title-border" />
+          what our customers say
+          <div
+            className="title-border"
+            style={{
+              width: "80px",
+              height: "3.5px",
+              borderRadius: "100px",
+              backgroundColor: "#2f3e4e",
+              margin: "0 auto",
+            }}
+          />
         </Typography>
+
         <Box display="flex" justifyContent="center" flexWrap="wrap">
           {slides.slice(currentSlide, currentSlide + 2).map((slide, index) => (
             <Card

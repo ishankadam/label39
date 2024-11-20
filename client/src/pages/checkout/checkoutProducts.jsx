@@ -18,7 +18,14 @@ const CheckoutProducts = (props) => {
     0
   );
   return (
-    <Card>
+    <Card
+      sx={{
+        p: 2,
+        borderLeft: "1px solid black",
+        borderRadius: "none !important",
+        boxShadow: "none",
+      }}
+    >
       {" "}
       {cartItems.map((item) => (
         <Grid

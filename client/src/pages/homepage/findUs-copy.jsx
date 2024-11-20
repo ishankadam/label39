@@ -34,7 +34,6 @@ const FindUs = () => {
       <Typography
         variant="h4"
         sx={{
-          color: "#2f3e4e",
           textAlign: "center",
           mb: 1,
           mt: 4,
@@ -42,17 +41,8 @@ const FindUs = () => {
           fontWeight: "600",
         }}
       >
-        contact us
-        <div
-          className="title-border"
-          style={{
-            width: "80px",
-            height: "3.5px",
-            borderRadius: "100px",
-            backgroundColor: "#2f3e4e",
-            margin: "0 auto",
-          }}
-        />
+        FIND US
+        <div className="title-border" />
       </Typography>
       <div className="findus-container">
         <NavigateBeforeOutlinedIcon

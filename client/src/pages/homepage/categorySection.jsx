@@ -18,15 +18,25 @@ const CategorySection = () => {
       <Typography
         variant="h4"
         sx={{
+          color: "#2f3e4e",
           textAlign: "center",
-          mb: 3,
+          mb: 4,
           mt: 4,
           fontFamily: "'cinzel', serif",
           fontWeight: "600",
         }}
       >
-        CATEGORIES
-        <div className="title-border" />
+        categories
+        <div
+          className="title-border"
+          style={{
+            width: "80px",
+            height: "3.5px",
+            borderRadius: "100px",
+            backgroundColor: "#2f3e4e",
+            margin: "0 auto",
+          }}
+        />
       </Typography>
 
       <Grid2

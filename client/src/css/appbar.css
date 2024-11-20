@@ -88,7 +88,6 @@
   }
 
   .logo-wrapper {
-    flex-grow: 1; /* Allows logo to take up space and center it */
     display: flex;
     justify-content: center; /* Center the logo */
   }
