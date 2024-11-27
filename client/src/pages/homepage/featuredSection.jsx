@@ -1,6 +1,6 @@
 import React from "react";
 import Slider from "react-slick";
-import { Card, CardMedia, Button, Typography } from "@mui/material";
+import { Card, CardMedia, Button, Typography, Box } from "@mui/material";
 import video1 from "../../assets/video1.MOV";
 import video2 from "../../assets/video2.mov";
 import "./../../css/categorySection.css";
@@ -45,24 +45,28 @@ const FeaturedSection = () => {
   };
 
   return (
-    <>
+    <Box
+      sx={{
+        background: "#F7ECE9",
+        paddingTop: { xs: "20px", sm: "28px", md: "36px" },
+      }}
+    >
       <Typography
         variant="h4"
         sx={{
           color: "#2f3e4e",
           textAlign: "center",
-          mb: 4,
-          mt: 4,
+          mb: 1,
           fontFamily: "'cinzel', serif",
-          fontWeight: "600",
+          fontWeight: "500",
         }}
       >
         shop by videos
         <div
           className="title-border"
           style={{
-            width: "80px",
-            height: "3.5px",
+            width: "70px",
+            height: "3px",
             borderRadius: "100px",
             backgroundColor: "#2f3e4e",
             margin: "0 auto",
@@ -73,7 +77,7 @@ const FeaturedSection = () => {
       <div
         style={{
           // maxWidth: "1200px",
-          margin: "0 auto",
+          margin: "20px auto",
           overflow: "hidden", // Hide overflow
         }}
       >
@@ -117,9 +121,44 @@ const FeaturedSection = () => {
                   >
                     {item.label}
                   </Typography>
-                  <Button variant="contained" color="success">
+                  {/* <Button
+                    variant="contained"
+                    // color="white"
+                    sx={{
+                      background: "#c4907c",
+                      fontFamily: "'Cinzel', serif",
+                      fontWeight: "700",
+                      padding: "10px 14px",
+                      borderRadius: "2px",
+                      "&:hover": {
+                        color: "white",
+                        background: "#c4907c",
+                        borderColor: "#c4907c",
+                      },
+                    }}
+                  >
                     SHOP NOW
-                  </Button>
+                  </Button> */}
+                  <Button
+                    variant="outlined"
+                    // color="white"
+                    sx={{
+                      // background: "#c4907c",
+                      color: "white",
+                      fontFamily: "'Cinzel', serif",
+                      fontWeight: "700",
+                      padding: "10px 20px",
+                      borderRadius: "2px",
+                      borderColor: "white",
+                      "&:hover": {
+                        color: "white",
+                        background: "#a16149",
+                        borderColor: "#a16149",
+                      },
+                    }}
+                  >
+                    SHOP NOW
+                  </Button>{" "}
                 </div>
               </Card>
             </div>
@@ -128,7 +167,7 @@ const FeaturedSection = () => {
       </div>
 
       <hr className="footer-line" style={{ marginTop: "24px" }} />
-    </>
+    </Box>
   );
 };
 

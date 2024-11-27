@@ -3,6 +3,7 @@
   height: 100%; /* Dynamic height */
   aspect-ratio: 16 / 9;
   overflow: hidden;
+  position: relative;
 }
 
 .slick-slide {
@@ -12,6 +13,8 @@
 }
 
 .carousel-item {
+  position: relative; /* For text overlay */
+
   cursor: pointer;
   width: 100%;
   height: 100%; /* Ensures the image container fills the viewport */
@@ -20,7 +23,7 @@
 .carousel-image {
   width: 100%;
   height: 100vh;
-  object-fit: contain !important;
+  object-fit: fill !important;
 }
 
 .slick-dots {
@@ -81,5 +84,55 @@
 @media (max-width: 599px) {
   .slick-dots {
     display: none !important;
+  }
+}
+
+/* Text Overlay */
+.carousel-text {
+  position: absolute;
+  top: 35%;
+  transform: translateY(-50%);
+  z-index: 2;
+
+  opacity: 0; /* Hidden initially */
+  transition: all 0.8s ease-in-out; /* Smooth transition for animation reset */
+}
+
+.carousel-text.animate {
+  opacity: 1; /* Show text */
+}
+
+/* Left Slide-In */
+.carousel-text.left.animate {
+  left: 20px; /* Slide in to this position */
+  animation: slide-in-left 0.8s ease-in-out forwards;
+}
+
+/* Right Slide-In */
+.carousel-text.right.animate {
+  right: 20px; /* Slide in to this position */
+  animation: slide-in-right 0.8s ease-in-out forwards;
+}
+
+/* Animations */
+@keyframes slide-in-left {
+  0% {
+    left: -100%;
+    opacity: 0;
+  }
+  100% {
+    left: 20px;
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-right {
+  0% {
+    right: -100%;
+    opacity: 0;
+  }
+  100% {
+    right: 20px;
+    opacity: 1;
   }
 }

@@ -160,7 +160,7 @@ const ProductCard = (props) => {
           bottom: 0,
           left: 0,
           right: 0,
-          display: "flex",
+          display: { xs: "none", sm: "flex" },
           justifyContent: "space-between",
           alignItems: "center",
           padding: "10px",
@@ -171,76 +171,17 @@ const ProductCard = (props) => {
           zIndex: 2,
         }}
       >
+        <IconButton variant="outlined" color="custom">
+          <ShoppingCartOutlinedIcon />
+        </IconButton>
+
         <Button
+          // className="btn-buy"
           variant="outlined"
-          color="success"
-          size="small"
-          sx={{
-            display: { xs: "none", sm: "flex", md: "flex", lg: "flex" },
-            margin: "0 5px",
-
-            width: "30%",
-            height: { xs: "28px", sm: "32px", md: "36px", lg: "40px" },
-            padding: "0 !important",
-            border: "2px solid #006a19",
-          }}
+          color="custom"
+          // size="small"
         >
-          <IconButton color="inherit">
-            <ShoppingCartOutlinedIcon sx={{ color: "#006a19" }} />
-          </IconButton>
-        </Button>
-        <Button
-          className="btn-buy"
-          variant="outlined"
-          color="success"
-          size="small"
-          sx={{
-            display: { xs: "block", sm: "none", md: "none", lg: "none" },
-            width: "90%",
-            margin: "5px 0px",
-
-            height: { xs: "28px", sm: "32px", md: "36px", lg: "40px" },
-            padding: "0 !important",
-            fontWeight: "600",
-            fontSize: { xs: "10px", sm: "12px", md: "13px", lg: "14px" },
-            fontFamily: "'Poppins', serif",
-            border: "2px solid #006a19",
-          }}
-        >
-          <IconButton
-            color="inherit"
-            sx={{
-              padding: "2px 4px !important",
-            }}
-          >
-            <ShoppingCartOutlinedIcon
-              sx={{
-                color: "#006a19",
-                fontSize: "12px",
-              }}
-            />
-          </IconButton>
-          Add to Cart
-        </Button>
-        <Button
-          className="btn-buy"
-          variant="contained"
-          color="success"
-          size="small"
-          sx={{
-            width: { xs: "90%", sm: "70%", md: "70%", lg: "70%" },
-            // marginLeft: "15px",
-            margin: "0 5px",
-
-            height: { xs: "28px", sm: "32px", md: "36px", lg: "40px" },
-            padding: "0 20px 0 10px !important",
-            fontWeight: "600",
-            fontSize: { xs: "10px", sm: "12px", md: "13px", lg: "14px" },
-            fontFamily: "'Poppins', serif",
-            boxShadow: "none",
-          }}
-        >
-          <IconButton
+          {/* <IconButton
             color="inherit"
             sx={{
               padding: "0px 4px !important",
@@ -249,10 +190,10 @@ const ProductCard = (props) => {
             <BoltIcon
               sx={{
                 color: "#fff",
-                fontSize: { xs: "13px", sm: "14px", md: "16px", lg: "18px" },
+                fontSize: { xs: "13px", sm: "14px", md: "1px", lg: "18px" },
               }}
             />
-          </IconButton>
+          </IconButton> */}
           Buy Now
         </Button>
       </Box>

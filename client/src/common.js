@@ -106,7 +106,7 @@ export const cartItems = [
   {
     id: 2,
     image: bestSeller2,
-    title: "Genelia Deshmukh in Gulshan Anarkali with Embroidered Jacket",
+    title: "Genelia Deshmukh in Embroidered Jacket",
     price: 59900,
     quantity: 1,
     size: "M",

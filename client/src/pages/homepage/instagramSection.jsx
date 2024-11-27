@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React from "react";
 import "./Slider.css"; // Assuming you have the relevant CSS file here
 import bestSeller1 from "../../assets/bestseller1.jpeg"; // Importing images
@@ -39,24 +39,28 @@ const InstagramSection = () => {
   ]; // Array of images with texts and dates
 
   return (
-    <div>
+    <Box
+      sx={{
+        background: "#F7ECE9",
+        paddingTop: { xs: "20px", sm: "28px", md: "36px" },
+      }}
+    >
       <Typography
         variant="h4"
         sx={{
           color: "#2f3e4e",
           textAlign: "center",
           mb: 1,
-          mt: 4,
           fontFamily: "'cinzel', serif",
-          fontWeight: "600",
+          fontWeight: "500",
         }}
       >
         join us on instagram
         <div
           className="title-border"
           style={{
-            width: "80px",
-            height: "3.5px",
+            width: "70px",
+            height: "3px",
             borderRadius: "100px",
             backgroundColor: "#2f3e4e",
             margin: "0 auto",
@@ -102,7 +106,7 @@ const InstagramSection = () => {
         className="footer-line"
         style={{ marginTop: "24px", borderTop: "1px solid #d6d6d6 !important" }}
       />
-    </div>
+    </Box>
   );
 };
 

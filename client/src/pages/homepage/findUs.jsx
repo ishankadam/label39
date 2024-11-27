@@ -11,6 +11,7 @@ import {
   Grid2,
   IconButton,
   Link,
+  Box,
 } from "@mui/material";
 
 import React, { useState } from "react";
@@ -30,24 +31,23 @@ const FindUs = () => {
   };
 
   return (
-    <div>
+    <Box sx={{ marginTop: { xs: "20px", sm: "28px", md: "36px" } }}>
       <Typography
         variant="h4"
         sx={{
           color: "#2f3e4e",
           textAlign: "center",
           mb: 1,
-          mt: 4,
           fontFamily: "'cinzel', serif",
-          fontWeight: "600",
+          fontWeight: "500",
         }}
       >
         contact us
         <div
           className="title-border"
           style={{
-            width: "80px",
-            height: "3.5px",
+            width: "70px",
+            height: "3px",
             borderRadius: "100px",
             backgroundColor: "#2f3e4e",
             margin: "0 auto",
@@ -109,7 +109,7 @@ const FindUs = () => {
                           md: "36px",
                           lg: "42px",
                         },
-                        color: "#006A19",
+                        color: "#a16149",
                         marginBottom: "20px",
                         fontWeight: "600",
                       }}
@@ -231,7 +231,7 @@ const FindUs = () => {
           }}
         />
       </div>
-    </div>
+    </Box>
   );
 };
 

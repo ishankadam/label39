@@ -8,7 +8,7 @@ import bestSeller5hover from "../../assets/bestseller5-hover.JPG";
 import bestSeller6 from "../../assets/bestSellerP6.jpg";
 import bestSeller6Hover from "../../assets/bestseller6-hover.jpeg";
 
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Slider from "react-slick";
 import ProductCard from "../../components/card/productCard";
 import { NextArrow, PrevArrow } from "../../components/arrow-component"; // Update the import path as needed
@@ -81,24 +81,23 @@ const BestSellerSection = () => {
   };
 
   return (
-    <>
+    <Box sx={{ marginTop: { xs: "20px", sm: "28px", md: "36px" } }}>
       <Typography
         variant="h4"
         sx={{
           color: "#2f3e4e",
           textAlign: "center",
-          mb: 4,
-          mt: 4,
+          mb: 1,
           fontFamily: "'cinzel', serif",
-          fontWeight: "600",
+          fontWeight: "500",
         }}
       >
         best sellers
         <div
           className="title-border"
           style={{
-            width: "80px",
-            height: "3.5px",
+            width: "70px",
+            height: "3px",
             borderRadius: "100px",
             backgroundColor: "#2f3e4e",
             margin: "0 auto",
@@ -121,7 +120,7 @@ const BestSellerSection = () => {
         className="footer-line"
         style={{ marginTop: "24px", borderTop: "1px solid #d6d6d6 !important" }}
       />
-    </>
+    </Box>
   );
 };
 

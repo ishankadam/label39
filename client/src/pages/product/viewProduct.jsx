@@ -54,20 +54,22 @@ const ViewProductModal = (props) => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          padding: "20px",
+          padding: "10px",
         }}
       >
         <Box
           sx={{
             bgcolor: "background.paper",
-            padding: "20px",
-            width: "80%",
+            padding: "20px 50px",
+            width: "70%",
             maxHeight: "100%",
             maxWidth: "100%",
             overflowY: "auto",
+            // borderRadius: "10px",
+            border: "2px solid #d7d7d7",
           }}
         >
-          <Grid container spacing={4}>
+          <Grid container spacing={2}>
             {/* Left: Image Section */}
             <Grid
               item
@@ -97,7 +99,7 @@ const ViewProductModal = (props) => {
                   sx={{
                     position: "absolute",
                     top: "50%",
-                    right: 0,
+                    right: "-6px",
                     zIndex: 1,
                   }}
                 >
@@ -147,88 +149,187 @@ const ViewProductModal = (props) => {
                     marginBottom: "10px",
                     display: "flex",
                     justifyContent: "left",
+                    fontWeight: "600",
+                    color: "#494949",
+                    fontFamily: "'Cinzel Serif', serif ",
                   }}
                 >
                   {props.product.label}
                 </Typography>
                 <Typography
                   variant="h5"
-                  color="text.secondary"
-                  sx={{ marginBottom: "20px" }}
+                  // color="text.secondary"
+                  sx={{
+                    marginBottom: "20px",
+                    fontSize: "20px",
+                    color: "rgba(55, 65, 81, 0.85)",
+                    fontFamily: "'Roboto Condensed', serif ",
+                  }}
                 >
                   RS. {props.product.price}
                 </Typography>
 
                 {/* Size Chart */}
-                <Link href="#" sx={{ marginBottom: "10px", display: "block" }}>
+                <Link
+                  href="#"
+                  color="text.secondary"
+                  sx={{
+                    marginBottom: "15px",
+                    display: "block",
+                    fontSize: "16px",
+                    fontWeight: "600",
+                    fontFamily: "'Roboto Serif', serif ",
+
+                    // color: "rgba(55, 65, 81, 0.85)",
+                  }}
+                >
                   Size Chart
                 </Link>
-                <Box sx={{ display: "flex", gap: 2, marginBottom: "20px" }}>
+                <Box sx={{ display: "flex", gap: 2, marginBottom: "25px" }}>
                   {props.product.sizes.map((size) => (
-                    <Button key={size} variant="outlined" color="success">
-                      {size}
+                    <Button key={size} variant="outlined" color="custom">
+                      <Typography
+                        sx={{
+                          fontSize: "16px",
+                          fontWeight: "600",
+                          fontFamily: "'Roboto Serif', serif ",
+                        }}
+                      >
+                        {size}
+                      </Typography>
                     </Button>
                   ))}
                 </Box>
 
                 {/* Quantity */}
-                <Box sx={{ marginBottom: "20px" }}>
-                  <Typography>Quantity</Typography>
-                  <Box sx={{ display: "flex", gap: 1, marginTop: "10px" }}>
-                    <Button
-                      variant="outlined"
-                      color="success"
-                      onClick={() => setQuantity((prev) => prev + 1)}
-                    >
-                      +
-                    </Button>
-                    <Button variant="outlined" color="success">
-                      {quantity}
-                    </Button>
+                <Box sx={{ marginBottom: "25px" }}>
+                  <Typography
+                    sx={{
+                      fontSize: "16px",
+                      fontWeight: "600",
+                      fontFamily: "'Roboto Serif', serif ",
+                      color: "rgba(55, 65, 81, 0.85)",
+                    }}
+                  >
+                    Quantity
+                  </Typography>
+                  <Box sx={{ display: "flex", gap: 2, marginTop: "10px" }}>
                     <Button
                       variant="outlined"
                       color="success"
                       onClick={() =>
                         setQuantity((prev) => (prev > 0 ? prev - 1 : 0))
                       }
+                      sx={{
+                        borderRadius: "0",
+                        padding: "5px !important",
+                      }}
                     >
                       -
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      color="custom"
+                      sx={{
+                        width: "40px",
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          fontSize: "16px",
+                          fontWeight: "600",
+                          fontFamily: "'Roboto Serif', serif ",
+                        }}
+                      >
+                        {quantity}
+                      </Typography>
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      color="success"
+                      onClick={() => setQuantity((prev) => prev + 1)}
+                      sx={{
+                        borderRadius: "0",
+                        padding: "5px !important",
+                      }}
+                    >
+                      +
                     </Button>
                   </Box>
                 </Box>
 
                 {/* Add to Cart and Buy Now */}
-                <Box sx={{ display: "flex", gap: 2, marginBottom: "20px" }}>
-                  <Button variant="contained" color="success">
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 1,
+                    marginBottom: "25px",
+                  }}
+                >
+                  <Button variant="outlined" color="custom" sx={{}}>
                     Add to Cart
                   </Button>
-                  <Button variant="contained" color="success">
+                  <Button
+                    variant="contained"
+                    color="custom"
+                    sx={
+                      {
+                        // width: "83%",
+                      }
+                    }
+                  >
                     Buy Now
                   </Button>
                 </Box>
 
                 {/* Talk to Us and Share */}
-                <Box sx={{ display: "flex", gap: 2, marginBottom: "20px" }}>
+                <Box sx={{ display: "flex", gap: 2, marginBottom: "25px" }}>
                   <Button
                     startIcon={<ChatIcon />}
                     variant="outlined"
-                    color="success"
+                    color="custom"
+                    sx={{
+                      width: "50%",
+                    }}
                   >
                     Talk to Us
                   </Button>
                   <Button
                     startIcon={<ShareIcon />}
                     variant="outlined"
-                    color="success"
+                    color="custom"
+                    sx={{
+                      width: "50%",
+                    }}
                   >
                     Share
                   </Button>
                 </Box>
 
                 {/* Description */}
-                <Box sx={{ marginBottom: "20px" }}>
-                  <Typography variant="h6">Description</Typography>
-                  <Typography>{props.product.description}</Typography>
+                <Box sx={{ marginBottom: "25px" }}>
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      fontSize: "16px",
+                      fontWeight: "600",
+                      fontFamily: "'Roboto Serif', serif ",
+                      color: "rgba(55, 65, 81, 0.85)",
+                    }}
+                  >
+                    Description
+                  </Typography>
+                  <Typography
+                    sx={{
+                      fontSize: "14px",
+                      fontWeight: "400",
+                      fontFamily: "'Roboto Serif', serif ",
+                      color: "rgba(55, 65, 81, 0.85)",
+                    }}
+                  >
+                    {props.product.description}
+                  </Typography>
                 </Box>
 
                 <div
@@ -236,14 +337,53 @@ const ViewProductModal = (props) => {
                   style={{ display: "flex" }}
                 >
                   <div>
-                    <Typography variant="h6">Garment Details</Typography>
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        fontSize: "16px",
+                        fontWeight: "600",
+                        fontFamily: "'Roboto Serif', serif ",
+                        color: "rgba(55, 65, 81, 0.85)",
+                      }}
+                    >
+                      Garment Details
+                    </Typography>
                     {props.product.garmentDetails.map((detail, index) => (
-                      <Typography key={index}>{detail}</Typography>
+                      <Typography
+                        key={index}
+                        sx={{
+                          fontSize: "14px",
+                          fontWeight: "400",
+                          fontFamily: "'Roboto Serif', serif ",
+                          color: "rgba(55, 65, 81, 0.85)",
+                        }}
+                      >
+                        {detail}
+                      </Typography>
                     ))}
                   </div>
-                  <div style={{ margin: "0 20px" }}>
-                    <Typography variant="h6">Delivery in:</Typography>
-                    <Typography>{props.product.deliveryInfo}</Typography>
+                  <div style={{ margin: "0 40px" }}>
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        fontSize: "16px",
+                        fontWeight: "600",
+                        fontFamily: "'Roboto Serif', serif ",
+                        color: "rgba(55, 65, 81, 0.85)",
+                      }}
+                    >
+                      Delivery in:
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: "14px",
+                        fontWeight: "400",
+                        fontFamily: "'Roboto Serif', serif ",
+                        color: "rgba(55, 65, 81, 0.85)",
+                      }}
+                    >
+                      {props.product.deliveryInfo}
+                    </Typography>
                   </div>
                 </div>
               </Box>

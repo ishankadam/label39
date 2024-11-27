@@ -16,6 +16,8 @@ import { useState } from "react";
 import Cart from "./pages/cart/cart";
 import Checkout from "./pages/checkout/checkout";
 import FindUs from "./pages/homepage/findUs";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import { Fab, Tooltip } from "@mui/material";
 
 const App = () => {
   const [cartDetails, setCartDetails] = useState({
@@ -29,6 +31,44 @@ const App = () => {
           cartDetails={cartDetails}
           setCartDetails={setCartDetails}
         />
+        <Tooltip
+          title="Contact us on WhatsApp"
+          arrow
+          PopperProps={{
+            sx: {
+              "& .MuiTooltip-tooltip": {
+                bgcolor: "white",
+                color: "#000",
+                fontFamily: "'Roboto Serif', serif",
+                padding: "12px 16px",
+                margin: "5px", // Add margin
+                fontSize: "14px", // Set font size
+                boxShadow: "0 4px 20px rgba(0, 0, 0, 0.2)", // Nice box shadow
+              },
+              "& .MuiTooltip-arrow": {
+                color: "white", // Match arrow color to tooltip background
+              },
+            },
+          }}
+        >
+          <Fab
+            color="success"
+            aria-label="add"
+            sx={{
+              position: "fixed",
+              bottom: 20,
+              right: 20,
+              zIndex: 1000,
+              transition: "background-color 0.3s ease",
+              "&:hover": {
+                backgroundColor: "#4caf50",
+              },
+            }}
+          >
+            <WhatsAppIcon sx={{ fontSize: 30 }} />
+          </Fab>
+        </Tooltip>
+
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/shop" element={<Shop />} />

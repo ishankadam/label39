@@ -6,12 +6,14 @@ import textile from "../../assets/texttile.png";
 import woven from "../../assets/woven.png";
 import mindful from "../../assets/mindful.png";
 import sustainable from "../../assets/sustainable.png";
-
+import footerImg from "../../assets/footer.jpg";
 const Footer = (props) => {
   return (
     <div className="container">
+      <img src={footerImg} style={{ width: "100%", display: "block" }} alt="" />
+
       {/* Top Section */}
-      {props.topSection && (
+      {/* {props.topSection && (
         <div className="top-section">
           <div className="top-item">
             <img src={textile} alt="textile" className="bottom-icons" />
@@ -30,7 +32,7 @@ const Footer = (props) => {
             <Typography>Sustainable Practices</Typography>
           </div>
         </div>
-      )}
+      )} */}
       <footer
         style={{ backgroundColor: "#F5F5F6", padding: "40px 0", color: "#fff" }}
       >

@@ -6,7 +6,7 @@
   position: relative;
   width: auto;
   height: 600px; /* Set the container height to 600px */
-  margin-bottom: 34px;
+  margin: 20px auto;
 }
 
 .seenon-video-wrapper {
@@ -15,7 +15,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  height: 600px; /* Set height of both video and image container */
+  height: 600px;
 }
 
 .seenon-image-wrapper {
@@ -30,7 +30,7 @@
 .product-button {
   font-family: "Roboto Serif", serif !important;
   font-weight: 600 !important;
-  width: 88%; /* Make button take the full width of the wrapper */
+  width: 90% !important;
 }
 
 .seenon-video-wrapper video,

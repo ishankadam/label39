@@ -62,24 +62,23 @@ const Testimonials = () => {
 
   return (
     <div>
-      <Box>
+      <Box sx={{ marginTop: { xs: "20px", sm: "28px", md: "36px" } }}>
         <Typography
           variant="h4"
           sx={{
             color: "#2f3e4e",
             textAlign: "center",
-            mb: 4,
-            mt: 4,
+            mb: 1,
             fontFamily: "'cinzel', serif",
-            fontWeight: "600",
+            fontWeight: "500",
           }}
         >
           what our customers say
           <div
             className="title-border"
             style={{
-              width: "80px",
-              height: "3.5px",
+              width: "70px",
+              height: "3px",
               borderRadius: "100px",
               backgroundColor: "#2f3e4e",
               margin: "0 auto",
@@ -87,7 +86,12 @@ const Testimonials = () => {
           />
         </Typography>
 
-        <Box display="flex" justifyContent="center" flexWrap="wrap">
+        <Box
+          display="flex"
+          justifyContent="center"
+          flexWrap="wrap"
+          sx={{ margin: "20px auto" }}
+        >
           {slides.slice(currentSlide, currentSlide + 2).map((slide, index) => (
             <Card
               key={index}
@@ -117,7 +121,7 @@ const Testimonials = () => {
                       variant="h6"
                       sx={{
                         fontFamily: "'Roboto Serif', serif",
-                        fontWeight: "600 !important",
+                        fontWeight: "500 !important",
                         textTransform: "capitalize",
                         fontSize: "16px",
                         margin: "15px",

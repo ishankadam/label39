@@ -6,6 +6,7 @@ import {
   Button,
   Typography,
   Pagination,
+  Box,
 } from "@mui/material";
 import React from "react";
 
@@ -14,24 +15,23 @@ import { categories } from "../../common";
 
 const CategorySection = () => {
   return (
-    <>
+    <Box sx={{ marginTop: { xs: "20px", sm: "28px", md: "36px" } }}>
       <Typography
         variant="h4"
         sx={{
           color: "#2f3e4e",
           textAlign: "center",
-          mb: 4,
-          mt: 4,
+          mb: 1,
           fontFamily: "'cinzel', serif",
-          fontWeight: "600",
+          fontWeight: "500",
         }}
       >
         categories
         <div
           className="title-border"
           style={{
-            width: "80px",
-            height: "3.5px",
+            width: "70px",
+            height: "3px",
             borderRadius: "100px",
             backgroundColor: "#2f3e4e",
             margin: "0 auto",
@@ -51,7 +51,7 @@ const CategorySection = () => {
           <Grid2 item size={{ xs: 12, sm: 6, md: 3 }}>
             <Card
               sx={{
-                margin: "20px",
+                margin: "16px",
                 textAlign: "center",
                 borderRadius: "3px",
                 position: "relative",
@@ -87,16 +87,16 @@ const CategorySection = () => {
                   left: "50%",
                   transform: "translate(-50%, -50%)",
                   padding: "10px !important",
-                  borderRadius: "5px",
+                  borderRadius: "2px",
                   background: "#FAFDFF",
-                  color: "#212121",
+                  color: "#a16149",
                   boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)", // Add shadow on hover
 
                   // border: "1px solid #d6d6d6",
                   transition: "0.2s ease", // Smooth transition for hover effect
                   "&:hover": {
                     backgroundColor: "#FAFDFF",
-                    color: "#121212",
+                    color: "#a16149",
                     boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
                     transform: "translate(-50%, -50%) scale(1.1)",
                   },
@@ -110,7 +110,7 @@ const CategorySection = () => {
       </Grid2>
 
       <hr className="footer-line" />
-    </>
+    </Box>
   );
 };
 

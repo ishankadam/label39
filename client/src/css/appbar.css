@@ -10,10 +10,14 @@
   margin-top: 8px !important;
 }
 
-.nav-options {
-  position: relative; /* To position the pseudo-element */
-  padding: 10px; /* Add some padding for better appearance */
-  color: #121212;
+/*  marquee for mobile notification */
+@keyframes scrollLeft {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }
 
 .nav-options::after {
@@ -23,38 +27,17 @@
   bottom: -2px; /* Position below the text */
   width: 100%; /* Full width */
   height: 3px; /* Height of the line */
-  background-color: #006a19; /* Change this to your desired color */
+  background-color: #a16149;
   transform: scaleX(0); /* Start with no width */
   transition: transform 0.3s ease; /* Smooth transition */
   color: red !important;
 }
 
 .nav-options:hover {
-  color: #006a19 !important;
+  color: #a16149 !important;
 }
 .nav-options:hover::after {
   transform: scaleX(1); /* Expand to full width on hover */
-}
-
-.notification-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 106, 25, 0.3);
-  color: rgba(0, 106, 25, 1);
-  padding: 5px 10px;
-
-  /* Ensure the text scales properly */
-  width: 100%;
-  box-sizing: border-box;
-}
-
-/* Style for the notification text */
-.notification-text {
-  font-family: "Roboto Serif", serif !important;
-  font-size: 14px !important; /* Default size */
-  font-weight: 700 !important;
-  text-align: center; /* Ensure the text is centered */
 }
 
 .nav-options {
@@ -80,21 +63,3 @@
     font-size: 14px !important; /* Larger font size for desktops */
   }
 }
-
-/* For smaller mobile devices */
-@media (max-width: 599px) {
-  .notification-text {
-    font-size: 11px !important; /* Smaller font size for mobile */
-  }
-
-  .logo-wrapper {
-    display: flex;
-    justify-content: center; /* Center the logo */
-  }
-}
-
-/* .cinzel-font {
-  font-family: "Cinzel", serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-} */

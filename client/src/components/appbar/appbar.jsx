@@ -24,7 +24,7 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
 import "./../../css/appbar.css";
-
+import CloseIcon from "@mui/icons-material/Close";
 import { useShopContext } from "../../context/shopContext";
 
 const CustomAppbar = (props) => {
@@ -75,11 +75,39 @@ const CustomAppbar = (props) => {
 
   return (
     <>
-      <div className="notification-wrapper">
-        <Typography className="notification-text">
-          USE CODE WELCOME10 TO GET 10% OFF ON YOUR FIRST PURCHASE
+      <Box
+        // className="notification-wrapper"
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: "#d7b4a7",
+          color: "#583528",
+          padding: "5px 10px",
+          width: "100%",
+          boxSizing: "border-box",
+          overflow: { xs: "hidden", md: "unset" }, // Hide overflow for marquee on mobile
+          whiteSpace: { xs: "nowrap", md: "unset" }, // Single-line text for marquee on mobile
+        }}
+      >
+        <Typography
+          // className="notification-text"
+          sx={{
+            textTransform: "capitalize",
+            fontFamily: '"Roboto Serif", serif',
+            fontSize: { xs: "12px", sm: "14px" }, // Responsive font size
+            fontWeight: 500,
+            textAlign: "center",
+            animation: {
+              xs: "scrollLeft 12s linear infinite",
+              md: "none", // No animation on larger screens
+            },
+          }}
+        >
+          free domestic shipping | free international shipping over Rs. 25000 |
+          use code 'welcome10' on first order
         </Typography>
-      </div>
+      </Box>
 
       <AppBar
         position="static"
@@ -95,28 +123,35 @@ const CustomAppbar = (props) => {
             color="inherit"
             opacity="0.7"
             aria-label="menu"
-            sx={{ display: { xs: "block", md: "none" } }}
+            sx={{
+              display: { xs: "flex", md: "none" },
+              width: { xs: "80px", sm: "80px" },
+              justifyContent: "left",
+              color: "#626262",
+            }}
             onClick={toggleDrawer(true)}
           >
             <MenuIcon />
           </IconButton>
 
-          <div
+          <Box
             className="logo-wrapper"
             onClick={() => handlePageChange("")}
-            style={{
+            sx={{
+              display: "flex",
+              justifyContent: { xs: "center", sm: "center", md: "left" },
               flexGrow: 1,
-              textAlign: { xs: "center", md: "left" },
+              textAlign: { xs: "center", sm: "center", md: "left" },
             }}
           >
             <IconButton edge="start" color="inherit" aria-label="logo">
               <img
                 src={logo}
                 alt="logo"
-                style={{ height: "40px", marginRight: "10px", width: "auto" }}
+                style={{ height: "40px", width: "auto" }}
               />
             </IconButton>
-          </div>
+          </Box>
 
           {/* Navigation for large screens */}
           <Box
@@ -172,10 +207,19 @@ const CustomAppbar = (props) => {
             <IconButton color="inherit" sx={{ opacity: 0.7 }}>
               <SearchOutlinedIcon />
             </IconButton>
-            <IconButton color="inherit" sx={{ opacity: 0.7 }}>
+            <IconButton
+              color="inherit"
+              sx={{
+                display: { xs: "none", md: "flex" }, // Hide on mobile
+                opacity: 0.7,
+              }}
+            >
               <PermIdentityRoundedIcon />
             </IconButton>
-            <IconButton color="inherit" sx={{ opacity: 0.7 }}>
+            <IconButton
+              color="inherit"
+              sx={{ opacity: 0.7, paddingRight: { xs: "0", sm: "auto" } }}
+            >
               <ShoppingCartOutlinedIcon onClick={handleOpenCart} />
             </IconButton>
 
@@ -224,28 +268,69 @@ const CustomAppbar = (props) => {
         {/* Mobile Drawer */}
         <Drawer anchor="left" open={mobileOpen} onClose={toggleDrawer(false)}>
           <Box
-            sx={{ width: 250 }}
+            sx={{
+              width: 250,
+              position: "relative", // Allow positioning of the close icon
+            }}
             role="presentation"
-            onClick={toggleDrawer(false)}
-            onKeyDown={toggleDrawer(false)}
           >
-            <List>
+            {/* Close Icon */}
+            <IconButton
+              onClick={toggleDrawer(false)} // Close the drawer when clicked
+              sx={{
+                position: "absolute",
+                top: "8px",
+                left: "8px",
+                zIndex: 10, // Ensure it stays on top
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
+
+            {/* Nav Options */}
+            <List sx={{ mt: "40px" }}>
+              {" "}
+              {/* Add margin to push content below the close icon */}
               {menuItems.map((item) => (
                 <ListItem
                   button
                   key={item.text}
                   onClick={() => handlePageChange(item.page)}
+                  sx={{
+                    display: { xs: "flex", md: "none" },
+                    justifyContent: "center",
+                  }}
                 >
-                  <ListItemText
+                  <Typography
                     sx={{
                       fontFamily: "'Roboto Serif', serif !important",
                       fontSize: "16px",
-                      fontWeight: "600",
+                      fontWeight: "500",
+                      padding: "8px",
                     }}
-                    primary={item.text}
-                  />
+                  >
+                    {item.text}
+                  </Typography>
                 </ListItem>
               ))}
+              {/* Account Icon: Visible only on mobile */}
+              <ListItem
+                button
+                sx={{
+                  display: { xs: "flex", md: "none" },
+                  justifyContent: "center",
+                }}
+              >
+                <Typography
+                  sx={{
+                    fontFamily: "'Roboto Serif', serif",
+                    fontWeight: "500",
+                    fontSize: "16px",
+                  }}
+                >
+                  Account
+                </Typography>
+              </ListItem>
             </List>
           </Box>
         </Drawer>

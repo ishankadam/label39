@@ -249,14 +249,14 @@ const CustomDrawer = (props) => {
             </Typography>
             <Button
               variant="contained"
-              color="success"
+              // color="success"
               sx={{
                 letterSpacing: "2px",
                 fontFamily: "'cinzel', serif",
                 fontWeight: "700",
                 borderRadius: 0,
                 padding: "8px 5px",
-                // backgroundColor: "green",
+                backgroundColor: "#a16149",
                 color: "#fff",
                 boxShadow: "none",
               }}

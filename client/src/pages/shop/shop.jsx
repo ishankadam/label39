@@ -14,11 +14,15 @@ import { products } from "../../common";
 import CircleIcon from "@mui/icons-material/Circle";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { getAllProducts } from "../../api";
+import ViewProductModal from "../product/viewProduct";
 
 const ProductsPage = () => {
   const [allProduct, setAllProduct] = useState([]);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-
+  const [showModal, setShowModal] = useState({
+    open: false,
+    data: {},
+  });
   const toggleDrawer = (open) => (event) => {
     setIsDrawerOpen(open);
   };
@@ -28,6 +32,14 @@ const ProductsPage = () => {
     price: "",
     color: "",
   });
+
+  const handleViewProduct = (product) => {
+    console.log(product);
+    setShowModal({
+      open: true,
+      data: product,
+    });
+  };
 
   const handleFilterChange = (value, field) => {
     setFilter((prev) => ({
@@ -61,7 +73,7 @@ const ProductsPage = () => {
             marginLeft: { xs: "6px", sm: "12px", md: "16px" },
 
             fontFamily: "'Cinzel', serif",
-            fontWeight: "600",
+            fontWeight: "500",
             color: "#292929",
           }}
         >
@@ -138,7 +150,7 @@ const ProductsPage = () => {
                       {isSelected && (
                         <CircleIcon
                           sx={{
-                            color: "#006A19",
+                            color: "#a16149",
                             fontSize: "8px",
                             marginRight: "8px",
                           }}
@@ -150,7 +162,7 @@ const ProductsPage = () => {
                           fontFamily: " 'Roboto Serif', serif",
                           fontSize: isSelected ? "16px" : "15px",
                           fontWeight: isSelected ? "600" : "normal",
-                          color: isSelected ? "#006a19" : "black",
+                          color: isSelected ? "#a16149" : "black",
                           margin: "0 !important", // Override margin
                           padding: "0 !important", // Override padding
                         }}
@@ -205,7 +217,7 @@ const ProductsPage = () => {
                       {isSelected && (
                         <CircleIcon
                           sx={{
-                            color: "#006A19",
+                            color: "#a16149",
                             fontSize: "8px",
                             marginRight: "8px",
                           }}
@@ -217,7 +229,7 @@ const ProductsPage = () => {
                           fontFamily: " 'Roboto Serif', serif",
                           fontSize: isSelected ? "16px" : "15px",
                           fontWeight: isSelected ? "600" : "normal",
-                          color: isSelected ? "#006a19" : "black",
+                          color: isSelected ? "#a16149" : "black",
                           margin: "0 !important", // Override margin
                           padding: "0 !important", // Override padding
                         }}
@@ -272,7 +284,7 @@ const ProductsPage = () => {
                       {isSelected && (
                         <CircleIcon
                           sx={{
-                            color: "#006A19",
+                            color: "#a16149",
                             fontSize: "8px",
                             marginRight: "8px",
                           }}
@@ -284,7 +296,7 @@ const ProductsPage = () => {
                           fontFamily: " 'Roboto Serif', serif",
                           fontSize: isSelected ? "16px" : "15px",
                           fontWeight: isSelected ? "600" : "normal",
-                          color: isSelected ? "#006a19" : "black",
+                          color: isSelected ? "#a16149" : "black",
                           margin: "0 !important", // Override margin
                           padding: "0 !important", // Override padding
                         }}
@@ -300,7 +312,11 @@ const ProductsPage = () => {
         {/* Products card container */}
         <div className="products-container">
           {products.slice(0, 8).map((product, index) => (
-            <ProductCard key={index} product={product} />
+            <ProductCard
+              key={index}
+              product={product}
+              handleViewProduct={handleViewProduct}
+            />
           ))}
         </div>
       </div>
@@ -350,7 +366,7 @@ const ProductsPage = () => {
                       {isSelected && (
                         <CircleIcon
                           sx={{
-                            color: "#006A19",
+                            color: "#a16149",
                             fontSize: "8px",
                             marginRight: "8px",
                           }}
@@ -364,7 +380,7 @@ const ProductsPage = () => {
                             ? { xs: "12px", sm: "12px", md: "16px" }
                             : { xs: "11px", sm: "11px", md: "15px" },
                           fontWeight: isSelected ? "600" : "normal",
-                          color: isSelected ? "#006a19" : "black",
+                          color: isSelected ? "#a16149" : "black",
                           margin: "0 !important", // Override margin
                           padding: "0 !important", // Override padding
                         }}
@@ -419,7 +435,7 @@ const ProductsPage = () => {
                       {isSelected && (
                         <CircleIcon
                           sx={{
-                            color: "#006A19",
+                            color: "#a16149",
                             fontSize: "8px",
                             marginRight: "8px",
                           }}
@@ -433,7 +449,7 @@ const ProductsPage = () => {
                             ? { xs: "12px", sm: "12px", md: "16px" }
                             : { xs: "11px", sm: "11px", md: "15px" },
                           fontWeight: isSelected ? "600" : "normal",
-                          color: isSelected ? "#006a19" : "black",
+                          color: isSelected ? "#a16149" : "black",
                           margin: "0 !important", // Override margin
                           padding: "0 !important", // Override padding
                         }}
@@ -488,7 +504,7 @@ const ProductsPage = () => {
                       {isSelected && (
                         <CircleIcon
                           sx={{
-                            color: "#006A19",
+                            color: "#a16149",
                             fontSize: "8px",
                             marginRight: "8px",
                           }}
@@ -502,7 +518,7 @@ const ProductsPage = () => {
                             ? { xs: "12px", sm: "12px", md: "16px" }
                             : { xs: "11px", sm: "11px", md: "15px" },
                           fontWeight: isSelected ? "600" : "normal",
-                          color: isSelected ? "#006a19" : "black",
+                          color: isSelected ? "#a16149" : "black",
                           margin: "0 !important", // Override margin
                           padding: "0 !important", // Override padding
                         }}
@@ -515,6 +531,14 @@ const ProductsPage = () => {
           </div>
         </div>
       </Drawer>
+
+      {showModal.open ? (
+        <ViewProductModal
+          open={showModal.open}
+          product={showModal.data}
+          setShowModal={setShowModal}
+        ></ViewProductModal>
+      ) : null}
     </div>
   );
 };

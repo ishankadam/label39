@@ -4,9 +4,9 @@ import CheckoutProducts from "./checkoutProducts";
 
 const Checkout = () => {
   return (
-    <div style={{ display: "flex", margin: "20px 10%" }}>
+    <div>
       <CheckoutForm></CheckoutForm>
-      <CheckoutProducts></CheckoutProducts>
+      {/* <CheckoutProducts></CheckoutProducts> */}
     </div>
   );
 };

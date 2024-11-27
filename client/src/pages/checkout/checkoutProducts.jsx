@@ -21,9 +21,12 @@ const CheckoutProducts = (props) => {
     <Card
       sx={{
         p: 2,
-        borderLeft: "1px solid black",
         borderRadius: "none !important",
         boxShadow: "none",
+        width: "50%",
+        // maxWidth: 600,
+        margin: "auto",
+        borderLeft: "1px solid #ccc",
       }}
     >
       {" "}

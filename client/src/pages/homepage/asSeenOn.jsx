@@ -7,8 +7,9 @@ import video2 from "../../assets/video2.mov";
 import bestSeller1 from "../../assets/bestseller1.jpeg";
 import bestSeller3 from "../../assets/bestseller3.jpeg";
 import "./../../css/asSeenOn.css";
-import { Button, Typography } from "@mui/material";
+import { Box, Button, IconButton, Typography } from "@mui/material";
 import as_seen_on_hoverImg from "../../assets/as_seen_on_hover.jpeg";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
 const AsSeenOn = () => {
   const [slideNumber, setSlideNumber] = useState(0);
@@ -41,24 +42,28 @@ const AsSeenOn = () => {
   ];
 
   return (
-    <>
+    <Box
+      sx={{
+        background: "#F7ECE9",
+        paddingTop: { xs: "20px", sm: "28px", md: "36px" },
+      }}
+    >
       <Typography
         variant="h4"
         sx={{
           color: "#2f3e4e",
           textAlign: "center",
-          mb: 4,
-          mt: 4,
+          mb: 1,
           fontFamily: "'cinzel', serif",
-          fontWeight: "600",
+          fontWeight: "500",
         }}
       >
         as seen on
         <div
           className="title-border"
           style={{
-            width: "80px",
-            height: "3.5px",
+            width: "70px",
+            height: "3px",
             borderRadius: "100px",
             backgroundColor: "#2f3e4e",
             margin: "0 auto",
@@ -98,11 +103,7 @@ const AsSeenOn = () => {
           onMouseLeave={() => setShowProductInfo(false)}
         >
           <ProductCard product={asSeenOn[slideNumber]} />
-          <Button
-            variant="contained"
-            color="success"
-            className="product-button"
-          >
+          <Button variant="contained" color="custom" className="product-button">
             View This Product
           </Button>
         </div>
@@ -123,7 +124,7 @@ const AsSeenOn = () => {
         className="footer-line"
         style={{ marginTop: "24px", borderTop: "1px solid #d6d6d6 !important" }}
       />
-    </>
+    </Box>
   );
 };
 

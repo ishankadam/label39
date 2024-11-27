@@ -1,6 +1,6 @@
 import { Typography, Box } from "@mui/material";
 import React from "react";
-import story from "../../assets/story.png";
+import story from "../../assets/aboutImg.jpeg";
 import Container from "@mui/material/Container";
 import backgroundImage from "../../assets/leaf-bg2-cropped.jpg"; // Import your background image
 
@@ -9,7 +9,7 @@ const OurStory = () => {
     <div
       style={{
         backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: "1800px 700px",
+        backgroundSize: "1800px 100%",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
         minHeight: "100%", // Ensure it covers the full viewport height
@@ -29,7 +29,7 @@ const OurStory = () => {
           sx={{
             textAlign: "center",
             mb: 4,
-            mt: 4,
+            mt: 2,
             fontFamily: "'cinzel', serif",
             fontWeight: "600",
           }}
@@ -82,19 +82,24 @@ const OurStory = () => {
               order: { xs: 2, md: 1 }, // Image comes first, text comes second on mobile
             }}
           >
-            We are a clothing brand based in Kolkata. We believe in making
-            conscious clothing for everyday. We want to be a part of the new
-            ethos where we are making thoughtful and personal design which
-            connects the wearer with the maker. We work closely with craftsmen
-            and weavers across the country to preserve age-old techniques and
-            practices of our country whilst contemporizing the product. Each
-            piece is a story of all the hands that came together in creating it.
-            We want to create separates that you will wear time and again,
-            perhaps in a different way each time. Design that is functional yet
-            thoughtful, contemporary yet rooted, classic yet versatile. Fashion
-            which celebrates everyday together with the special occasions.
-            Clothes that let you breathe easy, let you be yourself and yet make
-            you feel good.
+            The Label 39 is the creative expression of a mother-daughter duo,
+            Anita and Prachi, who embarked on their journey in 2021. With
+            Anita’s 20+ years of expertise in the fashion industry and Prachi’s
+            refined education from the prestigious London College of Fashion,
+            the brand seamlessly blends heritage with innovation. The Label 39
+            began with a focus on pret wear—effortlessly chic and versatile
+            pieces that became an instant hit. Building on this success, we
+            introduced our Drape Collection in 2024, a celebration of festive
+            elegance filled with fusion, designed for modernity. Our creations
+            feature intricate appliqué, embroidery, hand beadwork, cutwork, and
+            hand-painted details. Made with pure, eco-friendly fabrics, we
+            prioritise sustainability and embrace the ethos of slow fashion with
+            made-to-order designs that minimise waste. At the heart of The Label
+            39 lies a passion for Indian craftsmanship, reimagined with a
+            contemporary flair. Each silhouette is thoughtfully designed to
+            offer comfort, grace, and a story of artistry. We are proud to
+            present a brand that values authenticity, sustainability, and the
+            effortless charm of the modern woman.
           </Typography>
         </Container>
       </Container>
