@@ -299,7 +299,7 @@ const CheckoutForm = (props) => {
           }}
         >
           <Grid container spacing={2}>
-            <Grid item xs={12}>
+            <Grid xs={12}>
               <Typography
                 variant="h6"
                 sx={{
@@ -329,7 +329,7 @@ const CheckoutForm = (props) => {
             </Grid>
 
             {/* First Name and Last Name on the same row */}
-            <Grid item xs={12} sm={6}>
+            <Grid xs={12} sm={6}>
               <CustomTextfield
                 label="First Name"
                 variant="outlined"
@@ -340,7 +340,7 @@ const CheckoutForm = (props) => {
                 sx={{ width: "100%" }}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid xs={12} sm={6}>
               <CustomTextfield
                 label="Last Name"
                 variant="outlined"
@@ -353,7 +353,7 @@ const CheckoutForm = (props) => {
             </Grid>
 
             {/* Address Field */}
-            <Grid item xs={12}>
+            <Grid xs={12}>
               <CustomTextfield
                 label="Address"
                 config={{ field: "address", isRequired: true }}
@@ -363,7 +363,7 @@ const CheckoutForm = (props) => {
               />
             </Grid>
 
-            <Grid item xs={12}>
+            <Grid xs={12}>
               <CustomTextfield
                 label="Apartment, Suite, etc. (optional)"
                 config={{ field: "apartment" }}
@@ -372,7 +372,7 @@ const CheckoutForm = (props) => {
                 sx={{ width: "100%" }}
               />
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid xs={12} sm={4}>
               <CustomTextfield
                 label="City"
                 config={{ field: "city", isRequired: true }}
@@ -381,7 +381,7 @@ const CheckoutForm = (props) => {
                 sx={{ width: "100%" }}
               />
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid xs={12} sm={4}>
               <CustomTextfield
                 label="State"
                 config={{ field: "state", isRequired: true }}
@@ -390,7 +390,7 @@ const CheckoutForm = (props) => {
                 sx={{ width: "100%" }}
               />
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid xs={12} sm={4}>
               <CustomTextfield
                 label="Pincode"
                 config={{ field: "pincode", isRequired: true }}
@@ -399,7 +399,7 @@ const CheckoutForm = (props) => {
                 sx={{ width: "100%" }}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid xs={12}>
               <CustomTextfield
                 label="Phone number"
                 config={{ field: "Phone number", isRequired: true }}
@@ -418,11 +418,11 @@ const CheckoutForm = (props) => {
                 Shipping Method
               </Typography>
             </Grid>
-            <Grid item xs={12}>
+            <Grid xs={12}>
               <Box
                 sx={{
                   display: "flex",
-                  alignItems: "center",
+                  alignitemss: "center",
                   justifyContent: "space-between",
                   width: "100%",
                   height: "56px", // Standard height for TextField

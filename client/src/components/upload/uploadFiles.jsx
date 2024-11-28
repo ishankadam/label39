@@ -1,54 +1,38 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Close } from "@mui/icons-material";
-import { Button, Typography } from "@mui/material";
+import { Button, Typography, Grid2 } from "@mui/material";
 import React, { useEffect, useState, forwardRef } from "react";
-import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
-import { getUrl } from "../../common";
 import "./uploadFiles.css";
+import { imageUrl } from "../../api";
 
 const UploadFiles = forwardRef((props, ref) => {
-  const [dragActive, setDragActive] = React.useState(false);
-  const [file, setFile] = useState();
-  const [image, setImage] = useState();
+  const [files, setFiles] = useState([]);
   const inputRef = React.useRef(null);
-  const containerRef = React.useRef(null); // React ref for the container
 
-  const handleDrag = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (e.type === "dragenter" || e.type === "dragover") {
-      setDragActive(true);
-    } else if (e.type === "dragleave" || e.type === "drop") {
-      setDragActive(false);
-    }
-  };
+  const [filePreviews, setFilePreviews] = useState([]);
 
-  const handleFileUpdate = (file) => {
-    if (
-      file &&
-      !["image/png", "application/pdf", "image/jpg", "image/jpeg"].includes(
+  const handleFileUpdate = (newFiles) => {
+    const validFiles = Array.from(newFiles).filter((file) =>
+      ["image/png", "application/pdf", "image/jpg", "image/jpeg"].includes(
         file.type
       )
-    ) {
-      setFile(undefined);
-    } else {
-      setFile(file);
-    }
-  };
+    );
 
-  const handleDrop = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setDragActive(false);
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      handleFileUpdate(e.dataTransfer.files[0]);
+    if (validFiles.length > 0) {
+      setFiles((prevFiles) => {
+        const updatedFiles = props.isEditproductDetails.description
+          ? [validFiles[0]]
+          : [...prevFiles, ...validFiles];
+        return updatedFiles;
+      });
+      props.updateData && props.updateData(validFiles);
     }
   };
 
   const handleChange = (e) => {
     e.preventDefault();
-    if (e.target.files && e.target.files[0]) {
-      handleFileUpdate(e.target.files[0]);
+    if (e.target.files && e.target.files.length > 0) {
+      handleFileUpdate(e.target.files);
     }
   };
 
@@ -56,136 +40,129 @@ const UploadFiles = forwardRef((props, ref) => {
     inputRef.current.click();
   };
 
-  const handleFileRemove = () => {
-    setFile(undefined);
+  const handleFileRemove = (index) => {
+    const updatedFiles = files.filter((_, i) => i !== index);
+    setFiles(updatedFiles);
+    props.updateData && props.updateData(updatedFiles);
   };
 
   useEffect(() => {
-    const element = containerRef.current; // Use React ref
-    if (element) {
-      element.addEventListener("dragenter", handleDrag);
-      element.addEventListener("dragleave", handleDrag);
-      element.addEventListener("dragover", handleDrag);
-      element.addEventListener("drop", handleDrop);
-
-      return () => {
-        element.removeEventListener("dragenter", handleDrag);
-        element.removeEventListener("dragleave", handleDrag);
-        element.removeEventListener("dragover", handleDrag);
-        element.removeEventListener("drop", handleDrop);
-      };
+    if (props.isEdit && props.images && props.images.length > 0) {
+      setFiles(props.images);
     }
-  }, []);
+  }, [props.images, props.isEdit]);
 
   useEffect(() => {
-    if (dragActive) {
-      const dragElement = document.querySelector(".drag-active-ele");
-
-      if (!dragElement) {
-        const div = document.createElement("div");
-        div.className = "drag-active-ele";
-        div.innerHTML = "<span>Drop File Here!</span>";
-        div.addEventListener("dragenter", handleDrag);
-        div.addEventListener("dragleave", handleDrag);
-        div.addEventListener("dragover", handleDrag);
-        div.addEventListener("drop", handleDrop);
-        containerRef.current.appendChild(div); // Append to the React ref container
-      }
-    } else {
-      const removeElement = document.querySelector(".drag-active-ele");
-      if (removeElement) {
-        containerRef.current.removeChild(removeElement); // Remove from the React ref container
-      }
+    if (props.isEdit) {
+      setFiles(props.file);
     }
-  }, [dragActive]);
-
-  useEffect(() => {
-    setFile(props.file);
-
-    if (props.file) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        const arrayBuffer = e.target.result;
-        const blob = new Blob([arrayBuffer], { type: props.file?.type });
-        const url = URL.createObjectURL(blob);
-        setImage(url);
-      };
-
-      if (props.file && typeof props.file === "object") {
-        reader.readAsArrayBuffer(props.file);
-      }
-    }
-    return () => {
-      if (image) {
-        URL.revokeObjectURL(image);
-      }
-    };
   }, [props.file]);
+
+  useEffect(() => {
+    const previews = files.map((file) =>
+      file instanceof File ? URL.createObjectURL(file) : `${imageUrl}/${file}`
+    );
+    setFilePreviews(previews);
+
+    return () => {
+      previews.forEach((preview) => {
+        if (preview.startsWith("blob:")) URL.revokeObjectURL(preview);
+      });
+    };
+  }, [files, props.category]);
 
   return (
     <>
-      {!file ? (
-        <form id="form-file-upload" onSubmit={(e) => e.preventDefault()}>
-          <input
-            ref={inputRef}
-            type="file"
-            id="input-file-upload"
-            onChange={handleChange}
-            accept=" .PDF, .PNG, .JPG, .JPEG "
-            name="attachment"
-          />
-          <label
-            id="label-file-upload"
-            htmlFor="input-file-upload"
-            className={dragActive ? "drag-active" : ""}
-            ref={containerRef} // Attach the ref here
-          >
-            <div>
-              <Typography sx={{ fontSize: "13px" }}>
-                Drag and drop your PDF, PNG, JPG, JPEG file here or
-              </Typography>
-              <Button
-                variant="text"
-                className="upload-button"
-                onClick={onButtonClick}
-              >
-                Upload a file
-              </Button>
-            </div>
-          </label>
-        </form>
-      ) : file ? (
-        <>
-          <div className="attachment-filename">
-            <Typography>{file && file?.name}</Typography>
-            <Close onClick={handleFileRemove}></Close>
+      {/* <div id="file-upload-container"> */}
+      <form id="form-file-upload" onSubmit={(e) => e.preventDefault()}>
+        <input
+          ref={inputRef}
+          type="file"
+          id="input-file-upload"
+          onChange={handleChange}
+          accept={props.acceptedFiles}
+          name="attachment"
+          multiple={true}
+          style={{ display: "none" }}
+        />
+        <label id="label-file-upload" htmlFor="input-file-upload">
+          <div>
+            <Typography sx={{ fontSize: "13px" }}>
+              Upload your PDF, PNG, JPG, JPEG files here
+            </Typography>
+            <Button
+              variant="text"
+              className="upload-button"
+              onClick={onButtonClick}
+            >
+              Upload files
+            </Button>
           </div>
-          <div className="image-container">
-            <img
-              className="attachment-file"
-              src={
-                typeof props.file === "object" ? image : `${getUrl()}${file}`
-              }
-              alt="attachment"
-            />
-            <div className="overlay">
-              <Button
-                color={"primary"}
-                variant="contained"
-                size="small"
-                startIcon={
-                  <CloudDownloadIcon
-                    className="download-icon"
-                    fontSize="large"
+        </label>
+      </form>
+      <Grid2
+        container
+        spacing={2}
+        sx={{ display: "flex", justifyContent: "center", mt: 2 }}
+      >
+        {files.length > 0 && (
+          // <div className="files-preview">
+
+          <>
+            {files.map((file, index) => (
+              <Grid2
+                item
+                xs={6}
+                md={4}
+                key={index}
+                className="attachment-filename"
+                sx={{
+                  border: "1px solid #ccc",
+                  padding: "5px !important",
+                  position: "relative",
+                  width: "200px",
+                }}
+              >
+                <div className="image-container">
+                  {/* Display image preview */}
+                  {filePreviews[index] && (
+                    <img
+                      className="attachment-file"
+                      src={filePreviews[index]}
+                      alt="attachment"
+                    />
+                  )}
+                </div>
+                <div key={index} className="attachment-filename">
+                  <Typography
+                    sx={{
+                      fontSize: "13px",
+                      color: "#555",
+                      textAlign: "center",
+                    }}
+                  >
+                    {file instanceof File ? file.name : file}
+                  </Typography>
+
+                  <Close
+                    onClick={() => handleFileRemove(index)}
+                    sx={{
+                      position: "absolute",
+                      top: "5px",
+                      right: "5px",
+                      borderRadius: "50%",
+                      padding: "4px",
+                      cursor: "pointer",
+                    }}
                   />
-                }
-              >
-                Download
-              </Button>
-            </div>
-          </div>
-        </>
-      ) : null}
+                </div>
+              </Grid2>
+            ))}
+          </>
+          // </div>
+        )}
+      </Grid2>
+      {/* </div> */}
     </>
   );
 });

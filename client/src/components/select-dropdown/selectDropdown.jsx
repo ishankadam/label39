@@ -20,7 +20,6 @@ const SelectDropdown = (props) => {
   };
 
   const menuItems = updateMenuItems(_.get(props, "optionList", []));
-
   return (
     <FormControl
       className={props.className ? props.className : "select-condition-list"}

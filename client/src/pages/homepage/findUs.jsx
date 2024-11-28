@@ -25,6 +25,11 @@ import CustomTextfield from "../../components/textfield/customTextfield";
 
 const FindUs = () => {
   const [addressSlide, setAddressSlide] = useState(true);
+  const [showMap, setShowMap] = useState(false);
+
+  const toggleMapVisibility = () => {
+    setShowMap((prev) => !prev); // Toggle map visibility
+  };
 
   const handleSlideChange = () => {
     setAddressSlide(!addressSlide);
@@ -73,13 +78,26 @@ const FindUs = () => {
         <Card className="card-container">
           <Grid container>
             <Grid item xs={12} sm={6}>
-              <CardMedia
-                className="card-image"
-                component="img"
-                height="140"
-                image={findUs1}
-                alt="find us"
-              />
+              {showMap ? (
+                <Box
+                  component="iframe"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224345.83918911796!2d77.06889984999999!3d28.4743844!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce1612dfde9c9%3A0x29a8983a3a749f20!2sThe%20Dhanmill!5e0!3m2!1sen!2sin!4v1692722440123!5m2!1sen!2sin"
+                  height="100%"
+                  width="100%"
+                  allowFullScreen
+                  loading="lazy"
+                  style={{ border: 0 }}
+                  title="The Dhanmill Location"
+                />
+              ) : (
+                <CardMedia
+                  className="card-image"
+                  component="img"
+                  height="140"
+                  image={findUs1}
+                  alt="find us"
+                />
+              )}
             </Grid>
             <Grid item xs={12} sm={6} className="content-container">
               <CardContent>
@@ -128,6 +146,21 @@ const FindUs = () => {
                       The Dhanmill, SSN Marg, 100 Feet Road, Chhatarpur, New
                       Delhi, Delhi, 110074
                     </Typography>
+                    <Link
+                      component="button"
+                      onClick={toggleMapVisibility}
+                      sx={{
+                        color: "#a16149",
+                        fontSize: "16px",
+                        cursor: "pointer",
+                        textDecoration: "underline",
+                        "&:hover": {
+                          textDecoration: "none",
+                        },
+                      }}
+                    >
+                      {showMap ? "Show Shop" : "View in maps"}
+                    </Link>
                     <Typography
                       gutterBottom
                       variant="body2"
@@ -153,16 +186,39 @@ const FindUs = () => {
                         multiple={true}
                         sx={{
                           width: "300px",
-                          height: "100px", // Set the desired height
-                          margin: "0 20px",
+                          marginBottom: "10px",
                         }}
+                        label="Name"
+                      ></CustomTextfield>
+                      <CustomTextfield
+                        multiple={true}
+                        sx={{
+                          width: "300px",
+                          marginBottom: "10px",
+                        }}
+                        label="Email Address"
+                      ></CustomTextfield>
+                      <CustomTextfield
+                        multiple={true}
+                        sx={{
+                          width: "300px",
+                          marginBottom: "10px",
+                        }}
+                        label="Phone Number"
+                      ></CustomTextfield>
+                      <CustomTextfield
+                        multiple={true}
+                        sx={{
+                          width: "300px",
+                          marginBottom: "10px",
+                        }}
+                        label="message"
                       ></CustomTextfield>
                       <Button
                         variant="contained"
                         color="success"
                         sx={{
                           position: "absolute", // Absolutely position the button
-                          top: "-50px", // Align to the top of the parent div
                           right: "20px", // Slightly offset to the right of the textfield
                         }}
                       >

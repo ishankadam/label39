@@ -15,12 +15,14 @@ const productSchema = new mongoose.Schema({
       message: "Value is not a  number",
     },
   },
-  name: String,
-  price: Number,
-  description: String,
-  sizes: Array,
-  garmentDetails: Array,
-  deliveryIn: Array,
+  name: { type: String },
+  price: { type: Number },
+  description: { type: String },
+  category: { type: String },
+  sizes: { type: Object },
+  garmentDetails: { type: Array },
+  deliveryIn: { type: Array },
+  images: { type: Array },
 });
 
 // Create the model

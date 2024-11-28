@@ -18,35 +18,35 @@ import { bestSellers } from "../../common";
 const BestSellerSection = () => {
   const bestSellers = [
     {
-      label: "Sapphire Applique Kurta Set",
-      imgSrc: bestSeller5,
+      name: "Sapphire Applique Kurta Set",
+      images: ["Cord10.jpg"],
       hoverImgSrc: bestSeller5hover,
       price: 9999,
     },
     {
-      label: "Sapphire Applique Kurta Set",
-      imgSrc: bestSeller6,
+      name: "Sapphire Applique Kurta Set",
+      images: ["Cord61.jpg"],
       hoverImgSrc: bestSeller6Hover,
       price: 9999,
     },
     {
-      label: "Sapphire Applique Kurta Set",
-      imgSrc: bestSeller3,
+      name: "Sapphire Applique Kurta Set",
+      images: ["Cord21.jpg"],
       price: 9999,
     },
     {
-      label: "Sapphire Applique Kurta Set",
-      imgSrc: bestSeller4,
+      name: "Sapphire Applique Kurta Set",
+      images: ["Cord31.jpg"],
       price: 9999,
     },
     {
-      label: "Sapphire Applique Kurta Set",
-      imgSrc: bestSeller1,
+      name: "Sapphire Applique Kurta Set",
+      images: ["Cord41.jpg"],
       price: 9999,
     },
     {
-      label: "Sapphire Applique Kurta Set",
-      imgSrc: bestSeller3,
+      name: "Sapphire Applique Kurta Set",
+      images: ["Cord51.jpg"],
       price: 9999,
     },
   ];

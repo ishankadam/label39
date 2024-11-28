@@ -20,12 +20,12 @@ export const adminSettings = ["Profile", "Account", "Dashboard", "Logout"];
 export const countries = [
   {
     label: "India",
-    value: "india",
+    value: "INR",
     flag: indianFlag,
   },
   {
     label: "USA",
-    value: "usa",
+    value: "USD",
     flag: UsaFlag,
   },
 ];
@@ -39,12 +39,12 @@ export const categories = [
   {
     label: "CO-ORDS",
     imgSrc: coords,
-    value: "coords",
+    value: "cord",
   },
   {
-    label: "SUITS",
+    label: "KURTAS",
     imgSrc: suits,
-    value: "suits",
+    value: "kurtas",
   },
   {
     label: "FESTIVE",
@@ -86,12 +86,12 @@ export const availableColors = [
 ];
 
 export const availableSizes = [
-  { label: "XS", value: "xs" },
-  { label: "S", value: "s" },
-  { label: "M", value: "m" },
-  { label: "L", value: "l" },
-  { label: "XL", value: "xl" },
-  { label: "XXL", value: "xxl" },
+  { label: "XS", value: "XS" },
+  { label: "S", value: "S" },
+  { label: "M", value: "M" },
+  { label: "L", value: "L" },
+  { label: "XL", value: "XL" },
+  { label: "XXL", value: "XXL" },
 ];
 
 export const cartItems = [
@@ -136,6 +136,11 @@ export const bestSellers = [
     price: 9999,
   },
 ];
+
+export const findLabelByValue = (array, value) => {
+  const option = array.find((option) => option.value === value);
+  return option ? option.label : null;
+};
 
 export const products = [
   {

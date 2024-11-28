@@ -4,51 +4,63 @@ import {
   Button,
   Typography,
   IconButton,
-  Card,
-  Link,
   Grid,
   Modal,
+  Link,
 } from "@mui/material";
 import ShareIcon from "@mui/icons-material/Share";
 import ChatIcon from "@mui/icons-material/Chat";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Footer from "../homepage/footer";
+import { imageUrl } from "../../api";
 
 const ViewProductModal = (props) => {
-  const [open, setOpen] = useState(props.open);
+  const { isAdmin, product, open, setShowModal, setShowEditModal } = props;
+  const [modalOpen, setModalOpen] = useState(open);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-  const [quantity, setQuantity] = useState(0);
-  const selectedImage = props.product.imgSrc[selectedImageIndex];
+  const selectedImage = product.images[selectedImageIndex];
 
   const handlePreviousImage = () => {
     setSelectedImageIndex((prevIndex) =>
-      prevIndex > 0 ? prevIndex - 1 : props.product.imgSrc.length - 1
+      prevIndex > 0 ? prevIndex - 1 : product.images.length - 1
     );
   };
 
   const handleNextImage = () => {
     setSelectedImageIndex((prevIndex) =>
-      prevIndex < props.product.imgSrc.length - 1 ? prevIndex + 1 : 0
+      prevIndex < product.images.length - 1 ? prevIndex + 1 : 0
     );
   };
 
   const handleClose = () => {
-    props.setShowModal((prev) => ({
+    setShowModal((prev) => ({
       ...prev,
       open: false,
       data: {},
     }));
   };
 
+  const handleEditProduct = () => {
+    setShowModal((prev) => ({
+      ...prev,
+      open: false,
+      data: {},
+    }));
+    setShowEditModal({
+      open: true,
+      data: product,
+    });
+  };
+
   useEffect(() => {
-    setOpen(props.open);
-  }, [props.open]);
+    setModalOpen(open);
+  }, [open]);
 
   return (
     <>
       <Modal
-        open={open}
+        open={modalOpen}
         onClose={handleClose}
         sx={{
           display: "flex",
@@ -65,6 +77,7 @@ const ViewProductModal = (props) => {
             maxHeight: "100%",
             maxWidth: "100%",
             overflowY: "auto",
+            position: "relative",
             // borderRadius: "10px",
             border: "2px solid #d7d7d7",
           }}
@@ -106,7 +119,7 @@ const ViewProductModal = (props) => {
                   <ArrowForwardIosIcon />
                 </IconButton>
                 <img
-                  src={selectedImage}
+                  src={`${imageUrl}${selectedImage}`}
                   alt="Selected Product"
                   style={{
                     width: "100%",
@@ -119,10 +132,10 @@ const ViewProductModal = (props) => {
 
               {/* Thumbnails */}
               <Box sx={{ display: "flex", gap: 1, justifyContent: "center" }}>
-                {props.product.imgSrc.map((img, index) => (
+                {product.images.map((img, index) => (
                   <img
                     key={index}
-                    src={img}
+                    src={`${imageUrl}${img}`}
                     alt={`Thumbnail ${index}`}
                     style={{
                       width: "80px",
@@ -154,7 +167,7 @@ const ViewProductModal = (props) => {
                     fontFamily: "'Cinzel Serif', serif ",
                   }}
                 >
-                  {props.product.label}
+                  {product.name}
                 </Typography>
                 <Typography
                   variant="h5"
@@ -166,7 +179,7 @@ const ViewProductModal = (props) => {
                     fontFamily: "'Roboto Condensed', serif ",
                   }}
                 >
-                  RS. {props.product.price}
+                  RS. {product.price}
                 </Typography>
 
                 {/* Size Chart */}
@@ -185,150 +198,34 @@ const ViewProductModal = (props) => {
                 >
                   Size Chart
                 </Link>
-                <Box sx={{ display: "flex", gap: 2, marginBottom: "25px" }}>
-                  {props.product.sizes.map((size) => (
-                    <Button key={size} variant="outlined" color="custom">
-                      <Typography
-                        sx={{
-                          fontSize: "16px",
-                          fontWeight: "600",
-                          fontFamily: "'Roboto Serif', serif ",
-                        }}
-                      >
-                        {size}
+
+                <Box>
+                  {Object.entries(product.sizes).map(([category, sizes]) => (
+                    <Box key={category} sx={{ marginBottom: "20px" }}>
+                      <Typography variant="h6" sx={{ marginBottom: "10px" }}>
+                        {category}
                       </Typography>
-                    </Button>
+                      <Box sx={{ display: "flex", gap: 2 }}>
+                        {sizes.map(({ size, quantity }) => (
+                          <Button
+                            key={size}
+                            variant="outlined"
+                            color="success"
+                            title={`Quantity: ${quantity}`}
+                          >
+                            {size}
+                          </Button>
+                        ))}
+                      </Box>
+                    </Box>
                   ))}
                 </Box>
 
-                {/* Quantity */}
-                <Box sx={{ marginBottom: "25px" }}>
-                  <Typography
-                    sx={{
-                      fontSize: "16px",
-                      fontWeight: "600",
-                      fontFamily: "'Roboto Serif', serif ",
-                      color: "rgba(55, 65, 81, 0.85)",
-                    }}
-                  >
-                    Quantity
-                  </Typography>
-                  <Box sx={{ display: "flex", gap: 2, marginTop: "10px" }}>
-                    <Button
-                      variant="outlined"
-                      color="success"
-                      onClick={() =>
-                        setQuantity((prev) => (prev > 0 ? prev - 1 : 0))
-                      }
-                      sx={{
-                        borderRadius: "0",
-                        padding: "5px !important",
-                      }}
-                    >
-                      -
-                    </Button>
-                    <Button
-                      variant="outlined"
-                      color="custom"
-                      sx={{
-                        width: "40px",
-                      }}
-                    >
-                      <Typography
-                        sx={{
-                          fontSize: "16px",
-                          fontWeight: "600",
-                          fontFamily: "'Roboto Serif', serif ",
-                        }}
-                      >
-                        {quantity}
-                      </Typography>
-                    </Button>
-                    <Button
-                      variant="outlined"
-                      color="success"
-                      onClick={() => setQuantity((prev) => prev + 1)}
-                      sx={{
-                        borderRadius: "0",
-                        padding: "5px !important",
-                      }}
-                    >
-                      +
-                    </Button>
-                  </Box>
-                </Box>
-
-                {/* Add to Cart and Buy Now */}
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: 1,
-                    marginBottom: "25px",
-                  }}
-                >
-                  <Button variant="outlined" color="custom" sx={{}}>
-                    Add to Cart
-                  </Button>
-                  <Button
-                    variant="contained"
-                    color="custom"
-                    sx={
-                      {
-                        // width: "83%",
-                      }
-                    }
-                  >
-                    Buy Now
-                  </Button>
-                </Box>
-
-                {/* Talk to Us and Share */}
-                <Box sx={{ display: "flex", gap: 2, marginBottom: "25px" }}>
-                  <Button
-                    startIcon={<ChatIcon />}
-                    variant="outlined"
-                    color="custom"
-                    sx={{
-                      width: "50%",
-                    }}
-                  >
-                    Talk to Us
-                  </Button>
-                  <Button
-                    startIcon={<ShareIcon />}
-                    variant="outlined"
-                    color="custom"
-                    sx={{
-                      width: "50%",
-                    }}
-                  >
-                    Share
-                  </Button>
-                </Box>
-
                 {/* Description */}
-                <Box sx={{ marginBottom: "25px" }}>
-                  <Typography
-                    variant="h6"
-                    sx={{
-                      fontSize: "16px",
-                      fontWeight: "600",
-                      fontFamily: "'Roboto Serif', serif ",
-                      color: "rgba(55, 65, 81, 0.85)",
-                    }}
-                  >
-                    Description
-                  </Typography>
-                  <Typography
-                    sx={{
-                      fontSize: "14px",
-                      fontWeight: "400",
-                      fontFamily: "'Roboto Serif', serif ",
-                      color: "rgba(55, 65, 81, 0.85)",
-                    }}
-                  >
-                    {props.product.description}
+                <Box sx={{ marginBottom: "20px" }}>
+                  <Typography variant="h6">Description</Typography>
+                  <Typography>
+                    {product.description.replace(/<br\/>/g, "")}
                   </Typography>
                 </Box>
 
@@ -337,58 +234,69 @@ const ViewProductModal = (props) => {
                   style={{ display: "flex" }}
                 >
                   <div>
-                    <Typography
-                      variant="h6"
-                      sx={{
-                        fontSize: "16px",
-                        fontWeight: "600",
-                        fontFamily: "'Roboto Serif', serif ",
-                        color: "rgba(55, 65, 81, 0.85)",
-                      }}
-                    >
-                      Garment Details
-                    </Typography>
-                    {props.product.garmentDetails.map((detail, index) => (
-                      <Typography
-                        key={index}
-                        sx={{
-                          fontSize: "14px",
-                          fontWeight: "400",
-                          fontFamily: "'Roboto Serif', serif ",
-                          color: "rgba(55, 65, 81, 0.85)",
-                        }}
-                      >
-                        {detail}
-                      </Typography>
+                    <Typography variant="h6">Garment Details</Typography>
+                    {product["garmentDetails"].map((detail, index) => (
+                      <Typography key={index}>{detail}</Typography>
                     ))}
                   </div>
-                  <div style={{ margin: "0 40px" }}>
-                    <Typography
-                      variant="h6"
-                      sx={{
-                        fontSize: "16px",
-                        fontWeight: "600",
-                        fontFamily: "'Roboto Serif', serif ",
-                        color: "rgba(55, 65, 81, 0.85)",
-                      }}
-                    >
-                      Delivery in:
-                    </Typography>
-                    <Typography
-                      sx={{
-                        fontSize: "14px",
-                        fontWeight: "400",
-                        fontFamily: "'Roboto Serif', serif ",
-                        color: "rgba(55, 65, 81, 0.85)",
-                      }}
-                    >
-                      {props.product.deliveryInfo}
-                    </Typography>
+                  <div style={{ margin: "0 20px" }}>
+                    <Typography variant="h6">Delivery in:</Typography>
+                    <Typography>{product["deliveryIn"]}</Typography>
                   </div>
                 </div>
+                <Button
+                  startIcon={<ChatIcon />}
+                  variant="outlined"
+                  color="success"
+                >
+                  Talk to Us
+                </Button>
+                <Button
+                  startIcon={<ShareIcon />}
+                  variant="outlined"
+                  color="success"
+                >
+                  Share
+                </Button>
               </Box>
             </Grid>
           </Grid>
+
+          {/* Buttons Section at the Bottom */}
+          <Box
+            sx={{
+              display: "flex",
+              gap: 2,
+              justifyContent: "right",
+              marginTop: "20px",
+              borderTop: "1px solid #ddd",
+              paddingTop: "20px",
+            }}
+          >
+            {isAdmin ? (
+              <>
+                <Button variant="outlined" color="error" onClick={handleClose}>
+                  Cancel
+                </Button>
+                <Button
+                  variant="outlined"
+                  color="success"
+                  onClick={handleEditProduct}
+                >
+                  Edit
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button variant="contained" color="success">
+                  Add to Cart
+                </Button>
+                <Button variant="contained" color="success">
+                  Buy Now
+                </Button>
+              </>
+            )}
+          </Box>
         </Box>
       </Modal>
 

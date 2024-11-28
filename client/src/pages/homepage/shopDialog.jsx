@@ -4,10 +4,14 @@ import shopImage from "../../assets/SHIRTS.png";
 import "./shopDialog.css";
 import { useShopContext } from "../../context/shopContext";
 
-const ShopDialog = () => {
+const ShopDialog = ({ onMouseEnter, onMouseLeave }) => {
   const { openShopMenu } = useShopContext();
   return openShopMenu ? (
-    <div className="shop-menu-container">
+    <div
+      className="shop-menu-container"
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
       <div className="shop-menu-wrapper">
         <div className="category-list">
           <Typography variant="h5" sx={{ fontWeight: "bold" }}>

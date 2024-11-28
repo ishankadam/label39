@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Card,
   CardContent,
@@ -13,6 +13,7 @@ import "./../../css/productCard.css";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import BoltIcon from "@mui/icons-material/Bolt";
+import { imageUrl } from "../../api";
 
 const ProductCard = (props) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -69,7 +70,7 @@ const ProductCard = (props) => {
             height: { xs: "280px", sm: "350px", md: "500px" },
             transition: "transform 300ms ease-in-out",
           }}
-          image={props.product.imgSrc}
+          image={`${imageUrl}${props.product.images[0]}`}
           alt={props.product.label}
         />
         {/* Button Wrapper */}
@@ -137,18 +138,18 @@ const ProductCard = (props) => {
             fontSize: { xs: "11px", sm: "12px", md: "16px" },
           }}
         >
-          {props.product.label}
+          {props.product.name}
         </Typography>
         <Typography
           variant="h6"
           color="textSecondary"
           align="center"
           sx={{
-            fontSize: { xs: "10px", sm: "11px", md: "14px" },
+            fontSize: { xs: "12px", sm: "13px", md: "16px" },
             fontFamily: "'Poppins', sans-serif",
           }}
         >
-          Rs. {props.product.price}
+          {props.country}. {props.product.price}
         </Typography>
       </CardContent>
       <Box

@@ -74,8 +74,8 @@ const FeaturedSection = () => {
         />
       </Typography>
 
-      <div
-        style={{
+      <Box
+        sx={{
           // maxWidth: "1200px",
           margin: "20px auto",
           overflow: "hidden", // Hide overflow
@@ -83,11 +83,11 @@ const FeaturedSection = () => {
       >
         <Slider {...settings}>
           {featured.map((item, index) => (
-            <div key={index}>
+            <Box key={index}>
               <Card
                 sx={{
                   position: "relative",
-                  margin: "0 20px",
+                  margin: { xs: "0 16px", sm: "0 10px", md: "0 16px" },
                   overflow: "hidden",
                 }}
               >
@@ -97,17 +97,31 @@ const FeaturedSection = () => {
                   autoPlay
                   loop
                   muted
-                  sx={{ height: "auto", width: "100%" }} // Ensure video fills the card
+                  sx={{
+                    height: {
+                      xs: "550px",
+                      sm: "auto",
+                      md: "500px",
+                      lg: "550px",
+                    },
+                    width: "100%",
+                    objectFit: "cover",
+                  }} // Ensure video fills the card
                 />
-                <div
-                  style={{
+                <Box
+                  sx={{
                     position: "absolute",
                     bottom: 0,
                     left: 0,
                     right: 0,
-                    backgroundColor: "rgba(0, 0, 0, 0.6)",
+                    height: "70px",
+                    background:
+                      "linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0))",
+                    // "linear-gradient(0deg, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 63%, rgba(0, 0, 0, 0) 86%)",
+                    borderImage: "initial",
+                    boxShadow: "rgb(0, 0, 0) 0px 0px 0px",
                     color: "white",
-                    padding: "10px",
+                    padding: { xs: "6px", sm: "6px", md: "10px", lg: "10px" },
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
@@ -115,8 +129,9 @@ const FeaturedSection = () => {
                 >
                   <Typography
                     sx={{
+                      fontSize: { xs: "14px", sm: "13px", md: "16px" },
                       fontFamily: "'Cinzel', serif", // Ensure the font is applied here
-                      fontWeight: 700,
+                      fontWeight: { xs: "700", sm: "600", md: "700" },
                     }}
                   >
                     {item.label}
@@ -146,8 +161,9 @@ const FeaturedSection = () => {
                       // background: "#c4907c",
                       color: "white",
                       fontFamily: "'Cinzel', serif",
-                      fontWeight: "700",
-                      padding: "10px 20px",
+                      fontWeight: { xs: "700", sm: "600", md: "700" },
+                      fontSize: { xs: "14px", sm: "13px", md: "16px" },
+                      padding: { xs: "6px" },
                       borderRadius: "2px",
                       borderColor: "white",
                       "&:hover": {
@@ -159,12 +175,12 @@ const FeaturedSection = () => {
                   >
                     SHOP NOW
                   </Button>{" "}
-                </div>
+                </Box>
               </Card>
-            </div>
+            </Box>
           ))}
         </Slider>
-      </div>
+      </Box>
 
       <hr className="footer-line" style={{ marginTop: "24px" }} />
     </Box>

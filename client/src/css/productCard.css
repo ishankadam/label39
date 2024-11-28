@@ -1,11 +1,12 @@
 .product-card {
   text-align: center;
   position: relative;
+  max-height: 600px;
 }
 
 .product-card img {
   object-fit: cover;
-  max-height: 400px;
+
   /* transition: all 300ms ease-in-out; */
   transition: transform 300ms ease-in-out; /* Smooth zoom transition */
 }

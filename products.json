@@ -1,172 +1,591 @@
 [
   {
-    "productId": 1001,
-    "name": "Vintage Denim Jacket",
-    "price": 120,
-    "description": "A stylish vintage denim jacket perfect for casual wear.",
-    "sizes": [
-      { "size": "S", "quantity": 15 },
-      { "size": "M", "quantity": 20 },
-      { "size": "L", "quantity": 10 }
-    ],
+    "productId": 1487562876,
+    "name": "IVORY-RED APPLIQUE CO-ORD SET",
+    "description": "Ivory-red applique co-ord features signature applique work on the sleeve and back with subtle embroidery detail. <br/> \nElevate your fashion game with this elegant ensemble, perfect for making a statement wherever you go.",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10 },
+        { "size": "S", "quantity": 10 },
+        { "size": "M", "quantity": 10 },
+        { "size": "L", "quantity": 10 },
+        { "size": "XL", "quantity": 10 },
+        { "size": "XXL", "quantity": 10 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10 },
+        { "size": "S", "quantity": 10 },
+        { "size": "M", "quantity": 10 },
+        { "size": "L", "quantity": 10 },
+        { "size": "XL", "quantity": 10 },
+        { "size": "XXL", "quantity": 10 }
+      ]
+    },
+    "delivery In": "Shipped in 2-3 weeks",
+    "price": 13300,
     "garmentDetails": [
-      "100% cotton",
-      "Machine washable",
-      "Printed design on the back"
+      "Fabric: Pure silk chanderi",
+      "Lining - cotton",
+      "No. of Components: 2",
+      "Dispatch Timeline: 2-3 Weeks",
+      "Wash Care: Dry clean only"
     ],
-    "deliveryIn": "7-10 business days"
+    "category": "cord",
+    "images": [
+      "Cord10.jpg",
+      "Cord11.jpg",
+      "Cord12.jpg",
+      "Cord13.jpg",
+      "Cord14.jpg"
+    ]
   },
   {
-    "productId": 1002,
-    "name": "Vintage Denim Jacket",
-    "price": 120,
-    "description": "A stylish vintage denim jacket perfect for casual wear.",
-    "sizes": [
-      { "size": "S", "quantity": 15 },
-      { "size": "M", "quantity": 20 },
-      { "size": "L", "quantity": 10 }
-    ],
+    "productId": 8027073820,
+    "name": "IVORY FLORAL CO-ORD SET",
+    "description": "Ivory co-ord set featured floral embroidery work and hand bead work along with organza detailing on pants.<br/> \nThis chic outfit ensures that you look stylish and put together.",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10 },
+        { "size": "S", "quantity": 10 },
+        { "size": "M", "quantity": 10 },
+        { "size": "L", "quantity": 10 },
+        { "size": "XL", "quantity": 10 },
+        { "size": "XXL", "quantity": 10 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10 },
+        { "size": "S", "quantity": 10 },
+        { "size": "M", "quantity": 10 },
+        { "size": "L", "quantity": 10 },
+        { "size": "XL", "quantity": 10 },
+        { "size": "XXL", "quantity": 10 }
+      ]
+    },
+    "delivery In": "Shipped in 2-3 weeks",
+    "price": 12040,
     "garmentDetails": [
-      "100% cotton",
-      "Machine washable",
-      "Printed design on the back"
+      "Fabric: Pure silk chanderi",
+      "Lining - cotton",
+      "No. of Components: 2",
+      "Dispatch Timeline: 2-3 Weeks",
+      "Wash Care: Dry clean only"
     ],
-    "deliveryIn": "7-10 business days"
+    "category": "cord",
+    "images": ["Cord20.jpg", "Cord21.jpg", "Cord22.jpg", "Cord23.jpg"]
   },
   {
-    "productId": 1003,
-    "name": "Vintage Denim Jacket",
-    "price": 120,
-    "description": "A stylish vintage denim jacket perfect for casual wear.",
-    "sizes": [
-      { "size": "S", "quantity": 15 },
-      { "size": "M", "quantity": 20 },
-      { "size": "L", "quantity": 10 }
-    ],
+    "productId": 5722614439,
+    "name": "IVORY APPLIQUE AND CUTWORK CO-ORD SET",
+    "description": "Ivory co-ord set features floral embroidery work and hand bead work along with organza detailing pants.<br/> \nFeaturing vibrant colours, this co-ord is perfect for both casual outings and special occasions.",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10 },
+        { "size": "S", "quantity": 10 },
+        { "size": "M", "quantity": 10 },
+        { "size": "L", "quantity": 10 },
+        { "size": "XL", "quantity": 10 },
+        { "size": "XXL", "quantity": 10 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10 },
+        { "size": "S", "quantity": 10 },
+        { "size": "M", "quantity": 10 },
+        { "size": "L", "quantity": 10 },
+        { "size": "XL", "quantity": 10 },
+        { "size": "XXL", "quantity": 10 }
+      ]
+    },
+    "delivery In": "Shipped in 2-3 weeks",
+    "price": 13300,
     "garmentDetails": [
-      "100% cotton",
-      "Machine washable",
-      "Printed design on the back"
+      "Fabric: Pure silk chanderi",
+      "Lining - cotton",
+      "No. of Components: 2",
+      "Dispatch Timeline: 2-3 Weeks",
+      "Wash Care: Dry clean only"
     ],
-    "deliveryIn": "7-10 business days"
+    "category": "cord",
+    "images": ["Cord30.jpg", "Cord31.jpg", "Cord32.jpg", "Cord33.jpg"]
   },
   {
-    "productId": 1004,
-    "name": "Vintage Denim Jacket",
-    "price": 120,
-    "description": "A stylish vintage denim jacket perfect for casual wear.",
-    "sizes": [
-      { "size": "S", "quantity": 15 },
-      { "size": "M", "quantity": 20 },
-      { "size": "L", "quantity": 10 }
-    ],
+    "productId": 5361030173,
+    "name": "SAGE GREEN EMBROIDERY CO-ORD SET",
+    "description": "Embrace the warm hues of this radiant sage green co-ord set with floral embroidery work and stitching detailing.",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10 },
+        { "size": "S", "quantity": 10 },
+        { "size": "M", "quantity": 10 },
+        { "size": "L", "quantity": 10 },
+        { "size": "XL", "quantity": 10 },
+        { "size": "XXL", "quantity": 10 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10 },
+        { "size": "S", "quantity": 10 },
+        { "size": "M", "quantity": 10 },
+        { "size": "L", "quantity": 10 },
+        { "size": "XL", "quantity": 10 },
+        { "size": "XXL", "quantity": 10 }
+      ]
+    },
+    "delivery In": "Shipped in 2-3 weeks",
+    "price": 11550,
     "garmentDetails": [
-      "100% cotton",
-      "Machine washable",
-      "Printed design on the back"
+      "Fabric: Pure silk chanderi",
+      "Lining - cotton",
+      "No. of Components: 2",
+      "Dispatch Timeline: 2-3 Weeks",
+      "Wash Care: Dry clean only"
     ],
-    "deliveryIn": "7-10 business days"
+    "category": "cord",
+    "images": [
+      "Cord40.jpg",
+      "Cord41.jpg",
+      "Cord42.jpg",
+      "Cord43.jpg",
+      "Cord44.jpg"
+    ]
   },
   {
-    "productId": 1005,
-    "name": "Vintage Denim Jacket",
-    "price": 120,
-    "description": "A stylish vintage denim jacket perfect for casual wear.",
-    "sizes": [
-      { "size": "S", "quantity": 15 },
-      { "size": "M", "quantity": 20 },
-      { "size": "L", "quantity": 10 }
-    ],
+    "productId": 7719436122,
+    "name": "MYSTIC IVORY CO-ORD",
+    "description": "Ivory applique and embroidered co-ord set features vibrant applique colours with a subtle touch of embroidery.<br/>\nThe look of vibrant applique colours is enhanced by delicate stitch lines along the pants.",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10 },
+        { "size": "S", "quantity": 10 },
+        { "size": "M", "quantity": 10 },
+        { "size": "L", "quantity": 10 },
+        { "size": "XL", "quantity": 10 },
+        { "size": "XXL", "quantity": 10 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10 },
+        { "size": "S", "quantity": 10 },
+        { "size": "M", "quantity": 10 },
+        { "size": "L", "quantity": 10 },
+        { "size": "XL", "quantity": 10 },
+        { "size": "XXL", "quantity": 10 }
+      ]
+    },
+    "delivery In": "Shipped in 2-3 weeks",
+    "price": 12530,
     "garmentDetails": [
-      "100% cotton",
-      "Machine washable",
-      "Printed design on the back"
+      "Fabric: Pure silk chanderi",
+      "Lining - cotton",
+      "No. of Components: 2",
+      "Dispatch Timeline: 2-3 Weeks",
+      "Wash Care: Dry clean only"
     ],
-    "deliveryIn": "7-10 business days"
+    "category": "cord",
+    "images": ["Cord50.jpg", "Cord51.jpg", "Cord52.jpg", "Cord53.jpg"]
   },
   {
-    "productId": 1006,
-    "name": "Vintage Denim Jacket",
-    "price": 120,
-    "description": "A stylish vintage denim jacket perfect for casual wear.",
-    "sizes": [
-      { "size": "S", "quantity": 15 },
-      { "size": "M", "quantity": 20 },
-      { "size": "L", "quantity": 10 }
-    ],
+    "productId": 2307452565,
+    "name": "OLIVE GREEN APPLIQUE WORK CO-ORD SET",
+    "description": "Olive green co-ord set features floral applique work along the sleeves and back. The pants have some subtle applique work.<br/> \nA fashionable ensemble that easily blend comfort and sophistication.",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10 },
+        { "size": "S", "quantity": 10 },
+        { "size": "M", "quantity": 10 },
+        { "size": "L", "quantity": 10 },
+        { "size": "XL", "quantity": 10 },
+        { "size": "XXL", "quantity": 10 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10 },
+        { "size": "S", "quantity": 10 },
+        { "size": "M", "quantity": 10 },
+        { "size": "L", "quantity": 10 },
+        { "size": "XL", "quantity": 10 },
+        { "size": "XXL", "quantity": 10 }
+      ]
+    },
+    "delivery In": "Shipped in 2-3 weeks",
+    "price": 11480,
     "garmentDetails": [
-      "100% cotton",
-      "Machine washable",
-      "Printed design on the back"
+      "Fabric: Cotton fabric",
+      "No. of Components: 2",
+      "Dispatch Timeline: 2-3 Weeks",
+      "Wash Care: Dry clean only"
     ],
-    "deliveryIn": "7-10 business days"
+    "category": "cord",
+    "images": ["Cord60.jpg", "Cord61.jpg", "Cord62.jpg"]
   },
   {
-    "productId": 1007,
-    "name": "Vintage Denim Jacket",
-    "price": 120,
-    "description": "A stylish vintage denim jacket perfect for casual wear.",
-    "sizes": [
-      { "size": "S", "quantity": 15 },
-      { "size": "M", "quantity": 20 },
-      { "size": "L", "quantity": 10 }
-    ],
+    "productId": 6420441529,
+    "name": "IVORY crochet CO-ORD SET",
+    "description": "The crochet co-ord set is paired with hand woven crochet work and printed stripe.",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10 },
+        { "size": "S", "quantity": 10 },
+        { "size": "M", "quantity": 10 },
+        { "size": "L", "quantity": 10 },
+        { "size": "XL", "quantity": 10 },
+        { "size": "XXL", "quantity": 10 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10 },
+        { "size": "S", "quantity": 10 },
+        { "size": "M", "quantity": 10 },
+        { "size": "L", "quantity": 10 },
+        { "size": "XL", "quantity": 10 },
+        { "size": "XXL", "quantity": 10 }
+      ]
+    },
+    "delivery In": "Shipped in 2-3 weeks",
+    "price": 10654,
     "garmentDetails": [
-      "100% cotton",
-      "Machine washable",
-      "Printed design on the back"
+      "Fabric: Textured cotton fabric",
+      "Lining - cotton",
+      "No. of Components: 2",
+      "Dispatch Timeline: 2-3 Weeks",
+      "Wash Care: Dry clean only"
     ],
-    "deliveryIn": "7-10 business days"
+    "category": "cord",
+    "images": ["Cord70.jpg", "Cord71.jpg", "Cord72.jpg"]
   },
   {
-    "productId": 1008,
-    "name": "Vintage Denim Jacket",
-    "price": 120,
-    "description": "A stylish vintage denim jacket perfect for casual wear.",
-    "sizes": [
-      { "size": "S", "quantity": 15 },
-      { "size": "M", "quantity": 20 },
-      { "size": "L", "quantity": 10 }
-    ],
+    "productId": 1282084484,
+    "name": "SOFT PEACH PEARL CO-ORD SET",
+    "description": "Soft peach co-ord with intricate hand pearl work and organza cutwork detailing.",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10 },
+        { "size": "S", "quantity": 10 },
+        { "size": "M", "quantity": 10 },
+        { "size": "L", "quantity": 10 },
+        { "size": "XL", "quantity": 10 },
+        { "size": "XXL", "quantity": 10 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10 },
+        { "size": "S", "quantity": 10 },
+        { "size": "M", "quantity": 10 },
+        { "size": "L", "quantity": 10 },
+        { "size": "XL", "quantity": 10 },
+        { "size": "XXL", "quantity": 10 }
+      ]
+    },
+    "delivery In": "Shipped in 2-3 weeks",
+    "price": 10900,
     "garmentDetails": [
-      "100% cotton",
-      "Machine washable",
-      "Printed design on the back"
+      "Fabric: Pure silk chanderi",
+      "Lining - cotton",
+      "No. of Components: 2",
+      "Dispatch Timeline: 2-3 Weeks",
+      "Wash Care: Dry clean only"
     ],
-    "deliveryIn": "7-10 business days"
+    "category": "cord",
+    "images": ["Cord80.jpg", "Cord81.jpg", "Cord82.jpg"]
   },
   {
-    "productId": 1009,
-    "name": "Vintage Denim Jacket",
-    "price": 120,
-    "description": "A stylish vintage denim jacket perfect for casual wear.",
-    "sizes": [
-      { "size": "S", "quantity": 15 },
-      { "size": "M", "quantity": 20 },
-      { "size": "L", "quantity": 10 }
-    ],
+    "productId": 3107682493,
+    "name": "HEART CO-ORD SET",
+    "description": "Heart co-ord set features elegant hand embroidery on the shirt, adding a refined touch its design",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10 },
+        { "size": "S", "quantity": 10 },
+        { "size": "M", "quantity": 10 },
+        { "size": "L", "quantity": 10 },
+        { "size": "XL", "quantity": 10 },
+        { "size": "XXL", "quantity": 10 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10 },
+        { "size": "S", "quantity": 10 },
+        { "size": "M", "quantity": 10 },
+        { "size": "L", "quantity": 10 },
+        { "size": "XL", "quantity": 10 },
+        { "size": "XXL", "quantity": 10 }
+      ]
+    },
+    "delivery In": "Shipped in 2-3 weeks",
+    "price": 9940,
     "garmentDetails": [
-      "100% cotton",
-      "Machine washable",
-      "Printed design on the back"
+      "Fabric: Pure silk chanderi",
+      "Lining - cotton",
+      "No. of Components: 2",
+      "Dispatch Timeline: 2-3 Weeks",
+      "Wash Care: Dry clean only"
     ],
-    "deliveryIn": "7-10 business days"
+    "category": "cord",
+    "images": ["Cord100.jpg", "Cord101.jpg", "Cord102.jpg"]
   },
   {
-    "productId": 1010,
-    "name": "Vintage Denim Jacket",
-    "price": 120,
-    "description": "A stylish vintage denim jacket perfect for casual wear.",
-    "sizes": [
-      { "size": "S", "quantity": 15 },
-      { "size": "M", "quantity": 20 },
-      { "size": "L", "quantity": 10 }
-    ],
+    "productId": 717298971,
+    "name": "PISTACHIO GREEN CO-ORD SET",
+    "description": "Pistachio green set features abstract floral and leafy embroidery along the front, back and sleeve.<br/> \nThe shirt is paired with with flared pants giving it a contemporary edge.",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10 },
+        { "size": "S", "quantity": 10 },
+        { "size": "M", "quantity": 10 },
+        { "size": "L", "quantity": 10 },
+        { "size": "XL", "quantity": 10 },
+        { "size": "XXL", "quantity": 10 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10 },
+        { "size": "S", "quantity": 10 },
+        { "size": "M", "quantity": 10 },
+        { "size": "L", "quantity": 10 },
+        { "size": "XL", "quantity": 10 },
+        { "size": "XXL", "quantity": 10 }
+      ]
+    },
+    "delivery In": "Shipped in 2-3 weeks",
+    "price": 12155,
     "garmentDetails": [
-      "100% cotton",
-      "Machine washable",
-      "Printed design on the back"
+      "Fabric: Pure silk chanderi",
+      "Lining - cotton",
+      "No. of Components: 2",
+      "Dispatch Timeline: 2-3 Weeks",
+      "Wash Care: Dry clean only"
     ],
-    "deliveryIn": "7-10 business days"
+    "category": "cord",
+    "images": [
+      "Cord120.jpg",
+      "Cord121.jpg",
+      "Cord122.jpg",
+      "Cord123.jpg",
+      "Cord124.jpg"
+    ]
+  },
+  {
+    "productId": 7545793447,
+    "name": "BISQUE CO-ORD WITH HALF JACKET",
+    "description": "The Bisque co-ord paired with the half jacket is perfect for a effortless elegant and stylish look.<br/> \nThis three piece set features embroidery work on the front and back of the jacket and side tie knots. <br/>\nThe half jacket is adorned with handmade hangings. <br/>\nThe straight pants give a very comfortable fit with contrast stitching detailing on sides.",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10 },
+        { "size": "S", "quantity": 10 },
+        { "size": "M", "quantity": 10 },
+        { "size": "L", "quantity": 10 },
+        { "size": "XL", "quantity": 10 },
+        { "size": "XXL", "quantity": 10 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10 },
+        { "size": "S", "quantity": 10 },
+        { "size": "M", "quantity": 10 },
+        { "size": "L", "quantity": 10 },
+        { "size": "XL", "quantity": 10 },
+        { "size": "XXL", "quantity": 10 }
+      ]
+    },
+    "delivery In": "Shipped in 2-3 weeks",
+    "price": 13510,
+    "garmentDetails": [
+      "Fabric: Cotton shirt and pant",
+      " Denim Cotton jacket",
+      "No. of Components: 3",
+      "Dispatch Timeline: 2-3 Weeks",
+      "Wash Care: Dry clean only"
+    ],
+    "category": "cord",
+    "images": [
+      "Cord150.jpg",
+      "Cord151.jpg",
+      "Cord152.jpg",
+      "Cord153.jpg",
+      "Cord154.jpg"
+    ]
+  },
+  {
+    "productId": 8630343543,
+    "name": "BOTTLE GREEN CO-ORD SET",
+    "description": "A vibrant ensemble in bottle green colour is a perfect blend of comfort and chic.<br/> \nBottle green co-ord features contrast embroidery work on the shirt front and sleeves with subtle stitching detailing on collar and button line. <br/>\nIts paired with straight pants with cutwork detailing. It's a perfect pick for your evening outfit.",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10 },
+        { "size": "S", "quantity": 10 },
+        { "size": "M", "quantity": 10 },
+        { "size": "L", "quantity": 10 },
+        { "size": "XL", "quantity": 10 },
+        { "size": "XXL", "quantity": 10 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10 },
+        { "size": "S", "quantity": 10 },
+        { "size": "M", "quantity": 10 },
+        { "size": "L", "quantity": 10 },
+        { "size": "XL", "quantity": 10 },
+        { "size": "XXL", "quantity": 10 }
+      ]
+    },
+    "delivery In": "Shipped in 2-3 weeks",
+    "price": 8960,
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi",
+      "Lining - cotton",
+      "No. of Components: 2",
+      "Dispatch Timeline: 2-3 Weeks",
+      "Wash Care: Dry clean only"
+    ],
+    "category": "cord",
+    "images": [
+      "Cord160.jpg",
+      "Cord161.jpg",
+      "Cord162.jpg",
+      "Cord163.jpg",
+      "Cord164.jpg"
+    ]
+  },
+  {
+    "productId": 7775448076,
+    "name": "BLACK APPLIQUE CO-ORD SET",
+    "description": "The black applique co-ord set exudes luxury, craftsmanship and elegance.<br/> \nThe intricate applique and embroidery  work can help you uplift your fashion game effortlessly. <br/>\nThe co-ord is adorned with pastel applique and embroidery work on the shirt and pants.",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10 },
+        { "size": "S", "quantity": 10 },
+        { "size": "M", "quantity": 10 },
+        { "size": "L", "quantity": 10 },
+        { "size": "XL", "quantity": 10 },
+        { "size": "XXL", "quantity": 10 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10 },
+        { "size": "S", "quantity": 10 },
+        { "size": "M", "quantity": 10 },
+        { "size": "L", "quantity": 10 },
+        { "size": "XL", "quantity": 10 },
+        { "size": "XXL", "quantity": 10 }
+      ]
+    },
+    "delivery In": "Shipped in 2-3 weeks",
+    "price": 9875,
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi",
+      "Lining - cotton",
+      "No. of Components: 2",
+      "Dispatch Timeline: 2-3 Weeks",
+      "Wash Care: Dry clean only"
+    ],
+    "category": "cord",
+    "images": [
+      "Cord170.jpg",
+      "Cord171.jpg",
+      "Cord172.jpg",
+      "Cord173.jpg",
+      "Cord174.jpg"
+    ]
+  },
+  {
+    "productId": 4280680078,
+    "name": "IVORY BLOOM CO-ORD SET",
+    "description": "Ivory bloom set features floral embroidery work and contrast stripe embroidery. <br/>\nThe cascading embroidery work makes it perfect for sunny outings.",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10 },
+        { "size": "S", "quantity": 10 },
+        { "size": "M", "quantity": 10 },
+        { "size": "L", "quantity": 10 },
+        { "size": "XL", "quantity": 10 },
+        { "size": "XXL", "quantity": 10 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10 },
+        { "size": "S", "quantity": 10 },
+        { "size": "M", "quantity": 10 },
+        { "size": "L", "quantity": 10 },
+        { "size": "XL", "quantity": 10 },
+        { "size": "XXL", "quantity": 10 }
+      ]
+    },
+    "delivery In": "Shipped in 2-3 weeks",
+    "price": 8960,
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi",
+      "Lining - cotton",
+      "No. of Components: 2",
+      "Dispatch Timeline: 2-3 Weeks",
+      "Wash Care: Dry clean only"
+    ],
+    "category": "cord",
+    "images": [
+      "Cord130.jpg",
+      "Cord131.jpg",
+      "Cor 132.jpg",
+      "Cord133.jpg",
+      "Cord134.jpg"
+    ]
+  },
+  {
+    "productId": 3560755873,
+    "name": "DENIM CO-ORD SET",
+    "description": "Denim co-ord set features contrast embroidery work with zip detailing.<br/>\nThe intricate zip detailing elevates the look of the ensemble.",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10 },
+        { "size": "S", "quantity": 10 },
+        { "size": "M", "quantity": 10 },
+        { "size": "L", "quantity": 10 },
+        { "size": "XL", "quantity": 10 },
+        { "size": "XXL", "quantity": 10 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10 },
+        { "size": "S", "quantity": 10 },
+        { "size": "M", "quantity": 10 },
+        { "size": "L", "quantity": 10 },
+        { "size": "XL", "quantity": 10 },
+        { "size": "XXL", "quantity": 10 }
+      ]
+    },
+    "delivery In": "Shipped in 2-3 weeks",
+    "price": 11788,
+    "garmentDetails": [
+      "Fabric: Denim Cotton",
+      "No. of Components: 2",
+      "Dispatch Timeline: 2-3 Weeks",
+      "Wash Care: Dry clean only"
+    ],
+    "category": "cord",
+    "images": [
+      "Cord90.jpg",
+      "Cord91.jpg",
+      "Cord92.jpg",
+      "Cord93.jpg",
+      "Cord94.jpg"
+    ]
+  },
+  {
+    "productId": 6538646960,
+    "name": "STRIPE FLORAL HAND PAINTED CO-ORD SET",
+    "description": "Striped floral set combines captivating hand painted florals along the sleeve, pocket, back and pants and tie up detailing on the shirt.<br/> \nThis elegant piece is perfect for a sunny day or a evening night out.",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10 },
+        { "size": "S", "quantity": 10 },
+        { "size": "M", "quantity": 10 },
+        { "size": "L", "quantity": 10 },
+        { "size": "XL", "quantity": 10 },
+        { "size": "XXL", "quantity": 10 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10 },
+        { "size": "S", "quantity": 10 },
+        { "size": "M", "quantity": 10 },
+        { "size": "L", "quantity": 10 },
+        { "size": "XL", "quantity": 10 },
+        { "size": "XXL", "quantity": 10 }
+      ]
+    },
+    "delivery In": "Shipped in 2-3 weeks",
+    "price": 15105,
+    "garmentDetails": [
+      "Fabric: Cotton Silk fabric",
+      "No. of Components: 2",
+      "Dispatch Timeline: 2-3 Weeks",
+      "Wash Care: Dry clean only"
+    ],
+    "category": "cord",
+    "images": ["Cord110.jpg", "Cord111.jpg", "Cord112.jpg", "Cord113.jpg"]
   }
 ]

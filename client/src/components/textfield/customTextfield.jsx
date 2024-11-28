@@ -15,7 +15,6 @@ const CustomTextfield = (props) => {
 
   const handleTextfieldValue = (value) => {
     const inputValue = props.type === "number" ? Number(value) : value;
-    console.log(inputValue);
     setTextValue(inputValue);
     // let errObj = {
     //   isError: props.error,

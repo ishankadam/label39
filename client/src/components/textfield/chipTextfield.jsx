@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Autocomplete, TextField, Chip } from "@mui/material";
 
 const ChipTextfield = (props) => {
   const [inputValue, setInputValue] = useState("");
-  const [values, setValues] = useState([]);
+  const [values, setValues] = useState(props.value || []);
 
   // Handle Enter key press to add custom value to array
   const handleKeyDown = (event) => {
@@ -23,6 +23,10 @@ const ChipTextfield = (props) => {
     setValues(newValue); // Update local state
     props.handleEdit(newValue, props.config.field); // Pass updated values to parent
   };
+
+  useEffect(() => {
+    setValues(props.value);
+  }, [props.value]);
 
   return (
     <Autocomplete

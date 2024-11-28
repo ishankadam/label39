@@ -5,208 +5,253 @@ import {
   Checkbox,
   FormControlLabel,
   Typography,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
 } from "@mui/material";
 import CustomTextfield from "../../components/textfield/customTextfield";
-import SelectDropdown from "../../components/select-dropdown/selectDropdown";
-import { availableSizes, deliveryIn, garmentDetails } from "../../common";
+import {
+  availableSizes,
+  categories,
+  deliveryIn,
+  garmentDetails,
+} from "../../common";
 import ChipTextfield from "../../components/textfield/chipTextfield";
 import RemoveIcon from "@mui/icons-material/Remove";
-import "./addProduct.css";
-import { Margin } from "@mui/icons-material";
-import { createProduct } from "../../api";
+import { createProduct, updateProduct } from "../../api";
 import UploadFiles from "../../components/upload/uploadFiles";
+import "./addProduct.css";
+import SelectDropdown from "../../components/select-dropdown/selectDropdown";
 
-const AddProduct = () => {
+const AddEditProductModal = (props) => {
+  const [images, setImages] = useState([]);
   const [productDetails, setProductDetails] = useState({
     name: "",
     price: "",
     description: "",
-    sizes: [],
+    category: "",
+    sizes: [{ category: "Upper", sizes: [] }], // Default category
     garmentDetails: [],
     deliveryIn: [],
-    image: "",
+    images: [],
   });
 
-  const handleAddSize = () => {
-    const newSize = { size: "", quantity: "" }; // Create a new size object
-    setProductDetails((prev) => ({
-      ...prev,
-      sizes: [...prev.sizes, newSize],
-    }));
-  };
-
-  const handleAllSizes = (event) => {
-    let allSizes = [];
-
-    if (event.target.checked) {
-      allSizes = availableSizes.map((row) => {
-        return { size: row.value, quantity: 0 };
+  useEffect(() => {
+    if (props.product) {
+      setProductDetails({
+        ...props.product,
+        sizes: Object.entries(props.product.sizes || {}).map(
+          ([key, values]) => ({
+            category: key,
+            sizes: values,
+          })
+        ),
       });
     }
-    setProductDetails((prev) => ({
-      ...prev,
-      sizes: event.target.checked ? allSizes : [],
-    }));
-  };
+  }, [props.product]);
 
-  const handleSizeChange = (index, field, value) => {
+  const handleAddSize = (categoryIndex) => {
     const updatedSizes = [...productDetails.sizes];
-    updatedSizes[index][field] = value;
+    updatedSizes[categoryIndex].sizes.push({ size: "", quantity: "" });
+    setProductDetails((prev) => ({ ...prev, sizes: updatedSizes }));
+  };
+
+  const handleRemoveSize = (categoryIndex, sizeIndex) => {
+    const updatedSizes = [...productDetails.sizes];
+    updatedSizes[categoryIndex].sizes = updatedSizes[
+      categoryIndex
+    ].sizes.filter((_, i) => i !== sizeIndex);
+    setProductDetails((prev) => ({ ...prev, sizes: updatedSizes }));
+  };
+
+  const handleAddCategory = () => {
     setProductDetails((prev) => ({
       ...prev,
-      sizes: updatedSizes,
+      sizes: [...prev.sizes, { category: "Bottom", sizes: [] }],
     }));
   };
 
-  const handleRemoveSize = (index) => {
+  const handleRemoveCategory = (categoryIndex) => {
     setProductDetails((prev) => ({
       ...prev,
-      sizes: prev.sizes.filter((_, i) => i !== index), // Exclude the size at the specified index
+      sizes: prev.sizes.filter((_, i) => i !== categoryIndex),
     }));
   };
 
   const handleEdit = (value, field) => {
-    const keys = field.split(".");
-    setProductDetails((prev) => {
-      let updatedProductDetails = { ...prev };
+    setProductDetails((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
 
-      if (field.startsWith("sizes[")) {
-        const match = field.match(/sizes\[(\d+)\]\.(\w+)/);
-        if (match) {
-          const index = parseInt(match[1]);
-          const key = match[2];
-          const updatedSizes = [...updatedProductDetails.sizes];
-          updatedSizes[index][key] = value;
-          updatedProductDetails.sizes = updatedSizes;
-        }
-      } else {
-        keys.reduce((acc, key, idx) => {
-          if (idx === keys.length - 1) {
-            acc[key] = value;
-          } else {
-            acc[key] = { ...acc[key] };
-          }
-          return acc[key];
-        }, updatedProductDetails);
-      }
-
-      return updatedProductDetails;
-    });
+  const handleFileUpload = (files) => {
+    setImages(files);
   };
 
   const handleSubmit = () => {
-    createProduct(productDetails);
+    // Save logic for create or update product
+    handleClose();
   };
 
-  // useEffect(() => {
-  //   console.log(productDetails);
-  // }, [productDetails]);
+  const handleClose = () => {
+    console.log(props);
+    props.setShowEditModal((prev) => ({
+      ...prev,
+      open: false,
+      data: {},
+    }));
+  };
 
   return (
-    <div className="add-product-container">
-      <Card className="add-product-card">
-        <Typography variant="h3" className="add-product-title">
-          Add Product
-        </Typography>
-
+    <Dialog open={props.open} onClose={handleClose} fullWidth maxWidth="md">
+      <DialogTitle>
+        {props.product ? "Edit Product" : "Add Product"}
+      </DialogTitle>
+      <DialogContent>
         <CustomTextfield
           label="Product Name"
+          value={productDetails.name}
           config={{ field: "name", isRequired: true }}
           handleEdit={handleEdit}
-          sx={{ margin: "10px" }}
         />
-
         <CustomTextfield
           label="Price"
+          value={productDetails.price}
           config={{ field: "price", isRequired: true }}
           handleEdit={handleEdit}
-          sx={{ margin: "10px" }}
         />
-
         <CustomTextfield
           label="Description"
+          value={productDetails.description}
           config={{ field: "description", isRequired: true }}
           handleEdit={handleEdit}
           multiline={true}
-          sx={{ margin: "10px" }}
         />
-        <div className="size-header" style={{ display: "flex" }}>
-          <FormControlLabel
-            control={<Checkbox onChange={handleAllSizes} />}
-            label="Available in All Sizes"
-          />
-
-          <Button
-            variant="outlined"
-            className="add-size-button"
-            onClick={handleAddSize}
-          >
-            Add Size
-          </Button>
-        </div>
-
-        <div className="size-container">
-          {productDetails.sizes.map((element, index) => (
-            <div className="size-wrapper" key={`sizes-${index}`}>
-              <SelectDropdown
-                config={{
-                  field: `sizes[${index}].size`, // Unique field for each size
-                  isRequired: true,
-                }}
-                optionList={availableSizes}
-                label="Available Sizes"
-                value={element.size}
-                handleEdit={handleEdit}
-              />
-              <CustomTextfield
-                label="Quantity"
-                config={{
-                  field: `sizes[${index}].quantity`, // Unique field for each quantity
-                  isRequired: true,
-                }}
-                type={"number"}
-                handleEdit={handleEdit}
-              />
-              <RemoveIcon
-                className="remove-icon"
-                onClick={() => handleRemoveSize(index)}
-              />
+        <SelectDropdown
+          label="Category"
+          optionList={categories}
+          config={{ field: "category", isRequired: true }}
+          handleEdit={handleEdit}
+          value={productDetails.category}
+        />
+        {productDetails.sizes.map((category, categoryIndex) => (
+          <div key={`category-${categoryIndex}`} className="category-container">
+            <div
+              className="size-header"
+              style={{ display: "flex", justifyContent: "space-between" }}
+            >
+              <Typography variant="h6">{category.category}</Typography>
+              {categoryIndex > 0 && (
+                <Button
+                  variant="outlined"
+                  onClick={() => handleRemoveCategory(categoryIndex)}
+                >
+                  Remove Category
+                </Button>
+              )}
             </div>
-          ))}
-        </div>
+            <div className="size-container">
+              {category.sizes.map((size, sizeIndex) => (
+                <div
+                  className="size-wrapper"
+                  key={`size-${categoryIndex}-${sizeIndex}`}
+                >
+                  <SelectDropdown
+                    config={{
+                      field: `sizes[${categoryIndex}].sizes[${sizeIndex}].size`,
+                      isRequired: true,
+                    }}
+                    optionList={availableSizes}
+                    label="Size"
+                    value={size.size}
+                    handleEdit={(value) => {
+                      const updatedSizes = [...productDetails.sizes];
+                      updatedSizes[categoryIndex].sizes[sizeIndex].size = value;
+                      setProductDetails((prev) => ({
+                        ...prev,
+                        sizes: updatedSizes,
+                      }));
+                    }}
+                  />
+                  <CustomTextfield
+                    label="Quantity"
+                    config={{
+                      field: `sizes[${categoryIndex}].sizes[${sizeIndex}].quantity`,
+                      isRequired: true,
+                    }}
+                    type="number"
+                    value={size.quantity}
+                    handleEdit={(value) => {
+                      const updatedSizes = [...productDetails.sizes];
+                      updatedSizes[categoryIndex].sizes[sizeIndex].quantity =
+                        value;
+                      setProductDetails((prev) => ({
+                        ...prev,
+                        sizes: updatedSizes,
+                      }));
+                    }}
+                  />
+                  <RemoveIcon
+                    className="remove-icon"
+                    onClick={() => handleRemoveSize(categoryIndex, sizeIndex)}
+                  />
+                </div>
+              ))}
+              <Button
+                variant="outlined"
+                className="add-size-button"
+                onClick={() => handleAddSize(categoryIndex)}
+              >
+                Add Size
+              </Button>
+            </div>
+          </div>
+        ))}
+
+        <FormControlLabel
+          control={
+            <Checkbox
+              onChange={(e) =>
+                e.target.checked ? handleAddCategory() : handleRemoveCategory(1)
+              }
+            />
+          }
+          label="Add Bottom Category"
+        />
 
         <ChipTextfield
           label="Garment Details"
           predefinedOptions={garmentDetails}
           handleEdit={handleEdit}
-          config={{
-            field: `garmentDetails`, // Unique field for each quantity
-            isRequired: true,
-          }}
-          sx={{ margin: "10px" }}
+          config={{ field: "garmentDetails", isRequired: true }}
+          value={productDetails.garmentDetails}
         />
         <CustomTextfield
           label="Delivery In"
           predefinedOptions={deliveryIn}
-          config={{
-            field: `deliveryIn`, // Unique field for each quantity
-            isRequired: true,
-          }}
+          config={{ field: "deliveryIn", isRequired: true }}
+          value={productDetails.deliveryIn}
           handleEdit={handleEdit}
-          sx={{ margin: "10px" }}
         />
         <UploadFiles
-          updateData={(file) => handleEdit(file, "image")} // Update the image state
+          updateData={handleFileUpload}
           isEdit={true}
-          file={productDetails.image} // Pass current image for editing
-          acceptedFiles="image/png, image/jpeg, application/pdf" // Ensure these types are accepted
+          images={images}
+          file={productDetails.images}
+          acceptedFiles="image/png, image/jpeg"
+          parentClass="product-form-container"
         />
-        <Button variant="contained" onClick={() => handleSubmit()}>
-          Add product
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose}>Cancel</Button>
+        <Button variant="contained" onClick={handleSubmit}>
+          {props.product ? "Update Product" : "Add Product"}
         </Button>
-      </Card>
-    </div>
+      </DialogActions>
+    </Dialog>
   );
 };
 
-export default AddProduct;
+export default AddEditProductModal;

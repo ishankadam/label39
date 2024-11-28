@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../assets/logo 1.png";
 import {
   AppBar,
@@ -26,11 +26,12 @@ import MenuIcon from "@mui/icons-material/Menu";
 import "./../../css/appbar.css";
 import CloseIcon from "@mui/icons-material/Close";
 import { useShopContext } from "../../context/shopContext";
+import ShopDialog from "../../pages/homepage/shopDialog";
 
 const CustomAppbar = (props) => {
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [isAdmin] = useState(false);
-  const [country, setCountry] = useState("india");
+  const [country, setCountry] = useState(props.country || "INRs");
   const [mobileOpen, setMobileOpen] = useState(false);
   const { openDialog, closeDialog } = useShopContext(); // Ensure these functions are correct
   const navigate = useNavigate();
@@ -38,6 +39,10 @@ const CustomAppbar = (props) => {
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
+
+  useEffect(() => {
+    setCountry(props.country);
+  }, [props.country]);
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
@@ -57,7 +62,9 @@ const CustomAppbar = (props) => {
     setMobileOpen(open);
   };
 
-  const handleChange = () => {};
+  const handleChange = (value) => {
+    props.setCountry(value);
+  };
 
   const menuItems = [
     { text: "Home", page: "" },
@@ -167,8 +174,14 @@ const CustomAppbar = (props) => {
                 key={item.text}
                 color="inherit"
                 onClick={() => handlePageChange(item.page)}
-                onMouseEnter={openDialog} // Open dialog on hover
-                onMouseLeave={closeDialog} // Close dialog when mouse leaves
+                onMouseEnter={() => {
+                  if (item.text === "Shop") {
+                    openDialog(); // Open dialog only for the "Shop" button
+                  }
+                }}
+                onMouseLeave={() => {
+                  closeDialog(); // Close dialog only for the "Shop" button
+                }}
                 sx={{ fontWeight: "bold", cursor: "pointer" }}
               >
                 {item.text}
@@ -368,6 +381,7 @@ const CustomAppbar = (props) => {
           optionList={countries}
         />
       </Box>
+      <ShopDialog></ShopDialog>
     </>
   );
 };

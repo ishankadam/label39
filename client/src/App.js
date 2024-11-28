@@ -12,24 +12,38 @@ import Login from "./form/login/login";
 import Signup from "./form/signup/signup";
 import AddProduct from "./form/addProduct/addProduct";
 import CustomDrawer from "./components/drawer/drawer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Cart from "./pages/cart/cart";
 import Checkout from "./pages/checkout/checkout";
+import PaymentPage from "./pages/payment/paymentPage";
+import DeliveryForm from "./pages/product/deliveryForm";
+import Dashboard from "./pages/dashboard/dashboard";
+import AddEditProductModal from "./form/addProduct/addProduct";
 import FindUs from "./pages/homepage/findUs";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import { Fab, Tooltip } from "@mui/material";
+import { getAllProducts } from "./api";
+import SubscribeModal from "./pages/homepage/subscribeModal";
 
 const App = () => {
   const [cartDetails, setCartDetails] = useState({
     open: false,
     data: [],
   });
+  const [allProduct, setAllProduct] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [country, setCountry] = useState("INR");
+  useEffect(() => {
+    getAllProducts({ setProductsData: setAllProduct, setLoading, country });
+  }, [country]);
   return (
     <ShopProvider>
       <div>
         <CustomAppbar
           cartDetails={cartDetails}
           setCartDetails={setCartDetails}
+          country={country}
+          setCountry={setCountry}
         />
         <Tooltip
           title="Contact us on WhatsApp"
@@ -68,19 +82,36 @@ const App = () => {
             <WhatsAppIcon sx={{ fontSize: 30 }} />
           </Fab>
         </Tooltip>
-
+        <SubscribeModal></SubscribeModal>
         <Routes>
           <Route exact path="/" element={<Home />} />
-          <Route exact path="/shop" element={<Shop />} />
+          <Route
+            exact
+            path="/shop"
+            element={
+              <Shop
+                allProduct={allProduct}
+                loading={loading}
+                country={country}
+              />
+            }
+          />
           <Route exact path="/aboutus" element={<AboutUs />} />
           <Route exact path="/contactus" element={<FindUs />} />
           <Route exact path="/product" element={<ViewProduct />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/signup" element={<Signup />} />
           <Route exact path="/ourstory" element={<OurStory />} />
-          <Route exact path="/addProduct" element={<AddProduct />} />
+          {/* <Route
+            exact
+            path="/addProduct"
+            element={<AddEditProductModal open={true} />}
+          /> */}
           <Route exact path="/checkout" element={<Checkout />} />
           <Route exact path="/cart" element={<Cart />} />
+          <Route exact path="/delivery" element={<DeliveryForm />} />
+          <Route exact path="/payment" element={<PaymentPage />} />
+          <Route exact path="/dashboard" element={<Dashboard />} />
         </Routes>
         <CustomDrawer
           cartDetails={cartDetails}

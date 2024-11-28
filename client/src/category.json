@@ -1,0 +1,26 @@
+[
+  {
+    "categoryId": 1,
+    "name": "SHIRTS",
+    "description": "A variety of stylish shirts for all occasions.",
+    "image": "C-shirts.jpeg"
+  },
+  {
+    "categoryId": 2,
+    "name": "CO-ORDS",
+    "description": "Trendy co-ord sets for a coordinated look.",
+    "image": "C-cord.jpeg"
+  },
+  {
+    "categoryId": 3,
+    "name": "KURTAS",
+    "description": "Elegant suits for formal and semi-formal events.",
+    "image": "C-kurta.jpeg"
+  },
+  {
+    "categoryId": 4,
+    "name": "FESTIVE",
+    "description": "Festive wear for celebrations and special occasions.",
+    "image": "C-festive.jpeg"
+  }
+]
