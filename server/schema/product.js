@@ -23,6 +23,9 @@ const productSchema = new mongoose.Schema({
   garmentDetails: { type: Array },
   deliveryIn: { type: Array },
   images: { type: Array },
+  bestseller: { type: Boolean },
+  asSeenOn: { type: String },
+  videoSrc: { type: String },
 });
 
 // Create the model

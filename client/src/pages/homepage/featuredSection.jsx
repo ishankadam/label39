@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { Card, CardMedia, Button, Typography, Box } from "@mui/material";
 import video1 from "../../assets/video1.MOV";
@@ -6,16 +6,22 @@ import video2 from "../../assets/video2.mov";
 import "./../../css/categorySection.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { imageUrl } from "../../api";
 
-const FeaturedSection = () => {
-  const featured = [
-    { label: "NEW ARRIVAL", videoSrc: video1 },
-    { label: "READY TO SHIP", videoSrc: video2 },
-    { label: "AS SEEN ON", videoSrc: video1 },
-    { label: "AS SEEN ON", videoSrc: video1 },
-    { label: "AS SEEN ON", videoSrc: video1 },
-    { label: "AS SEEN ON", videoSrc: video1 },
-  ];
+const FeaturedSection = (props) => {
+  const [shopByVideos, setshopByVideos] = useState(props.shopByVideos || []);
+
+  useEffect(() => {
+    setshopByVideos(props.shopByVideos);
+  }, [props.shopByVideos]);
+  // const featured = [
+  //   { label: "NEW ARRIVAL", videoSrc: video1 },
+  //   { label: "READY TO SHIP", videoSrc: video2 },
+  //   { label: "AS SEEN ON", videoSrc: video1 },
+  //   { label: "AS SEEN ON", videoSrc: video1 },
+  //   { label: "AS SEEN ON", videoSrc: video1 },
+  //   { label: "AS SEEN ON", videoSrc: video1 },
+  // ];
 
   // Slick settings for responsive slider
   const settings = {
@@ -82,7 +88,7 @@ const FeaturedSection = () => {
         }}
       >
         <Slider {...settings}>
-          {featured.map((item, index) => (
+          {shopByVideos.map((item, index) => (
             <Box key={index}>
               <Card
                 sx={{
@@ -93,7 +99,7 @@ const FeaturedSection = () => {
               >
                 <CardMedia
                   component="video"
-                  src={item.videoSrc}
+                  src={`${imageUrl}${item.videoSrc}`}
                   autoPlay
                   loop
                   muted
@@ -134,7 +140,7 @@ const FeaturedSection = () => {
                       fontWeight: { xs: "700", sm: "600", md: "700" },
                     }}
                   >
-                    {item.label}
+                    {item.asSeenOn ? `As seen on ${item.asSeenOn}` : ""}
                   </Typography>
                   {/* <Button
                     variant="contained"

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MainCorousel from "./mainCorousel";
 import CategorySection from "./categorySection";
 import FeaturedSection from "./featuredSection";
@@ -7,20 +7,69 @@ import AsSeenOn from "./asSeenOn";
 import Testimonials from "./testimonials";
 import Footer from "./footer";
 import FindUs from "./findUs";
-import ShopDialog from "./shopDialog";
 import InstagramSection from "./instagramSection";
+import ViewProductModal from "../product/viewProduct";
 
 const Home = (props) => {
+  const [allProduct, setAllProduct] = useState(props.allProduct || []);
+  const [bestsellers, setBestsellers] = useState([]);
+  const [asSeenOn, setAsSeenOn] = useState([]);
+  const [shopByVideos, setshopByVideos] = useState([]);
+  const [showModal, setShowModal] = useState({
+    open: false,
+    data: {},
+  });
+
+  useEffect(() => {
+    setAllProduct(props.allProduct);
+  }, [props.allProduct]);
+
+  useEffect(() => {
+    if (allProduct.length > 0) {
+      const bestSellers = allProduct.filter((product) => product.bestseller);
+      setBestsellers(bestSellers);
+      const asSeenOnData = allProduct.filter((product) => product.asSeenOn);
+      setAsSeenOn(asSeenOnData);
+      const videosData = allProduct.filter((product) => product.videoSrc);
+      console.log(videosData);
+      setshopByVideos(videosData);
+    }
+  }, [allProduct]);
+
+  const handleViewProduct = (product) => {
+    console.log(product);
+    setShowModal({
+      open: true,
+      data: product,
+    });
+  };
+
   return (
     <div>
       <MainCorousel></MainCorousel>
       <CategorySection></CategorySection>
-      <FeaturedSection></FeaturedSection>
-      <BestSellerSection></BestSellerSection>
-      <AsSeenOn></AsSeenOn>
+      <FeaturedSection
+        shopByVideos={shopByVideos}
+        handleViewProduct={handleViewProduct}
+      ></FeaturedSection>
+      <BestSellerSection
+        bestsellers={bestsellers}
+        handleViewProduct={handleViewProduct}
+      ></BestSellerSection>
+      <AsSeenOn
+        handleViewProduct={handleViewProduct}
+        asSeenOn={asSeenOn}
+      ></AsSeenOn>
       <Testimonials></Testimonials>
       <InstagramSection></InstagramSection>
       <FindUs></FindUs>
+      {showModal.open ? (
+        <ViewProductModal
+          open={showModal.open}
+          product={showModal.data}
+          setShowModal={setShowModal}
+        ></ViewProductModal>
+      ) : null}
       <Footer topSection={true}></Footer>
     </div>
   );

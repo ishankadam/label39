@@ -64,56 +64,6 @@ const ProductsPage = (props) => {
     setLoading(true);
   }, []);
 
-  useEffect(() => {
-    const data = allProduct.map((item) => {
-      // Parse sizes if it's a string; otherwise, use it as is
-      if (typeof item.sizes === "string") {
-        try {
-          item.sizes = item.sizes
-            .replace(/([a-zA-Z]+):/g, '"$1":') // Add quotes around keys
-            .replace(/'/g, '"') // Replace single quotes with double quotes
-            .replace(/\bUpper\b/g, '"Upper"') // Ensure Upper is quoted
-            .replace(/\bBottom\b/g, '"Bottom"'); // Ensure Bottom is quoted
-        } catch (error) {
-          console.warn("Failed to parse sizes for productId:", item.productId);
-          item.sizes = {}; // Default to an empty object if parsing fails
-        }
-      }
-
-      // Parse garmentDetails if it's a string representation of an array
-      if (typeof item.garmentDetails === "string") {
-        try {
-          item.garmentDetails = item.garmentDetails
-            .replace(/<br\s*\/?>/g, "\n") // Replace <br> tags with new line character (if needed)
-            .split("\n") // Split the string at new lines
-            .map((item) => item.trim()) // Remove any extra spaces around each item
-            .filter((item) => item.length > 0); // Remove any empty strings
-        } catch (error) {
-          console.warn(
-            "Failed to parse garmentDetails for productId:",
-            item.productId
-          );
-          item.garmentDetails = []; // Default to an empty array if parsing fails
-        }
-      }
-
-      // Parse images if it's a string representation of an array
-      if (typeof item.images === "string") {
-        try {
-          item.images = item.images
-            .replace(/<br\s*\/?>/g, "\n") // Replace <br> tags with new line character (if needed)
-            .split("\n") // Split the string at new lines
-            .map((item) => item.trim()) // Remove any extra spaces around each item
-            .filter((item) => item.length > 0); // Remove any empty strings
-        } catch (error) {
-          console.warn("Failed to parse images for productId:", item.productId);
-          item.images = []; // Default to an empty array if parsing fails
-        }
-      }
-      return item;
-    });
-  }, [allProduct]);
-
   const handlePageChange = (event, value) => {
     setPage(value);
   };

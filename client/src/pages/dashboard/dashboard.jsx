@@ -10,8 +10,9 @@ import _ from "lodash";
 import SelectDropdown from "../../components/select-dropdown/selectDropdown";
 import ProductTable from "./productTable";
 import ManageCategories from "./manageCategory";
+import ManageTestimonials from "./manageTestimonials";
 
-const Dashboard = () => {
+const Dashboard = (props) => {
   const [options, setOptions] = useState("Products");
   const [products, setProducts] = useState([]);
   const [filterDataProducts, setfilterDataProducts] = useState([]);
@@ -48,12 +49,14 @@ const Dashboard = () => {
     getAllProducts({
       setProductsData: setProducts,
       setLoading: setProductsLoading,
+      country: props.country,
     });
-    // getAllCategories({ setCategories, setLoading: setCategoryLoading });
+    getAllCategories({ setCategories, setLoading: setCategoryLoading });
     // getAllTestimonials({ setTestimonials, setLoading: setTestimonialsLoading });
   }, []);
 
   const handleOpenForm = (page) => {
+    console.log(page);
     if (page === "Categories") {
       setShowCategoryModal({
         show: true,
@@ -70,7 +73,7 @@ const Dashboard = () => {
   };
 
   const handleOptions = (event, newValue) => {
-    // setOptions(findLabelByValue(dashboardTabValue, newValue));
+    setOptions(findLabelByValue(dashboardTabValue, newValue));
     setTabValue(newValue);
   };
 
@@ -304,11 +307,18 @@ const Dashboard = () => {
         <ManageCategories
           categories={categories}
           setCategories={setCategories}
-          // loading={productsloading}
-          // setLoading={setProductsLoading}
-          // showModal={showProductModal}
-          // setShowModal={setShowProductModal}
-          // categories={categories}
+          showModal={showCategoryModal}
+          setShowModal={setShowCategoryModal}
+          loading={categoryloading}
+          setLoading={setCategoryLoading}
+        />
+      )}
+      {tabValue === "three" && (
+        <ManageTestimonials
+          testimonials={testimonials}
+          loading={testimonialsloading}
+          setLoading={setTestimonialsLoading}
+          setTestimonials={setTestimonials}
         />
       )}
     </>

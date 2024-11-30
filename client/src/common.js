@@ -17,18 +17,31 @@ import bestSeller13 from "./assets/bestSeller13.jpg";
 
 export const adminSettings = ["Profile", "Account", "Dashboard", "Logout"];
 
+export const dashboardTabValue = [
+  { label: "Products", value: "one" },
+  { label: "Categories", value: "two" },
+  { label: "Testimonials", value: "three" },
+];
+
 export const countries = [
   {
     label: "India",
     value: "INR",
     flag: indianFlag,
+    currency: "₹",
   },
   {
     label: "USA",
     value: "USD",
     flag: UsaFlag,
+    currency: "$",
   },
 ];
+
+export const getCurrencySymbol = (country) => {
+  const symbol = countries.filter((row) => row.value === country)[0];
+  return symbol ? symbol.currency : "₹";
+};
 
 export const categories = [
   {

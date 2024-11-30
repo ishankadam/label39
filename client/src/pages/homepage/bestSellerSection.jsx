@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import bestSeller1 from "../../assets/bestSellerP1.jpg";
 import bestSeller2 from "../../assets/bestSellerP2.jpg";
 import bestSeller3 from "../../assets/bestSellerP3.jpg";
@@ -15,41 +15,47 @@ import { NextArrow, PrevArrow } from "../../components/arrow-component"; // Upda
 import "../../css/main.css";
 import { bestSellers } from "../../common";
 
-const BestSellerSection = () => {
-  const bestSellers = [
-    {
-      name: "Sapphire Applique Kurta Set",
-      images: ["Cord10.jpg"],
-      hoverImgSrc: bestSeller5hover,
-      price: 9999,
-    },
-    {
-      name: "Sapphire Applique Kurta Set",
-      images: ["Cord61.jpg"],
-      hoverImgSrc: bestSeller6Hover,
-      price: 9999,
-    },
-    {
-      name: "Sapphire Applique Kurta Set",
-      images: ["Cord21.jpg"],
-      price: 9999,
-    },
-    {
-      name: "Sapphire Applique Kurta Set",
-      images: ["Cord31.jpg"],
-      price: 9999,
-    },
-    {
-      name: "Sapphire Applique Kurta Set",
-      images: ["Cord41.jpg"],
-      price: 9999,
-    },
-    {
-      name: "Sapphire Applique Kurta Set",
-      images: ["Cord51.jpg"],
-      price: 9999,
-    },
-  ];
+const BestSellerSection = (props) => {
+  const [bestsellers, setBestsellers] = useState(props.bestsellers || []);
+
+  useEffect(() => {
+    setBestsellers(props.bestsellers);
+  }, [props.bestsellers]);
+
+  // const bestSellers = [
+  //   {
+  //     name: "Sapphire Applique Kurta Set",
+  //     images: ["Cord10.jpg"],
+  //     hoverImgSrc: bestSeller5hover,
+  //     price: 9999,
+  //   },
+  //   {
+  //     name: "Sapphire Applique Kurta Set",
+  //     images: ["Cord61.jpg"],
+  //     hoverImgSrc: bestSeller6Hover,
+  //     price: 9999,
+  //   },
+  //   {
+  //     name: "Sapphire Applique Kurta Set",
+  //     images: ["Cord21.jpg"],
+  //     price: 9999,
+  //   },
+  //   {
+  //     name: "Sapphire Applique Kurta Set",
+  //     images: ["Cord31.jpg"],
+  //     price: 9999,
+  //   },
+  //   {
+  //     name: "Sapphire Applique Kurta Set",
+  //     images: ["Cord41.jpg"],
+  //     price: 9999,
+  //   },
+  //   {
+  //     name: "Sapphire Applique Kurta Set",
+  //     images: ["Cord51.jpg"],
+  //     price: 9999,
+  //   },
+  // ];
 
   // Slick Slider settings
   const settings = {
@@ -106,11 +112,12 @@ const BestSellerSection = () => {
       </Typography>
       <div className="slider-wrapper">
         <Slider {...settings}>
-          {bestSellers.map((product, index) => (
+          {bestsellers.map((product, index) => (
             <div key={index}>
               <ProductCard
                 product={product}
                 sx={{ maxHeight: "400px !important" }}
+                handleViewProduct={props.handleViewProduct}
               />
             </div>
           ))}

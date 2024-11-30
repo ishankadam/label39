@@ -1,7 +1,9 @@
 const axios = require("axios");
 const razorpayInstance = require("../razorpay");
 const Product = require("../schema/product");
-const get_all_Products = async (req, res) => {
+const Category = require("../schema/categories");
+
+const get_all_products = async (req, res) => {
   console.log(req.body.country); // Log the selected country code
   try {
     const country = req.body.country;
@@ -142,10 +144,20 @@ const trackDeliveryOrder = async (req, res) => {
   }
 };
 
+const get_all_categories = async (req, res) => {
+  try {
+    const category = await Category.find({}).select("-_id -__v"); // Exclude _id and __v fields
+    res.status(200).json(category); // Send the result as JSON
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching events", error });
+  }
+};
+
 module.exports = {
-  get_all_Products,
+  get_all_products,
   create_product,
   createPayment,
   createDeliveryOrder,
   trackDeliveryOrder,
+  get_all_categories,
 };

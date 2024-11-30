@@ -5,13 +5,15 @@ const controller = require("../controller/controllers");
 
 router.use(express.json()); // Middleware to parse JSON request bodies
 
-// Routes
-router.post("/getProducts", controller.get_all_Products);
+// Routes for products
+router.post("/getProducts", controller.get_all_products);
 router.post("/createProduct", controller.create_product);
 
-router.post("/createOrder", controller.createPayment);
+// Routes for categories
+router.get("/getCategories", controller.get_all_categories);
 
 // Create Delivery Order
+router.post("/createOrder", controller.createPayment);
 router.post("/createDelivery", controller.createDeliveryOrder);
 
 // Track Delivery Order

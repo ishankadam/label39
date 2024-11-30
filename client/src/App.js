@@ -84,7 +84,7 @@ const App = () => {
         </Tooltip>
         <SubscribeModal></SubscribeModal>
         <Routes>
-          <Route exact path="/" element={<Home />} />
+          <Route exact path="/" element={<Home allProduct={allProduct} />} />
           <Route
             exact
             path="/shop"
@@ -102,16 +102,20 @@ const App = () => {
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/signup" element={<Signup />} />
           <Route exact path="/ourstory" element={<OurStory />} />
-          {/* <Route
+          <Route
             exact
             path="/addProduct"
             element={<AddEditProductModal open={true} />}
-          /> */}
+          />
           <Route exact path="/checkout" element={<Checkout />} />
           <Route exact path="/cart" element={<Cart />} />
           <Route exact path="/delivery" element={<DeliveryForm />} />
           <Route exact path="/payment" element={<PaymentPage />} />
-          <Route exact path="/dashboard" element={<Dashboard />} />
+          <Route
+            exact
+            path="/dashboard"
+            element={<Dashboard country={country} />}
+          />
         </Routes>
         <CustomDrawer
           cartDetails={cartDetails}

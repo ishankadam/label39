@@ -14,10 +14,10 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import BoltIcon from "@mui/icons-material/Bolt";
 import { imageUrl } from "../../api";
+import { getCurrencySymbol } from "../../common";
 
 const ProductCard = (props) => {
   const [isHovered, setIsHovered] = useState(false);
-
   return (
     <Card
       className="product-card"
@@ -138,7 +138,9 @@ const ProductCard = (props) => {
             fontSize: { xs: "11px", sm: "12px", md: "16px" },
           }}
         >
-          {props.product.name}
+          {props.asSeenOn && props.product.asSeenOn
+            ? `${props.product.asSeenOn} in ${props.product.name}`
+            : props.product.name}
         </Typography>
         <Typography
           variant="h6"
@@ -149,7 +151,7 @@ const ProductCard = (props) => {
             fontFamily: "'Poppins', sans-serif",
           }}
         >
-          {props.country}. {props.product.price}
+          {getCurrencySymbol(props.country)}. {props.product.price}
         </Typography>
       </CardContent>
       <Box

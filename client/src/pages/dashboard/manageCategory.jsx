@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CustomTable from "../../components/custom-table/customTable";
+import AddEditCategory from "../../form/addCategory/addCategory";
 // import CreateCategory from "../../components/modal/createCategory";
 // import { deleteCategory } from "../../api";
 const ManageCategories = (props) => {
@@ -45,6 +46,13 @@ const ManageCategories = (props) => {
 
   const colDef = [
     {
+      id: "image",
+      label: "Image",
+      key: "image",
+      align: "center",
+      type: "image",
+    },
+    {
       id: "name",
       label: "Name",
       key: "name",
@@ -57,14 +65,6 @@ const ManageCategories = (props) => {
       key: "description",
       type: "text",
       align: "left",
-    },
-    {
-      id: "image",
-      label: "Product",
-      key: "imgSrc",
-      type: "categoryImage",
-      align: "center",
-      category: "categories",
     },
     {
       id: "notification-icon",
@@ -94,7 +94,7 @@ const ManageCategories = (props) => {
         loading={props.loading}
         pagination={true}
       ></CustomTable>
-      {/* <CreateCategory
+      <AddEditCategory
         open={showModal.show}
         isEdit={showModal.isEdit}
         data={showModal.data}
@@ -102,7 +102,7 @@ const ManageCategories = (props) => {
         setShowModal={setShowModal}
         setLoading={props.setLoading}
         setCategories={setCategories}
-      /> */}
+      />
     </div>
   );
 };

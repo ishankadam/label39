@@ -21,7 +21,7 @@ const categorySchema = new mongoose.Schema({
     required: true, // Make category required
   },
   image: {
-    type: String,
+    type: Array,
     required: true, // Make url required for each image
   },
 });

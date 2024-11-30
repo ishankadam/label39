@@ -96,7 +96,6 @@ const AddEditProductModal = (props) => {
   };
 
   const handleClose = () => {
-    console.log(props);
     props.setShowEditModal((prev) => ({
       ...prev,
       open: false,
