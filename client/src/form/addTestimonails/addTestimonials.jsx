@@ -58,7 +58,7 @@ const TestimonialModal = (props) => {
     name: "",
     comments: "",
     image: null,
-    rating: 5, // Initialize rating
+    // rating: 5, // Initialize rating
   });
   const [images, setImages] = useState([]);
   const [value, setValue] = useState(0);
@@ -205,20 +205,28 @@ const TestimonialModal = (props) => {
           {/* Rating Component */}
           <Box mb={2} display="flex" alignItems="center">
             <Typography sx={{ mr: 2 }}>Rating:</Typography>
-            <Rating
+            <StyledRating
               name="hover-feedback"
               value={testimonial.rating}
-              precision={0.5}
+              precision={1}
               onChange={(event, newValue) => {
-                setValue(newValue);
+                handleChange(newValue, "rating");
               }}
               onChangeActive={(event, newHover) => {
                 setHover(newHover);
               }}
+              getLabelText={(value) => customIcons[value]?.label || ""}
+              IconContainerComponent={IconContainer}
               emptyIcon={
                 <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
               }
             />
+            {hover !== -1 && (
+              <Typography sx={{ ml: 2 }}>
+                {customIcons[hover]?.label ||
+                  customIcons[testimonial.rating]?.label}
+              </Typography>
+            )}
           </Box>
 
           <Box mb={2}>

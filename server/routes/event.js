@@ -12,6 +12,9 @@ router.post("/createProduct", controller.create_product);
 // Routes for categories
 router.get("/getCategories", controller.get_all_categories);
 
+// Routes for Testimonials
+router.get("/getTestimonials", controller.get_all_testimonials);
+
 // Create Delivery Order
 router.post("/createOrder", controller.createPayment);
 router.post("/createDelivery", controller.createDeliveryOrder);

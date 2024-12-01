@@ -52,7 +52,7 @@ const Dashboard = (props) => {
       country: props.country,
     });
     getAllCategories({ setCategories, setLoading: setCategoryLoading });
-    // getAllTestimonials({ setTestimonials, setLoading: setTestimonialsLoading });
+    getAllTestimonials({ setTestimonials, setLoading: setTestimonialsLoading });
   }, []);
 
   const handleOpenForm = (page) => {

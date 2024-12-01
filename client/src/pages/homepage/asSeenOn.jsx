@@ -119,7 +119,11 @@ const AsSeenOn = (props) => {
           onMouseEnter={() => setShowProductInfo(true)}
           onMouseLeave={() => setShowProductInfo(false)}
         >
-          <ProductCard product={products[slideNumber]} asSeenOn={true} />
+          <ProductCard
+            product={products[slideNumber]}
+            asSeenOn={true}
+            country={props.country}
+          />
           <Button
             variant="contained"
             color="custom"

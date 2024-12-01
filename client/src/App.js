@@ -24,7 +24,9 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import { Fab, Tooltip } from "@mui/material";
 import { getAllProducts } from "./api";
 import SubscribeModal from "./pages/homepage/subscribeModal";
-
+import TermsAndConditions from "./pages/termsAndCondition/termsAndCondition";
+import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
+import GiftCardModal from "./form/giftCard/giftCard";
 const App = () => {
   const [cartDetails, setCartDetails] = useState({
     open: false,
@@ -33,6 +35,10 @@ const App = () => {
   const [allProduct, setAllProduct] = useState([]);
   const [loading, setLoading] = useState(false);
   const [country, setCountry] = useState("INR");
+  const [isGiftCardModalOpen, setIsGiftCardModalOpen] = useState(false);
+
+  const handleOpen = () => setIsGiftCardModalOpen(true);
+  const handleClose = () => setIsGiftCardModalOpen(false);
   useEffect(() => {
     getAllProducts({ setProductsData: setAllProduct, setLoading, country });
   }, [country]);
@@ -82,9 +88,31 @@ const App = () => {
             <WhatsAppIcon sx={{ fontSize: 30 }} />
           </Fab>
         </Tooltip>
+        <Fab
+          color="#d7b4a7"
+          aria-label="add"
+          sx={{
+            position: "fixed",
+            bottom: 80,
+            right: 20,
+            zIndex: 1000,
+            transition: "background-color 0.3s ease",
+            "&:hover": {
+              backgroundColor: "#d7b4a7",
+            },
+          }}
+        >
+          <CardGiftcardIcon sx={{ fontSize: 30 }} onClick={handleOpen} />
+        </Fab>
+
         <SubscribeModal></SubscribeModal>
+        <GiftCardModal open={isGiftCardModalOpen} onClose={handleClose} />
         <Routes>
-          <Route exact path="/" element={<Home allProduct={allProduct} />} />
+          <Route
+            exact
+            path="/"
+            element={<Home allProduct={allProduct} country={country} />}
+          />
           <Route
             exact
             path="/shop"
@@ -111,6 +139,11 @@ const App = () => {
           <Route exact path="/cart" element={<Cart />} />
           <Route exact path="/delivery" element={<DeliveryForm />} />
           <Route exact path="/payment" element={<PaymentPage />} />
+          <Route
+            exact
+            path="/terms-and-conditions"
+            element={<TermsAndConditions />}
+          />
           <Route
             exact
             path="/dashboard"

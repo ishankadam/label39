@@ -118,6 +118,7 @@ const BestSellerSection = (props) => {
                 product={product}
                 sx={{ maxHeight: "400px !important" }}
                 handleViewProduct={props.handleViewProduct}
+                country={props.country}
               />
             </div>
           ))}

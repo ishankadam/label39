@@ -132,3 +132,27 @@ export const getAllCategories = async ({ setCategories, setLoading }) => {
     console.error("Error fetching products:", err);
   }
 };
+
+// Fetch all categories
+export const getAllTestimonials = async ({ setTestimonials, setLoading }) => {
+  try {
+    const response = await fetch(`${apiUrl}/getTestimonials`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (!response.ok) {
+      if (response.status === 401) {
+        console.error("Unauthorized access");
+      }
+      throw new Error("Failed to fetch products");
+    }
+
+    const data = await response.json();
+    setTestimonials(data);
+    setLoading && setLoading(false);
+    return data;
+  } catch (err) {
+    console.error("Error fetching products:", err);
+  }
+};
