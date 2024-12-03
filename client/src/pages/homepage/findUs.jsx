@@ -31,10 +31,6 @@ const FindUs = () => {
     setShowMap((prev) => !prev); // Toggle map visibility
   };
 
-  const handleSlideChange = () => {
-    setAddressSlide(!addressSlide);
-  };
-
   return (
     <Box sx={{ marginTop: { xs: "20px", sm: "28px", md: "36px" } }}>
       <Typography
@@ -60,25 +56,18 @@ const FindUs = () => {
         />
       </Typography>
       <div className="findus-container">
-        <NavigateBeforeOutlinedIcon
-          onClick={handleSlideChange}
-          sx={{
-            borderRadius: "50%",
-            backgroundColor: "white",
-            boxShadow: "0 2px 5px rgba(0,0,0,0.3)",
-            "&:hover": {
-              backgroundColor: "#f0f0f0",
-            },
-            padding: "5px",
-            cursor: "pointer",
-            margin: "100px",
-            // opacity: currentSlide === 0 ? 0.5 : 1,
-          }}
-        />
         <Card className="card-container">
           <Grid container>
             <Grid item xs={12} sm={6}>
               {showMap ? (
+                <CardMedia
+                  className="card-image"
+                  component="img"
+                  height="140"
+                  image={findUs1}
+                  alt="find us"
+                />
+              ) : (
                 <Box
                   component="iframe"
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224345.83918911796!2d77.06889984999999!3d28.4743844!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce1612dfde9c9%3A0x29a8983a3a749f20!2sThe%20Dhanmill!5e0!3m2!1sen!2sin!4v1692722440123!5m2!1sen!2sin"
@@ -88,14 +77,6 @@ const FindUs = () => {
                   loading="lazy"
                   style={{ border: 0 }}
                   title="The Dhanmill Location"
-                />
-              ) : (
-                <CardMedia
-                  className="card-image"
-                  component="img"
-                  height="140"
-                  image={findUs1}
-                  alt="find us"
                 />
               )}
             </Grid>
@@ -110,10 +91,10 @@ const FindUs = () => {
                     marginBottom: "20px",
                   }}
                 >
-                  {addressSlide ? "Find us at" : "Write us at"}
+                  {showMap ? "Find us at" : "Write us at"}
                 </Typography>
                 {/* <Divider sx={{ my: 1 }} /> */}
-                {addressSlide ? (
+                {!showMap ? (
                   <>
                     <Typography
                       gutterBottom
@@ -146,21 +127,6 @@ const FindUs = () => {
                       The Dhanmill, SSN Marg, 100 Feet Road, Chhatarpur, New
                       Delhi, Delhi, 110074
                     </Typography>
-                    <Link
-                      component="button"
-                      onClick={toggleMapVisibility}
-                      sx={{
-                        color: "#a16149",
-                        fontSize: "16px",
-                        cursor: "pointer",
-                        textDecoration: "underline",
-                        "&:hover": {
-                          textDecoration: "none",
-                        },
-                      }}
-                    >
-                      {showMap ? "Show Shop" : "View in maps"}
-                    </Link>
                     <Typography
                       gutterBottom
                       variant="body2"
@@ -172,7 +138,7 @@ const FindUs = () => {
                       }}
                     >
                       Phone Number: +91 9674949842
-                    </Typography>
+                    </Typography>{" "}
                   </>
                 ) : (
                   <>
@@ -269,23 +235,24 @@ const FindUs = () => {
               </CardContent>
             </Grid>
           </Grid>
+          <Link
+            component="button"
+            onClick={toggleMapVisibility}
+            sx={{
+              color: "#a16149",
+              fontSize: "16px",
+              cursor: "pointer",
+              textDecoration: "underline",
+              "&:hover": {
+                textDecoration: "none",
+              },
+            }}
+          >
+            {showMap
+              ? "Show Shop Address"
+              : "To send us your queries click here"}
+          </Link>
         </Card>
-        <NavigateNextOutlinedIcon
-          onClick={handleSlideChange}
-          sx={{
-            borderRadius: "50%",
-            backgroundColor: "white",
-            boxShadow: "0 2px 5px rgba(0,0,0,0.3)",
-            "&:hover": {
-              backgroundColor: "#f0f0f0",
-            },
-            padding: "5px",
-            cursor: "pointer",
-            margin: "100px",
-
-            // opacity: currentSlide >= slides.length - 2 ? 0.5 : 1,
-          }}
-        />
       </div>
     </Box>
   );

@@ -7,6 +7,8 @@ import {
   Grid,
   Modal,
   Link,
+  ToggleButtonGroup,
+  ToggleButton,
 } from "@mui/material";
 import ShareIcon from "@mui/icons-material/Share";
 import ChatIcon from "@mui/icons-material/Chat";
@@ -14,13 +16,14 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Footer from "../homepage/footer";
 import { imageUrl } from "../../api";
+import { products } from "../../common";
 
 const ViewProductModal = (props) => {
   const { isAdmin, product, open, setShowModal, setShowEditModal } = props;
   const [modalOpen, setModalOpen] = useState(open);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const selectedImage = product.images[selectedImageIndex];
-
+  const [selectedSizes, setSelectedSizes] = useState({});
   const handlePreviousImage = () => {
     setSelectedImageIndex((prevIndex) =>
       prevIndex > 0 ? prevIndex - 1 : product.images.length - 1
@@ -56,6 +59,13 @@ const ViewProductModal = (props) => {
   useEffect(() => {
     setModalOpen(open);
   }, [open]);
+
+  const handleSizeChange = (category, newSize) => {
+    setSelectedSizes((prevSelectedSizes) => ({
+      ...prevSelectedSizes,
+      [category]: newSize, // Only one size per category
+    }));
+  };
 
   return (
     <>
@@ -205,18 +215,31 @@ const ViewProductModal = (props) => {
                       <Typography variant="h6" sx={{ marginBottom: "10px" }}>
                         {category}
                       </Typography>
-                      <Box sx={{ display: "flex", gap: 2 }}>
+                      <ToggleButtonGroup
+                        exclusive
+                        value={selectedSizes[category] || ""}
+                        onChange={(event, newSize) =>
+                          handleSizeChange(category, newSize)
+                        }
+                        aria-label={`${category} sizes`}
+                        sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}
+                      >
                         {sizes.map(({ size, quantity }) => (
-                          <Button
+                          <ToggleButton
                             key={size}
-                            variant="outlined"
-                            color="success"
+                            value={size}
                             title={`Quantity: ${quantity}`}
+                            sx={{
+                              "&.Mui-selected": {
+                                backgroundColor: "green",
+                                color: "white",
+                              },
+                            }}
                           >
                             {size}
-                          </Button>
+                          </ToggleButton>
                         ))}
-                      </Box>
+                      </ToggleButtonGroup>
                     </Box>
                   ))}
                 </Box>
