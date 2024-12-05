@@ -94,15 +94,17 @@ const ManageCategories = (props) => {
         loading={props.loading}
         pagination={true}
       ></CustomTable>
-      <AddEditCategory
-        open={showModal.show}
-        isEdit={showModal.isEdit}
-        data={showModal.data}
-        handleModalClose={handleModalClose}
-        setShowModal={setShowModal}
-        setLoading={props.setLoading}
-        setCategories={setCategories}
-      />
+      {showModal.show && (
+        <AddEditCategory
+          open={showModal.show}
+          isEdit={showModal.isEdit}
+          data={showModal.data}
+          handleModalClose={handleModalClose}
+          setShowModal={setShowModal}
+          setLoading={props.setLoading}
+          setCategories={setCategories}
+        />
+      )}
     </div>
   );
 };

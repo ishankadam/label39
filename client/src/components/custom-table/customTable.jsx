@@ -177,7 +177,7 @@ const CustomTable = (props) => {
       //     children = (
       //       <img
       //         className="attachment-file"
-      //         src={`${imageUrl}${colDef.category}/${row[colDef.key]}`}
+      //         src={${imageUrl}${colDef.category}/${row[colDef.key]}}
       //         alt="attachment"
       //         style={{ height: "80px", width: "80px" }}
       //       />

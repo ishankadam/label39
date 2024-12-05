@@ -20,7 +20,7 @@ export const adminSettings = ["Profile", "Account", "Dashboard", "Logout"];
 export const dashboardTabValue = [
   { label: "Products", value: "one" },
   { label: "Categories", value: "two" },
-  { label: "Testimonials", value: "three" },
+  { label: "Miscellaneous", value: "three" },
 ];
 
 export const countries = [

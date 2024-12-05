@@ -72,6 +72,10 @@ const Dashboard = (props) => {
     }
   };
 
+  useEffect(() => {
+    console.log(options);
+  }, [options]);
+
   const handleOptions = (event, newValue) => {
     setOptions(findLabelByValue(dashboardTabValue, newValue));
     setTabValue(newValue);
@@ -176,7 +180,7 @@ const Dashboard = (props) => {
       >
         <Tab value="one" label="Products" wrapped />
         <Tab value="two" label="Categories" />
-        <Tab value="three" label="Statistics" />
+        <Tab value="three" label="Miscellaneous" />
       </Tabs>
 
       <Grid2
@@ -269,7 +273,7 @@ const Dashboard = (props) => {
           <Grid2>
             <Box>
               {" "}
-              {options !== "Stats" && (
+              {options !== "Miscellaneous" && (
                 <Button
                   variant="contained"
                   onClick={() => handleOpenForm(options)}
@@ -296,11 +300,11 @@ const Dashboard = (props) => {
         <ProductTable
           products={products}
           setProducts={setProducts}
-          // loading={productsloading}
-          // setLoading={setProductsLoading}
-          // showModal={showProductModal}
-          // setShowModal={setShowProductModal}
-          // categories={categories}
+          loading={productsloading}
+          setLoading={setProductsLoading}
+          showModal={showProductModal}
+          setShowModal={setShowProductModal}
+          categories={categories}
         />
       )}
       {tabValue === "two" && (

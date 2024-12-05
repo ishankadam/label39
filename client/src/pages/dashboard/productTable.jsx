@@ -5,10 +5,28 @@ import {
   transformInputData,
   transformProductData,
 } from "../../common";
+import AddEditProductModal from "../../form/addProduct/addProduct";
 
 const ProductTable = (props) => {
   const [products, setProducts] = useState(props.products || []);
+  const [showModal, setShowModal] = useState(
+    props.showModal || {
+      show: false,
+      isEdit: false,
+      data: {},
+    }
+  );
 
+  useEffect(() => {
+    setShowModal(props.showModal);
+  }, [props.showModal]);
+
+  const handleModalClose = () => {
+    props.setShowModal({
+      show: false,
+      data: {},
+    });
+  };
   useEffect(() => {
     setProducts(props.products);
   }, [props.products]);
@@ -109,16 +127,29 @@ const ProductTable = (props) => {
     },
   ];
   return (
-    <CustomTable
-      colDef={colDef}
-      rowData={products}
-      deleteContent={{
-        title: "Delete Confirmation",
-        message: "Are you sure you want to delete this record?",
-      }}
-      loading={props.loading}
-      pagination={true}
-    ></CustomTable>
+    <>
+      <CustomTable
+        colDef={colDef}
+        rowData={products}
+        deleteContent={{
+          title: "Delete Confirmation",
+          message: "Are you sure you want to delete this record?",
+        }}
+        loading={props.loading}
+        pagination={true}
+      ></CustomTable>
+      {showModal.show && (
+        <AddEditProductModal
+          open={showModal.show}
+          isEdit={showModal.isEdit}
+          data={showModal.data}
+          handleModalClose={handleModalClose}
+          setShowModal={props.setShowModal}
+          setLoading={props.setLoading}
+          setProducts={setProducts}
+        />
+      )}
+    </>
   );
 };
 

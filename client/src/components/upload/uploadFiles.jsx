@@ -20,7 +20,7 @@ const UploadFiles = forwardRef((props, ref) => {
 
     if (validFiles.length > 0) {
       setFiles((prevFiles) => {
-        const updatedFiles = props.isEditproductDetails.description
+        const updatedFiles = props.isEdit
           ? [validFiles[0]]
           : [...prevFiles, ...validFiles];
         return updatedFiles;
@@ -53,14 +53,10 @@ const UploadFiles = forwardRef((props, ref) => {
   }, [props.images, props.isEdit]);
 
   useEffect(() => {
-    if (props.isEdit) {
-      setFiles(props.file);
-    }
-  }, [props.file]);
-
-  useEffect(() => {
     const previews = files.map((file) =>
-      file instanceof File ? URL.createObjectURL(file) : `${imageUrl}/${file}`
+      file instanceof File
+        ? URL.createObjectURL(file)
+        : `${imageUrl}${props.category}/${file}`
     );
     setFilePreviews(previews);
 
@@ -85,7 +81,7 @@ const UploadFiles = forwardRef((props, ref) => {
           multiple={true}
           style={{ display: "none" }}
         />
-        <label id="label-file-upload" htmlFor="input-file-upload">
+        <div id="label-file-upload" htmlFor="input-file-upload">
           <div>
             <Typography sx={{ fontSize: "13px" }}>
               Upload your PDF, PNG, JPG, JPEG files here
@@ -98,7 +94,7 @@ const UploadFiles = forwardRef((props, ref) => {
               Upload files
             </Button>
           </div>
-        </label>
+        </div>
       </form>
       <Grid2
         container

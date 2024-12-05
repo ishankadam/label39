@@ -130,11 +130,11 @@ const App = () => {
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/signup" element={<Signup />} />
           <Route exact path="/ourstory" element={<OurStory />} />
-          <Route
+          {/* <Route
             exact
             path="/addProduct"
             element={<AddEditProductModal open={true} />}
-          />
+          /> */}
           <Route exact path="/checkout" element={<Checkout />} />
           <Route exact path="/cart" element={<Cart />} />
           <Route exact path="/delivery" element={<DeliveryForm />} />

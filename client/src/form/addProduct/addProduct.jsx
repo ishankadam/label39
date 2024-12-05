@@ -96,15 +96,21 @@ const AddEditProductModal = (props) => {
   };
 
   const handleClose = () => {
-    props.setShowEditModal((prev) => ({
+    props.setShowModal((prev) => ({
       ...prev,
-      open: false,
+      show: false,
       data: {},
     }));
   };
 
   return (
-    <Dialog open={props.open} onClose={handleClose} fullWidth maxWidth="md">
+    <Dialog
+      open={props.open}
+      onClose={handleClose}
+      fullWidth
+      maxWidth="md"
+      className="add-product-modal"
+    >
       <DialogTitle>
         {props.product ? "Edit Product" : "Add Product"}
       </DialogTitle>
@@ -240,7 +246,7 @@ const AddEditProductModal = (props) => {
           images={images}
           file={productDetails.images}
           acceptedFiles="image/png, image/jpeg"
-          parentClass="product-form-container"
+          parentClass="add-product-modal"
         />
       </DialogContent>
       <DialogActions>
