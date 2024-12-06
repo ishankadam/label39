@@ -1,11 +1,15 @@
-import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardContent,
+  CardMedia,
+  Grid,
+  Typography,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
-import testimonials1 from "../../assets/bestseller1.jpeg";
-import testimonials2 from "../../assets/bestseller2.jpeg"; // Add another image
 import NavigateNextOutlinedIcon from "@mui/icons-material/NavigateNextOutlined";
 import NavigateBeforeOutlinedIcon from "@mui/icons-material/NavigateBeforeOutlined";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
-import "./../../css/testimonials.css";
 import { imageUrl } from "../../api";
 
 const Testimonials = (props) => {
@@ -33,151 +37,196 @@ const Testimonials = (props) => {
       <StarRateRoundedIcon key={index} />
     ));
   };
-
   return (
-    <div>
-      <Box sx={{ marginTop: { xs: "20px", sm: "28px", md: "36px" } }}>
-        <Typography
-          variant="h4"
-          sx={{
-            color: "#2f3e4e",
-            textAlign: "center",
-            mb: 1,
-            fontFamily: "'cinzel', serif",
-            fontWeight: "500",
-          }}
-        >
-          what our customers say
-          <div
-            className="title-border"
-            style={{
-              width: "70px",
-              height: "3px",
-              borderRadius: "100px",
-              backgroundColor: "#2f3e4e",
-              margin: "0 auto",
-            }}
-          />
-        </Typography>
-
+    <Box sx={{ mt: { xs: "20px", sm: "28px", md: "36px" }, mb: 1 }}>
+      <Typography
+        sx={{
+          color: "#2f3e4e",
+          textAlign: "center",
+          mb: 1,
+          fontFamily: "'Cinzel', serif",
+          fontWeight: 500,
+          fontSize: { xs: "22px", sm: "28px", md: "32px", lg: "34px" },
+        }}
+      >
+        what our customers say
         <Box
-          display="flex"
-          justifyContent="center"
-          flexWrap="wrap"
-          sx={{ margin: "20px auto" }}
+          sx={{
+            width: "70px",
+            height: "3px",
+            borderRadius: "100px",
+            backgroundColor: "#2f3e4e",
+            mx: "auto",
+            mt: 1,
+          }}
+        />
+      </Typography>
+
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        sx={{ margin: "20px auto" }}
+      >
+        {/* Previous Arrow */}
+        <NavigateBeforeOutlinedIcon
+          onClick={handlePrevSlide}
+          sx={{
+            borderRadius: "50%",
+            backgroundColor: "white",
+            boxShadow: "0 2px 5px rgba(0,0,0,0.3)",
+            "&:hover": { backgroundColor: "#f0f0f0" },
+            padding: "10px",
+            cursor: currentSlide === 0 ? "not-allowed" : "pointer",
+            margin: { xs: "0 5px", sm: "0 10px", md: "0 15px" },
+            fontSize: "36px",
+          }}
+        />
+
+        {/* Cards Container */}
+        <Grid
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            flexDirection: { xs: "column", sm: "column", md: "row" },
+            width: "100%",
+            gap: 2, // Add spacing between cards
+            maxWidth: "100%", // Adjust as needed
+          }}
         >
           {testimonials
             .slice(currentSlide, currentSlide + 2)
             .map((slide, index) => (
               <Card
                 key={index}
-                className={`testimonials-container ${
-                  index % 2 === 0 ? "light-background" : "dark-background"
-                }`}
-                sx={{ margin: 1 }} // Add some margin between cards
+                sx={{
+                  display: "flex",
+                  flexDirection: { xs: "row", sm: "row", md: "row" },
+                  boxShadow:
+                    "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
+                  borderRadius: "4px",
+                  width: { xs: "100%", sm: "90%", md: "50%" },
+                  height: {
+                    xs: "270px",
+                    sm: "340px",
+                    md: "420px",
+                    lg: "400px",
+                  },
+                  backgroundColor: index % 2 === 0 ? "#F2F5F9" : "#F7ECE9",
+                }}
               >
-                <CardContent className="testimonials-wrapper">
-                  <Box className="testimonial-content" display="flex">
+                {/* Left Section: Image */}
+                <CardMedia
+                  component="img"
+                  image={`${imageUrl}${slide.image}`}
+                  alt={`slide-${currentSlide + index}`}
+                  sx={{
+                    paddingLeft: { xs: "0", sm: "0", md: "10px" },
+                    width: { xs: "34%", sm: "40%", md: "40%" },
+                    objectFit: { xs: "contain", sm: "contain", md: "contain" },
+                    // height: "400px",
+                  }}
+                />
+
+                {/* Right Section: Text */}
+                <CardContent
+                  sx={{
+                    flex: 1,
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    paddingBottom: { xs: "10px !important", sm: 2, md: 3 },
+                    padding: { xs: "10px", sm: 2, md: 3 },
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      verticalAlign: "center",
+                      flex: 1,
+                    }}
+                  >
                     <Box
-                      display="flex"
-                      flexDirection="column"
-                      justifyContent="center" // Vertically center the left content
-                      alignItems="flex-start" // Align the items to the left
-                      sx={{ flex: 1, paddingRight: 2 }} // Add spacing on the right side
-                    >
-                      <Box
-                        display="flex"
-                        alignItems="center"
-                        sx={{ margin: "0 15px" }}
-                      >
-                        {renderStars(slide.rating)}{" "}
-                        {/* Render stars based on rating */}
-                      </Box>
-                      <Typography
-                        variant="h6"
-                        sx={{
-                          fontFamily: "'Roboto Serif', serif",
-                          fontWeight: "500 !important",
-                          textTransform: "capitalize",
-                          fontSize: "16px",
-                          margin: "15px",
-                          color: "#111111",
-                        }}
-                      >
-                        {slide.comments}
-                      </Typography>
-                      <Typography
-                        variant="subtitle1"
-                        sx={{
-                          fontStyle: "italic",
-                          fontFamily: "'Roboto Serif', serif",
-                          fontWeight: "600",
-                          margin: "0 15px",
-                          color: "#494949",
-                        }}
-                      >
-                        {slide.name}
-                      </Typography>
-                    </Box>
-                    <CardMedia
-                      component="img"
-                      height="400"
-                      image={`${imageUrl}${slide.image}`}
-                      alt={`slide-${currentSlide + index}`}
                       sx={{
-                        flex: 1,
-                        padding: 0,
-                        display: { xs: "none", sm: "block" },
-                      }} // Remove padding from the image side
-                    />
+                        display: "flex",
+                        alignItems: "center",
+                        mb: { xs: 1, sm: 2 },
+                        color:
+                          index % 2 === 0
+                            ? "#2F3E4E !important"
+                            : "#2F3E4E !important",
+                      }}
+                    >
+                      {renderStars(slide.rating)}
+                    </Box>
+                    <Typography
+                      sx={{
+                        fontFamily: "'Roboto Serif', serif",
+                        fontWeight: 500,
+                        textTransform: "capitalize",
+                        fontSize: {
+                          xs: "11px",
+                          sm: "14px",
+                          md: "14px",
+                          lg: "16px",
+                        },
+                        mb: { xs: 1, sm: 2 },
+                        color:
+                          index % 2 === 0
+                            ? "#2F3E4E !important"
+                            : "#2F3E4E !important",
+                      }}
+                    >
+                      {slide.comments}
+                    </Typography>
+                    <Typography
+                      variant="subtitle1"
+                      sx={{
+                        fontSize: {
+                          xs: "12px",
+                          sm: "14px",
+                          md: "14px",
+                          lg: "15px",
+                        },
+                        fontStyle: "italic",
+                        fontFamily: "'Roboto Serif', serif",
+                        fontWeight: 600,
+                        color:
+                          index % 2 === 0
+                            ? "#2F3E4E !important"
+                            : "#2F3E4E !important",
+                      }}
+                    >
+                      {slide.name}
+                    </Typography>
                   </Box>
                 </CardContent>
               </Card>
             ))}
-        </Box>
-        <Box display="flex" justifyContent="center" mt={2}>
-          <NavigateBeforeOutlinedIcon
-            onClick={handlePrevSlide}
-            sx={{
-              borderRadius: "50%",
-              backgroundColor: "white",
-              boxShadow: "0 2px 5px rgba(0,0,0,0.3)",
-              "&:hover": {
-                backgroundColor: "#f0f0f0",
-              },
-              padding: "5px",
-              cursor: currentSlide === 0 ? "not-allowed" : "pointer",
-              margin: "10px",
-              // opacity: currentSlide === 0 ? 0.5 : 1,
-            }}
-          />
-          <NavigateNextOutlinedIcon
-            onClick={handleNextSlide}
-            sx={{
-              borderRadius: "50%",
-              backgroundColor: "white",
-              boxShadow: "0 2px 5px rgba(0,0,0,0.3)",
-              "&:hover": {
-                backgroundColor: "#f0f0f0",
-              },
-              padding: "5px",
-              cursor:
-                currentSlide >= testimonials.length - 2
-                  ? "not-allowed"
-                  : "pointer",
-              margin: "10px",
+        </Grid>
 
-              // opacity: currentSlide >= slides.length - 2 ? 0.5 : 1,
-            }}
-          />
-        </Box>
+        {/* Next Arrow */}
+        <NavigateNextOutlinedIcon
+          onClick={handleNextSlide}
+          sx={{
+            borderRadius: "50%",
+            backgroundColor: "white",
+            boxShadow: "0 2px 5px rgba(0,0,0,0.3)",
+            "&:hover": { backgroundColor: "#f0f0f0" },
+            padding: "10px",
+            cursor:
+              currentSlide >= testimonials.length - 2
+                ? "not-allowed"
+                : "pointer",
+            margin: { xs: "0 5px", sm: "0 10px", md: "0 15px" },
+            fontSize: "36px",
+          }}
+        />
       </Box>
-
-      <hr
-        className="footer-line"
-        style={{ marginTop: "24px", borderTop: "1px solid #d6d6d6 !important" }}
-      />
-    </div>
+    </Box>
   );
 };
 

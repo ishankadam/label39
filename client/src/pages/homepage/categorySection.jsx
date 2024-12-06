@@ -17,8 +17,8 @@ const CategorySection = () => {
   return (
     <Box sx={{ marginTop: { xs: "20px", sm: "28px", md: "36px" } }}>
       <Typography
-        variant="h4"
         sx={{
+          fontSize: { xs: "22px", sm: "28px", md: "32px", lg: "34px" },
           color: "#2f3e4e",
           textAlign: "center",
           mb: 1,
@@ -41,14 +41,14 @@ const CategorySection = () => {
 
       <Grid2
         container
-        spacing={2}
+        // spacing={2}
         sx={{
           // padding: "10px",
           borderRadius: "5px",
         }}
       >
         {categories.map((category) => (
-          <Grid2 item size={{ xs: 12, sm: 6, md: 3 }}>
+          <Grid2 item size={{ xs: 6, sm: 6, md: 3 }}>
             <Card
               sx={{
                 margin: "16px",
@@ -63,7 +63,15 @@ const CategorySection = () => {
                 component="img"
                 image={category.imgSrc}
                 alt={category.label}
-                sx={{ objectFit: "cover" }}
+                sx={{
+                  objectFit: "cover",
+                  height: {
+                    xs: "350px",
+                    sm: "420px",
+                    md: "500px ",
+                    lg: "500px",
+                  },
+                }}
               />
               {/* Glassy Dark Overlay */}
 
@@ -71,12 +79,12 @@ const CategorySection = () => {
                 className="category-btn"
                 sx={{
                   width: {
-                    xs: "120px", // Small screen
+                    xs: "110px", // Small screen
                     sm: "140px", // Tablet
                     md: "150px", // Desktop
                   },
                   fontSize: {
-                    xs: "14px", // Small screen
+                    xs: "15px", // Small screen
                     sm: "16px", // Tablet
                     md: "18px", // Desktop
                   },
@@ -109,7 +117,7 @@ const CategorySection = () => {
         ))}
       </Grid2>
 
-      <hr className="footer-line" />
+      {/* <hr className="footer-line" /> */}
     </Box>
   );
 };

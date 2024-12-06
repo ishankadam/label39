@@ -26,6 +26,7 @@ const ProductCard = (props) => {
         margin: { xs: "6px", sm: "12px", md: "16px" },
 
         maxWidth: 350,
+
         border: "1px solid #ccc",
         boxShadow: "none",
         cursor: "pointer",
@@ -38,7 +39,7 @@ const ProductCard = (props) => {
       }}
     >
       {/* Conditional Tag (Sold Out or Best Seller) */}
-      {(props.product.soldOut || props.product.bestSeller) && (
+      {(props.product.soldOut || props.product.bestseller) && (
         <Box
           className="product-tag"
           sx={{
@@ -64,10 +65,10 @@ const ProductCard = (props) => {
 
       <Box sx={{ position: "relative", overflow: "hidden" }}>
         <CardMedia
-          className={`cardMedia ${props.product.soldOut ? "grayscale" : ""}`}
+          className="cardMedia"
           component="img"
           sx={{
-            height: { xs: "280px", sm: "350px", md: "500px" },
+            // height: { xs: "280px", sm: "350px", md: "500px" },
             transition: "transform 300ms ease-in-out",
           }}
           image={`${imageUrl}${props.product.images[0]}`}

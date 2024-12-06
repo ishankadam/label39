@@ -30,9 +30,13 @@ const theme = createTheme({
               boxShadow: "none",
               background: "#8c4e3d",
             },
-            "@media (max-width:600px)": {
+            "@media (max-width:768px)": {
               padding: "8px 2px",
               fontSize: "0.875rem",
+            },
+            "@media (max-width:600px)": {
+              padding: "8px 2px",
+              fontSize: "0.75rem",
             },
           },
         },
@@ -44,7 +48,7 @@ const theme = createTheme({
             letterSpacing: "1px",
             boxShadow: "none",
             padding: "8px 4px",
-            fontSize: "1rem",
+            fontSize: { xs: "0.8rem", sm: "1rem", md: "1rem" },
             fontFamily: '"Roboto Serif", serif',
             fontWeight: "600 !important",
             border: "2px solid #a16149",
@@ -85,10 +89,6 @@ const theme = createTheme({
               boxShadow: "none",
               background: "#8c4e3d",
             },
-            "@media (max-width:600px)": {
-              width: "40px",
-              height: "40px",
-            },
           },
         },
         // Outlined Icon Button
@@ -99,8 +99,8 @@ const theme = createTheme({
             boxShadow: "none",
             border: "2px solid #a16149",
             color: "#a16149",
-            width: "47px",
-            height: "47px",
+            width: { xs: "20px !important", sm: "20px", md: "1rem" },
+            height: { xs: "20px !important", sm: "20px", md: "20px" },
             marginRight: "5px",
             "&:hover": {
               color: "white",
@@ -108,10 +108,10 @@ const theme = createTheme({
               background: "#a16149",
               boxShadow: "none",
             },
-            "@media (max-width:600px)": {
-              width: "40px",
-              height: "40px",
-            },
+            // "@media (max-width:600px)": {
+            //   width: "40px",
+            //   height: "40px",
+            // },
           },
         },
       ],

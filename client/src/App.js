@@ -89,20 +89,24 @@ const App = () => {
           </Fab>
         </Tooltip>
         <Fab
-          color="#d7b4a7"
+          color="#A16149"
           aria-label="add"
           sx={{
+            background: "#A16149",
             position: "fixed",
-            bottom: 80,
+            bottom: 90,
             right: 20,
             zIndex: 1000,
             transition: "background-color 0.3s ease",
             "&:hover": {
-              backgroundColor: "#d7b4a7",
+              backgroundColor: "#b77961",
             },
           }}
         >
-          <CardGiftcardIcon sx={{ fontSize: 30 }} onClick={handleOpen} />
+          <CardGiftcardIcon
+            sx={{ fontSize: 30, color: "white" }}
+            onClick={handleOpen}
+          />
         </Fab>
 
         <SubscribeModal></SubscribeModal>
@@ -141,13 +145,13 @@ const App = () => {
           <Route exact path="/payment" element={<PaymentPage />} />
           <Route
             exact
-            path="/terms-and-conditions"
-            element={<TermsAndConditions />}
+            path="/dashboard"
+            element={<Dashboard country={country} />}
           />
           <Route
             exact
-            path="/dashboard"
-            element={<Dashboard country={country} />}
+            path="/termsAndCondition"
+            element={<TermsAndConditions />}
           />
         </Routes>
         <CustomDrawer

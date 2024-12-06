@@ -7,13 +7,20 @@ import woven from "../../assets/woven.png";
 import mindful from "../../assets/mindful.png";
 import sustainable from "../../assets/sustainable.png";
 import footerImg from "../../assets/footer.jpg";
+import TermsAndCondition from "../termsAndCondition/termsAndCondition.jsx";
+import { useNavigate } from "react-router-dom";
 const Footer = (props) => {
+  const navigate = useNavigate();
+
+  const handlePageChange = () => {
+    navigate("/termsAndCondition");
+  };
   return (
     <div className="container">
       <img src={footerImg} style={{ width: "100%", display: "block" }} alt="" />
 
       {/* Top Section */}
-      {/* {props.topSection && (
+      {props.topSection && (
         <div className="top-section">
           <div className="top-item">
             <img src={textile} alt="textile" className="bottom-icons" />
@@ -32,9 +39,13 @@ const Footer = (props) => {
             <Typography>Sustainable Practices</Typography>
           </div>
         </div>
-      )} */}
+      )}
       <footer
-        style={{ backgroundColor: "#F5F5F6", padding: "40px 0", color: "#fff" }}
+        style={{
+          backgroundColor: "#F7ECE9",
+          padding: "40px 0",
+          color: "#fff",
+        }}
       >
         <Container
           sx={{
@@ -136,7 +147,7 @@ const Footer = (props) => {
             </Grid2>
 
             {/* Center Section (Links) */}
-            <Grid2 item size={{ xs: 6, md: 2 }}>
+            <Grid2 item size={{ xs: 6, md: 2 }} sx={{ cursor: "pointer" }}>
               <Typography variant="h6" className="footer-links-header">
                 INFO
               </Typography>
@@ -156,8 +167,8 @@ const Footer = (props) => {
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="footer-links">
-                    FAQs
+                  <Link onClick={handlePageChange} className="footer-links">
+                    Terms and Condition
                   </Link>
                 </li>
                 <li>

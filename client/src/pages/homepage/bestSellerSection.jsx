@@ -63,9 +63,11 @@ const BestSellerSection = (props) => {
     infinite: true,
     speed: 500,
     slidesToShow: 4, // Default for laptops
+    autoplay: true, // Enable automatic sliding
+    autoplaySpeed: 3000,
     slidesToScroll: 1,
-    nextArrow: <NextArrow />, // Custom next arrow
-    prevArrow: <PrevArrow />, // Custom prev arrow
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
     responsive: [
       {
         breakpoint: 1024, // Tablet and below
@@ -89,8 +91,8 @@ const BestSellerSection = (props) => {
   return (
     <Box sx={{ marginTop: { xs: "20px", sm: "28px", md: "36px" } }}>
       <Typography
-        variant="h4"
         sx={{
+          fontSize: { xs: "22px", sm: "28px", md: "32px", lg: "34px" },
           color: "#2f3e4e",
           textAlign: "center",
           mb: 1,
@@ -116,7 +118,6 @@ const BestSellerSection = (props) => {
             <div key={index}>
               <ProductCard
                 product={product}
-                sx={{ maxHeight: "400px !important" }}
                 handleViewProduct={props.handleViewProduct}
                 country={props.country}
               />
@@ -124,10 +125,6 @@ const BestSellerSection = (props) => {
           ))}
         </Slider>
       </div>
-      <hr
-        className="footer-line"
-        style={{ marginTop: "24px", borderTop: "1px solid #d6d6d6 !important" }}
-      />
     </Box>
   );
 };

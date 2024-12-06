@@ -46,13 +46,13 @@ const InstagramSection = () => {
       }}
     >
       <Typography
-        variant="h4"
         sx={{
           color: "#2f3e4e",
           textAlign: "center",
           mb: 1,
           fontFamily: "'cinzel', serif",
           fontWeight: "500",
+          fontSize: { xs: "22px", sm: "28px", md: "32px", lg: "34px" },
         }}
       >
         join us on instagram

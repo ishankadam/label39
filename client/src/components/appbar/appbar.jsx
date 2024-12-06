@@ -36,6 +36,18 @@ const CustomAppbar = (props) => {
   const { openDialog, closeDialog } = useShopContext(); // Ensure these functions are correct
   const navigate = useNavigate();
 
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  // Function to open the Menu
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget); // Set anchor to the Shop button
+  };
+
+  // Function to close the Menu
+  const handleMenuClose = () => {
+    setAnchorEl(null); // Close the Menu
+  };
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -71,6 +83,18 @@ const CustomAppbar = (props) => {
     { text: "Shop", page: "shop" },
     { text: "About Us", page: "ourStory" },
     { text: "Contact Us", page: "contactus" },
+  ];
+
+  const shopMenuItems = [
+    { text: "Shirts", page: "/shirts" },
+    { text: "Co-ord Sets", page: "/co-ord-sets" },
+    { text: "Suits", page: "/suits" },
+    { text: "Festive", page: "/festive" },
+    { text: "New Arrival", page: "/new-arrival" },
+    { text: "As Seen On - Celebrity Style", page: "/celebrity-style" },
+    { text: "Clients Dairy", page: "/clients-dairy" },
+    { text: "Kurta Sets", page: "/kurta-sets" },
+    { text: "Best Sellers", page: "/best-sellers" },
   ];
 
   const handleOpenCart = () => {
@@ -282,7 +306,7 @@ const CustomAppbar = (props) => {
         <Drawer anchor="left" open={mobileOpen} onClose={toggleDrawer(false)}>
           <Box
             sx={{
-              width: 250,
+              width: 220,
               position: "relative", // Allow positioning of the close icon
             }}
             role="presentation"
@@ -293,7 +317,7 @@ const CustomAppbar = (props) => {
               sx={{
                 position: "absolute",
                 top: "8px",
-                left: "8px",
+                left: 2,
                 zIndex: 10, // Ensure it stays on top
               }}
             >
@@ -301,7 +325,7 @@ const CustomAppbar = (props) => {
             </IconButton>
 
             {/* Nav Options */}
-            <List sx={{ mt: "40px" }}>
+            <List sx={{ mt: "50px", mx: 2, borderBottom: "1px solid #ccc" }}>
               {" "}
               {/* Add margin to push content below the close icon */}
               {menuItems.map((item) => (
@@ -311,15 +335,17 @@ const CustomAppbar = (props) => {
                   onClick={() => handlePageChange(item.page)}
                   sx={{
                     display: { xs: "flex", md: "none" },
-                    justifyContent: "center",
+                    justifyContent: "left",
+                    borderBottom: "1px solid #ccc",
+                    borderWidth: "60%",
                   }}
                 >
                   <Typography
                     sx={{
-                      fontFamily: "'Roboto Serif', serif !important",
-                      fontSize: "16px",
+                      fontFamily: "'Cinzel', serif !important",
+                      fontSize: "14px",
                       fontWeight: "500",
-                      padding: "8px",
+                      padding: "8px 0px",
                     }}
                   >
                     {item.text}
@@ -331,14 +357,15 @@ const CustomAppbar = (props) => {
                 button
                 sx={{
                   display: { xs: "flex", md: "none" },
-                  justifyContent: "center",
+                  justifyContent: "left",
                 }}
               >
                 <Typography
                   sx={{
-                    fontFamily: "'Roboto Serif', serif",
+                    fontFamily: "'Cinzel', serif",
                     fontWeight: "500",
-                    fontSize: "16px",
+                    fontSize: "14px",
+                    padding: "8px 0px",
                   }}
                 >
                   Account

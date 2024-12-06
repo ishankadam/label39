@@ -1,7 +1,7 @@
 /* Slider Wrapper */
 .slider-wrapper {
   position: relative;
-  padding: 0 100px; /* Creates space for arrows on both sides of the slider */
+  padding: 0 100px;
 }
 
 .slick-prev,
@@ -12,7 +12,7 @@
   z-index: 1;
   width: 30px; /* Adjust width */
   height: 30px; /* Adjust height */
-  background-color: rgba(0, 255, 0, 0.3); /* Your custom arrow background */
+  background-color: #a16149; /* Your custom arrow background */
   border-radius: 50%; /* Make the container round */
 }
 

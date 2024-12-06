@@ -110,14 +110,14 @@ const AddEditCategory = (props) => {
             variant="h5"
             sx={{
               fontFamily: "'Roboto Serif', serif",
-              color: "#33376F",
-              fontWeight: "Bold",
+              color: "#a16149",
+              fontWeight: "600",
               textAlign: { xs: "center", md: "left" },
               fontSize: {
                 xs: "1rem",
-                sm: "1.2rem",
-                md: "1.4rem",
-                lg: "1.6rem",
+                sm: "1.1rem",
+                md: "1.3rem",
+                lg: "1.5rem",
               },
             }}
           >

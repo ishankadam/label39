@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Close } from "@mui/icons-material";
-import { Button, Typography, Grid2 } from "@mui/material";
+import { Button, Typography, Grid2, Box } from "@mui/material";
 import React, { useEffect, useState, forwardRef } from "react";
 import "./uploadFiles.css";
 import { imageUrl } from "../../api";
@@ -8,6 +8,7 @@ import { imageUrl } from "../../api";
 const UploadFiles = forwardRef((props, ref) => {
   const [files, setFiles] = useState([]);
   const inputRef = React.useRef(null);
+  console.log(inputRef.current); // Debug: Check if inputRef is correctly set
 
   const [filePreviews, setFilePreviews] = useState([]);
 
@@ -70,7 +71,7 @@ const UploadFiles = forwardRef((props, ref) => {
   return (
     <>
       {/* <div id="file-upload-container"> */}
-      <form id="form-file-upload" onSubmit={(e) => e.preventDefault()}>
+      <form className="form-file-upload" onSubmit={(e) => e.preventDefault()}>
         <input
           ref={inputRef}
           type="file"
@@ -81,20 +82,21 @@ const UploadFiles = forwardRef((props, ref) => {
           multiple={true}
           style={{ display: "none" }}
         />
-        <div id="label-file-upload" htmlFor="input-file-upload">
-          <div>
-            <Typography sx={{ fontSize: "13px" }}>
-              Upload your PDF, PNG, JPG, JPEG files here
-            </Typography>
-            <Button
-              variant="text"
-              className="upload-button"
-              onClick={onButtonClick}
-            >
-              Upload files
-            </Button>
-          </div>
-        </div>
+        {/* <label id="label-file-upload" htmlFor="input-file-upload"> */}
+        <Box sx={{ display: "flex", flexDirection: "column" }}>
+          <Typography sx={{ fontSize: "13px" }}>
+            Upload your PDF, PNG, JPG, JPEG files here
+          </Typography>
+          <Button
+            variant="text"
+            className="upload-button"
+            onClick={onButtonClick}
+            sx={{ fontFamily: "'Roboto Serif', serif", color: "#a16149" }}
+          >
+            Upload files
+          </Button>
+        </Box>
+        {/* </label> */}
       </form>
       <Grid2
         container

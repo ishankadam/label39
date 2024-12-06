@@ -6,6 +6,7 @@ import {
   IconButton,
   Grid,
   Modal,
+  Card,
   Link,
   ToggleButtonGroup,
   ToggleButton,
@@ -82,8 +83,8 @@ const ViewProductModal = (props) => {
         <Box
           sx={{
             bgcolor: "background.paper",
-            padding: "20px 50px",
-            width: "70%",
+            padding: { xs: "20px 10px", sm: "20px 30px" },
+            width: { xs: "100%", sm: "80%", md: "90%", lg: "70%" },
             maxHeight: "100%",
             maxWidth: "100%",
             overflowY: "auto",
@@ -106,7 +107,7 @@ const ViewProductModal = (props) => {
             >
               {/* Main Image with Arrows */}
               <Box sx={{ position: "relative", width: "100%" }}>
-                <IconButton
+                {/* <IconButton
                   onClick={handlePreviousImage}
                   sx={{
                     position: "absolute",
@@ -127,13 +128,14 @@ const ViewProductModal = (props) => {
                   }}
                 >
                   <ArrowForwardIosIcon />
-                </IconButton>
-                <img
+                </IconButton> */}
+                <Box
+                  component="img"
                   src={`${imageUrl}${selectedImage}`}
                   alt="Selected Product"
-                  style={{
+                  sx={{
                     width: "100%",
-                    height: "600px",
+                    height: { xs: "370px", sm: "450px", md: "500px" },
                     objectFit: "contain",
                     marginBottom: "20px",
                   }}
@@ -141,20 +143,28 @@ const ViewProductModal = (props) => {
               </Box>
 
               {/* Thumbnails */}
-              <Box sx={{ display: "flex", gap: 1, justifyContent: "center" }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  gap: 1,
+                  justifyContent: "center",
+                  mb: 1,
+                }}
+              >
                 {product.images.map((img, index) => (
-                  <img
+                  <Box
+                    component="img"
                     key={index}
                     src={`${imageUrl}${img}`}
                     alt={`Thumbnail ${index}`}
-                    style={{
-                      width: "80px",
-                      height: "80px",
+                    sx={{
+                      width: { xs: "50px", sm: "70px" },
+                      height: { xs: "70px", sm: "90px" },
                       objectFit: "cover",
                       cursor: "pointer",
                       border:
                         selectedImageIndex === index
-                          ? "2px solid black"
+                          ? "2px solid #a16149"
                           : "none",
                     }}
                     onClick={() => setSelectedImageIndex(index)}
@@ -165,14 +175,20 @@ const ViewProductModal = (props) => {
 
             {/* Right: Product Info Section */}
             <Grid item xs={12} md={6}>
-              <Box sx={{ paddingLeft: { xs: 0, md: 3 } }}>
+              <Box>
                 <Typography
-                  variant="h4"
                   sx={{
                     marginBottom: "10px",
                     display: "flex",
-                    justifyContent: "left",
+                    justifyContent: { xs: "center", sm: "center", md: "left" },
+                    textAlign: { xs: "center", sm: "center", md: "left" },
                     fontWeight: "600",
+                    fontSize: {
+                      xs: "18px",
+                      sm: "18px",
+                      md: "20px",
+                      lg: "24px",
+                    },
                     color: "#494949",
                     fontFamily: "'Cinzel Serif', serif ",
                   }}
@@ -184,9 +200,11 @@ const ViewProductModal = (props) => {
                   // color="text.secondary"
                   sx={{
                     marginBottom: "20px",
-                    fontSize: "20px",
+                    fontSize: { xs: "18px", sm: "18px", md: "20px" },
                     color: "rgba(55, 65, 81, 0.85)",
                     fontFamily: "'Roboto Condensed', serif ",
+                    display: "flex",
+                    justifyContent: { xs: "center", sm: "center", md: "left" },
                   }}
                 >
                   RS. {product.price}
@@ -209,10 +227,19 @@ const ViewProductModal = (props) => {
                   Size Chart
                 </Link>
 
-                <Box>
+                <Box sx={{ marginBottom: "25px" }}>
                   {Object.entries(product.sizes).map(([category, sizes]) => (
-                    <Box key={category} sx={{ marginBottom: "20px" }}>
-                      <Typography variant="h6" sx={{ marginBottom: "10px" }}>
+                    <Box key={category} sx={{ marginBottom: "15px" }}>
+                      <Typography
+                        variant="h6"
+                        sx={{
+                          marginBottom: "8px",
+                          fontSize: { xs: "14px", sm: "16px" },
+                          fontWeight: "600",
+                          fontFamily: "'Roboto Serif', serif ",
+                          color: "rgba(55, 65, 81, 0.85)",
+                        }}
+                      >
                         {category}
                       </Typography>
                       <ToggleButtonGroup
@@ -222,18 +249,29 @@ const ViewProductModal = (props) => {
                           handleSizeChange(category, newSize)
                         }
                         aria-label={`${category} sizes`}
-                        sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}
+                        sx={{
+                          display: "flex",
+                          gap: 0,
+                          flexWrap: "wrap",
+                        }}
                       >
                         {sizes.map(({ size, quantity }) => (
                           <ToggleButton
+                            size="small"
                             key={size}
+                            variant="outlined"
+                            color="custom"
                             value={size}
                             title={`Quantity: ${quantity}`}
                             sx={{
                               "&.Mui-selected": {
-                                backgroundColor: "green",
+                                backgroundColor: "#a16149",
                                 color: "white",
                               },
+                              border: "1px solid #ccc",
+                              fontSize: "12px !important",
+                              textAlign: "center",
+                              width: "50px !important",
                             }}
                           >
                             {size}
@@ -244,10 +282,69 @@ const ViewProductModal = (props) => {
                   ))}
                 </Box>
 
+                {!isAdmin && (
+                  <Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: 1,
+                        marginBottom: "25px",
+                      }}
+                    >
+                      <Button variant="outlined" color="custom" sx={{}}>
+                        Add to Cart
+                      </Button>
+                      <Button variant="contained" color="custom">
+                        Buy Now
+                      </Button>
+                    </Box>
+                    <Box sx={{ display: "flex", gap: 2, marginBottom: "25px" }}>
+                      <Button
+                        startIcon={<ChatIcon />}
+                        variant="outlined"
+                        color="custom"
+                        sx={{
+                          width: "50%",
+                        }}
+                      >
+                        Talk to Us
+                      </Button>
+                      <Button
+                        startIcon={<ShareIcon />}
+                        variant="outlined"
+                        color="custom"
+                        sx={{
+                          width: "50%",
+                        }}
+                      >
+                        Share
+                      </Button>
+                    </Box>
+                  </Box>
+                )}
+
                 {/* Description */}
-                <Box sx={{ marginBottom: "20px" }}>
-                  <Typography variant="h6">Description</Typography>
-                  <Typography>
+                <Box sx={{ marginBottom: "25px" }}>
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      fontSize: "16px",
+                      fontWeight: "600",
+                      fontFamily: "'Roboto Serif', serif ",
+                      color: "rgba(55, 65, 81, 0.85)",
+                    }}
+                  >
+                    Description
+                  </Typography>
+                  <Typography
+                    sx={{
+                      fontSize: "14px",
+                      fontWeight: "400",
+                      fontFamily: "'Roboto Serif', serif ",
+                      color: "rgba(55, 65, 81, 0.85)",
+                    }}
+                  >
                     {product.description.replace(/<br\/>/g, "")}
                   </Typography>
                 </Box>
@@ -257,30 +354,55 @@ const ViewProductModal = (props) => {
                   style={{ display: "flex" }}
                 >
                   <div>
-                    <Typography variant="h6">Garment Details</Typography>
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        fontSize: "16px",
+                        fontWeight: "600",
+                        fontFamily: "'Roboto Serif', serif ",
+                        color: "rgba(55, 65, 81, 0.85)",
+                      }}
+                    >
+                      Garment Details
+                    </Typography>
                     {product["garmentDetails"].map((detail, index) => (
-                      <Typography key={index}>{detail}</Typography>
+                      <Typography
+                        key={index}
+                        sx={{
+                          fontSize: "14px",
+                          fontWeight: "400",
+                          fontFamily: "'Roboto Serif', serif ",
+                          color: "rgba(55, 65, 81, 0.85)",
+                        }}
+                      >
+                        {detail}
+                      </Typography>
                     ))}
                   </div>
-                  <div style={{ margin: "0 20px" }}>
-                    <Typography variant="h6">Delivery in:</Typography>
-                    <Typography>{product["deliveryIn"]}</Typography>
+                  <div style={{ margin: "0 25px" }}>
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        fontSize: "16px",
+                        fontWeight: "600",
+                        fontFamily: "'Roboto Serif', serif ",
+                        color: "rgba(55, 65, 81, 0.85)",
+                      }}
+                    >
+                      Delivery in:
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: "14px",
+                        fontWeight: "400",
+                        fontFamily: "'Roboto Serif', serif ",
+                        color: "rgba(55, 65, 81, 0.85)",
+                      }}
+                    >
+                      {product["deliveryIn"]}
+                    </Typography>
                   </div>
                 </div>
-                <Button
-                  startIcon={<ChatIcon />}
-                  variant="outlined"
-                  color="success"
-                >
-                  Talk to Us
-                </Button>
-                <Button
-                  startIcon={<ShareIcon />}
-                  variant="outlined"
-                  color="success"
-                >
-                  Share
-                </Button>
               </Box>
             </Grid>
           </Grid>
@@ -296,7 +418,7 @@ const ViewProductModal = (props) => {
               paddingTop: "20px",
             }}
           >
-            {isAdmin ? (
+            {isAdmin && (
               <>
                 <Button variant="outlined" color="error" onClick={handleClose}>
                   Cancel
@@ -307,15 +429,6 @@ const ViewProductModal = (props) => {
                   onClick={handleEditProduct}
                 >
                   Edit
-                </Button>
-              </>
-            ) : (
-              <>
-                <Button variant="contained" color="success">
-                  Add to Cart
-                </Button>
-                <Button variant="contained" color="success">
-                  Buy Now
                 </Button>
               </>
             )}

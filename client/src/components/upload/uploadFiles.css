@@ -1,8 +1,8 @@
 /* Main container for file upload */
-#form-file-upload {
+.form-file-upload {
   border: 2px dashed #ccc;
   border-radius: 8px;
-  padding: 20px;
+  padding: 50px;
   text-align: center;
   transition: background-color 0.2s ease;
   position: relative;
@@ -22,6 +22,7 @@
 /* Label that holds the drag/drop text and button */
 #label-file-upload {
   cursor: pointer;
+  width: 100%;
 }
 
 /* Styling for the "Upload a file" button */

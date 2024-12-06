@@ -39,6 +39,21 @@ const AsSeenOn = (props) => {
     });
   };
 
+  const asSeenOn = [
+    {
+      name: "Prachi with Sapphire Applique Kurta Set",
+      images: ["Cord71.jpg"],
+      price: 9999,
+      videoSrc: video2,
+      hoverImgSrc: as_seen_on_hoverImg,
+    },
+    {
+      name: "Sapphire Applique Kurta Set",
+      images: ["Cord71.jpg"],
+      price: 9999,
+      videoSrc: video1,
+    },
+  ];
   // Render only if products array has data
   if (products.length === 0) {
     return (
@@ -59,51 +74,82 @@ const AsSeenOn = (props) => {
     <Box
       sx={{
         background: "#F7ECE9",
-        paddingTop: { xs: "20px", sm: "28px", md: "36px" },
+        pt: { xs: "20px", sm: "28px", md: "36px" },
+        pb: "20px",
       }}
     >
       <Typography
-        variant="h4"
         sx={{
+          fontSize: { xs: "22px", sm: "28px", md: "32px", lg: "34px" },
           color: "#2f3e4e",
           textAlign: "center",
           mb: 1,
-          fontFamily: "'cinzel', serif",
+          fontFamily: "'Cinzel', serif",
           fontWeight: "500",
         }}
       >
         as seen on
-        <div
-          className="title-border"
-          style={{
+        <Box
+          sx={{
             width: "70px",
             height: "3px",
             borderRadius: "100px",
             backgroundColor: "#2f3e4e",
-            margin: "0 auto",
+            mx: "auto",
+            mt: "8px",
           }}
         />
       </Typography>
-      <div className="seenon-container">
-        <NavigateBeforeOutlinedIcon
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: { xs: "10px", sm: "20px" },
+          flexDirection: { xs: "row", sm: "row" },
+          width: "auto",
+          mx: "10px",
+          mt: "16px",
+
+          // height: { xs: "auto", md: "600px" },
+        }}
+      >
+        <IconButton
           onClick={() => handleSlideChange(false)}
           sx={{
             borderRadius: "50%",
             backgroundColor: "white",
             boxShadow: "0 2px 5px rgba(0,0,0,0.3)",
-            "&:hover": {
-              backgroundColor: "#f0f0f0",
-            },
-            padding: "5px",
+            "&:hover": { backgroundColor: "#f0f0f0" },
+            p: "5px",
           }}
-        />
-        <div className="seenon-video-wrapper">
+        >
+          <NavigateBeforeOutlinedIcon />
+        </IconButton>
+
+        <Box
+          sx={{
+            display: { xs: "none", sm: "flex" }, // Hide on mobile, show on larger screens
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center",
+            height: { sm: "500px", md: "550px ", lg: "600px" },
+            width: { sm: "auto" },
+            overflow: "hidden",
+          }}
+        >
           <video
             key={products[slideNumber].videoSrc}
             autoPlay
             muted
             loop
-            className="centered-video"
+            style={{
+              borderRadius: "5px",
+              maxHeight: "100%",
+              width: "100%",
+              objectFit: "cover",
+            }}
           >
             <source
               src={`${imageUrl}${products[slideNumber].videoSrc}`}
@@ -111,13 +157,18 @@ const AsSeenOn = (props) => {
             />
             Your browser does not support the video tag.
           </video>
-        </div>
-        <div
-          className={`seenon-image-wrapper ${
-            showProductInfo ? "show-product" : ""
-          }`}
-          onMouseEnter={() => setShowProductInfo(true)}
-          onMouseLeave={() => setShowProductInfo(false)}
+        </Box>
+
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center",
+            // mt: { xs: "20px", sm: 0 },
+            width: { xs: "270px", sm: "300px", md: "350px" },
+          }}
         >
           <ProductCard
             product={products[slideNumber]}
@@ -128,28 +179,29 @@ const AsSeenOn = (props) => {
             variant="contained"
             color="custom"
             className="product-button"
+            sx={{
+              fontFamily: "'Roboto Serif', serif",
+              fontWeight: 600,
+            }}
             onClick={() => props.handleViewProduct(products[slideNumber])}
           >
             View This Product
           </Button>
-        </div>
-        <NavigateNextOutlinedIcon
+        </Box>
+
+        <IconButton
           onClick={() => handleSlideChange(true)}
           sx={{
             borderRadius: "50%",
             backgroundColor: "white",
             boxShadow: "0 2px 5px rgba(0,0,0,0.3)",
-            "&:hover": {
-              backgroundColor: "#f0f0f0",
-            },
-            padding: "5px",
+            "&:hover": { backgroundColor: "#f0f0f0" },
+            p: "5px",
           }}
-        />
-      </div>
-      <hr
-        className="footer-line"
-        style={{ marginTop: "24px", borderTop: "1px solid #d6d6d6 !important" }}
-      />
+        >
+          <NavigateNextOutlinedIcon />
+        </IconButton>
+      </Box>
     </Box>
   );
 };

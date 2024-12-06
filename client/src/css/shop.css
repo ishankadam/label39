@@ -82,7 +82,7 @@ ul li {
 }
 
 /* For laptops and desktops */
-@media (min-width: 1024px) {
+@media (min-width: 1025px) {
   .header {
     justify-content: center;
   }

@@ -7,6 +7,7 @@ import "./../../css/categorySection.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { imageUrl } from "../../api";
+import { NextArrow, PrevArrow } from "../../components/arrow-component"; // Update the import path as needed
 
 const FeaturedSection = (props) => {
   const [shopByVideos, setshopByVideos] = useState(props.shopByVideos || []);
@@ -26,13 +27,30 @@ const FeaturedSection = (props) => {
   // Slick settings for responsive slider
   const settings = {
     dots: false,
-    infinite: true,
+    infinite: shopByVideos.length > 4,
     speed: 500,
     slidesToShow: 4, // 5 cards on laptop
     autoplay: true, // Enable automatic sliding
     autoplaySpeed: 3000,
     slidesToScroll: 1,
+    arrows: false,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
     responsive: [
+      {
+        breakpoint: 1440, // Big laptops (1440px and below)
+        settings: {
+          slidesToShow: 4, // Show 4 cards on big laptops
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 1024, // Small laptops and tablets
+        settings: {
+          slidesToShow: 3, // Show 3 cards on small laptops
+          slidesToScroll: 1,
+        },
+      },
       {
         breakpoint: 1024, // Tablet
         settings: {
@@ -55,11 +73,12 @@ const FeaturedSection = (props) => {
       sx={{
         background: "#F7ECE9",
         paddingTop: { xs: "20px", sm: "28px", md: "36px" },
+        pb: 1,
       }}
     >
       <Typography
-        variant="h4"
         sx={{
+          fontSize: { xs: "22px", sm: "28px", md: "32px", lg: "34px" },
           color: "#2f3e4e",
           textAlign: "center",
           mb: 1,
@@ -83,8 +102,10 @@ const FeaturedSection = (props) => {
       <Box
         sx={{
           // maxWidth: "1200px",
+          width: { xs: "70%", sm: "100%" },
+          maxWidth: { xs: "270px", sm: "100%" },
           margin: "20px auto",
-          overflow: "hidden", // Hide overflow
+          // overflow: "hidden", // Hide overflow
         }}
       >
         <Slider {...settings}>
@@ -93,7 +114,7 @@ const FeaturedSection = (props) => {
               <Card
                 sx={{
                   position: "relative",
-                  margin: { xs: "0 16px", sm: "0 10px", md: "0 16px" },
+                  margin: { xs: "0 5px", sm: "0 10px", md: "0 16px" },
                   overflow: "hidden",
                 }}
               >
@@ -105,11 +126,12 @@ const FeaturedSection = (props) => {
                   muted
                   sx={{
                     height: {
-                      xs: "550px",
+                      xs: "450px",
                       sm: "auto",
                       md: "500px",
                       lg: "550px",
                     },
+
                     width: "100%",
                     objectFit: "cover",
                   }} // Ensure video fills the card
@@ -188,7 +210,7 @@ const FeaturedSection = (props) => {
         </Slider>
       </Box>
 
-      <hr className="footer-line" style={{ marginTop: "24px" }} />
+      {/* <hr className="footer-line" style={{ marginTop: "24px" }} /> */}
     </Box>
   );
 };

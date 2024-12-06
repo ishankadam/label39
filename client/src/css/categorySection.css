@@ -12,7 +12,6 @@
 
 .image-container img {
   width: 100%; /* Ensure the image takes full width */
-  height: auto; /* Maintain aspect ratio */
 }
 
 .footer-line {

@@ -34,13 +34,13 @@ const FindUs = () => {
   return (
     <Box sx={{ marginTop: { xs: "20px", sm: "28px", md: "36px" } }}>
       <Typography
-        variant="h4"
         sx={{
           color: "#2f3e4e",
           textAlign: "center",
           mb: 1,
           fontFamily: "'cinzel', serif",
           fontWeight: "500",
+          fontSize: { xs: "22px", sm: "28px", md: "32px", lg: "34px" },
         }}
       >
         contact us
@@ -63,7 +63,6 @@ const FindUs = () => {
                 <CardMedia
                   className="card-image"
                   component="img"
-                  height="140"
                   image={findUs1}
                   alt="find us"
                 />
@@ -71,31 +70,31 @@ const FindUs = () => {
                 <Box
                   component="iframe"
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224345.83918911796!2d77.06889984999999!3d28.4743844!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce1612dfde9c9%3A0x29a8983a3a749f20!2sThe%20Dhanmill!5e0!3m2!1sen!2sin!4v1692722440123!5m2!1sen!2sin"
-                  height="100%"
+                  height="380px"
                   width="100%"
                   allowFullScreen
                   loading="lazy"
-                  style={{ border: 0 }}
                   title="The Dhanmill Location"
+                  sx={{ border: 0 }}
                 />
               )}
             </Grid>
             <Grid item xs={12} sm={6} className="content-container">
               <CardContent>
-                <Typography
-                  variant="body1"
-                  sx={{
-                    fontFamily: " 'Berkshire Swash', serif",
-                    fontWeight: "400",
-                    fontSize: "20px",
-                    marginBottom: "20px",
-                  }}
-                >
-                  {showMap ? "Find us at" : "Write us at"}
-                </Typography>
                 {/* <Divider sx={{ my: 1 }} /> */}
                 {!showMap ? (
                   <>
+                    <Typography
+                      variant="body1"
+                      sx={{
+                        fontFamily: " 'Berkshire Swash', serif",
+                        fontWeight: "400",
+                        fontSize: "20px",
+                        marginBottom: "25px",
+                      }}
+                    >
+                      Find us at
+                    </Typography>
                     <Typography
                       gutterBottom
                       // variant="h2"
@@ -109,7 +108,7 @@ const FindUs = () => {
                           lg: "42px",
                         },
                         color: "#a16149",
-                        marginBottom: "20px",
+                        marginBottom: "25px",
                         fontWeight: "600",
                       }}
                     >
@@ -121,7 +120,7 @@ const FindUs = () => {
                         color: "#494949",
                         fontSize: "18px",
                         fontFamily: "'Roboto Serif', serif",
-                        marginBottom: "20px",
+                        marginBottom: "25px",
                       }}
                     >
                       The Dhanmill, SSN Marg, 100 Feet Road, Chhatarpur, New
@@ -141,117 +140,151 @@ const FindUs = () => {
                     </Typography>{" "}
                   </>
                 ) : (
-                  <>
-                    <div
-                      style={{
-                        position: "relative", // Parent should be relative for absolute positioning
-                        width: "fit-content", // Shrinks the parent width to the content's size
-                      }}
+                  <Box>
+                    <Box
+                      sx={{ display: "flex", justifyContent: "space-between" }}
                     >
-                      <CustomTextfield
-                        multiple={true}
+                      <Typography
+                        variant="body1"
                         sx={{
-                          width: "300px",
-                          marginBottom: "10px",
-                        }}
-                        label="Name"
-                      ></CustomTextfield>
-                      <CustomTextfield
-                        multiple={true}
-                        sx={{
-                          width: "300px",
-                          marginBottom: "10px",
-                        }}
-                        label="Email Address"
-                      ></CustomTextfield>
-                      <CustomTextfield
-                        multiple={true}
-                        sx={{
-                          width: "300px",
-                          marginBottom: "10px",
-                        }}
-                        label="Phone Number"
-                      ></CustomTextfield>
-                      <CustomTextfield
-                        multiple={true}
-                        sx={{
-                          width: "300px",
-                          marginBottom: "10px",
-                        }}
-                        label="message"
-                      ></CustomTextfield>
-                      <Button
-                        variant="contained"
-                        color="success"
-                        sx={{
-                          position: "absolute", // Absolutely position the button
-                          right: "20px", // Slightly offset to the right of the textfield
+                          fontFamily: " 'Berkshire Swash', serif",
+                          fontWeight: "400",
+                          fontSize: "20px",
+                          marginBottom: "20px",
                         }}
                       >
-                        Submit
-                      </Button>
-                    </div>
-                    <Divider sx={{ margin: "50px 15px 15px 15px" }} />
-                    <Typography
-                      variant="body1"
-                      sx={{
-                        fontFamily: " 'Berkshire Swash', serif",
-                        fontWeight: "400",
-                        fontSize: "20px",
-                      }}
-                    >
-                      Follow us
-                    </Typography>
-                    <IconButton
-                      className="findus-icon"
-                      sx={{
-                        color: "#7D818D",
-                        fontSize: "28px",
-                        // marginRight: "12px",
-                        padding: "0px 0px !important",
-                      }}
-                      component={Link}
-                      href="#"
-                      aria-label="Facebook"
-                    >
-                      <Facebook />
-                    </IconButton>
-                    <IconButton
-                      className="findus-icon"
-                      sx={{
-                        color: "#7D818D",
-                        fontSize: "28px",
+                        Write us at
+                      </Typography>
+                      <Box>
+                        <IconButton
+                          className="findus-icon"
+                          sx={{
+                            color: "#1F2020",
+                            fontSize: "28px",
+                            // marginRight: "12px",
+                          }}
+                          component={Link}
+                          href="#"
+                          aria-label="Facebook"
+                        >
+                          <Facebook />
+                        </IconButton>
+                        <IconButton
+                          className="findus-icon"
+                          sx={{
+                            color: "#1F2020",
+                            fontSize: "28px",
 
-                        // marginRight: "12px",
-                      }}
-                      component={Link}
-                      href="#"
-                      aria-label="Instagram"
-                    >
-                      <Instagram />
-                    </IconButton>
-                  </>
+                            // marginRight: "12px",
+                          }}
+                          component={Link}
+                          href="#"
+                          aria-label="Instagram"
+                        >
+                          <Instagram />
+                        </IconButton>
+                      </Box>
+                    </Box>
+
+                    <Grid container spacing={2}>
+                      <Grid item xs={12} sm={12}>
+                        <CustomTextfield
+                          multiple={true}
+                          label="Name"
+                          sx={{
+                            width: "100%",
+                            "& .MuiInputLabel-root": {
+                              fontSize: "14px",
+                              top: "-5px",
+                            },
+                            "& .MuiOutlinedInput-root": {
+                              height: "40px",
+                            },
+                          }}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={12}>
+                        <CustomTextfield
+                          multiple={true}
+                          label="Email Address"
+                          sx={{
+                            width: "100%",
+                            "& .MuiInputLabel-root": {
+                              fontSize: "14px",
+                              top: "-5px",
+                            },
+                            "& .MuiOutlinedInput-root": {
+                              height: "40px",
+                            },
+                          }}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={12}>
+                        <CustomTextfield
+                          multiple={true}
+                          label="Phone Number"
+                          sx={{
+                            width: "100%",
+                            "& .MuiInputLabel-root": {
+                              fontSize: "14px",
+                              top: "-5px",
+                            },
+                            "& .MuiOutlinedInput-root": {
+                              height: "40px",
+                            },
+                          }}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={12}>
+                        <CustomTextfield
+                          multiple={true}
+                          label="Message"
+                          sx={{
+                            width: "100%",
+                            "& .MuiInputLabel-root": {
+                              fontSize: "14px",
+                              top: "-5px",
+                            },
+                            "& .MuiOutlinedInput-root": {
+                              height: "40px",
+                            },
+                          }}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={12}>
+                        <Button color="custom" variant="contained">
+                          Submit
+                        </Button>
+                      </Grid>
+                    </Grid>
+                  </Box>
                 )}
+
+                <Link
+                  component="button"
+                  onClick={toggleMapVisibility}
+                  sx={{
+                    color: "#a16149",
+                    mt: 2,
+                    fontSize: "16px",
+                    cursor: "pointer",
+                    textDecoration: "underline",
+                    "&:hover": {
+                      textDecoration: "none",
+                    },
+
+                    fontFamily: " 'Roboto Serif', serif",
+                    fontWeight: "400",
+                    // marginBottom: "25px",
+                  }}
+                >
+                  {showMap
+                    ? "Show Shop Address"
+                    : " Click here to send us your queries"}
+                </Link>
               </CardContent>
             </Grid>
           </Grid>
-          <Link
-            component="button"
-            onClick={toggleMapVisibility}
-            sx={{
-              color: "#a16149",
-              fontSize: "16px",
-              cursor: "pointer",
-              textDecoration: "underline",
-              "&:hover": {
-                textDecoration: "none",
-              },
-            }}
-          >
-            {showMap
-              ? "Show Shop Address"
-              : "To send us your queries click here"}
-          </Link>
         </Card>
       </div>
     </Box>

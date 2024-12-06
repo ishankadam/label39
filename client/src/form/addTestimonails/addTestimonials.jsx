@@ -23,26 +23,36 @@ const StyledRating = styled(Rating)(({ theme }) => ({
     color: theme.palette.action.disabled,
   },
 }));
-
 const customIcons = {
   1: {
     icon: <SentimentVeryDissatisfiedIcon color="error" />,
     label: "Very Dissatisfied",
   },
   2: {
-    icon: <SentimentDissatisfiedIcon color="error" />,
+    icon: (
+      <SentimentDissatisfiedIcon color="error" sx={{ marginLeft: "30px" }} />
+    ),
     label: "Dissatisfied",
   },
   3: {
-    icon: <SentimentSatisfiedIcon color="warning" />,
+    icon: (
+      <SentimentSatisfiedIcon color="warning" sx={{ marginLeft: "60px" }} />
+    ),
     label: "Neutral",
   },
   4: {
-    icon: <SentimentSatisfiedAltIcon color="success" />,
+    icon: (
+      <SentimentSatisfiedAltIcon color="success" sx={{ marginLeft: "90px" }} />
+    ),
     label: "Satisfied",
   },
   5: {
-    icon: <SentimentVerySatisfiedIcon color="success" />,
+    icon: (
+      <SentimentVerySatisfiedIcon
+        color="success"
+        sx={{ marginLeft: "120px" }}
+      />
+    ),
     label: "Very Satisfied",
   },
 };
@@ -146,14 +156,14 @@ const TestimonialModal = (props) => {
             variant="h5"
             sx={{
               fontFamily: "'Roboto Serif', serif",
-              color: "#33376F",
-              fontWeight: "Bold",
+              color: "#a16149",
+              fontWeight: "600",
               textAlign: { xs: "center", md: "left" },
               fontSize: {
                 xs: "1rem",
-                sm: "1.2rem",
-                md: "1.4rem",
-                lg: "1.6rem",
+                sm: "1.1rem",
+                md: "1.3rem",
+                lg: "1.5rem",
               },
             }}
           >
@@ -170,6 +180,7 @@ const TestimonialModal = (props) => {
             flexDirection: "column",
             maxHeight: { xs: "380px", sm: "400px", md: "400px", lg: "400px" },
             overflowY: "auto",
+            mt: 2,
             mb: 2,
           }}
         >

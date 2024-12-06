@@ -12,7 +12,7 @@ const NextArrow = ({ onClick }) => {
         width: "30px",
         height: "30px",
         top: "50%",
-        right: "-25px", // Adjust spacing as needed
+        right: "-30px", // Adjust spacing as needed
         transform: "translateY(-50%)",
         zIndex: 1,
         borderRadius: "50%", // Rounded button
@@ -39,7 +39,7 @@ const PrevArrow = ({ onClick }) => {
         width: "30px",
         height: "30px",
         top: "50%",
-        left: "-25px", // Adjust spacing as needed
+        left: "-30px", // Adjust spacing as needed
         transform: "translateY(-50%)",
         zIndex: 1,
         borderRadius: "50%", // Rounded button

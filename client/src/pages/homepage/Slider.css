@@ -1,5 +1,5 @@
 .slider-main {
-  width: min(1400px, 100vw);
+  /* width: min(1400px, 100vw); */
   margin: 30px auto;
 }
 .slider {

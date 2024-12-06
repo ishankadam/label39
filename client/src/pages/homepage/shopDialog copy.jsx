@@ -39,18 +39,10 @@ const ShopDialog = ({ onMouseEnter, onMouseLeave }) => {
           >
             CATEGORIES
           </Typography>
-          <Button sx={{ textAlign: "left", width: "100%", color: "#677489" }}>
-            SHIRTS
-          </Button>
-          <Button sx={{ textAlign: "left", width: "100%", color: "#677489" }}>
-            CO-ORD SETS
-          </Button>
-          <Button sx={{ textAlign: "left", width: "100%", color: "#677489" }}>
-            SUITS
-          </Button>
-          <Button sx={{ textAlign: "left", width: "100%", color: "#677489" }}>
-            FESTIVE
-          </Button>
+          <Button sx={{ textAlign: "left", width: "100%" }}>SHIRTS</Button>
+          <Button sx={{ textAlign: "left", width: "100%" }}>CO-ORD SETS</Button>
+          <Button sx={{ textAlign: "left", width: "100%" }}>SUITS</Button>
+          <Button sx={{ textAlign: "left", width: "100%" }}>FESTIVE</Button>
         </Box>
 
         <Box sx={{ marginBottom: "20px", textAlign: "center" }}>
@@ -65,19 +57,15 @@ const ShopDialog = ({ onMouseEnter, onMouseLeave }) => {
           >
             FEATURED
           </Typography>
-          <Button sx={{ textAlign: "left", width: "100%", color: "#677489" }}>
-            NEW ARRIVAL
-          </Button>
-          <Button sx={{ textAlign: "left", width: "100%", color: "#677489" }}>
+          <Button sx={{ textAlign: "left", width: "100%" }}>NEW ARRIVAL</Button>
+          <Button sx={{ textAlign: "left", width: "100%" }}>
             AS SEEN ON - CELEBRITY STYLE
           </Button>
-          <Button sx={{ textAlign: "left", width: "100%", color: "#677489" }}>
+          <Button sx={{ textAlign: "left", width: "100%" }}>
             CLIENTS DAIRY
           </Button>
-          <Button sx={{ textAlign: "left", width: "100%", color: "#677489" }}>
-            KURTA SETS
-          </Button>
-          <Button sx={{ textAlign: "left", width: "100%", color: "#677489" }}>
+          <Button sx={{ textAlign: "left", width: "100%" }}>KURTA SETS</Button>
+          <Button sx={{ textAlign: "left", width: "100%" }}>
             BEST SELLERS
           </Button>
         </Box>
