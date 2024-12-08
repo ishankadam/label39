@@ -8,7 +8,6 @@ import { imageUrl } from "../../api";
 const UploadFiles = forwardRef((props, ref) => {
   const [files, setFiles] = useState([]);
   const inputRef = React.useRef(null);
-  console.log(inputRef.current); // Debug: Check if inputRef is correctly set
 
   const [filePreviews, setFilePreviews] = useState([]);
 
@@ -21,12 +20,15 @@ const UploadFiles = forwardRef((props, ref) => {
 
     if (validFiles.length > 0) {
       setFiles((prevFiles) => {
-        const updatedFiles = props.isEdit
-          ? [validFiles[0]]
-          : [...prevFiles, ...validFiles];
-        return updatedFiles;
+        if (props.singleFile) {
+          // If singleFile is true, only store the newest file
+          return [validFiles[validFiles.length - 1]];
+        } else {
+          // If not singleFile, append the files (bulk upload)
+          const updatedFiles = [...prevFiles, ...validFiles];
+          return updatedFiles;
+        }
       });
-      props.updateData && props.updateData(validFiles);
     }
   };
 
@@ -60,7 +62,7 @@ const UploadFiles = forwardRef((props, ref) => {
         : `${imageUrl}${props.category}/${file}`
     );
     setFilePreviews(previews);
-
+    props.updateData && props.updateData(files);
     return () => {
       previews.forEach((preview) => {
         if (preview.startsWith("blob:")) URL.revokeObjectURL(preview);
@@ -70,7 +72,6 @@ const UploadFiles = forwardRef((props, ref) => {
 
   return (
     <>
-      {/* <div id="file-upload-container"> */}
       <form className="form-file-upload" onSubmit={(e) => e.preventDefault()}>
         <input
           ref={inputRef}
@@ -82,7 +83,6 @@ const UploadFiles = forwardRef((props, ref) => {
           multiple={true}
           style={{ display: "none" }}
         />
-        {/* <label id="label-file-upload" htmlFor="input-file-upload"> */}
         <Box sx={{ display: "flex", flexDirection: "column" }}>
           <Typography sx={{ fontSize: "13px" }}>
             Upload your PDF, PNG, JPG, JPEG files here
@@ -96,16 +96,14 @@ const UploadFiles = forwardRef((props, ref) => {
             Upload files
           </Button>
         </Box>
-        {/* </label> */}
       </form>
+
       <Grid2
         container
         spacing={2}
         sx={{ display: "flex", justifyContent: "center", mt: 2 }}
       >
         {files.length > 0 && (
-          // <div className="files-preview">
-
           <>
             {files.map((file, index) => (
               <Grid2
@@ -122,7 +120,6 @@ const UploadFiles = forwardRef((props, ref) => {
                 }}
               >
                 <div className="image-container">
-                  {/* Display image preview */}
                   {filePreviews[index] && (
                     <img
                       className="attachment-file"
@@ -157,10 +154,8 @@ const UploadFiles = forwardRef((props, ref) => {
               </Grid2>
             ))}
           </>
-          // </div>
         )}
       </Grid2>
-      {/* </div> */}
     </>
   );
 });

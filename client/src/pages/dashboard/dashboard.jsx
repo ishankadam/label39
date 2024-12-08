@@ -12,11 +12,9 @@ import {
 } from "../../api";
 import { dashboardTabValue, findLabelByValue } from "../../common";
 import _ from "lodash";
-import SelectDropdown from "../../components/select-dropdown/selectDropdown";
 import ProductTable from "./productTable";
 import ManageCategories from "./manageCategory";
 import ManageTestimonials from "./manageTestimonials";
-import DashboardSidebar from "./dashboardSidebar";
 
 const Dashboard = (props) => {
   const [options, setOptions] = useState("Products");
@@ -42,6 +40,11 @@ const Dashboard = (props) => {
     data: {},
   });
   const [showProductModal, setShowProductModal] = useState({
+    show: false,
+    isEdit: false,
+    data: {},
+  });
+  const [showTestimonialModal, setShowTestimonialModal] = useState({
     show: false,
     isEdit: false,
     data: {},
@@ -72,6 +75,12 @@ const Dashboard = (props) => {
         isEdit: false,
         data: {},
       });
+    } else if (page === "Testimonials") {
+      setShowTestimonialModal({
+        show: true,
+        isEdit: false,
+        data: {},
+      });
     }
   };
 
@@ -92,34 +101,34 @@ const Dashboard = (props) => {
     }));
   }, [categories]);
 
-  const handleChange = (value, field) => {
-    if (field === "categories") {
-      const selected = categories.find(
-        (item) =>
-          item.name.toLowerCase().replace(/ & /g, "-").replace(/\s+/g, "-") ===
-          value
-      );
-      const subcategories =
-        selected?.subcategories.map((subcategory) => ({
-          label: subcategory.toUpperCase(),
-          value: subcategory.toLowerCase().trim(),
-        })) || [];
-      setCategoryData((prev) => ({
-        ...prev,
-        subcategories,
-      }));
-      setFilterOptions((prevDetails) => ({
-        ...prevDetails,
-        categories: value,
-        subcategories: "",
-      }));
-    } else {
-      setFilterOptions((prevDetails) => ({
-        ...prevDetails,
-        [field]: value,
-      }));
-    }
-  };
+  // const handleChange = (value, field) => {
+  //   if (field === "categories") {
+  //     const selected = categories.find(
+  //       (item) =>
+  //         item.name.toLowerCase().replace(/ & /g, "-").replace(/\s+/g, "-") ===
+  //         value
+  //     );
+  //     const subcategories =
+  //       selected?.subcategories.map((subcategory) => ({
+  //         label: subcategory.toUpperCase(),
+  //         value: subcategory.toLowerCase().trim(),
+  //       })) || [];
+  //     setCategoryData((prev) => ({
+  //       ...prev,
+  //       subcategories,
+  //     }));
+  //     setFilterOptions((prevDetails) => ({
+  //       ...prevDetails,
+  //       categories: value,
+  //       subcategories: "",
+  //     }));
+  //   } else {
+  //     setFilterOptions((prevDetails) => ({
+  //       ...prevDetails,
+  //       [field]: value,
+  //     }));
+  //   }
+  // };
 
   useEffect(() => {
     const filteredList = (products || []).filter((item) => {
@@ -179,24 +188,16 @@ const Dashboard = (props) => {
             },
           }}
         >
-          <Tab
-            sx={{ justifyContent: "flex-start" }}
-            value="one"
-            label={sidebarOpen ? "Products" : ""}
-            icon={<DashboardIcon />}
-          />
-          <Tab
-            sx={{ justifyContent: "flex-start" }}
-            value="two"
-            label={sidebarOpen ? "Categories" : ""}
-            icon={<CategoryIcon />}
-          />
-          <Tab
-            sx={{ justifyContent: "flex-start" }}
-            value="three"
-            label={sidebarOpen ? "Miscellaneous" : ""}
-            icon={<RecentActorsIcon />}
-          />
+          {dashboardTabValue.map((row) => {
+            return (
+              <Tab
+                sx={{ justifyContent: "flex-start" }}
+                value={row.value}
+                label={sidebarOpen ? row.label : ""}
+                icon={row.icon}
+              />
+            );
+          })}
         </Tabs>
       </Box>
 
@@ -230,23 +231,21 @@ const Dashboard = (props) => {
             </Typography>
           </Grid2>
           <Grid2 item>
-            {options !== "Miscellaneous" && (
-              <Button
-                variant="contained"
-                onClick={() => handleOpenForm(options)}
-                color="warning"
-                sx={{
-                  fontSize: { xs: "13px", sm: "14px", md: "16px" },
-                  textTransform: "capitalize",
-                  minWidth: "120px",
-                  height: "56px",
-                  marginTop: "16px !important",
-                  marginBottom: "8px !important",
-                }}
-              >
-                {`Add ${options}`}
-              </Button>
-            )}
+            <Button
+              variant="contained"
+              onClick={() => handleOpenForm(options)}
+              color="warning"
+              sx={{
+                fontSize: { xs: "13px", sm: "14px", md: "16px" },
+                textTransform: "capitalize",
+                minWidth: "120px",
+                height: "56px",
+                marginTop: "16px !important",
+                marginBottom: "8px !important",
+              }}
+            >
+              {`Add ${options}`}
+            </Button>
           </Grid2>
         </Grid2>
 
@@ -277,6 +276,8 @@ const Dashboard = (props) => {
             testimonials={testimonials}
             loading={testimonialsloading}
             setLoading={setTestimonialsLoading}
+            showModal={showTestimonialModal}
+            setShowModal={setShowTestimonialModal}
             setTestimonials={setTestimonials}
           />
         )}

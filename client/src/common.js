@@ -14,13 +14,18 @@ import bestSeller7 from "./assets/bestSeller10.jpg";
 import bestSeller11 from "./assets/bestSeller11.jpg";
 import bestSeller12 from "./assets/bestSeller12.jpg";
 import bestSeller13 from "./assets/bestSeller13.jpg";
-
+import {
+  Dashboard as DashboardIcon,
+  Category as CategoryIcon,
+  RecentActors as RecentActorsIcon,
+} from "@mui/icons-material"; // Import icons
 export const adminSettings = ["Profile", "Account", "Dashboard", "Logout"];
 
 export const dashboardTabValue = [
-  { label: "Products", value: "one" },
-  { label: "Categories", value: "two" },
-  { label: "Miscellaneous", value: "three" },
+  { label: "Products", value: "one", icon: <DashboardIcon /> },
+  { label: "Categories", value: "two", icon: <CategoryIcon /> },
+  { label: "Testimonials", value: "three", icon: <RecentActorsIcon /> },
+  { label: "Homepage", value: "four", icon: <RecentActorsIcon /> },
 ];
 
 export const countries = [

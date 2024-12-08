@@ -37,7 +37,10 @@ const AddEditCategory = (props) => {
   }, [images]);
 
   const handleFileUpload = (files) => {
-    setImages(files);
+    setCategory((prev) => ({
+      ...prev,
+      image: files,
+    }));
   };
 
   useEffect(() => {
@@ -80,6 +83,7 @@ const AddEditCategory = (props) => {
     } else {
       setButtonDisabled(false);
     }
+    console.log(category);
   }, [category, images]);
 
   return (
@@ -177,6 +181,7 @@ const AddEditCategory = (props) => {
               isEdit={props.isEdit}
               images={images}
               file={category.image}
+              singleFile={true}
               acceptedFiles="image/png, image/jpeg"
               //   parentClass="category-form-container"
             />

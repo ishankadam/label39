@@ -13,14 +13,20 @@ import CustomTable from "../../components/custom-table/customTable";
 import TestimonialModal from "../../form/addTestimonails/addTestimonials";
 const ManageTestimonials = (props) => {
   const [testimonials, setTestimonials] = useState(props.testimonials || []);
-  const [showModal, setShowModal] = useState({
-    show: false,
-    isEdit: false,
-    data: {},
-  });
+  const [showModal, setShowModal] = useState(
+    props.showModal || {
+      show: false,
+      isEdit: false,
+      data: {},
+    }
+  );
+
+  useEffect(() => {
+    setShowModal(props.showModal);
+  }, [props.showModal]);
 
   const handleOpenModal = () => {
-    setShowModal({
+    props.setShowModal({
       show: true,
       isEdit: false,
       data: {},
@@ -37,7 +43,7 @@ const ManageTestimonials = (props) => {
   };
 
   const handleOnClickView = (row) => {
-    setShowModal({
+    props.setShowModal({
       show: true,
       isEdit: true,
       data: row,
@@ -98,31 +104,6 @@ const ManageTestimonials = (props) => {
 
   return (
     <div>
-      <Box
-        sx={{
-          flexGrow: 1,
-          px: 3,
-          pt: 3,
-          display: "flex",
-          justifyContent: "space-between",
-        }}
-      >
-        <Button
-          variant="contained"
-          color="warning"
-          sx={{
-            fontSize: { xs: "13px", sm: "14px", md: "16px" },
-            position: "sticky", // Keeps the button on the right
-            right: 0,
-            textTransform: "capitalize",
-            marginLeft: "10px",
-            height: "44px",
-          }}
-          onClick={handleOpenModal}
-        >
-          Add Testimonials
-        </Button>
-      </Box>
       <CustomTable
         colDef={colDef}
         rowData={testimonials}

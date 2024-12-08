@@ -10,7 +10,6 @@ import {
   DialogContent,
   DialogTitle,
   Grid,
-  Grid2,
 } from "@mui/material";
 import CustomTextfield from "../../components/textfield/customTextfield";
 import {
@@ -23,8 +22,8 @@ import ChipTextfield from "../../components/textfield/chipTextfield";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { createProduct, updateProduct } from "../../api";
 import UploadFiles from "../../components/upload/uploadFiles";
-import "./addProduct.css";
 import SelectDropdown from "../../components/select-dropdown/selectDropdown";
+import "./addProduct.css";
 
 const AddEditProductModal = (props) => {
   const [images, setImages] = useState([]);
@@ -38,6 +37,7 @@ const AddEditProductModal = (props) => {
     deliveryIn: [],
     images: [],
   });
+  const [bottomCategoryVisible, setBottomCategoryVisible] = useState(false);
 
   useEffect(() => {
     if (props.product) {
@@ -55,7 +55,7 @@ const AddEditProductModal = (props) => {
 
   const handleAddSize = (categoryIndex) => {
     const updatedSizes = [...productDetails.sizes];
-    updatedSizes[categoryIndex].sizes.push({ size: "", quantity: "" });
+    updatedSizes[categoryIndex].sizes.push({ size: "", quantity: 0, price: 0 });
     setProductDetails((prev) => ({ ...prev, sizes: updatedSizes }));
   };
 
@@ -67,18 +67,26 @@ const AddEditProductModal = (props) => {
     setProductDetails((prev) => ({ ...prev, sizes: updatedSizes }));
   };
 
-  const handleAddCategory = () => {
-    setProductDetails((prev) => ({
-      ...prev,
-      sizes: [...prev.sizes, { category: "Bottom", sizes: [] }],
-    }));
-  };
+  const handleCategory = (visibility) => {
+    setBottomCategoryVisible(visibility);
 
-  const handleRemoveCategory = (categoryIndex) => {
-    setProductDetails((prev) => ({
-      ...prev,
-      sizes: prev.sizes.filter((_, i) => i !== categoryIndex),
-    }));
+    setProductDetails((prev) => {
+      // If visibility is false, remove the "Bottom" category
+      if (!visibility) {
+        return {
+          ...prev,
+          sizes: prev.sizes.filter(
+            (category) => category.category !== "Bottom"
+          ),
+        };
+      }
+
+      // If visibility is true, add the "Bottom" category
+      return {
+        ...prev,
+        sizes: [...prev.sizes, { category: "Bottom", sizes: [] }],
+      };
+    });
   };
 
   const handleEdit = (value, field) => {
@@ -89,7 +97,10 @@ const AddEditProductModal = (props) => {
   };
 
   const handleFileUpload = (files) => {
-    setImages(files);
+    setProductDetails((prev) => ({
+      ...prev,
+      images: files,
+    }));
   };
 
   const handleSubmit = () => {
@@ -104,6 +115,10 @@ const AddEditProductModal = (props) => {
       data: {},
     }));
   };
+
+  useEffect(() => {
+    console.log(productDetails);
+  }, [productDetails]);
 
   return (
     <Dialog
@@ -169,7 +184,6 @@ const AddEditProductModal = (props) => {
           </Grid>
 
           <Grid item xs={12} sm={12}>
-            {" "}
             <SelectDropdown
               label="Category"
               optionList={categories}
@@ -183,36 +197,41 @@ const AddEditProductModal = (props) => {
             {productDetails.sizes.map((category, categoryIndex) => (
               <div
                 key={`category-${categoryIndex}`}
-                className="category-container"
+                style={{
+                  border: "1px solid #ddd",
+                  borderRadius: "8px",
+                  padding: "16px",
+                  marginBottom: "16px",
+                }}
               >
                 <div
-                  className="size-header"
-                  style={{ display: "flex", justifyContent: "space-between" }}
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    marginBottom: "16px",
+                  }}
                 >
                   <Typography variant="h6">{category.category}</Typography>
-                  {categoryIndex > 0 && (
-                    <Button
-                      variant="outlined"
-                      onClick={() => handleRemoveCategory(categoryIndex)}
-                    >
-                      Remove Category
-                    </Button>
-                  )}
                   <Button
                     color="custom"
-                    sx={{ width: "120px" }}
+                    style={{ width: "120px" }}
                     variant="outlined"
-                    className="add-size-button"
                     onClick={() => handleAddSize(categoryIndex)}
                   >
                     Add Size
                   </Button>
                 </div>
-                <div className="size-container">
+
+                <div>
                   {category.sizes.map((size, sizeIndex) => (
                     <div
-                      className="size-wrapper"
                       key={`size-${categoryIndex}-${sizeIndex}`}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        marginBottom: "12px",
+                      }}
                     >
                       <SelectDropdown
                         config={{
@@ -233,7 +252,7 @@ const AddEditProductModal = (props) => {
                         }}
                       />
                       <CustomTextfield
-                        sx={{ marginLeft: "15px" }}
+                        style={{ marginLeft: "15px" }}
                         label="Quantity"
                         config={{
                           field: `sizes[${categoryIndex}].sizes[${sizeIndex}].quantity`,
@@ -252,34 +271,47 @@ const AddEditProductModal = (props) => {
                           }));
                         }}
                       />
-                      <Grid item xs={12} sm={6}>
-                        <CustomTextfield
-                          label="Price"
-                          value={productDetails.price}
-                          config={{ field: "price", isRequired: true }}
-                          handleEdit={handleEdit}
-                          sx={{ width: "100%", marginLeft: "10px" }}
-                        />
-                      </Grid>
+                      <CustomTextfield
+                        style={{ marginLeft: "15px" }}
+                        label="Price"
+                        config={{
+                          field: `sizes[${categoryIndex}].sizes[${sizeIndex}].price`,
+                          isRequired: true,
+                        }}
+                        value={size.price}
+                        handleEdit={(value) => {
+                          const updatedSizes = [...productDetails.sizes];
+                          updatedSizes[categoryIndex].sizes[sizeIndex].price =
+                            value;
+                          setProductDetails((prev) => ({
+                            ...prev,
+                            sizes: updatedSizes,
+                          }));
+                        }}
+                      />
                       <RemoveIcon
-                        className="remove-icon"
+                        style={{
+                          marginLeft: "12px",
+                          cursor: "pointer",
+                          color: "#f00",
+                        }}
                         onClick={() =>
                           handleRemoveSize(categoryIndex, sizeIndex)
                         }
                       />
                     </div>
                   ))}
-                  {/* <Button
-                    variant="outlined"
-                    className="add-size-button"
-                    onClick={() => handleAddSize(categoryIndex)}
-                  >
-                    Add Size
-                  </Button> */}
                 </div>
               </div>
             ))}
           </Grid>
+
+          <Button onClick={(e) => handleCategory(!bottomCategoryVisible)}>
+            {bottomCategoryVisible ? "Remove Bottom" : "Add Bottom"}
+          </Button>
+
+          {/* Conditionally Render Bottom Category */}
+
           <Grid item xs={12} sm={12}>
             <ChipTextfield
               label="Garment Details"
@@ -302,25 +334,11 @@ const AddEditProductModal = (props) => {
           <Grid item xs={12} sm={12}>
             <UploadFiles
               updateData={handleFileUpload}
-              isEdit={true}
+              // isEdit={true}
               images={images}
               file={productDetails.images}
               acceptedFiles="image/png, image/jpeg"
-              // parentClass="product-form-container"
-            />
-          </Grid>
-          <Grid item xs={12} sm={12}>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  onChange={(e) =>
-                    e.target.checked
-                      ? handleAddCategory()
-                      : handleRemoveCategory(1)
-                  }
-                />
-              }
-              label="Add Bottom Category"
+              singleFile={false}
             />
           </Grid>
         </Grid>
@@ -329,26 +347,13 @@ const AddEditProductModal = (props) => {
         sx={{
           display: "flex",
           justifyContent: "space-between",
-          py: 2,
-          boxShadow:
-            "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;",
         }}
       >
-        <Button
-          onClick={handleClose}
-          variant="outlined"
-          color="custom"
-          sx={{ width: "160px", fontSize: "15px" }}
-        >
+        <Button onClick={handleClose} variant="outlined">
           Cancel
         </Button>
-        <Button
-          variant="contained"
-          color="custom"
-          sx={{ width: "160px", fontSize: "15px" }}
-          onClick={handleSubmit}
-        >
-          {props.product ? "Update Product" : "Add Product"}
+        <Button onClick={handleSubmit} variant="contained">
+          {props.product ? "Save Changes" : "Add Product"}
         </Button>
       </DialogActions>
     </Dialog>

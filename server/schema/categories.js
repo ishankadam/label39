@@ -14,15 +14,18 @@ const categorySchema = new mongoose.Schema({
   },
   name: {
     type: String,
-    required: true, // Make name required
+    required: true,
   },
   description: {
-    type: String, // Assuming category is a string
-    required: true, // Make category required
+    type: String,
+    required: true,
   },
   image: {
     type: Array,
-    required: true, // Make url required for each image
+    required: true,
+  },
+  order: {
+    type: Array,
   },
 });
 

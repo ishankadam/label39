@@ -18,11 +18,13 @@ import SentimentSatisfiedIcon from "@mui/icons-material/SentimentSatisfied";
 import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAltOutlined";
 import SentimentVerySatisfiedIcon from "@mui/icons-material/SentimentVerySatisfied";
 import StarIcon from "@mui/icons-material/Star";
+
 const StyledRating = styled(Rating)(({ theme }) => ({
   "& .MuiRating-iconEmpty .MuiSvgIcon-root": {
     color: theme.palette.action.disabled,
   },
 }));
+
 const customIcons = {
   1: {
     icon: <SentimentVeryDissatisfiedIcon color="error" />,
@@ -68,11 +70,12 @@ const TestimonialModal = (props) => {
     name: "",
     comments: "",
     image: null,
-    // rating: 5, // Initialize rating
+    rating: 0, // Initialize rating
   });
   const [images, setImages] = useState([]);
   const [value, setValue] = useState(0);
   const [hover, setHover] = React.useState(-1);
+
   const handleChange = (value, field) => {
     setTestimonial((prevDetails) => ({
       ...prevDetails,
@@ -80,17 +83,11 @@ const TestimonialModal = (props) => {
     }));
   };
 
-  useEffect(() => {
-    if (images && Array.isArray(images) && images.length > 0) {
-      setTestimonial((prevDetails) => ({
-        ...prevDetails,
-        image: images[0],
-      }));
-    }
-  }, [images]);
-
   const handleFileUpload = (files) => {
-    setImages(files);
+    setTestimonial((prevDetails) => ({
+      ...prevDetails,
+      image: files,
+    }));
   };
 
   useEffect(() => {
@@ -100,7 +97,7 @@ const TestimonialModal = (props) => {
         name: props.data.name,
         comments: props.data.comments,
         image: props.data.image,
-        rating: props.data.rating || 0, // Initialize rating if available
+        rating: props.data.rating ?? 0, // Initialize rating if available
       });
       setImages([props.data.image]);
     }
@@ -126,6 +123,7 @@ const TestimonialModal = (props) => {
     } else {
       setButtonDisabled(false);
     }
+    console.log(testimonial);
   }, [testimonial, images]);
 
   return (
@@ -221,7 +219,7 @@ const TestimonialModal = (props) => {
               value={testimonial.rating}
               precision={1}
               onChange={(event, newValue) => {
-                handleChange(newValue, "rating");
+                handleChange(newValue, "rating"); // Update rating in state
               }}
               onChangeActive={(event, newHover) => {
                 setHover(newHover);
@@ -246,6 +244,7 @@ const TestimonialModal = (props) => {
               isEdit={props.isEdit}
               images={images}
               file={testimonial.image}
+              singleFile={true}
               category="testimonial"
               acceptedFiles="image/png, image/jpeg"
               parentClass="testimonial-form-container"
