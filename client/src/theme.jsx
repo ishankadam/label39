@@ -31,11 +31,11 @@ const theme = createTheme({
               background: "#8c4e3d",
             },
             "@media (max-width:768px)": {
-              padding: "8px 2px",
+              padding: "8px",
               fontSize: "0.875rem",
             },
             "@media (max-width:600px)": {
-              padding: "8px 2px",
+              padding: "8px",
               fontSize: "0.75rem",
             },
           },

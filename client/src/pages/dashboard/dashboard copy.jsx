@@ -1,5 +1,10 @@
 import { Box, Button, Tab, Tabs, Typography, Grid2 } from "@mui/material";
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import {
+  Dashboard as DashboardIcon,
+  Category as CategoryIcon,
+  RecentActors as RecentActorsIcon,
+} from "@mui/icons-material"; // Import icons
 import {
   getAllCategories,
   getAllProducts,
@@ -7,10 +12,10 @@ import {
 } from "../../api";
 import { dashboardTabValue, findLabelByValue } from "../../common";
 import _ from "lodash";
-import SelectDropdown from "../../components/select-dropdown/selectDropdown";
 import ProductTable from "./productTable";
 import ManageCategories from "./manageCategory";
 import ManageTestimonials from "./manageTestimonials";
+import MiniDrawer from "./miniDrawer";
 
 const Dashboard = (props) => {
   const [options, setOptions] = useState("Products");
@@ -35,17 +40,20 @@ const Dashboard = (props) => {
     isEdit: false,
     data: {},
   });
-
   const [showProductModal, setShowProductModal] = useState({
     show: false,
     isEdit: false,
     data: {},
   });
+  const [showTestimonialModal, setShowTestimonialModal] = useState({
+    show: false,
+    isEdit: false,
+    data: {},
+  });
+  const [sidebarOpen, setSidebarOpen] = useState(false); // Track sidebar open state
 
   useEffect(() => {
     setProductsLoading(true);
-    // setCategoryLoading(true);
-    // setTestimonialsLoading(true);
     getAllProducts({
       setProductsData: setProducts,
       setLoading: setProductsLoading,
@@ -56,7 +64,6 @@ const Dashboard = (props) => {
   }, []);
 
   const handleOpenForm = (page) => {
-    console.log(page);
     if (page === "Categories") {
       setShowCategoryModal({
         show: true,
@@ -69,12 +76,14 @@ const Dashboard = (props) => {
         isEdit: false,
         data: {},
       });
+    } else if (page === "Testimonials") {
+      setShowTestimonialModal({
+        show: true,
+        isEdit: false,
+        data: {},
+      });
     }
   };
-
-  useEffect(() => {
-    console.log(options);
-  }, [options]);
 
   const handleOptions = (event, newValue) => {
     setOptions(findLabelByValue(dashboardTabValue, newValue));
@@ -93,35 +102,34 @@ const Dashboard = (props) => {
     }));
   }, [categories]);
 
-  const handleChange = (value, field) => {
-    if (field === "categories") {
-      const selected = categories.find(
-        (item) =>
-          item.name.toLowerCase().replace(/ & /g, "-").replace(/\s+/g, "-") ===
-          value
-      );
-
-      const subcategories =
-        selected?.subcategories.map((subcategory) => ({
-          label: subcategory.toUpperCase(),
-          value: subcategory.toLowerCase().trim(),
-        })) || [];
-      setCategoryData((prev) => ({
-        ...prev,
-        subcategories,
-      }));
-      setFilterOptions((prevDetails) => ({
-        ...prevDetails,
-        categories: value,
-        subcategories: "",
-      }));
-    } else {
-      setFilterOptions((prevDetails) => ({
-        ...prevDetails,
-        [field]: value,
-      }));
-    }
-  };
+  // const handleChange = (value, field) => {
+  //   if (field === "categories") {
+  //     const selected = categories.find(
+  //       (item) =>
+  //         item.name.toLowerCase().replace(/ & /g, "-").replace(/\s+/g, "-") ===
+  //         value
+  //     );
+  //     const subcategories =
+  //       selected?.subcategories.map((subcategory) => ({
+  //         label: subcategory.toUpperCase(),
+  //         value: subcategory.toLowerCase().trim(),
+  //       })) || [];
+  //     setCategoryData((prev) => ({
+  //       ...prev,
+  //       subcategories,
+  //     }));
+  //     setFilterOptions((prevDetails) => ({
+  //       ...prevDetails,
+  //       categories: value,
+  //       subcategories: "",
+  //     }));
+  //   } else {
+  //     setFilterOptions((prevDetails) => ({
+  //       ...prevDetails,
+  //       [field]: value,
+  //     }));
+  //   }
+  // };
 
   useEffect(() => {
     const filteredList = (products || []).filter((item) => {
@@ -140,192 +148,141 @@ const Dashboard = (props) => {
   }, [filterOptions, products]);
 
   return (
-    <>
-      <Tabs
-        value={tabValue}
-        onChange={handleOptions}
-        aria-label="wrapped label tabs example"
-        centered
+    <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+      {/* Sidebar */}
+      <MiniDrawer />
+      <Box
         sx={{
-          mb: 3,
-          color: "#212121",
-          fontWeight: "Bold",
-          bgcolor: "#33376F",
-          boxShadow: "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
-          "& .MuiTab-root": {
-            fontFamily: "'Roboto Serif', serif",
-            color: "white", // Ensure tabs are white
-            fontWeight: "bold", // Make text bold
-            padding: "12px 16px", // Base padding
-            fontSize: "13px", // Base font size
-            "@media (min-width: 600px)": {
-              fontFamily: "'Roboto Serif', serif",
-              fontSize: "16px", // Tablet font size
-              padding: "14px 20px", // Tablet padding
-            },
-            "@media (min-width: 960px)": {
-              fontFamily: "'Roboto Serif', serif",
-              fontSize: "17px", // Laptop font size
-              padding: "16px 24px", // Laptop padding
-            },
-          },
-          "& .Mui-selected": {
-            color: "white !important",
-          },
-          "& .MuiTabs-indicator": {
-            backgroundColor: "white",
-            marginBottom: "1px", // White bottom border when a tab is selected
-          },
-        }}
-      >
-        <Tab value="one" label="Products" wrapped />
-        <Tab value="two" label="Categories" />
-        <Tab value="three" label="Miscellaneous" />
-      </Tabs>
-
-      <Grid2
-        container
-        sx={{
-          fontSize: "12px",
-          px: 3,
+          // display: block;
+          width: sidebarOpen ? "10%" : { xs: "10%", sm: "10%", md: "5%" },
+          backgroundColor: "#D7B4A7",
+          color: "white",
+          padding: "5px",
           display: "flex",
-          alignContent: "flex-end",
-          justifyContent: "space-between",
-          alignItems: "center", // Align items vertically center
-          flexDirection: {
-            xs: options === "Products" ? "column" : "row",
-            sm: "row",
+          flexDirection: "column",
+          justifyContent: "flex-start",
+
+          transition: "width 0.3s ease",
+          "&:hover": {
+            width: 250,
           },
         }}
-        size={12}
+        onMouseEnter={() => setSidebarOpen(true)}
+        onMouseLeave={() => setSidebarOpen(false)}
       >
-        <Grid2
+        <Tabs
+          value={tabValue}
+          onChange={handleOptions}
+          aria-label="wrapped label tabs example"
+          orientation="vertical"
           sx={{
-            order: { xs: 1, sm: 1 },
+            color: "#fff",
+            fontWeight: "bold",
+            "& .MuiTab-root": {
+              fontFamily: "'Roboto Serif', serif",
+              color: "white",
+              fontWeight: "bold",
+            },
+            "& .Mui-selected": {
+              color: "white !important",
+            },
+            "& .MuiTabs-indicator": {
+              backgroundColor: "white",
+            },
           }}
         >
-          <Box>
+          {dashboardTabValue.map((row) => {
+            return (
+              <Tab
+                sx={{ justifyContent: "flex-start" }}
+                value={row.value}
+                label={sidebarOpen ? row.label : ""}
+                icon={row.icon}
+              />
+            );
+          })}
+        </Tabs>
+      </Box>
+
+      {/* Content Area */}
+      <Box sx={{ padding: "16px", width: "90%" }}>
+        <Grid2
+          container
+          sx={{
+            // fontSize: "12px",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            mb: 2,
+          }}
+        >
+          <Grid2 item>
             <Typography
               variant="h4"
-              gutterBottom
               sx={{
                 color: "#212121",
                 fontFamily: "'Roboto Serif', serif",
-                fontWeight: "Bold",
-                textAlign: "left", // Always left-align
+                fontWeight: "600",
                 fontSize: {
-                  xs: "1.2rem",
-                  sm: "1.5rem",
-                  md: "1.5rem",
-                  lg: "1.7rem",
+                  xs: "1rem",
+                  sm: "1.2rem",
+                  md: "1.35rem",
+                  lg: "1.4rem",
                 },
               }}
             >
-              {/* title */}
               {options}
             </Typography>
-          </Box>
-        </Grid2>
-        <Grid2
-          container
-          columnSpacing={0}
-          sx={{
-            order: { xs: 1, sm: 2 },
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <Grid2 size={{ xs: "auto", sm: "grow" }}>
-            <Box
+          </Grid2>
+          <Grid2 item>
+            <Button
+              variant="contained"
+              onClick={() => handleOpenForm(options)}
+              color="custom"
               sx={{
-                display: "flex",
-                flexDirection: "row",
+                fontSize: { xs: "12px", sm: "13px", md: "14px" },
+                // padding: "10px",
               }}
             >
-              {options === "Products" && (
-                <>
-                  <SelectDropdown
-                    label="Category"
-                    sx={{
-                      minWidth: { xs: "9rem", sm: "12rem", md: "13rem" },
-                      marginRight: "20px",
-                    }}
-                    value={filterOptions.categories}
-                    config={{ field: "categories" }}
-                    handleEdit={handleChange}
-                    optionList={categoryData.categories}
-                  />
-                  <SelectDropdown
-                    label="Sub Category"
-                    sx={{
-                      minWidth: { xs: "9rem", sm: "12rem", md: "13rem" },
-                      marginRight: { xs: "0", sm: "20px" },
-                    }}
-                    value={filterOptions.subcategories}
-                    config={{ field: "subcategories" }}
-                    handleEdit={handleChange}
-                    optionList={categoryData.subcategories}
-                  />
-                </>
-              )}
-            </Box>
-          </Grid2>
-          <Grid2>
-            <Box>
-              {" "}
-              {options !== "Miscellaneous" && (
-                <Button
-                  variant="contained"
-                  onClick={() => handleOpenForm(options)}
-                  color="warning"
-                  sx={{
-                    fontSize: { xs: "13px", sm: "14px", md: "16px" },
-                    textTransform: "capitalize",
-                    minWidth: "120px",
-                    height: "56px",
-                    marginTop: "16px !important",
-                    marginBottom: "8px !important",
-                  }}
-                >
-                  {/* btn */}
-                  {`Add ${options}`}
-                </Button>
-              )}
-            </Box>
+              {`Add ${options}`}
+            </Button>
           </Grid2>
         </Grid2>
-      </Grid2>
 
-      {tabValue === "one" && (
-        <ProductTable
-          products={products}
-          setProducts={setProducts}
-          loading={productsloading}
-          setLoading={setProductsLoading}
-          showModal={showProductModal}
-          setShowModal={setShowProductModal}
-          categories={categories}
-        />
-      )}
-      {tabValue === "two" && (
-        <ManageCategories
-          categories={categories}
-          setCategories={setCategories}
-          showModal={showCategoryModal}
-          setShowModal={setShowCategoryModal}
-          loading={categoryloading}
-          setLoading={setCategoryLoading}
-        />
-      )}
-      {tabValue === "three" && (
-        <ManageTestimonials
-          testimonials={testimonials}
-          loading={testimonialsloading}
-          setLoading={setTestimonialsLoading}
-          setTestimonials={setTestimonials}
-        />
-      )}
-    </>
+        {/* Render Content Based on Tab Selection */}
+        {tabValue === "one" && (
+          <ProductTable
+            products={products}
+            setProducts={setProducts}
+            loading={productsloading}
+            setLoading={setProductsLoading}
+            showModal={showProductModal}
+            setShowModal={setShowProductModal}
+            categories={categories}
+          />
+        )}
+        {tabValue === "two" && (
+          <ManageCategories
+            categories={categories}
+            setCategories={setCategories}
+            showModal={showCategoryModal}
+            setShowModal={setShowCategoryModal}
+            loading={categoryloading}
+            setLoading={setCategoryLoading}
+          />
+        )}
+        {tabValue === "three" && (
+          <ManageTestimonials
+            testimonials={testimonials}
+            loading={testimonialsloading}
+            setLoading={setTestimonialsLoading}
+            showModal={showTestimonialModal}
+            setShowModal={setShowTestimonialModal}
+            setTestimonials={setTestimonials}
+          />
+        )}
+      </Box>
+    </Box>
   );
 };
 

@@ -5,7 +5,7 @@ import SignupImg from "../../assets/signup.png";
 import { Button, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import CustomTextfield from "../../components/textfield/customTextfield";
-import backgroundImage from "../../assets/leaf-bg2.jpg"; // Import your background image
+import backgroundImage from "../../assets/about.png"; // Import your background image
 import TextField from "@mui/material/TextField";
 
 const Login = () => {
@@ -32,7 +32,7 @@ const Login = () => {
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        minHeight: "100vh", // Ensure it covers the full viewport height
+        minHeight: "100vh",
         padding: "20px 0px", // Optional: Add some padding
       }}
     >
@@ -119,7 +119,7 @@ const Login = () => {
                 <div className="form">
                   <Button
                     variant="contained"
-                    color="success"
+                    color="custom"
                     type="submit"
                     value="Log In"
                     className="sign-btn"
@@ -172,16 +172,12 @@ const Login = () => {
                 <div className="heading">
                   <Typography
                     sx={{
-                      fontSize: {
-                        xs: "18px",
-                        sm: "24px",
-                        md: "28px",
-                        lg: "28px",
-                      },
+                      fontSize: "28px",
                       fontWeight: "bold",
                       fontFamily: "'Cinzel Serif', serif ",
                       textAlign: "center",
                       color: "#2f3e4e",
+                      paddingBottom: "20px",
                     }}
                   >
                     CREATE AN ACCOUNT
@@ -259,7 +255,7 @@ const Login = () => {
                 <div className="form">
                   <Button
                     variant="contained"
-                    color="success"
+                    color="custom"
                     type="submit"
                     value="Sign In"
                     className="sign-btn"

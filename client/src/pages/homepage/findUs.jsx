@@ -91,6 +91,7 @@ const FindUs = () => {
                         fontWeight: "400",
                         fontSize: "20px",
                         marginBottom: "25px",
+                        textAlign: "center",
                       }}
                     >
                       Find us at
@@ -110,6 +111,7 @@ const FindUs = () => {
                         color: "#a16149",
                         marginBottom: "25px",
                         fontWeight: "600",
+                        textAlign: "center",
                       }}
                     >
                       TheLabel39
@@ -121,10 +123,11 @@ const FindUs = () => {
                         fontSize: "18px",
                         fontFamily: "'Roboto Serif', serif",
                         marginBottom: "25px",
+                        textAlign: "center",
                       }}
                     >
-                      The Dhanmill, SSN Marg, 100 Feet Road, Chhatarpur, New
-                      Delhi, Delhi, 110074
+                      302 sun vision classic Hanuman road Vile Parle East Mumbai
+                      - 400057
                     </Typography>
                     <Typography
                       gutterBottom
@@ -134,9 +137,10 @@ const FindUs = () => {
                         color: "#494949",
                         fontSize: "16px",
                         fontFamily: "'Roboto Serif', serif",
+                        textAlign: "center",
                       }}
                     >
-                      Phone Number: +91 9674949842
+                      Phone Number: +91 9137845071
                     </Typography>{" "}
                   </>
                 ) : (
@@ -260,28 +264,31 @@ const FindUs = () => {
                   </Box>
                 )}
 
-                <Link
-                  component="button"
-                  onClick={toggleMapVisibility}
-                  sx={{
-                    color: "#a16149",
-                    mt: 2,
-                    fontSize: "16px",
-                    cursor: "pointer",
-                    textDecoration: "underline",
-                    "&:hover": {
-                      textDecoration: "none",
-                    },
+                <Typography sx={{ textAlign: "center" }}>
+                  <Link
+                    component="button"
+                    onClick={toggleMapVisibility}
+                    sx={{
+                      color: "#a16149",
+                      mt: 2,
+                      fontSize: "16px",
+                      cursor: "pointer",
 
-                    fontFamily: " 'Roboto Serif', serif",
-                    fontWeight: "400",
-                    // marginBottom: "25px",
-                  }}
-                >
-                  {showMap
-                    ? "Show Shop Address"
-                    : " Click here to send us your queries"}
-                </Link>
+                      textDecoration: "underline",
+                      "&:hover": {
+                        textDecoration: "none",
+                      },
+
+                      fontFamily: " 'Roboto Serif', serif",
+                      fontWeight: "400",
+                      // marginBottom: "25px",
+                    }}
+                  >
+                    {showMap
+                      ? "Show Shop Address"
+                      : " Click here to send us your queries"}
+                  </Link>
+                </Typography>
               </CardContent>
             </Grid>
           </Grid>

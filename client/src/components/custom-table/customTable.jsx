@@ -232,17 +232,19 @@ const CustomTable = (props) => {
     );
   };
   return (
-    <>
+    <Paper sx={{ width: "100%", overflow: "hidden" }}>
       <TableContainer
         component={Paper}
         sx={{
-          mx: 3,
-          mt: 3,
+          boxShadow: "none",
+          border: "1px solid #ccc",
+          // mx: 1,
+          mt: 1,
           width: "auto",
           // margin: "5px 20px",
         }}
       >
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table aria-label="simple table">
           <TableHead className="job-table-header">
             <TableRow sx={{ position: "sticky", zIndex: 900, top: 0 }}>
               {props.colDef.map((column) => (
@@ -337,7 +339,7 @@ const CustomTable = (props) => {
           isAdmin={true}
         ></AddEditProductModal>
       ) : null}
-    </>
+    </Paper>
   );
 };
 

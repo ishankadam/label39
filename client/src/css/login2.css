@@ -15,7 +15,6 @@ input {
 
 #main {
   width: 100%;
-  min-height: 86vh;
   overflow: hidden;
   /* background-color: #aeceb681; */
   padding: 1rem;

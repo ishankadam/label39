@@ -40,12 +40,21 @@ ul li:hover,
   display: flex;
   justify-content: space-around;
   /* background-color: #2f3e4e; */
-  background-color: #e6beb8;
-  padding: 20px;
+  /* background-color: #e6beb8; */
+  background-color: rgba(183, 121, 97, 0.7);
+  backdrop-filter: blur(100px); /* Applies the glassy blur */
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
+  padding: 16px;
   color: white;
+  flex-wrap: nowrap; /* Prevents wrapping of items */
+  overflow-x: auto; /* Enables horizontal scrolling */
+  gap: 16px; /* Adds spacing between items */
 }
 
 .top-item {
+  flex: 0 0 auto; /* Prevents shrinking and ensures items take up only their content size */
+  text-align: center; /* Centers text below icons */
+  width: 150px; /* Optional: Set a fixed width for consistency */
   text-align: center;
 }
 

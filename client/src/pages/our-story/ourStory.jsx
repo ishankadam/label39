@@ -2,18 +2,24 @@ import { Typography, Box } from "@mui/material";
 import React from "react";
 import story from "../../assets/aboutImg.jpeg";
 import Container from "@mui/material/Container";
-import backgroundImage from "../../assets/leaf-bg2-cropped.jpg"; // Import your background image
+import backgroundImage from "../../assets/aboutbg2.png";
+// import backgroundImage from "../../assets/aboutbg2.png";
+// import backgroundImage from "../../assets/about.png";
+// import backgroundImage from "../../assets/aboutbg3.jpg";
+// import backgroundImage from "../../assets/aboutbg2.png";
 
 const OurStory = () => {
   return (
     <div
       style={{
-        // backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: "1800px 100%",
+        background: "#F7ECE9",
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: "auto 100%",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
-        minHeight: "100%", // Ensure it covers the full viewport height
+        minHeight: "100%",
         padding: "33px 0px", // Optional: Add some padding
+        objectFit: "cover",
       }}
     >
       <Container
@@ -59,7 +65,7 @@ const OurStory = () => {
                 lg: "100%",
               }, // Full width on mobile
               maxWidth: "300px", // Fixed max-width for larger screens
-              height: "auto", // Maintain aspect ratio
+              height: "350px", // Maintain aspect ratio
               borderRadius: "1%",
               objectFit: "cover",
               marginRight: { xs: "0px", sm: "30px", md: "0", lg: "0" },
@@ -85,21 +91,12 @@ const OurStory = () => {
             Anita and Prachi, who embarked on their journey in 2021. With
             Anita’s 20+ years of expertise in the fashion industry and Prachi’s
             refined education from the prestigious London College of Fashion,
-            the brand seamlessly blends heritage with innovation. The Label 39
-            began with a focus on pret wear—effortlessly chic and versatile
-            pieces that became an instant hit. Building on this success, we
-            introduced our Drape Collection in 2024, a celebration of festive
-            elegance filled with fusion, designed for modernity.{" "}
+            the brand seamlessly blends heritage with innovation.{" "}
             <Box sx={{ marginTop: 2 }} />
-            Our creations feature intricate appliqué, embroidery, hand beadwork,
-            cutwork, and hand-painted details. Made with pure, eco-friendly
-            fabrics, we prioritise sustainability and embrace the ethos of slow
-            fashion with made-to-order designs that minimise waste. At the heart
-            of The Label 39 lies a passion for Indian craftsmanship, reimagined
-            with a contemporary flair. Each silhouette is thoughtfully designed
-            to offer comfort, grace, and a story of artistry. We are proud to
-            present a brand that values authenticity, sustainability, and the
-            effortless charm of the modern woman.
+            The Label 39 began with a focus on pret wear—effortlessly chic and
+            versatile pieces that became an instant hit. Building on this
+            success, we introduced our Drape Collection in 2024, a celebration
+            of festive elegance filled with fusion, designed for modernity.
           </Typography>
         </Container>
 
@@ -130,7 +127,9 @@ const OurStory = () => {
                 lg: "100%",
               }, // Full width on mobile
               maxWidth: "300px", // Fixed max-width for larger screens
-              height: "auto", // Maintain aspect ratio
+              // height: "auto",
+              height: "350px", // Maintain aspect ratio
+
               borderRadius: "1%",
               objectFit: "cover",
               marginLeft: { xs: "0px", sm: "30px", md: "0", lg: "0" },
@@ -152,25 +151,16 @@ const OurStory = () => {
               order: { xs: 2, md: 1 },
             }}
           >
-            The Label 39 is the creative expression of a mother-daughter duo,
-            Anita and Prachi, who embarked on their journey in 2021. With
-            Anita’s 20+ years of expertise in the fashion industry and Prachi’s
-            refined education from the prestigious London College of Fashion,
-            the brand seamlessly blends heritage with innovation. The Label 39
-            began with a focus on pret wear—effortlessly chic and versatile
-            pieces that became an instant hit. Building on this success, we
-            introduced our Drape Collection in 2024, a celebration of festive
-            elegance filled with fusion, designed for modernity.{" "}
-            <Box sx={{ marginTop: 2 }} />
             Our creations feature intricate appliqué, embroidery, hand beadwork,
             cutwork, and hand-painted details. Made with pure, eco-friendly
             fabrics, we prioritise sustainability and embrace the ethos of slow
-            fashion with made-to-order designs that minimise waste. At the heart
-            of The Label 39 lies a passion for Indian craftsmanship, reimagined
-            with a contemporary flair. Each silhouette is thoughtfully designed
-            to offer comfort, grace, and a story of artistry. We are proud to
-            present a brand that values authenticity, sustainability, and the
-            effortless charm of the modern woman.
+            fashion with made-to-order designs that minimise waste.
+            <Box sx={{ marginTop: 2 }} />
+            At the heart of The Label 39 lies a passion for Indian
+            craftsmanship, reimagined with a contemporary flair. Each silhouette
+            is thoughtfully designed to offer comfort, grace, and a story of
+            artistry. We are proud to present a brand that values authenticity,
+            sustainability, and the effortless charm of the modern woman.
           </Typography>
         </Container>
       </Container>

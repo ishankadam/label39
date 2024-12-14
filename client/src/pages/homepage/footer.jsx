@@ -1,5 +1,12 @@
 import React from "react";
-import { Container, Grid2, Typography, IconButton, Link } from "@mui/material";
+import {
+  Container,
+  Grid2,
+  Typography,
+  IconButton,
+  Link,
+  Box,
+} from "@mui/material";
 import { Twitter, Facebook, Instagram, LinkedIn } from "@mui/icons-material";
 import "../../css/footer.css";
 import textile from "../../assets/texttile.png";
@@ -91,8 +98,8 @@ const Footer = (props) => {
                 sx={{
                   fontFamily: "'Cinzel', serif",
                   fontSize: {
-                    xs: "13px",
-                    sm: "14px",
+                    xs: "15px",
+                    sm: "15px",
                     md: "15px",
                     lg: "15px",
                   },
@@ -108,13 +115,15 @@ const Footer = (props) => {
                   },
                 }}
               >
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen.
+                Born from the sheer love for clothes, The Label 39 is a fusion
+                of simple and sophistication. We work directly with artisans
+                from across the country to create conscious and intricate
+                clothing that is true to its craftsmanship.
               </Typography>
               {/* Social Media Icons */}
-              <div style={{ marginLeft: "10px" }}>
+              <Box
+                sx={{ marginLeft: { xs: 0, sm: 0, md: "10px", lg: "10px" } }}
+              >
                 <IconButton
                   className="footer-icon"
                   sx={{
@@ -143,7 +152,7 @@ const Footer = (props) => {
                 >
                   <Instagram />
                 </IconButton>
-              </div>
+              </Box>
             </Grid2>
 
             {/* Center Section (Links) */}
