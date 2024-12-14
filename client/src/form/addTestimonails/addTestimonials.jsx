@@ -252,15 +252,21 @@ const TestimonialModal = (props) => {
           </Box>
         </Box>
 
-        <Box display="flex" justifyContent="space-between" mt="auto">
-          <Button variant="outlined" color="error" onClick={handleClose}>
+        <Box display="flex" justifyContent="right" mt="auto">
+          <Button
+            variant="outlined"
+            color="custom"
+            onClick={handleClose}
+            sx={{ width: "200px", mr: 1 }}
+          >
             Cancel
           </Button>
           <Button
             variant="contained"
-            color="success"
+            color="custom"
             onClick={handleTestimonialSubmit}
             disabled={buttonDisabled}
+            sx={{ width: "200px" }}
           >
             {props.isEdit ? "Save" : "Add"}
           </Button>

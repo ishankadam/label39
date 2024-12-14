@@ -18,7 +18,7 @@ const theme = createTheme({
             borderRadius: "2px",
             letterSpacing: "1px",
             boxShadow: "none",
-            padding: "10px 4px",
+            padding: "8px 4px",
             fontSize: "1rem",
             fontFamily: '"Roboto Serif", serif',
             fontWeight: "600 !important",
@@ -31,11 +31,11 @@ const theme = createTheme({
               background: "#8c4e3d",
             },
             "@media (max-width:768px)": {
-              padding: "8px",
+              padding: "8px 2px",
               fontSize: "0.875rem",
             },
             "@media (max-width:600px)": {
-              padding: "8px",
+              padding: "8px 2px",
               fontSize: "0.75rem",
             },
           },
@@ -62,9 +62,13 @@ const theme = createTheme({
               background: "#a16149",
               boxShadow: "none",
             },
-            "@media (max-width:600px)": {
-              padding: "7px 2px",
+            "@media (max-width:768px)": {
+              padding: "8px 2px",
               fontSize: "0.875rem",
+            },
+            "@media (max-width:600px)": {
+              padding: "8px 2px",
+              fontSize: "0.75rem",
             },
           },
         },

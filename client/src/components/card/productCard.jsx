@@ -71,7 +71,7 @@ const ProductCard = (props) => {
             // height: { xs: "280px", sm: "350px", md: "500px" },
             transition: "transform 300ms ease-in-out",
           }}
-          image={`${imageUrl}${props.product.images[0]}`}
+          image={`${imageUrl}products/${props.product.images[0]}`}
           alt={props.product.label}
         />
         {/* Button Wrapper */}

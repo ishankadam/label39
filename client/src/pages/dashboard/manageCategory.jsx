@@ -51,6 +51,7 @@ const ManageCategories = (props) => {
       key: "image",
       align: "center",
       type: "image",
+      folderName: "categories",
     },
     {
       id: "name",
