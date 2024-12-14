@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
 import CustomTable from "../../components/custom-table/customTable";
-import {
-  categories,
-  transformInputData,
-  transformProductData,
-} from "../../common";
+import { categories } from "../../common";
 import AddEditProductModal from "../../form/addProduct/addProduct";
+import { toggleProductStatus } from "../../api";
 
 const ProductTable = (props) => {
   const [products, setProducts] = useState(props.products || []);
@@ -21,15 +18,32 @@ const ProductTable = (props) => {
     setShowModal(props.showModal);
   }, [props.showModal]);
 
+  useEffect(() => {
+    setProducts(props.products);
+  }, [props.products]);
+
   const handleModalClose = () => {
     props.setShowModal({
       show: false,
       data: {},
     });
   };
-  useEffect(() => {
-    setProducts(props.products);
-  }, [props.products]);
+
+  const handleDisableProduct = (row, index) => {
+    toggleProductStatus({
+      row: row,
+      setLoading: props.setLoading,
+      setProductsData: props.setProducts,
+    });
+  };
+
+  const handleOnClickView = (row) => {
+    setShowModal({
+      show: true,
+      isEdit: true,
+      data: row,
+    });
+  };
 
   const colDef = [
     {
@@ -38,6 +52,7 @@ const ProductTable = (props) => {
       key: "images",
       type: "image",
       align: "center",
+      folderName: "products",
     },
     {
       id: "name",
@@ -119,9 +134,10 @@ const ProductTable = (props) => {
       editId: "edit-icon",
       deleteId: "delete-icon",
       commentId: "comment-icon",
-      // editFunc: (row, index) => handleOnClickView(row, true, index),
-      // deleteFunc: (row, index) => handleDeleteProduct(row, index),
-      isDelete: true,
+      disableKey: "isActive",
+      editFunc: (row, index) => handleOnClickView(row, true, index),
+      disableFunc: (row, index) => handleDisableProduct(row, index),
+      isDisable: true,
       isEdit: true,
       page: "JobListing",
     },
@@ -131,9 +147,9 @@ const ProductTable = (props) => {
       <CustomTable
         colDef={colDef}
         rowData={products}
-        deleteContent={{
-          title: "Delete Confirmation",
-          message: "Are you sure you want to delete this record?",
+        disableContent={{
+          title: "Disable Confirmation",
+          message: "Are you sure you want to disable this product?",
         }}
         loading={props.loading}
         pagination={true}
@@ -146,7 +162,8 @@ const ProductTable = (props) => {
           handleModalClose={handleModalClose}
           setShowModal={props.setShowModal}
           setLoading={props.setLoading}
-          setProducts={setProducts}
+          setProducts={props.setProducts}
+          categories={props.categories}
         />
       )}
     </>

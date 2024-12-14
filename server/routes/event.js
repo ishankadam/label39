@@ -7,7 +7,19 @@ router.use(express.json()); // Middleware to parse JSON request bodies
 
 // Routes for products
 router.post("/getProducts", controller.get_all_products);
-router.post("/createProduct", controller.create_product);
+router.post(
+  "/createProduct",
+  controller.upload.array("images"),
+  controller.create_product
+);
+
+router.put(
+  "/editProduct",
+  controller.upload.array("images"),
+  controller.edit_product
+);
+
+router.put("/product/:id/disable", controller.toggleProductStatus);
 
 // Routes for categories
 router.get("/getCategories", controller.get_all_categories);

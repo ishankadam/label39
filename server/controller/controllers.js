@@ -1,11 +1,53 @@
 const axios = require("axios");
 const razorpayInstance = require("../razorpay");
+const multer = require("multer");
 const Product = require("../schema/product");
 const Category = require("../schema/categories");
 const Testimonial = require("../schema/testimonial");
+const path = require("path");
+const parentDir = path.join(__dirname, "..");
+const fs = require("fs");
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    let category;
+    try {
+      // Parse `req.body` based on whether it contains `products` or `categories`
+      if (req.body.products) {
+        category = "products";
+      } else if (req.body.category) {
+        category = "categories";
+      } else if (req.body.testimonial) {
+        category = "testimonial";
+      } else {
+        return cb(new Error("Either products or categories data is required"));
+      }
+
+      // Validate `category` existence
+      if (!category) {
+        return cb(new Error("Category is required"));
+      }
+
+      // Define and create the directory path
+      const dir = path.join(parentDir, "uploads", category);
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+      }
+      cb(null, dir); // Set the directory as the destination
+    } catch (error) {
+      console.error("Error parsing data:", error);
+      return cb(new Error("Invalid data format in request body"));
+    }
+  },
+
+  filename: (req, file, cb) => {
+    cb(null, file.originalname); // Save file with its original name
+  },
+});
+
+const upload = multer({ storage });
 
 const get_all_products = async (req, res) => {
-  console.log(req.body.country); // Log the selected country code
   try {
     const country = req.body.country;
 
@@ -14,7 +56,7 @@ const get_all_products = async (req, res) => {
     }
 
     // Fetch all products from the database
-    const products = await Product.find({}); // Assume prices are stored in INR
+    const products = await Product.find({}).select("-_id"); // Assume prices are stored in INR
 
     // If the selected country is INR, no need to convert
     if (country === "INR") {
@@ -54,25 +96,42 @@ const get_all_products = async (req, res) => {
 };
 
 const create_product = async (req, res) => {
-  const newProductId = Math.floor(Math.random() * 9000000000) + 1;
   try {
-    const newCreatedProduct = new Product({
-      productId: newProductId,
-      name: req.body.name,
-      price: req.body.price,
-      description: req.body.description,
-      sizes: req.body.sizes || [],
-      garmentDetails: req.body.garmentDetails || [],
-      deliveryIn: req.body.deliveryIn,
-    });
+    const productsData = JSON.parse(req.body.products); // This will now be an array
+    const images = req.files.map((file) => file.filename);
+
+    const newProduct = {
+      productId: Math.floor(Math.random() * 9000000000) + 1,
+      name: productsData.name,
+      description: productsData.description,
+      sizes: productsData.sizes || [],
+      price: productsData.price,
+      garmentDetails: productsData.garmentDetails || [],
+      category: productsData.category,
+      bestSeller: productsData.bestseller,
+      deliveryIn: productsData.deliveryIn,
+      isActive: true,
+      bestseller: productsData.bestseller || false,
+    };
+
+    if (productsData.asSeenOn) {
+      newProduct.asSeenOn = productsData.asSeenOn;
+    }
+    if (productsData.videoSrc) {
+      newProduct.videoSrc = productsData.videoSrc;
+    }
+    const newProductData = {
+      ...newProduct,
+      images,
+    };
+    const newCreatedProduct = new Product(newProductData);
     await newCreatedProduct.save();
-    const allProduct = await Product.aggregate([{ $project: { _id: 0 } }]);
+
+    const allProduct = await Product.find({}, { _id: 0 });
     res.send(allProduct);
-    res.end();
   } catch (error) {
     console.log(error);
     res.status(400).send(error);
-    res.end();
   }
 };
 
@@ -164,6 +223,89 @@ const get_all_testimonials = async (req, res) => {
   }
 };
 
+const toggleProductStatus = async (req, res) => {
+  try {
+    const productToBeUpdated = await Product.find({
+      productId: Number(req.params.id),
+    });
+
+    console.log(productToBeUpdated[0].isActive);
+
+    const product = await Product.findOneAndUpdate(
+      { productId: Number(req.params.id) }, // Find by the custom field 'productId'
+      { $set: { isActive: !productToBeUpdated[0].isActive } }, // Set isActive to false
+      { new: true } // Return the updated product
+    );
+
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    const allProduct = await Product.find({}, { _id: 0 });
+    res.status(200).json({
+      message: "Product disabled successfully",
+      allProduct,
+    });
+  } catch (error) {
+    console.error("Error disabling product:", error);
+    res.status(500).json({
+      message: "Failed to disable product",
+      error: error.message,
+    });
+  }
+};
+
+const edit_product = async (req, res) => {
+  try {
+    const editData = JSON.parse(req.body.products); // Parse incoming product data
+    const images = req.files.map((file) => file.filename);
+
+    // Destructure productId and prepare updated product data
+    const { productId, ...editedProduct } = editData;
+    const productToBeEdited = await Product.findOne({ productId: productId });
+    // const imagePath = path.join(
+    //   parentDir,
+    //   "uploads",
+    //   productToBeEdited.category,
+    //   productToBeEdited.images[0]
+    // );
+
+    // fs.unlink(imagePath, (err) => {
+    //   if (err) {
+    //     console.error("Error deleting image file:", err);
+    //   } else {
+    //     console.log("Image file deleted successfully");
+    //   }
+    // });
+    // Check if productId is defined
+    if (!productId) {
+      return res.status(400).send({ error: "productId is required" });
+    }
+
+    // Prepare updatedProduct with name and images formatted accordingly
+    console.log(editedProduct);
+
+    console.log(editedProduct.images);
+    console.log(images);
+    editedProduct.images = [...editedProduct.images, ...images];
+    const updatedProduct = {
+      productId,
+      ...editedProduct,
+    };
+    // Replace or insert the product with upsert
+    // await Product.replaceOne({ productId: productId }, updatedProduct, {
+    //   upsert: true,
+    // });
+
+    // Retrieve all products excluding _id
+    const allProducts = await Product.find({}, { _id: 0 });
+    res.send(allProducts); // Send the updated product list
+  } catch (error) {
+    console.error("Error in edit_product:", error);
+    res.status(400).send({ error: error.message });
+  }
+};
+
 module.exports = {
   get_all_products,
   create_product,
@@ -172,4 +314,7 @@ module.exports = {
   trackDeliveryOrder,
   get_all_categories,
   get_all_testimonials,
+  upload,
+  toggleProductStatus,
+  edit_product,
 };

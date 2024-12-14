@@ -4,7 +4,12 @@ import React from "react";
 import "./../../css/selectDropdown.css";
 const SelectDropdown = (props) => {
   const handleChange = (e) => {
-    props.handleEdit(e.target.value, props.config.field);
+    props.handleEdit(
+      e.target.value,
+      props.config.field,
+      props.config.index,
+      props.config.section
+    );
   };
   const CountryFlag = ({ flag, name }) => (
     <img className="country-flag" src={flag} alt={name} />

@@ -26,13 +26,14 @@ import { findLabelByValue } from "../../common";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import ViewProductModal from "../../pages/product/viewProduct";
 import { imageUrl } from "../../api";
-import AddProduct from "../../form/addProduct/addProduct";
 import AddEditProductModal from "../../form/addProduct/addProduct";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import ConfirmationModal from "../modal/confirmationModal";
 const CustomTable = (props) => {
   const [rowData, setRowData] = useState(props.rowData);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [deleteInfo, setDeleteInfo] = useState({
+  const [disableInfo, setDisableInfo] = useState({
     row: 0,
     index: 0,
     show: false,
@@ -73,7 +74,7 @@ const CustomTable = (props) => {
   const renderTooltipContent = (items) => (
     <Grid container spacing={1}>
       {items.map((item) => (
-        <Grid xs={12} key={item.size}>
+        <Grid item="true" xs={12} key={item.size}>
           <Typography variant="body2">
             {item.size}: {item.quantity}
           </Typography>
@@ -155,7 +156,7 @@ const CustomTable = (props) => {
         children = (
           <img
             className="attachment-file"
-            src={`${imageUrl}${row[colDef.key][0]}`}
+            src={`${imageUrl}${colDef.folderName}/${row[colDef.key][0]}`}
             alt="attachment"
             style={{ height: "150px", width: "120px" }}
           />
@@ -198,20 +199,36 @@ const CustomTable = (props) => {
             ) : (
               ""
             )}
-            {colDef.isDelete ? (
-              <DeleteIcon
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setDeleteInfo({
-                    row: row,
-                    index: rowIndex,
-                    show: true,
-                    deleteFunc: colDef.deleteFunc,
-                  });
-                }}
-                sx={{ cursor: "pointer" }}
-                id={`${colDef.deleteId}-${rowIndex}`}
-              ></DeleteIcon>
+            {colDef.isDisable ? (
+              row[colDef.disableKey] ? (
+                <VisibilityOffIcon
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setDisableInfo({
+                      row: row,
+                      index: rowIndex,
+                      show: true,
+                      deleteFunc: colDef.disableFunc,
+                    });
+                  }}
+                  sx={{ cursor: "pointer" }}
+                  id={`${colDef.deleteId}-${rowIndex}`}
+                ></VisibilityOffIcon>
+              ) : (
+                <VisibilityIcon
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setDisableInfo({
+                      row: row,
+                      index: rowIndex,
+                      show: true,
+                      deleteFunc: colDef.disableFunc,
+                    });
+                  }}
+                  sx={{ cursor: "pointer" }}
+                  id={`${colDef.deleteId}-${rowIndex}`}
+                ></VisibilityIcon>
+              )
             ) : (
               ""
             )}
@@ -310,18 +327,18 @@ const CustomTable = (props) => {
         showFirstButton
         showLastButton
       />
-      {/* {deleteInfo.show ? (
+      {disableInfo.show ? (
         <ConfirmationModal
-          open={deleteInfo.show}
-          title={props.deleteContent.title}
-          message={props.deleteContent.message}
+          open={disableInfo.show}
+          title={props.disableContent.title}
+          message={props.disableContent.message}
           handleConfirm={() => {
-            deleteInfo.deleteFunc(deleteInfo.row, deleteInfo.index);
-            setDeleteInfo({ show: false });
+            disableInfo.deleteFunc(disableInfo.row, disableInfo.index);
+            setDisableInfo({ show: false });
           }}
-          handleCancel={() => setDeleteInfo({ show: false })}
+          handleCancel={() => setDisableInfo({ show: false })}
         />
-      ) : null} */}
+      ) : null}
       {showViewModal.open ? (
         <ViewProductModal
           open={showViewModal.open}

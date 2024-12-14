@@ -131,7 +131,7 @@ const ViewProductModal = (props) => {
                 </IconButton> */}
                 <Box
                   component="img"
-                  src={`${imageUrl}${selectedImage}`}
+                  src={`${imageUrl}products/${selectedImage}`}
                   alt="Selected Product"
                   sx={{
                     width: "100%",
@@ -155,7 +155,7 @@ const ViewProductModal = (props) => {
                   <Box
                     component="img"
                     key={index}
-                    src={`${imageUrl}${img}`}
+                    src={`${imageUrl}products/${img}`}
                     alt={`Thumbnail ${index}`}
                     sx={{
                       width: { xs: "50px", sm: "70px" },

@@ -1,3 +1,5 @@
+import { urlToFile } from "./common";
+
 const { REACT_APP_API_URL, REACT_APP_IMAGE_URL } = process.env;
 
 export const apiUrl = REACT_APP_API_URL;
@@ -33,21 +35,107 @@ export const getAllProducts = async ({
 };
 
 // Create a new product
-export const createProduct = async (productDetails) => {
-  try {
-    const response = await fetch(`${apiUrl}/createProduct`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(productDetails),
-    });
+export const createProduct = async ({
+  products,
+  setLoading,
+  setAllProduct,
+}) => {
+  setLoading(true);
 
-    if (!response.ok) {
-      throw new Error("Failed to create product");
+  try {
+    // Create FormData
+    const formData = new FormData();
+
+    // Append product details as JSON
+    formData.append(
+      "products",
+      JSON.stringify(products) // Wrap the product in an array
+    );
+
+    if (products.images && Array.isArray(products.images)) {
+      products.images.forEach((image) => {
+        if (image instanceof File) {
+          formData.append("images", image); // Add images
+        }
+      });
     }
 
-    console.log("Product created:", await response.json());
-  } catch (err) {
-    console.error("Error creating product:", err);
+    // Prepare request options
+    const requestOptions = {
+      method: "POST",
+      body: formData,
+    };
+
+    // Log FormData for debugging
+    for (let pair of formData.entries()) {
+      console.log(`${pair[0]}:`, pair[1]);
+    }
+
+    // Make API call
+    const response = await fetch(`${apiUrl}/createProduct`, requestOptions);
+
+    if (response.ok) {
+      const data = await response.json();
+      setAllProduct(data); // Update state with new product list
+    } else {
+      const errorData = await response.json();
+      console.error("Error creating products:", errorData);
+    }
+  } catch (e) {
+    console.error("Fetch error:", e);
+  } finally {
+    setLoading(false);
+  }
+};
+
+export const editProduct = async ({ products, setProducts, setLoading }) => {
+  setLoading(true);
+
+  const formData = new FormData();
+
+  const { images, ...productWithoutImages } = products;
+
+  // Append the product without images to FormData
+  formData.append("products", JSON.stringify(productWithoutImages));
+
+  if (products.images.length > 0) {
+    products.images.map(async (image) => {
+      if (image instanceof File) {
+        formData.append("images", image);
+      } else if (typeof image === "string") {
+        try {
+          const file = await urlToFile(image, image.split("/").pop());
+          formData.append("images", file);
+        } catch (error) {
+          console.error("Error converting URL to File:", error);
+        }
+      }
+    });
+  }
+
+  for (let [key, value] of formData.entries()) {
+    console.log(`${key}:`, value);
+  }
+
+  const requestOptions = {
+    method: "PUT",
+    body: formData,
+  };
+
+  try {
+    const response = await fetch(`${apiUrl}/editProduct`, requestOptions);
+    if (response.ok) {
+      const data = await response.json();
+      setProducts(data);
+    } else {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Network response was not ok.");
+    }
+  } catch (error) {
+    console.log(error);
+    throw error;
+  } finally {
+    setLoading(false);
   }
 };
 
@@ -154,5 +242,38 @@ export const getAllTestimonials = async ({ setTestimonials, setLoading }) => {
     return data;
   } catch (err) {
     console.error("Error fetching products:", err);
+  }
+};
+
+export const toggleProductStatus = async ({
+  row,
+  setProductsData,
+  setLoading,
+}) => {
+  try {
+    if (setLoading) setLoading(true);
+
+    const response = await fetch(`${apiUrl}/product/${row.productId}/disable`, {
+      method: "PUT", // Change to PUT for updates
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (!response.ok) {
+      if (response.status === 404) {
+        console.error("Product not found");
+      } else {
+        console.error("Failed to disable the product");
+      }
+      throw new Error("Failed to disable product");
+    }
+
+    const data = await response.json();
+    console.log(data);
+    setProductsData(data.allProduct); // Update state with the API response
+    if (setLoading) setLoading(false);
+    return data;
+  } catch (err) {
+    console.error("Error disabling product:", err);
+    if (setLoading) setLoading(false);
   }
 };

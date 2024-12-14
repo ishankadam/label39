@@ -51,7 +51,12 @@ const CustomTextfield = (props) => {
     // setTextValue(value);
     // if (props.handleEdit) {
     // }
-    props.handleEdit(value, props.config.field);
+    props.handleEdit(
+      inputValue,
+      props.config.field,
+      props.config.index,
+      props.config.section
+    );
   };
 
   useEffect(() => {

@@ -27,6 +27,7 @@ const productSchema = new mongoose.Schema({
   soldOut: { type: Boolean, default: false },
   asSeenOn: { type: String },
   videoSrc: { type: String },
+  isActive: { type: Boolean, default: true },
 });
 
 // Create the model

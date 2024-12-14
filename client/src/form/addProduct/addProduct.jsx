@@ -1,110 +1,117 @@
 import React, { useEffect, useState } from "react";
 import {
   Button,
-  Card,
   Checkbox,
-  FormControlLabel,
   Typography,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
+  Switch,
   Grid,
 } from "@mui/material";
 import CustomTextfield from "../../components/textfield/customTextfield";
+import SelectDropdown from "../../components/select-dropdown/selectDropdown";
+import UploadFiles from "../../components/upload/uploadFiles";
 import {
   availableSizes,
-  categories,
   deliveryIn,
   garmentDetails,
+  sizeOptions,
 } from "../../common";
 import ChipTextfield from "../../components/textfield/chipTextfield";
-import RemoveIcon from "@mui/icons-material/Remove";
-import { createProduct, updateProduct } from "../../api";
-import UploadFiles from "../../components/upload/uploadFiles";
-import SelectDropdown from "../../components/select-dropdown/selectDropdown";
+import { createProduct, editProduct } from "../../api";
 import "./addProduct.css";
+import ClearIcon from "@mui/icons-material/Clear";
+import AddIcon from "@mui/icons-material/Add";
 
 const AddEditProductModal = (props) => {
   const [images, setImages] = useState([]);
+  const [showBottomSection, setShowBottomSection] = useState(false); // Toggle for bottom section
+  const [categoryList, setCategoryList] = useState([]);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [productDetails, setProductDetails] = useState({
     name: "",
     price: "",
     description: "",
     category: "",
-    sizes: [{ category: "Upper", sizes: [] }], // Default category
+    sizes: {
+      Upper: [{ size: "", quantity: "", price: "" }],
+      Bottom: [],
+    },
     garmentDetails: [],
     deliveryIn: [],
     images: [],
+    bestseller: false,
   });
-  const [bottomCategoryVisible, setBottomCategoryVisible] = useState(false);
 
-  useEffect(() => {
-    if (props.product) {
-      setProductDetails({
-        ...props.product,
-        sizes: Object.entries(props.product.sizes || {}).map(
-          ([key, values]) => ({
-            category: key,
-            sizes: values,
-          })
-        ),
+  // Handle input changes
+  const handleEdit = (value, field, index, section) => {
+    if (section) {
+      setProductDetails((prev) => {
+        const updatedSizes = [...prev.sizes[section]];
+        updatedSizes[index] = { ...updatedSizes[index], [field]: value };
+        return { ...prev, sizes: { ...prev.sizes, [section]: updatedSizes } };
       });
-    }
-  }, [props.product]);
-
-  const handleAddSize = (categoryIndex) => {
-    const updatedSizes = [...productDetails.sizes];
-    updatedSizes[categoryIndex].sizes.push({ size: "", quantity: 0, price: 0 });
-    setProductDetails((prev) => ({ ...prev, sizes: updatedSizes }));
-  };
-
-  const handleRemoveSize = (categoryIndex, sizeIndex) => {
-    const updatedSizes = [...productDetails.sizes];
-    updatedSizes[categoryIndex].sizes = updatedSizes[
-      categoryIndex
-    ].sizes.filter((_, i) => i !== sizeIndex);
-    setProductDetails((prev) => ({ ...prev, sizes: updatedSizes }));
-  };
-
-  const handleCategory = (visibility) => {
-    setBottomCategoryVisible(visibility);
-
-    setProductDetails((prev) => {
-      // If visibility is false, remove the "Bottom" category
-      if (!visibility) {
-        return {
-          ...prev,
-          sizes: prev.sizes.filter(
-            (category) => category.category !== "Bottom"
-          ),
-        };
-      }
-
-      // If visibility is true, add the "Bottom" category
-      return {
+    } else {
+      setProductDetails((prev) => ({
         ...prev,
-        sizes: [...prev.sizes, { category: "Bottom", sizes: [] }],
-      };
-    });
+        [field]: value,
+      }));
+    }
   };
 
-  const handleEdit = (value, field) => {
-    setProductDetails((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
-  };
-
+  // Handle file uploads
   const handleFileUpload = (files) => {
+    console.log(files);
     setProductDetails((prev) => ({
       ...prev,
       images: files,
     }));
   };
 
+  // Add a new row in sizes
+  const addSizeRow = (section) => {
+    setProductDetails((prev) => ({
+      ...prev,
+      sizes: {
+        ...prev.sizes,
+        [section]: [
+          ...prev.sizes[section],
+          { size: "", quantity: "", price: "" },
+        ],
+      },
+    }));
+  };
+
+  // Remove a row from sizes
+  const removeSizeRow = (section, index) => {
+    setProductDetails((prev) => {
+      const updatedSizes = prev.sizes[section].filter((_, i) => i !== index);
+      return { ...prev, sizes: { ...prev.sizes, [section]: updatedSizes } };
+    });
+  };
+
+  // Submit product details
   const handleSubmit = () => {
-    // Save logic for create or update product
+    try {
+      if (props.isEdit) {
+        editProduct({
+          products: productDetails,
+          setProducts: props.setProducts,
+          setLoading: props.setLoading,
+        });
+      } else {
+        createProduct({
+          products: productDetails,
+          setLoading: props.setLoading,
+          setAllProduct: props.setProducts,
+        });
+      }
+      props.handleModalClose();
+    } catch (error) {
+      console.error("Error processing product:", error);
+    }
     handleClose();
   };
 
@@ -117,8 +124,39 @@ const AddEditProductModal = (props) => {
   };
 
   useEffect(() => {
-    console.log(productDetails);
-  }, [productDetails]);
+    const newCategoriesList = props.categories?.map((category) => ({
+      label: category.name,
+      value: category.name.toLowerCase().replace(/\s+/g, ""),
+    }));
+    setCategoryList(newCategoriesList);
+  }, [props.categories]);
+
+  useEffect(() => {
+    if (props.isEdit && props.data) {
+      setProductDetails({ ...props.data });
+      setImages(
+        Array.isArray(props.data.images)
+          ? props.data.images
+          : [props.data.images]
+      );
+    }
+  }, [props.isEdit, props.data]);
+
+  const handleAddBottomSection = (section) => {
+    setShowBottomSection((prev) => !prev);
+    if (productDetails.sizes.Bottom.length < 1) {
+      setProductDetails((prev) => ({
+        ...prev,
+        sizes: {
+          ...prev.sizes,
+          [section]: [
+            ...prev.sizes[section],
+            { size: "", quantity: "", price: "" },
+          ],
+        },
+      }));
+    }
+  };
 
   return (
     <Dialog
@@ -128,32 +166,14 @@ const AddEditProductModal = (props) => {
       fullWidth
       maxWidth="md"
     >
-      <DialogTitle
-        sx={{
-          boxShadow:
-            "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;",
-        }}
-      >
-        <Typography
-          variant="h5"
-          sx={{
-            fontFamily: "'Roboto Serif', serif",
-            color: "#a16149",
-            fontWeight: "600",
-            textAlign: { xs: "center", md: "left" },
-            fontSize: {
-              xs: "1rem",
-              sm: "1.1rem",
-              md: "1.3rem",
-              lg: "1.5rem",
-            },
-          }}
-        >
+      <DialogTitle>
+        <Typography variant="h6">
           {props.product ? "Edit Product" : "Add Product"}
         </Typography>
       </DialogTitle>
       <DialogContent>
-        <Grid container spacing={2} sx={{ pt: 2 }}>
+        <Grid container spacing={2}>
+          {/* Product Fields */}
           <Grid item xs={12} sm={6}>
             <CustomTextfield
               label="Product Name"
@@ -172,7 +192,7 @@ const AddEditProductModal = (props) => {
               sx={{ width: "100%" }}
             />
           </Grid>
-          <Grid item xs={12} sm={12}>
+          <Grid item xs={12}>
             <CustomTextfield
               label="Description"
               value={productDetails.description}
@@ -182,137 +202,136 @@ const AddEditProductModal = (props) => {
               sx={{ width: "100%" }}
             />
           </Grid>
-
-          <Grid item xs={12} sm={12}>
+          <Grid xs={12} sm={12}>
             <SelectDropdown
               label="Category"
-              optionList={categories}
+              optionList={categoryList}
               config={{ field: "category", isRequired: true }}
               handleEdit={handleEdit}
               value={productDetails.category}
+              sx={{ width: "100%" }}
             />
           </Grid>
-
-          <Grid item xs={12} sm={12}>
-            {productDetails.sizes.map((category, categoryIndex) => (
-              <div
-                key={`category-${categoryIndex}`}
-                style={{
-                  border: "1px solid #ddd",
-                  borderRadius: "8px",
-                  padding: "16px",
-                  marginBottom: "16px",
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    marginBottom: "16px",
-                  }}
-                >
-                  <Typography variant="h6">{category.category}</Typography>
-                  <Button
-                    color="custom"
-                    style={{ width: "120px" }}
-                    variant="outlined"
-                    onClick={() => handleAddSize(categoryIndex)}
-                  >
-                    Add Size
-                  </Button>
-                </div>
-
-                <div>
-                  {category.sizes.map((size, sizeIndex) => (
-                    <div
-                      key={`size-${categoryIndex}-${sizeIndex}`}
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        marginBottom: "12px",
+          {/* Sizes Section */}
+          <Grid item xs={12}>
+            <Typography variant="subtitle1">Sizes (Upper Section)</Typography>
+            {productDetails.sizes.Upper.length > 0 &&
+              productDetails.sizes.Upper?.map((row, index) => (
+                <Grid container spacing={2} key={index} alignItems="center">
+                  <Grid item xs={4}>
+                    <SelectDropdown
+                      label="Size"
+                      optionList={availableSizes}
+                      config={{ field: "size", index: index, section: "Upper" }}
+                      value={row.size}
+                      handleEdit={handleEdit}
+                    />
+                  </Grid>
+                  <Grid item xs={4}>
+                    <CustomTextfield
+                      label="Quantity"
+                      value={row.quantity}
+                      config={{
+                        field: "quantity",
+                        index: index,
+                        section: "Upper",
                       }}
-                    >
-                      <SelectDropdown
-                        config={{
-                          field: `sizes[${categoryIndex}].sizes[${sizeIndex}].size`,
-                          isRequired: true,
-                        }}
-                        optionList={availableSizes}
-                        label="Size"
-                        value={size.size}
-                        handleEdit={(value) => {
-                          const updatedSizes = [...productDetails.sizes];
-                          updatedSizes[categoryIndex].sizes[sizeIndex].size =
-                            value;
-                          setProductDetails((prev) => ({
-                            ...prev,
-                            sizes: updatedSizes,
-                          }));
-                        }}
-                      />
-                      <CustomTextfield
-                        style={{ marginLeft: "15px" }}
-                        label="Quantity"
-                        config={{
-                          field: `sizes[${categoryIndex}].sizes[${sizeIndex}].quantity`,
-                          isRequired: true,
-                        }}
-                        type="number"
-                        value={size.quantity}
-                        handleEdit={(value) => {
-                          const updatedSizes = [...productDetails.sizes];
-                          updatedSizes[categoryIndex].sizes[
-                            sizeIndex
-                          ].quantity = value;
-                          setProductDetails((prev) => ({
-                            ...prev,
-                            sizes: updatedSizes,
-                          }));
-                        }}
-                      />
-                      <CustomTextfield
-                        style={{ marginLeft: "15px" }}
-                        label="Price"
-                        config={{
-                          field: `sizes[${categoryIndex}].sizes[${sizeIndex}].price`,
-                          isRequired: true,
-                        }}
-                        value={size.price}
-                        handleEdit={(value) => {
-                          const updatedSizes = [...productDetails.sizes];
-                          updatedSizes[categoryIndex].sizes[sizeIndex].price =
-                            value;
-                          setProductDetails((prev) => ({
-                            ...prev,
-                            sizes: updatedSizes,
-                          }));
-                        }}
-                      />
-                      <RemoveIcon
-                        style={{
-                          marginLeft: "12px",
-                          cursor: "pointer",
-                          color: "#f00",
-                        }}
-                        onClick={() =>
-                          handleRemoveSize(categoryIndex, sizeIndex)
-                        }
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
+                      handleEdit={handleEdit}
+                    />
+                  </Grid>
+                  <Grid item xs={4}>
+                    <CustomTextfield
+                      label="Price"
+                      type="number"
+                      value={row.price}
+                      config={{
+                        field: "price",
+                        index: index,
+                        section: "Upper",
+                      }}
+                      handleEdit={handleEdit}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <ClearIcon
+                      color="error"
+                      onClick={() => removeSizeRow("Upper", index)}
+                    />
+                  </Grid>
+                </Grid>
+              ))}
+
+            <AddIcon color="primary" onClick={() => addSizeRow("Upper")} />
           </Grid>
+          {/* Bottom Section Toggle */}
+          <Grid item xs={12}>
+            <Typography variant="subtitle1">
+              Add Bottom Section{" "}
+              <Switch
+                checked={showBottomSection}
+                onChange={() => handleAddBottomSection("Bottom")}
+              />
+            </Typography>
+            {showBottomSection && (
+              <>
+                <Typography variant="subtitle1">
+                  Sizes (Bottom Section)
+                </Typography>
+                {productDetails.sizes.Bottom.map((row, index) => (
+                  <Grid container spacing={2} key={index} alignItems="center">
+                    <Grid item xs={4}>
+                      <SelectDropdown
+                        label="Size"
+                        optionList={availableSizes}
+                        value={row.size}
+                        config={{
+                          field: "size",
+                          index: index,
+                          section: "Bottom",
+                        }}
+                        handleEdit={handleEdit}
+                      />
+                    </Grid>
+                    <Grid item xs={4}>
+                      <CustomTextfield
+                        label="Quantity"
+                        value={row.quantity}
+                        config={{
+                          field: "quantity",
+                          index: index,
+                          section: "Bottom",
+                        }}
+                        handleEdit={handleEdit}
+                      />
+                    </Grid>
+                    <Grid item xs={4}>
+                      <CustomTextfield
+                        label="Price"
+                        value={row.price}
+                        type="number"
+                        config={{
+                          field: "price",
+                          index: index,
 
-          <Button onClick={(e) => handleCategory(!bottomCategoryVisible)}>
-            {bottomCategoryVisible ? "Remove Bottom" : "Add Bottom"}
-          </Button>
-
-          {/* Conditionally Render Bottom Category */}
-
-          <Grid item xs={12} sm={12}>
+                          section: "Bottom",
+                        }}
+                        handleEdit={handleEdit}
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <ClearIcon
+                        color="error"
+                        onClick={() => removeSizeRow("Bottom", index)}
+                      />
+                    </Grid>
+                  </Grid>
+                ))}
+                <AddIcon color="primary" onClick={() => addSizeRow("Bottom")} />
+              </>
+            )}
+          </Grid>
+          {/* Other Fields */}
+          <Grid item xs={12}>
             <ChipTextfield
               label="Garment Details"
               predefinedOptions={garmentDetails}
@@ -321,7 +340,7 @@ const AddEditProductModal = (props) => {
               value={productDetails.garmentDetails}
             />
           </Grid>
-          <Grid item xs={12} sm={12}>
+          <div xs={12} sm={12}>
             <CustomTextfield
               label="Delivery In"
               predefinedOptions={deliveryIn}
@@ -330,30 +349,34 @@ const AddEditProductModal = (props) => {
               handleEdit={handleEdit}
               sx={{ width: "100%" }}
             />
-          </Grid>
-          <Grid item xs={12} sm={12}>
+          </div>
+          <div style={{ display: "flex" }}>
+            <Checkbox
+              checked={productDetails.bestseller}
+              config={{ field: "bestseller", isRequired: true }}
+              onChange={(e) => handleEdit(e.target.checked, "bestseller")}
+            />
+            <Typography>Is this a bestseller?</Typography>
+          </div>
+          <Grid item xs={12}>
             <UploadFiles
               updateData={handleFileUpload}
-              // isEdit={true}
               images={images}
+              isEdit={props.isEdit}
               file={productDetails.images}
               acceptedFiles="image/png, image/jpeg"
               singleFile={false}
+              category="products"
             />
           </Grid>
         </Grid>
       </DialogContent>
-      <DialogActions
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-        }}
-      >
+      <DialogActions>
         <Button onClick={handleClose} variant="outlined">
           Cancel
         </Button>
         <Button onClick={handleSubmit} variant="contained">
-          {props.product ? "Save Changes" : "Add Product"}
+          {props.isEdit ? "Save Changes" : "Add Product"}
         </Button>
       </DialogActions>
     </Dialog>
