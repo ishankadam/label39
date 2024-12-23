@@ -1,13 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   Card,
-  Checkbox,
-  FormControlLabel,
   Typography,
-  Grid2,
   Grid,
-  TextField,
   Box,
   Badge,
   Accordion,
@@ -16,16 +12,74 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CustomTextfield from "../../components/textfield/customTextfield";
-import SelectDropdown from "../../components/select-dropdown/selectDropdown";
-import { countries } from "../../common";
+import { useSelector } from "react-redux";
+import { imageUrl } from "../../api";
+import { createOrder } from "../../api";
+const { RAZORPAY_KEY_ID } = process.env;
+export const razorpayId = RAZORPAY_KEY_ID;
 
-import { cartItems } from "../../common";
 const CheckoutForm = (props) => {
+  const cartItems = useSelector((state) => state.cart.items);
   const totalPrice = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
     0
   );
-  const handleEdit = () => {};
+  const [checkoutData, setCheckoutData] = useState({
+    firstName: "",
+    lastName: "",
+    address: "",
+    apartment: "",
+    city: "",
+    state: "",
+    pincode: "",
+    phone: "",
+    email: "",
+  });
+
+  const handleEdit = (value, field) => {
+    setCheckoutData((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
+  const handleOrderPlacement = async () => {
+    const amount = cartItems.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
+    try {
+      const { orderId } = await createOrder(amount);
+      const options = {
+        key: razorpayId, // Replace with your key_id
+        amount: amount * 100, // Amount in the smallest currency unit
+        currency: "INR",
+        name: "The Label 39",
+        description: "Payment Description",
+        order_id: orderId,
+        handler: function (response) {
+          alert("Payment Successful!");
+          console.log(response);
+        },
+        prefill: {
+          name: "TheLabel39",
+          email: "thelabel39@gmail.com",
+          contact: "96749 49842",
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+      console.log(rzp);
+    } catch (error) {
+      console.error("Payment failed:", error);
+    }
+    console.log(checkoutData);
+  };
+
   return (
     <>
       {/* Accordion */}
@@ -90,7 +144,7 @@ const CheckoutForm = (props) => {
                   >
                     {/* Image */}
                     <img
-                      src={item.image}
+                      src={`${imageUrl}products/${item.images[0]}`}
                       alt={item.title}
                       style={{
                         maxWidth: "100%",
@@ -111,7 +165,7 @@ const CheckoutForm = (props) => {
                       fontSize: { xs: "11px", sm: "12px", md: "14px" },
                     }}
                   >
-                    {item.title}
+                    {item.name}
                   </Typography>
                   <Typography
                     variant="body2"
@@ -156,6 +210,7 @@ const CheckoutForm = (props) => {
                   flex: 1, // Allows the TextField to take remaining space
                   height: "56px", // Matches the default Button height
                 }}
+                value={checkoutData.pincode}
               />
               <Button
                 variant="contained"
@@ -312,7 +367,8 @@ const CheckoutForm = (props) => {
               </Typography>
               <CustomTextfield
                 label="Phone number"
-                config={{ field: "phone", isRequired: true }}
+                value={checkoutData.phone}
+                config={{ field: "phone", type: "phone", isRequired: true }}
                 handleEdit={handleEdit}
                 sx={{ width: "100%" }}
               ></CustomTextfield>
@@ -333,6 +389,7 @@ const CheckoutForm = (props) => {
               <CustomTextfield
                 label="First Name"
                 variant="outlined"
+                value={checkoutData.firstName}
                 config={{ field: "firstName", isRequired: true }}
                 handleEdit={handleEdit}
                 fullWidth
@@ -344,7 +401,20 @@ const CheckoutForm = (props) => {
               <CustomTextfield
                 label="Last Name"
                 variant="outlined"
+                value={checkoutData.lastName}
                 config={{ field: "lastName", isRequired: true }}
+                handleEdit={handleEdit}
+                fullWidth
+                required
+                sx={{ width: "100%" }}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <CustomTextfield
+                label="Email"
+                variant="outlined"
+                value={checkoutData.email}
+                config={{ field: "email", type: "email", isRequired: true }}
                 handleEdit={handleEdit}
                 fullWidth
                 required
@@ -356,6 +426,7 @@ const CheckoutForm = (props) => {
             <Grid item xs={12}>
               <CustomTextfield
                 label="Address"
+                value={checkoutData.address}
                 config={{ field: "address", isRequired: true }}
                 handleEdit={handleEdit}
                 fullWidth
@@ -366,7 +437,8 @@ const CheckoutForm = (props) => {
             <Grid item xs={12}>
               <CustomTextfield
                 label="Apartment, Suite, etc. (optional)"
-                config={{ field: "apartment" }}
+                value={checkoutData.apartment}
+                config={{ field: "apartment", isRequired: true }}
                 handleEdit={handleEdit}
                 fullWidth
                 sx={{ width: "100%" }}
@@ -375,6 +447,7 @@ const CheckoutForm = (props) => {
             <Grid item xs={12} sm={4}>
               <CustomTextfield
                 label="City"
+                value={checkoutData.city}
                 config={{ field: "city", isRequired: true }}
                 handleEdit={handleEdit}
                 fullWidth
@@ -384,6 +457,7 @@ const CheckoutForm = (props) => {
             <Grid item xs={12} sm={4}>
               <CustomTextfield
                 label="State"
+                value={checkoutData.state}
                 config={{ field: "state", isRequired: true }}
                 handleEdit={handleEdit}
                 fullWidth
@@ -393,6 +467,7 @@ const CheckoutForm = (props) => {
             <Grid item xs={12} sm={4}>
               <CustomTextfield
                 label="Pincode"
+                value={checkoutData.pincode}
                 config={{ field: "pincode", isRequired: true }}
                 handleEdit={handleEdit}
                 fullWidth
@@ -400,13 +475,6 @@ const CheckoutForm = (props) => {
               />
             </Grid>
             <Grid item xs={12}>
-              <CustomTextfield
-                label="Phone number"
-                config={{ field: "Phone number", isRequired: true }}
-                handleEdit={handleEdit}
-                fullWidth
-                sx={{ width: "100%" }}
-              />
               <Typography
                 variant="h6"
                 sx={{
@@ -494,6 +562,7 @@ const CheckoutForm = (props) => {
                 fontSize: "18px",
                 p: 1,
               }}
+              onClick={() => handleOrderPlacement()}
             >
               Pay Now
             </Button>
@@ -548,7 +617,7 @@ const CheckoutForm = (props) => {
                 >
                   {/* Image */}
                   <img
-                    src={item.image}
+                    src={`${imageUrl}products/${item.images[0]}`}
                     alt={item.title}
                     style={{
                       maxWidth: "100%",
@@ -569,7 +638,7 @@ const CheckoutForm = (props) => {
                     fontSize: { xs: "11px", sm: "12px", md: "14px" },
                   }}
                 >
-                  {item.title}
+                  {item.name}
                 </Typography>
                 <Typography
                   variant="body2"
@@ -580,7 +649,9 @@ const CheckoutForm = (props) => {
                     fontSize: { xs: "11px", sm: "12px", md: "13px" },
                   }}
                 >
-                  Size: {item.size}
+                  {`Size: Upper - ${item.sizes.Upper} | ${
+                    item.sizes.Bottom ? `Bottom - ${item.sizes.Bottom}` : ""
+                  }`}
                 </Typography>
               </Box>
 

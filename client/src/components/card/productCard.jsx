@@ -11,13 +11,32 @@ import {
 import React from "react";
 import "./../../css/productCard.css";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import BoltIcon from "@mui/icons-material/Bolt";
 import { imageUrl } from "../../api";
-import { getCurrencySymbol } from "../../common";
+import { deliveryIn, getCurrencySymbol } from "../../common";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../store/cartSlice";
 
 const ProductCard = (props) => {
   const [isHovered, setIsHovered] = useState(false);
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (e, product) => {
+    e.stopPropagation();
+    const cartProduct = {
+      productId: product.productId,
+      name: product.name,
+      price: product.price,
+      quantity: 1,
+      deliveryIn: product.deliveryIn,
+      images: [product.images[0]],
+      sizes: {
+        Upper: "",
+        Bottom: "",
+      },
+    };
+    dispatch(addToCart(cartProduct));
+  };
+
   return (
     <Card
       className="product-card"
@@ -175,29 +194,17 @@ const ProductCard = (props) => {
           zIndex: 2,
         }}
       >
-        <IconButton variant="outlined" color="custom">
+        <IconButton
+          variant="outlined"
+          color="custom"
+          onClick={(e) => {
+            handleAddToCart(e, props.product);
+          }}
+        >
           <ShoppingCartOutlinedIcon />
         </IconButton>
 
-        <Button
-          // className="btn-buy"
-          variant="outlined"
-          color="custom"
-          // size="small"
-        >
-          {/* <IconButton
-            color="inherit"
-            sx={{
-              padding: "0px 4px !important",
-            }}
-          >
-            <BoltIcon
-              sx={{
-                color: "#fff",
-                fontSize: { xs: "13px", sm: "14px", md: "1px", lg: "18px" },
-              }}
-            />
-          </IconButton> */}
+        <Button variant="outlined" color="custom">
           Buy Now
         </Button>
       </Box>

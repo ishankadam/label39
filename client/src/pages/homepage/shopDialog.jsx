@@ -1,16 +1,17 @@
 import * as React from "react";
 import { Typography, Box, Button } from "@mui/material";
 import shopImage from "../../assets/SHIRTS.png";
-import { useShopContext } from "../../context/shopContext";
+import { useSelector } from "react-redux";
 
 const ShopDialog = ({ onMouseEnter, onMouseLeave }) => {
-  const { openShopMenu } = useShopContext();
+  const openShopMenu = useSelector((state) => state.cart.openShopMenu);
 
-  return openShopMenu ? (
+  if (!openShopMenu) return null;
+
+  return (
     <Box
       sx={{
         position: "absolute",
-        // top: "15%",
         left: "50%",
         transform: "translateX(-50%)",
         zIndex: 1000,
@@ -93,15 +94,15 @@ const ShopDialog = ({ onMouseEnter, onMouseLeave }) => {
           <img
             src={shopImage}
             alt="Example"
-            sx={{
-              maxWidth: "100%", // Ensure the image does not exceed the container width
-              height: "auto", // Maintain aspect ratio
+            style={{
+              maxWidth: "100%",
+              height: "auto",
             }}
           />
         </Box>
       </Box>
     </Box>
-  ) : null;
+  );
 };
 
 export default ShopDialog;

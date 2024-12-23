@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CustomTable from "../../components/custom-table/customTable";
 import AddEditCategory from "../../form/addCategory/addCategory";
+import { toggleCategoryStatus } from "../../api";
 // import CreateCategory from "../../components/modal/createCategory";
 // import { deleteCategory } from "../../api";
 const ManageCategories = (props) => {
@@ -36,12 +37,12 @@ const ManageCategories = (props) => {
     });
   };
 
-  const handleDeleteCategory = (row) => {
-    // deleteCategory({
-    //   category: row,
-    //   setLoading: props.setLoading,
-    //   setCategory: props.setCategories,
-    // });
+  const handleDisableProduct = (row, index) => {
+    toggleCategoryStatus({
+      category: row,
+      setLoading: props.setLoading,
+      setCategories: props.setCategories,
+    });
   };
 
   const colDef = [
@@ -76,9 +77,10 @@ const ManageCategories = (props) => {
       editId: "edit-icon",
       deleteId: "delete-icon",
       commentId: "comment-icon",
-      //   editFunc: (row, index) => handleOnClickView(row, true, index),
-      //   deleteFunc: (row, index) => handleDeleteCategory(row, index),
-      isDelete: true,
+      disableKey: "isActive",
+      editFunc: (row, index) => handleOnClickView(row, true, index),
+      disableFunc: (row, index) => handleDisableProduct(row, index),
+      isDisable: true,
       isEdit: true,
       page: "JobListing",
     },
@@ -88,9 +90,9 @@ const ManageCategories = (props) => {
       <CustomTable
         colDef={colDef}
         rowData={categories}
-        deleteContent={{
-          title: "Delete Confirmation",
-          message: "Are you sure you want to delete this record?",
+        disableContent={{
+          title: "Disable Confirmation",
+          message: "Are you sure you want to disable this category?",
         }}
         loading={props.loading}
         pagination={true}

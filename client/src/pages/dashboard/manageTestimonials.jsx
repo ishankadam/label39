@@ -57,6 +57,7 @@ const ManageTestimonials = (props) => {
       type: "image",
       align: "center",
       category: "testimonial",
+      folderName: "testimonials",
     },
     {
       id: "name",
@@ -83,7 +84,7 @@ const ManageTestimonials = (props) => {
       commentId: "comment-icon",
       editFunc: (row, index) => handleOnClickView(row, true, index),
       deleteFunc: (row, index) => handleDeleteTestimonial(row, index),
-      isDelete: true,
+      isDisable: true,
       isEdit: true,
       page: "JobListing",
     },

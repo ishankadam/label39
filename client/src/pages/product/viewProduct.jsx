@@ -13,29 +13,26 @@ import {
 } from "@mui/material";
 import ShareIcon from "@mui/icons-material/Share";
 import ChatIcon from "@mui/icons-material/Chat";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Footer from "../homepage/footer";
 import { imageUrl } from "../../api";
-import { products } from "../../common";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../store/cartSlice";
+import { useNavigate } from "react-router-dom";
 
 const ViewProductModal = (props) => {
-  const { isAdmin, product, open, setShowModal, setShowEditModal } = props;
+  const { isAdmin, product, open, setShowModal } = props;
   const [modalOpen, setModalOpen] = useState(open);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const selectedImage = product.images[selectedImageIndex];
-  const [selectedSizes, setSelectedSizes] = useState({});
-  const handlePreviousImage = () => {
-    setSelectedImageIndex((prevIndex) =>
-      prevIndex > 0 ? prevIndex - 1 : product.images.length - 1
-    );
-  };
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [selectedSizes, setSelectedSizes] = useState({
+    Upper: "XS",
+    Bottom: "XS",
+  });
 
-  const handleNextImage = () => {
-    setSelectedImageIndex((prevIndex) =>
-      prevIndex < product.images.length - 1 ? prevIndex + 1 : 0
-    );
-  };
+  const [price, setPrice] = useState(product.price);
+  const [cartProduct, setCartProduct] = useState(product);
 
   const handleClose = () => {
     setShowModal((prev) => ({
@@ -45,18 +42,6 @@ const ViewProductModal = (props) => {
     }));
   };
 
-  const handleEditProduct = () => {
-    setShowModal((prev) => ({
-      ...prev,
-      open: false,
-      data: {},
-    }));
-    setShowEditModal({
-      open: true,
-      data: product,
-    });
-  };
-
   useEffect(() => {
     setModalOpen(open);
   }, [open]);
@@ -64,8 +49,69 @@ const ViewProductModal = (props) => {
   const handleSizeChange = (category, newSize) => {
     setSelectedSizes((prevSelectedSizes) => ({
       ...prevSelectedSizes,
-      [category]: newSize, // Only one size per category
+      [category]: newSize,
     }));
+  };
+
+  useEffect(() => {
+    let selectedPrice = 0;
+
+    if (selectedSizes.Upper && !selectedSizes.Bottom) {
+      // Find the price for the selected Upper size
+      const upperSize = product.sizes.Upper?.find(
+        (item) => item.size === selectedSizes.Upper
+      );
+      if (upperSize) selectedPrice = upperSize.price;
+    } else if (selectedSizes.Bottom) {
+      // Find the price for the selected Bottom size
+      const bottomSize = product.sizes.Bottom?.find(
+        (item) => item.size === selectedSizes.Bottom
+      );
+      if (bottomSize) selectedPrice = bottomSize.price;
+    }
+    setPrice(selectedPrice || product.price); // Default to 0 if no size is selected
+    setCartProduct((prev) => ({
+      ...prev,
+      price: selectedPrice || prev.price,
+      sizes: selectedSizes,
+    }));
+  }, [selectedSizes, product]);
+
+  useEffect(() => {
+    setPrice(product.price);
+  }, [product.price]);
+
+  const handleAddToCart = () => {
+    const newCartProduct = {
+      productId: cartProduct.cartProductId,
+      name: cartProduct.name,
+      price: cartProduct.price,
+      quantity: 1,
+      deliveryIn: cartProduct.deliveryIn,
+      images: [cartProduct.images[0]],
+      sizes: {
+        Upper: "",
+        Bottom: "",
+      },
+    };
+    dispatch(addToCart(newCartProduct));
+  };
+
+  const handleBuyNow = () => {
+    const newCartProduct = {
+      productId: cartProduct.cartProductId,
+      name: cartProduct.name,
+      price: cartProduct.price,
+      quantity: 1,
+      deliveryIn: cartProduct.deliveryIn,
+      images: [cartProduct.images[0]],
+      sizes: {
+        Upper: "",
+        Bottom: "",
+      },
+    };
+    dispatch(addToCart(newCartProduct));
+    navigate("/checkout");
   };
 
   return (
@@ -207,7 +253,7 @@ const ViewProductModal = (props) => {
                     justifyContent: { xs: "center", sm: "center", md: "left" },
                   }}
                 >
-                  RS. {product.price}
+                  RS. {price ? price : product.price}
                 </Typography>
 
                 {/* Size Chart */}
@@ -292,10 +338,18 @@ const ViewProductModal = (props) => {
                         marginBottom: "25px",
                       }}
                     >
-                      <Button variant="outlined" color="custom" sx={{}}>
+                      <Button
+                        variant="outlined"
+                        color="custom"
+                        onClick={handleAddToCart}
+                      >
                         Add to Cart
                       </Button>
-                      <Button variant="contained" color="custom">
+                      <Button
+                        variant="contained"
+                        color="custom"
+                        onClick={handleBuyNow}
+                      >
                         Buy Now
                       </Button>
                     </Box>
@@ -407,8 +461,9 @@ const ViewProductModal = (props) => {
             </Grid>
           </Grid>
 
-          {/* Buttons Section at the Bottom */}
-          <Box
+          {/* TODO => handle edit from modal */}
+
+          {/* <Box
             sx={{
               display: "flex",
               gap: 2,
@@ -426,13 +481,13 @@ const ViewProductModal = (props) => {
                 <Button
                   variant="outlined"
                   color="success"
-                  onClick={handleEditProduct}
+                  onClick={() => handleEditProduct(product)}
                 >
                   Edit
                 </Button>
               </>
             )}
-          </Box>
+          </Box> */}
         </Box>
       </Modal>
 

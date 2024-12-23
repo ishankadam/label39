@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 
 import React, { useState } from "react";
-import findUs1 from "../../assets/findus1.png";
+import findUs1 from "../../assets/findus1.JPG";
 import "./../../css/findUs.css";
 import NavigateNextOutlinedIcon from "@mui/icons-material/NavigateNextOutlined";
 import NavigateBeforeOutlinedIcon from "@mui/icons-material/NavigateBeforeOutlined";

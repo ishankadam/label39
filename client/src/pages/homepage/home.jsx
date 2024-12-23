@@ -33,7 +33,6 @@ const Home = (props) => {
       const asSeenOnData = allProduct.filter((product) => product.asSeenOn);
       setAsSeenOn(asSeenOnData);
       const videosData = allProduct.filter((product) => product.videoSrc);
-      console.log(videosData);
       setshopByVideos(videosData);
     }
   }, [allProduct]);

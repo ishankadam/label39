@@ -24,19 +24,20 @@ import { createProduct, editProduct } from "../../api";
 import "./addProduct.css";
 import ClearIcon from "@mui/icons-material/Clear";
 import AddIcon from "@mui/icons-material/Add";
+import ColorInputComponent from "../../components/color-picker/colorPicker";
 
 const AddEditProductModal = (props) => {
   const [images, setImages] = useState([]);
   const [showBottomSection, setShowBottomSection] = useState(false); // Toggle for bottom section
   const [categoryList, setCategoryList] = useState([]);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [price, setPrice] = useState();
   const [productDetails, setProductDetails] = useState({
     name: "",
     price: "",
     description: "",
     category: "",
     sizes: {
-      Upper: [{ size: "", quantity: "", price: "" }],
+      Upper: [{ size: "", quantity: "", price: price }],
       Bottom: [],
     },
     garmentDetails: [],
@@ -63,10 +64,28 @@ const AddEditProductModal = (props) => {
 
   // Handle file uploads
   const handleFileUpload = (files) => {
-    console.log(files);
     setProductDetails((prev) => ({
       ...prev,
       images: files,
+    }));
+  };
+
+  const handleAllSizes = (event, category) => {
+    // Check if checkbox is checked
+    const allSizes = event.target.checked
+      ? availableSizes.map((row) => ({
+          size: row.value,
+          quantity: 10,
+          price: price,
+        }))
+      : []; // Reset sizes if unchecked
+
+    setProductDetails((prev) => ({
+      ...prev,
+      sizes: {
+        ...prev.sizes, // Preserve existing categories
+        [category]: allSizes, // Update the specified category
+      },
     }));
   };
 
@@ -158,6 +177,27 @@ const AddEditProductModal = (props) => {
     }
   };
 
+  const handlePriceChange = (value, field) => {
+    setPrice(value);
+    setProductDetails((prev) => {
+      const updatedSizes = {};
+
+      // Iterate through categories in sizes and update their price
+      for (const category in prev.sizes) {
+        updatedSizes[category] = prev.sizes[category].map((size) => ({
+          ...size,
+          price: value, // Update price for each size
+        }));
+      }
+
+      return {
+        ...prev,
+        [field]: value, // Update the main price field
+        sizes: updatedSizes, // Update sizes with new price
+      };
+    });
+  };
+
   return (
     <Dialog
       // className="add-product-modal"
@@ -189,7 +229,7 @@ const AddEditProductModal = (props) => {
       <DialogContent>
         <Grid container spacing={2} sx={{ pt: 1 }}>
           {/* Product Fields */}
-          <Grid item xs={12} sm={6} mb={1}>
+          <Grid xs={12} sm={6} mb={1}>
             <CustomTextfield
               label="Product Name"
               value={productDetails.name}
@@ -198,16 +238,16 @@ const AddEditProductModal = (props) => {
               sx={{ width: "100%" }}
             />
           </Grid>
-          <Grid item xs={12} sm={6} mb={1}>
+          <Grid xs={12} sm={6} mb={1}>
             <CustomTextfield
               label="Price"
               value={productDetails.price}
               config={{ field: "price", isRequired: true }}
-              handleEdit={handleEdit}
+              handleEdit={handlePriceChange}
               sx={{ width: "100%" }}
             />
           </Grid>
-          <Grid item xs={12} mb={2}>
+          <Grid xs={12} mb={2}>
             <CustomTextfield
               label="Description"
               value={productDetails.description}
@@ -230,12 +270,16 @@ const AddEditProductModal = (props) => {
           />
         </Grid>
         {/* Sizes Section */}
-        <Grid item xs={12}>
+        <Grid xs={12}>
           <Typography variant="subtitle1">Sizes (Upper Section)</Typography>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <Checkbox onChange={(event) => handleAllSizes(event, "Upper")} />
+            <Typography>Add all sizes for upper?</Typography>
+          </div>
           {productDetails.sizes.Upper.length > 0 &&
             productDetails.sizes.Upper?.map((row, index) => (
               <Grid container spacing={2} key={index} alignItems="center">
-                <Grid item xs={4}>
+                <Grid xs={4}>
                   <SelectDropdown
                     label="Size"
                     optionList={availableSizes}
@@ -245,7 +289,7 @@ const AddEditProductModal = (props) => {
                     sx={{ width: "100%" }}
                   />
                 </Grid>
-                <Grid item xs={4}>
+                <Grid xs={4}>
                   <CustomTextfield
                     label="Quantity"
                     value={row.quantity}
@@ -258,7 +302,7 @@ const AddEditProductModal = (props) => {
                     sx={{ width: "100%" }}
                   />
                 </Grid>
-                <Grid item xs={3}>
+                <Grid xs={3}>
                   <CustomTextfield
                     label="Price"
                     type="number"
@@ -272,7 +316,7 @@ const AddEditProductModal = (props) => {
                     sx={{ width: "100%" }}
                   />
                 </Grid>
-                <Grid item xs={1}>
+                <Grid xs={1}>
                   <Button
                     color="custom"
                     sx={{ width: "50px" }}
@@ -295,7 +339,7 @@ const AddEditProductModal = (props) => {
           </Button>
         </Grid>
         {/* Bottom Section Toggle */}
-        <Grid item xs={12} mt={2} mb={2}>
+        <Grid xs={12} mt={2} mb={2}>
           <Typography variant="subtitle1">
             Add Bottom Section{" "}
             <Switch
@@ -308,6 +352,12 @@ const AddEditProductModal = (props) => {
               <Typography variant="subtitle1" mt={1}>
                 Sizes (Bottom Section)
               </Typography>
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <Checkbox
+                  onChange={(event) => handleAllSizes(event, "Bottom")}
+                />
+                <Typography>Add all sizes for bottom?</Typography>
+              </div>
               {productDetails.sizes.Bottom.map((row, index) => (
                 <Grid container spacing={2} key={index} alignItems="center">
                   <Grid item xs={4}>
@@ -417,6 +467,9 @@ const AddEditProductModal = (props) => {
             singleFile={false}
             category="products"
           />
+        </Grid>
+        <Grid item xs={12} sm={12}>
+          {/* <ColorInputComponent></ColorInputComponent> */}
         </Grid>
       </DialogContent>
       <DialogActions>

@@ -27,6 +27,7 @@ const categorySchema = new mongoose.Schema({
   order: {
     type: Number,
   },
+  isActive: { type: Boolean, default: true },
 });
 
 // Create the model

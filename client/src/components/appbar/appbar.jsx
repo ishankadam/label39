@@ -14,9 +14,9 @@ import {
   Drawer,
   List,
   ListItem,
-  ListItemText,
+  Badge,
 } from "@mui/material";
-import { adminSettings, countries } from "../../common";
+import { countries } from "../../common";
 import { useNavigate } from "react-router-dom";
 import SelectDropdown from "../select-dropdown/selectDropdown";
 import PermIdentityRoundedIcon from "@mui/icons-material/PermIdentityRounded";
@@ -25,29 +25,21 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
 import "./../../css/appbar.css";
 import CloseIcon from "@mui/icons-material/Close";
-import { useShopContext } from "../../context/shopContext";
 import ShopDialog from "../../pages/homepage/shopDialog";
+import { useDispatch, useSelector } from "react-redux";
+import { closeDialog, openCartDrawer, openDialog } from "../../store/cartSlice";
 
 const CustomAppbar = (props) => {
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const [isAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [country, setCountry] = useState(props.country || "INRs");
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { openDialog, closeDialog } = useShopContext(); // Ensure these functions are correct
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const [anchorEl, setAnchorEl] = useState(null);
-
-  // Function to open the Menu
-  const handleMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget); // Set anchor to the Shop button
-  };
-
-  // Function to close the Menu
-  const handleMenuClose = () => {
-    setAnchorEl(null); // Close the Menu
-  };
-
+  const [adminSettings, setAdminSettings] = useState([
+    { label: "Profile", url: "/profile", type: "navigate" },
+    { label: "Dashboard", url: "/dashboard", type: "navigate" },
+  ]);
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -57,6 +49,7 @@ const CustomAppbar = (props) => {
   }, [props.country]);
 
   const handleCloseUserMenu = () => {
+    console.log("hi");
     setAnchorElUser(null);
   };
 
@@ -103,6 +96,53 @@ const CustomAppbar = (props) => {
       open: true,
     }));
   };
+
+  useEffect(() => {
+    const role = localStorage.getItem("role");
+
+    setAdminSettings((prev) => {
+      // Check if "Login" already exists in the array
+      const hasLogin = prev.some((item) => item.label === "login");
+      // Check if "Logout" already exists in the array
+      const hasLogout = prev.some((item) => item.label === "Logout");
+
+      if (role === null) {
+        // If role is null and "Login" is not present, add it. Remove "Logout" if it exists.
+        if (!hasLogin) {
+          return [
+            ...prev.filter((item) => item.label !== "Logout"), // Remove "Logout" if present
+            { label: "login", type: "navigate", url: "/login" },
+          ];
+        }
+      } else {
+        // If role exists and "Logout" is not present, add it. Remove "Login" if it exists.
+        if (!hasLogout) {
+          return [
+            ...prev.filter((item) => item.label !== "login"), // Remove "Login" if present
+            { label: "Logout", type: "action", onClick: logout },
+          ];
+        }
+      }
+
+      // If no changes are needed, return the previous state
+      return prev;
+    });
+
+    // Set isAdmin state based on role
+    setIsAdmin(role === "admin");
+  }, [props.userUpdated]);
+
+  const logout = () => {
+    localStorage.clear();
+    navigate("/");
+    props.setUserUpdated(false);
+  };
+
+  const handleNavigation = (url) => {
+    navigate(url);
+  };
+
+  const cartItemCount = useSelector((state) => state.cart.totalItems);
 
   return (
     <>
@@ -167,7 +207,6 @@ const CustomAppbar = (props) => {
 
           <Box
             className="logo-wrapper"
-            onClick={() => handlePageChange("")}
             sx={{
               display: "flex",
               justifyContent: { xs: "center", sm: "center", md: "left" },
@@ -180,6 +219,7 @@ const CustomAppbar = (props) => {
                 src={logo}
                 alt="logo"
                 style={{ height: "40px", width: "auto" }}
+                onClick={() => handlePageChange("")}
               />
             </IconButton>
           </Box>
@@ -200,11 +240,11 @@ const CustomAppbar = (props) => {
                 onClick={() => handlePageChange(item.page)}
                 onMouseEnter={() => {
                   if (item.text === "Shop") {
-                    openDialog(); // Open dialog only for the "Shop" button
+                    dispatch(openDialog()); // Open dialog only for the "Shop" button
                   }
                 }}
                 onMouseLeave={() => {
-                  closeDialog(); // Close dialog only for the "Shop" button
+                  dispatch(closeDialog()); // Close dialog only for the "Shop" button
                 }}
                 sx={{ fontWeight: "bold", cursor: "pointer" }}
               >
@@ -241,32 +281,19 @@ const CustomAppbar = (props) => {
               handleEdit={handleChange}
               optionList={countries}
             />
-            <IconButton color="inherit" sx={{ opacity: 0.7 }}>
-              <SearchOutlinedIcon />
-            </IconButton>
             <IconButton
               color="inherit"
               sx={{
                 display: { xs: "none", md: "flex" }, // Hide on mobile
                 opacity: 0.7,
               }}
+              onClick={handleOpenUserMenu}
             >
-              <PermIdentityRoundedIcon />
-            </IconButton>
-            <IconButton
-              color="inherit"
-              sx={{ opacity: 0.7, paddingRight: { xs: "0", sm: "auto" } }}
-            >
-              <ShoppingCartOutlinedIcon onClick={handleOpenCart} />
-            </IconButton>
-
-            {/* User Menu for Admins */}
-            {isAdmin && (
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title="Open settings">
-                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="Maeii" src="/static/images/avatar/2.jpg" />
-                  </IconButton>
+                  <PermIdentityRoundedIcon
+                    sx={{ p: 0 }}
+                  ></PermIdentityRoundedIcon>
                 </Tooltip>
                 <Menu
                   sx={{ mt: "45px" }}
@@ -285,20 +312,42 @@ const CustomAppbar = (props) => {
                   onClose={handleCloseUserMenu}
                 >
                   {adminSettings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    <MenuItem
+                      key={setting.label}
+                      onClick={
+                        setting.type === "action"
+                          ? setting.onClick
+                          : () => handleNavigation(setting.url)
+                      }
+                    >
                       <Typography
                         sx={{
                           textAlign: "center",
                           fontFamily: "'Cinzel', serif !important",
                         }}
                       >
-                        {setting}
+                        {setting.label}
                       </Typography>
                     </MenuItem>
                   ))}
                 </Menu>
               </Box>
-            )}
+            </IconButton>
+            <IconButton
+              color="inherit"
+              sx={{ opacity: 0.7, paddingRight: { xs: "0", sm: "auto" } }}
+              onClick={() => dispatch(openCartDrawer())}
+            >
+              <Badge
+                badgeContent={cartItemCount} // Number of items
+                color="error" // Red badge
+                overlap="circular" // Adjusts position for circular icons
+              >
+                <ShoppingCartOutlinedIcon />
+              </Badge>
+            </IconButton>
+
+            {/* User Menu for Admins */}
           </div>
         </Toolbar>
 

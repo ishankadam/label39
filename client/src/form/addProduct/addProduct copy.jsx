@@ -128,7 +128,7 @@ const AddEditProductModal = (props) => {
       </DialogTitle>
       <DialogContent>
         <Grid container spacing={2} sx={{ pt: 1 }}>
-          <Grid item xs={12} sm={6}>
+          <Grid xs={12} sm={6}>
             <CustomTextfield
               label="Product Name"
               value={productDetails.name}
@@ -137,7 +137,7 @@ const AddEditProductModal = (props) => {
               sx={{ width: "100%" }}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid xs={12} sm={6}>
             <CustomTextfield
               label="Price"
               value={productDetails.price}
@@ -146,7 +146,7 @@ const AddEditProductModal = (props) => {
               sx={{ width: "100%" }}
             />
           </Grid>
-          <Grid item xs={12} sm={12}>
+          <Grid xs={12} sm={12}>
             <CustomTextfield
               label="Description"
               value={productDetails.description}
@@ -157,13 +157,13 @@ const AddEditProductModal = (props) => {
             />
           </Grid>
 
-          <Grid item xs={12} sm={12}></Grid>
+          <Grid xs={12} sm={12}></Grid>
 
-          <Grid item xs={12} sm={12}></Grid>
-          <Grid item xs={12} sm={12}></Grid>
-          <Grid item xs={12} sm={12}></Grid>
-          <Grid item xs={12} sm={12}></Grid>
-          <Grid item xs={12} sm={12}></Grid>
+          <Grid xs={12} sm={12}></Grid>
+          <Grid xs={12} sm={12}></Grid>
+          <Grid xs={12} sm={12}></Grid>
+          <Grid xs={12} sm={12}></Grid>
+          <Grid xs={12} sm={12}></Grid>
         </Grid>
 
         <SelectDropdown

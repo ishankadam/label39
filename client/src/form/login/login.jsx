@@ -3,21 +3,31 @@ import "../../css/login2.css";
 import LoginImg from "../../assets/login.png";
 import SignupImg from "../../assets/signup.png";
 import { Button, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CustomTextfield from "../../components/textfield/customTextfield";
 import backgroundImage from "../../assets/about.png"; // Import your background image
 import TextField from "@mui/material/TextField";
+import { login } from "../../api";
 
-const Login = () => {
+const Login = (props) => {
   const [isSignUpMode, setIsSignUpMode] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0); // 0-based index for the first image
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
 
+  const [error, setError] = useState({
+    email: false,
+    password: false,
+  });
   const images = [LoginImg, SignupImg];
 
   const handleToggle = () => {
     setIsSignUpMode(!isSignUpMode);
   };
 
+  const navigate = useNavigate();
   // Function to automatically slide the images
   useEffect(() => {
     const interval = setInterval(() => {
@@ -26,6 +36,24 @@ const Login = () => {
 
     return () => clearInterval(interval); // Cleanup the interval on component unmount
   }, [images.length]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const loggedInUser = await login(user, error, setError, navigate);
+      if (loggedInUser) {
+        navigate("/"); // Redirect to the homepage or another route after successful login
+        props.setUserUpdated(true);
+      }
+    } catch (err) {
+      console.error("Login failed:", err);
+    }
+  };
+
+  const handleEdit = (value, field) => {
+    setUser({ ...user, [field]: value });
+  };
   return (
     <div
       style={{
@@ -46,6 +74,7 @@ const Login = () => {
                 action="index.html"
                 autoComplete="off"
                 className="sign-in-form"
+                onSubmit={handleSubmit}
               >
                 <div className="heading">
                   <Typography
@@ -75,29 +104,47 @@ const Login = () => {
                       LOGIN
                     </Typography> */}
                     <div className="input-wrap">
-                      <TextField
-                        label="Email ID"
+                      <CustomTextfield
+                        id="login-email"
+                        label="Email"
                         variant="outlined"
-                        color="success"
+                        margin="normal"
                         fullWidth
-                        sx={{
-                          "& .MuiOutlinedInput-root": {
-                            fontSize: "15px", // Set the font size
-                          },
-                        }}
+                        required
+                        value={user.email}
+                        error={error.email}
+                        errorObj={error}
+                        setError={setError}
+                        helperText={
+                          error.email ? "Please enter correct Email" : ""
+                        }
+                        config={{ field: "email", type: "email" }}
+                        handleEdit={handleEdit}
+                        sx={{ width: "100%" }}
                       />
                     </div>
 
                     <div className="input-wrap">
-                      <TextField
+                      <CustomTextfield
                         label="Password"
                         variant="outlined"
                         color="success"
                         fullWidth
+                        value={user.password}
+                        error={error.password}
+                        errorObj={error}
+                        setError={setError}
+                        helperText={
+                          error.password ? "Please enter correct password" : ""
+                        }
+                        config={{ field: "password" }}
+                        handleEdit={handleEdit}
+                        type="password"
                         sx={{
                           "& .MuiOutlinedInput-root": {
                             fontSize: "15px", // Set the font size
                           },
+                          width: "100%",
                         }}
                       />
                       <Link href="#">

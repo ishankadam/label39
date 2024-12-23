@@ -16,41 +16,41 @@ const CustomTextfield = (props) => {
   const handleTextfieldValue = (value) => {
     const inputValue = props.type === "number" ? Number(value) : value;
     setTextValue(inputValue);
-    // let errObj = {
-    //   isError: props.error,
-    // };
-    // const key = props.config.field;
-    // if (props.config.type === "email") {
-    //   if (_.includes(inputValue, ".")) {
-    //     errObj.isError = !validateEmail(inputValue);
-    //   } else {
-    //     errObj.isError = false;
-    //   }
-    // } else if (props.config.type === "password") {
-    //   const passwordValid = validatePassword(inputValue);
-    //   errObj.isError = !passwordValid;
-    //   props.setValidation && props.setValidation(passwordValid);
-    // } else if (props.config.type === "phone") {
-    //   errObj.isError = !isValidPhoneNumber(inputValue);
-    // } else {
-    //   errObj.isError =
-    //     props.type === "number"
-    //       ? inputValue.length > 0
-    //       : inputValue.trim() === "";
-    // }
-    // if (props.config.type !== "filter") {
-    //   props.setError &&
-    //     props.setError({
-    //       ...props.errorObj,
-    //       [key]: errObj.isError,
-    //     });
-    //   setError(errObj.isError);
-    // }
-    // setHelperText(props.helperText);
+    let errObj = {
+      isError: props.error,
+    };
+    const key = props.config.field;
+    if (props.config.type === "email") {
+      if (_.includes(inputValue, ".")) {
+        errObj.isError = !validateEmail(inputValue);
+      } else {
+        errObj.isError = false;
+      }
+    } else if (props.config.type === "password") {
+      const passwordValid = validatePassword(inputValue);
+      errObj.isError = !passwordValid;
+      props.setValidation && props.setValidation(passwordValid);
+    } else if (props.config.type === "phone") {
+      errObj.isError = !isValidPhoneNumber(inputValue);
+    } else {
+      errObj.isError =
+        props.type === "number"
+          ? inputValue.length > 0
+          : inputValue.trim() === "";
+    }
+    if (props.config.type !== "filter") {
+      props.setError &&
+        props.setError({
+          ...props.errorObj,
+          [key]: errObj.isError,
+        });
+      setError(errObj.isError);
+    }
+    setHelperText(props.helperText);
 
-    // setTextValue(value);
-    // if (props.handleEdit) {
-    // }
+    setTextValue(value);
+    if (props.handleEdit) {
+    }
     props.handleEdit(
       inputValue,
       props.config.field,

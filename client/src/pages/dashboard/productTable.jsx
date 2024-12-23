@@ -31,7 +31,7 @@ const ProductTable = (props) => {
 
   const handleDisableProduct = (row, index) => {
     toggleProductStatus({
-      row: row,
+      product: row,
       setLoading: props.setLoading,
       setProductsData: props.setProducts,
     });
@@ -153,6 +153,10 @@ const ProductTable = (props) => {
         }}
         loading={props.loading}
         pagination={true}
+        setShowModal={setShowModal}
+        categories={props.categories}
+        setProducts={props.setProducts}
+        handleModalClose={handleModalClose}
       ></CustomTable>
       {showModal.show && (
         <AddEditProductModal

@@ -3,10 +3,9 @@ import React from "react";
 import story from "../../assets/aboutImg.jpeg";
 import Container from "@mui/material/Container";
 import backgroundImage from "../../assets/aboutbg2.png";
-// import backgroundImage from "../../assets/aboutbg2.png";
 // import backgroundImage from "../../assets/about.png";
 // import backgroundImage from "../../assets/aboutbg3.jpg";
-// import backgroundImage from "../../assets/aboutbg2.png";
+// import backgroundImage from "../../assets/aboutbg4.png";
 
 const OurStory = () => {
   return (

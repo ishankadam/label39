@@ -48,7 +48,7 @@ const CategorySection = () => {
         }}
       >
         {categories.map((category) => (
-          <Grid2 item size={{ xs: 6, sm: 6, md: 3 }}>
+          <Grid2 size={{ xs: 6, sm: 6, md: 3 }} key={category.label}>
             <Card
               sx={{
                 margin: "16px",

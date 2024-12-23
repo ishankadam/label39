@@ -6,7 +6,6 @@ const Checkout = () => {
   return (
     <div>
       <CheckoutForm></CheckoutForm>
-      {/* <CheckoutProducts></CheckoutProducts> */}
     </div>
   );
 };

@@ -10,6 +10,7 @@ import {
 import { Close as CloseIcon } from "@mui/icons-material";
 import UploadFiles from "../../components/upload/uploadFiles";
 import CustomTextfield from "../../components/textfield/customTextfield";
+import { createCategory, editCategory } from "../../api";
 
 const AddEditCategory = (props) => {
   const [buttonDisabled, setButtonDisabled] = useState(true);
@@ -57,19 +58,19 @@ const AddEditCategory = (props) => {
 
   const handleCategorySubmit = (e) => {
     e.preventDefault();
-    // if (props.isEdit) {
-    //   editCategory({
-    //     category,
-    //     setCategory: props.setCategories,
-    //     setLoading: props.setLoading,
-    //   });
-    // } else {
-    //   createCategory({
-    //     category,
-    //     setLoading: props.setLoading,
-    //     setCategories: props.setCategories,
-    //   });
-    // }
+    if (props.isEdit) {
+      editCategory({
+        category,
+        setCategory: props.setCategories,
+        setLoading: props.setLoading,
+      });
+    } else {
+      createCategory({
+        category,
+        setLoading: props.setLoading,
+        setCategories: props.setCategories,
+      });
+    }
     props.handleModalClose();
   };
 
@@ -78,12 +79,11 @@ const AddEditCategory = (props) => {
   };
 
   useEffect(() => {
-    if (!category.name || !category.description || images.length < 1) {
+    if (!category.name || !category.description || category.image.length < 1) {
       setButtonDisabled(true);
     } else {
       setButtonDisabled(false);
     }
-    console.log(category);
   }, [category, images]);
 
   return (
@@ -183,6 +183,7 @@ const AddEditCategory = (props) => {
               file={category.image}
               singleFile={true}
               acceptedFiles="image/png, image/jpeg"
+              category="categories"
               //   parentClass="category-form-container"
             />
           </Box>

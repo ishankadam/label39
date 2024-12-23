@@ -14,7 +14,9 @@ const FeaturedSection = (props) => {
 
   useEffect(() => {
     setshopByVideos(props.shopByVideos);
+    console.log(props.shopByVideos);
   }, [props.shopByVideos]);
+
   // const featured = [
   //   { label: "NEW ARRIVAL", videoSrc: video1 },
   //   { label: "READY TO SHIP", videoSrc: video2 },

@@ -11,42 +11,34 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
   useMediaQuery,
   Stack,
 } from "@mui/material";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
-import bestseller1 from "../../assets/bestSellerP5.jpg";
-import bestseller2 from "../../assets/bestSellerP4.jpg";
 import { useTheme } from "@mui/system";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  clearCart,
+  removeFromCart,
+  updateQuantity,
+} from "../../store/cartSlice";
 
 const Cart = () => {
-  const cartItems = [
-    {
-      id: 1,
-      image: bestseller1,
-      title: "Prajakta Koli in Marble Cape Set",
-      price: 49900,
-      quantity: 1,
-      size: "XS",
-    },
-    {
-      id: 2,
-      image: bestseller2,
-      title: "Genelia Deshmukh in Gulshan Anarkali",
-      price: 59900,
-      quantity: 1,
-      size: "M",
-    },
-  ];
-
-  const handleQuantityChange = (id, action) => {
-    console.log(`Change quantity of item ${id} with action ${action}`);
-  };
+  const cartItems = useSelector((state) => state.cart.items);
+  console.log(cartItems);
+  const dispatch = useDispatch();
 
   const handleRemoveItem = (id) => {
-    console.log(`Remove item with id ${id}`);
+    dispatch(removeFromCart(id));
+  };
+
+  const handleUpdateQuantity = (productId, quantity) => {
+    dispatch(updateQuantity({ productId, quantity }));
+  };
+
+  const handleClearCart = () => {
+    dispatch(clearCart());
   };
 
   const totalPrice = cartItems.reduce(
@@ -175,7 +167,9 @@ const Cart = () => {
                   </TableCell>
                   <TableCell align="center">
                     <IconButton
-                      onClick={() => handleQuantityChange(item.id, "decrease")}
+                      onClick={() =>
+                        handleUpdateQuantity(item.productId, "decrease")
+                      }
                       size="small"
                       sx={{
                         border: "1px solid #ccc", // Outlined style
@@ -190,7 +184,9 @@ const Cart = () => {
                       {item.quantity}
                     </Typography>
                     <IconButton
-                      onClick={() => handleQuantityChange(item.id, "increase")}
+                      onClick={() =>
+                        handleUpdateQuantity(item.productId, "increase")
+                      }
                       size="small"
                       sx={{
                         border: "1px solid #ccc", // Outlined style
@@ -269,7 +265,9 @@ const Cart = () => {
                     sx={{ mt: 1, gap: 1 }}
                   >
                     <IconButton
-                      onClick={() => handleQuantityChange(item.id, "decrease")}
+                      onClick={() =>
+                        handleUpdateQuantity(item.productId, "decrease")
+                      }
                       size="small"
                     >
                       <RemoveIcon />
@@ -278,7 +276,9 @@ const Cart = () => {
                       {item.quantity}
                     </Typography>
                     <IconButton
-                      onClick={() => handleQuantityChange(item.id, "increase")}
+                      onClick={() =>
+                        handleUpdateQuantity(item.productId, "increase")
+                      }
                       size="small"
                     >
                       <AddIcon />

@@ -123,7 +123,6 @@ const TestimonialModal = (props) => {
     } else {
       setButtonDisabled(false);
     }
-    console.log(testimonial);
   }, [testimonial, images]);
 
   return (

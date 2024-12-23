@@ -8,13 +8,17 @@ import {
   Drawer,
   Button,
   Pagination,
+  ListItemSecondaryAction,
+  IconButton,
 } from "@mui/material";
 import "../../css/shop.css";
 import ProductCard from "../../components/card/productCard";
 import CircleIcon from "@mui/icons-material/Circle";
 import FilterListIcon from "@mui/icons-material/FilterList";
-import { getAllProducts } from "../../api";
 import ViewProductModal from "../product/viewProduct";
+import _, { set } from "lodash";
+import ClearIcon from "@mui/icons-material/Clear";
+import CustomTextfield from "../../components/textfield/customTextfield";
 
 const ProductsPage = (props) => {
   const [allProduct, setAllProduct] = useState(props.allProduct || []);
@@ -30,9 +34,10 @@ const ProductsPage = (props) => {
     data: {},
   });
   const [filter, setFilter] = useState({
-    category: "Shirts",
+    category: "",
     price: "",
     color: "",
+    search: "",
   });
 
   useEffect(() => {
@@ -57,7 +62,11 @@ const ProductsPage = (props) => {
   };
 
   const categories = ["Shirts", "Co-ords", "Kurtas", "Suits"];
-  const priceRanges = ["Under 10000", "10000-15000", "15000-20000"];
+  const priceRanges = [
+    { label: "Under 10000", min: 0, max: 10000 },
+    { label: "10000-15000", min: 10000, max: 15000 },
+    { label: "15000-20000", min: 15000, max: 20000 },
+  ];
   const availableColors = ["Red", "Black", "Blue", "Green", "Yellow"];
 
   useEffect(() => {
@@ -73,9 +82,40 @@ const ProductsPage = (props) => {
     const startIdx = page === 1 ? 0 : 12 + (page - 2) * 10;
     const endIdx = startIdx + productsPerPage;
 
-    const productList = allProduct.slice(startIdx, endIdx);
+    const filteredProducts = allProduct.filter((product) => {
+      // Category Filter
+      const categoryFilter =
+        filter.category !== ""
+          ? _.lowerCase(product.category) === _.lowerCase(filter.category) // Match category case-insensitively
+          : true; // If no category filter, include all
+
+      // Price Filter
+      const priceFilter =
+        filter.price !== "" // Check if a price range is selected
+          ? (() => {
+              const price = product.price; // Get product price
+              const range = priceRanges.find((r) => r.label === filter.price); // Find the selected range
+
+              // Return true if price falls within the selected range
+              return range && price >= range.min && price <= range.max;
+            })()
+          : true; // Include all if no price filter
+
+      const searchFilter =
+        filter.search !== ""
+          ? product.name.toLowerCase().includes(filter.search.toLowerCase()) ||
+            product.description
+              .toLowerCase()
+              .includes(filter.search.toLowerCase())
+          : true;
+
+      // Return true only if both filters match
+      return categoryFilter && priceFilter && searchFilter;
+    });
+
+    const productList = filteredProducts.slice(startIdx, endIdx);
     setDisplayedProducts(productList);
-  }, [allProduct, page]);
+  }, [allProduct, page, filter]);
 
   return (
     <div className="products-page">
@@ -94,9 +134,19 @@ const ProductsPage = (props) => {
             color: "#292929",
           }}
         >
-          SHIRTS
+          {filter.category}
           {/* <div className="title-border" /> */}
         </Typography>
+        <CustomTextfield
+          label="Search"
+          config={{ field: "search", type: "filter" }}
+          handleEdit={handleFilterChange}
+          sx={{
+            width: "30%",
+          }}
+          placeholder="Search for products"
+          variant="outlined"
+        ></CustomTextfield>
         <Button
           variant="outlined"
           className="filter-button"
@@ -184,6 +234,23 @@ const ProductsPage = (props) => {
                             padding: "0 !important", // Override padding
                           }}
                         />
+                        {isSelected && (
+                          <ListItemSecondaryAction>
+                            <IconButton
+                              edge="end"
+                              aria-label="delete"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setFilter((prev) => ({
+                                  ...prev,
+                                  category: "",
+                                }));
+                              }}
+                            >
+                              <ClearIcon />
+                            </IconButton>
+                          </ListItemSecondaryAction>
+                        )}
                       </ListItemButton>
                     </ListItem>
                   );
@@ -209,12 +276,17 @@ const ProductsPage = (props) => {
               </Typography>
               <List>
                 {priceRanges.map((priceRange, index) => {
-                  const isSelected = filter.price === priceRange;
+                  const isSelected = filter.price === priceRange.label;
 
                   return (
-                    <ListItem key={index} disablePadding>
+                    <ListItem
+                      key={`${priceRange.label}${index}`}
+                      disablePadding
+                    >
                       <ListItemButton
-                        onClick={() => handleFilterChange(priceRange, "price")}
+                        onClick={() =>
+                          handleFilterChange(priceRange.label, "price")
+                        }
                         sx={{
                           margin: "0 !important",
                           Color: isSelected
@@ -241,7 +313,7 @@ const ProductsPage = (props) => {
                           />
                         )}
                         <ListItemText
-                          primary={priceRange}
+                          primary={priceRange.label}
                           primaryTypographyProps={{
                             fontFamily: " 'Roboto Serif', serif",
                             fontSize: isSelected ? "16px" : "15px",
@@ -251,6 +323,23 @@ const ProductsPage = (props) => {
                             padding: "0 !important", // Override padding
                           }}
                         />
+                        {isSelected && (
+                          <ListItemSecondaryAction>
+                            <IconButton
+                              edge="end"
+                              aria-label="delete"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setFilter((prev) => ({
+                                  ...prev,
+                                  price: "",
+                                }));
+                              }}
+                            >
+                              <ClearIcon />
+                            </IconButton>
+                          </ListItemSecondaryAction>
+                        )}
                       </ListItemButton>
                     </ListItem>
                   );
@@ -318,6 +407,24 @@ const ProductsPage = (props) => {
                             padding: "0 !important", // Override padding
                           }}
                         />
+                        {isSelected && (
+                          <ListItemSecondaryAction>
+                            <IconButton
+                              edge="end"
+                              aria-label="delete"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setFilter((prev) => ({
+                                  ...prev,
+                                  price: "",
+                                }));
+                              }}
+                            >
+                              <ClearIcon />
+                            </IconButton>
+                          </ListItemSecondaryAction>
+                        )}
+                        s
                       </ListItemButton>
                     </ListItem>
                   );
@@ -328,14 +435,20 @@ const ProductsPage = (props) => {
 
           {/* Products card container */}
           <div className="products-container">
-            {displayedProducts.map((product, index) => (
-              <ProductCard
-                key={index}
-                product={product}
-                handleViewProduct={handleViewProduct}
-                country={props.country}
-              />
-            ))}
+            {displayedProducts.length < 1 ? (
+              <Typography variant="h3" sx={{ textAlign: "center" }}>
+                No Records Found
+              </Typography>
+            ) : (
+              displayedProducts.map((product, index) => (
+                <ProductCard
+                  key={index}
+                  product={product}
+                  handleViewProduct={handleViewProduct}
+                  country={props.country}
+                />
+              ))
+            )}
           </div>
         </div>
         <div className="pagination"></div>

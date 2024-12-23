@@ -13,56 +13,52 @@ import bestseller2 from "../../assets/bestSellerP4.jpg";
 import CustomTextfield from "../textfield/customTextfield";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
+import {
+  clearCart,
+  closeCartDrawer,
+  closeDialog,
+  removeFromCart,
+  updateQuantity,
+} from "../../store/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { imageUrl } from "../../api";
+import { useNavigate } from "react-router-dom";
 
 const CustomDrawer = (props) => {
-  const [cartDetails, setCartDetails] = useState(props.cartDetails || {});
   const [displayNote, setDisplayNote] = useState(false);
-  useEffect(() => {
-    setCartDetails(props.cartDetails);
-  }, [props.cartDetails]);
-  const cartItems = [
-    {
-      id: 1,
-      image: bestseller1, // Replace with actual image URL
-      title: "Gulshan Anarkali with Embroidered Jacket",
-      price: 59900,
-      quantity: 1,
-      size: "M",
-    },
-    {
-      id: 2,
-      image: bestseller2, // Replace with actual image URL
-      title: "Classic Silk Saree",
-      price: 45000,
-      quantity: 1,
-      size: "Free Size",
-    },
-    {
-      id: 3,
-      image: bestseller2, // Replace with actual image URL
-      title: "Classic Silk Saree",
-      price: 45000,
-      quantity: 1,
-      size: "Free Size",
-    },
-  ];
+  const openDrawer = useSelector((state) => state.cart.openCartDrawer);
+  const cartItems = useSelector((state) => state.cart.items);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleRemoveItem = (productId) => {
+    dispatch(removeFromCart(productId));
+  };
+
+  const handleUpdateQuantity = (productId, operation) => {
+    dispatch(updateQuantity({ productId, operation }));
+  };
+
+  const handleClearCart = () => {
+    dispatch(clearCart());
+  };
 
   const handleOrderNote = () => {
     setDisplayNote(!displayNote);
   };
 
   const onClose = () => {
-    props.setCartDetails((prev) => ({
-      ...prev,
-      open: false,
-    }));
+    dispatch(closeCartDrawer());
   };
+
+  useEffect(() => {
+    console.log(cartItems);
+  }, [cartItems]);
 
   return (
     <div>
       <Drawer
         anchor="right"
-        open={cartDetails.open}
+        open={openDrawer}
         onClose={onClose}
         PaperProps={{
           sx: { width: { xs: "90%", sm: "50%", md: "30%" } }, // Adjust the width as needed
@@ -101,102 +97,124 @@ const CustomDrawer = (props) => {
 
           <Box sx={{ overflowY: "scroll", height: "80%" }}>
             {/* Cart item */}
-            {cartItems.map((item) => (
-              <Box
-                key={item.id}
-                sx={{
-                  display: "flex",
-                  mt: 2,
-                  mb: 2,
-                }}
-              >
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  style={{
-                    aspectRatio: "2:3",
-                    width: "120px",
-                    height: "180px",
-                    marginRight: 16,
+            {cartItems.length > 0 ? (
+              cartItems.map((item) => (
+                <Box
+                  key={item.id}
+                  sx={{
+                    display: "flex",
+                    mt: 2,
+                    mb: 2,
                   }}
-                />
-                <Box>
-                  <Typography
-                    sx={{
-                      fontFamily: "'Roboto Serif', serif",
-                      fontWeight: "400",
-                      fontSize: { xs: "11px", sm: "12px", md: "16px" },
-                      mb: 1,
+                >
+                  <img
+                    src={`${imageUrl}products/${item.images[0]}`}
+                    alt={item.title}
+                    style={{
+                      aspectRatio: "2:3",
+                      width: "120px",
+                      height: "180px",
+                      marginRight: 16,
                     }}
-                  >
-                    {item.title}
-                  </Typography>
-                  <Typography
-                    sx={{
-                      fontFamily: "'Roboto Serif', serif",
-                      fontWeight: "400",
-                      fontSize: { xs: "11px", sm: "12px", md: "15px" },
-                      mb: 1,
-                    }}
-                    color="textSecondary"
-                  >
-                    Size : {item.size}
-                  </Typography>
-                  <Typography
-                    sx={{
-                      fontFamily: "'Roboto Serif', serif",
-                      fontWeight: "400",
-                      fontSize: { xs: "11px", sm: "12px", md: "15px" },
-                      mb: 1,
-                    }}
-                    color="textSecondary"
-                  >{`Rs. ${item.price}`}</Typography>
-                  <IconButton
-                    // onClick={() => handleQuantityChange(item.id, "decrease")}
-                    size="small"
-                    sx={{
-                      border: "1px solid #ccc", // Outlined style
-                      borderRadius: "4px",
-                      padding: "4px",
-                      mr: 1,
-                    }}
-                  >
-                    <RemoveIcon />
-                  </IconButton>
-                  <Typography variant="body1" component="span" sx={{ mx: 1 }}>
-                    {item.quantity}
-                  </Typography>
-                  <IconButton
-                    // onClick={() => handleQuantityChange(item.id, "increase")}
-                    size="small"
-                    sx={{
-                      border: "1px solid #ccc", // Outlined style
-                      borderRadius: "4px",
-                      padding: "4px",
-                      ml: 1,
-                    }}
-                  >
-                    <AddIcon />
-                  </IconButton>
-                  {/* <br /> */}
-                  <Button
-                    // onClick={() => handleRemoveItem(item.id)}
-                    color="textSecondary"
-                    size="small"
-                    sx={{
-                      ml: 2,
-                      fontFamily: "'Roboto Serif', serif",
-                      fontWeight: "400",
-                      fontSize: { xs: "11px", sm: "12px", md: "13px" },
-                      mt: 1,
-                      textDecoration: "underline !important",
-                    }}
-                  >
-                    Remove
-                  </Button>
+                  />
+                  <Box>
+                    <Typography
+                      sx={{
+                        fontFamily: "'Roboto Serif', serif",
+                        fontWeight: "400",
+                        fontSize: { xs: "11px", sm: "12px", md: "16px" },
+                        mb: 1,
+                      }}
+                    >
+                      {item.title}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontFamily: "'Roboto Serif', serif",
+                        fontWeight: "400",
+                        fontSize: { xs: "11px", sm: "12px", md: "15px" },
+                        mb: 1,
+                      }}
+                      color="textSecondary"
+                    >
+                      Size : {item.size}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontFamily: "'Roboto Serif', serif",
+                        fontWeight: "400",
+                        fontSize: { xs: "11px", sm: "12px", md: "15px" },
+                        mb: 1,
+                      }}
+                      color="textSecondary"
+                    >{`Rs. ${item.price}`}</Typography>
+                    <IconButton
+                      onClick={() =>
+                        handleUpdateQuantity(item.productId, "decrease")
+                      }
+                      size="small"
+                      sx={{
+                        border: "1px solid #ccc", // Outlined style
+                        borderRadius: "4px",
+                        padding: "4px",
+                        mr: 1,
+                      }}
+                    >
+                      <RemoveIcon />
+                    </IconButton>
+                    <Typography variant="body1" component="span" sx={{ mx: 1 }}>
+                      {item.quantity}
+                    </Typography>
+                    <IconButton
+                      onClick={() =>
+                        handleUpdateQuantity(item.productId, "increase")
+                      }
+                      size="small"
+                      sx={{
+                        border: "1px solid #ccc", // Outlined style
+                        borderRadius: "4px",
+                        padding: "4px",
+                        ml: 1,
+                      }}
+                    >
+                      <AddIcon />
+                    </IconButton>
+                    {/* <br /> */}
+                    <Button
+                      // onClick={() => handleRemoveItem(item.id)}
+                      color="textSecondary"
+                      size="small"
+                      sx={{
+                        ml: 2,
+                        fontFamily: "'Roboto Serif', serif",
+                        fontWeight: "400",
+                        fontSize: { xs: "11px", sm: "12px", md: "13px" },
+                        mt: 1,
+                        textDecoration: "underline !important",
+                      }}
+                      onClick={() => handleRemoveItem(item.productId)}
+                    >
+                      Remove
+                    </Button>
+                  </Box>
                 </Box>
-              </Box>
-            ))}
+              ))
+            ) : (
+              <>
+                <Typography variant="h6" sx={{ textAlign: "center", mt: 2 }}>
+                  Your cart is currently empty
+                </Typography>
+                <Button
+                  onClick={() => {
+                    navigate("/shop");
+                    dispatch(closeCartDrawer());
+                  }}
+                  sx={{ mt: 2 }}
+                >
+                  Go to shop
+                </Button>
+              </>
+            )}
           </Box>
 
           <Box mt="auto" sx={{}}>
@@ -261,11 +279,16 @@ const CustomDrawer = (props) => {
                 boxShadow: "none",
               }}
               fullWidth
+              onClick={() => {
+                dispatch(closeCartDrawer());
+                navigate("/checkout");
+              }}
             >
               Checkout • Rs.{" "}
-              {cartItems
-                .reduce((total, item) => total + item.price * item.quantity, 0)
-                .toLocaleString()}
+              {cartItems.reduce(
+                (total, item) => total + item.price * item.quantity,
+                0
+              )}
             </Button>
           </Box>
         </Box>

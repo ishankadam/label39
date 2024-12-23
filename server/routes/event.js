@@ -33,6 +33,32 @@ router.post("/createDelivery", controller.createDeliveryOrder);
 
 // Track Delivery Order
 router.get("/trackOrder/:trackingId", controller.trackDeliveryOrder);
+
+//create Category
+router.post(
+  "/createCategory",
+  controller.upload.array("image"),
+  controller.create_category
+);
+
+// Edit Category
+router.put(
+  "/editCategory",
+  controller.upload.array("image"),
+  controller.edit_category
+);
+
+router.put("/category/:id/disable", controller.toggleCategoryStatus);
+
+//create user
+router.post("/createUser", controller.create_user);
+
+//Fetch all users
+router.get("/getUsers", controller.get_all_users);
+
+// Check Login Credentials
+router.post("/login", controller.checkLoginCredentials);
+
 // Error handling middleware
 router.use((error, req, res, next) => {
   const status = error.status || 500;

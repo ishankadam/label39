@@ -5,6 +5,7 @@ import {
   getAllCategories,
   getAllProducts,
   getAllTestimonials,
+  getAllUsers,
 } from "../../api";
 import { dashboardTabValue, findLabelByValue } from "../../common";
 import _ from "lodash";
@@ -23,6 +24,9 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import PageNotFound from "../not-found/pageNotFound";
+import ManageUsers from "./manageUsers";
+import SelectDropdown from "../../components/select-dropdown/selectDropdown";
 
 const drawerWidth = 180;
 
@@ -115,14 +119,17 @@ const Dashboard = (props) => {
   const [filterDataProducts, setfilterDataProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
+  const [users, setUsers] = useState([]);
   const [productsloading, setProductsLoading] = useState(false);
   const [categoryloading, setCategoryLoading] = useState(false);
   const [testimonialsloading, setTestimonialsLoading] = useState(false);
+  const [usersloading, setUsersLoading] = useState(false);
   const [tabValue, setTabValue] = React.useState("one");
   const [filterOptions, setFilterOptions] = useState({
     categories: "",
     subcategories: "",
   });
+  const [isAdmin, setIsAdmin] = useState(false);
   const [categoryData, setCategoryData] = useState({
     categories: [],
     subcategories: [],
@@ -132,17 +139,24 @@ const Dashboard = (props) => {
     isEdit: false,
     data: {},
   });
-  const [showProductModal, setShowProductModal] = useState({
-    show: false,
-    isEdit: false,
-    data: {},
-  });
+  const [showProductModal, setShowProductModal] = useState(
+    props.showProductModal
+  );
   const [showTestimonialModal, setShowTestimonialModal] = useState({
     show: false,
     isEdit: false,
     data: {},
   });
+  const [showUserModal, setShowUserModal] = useState({
+    show: false,
+    isEdit: false,
+    data: {},
+  });
   const [sidebarOpen, setSidebarOpen] = useState(false); // Track sidebar open state
+  const [categoryList, setCategoryList] = useState([]);
+  useEffect(() => {
+    setShowProductModal(props.showProductModal);
+  }, [props.showProductModal]);
 
   useEffect(() => {
     setProductsLoading(true);
@@ -153,6 +167,7 @@ const Dashboard = (props) => {
     });
     getAllCategories({ setCategories, setLoading: setCategoryLoading });
     getAllTestimonials({ setTestimonials, setLoading: setTestimonialsLoading });
+    getAllUsers({ setUsers, setLoading: setUsersLoading });
   }, []);
 
   const handleOpenForm = (page) => {
@@ -162,14 +177,14 @@ const Dashboard = (props) => {
         isEdit: false,
         data: {},
       });
-    } else if (page === "Products") {
-      setShowProductModal({
+    } else if (page === "Testimonials") {
+      setShowTestimonialModal({
         show: true,
         isEdit: false,
         data: {},
       });
-    } else if (page === "Testimonials") {
-      setShowTestimonialModal({
+    } else if (page === "Users") {
+      setShowUserModal({
         show: true,
         isEdit: false,
         data: {},
@@ -239,7 +254,26 @@ const Dashboard = (props) => {
     setfilterDataProducts(filteredList);
   }, [filterOptions, products]);
 
-  return (
+  useEffect(() => {
+    const role = localStorage.getItem("role");
+    // Set isAdmin state based on role
+    setIsAdmin(role === "admin");
+  }, [props.userUpdated]);
+
+  useEffect(() => {
+    const newCategoriesList = categories?.map((category) => ({
+      label: category.name,
+      value: category.name.toLowerCase().replace(/\s+/g, ""),
+    }));
+    setCategoryList(newCategoriesList);
+  }, [categories]);
+
+  const statusList = [
+    { label: "Active", value: "active" },
+    { label: "Inactive", value: "inactive" },
+  ];
+
+  return isAdmin ? (
     <Box>
       {/* Sidebar */}
       <Box sx={{ display: "flex" }}>
@@ -335,18 +369,45 @@ const Dashboard = (props) => {
               </Typography>
             </Grid2>
             <Grid2 item>
-              <Button
-                variant="contained"
-                onClick={() => handleOpenForm(options)}
-                color="custom"
-                sx={{
-                  fontSize: { xs: "12px", sm: "13px", md: "14px" },
-                  padding: "10px",
-                }}
-              >
-                {`Add ${options}`}
-              </Button>
+              {options !== "Products" && (
+                <Button
+                  variant="contained"
+                  onClick={() => handleOpenForm(options)}
+                  color="custom"
+                  sx={{
+                    fontSize: { xs: "12px", sm: "13px", md: "14px" },
+                    padding: "10px",
+                  }}
+                >
+                  {`Add ${options}`}
+                </Button>
+              )}
             </Grid2>
+            {options === "Products" && (
+              <>
+                {" "}
+                <Grid2 item>
+                  <SelectDropdown
+                    label="status"
+                    optionList={statusList}
+                    config={{ field: "status" }}
+                    // handleEdit={handleChange}
+                    // value={country}
+                    sx={{ width: "200px" }}
+                  />
+                </Grid2>
+                <Grid2 item>
+                  <SelectDropdown
+                    label="Category"
+                    optionList={categoryList}
+                    config={{ field: "Category" }}
+                    // handleEdit={handleChange}
+                    // value={country}
+                    sx={{ width: "200px" }}
+                  />
+                </Grid2>
+              </>
+            )}
           </Grid2>
 
           {/* Render Content Based on Tab Selection */}
@@ -357,7 +418,7 @@ const Dashboard = (props) => {
               loading={productsloading}
               setLoading={setProductsLoading}
               showModal={showProductModal}
-              setShowModal={setShowProductModal}
+              setShowModal={props.setShowProductModal}
               categories={categories}
             />
           )}
@@ -381,9 +442,21 @@ const Dashboard = (props) => {
               setTestimonials={setTestimonials}
             />
           )}
+          {tabValue === "four" && (
+            <ManageUsers
+              users={users}
+              loading={usersloading}
+              setLoading={setUsersLoading}
+              showModal={showUserModal}
+              setShowModal={setShowUserModal}
+              setUsers={setUsers}
+            />
+          )}
         </Box>
       </Box>
     </Box>
+  ) : (
+    <PageNotFound />
   );
 };
 

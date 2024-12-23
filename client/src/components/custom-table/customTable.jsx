@@ -45,6 +45,7 @@ const CustomTable = (props) => {
   });
   const [showEditModal, setShowEditModal] = useState({
     open: false,
+    isEdit: false,
     data: {},
   });
   const [loading, setLoading] = useState(props.loading);
@@ -71,10 +72,18 @@ const CustomTable = (props) => {
     });
   };
 
+  const handleModalClose = () => {
+    setShowEditModal({
+      show: false,
+      isEdit: false,
+      data: {},
+    });
+  };
+
   const renderTooltipContent = (items) => (
     <Grid container spacing={1}>
       {items.map((item) => (
-        <Grid item="true" xs={12} key={item.size}>
+        <Grid xs={12} key={item.size}>
           <Typography variant="body2">
             {item.size}: {item.quantity}
           </Typography>
@@ -351,9 +360,13 @@ const CustomTable = (props) => {
       {showEditModal.open ? (
         <AddEditProductModal
           open={showEditModal.open}
-          product={showEditModal.data}
-          setShowEditModal={setShowEditModal}
-          isAdmin={true}
+          isEdit={showEditModal.isEdit}
+          data={showEditModal.data}
+          handleModalClose={handleModalClose}
+          setShowModal={setShowEditModal}
+          setLoading={props.setLoading}
+          setProducts={props.setProducts}
+          categories={props.categories}
         ></AddEditProductModal>
       ) : null}
     </Paper>

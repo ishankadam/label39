@@ -19,13 +19,13 @@ import {
   Category as CategoryIcon,
   RecentActors as RecentActorsIcon,
 } from "@mui/icons-material"; // Import icons
-export const adminSettings = ["Profile", "Account", "Dashboard", "Logout"];
+import GroupIcon from "@mui/icons-material/Group";
 
 export const dashboardTabValue = [
   { label: "Products", value: "one", icon: <DashboardIcon /> },
   { label: "Categories", value: "two", icon: <CategoryIcon /> },
   { label: "Testimonials", value: "three", icon: <RecentActorsIcon /> },
-  { label: "Homepage", value: "four", icon: <RecentActorsIcon /> },
+  { label: "User", value: "four", icon: <GroupIcon /> },
 ];
 
 export const countries = [
@@ -58,7 +58,7 @@ export const urlToFile = async (url, filename) => {
 
 export const categories = [
   {
-    label: "SHIRTS",
+    label: "SHIRTS and Dresses",
     imgSrc: shirt,
     value: "shirts",
   },
@@ -110,6 +110,34 @@ export const availableColors = [
   { label: "Yellow", value: "yellow" },
   { label: "Black", value: "black" },
 ];
+
+export const hasEmptyField = (obj) => {
+  return Object.values(obj).some(
+    (value) => typeof value === "string" && value.trim() === ""
+  );
+};
+
+export const validateEmail = (passedEmail) => {
+  let emailRegex = /^[A-Za-z0-9_.-]{3,}@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+  return emailRegex.test(passedEmail);
+};
+
+export const isValidPhoneNumber = (phoneNumber) => {
+  // Regex to check if the cleaned number is a 10-digit number starting with 7-9
+  const phoneRegex = /^[7-9]\d{9}$/;
+
+  return phoneRegex.test(phoneNumber);
+};
+
+export const validatePassword = (password) => {
+  return {
+    minLength: password.length >= 8,
+    uppercase: /[A-Z]/.test(password),
+    lowercase: /[a-z]/.test(password),
+    digit: /\d/.test(password),
+    specialChar: /[!@#$%^&*(),.?":{}|<>]/.test(password),
+  };
+};
 
 export const availableSizes = [
   { label: "XS", value: "XS" },

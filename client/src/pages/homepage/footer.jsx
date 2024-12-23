@@ -171,7 +171,7 @@ const Footer = (props) => {
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="footer-links">
+                  <Link href="/contactus" className="footer-links">
                     Contact us
                   </Link>
                 </li>
