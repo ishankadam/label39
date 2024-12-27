@@ -1,13 +1,5 @@
 /* eslint-disable no-unused-vars */
-import {
-  Card,
-  CardContent,
-  Grid,
-  TextField,
-  Typography,
-  Button,
-  Box,
-} from "@mui/material";
+
 import React, { useEffect, useState } from "react";
 import CustomTable from "../../components/custom-table/customTable";
 import TestimonialModal from "../../form/addTestimonails/addTestimonials";
@@ -114,6 +106,7 @@ const ManageTestimonials = (props) => {
         }}
         loading={props.loading}
         pagination={true}
+        page="Testimonials"
       ></CustomTable>
       {showModal.show && (
         <TestimonialModal

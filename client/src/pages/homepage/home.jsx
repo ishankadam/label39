@@ -42,7 +42,6 @@ const Home = (props) => {
   }, []);
 
   const handleViewProduct = (product) => {
-    console.log(product);
     setShowModal({
       open: true,
       data: product,
@@ -63,11 +62,13 @@ const Home = (props) => {
         handleViewProduct={handleViewProduct}
         country={props.country}
       ></BestSellerSection>
-      <AsSeenOn
-        handleViewProduct={handleViewProduct}
-        asSeenOn={asSeenOn}
-        country={props.country}
-      ></AsSeenOn>
+      {asSeenOn.length > 0 && (
+        <AsSeenOn
+          handleViewProduct={handleViewProduct}
+          asSeenOn={asSeenOn}
+          country={props.country}
+        ></AsSeenOn>
+      )}
       <Testimonials testimonials={testimonials}></Testimonials>
       <InstagramSection></InstagramSection>
       <FindUs></FindUs>

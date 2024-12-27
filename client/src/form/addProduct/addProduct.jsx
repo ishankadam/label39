@@ -44,7 +44,16 @@ const AddEditProductModal = (props) => {
     deliveryIn: [],
     images: [],
     bestseller: false,
+    color: "",
   });
+
+  const colorList = [
+    { label: "Red", value: "red" },
+    { label: "Black", value: "black" },
+    { label: "Blue", value: "blue" },
+    { label: "Green", value: "green" },
+    { label: "Yellow", value: "yellow" },
+  ];
 
   // Handle input changes
   const handleEdit = (value, field, index, section) => {
@@ -456,6 +465,16 @@ const AddEditProductModal = (props) => {
             onChange={(e) => handleEdit(e.target.checked, "bestseller")}
           />
           <Typography>Is this a bestseller product ?</Typography>
+        </Grid>
+        <Grid xs={4}>
+          <SelectDropdown
+            label="Color"
+            optionList={colorList}
+            // config={{ field: "size", index: index, section: "Upper" }}
+            value={productDetails.color}
+            handleEdit={handleEdit}
+            sx={{ width: "100%" }}
+          />
         </Grid>
         <Grid item xs={12}>
           <UploadFiles

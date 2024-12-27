@@ -109,6 +109,7 @@ const ManageUsers = (props) => {
         }}
         loading={props.loading}
         pagination={true}
+        page="Users"
       ></CustomTable>
       {showModal.show && (
         <TestimonialModal

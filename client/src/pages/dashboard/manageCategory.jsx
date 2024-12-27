@@ -96,6 +96,7 @@ const ManageCategories = (props) => {
         }}
         loading={props.loading}
         pagination={true}
+        page="Categories"
       ></CustomTable>
       {showModal.show && (
         <AddEditCategory

@@ -26,6 +26,7 @@ export const dashboardTabValue = [
   { label: "Categories", value: "two", icon: <CategoryIcon /> },
   { label: "Testimonials", value: "three", icon: <RecentActorsIcon /> },
   { label: "User", value: "four", icon: <GroupIcon /> },
+  { label: "Orders", value: "five", icon: <GroupIcon /> },
 ];
 
 export const countries = [

@@ -29,10 +29,16 @@ router.get("/getTestimonials", controller.get_all_testimonials);
 
 // Create Delivery Order
 router.post("/createOrder", controller.createPayment);
+
+router.post("/verify-payment", controller.verifyPayment);
+
 router.post("/createDelivery", controller.createDeliveryOrder);
 
 // Track Delivery Order
 router.get("/trackOrder/:trackingId", controller.trackDeliveryOrder);
+
+// Get all orders
+router.get("/getOrders", controller.get_all_orders);
 
 //create Category
 router.post(
@@ -58,6 +64,12 @@ router.get("/getUsers", controller.get_all_users);
 
 // Check Login Credentials
 router.post("/login", controller.checkLoginCredentials);
+
+// Add to Cart
+router.post("/addToCart", controller.add_to_cart);
+
+// Get Cart Items
+router.post("/getCartItems", controller.getCartItems);
 
 // Error handling middleware
 router.use((error, req, res, next) => {

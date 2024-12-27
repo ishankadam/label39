@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Card,
@@ -9,17 +9,25 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
+  Snackbar,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CustomTextfield from "../../components/textfield/customTextfield";
-import { useSelector } from "react-redux";
-import { imageUrl } from "../../api";
+import { useDispatch, useSelector } from "react-redux";
+import { imageUrl, verifyPayment } from "../../api";
 import { createOrder } from "../../api";
+import { useNavigate } from "react-router-dom";
+import { clearCart } from "../../store/cartSlice";
 const { RAZORPAY_KEY_ID } = process.env;
 export const razorpayId = RAZORPAY_KEY_ID;
 
 const CheckoutForm = (props) => {
   const cartItems = useSelector((state) => state.cart.items);
+  const [paymentDetails, setPaymentDetails] = useState({});
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const totalPrice = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
     0
@@ -36,6 +44,13 @@ const CheckoutForm = (props) => {
     email: "",
   });
 
+  useEffect(() => {
+    const allFieldsFilled = Object.values(checkoutData).every(
+      (field) => field.trim() !== ""
+    );
+    setIsButtonDisabled(!allFieldsFilled); // Disable button if any field is empty
+  }, [checkoutData]);
+
   const handleEdit = (value, field) => {
     setCheckoutData((prev) => ({
       ...prev,
@@ -51,20 +66,33 @@ const CheckoutForm = (props) => {
     try {
       const { orderId } = await createOrder(amount);
       const options = {
-        key: razorpayId, // Replace with your key_id
-        amount: amount * 100, // Amount in the smallest currency unit
+        key: process.env.REACT_APP_RAZORPAY_KEY_ID,
+        amount: amount,
         currency: "INR",
-        name: "The Label 39",
-        description: "Payment Description",
+        name: "Your Company Name",
+        description: "Test Transaction",
         order_id: orderId,
-        handler: function (response) {
-          alert("Payment Successful!");
-          console.log(response);
+        handler: async function (response) {
+          const result = await verifyPayment({
+            razorpay_order_id: response.razorpay_order_id,
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_signature: response.razorpay_signature,
+            checkoutData,
+            cartItems,
+          });
+
+          if (result.success) {
+            alert("Payment Successful");
+            navigate("/shop");
+            dispatch(clearCart());
+          } else {
+            alert("Payment Failed");
+          }
         },
         prefill: {
-          name: "TheLabel39",
-          email: "thelabel39@gmail.com",
-          contact: "96749 49842",
+          name: checkoutData.name,
+          email: checkoutData.email,
+          contact: checkoutData.phone,
         },
         theme: {
           color: "#3399cc",
@@ -73,11 +101,9 @@ const CheckoutForm = (props) => {
 
       const rzp = new window.Razorpay(options);
       rzp.open();
-      console.log(rzp);
     } catch (error) {
       console.error("Payment failed:", error);
     }
-    console.log(checkoutData);
   };
 
   return (
@@ -562,6 +588,7 @@ const CheckoutForm = (props) => {
                 fontSize: "18px",
                 p: 1,
               }}
+              disabled={isButtonDisabled}
               onClick={() => handleOrderPlacement()}
             >
               Pay Now
@@ -790,6 +817,12 @@ const CheckoutForm = (props) => {
           </Box>
         </Card>
       </Card>
+      <Snackbar
+        variant="success"
+        open={paymentSuccess}
+        autoHideDuration={6000}
+        onClose={() => setPaymentSuccess(false)}
+      ></Snackbar>
     </>
   );
 };

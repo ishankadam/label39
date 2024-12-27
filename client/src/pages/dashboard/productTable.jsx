@@ -157,6 +157,7 @@ const ProductTable = (props) => {
         categories={props.categories}
         setProducts={props.setProducts}
         handleModalClose={handleModalClose}
+        page="Products"
       ></CustomTable>
       {showModal.show && (
         <AddEditProductModal

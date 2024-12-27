@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 
 import {
   getAllCategories,
+  getAllOrders,
   getAllProducts,
   getAllTestimonials,
   getAllUsers,
@@ -27,6 +28,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import PageNotFound from "../not-found/pageNotFound";
 import ManageUsers from "./manageUsers";
 import SelectDropdown from "../../components/select-dropdown/selectDropdown";
+import ManageOrders from "./manageOrders";
 
 const drawerWidth = 180;
 
@@ -129,6 +131,7 @@ const Dashboard = (props) => {
     categories: "",
     subcategories: "",
   });
+  const [allOrders, setAllOrders] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
   const [categoryData, setCategoryData] = useState({
     categories: [],
@@ -168,6 +171,7 @@ const Dashboard = (props) => {
     getAllCategories({ setCategories, setLoading: setCategoryLoading });
     getAllTestimonials({ setTestimonials, setLoading: setTestimonialsLoading });
     getAllUsers({ setUsers, setLoading: setUsersLoading });
+    getAllOrders({ setAllOrders });
   }, []);
 
   const handleOpenForm = (page) => {
@@ -450,7 +454,11 @@ const Dashboard = (props) => {
               showModal={showUserModal}
               setShowModal={setShowUserModal}
               setUsers={setUsers}
+              page="Users"
             />
+          )}
+          {tabValue === "five" && (
+            <ManageOrders allOrders={allOrders} page="Orders" />
           )}
         </Box>
       </Box>

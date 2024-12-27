@@ -109,7 +109,7 @@ const CustomDrawer = (props) => {
                 >
                   <img
                     src={`${imageUrl}products/${item.images[0]}`}
-                    alt={item.title}
+                    alt={item.name}
                     style={{
                       aspectRatio: "2:3",
                       width: "120px",
@@ -126,7 +126,7 @@ const CustomDrawer = (props) => {
                         mb: 1,
                       }}
                     >
-                      {item.title}
+                      {item.name}
                     </Typography>
                     <Typography
                       sx={{

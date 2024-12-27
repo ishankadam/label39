@@ -27,7 +27,15 @@ import "./../../css/appbar.css";
 import CloseIcon from "@mui/icons-material/Close";
 import ShopDialog from "../../pages/homepage/shopDialog";
 import { useDispatch, useSelector } from "react-redux";
-import { closeDialog, openCartDrawer, openDialog } from "../../store/cartSlice";
+import {
+  addToCart,
+  clearCart,
+  closeCartDrawer,
+  closeDialog,
+  openCartDrawer,
+  openDialog,
+} from "../../store/cartSlice";
+import { getCartItems } from "../../api";
 
 const CustomAppbar = (props) => {
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -44,15 +52,13 @@ const CustomAppbar = (props) => {
     setAnchorElUser(event.currentTarget);
   };
 
-  useEffect(() => {
-    setCountry(props.country);
-  }, [props.country]);
-
   const handleCloseUserMenu = () => {
-    console.log("hi");
     setAnchorElUser(null);
   };
 
+  useEffect(() => {
+    setCountry(props.country);
+  }, [props.country]);
   const handlePageChange = (pageName) => {
     navigate(`/${pageName}`);
   };
@@ -78,29 +84,20 @@ const CustomAppbar = (props) => {
     { text: "Contact Us", page: "contactus" },
   ];
 
-  const shopMenuItems = [
-    { text: "Shirts", page: "/shirts" },
-    { text: "Co-ord Sets", page: "/co-ord-sets" },
-    { text: "Suits", page: "/suits" },
-    { text: "Festive", page: "/festive" },
-    { text: "New Arrival", page: "/new-arrival" },
-    { text: "As Seen On - Celebrity Style", page: "/celebrity-style" },
-    { text: "Clients Dairy", page: "/clients-dairy" },
-    { text: "Kurta Sets", page: "/kurta-sets" },
-    { text: "Best Sellers", page: "/best-sellers" },
-  ];
-
-  const handleOpenCart = () => {
-    props.setCartDetails((prev) => ({
-      ...prev,
-      open: true,
-    }));
-  };
-
   useEffect(() => {
     const role = localStorage.getItem("role");
 
     setAdminSettings((prev) => {
+      const userId = localStorage.getItem("userId");
+      if (userId) {
+        async function getCartItemsForUser() {
+          const cartItems = await getCartItems({ userId });
+          if (cartItems.length === 0) return;
+          dispatch(addToCart(cartItems));
+          dispatch(closeCartDrawer());
+        }
+        getCartItemsForUser();
+      }
       // Check if "Login" already exists in the array
       const hasLogin = prev.some((item) => item.label === "login");
       // Check if "Logout" already exists in the array
@@ -135,14 +132,26 @@ const CustomAppbar = (props) => {
   const logout = () => {
     localStorage.clear();
     navigate("/");
+    dispatch(clearCart());
     props.setUserUpdated(false);
   };
 
   const handleNavigation = (url) => {
+    console.log("test");
+    handleCloseUserMenu(null);
     navigate(url);
   };
 
   const cartItemCount = useSelector((state) => state.cart.totalItems);
+
+  const handleMenuItemClick = (setting) => {
+    if (setting.type === "action") {
+      setting.onClick();
+    } else {
+      handleNavigation(setting.url);
+    }
+    handleCloseUserMenu(null); // Close the menu
+  };
 
   return (
     <>
@@ -308,17 +317,13 @@ const CustomAppbar = (props) => {
                     vertical: "top",
                     horizontal: "right",
                   }}
-                  open={Boolean(anchorElUser)}
+                  open={anchorElUser}
                   onClose={handleCloseUserMenu}
                 >
                   {adminSettings.map((setting) => (
                     <MenuItem
                       key={setting.label}
-                      onClick={
-                        setting.type === "action"
-                          ? setting.onClick
-                          : () => handleNavigation(setting.url)
-                      }
+                      onClick={() => handleMenuItemClick(setting)}
                     >
                       <Typography
                         sx={{

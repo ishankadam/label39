@@ -12,7 +12,19 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
-      state.items.push({ ...action.payload, quantity: 1 });
+      const existingItem = state.items.find(
+        (item) => item.productId === action.payload.productId
+      );
+
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        if (Array.isArray(action.payload)) {
+          state.items = [...action.payload];
+        } else {
+          state.items.push(action.payload);
+        }
+      }
       state.totalItems = state.items.length;
       state.openCartDrawer = true;
     },

@@ -11,6 +11,8 @@ const fs = require("fs");
 const md5 = require("md5");
 var _ = require("lodash");
 const { createJSONToken } = require("../auth");
+const orders = require("../schema/orders");
+const crypto = require("crypto");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -215,8 +217,6 @@ const create_product = async (req, res) => {
 const createPayment = async (req, res) => {
   const { currency, receipt } = req.body;
   const amount = _.parseInt(req.body.amount);
-  console.log(typeof req.body.amount, req.body.amount);
-  console.log(typeof amount, amount);
   try {
     const order = await razorpayInstance.orders.create({
       amount: amount * 100, // Convert amount to smallest currency unit (e.g., paise for INR)
@@ -231,6 +231,58 @@ const createPayment = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+const verifyPayment = async (req, res) => {
+  try {
+    const {
+      razorpay_order_id,
+      razorpay_payment_id,
+      razorpay_signature,
+      checkoutData,
+      cartItems,
+    } = req.body;
+
+    console.log(razorpay_order_id, razorpay_payment_id, razorpay_signature);
+
+    const sign = razorpay_order_id + "|" + razorpay_payment_id;
+    const expectedSign = crypto
+      .createHmac("sha256", process.env.RAZORPAY_SECRET)
+      .update(sign.toString())
+      .digest("hex");
+    console.log(expectedSign);
+
+    if (razorpay_signature === expectedSign) {
+      // Payment is successful, store data in the database
+      const order = new orders({
+        orderId: razorpay_order_id,
+        paymentId: razorpay_payment_id,
+        checkoutData: checkoutData,
+        paymentInfo: {
+          status: "success",
+          method: "razorpay",
+        },
+        cartItems,
+      });
+      await order.save();
+
+      return res.status(200).json({
+        message: "Payment verified successfully",
+        success: true,
+      });
+    } else {
+      return res.status(400).json({
+        message: "Invalid signature sent!",
+        success: false,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "Internal Server Error!",
+      success: false,
+    });
   }
 };
 
@@ -507,6 +559,69 @@ const get_all_users = async (req, res) => {
   }
 };
 
+const add_to_cart = async (req, res) => {
+  const { userId, cartItems } = req.body; // Extract userId and cartItems from request body
+
+  try {
+    // Check if the user exists
+    const user = await User.findOne({ userId: userId });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Find the index of the item in the cart
+    const itemIndex = user.cart.findIndex(
+      (item) => item.productId === cartItems.productId
+    );
+
+    if (itemIndex > -1) {
+      // If item exists, increment quantity
+      user.cart[itemIndex].quantity += cartItems.quantity || 1;
+    } else {
+      // Otherwise, add the new item
+      user.cart.push({ ...cartItems, quantity: cartItems.quantity || 1 });
+    }
+
+    // Mark the cart field as modified
+    user.markModified("cart");
+
+    // Save the updated user document
+    await user.save();
+
+    res.status(200).json({ message: "Cart updated successfully" });
+  } catch (error) {
+    console.error("Error updating cart:", error);
+    res.status(500).json({ message: "Failed to update cart" });
+  }
+};
+
+const getCartItems = async (req, res) => {
+  const userId = req.body.userId;
+  try {
+    const user = await User.findOne({ userId: userId })
+      .select("cart")
+      .populate("cart")
+      .lean();
+    const cartItems = user?.cart || [];
+    res.status(200).json(cartItems);
+  } catch (error) {
+    console.error("Error fetching cart items:", error);
+    res.status(500).json({ message: "Failed to fetch cart items" });
+  }
+};
+
+const get_all_orders = async (req, res) => {
+  try {
+    const ordersData = await orders.find({}).select("-_id -__v"); // Exclude _id and __v fields
+    console.log(ordersData);
+    res.status(200).json(ordersData); // Send the result as JSON
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Error fetching events", error });
+  }
+};
+
 module.exports = {
   get_all_products,
   create_product,
@@ -524,4 +639,8 @@ module.exports = {
   create_user,
   get_all_users,
   checkLoginCredentials,
+  add_to_cart,
+  getCartItems,
+  verifyPayment,
+  get_all_orders,
 };

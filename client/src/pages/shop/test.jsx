@@ -34,7 +34,6 @@ const Test = (props) => {
     color: "",
   });
   const handleViewProduct = (product) => {
-    console.log(product);
     setShowModal({
       open: true,
       data: product,

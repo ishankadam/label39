@@ -16,7 +16,7 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import _ from "lodash";
+import _, { set } from "lodash";
 import React, { useEffect, useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
@@ -29,6 +29,7 @@ import { imageUrl } from "../../api";
 import AddEditProductModal from "../../form/addProduct/addProduct";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import ConfirmationModal from "../modal/confirmationModal";
+import ViewOrders from "../../pages/dashboard/viewOrders";
 const CustomTable = (props) => {
   const [rowData, setRowData] = useState(props.rowData);
   const [page, setPage] = React.useState(0);
@@ -39,7 +40,11 @@ const CustomTable = (props) => {
     show: false,
     deleteFunc: undefined,
   });
-  const [showViewModal, setShowViewModal] = useState({
+  const [showViewProductModal, setShowViewProductModal] = useState({
+    open: false,
+    data: {},
+  });
+  const [showViewOrders, setShowViewOrders] = useState({
     open: false,
     data: {},
   });
@@ -65,11 +70,23 @@ const CustomTable = (props) => {
     setRowData(props.rowData);
   }, [props.rowData]);
 
-  const handleViewProduct = (product) => {
-    setShowViewModal({
-      open: true,
-      data: product,
-    });
+  const handleView = (data) => {
+    switch (props.page) {
+      case "Products":
+        setShowViewProductModal({
+          open: true,
+          data: data,
+        });
+        break;
+      case "Orders":
+        setShowViewOrders({
+          open: true,
+          data: data,
+        });
+        break;
+      default:
+        break;
+    } // Add more cases as needed
   };
 
   const handleModalClose = () => {
@@ -100,6 +117,13 @@ const CustomTable = (props) => {
           <Typography>{_.capitalize(row[colDef.key])}</Typography>
         ) : (
           <Typography>{row[colDef.key]}</Typography>
+        );
+        break;
+      case "nestedText":
+        children = colDef.capitalize ? (
+          <Typography>{_.capitalize(row[colDef.key])}</Typography>
+        ) : (
+          <Typography>{row[colDef.key][colDef.nestedKey]}</Typography>
         );
         break;
       case "textWithStartIcon":
@@ -304,7 +328,7 @@ const CustomTable = (props) => {
                         "&:last-child td, &:last-child th": { border: 0 },
                         cursor: "pointer",
                       }}
-                      onClick={() => handleViewProduct(row)}
+                      onClick={() => handleView(row)}
                     >
                       {props.colDef.map((column, colIndex) => {
                         return getCell(column, row, rowIndex, colIndex);
@@ -348,11 +372,11 @@ const CustomTable = (props) => {
           handleCancel={() => setDisableInfo({ show: false })}
         />
       ) : null}
-      {showViewModal.open ? (
+      {showViewProductModal.open ? (
         <ViewProductModal
-          open={showViewModal.open}
-          product={showViewModal.data}
-          setShowModal={setShowViewModal}
+          open={showViewProductModal.open}
+          product={showViewProductModal.data}
+          setShowModal={setShowViewProductModal}
           setShowEditModal={setShowEditModal}
           isAdmin={true}
         ></ViewProductModal>
@@ -368,6 +392,13 @@ const CustomTable = (props) => {
           setProducts={props.setProducts}
           categories={props.categories}
         ></AddEditProductModal>
+      ) : null}
+      {showViewOrders.open ? (
+        <ViewOrders
+          open={showViewOrders.open}
+          data={showViewOrders.data}
+          setShowModal={setShowViewOrders}
+        ></ViewOrders>
       ) : null}
     </Paper>
   );

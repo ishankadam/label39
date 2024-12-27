@@ -11,7 +11,7 @@ import {
 import React from "react";
 import "./../../css/productCard.css";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import { imageUrl } from "../../api";
+import { addProductToCart, imageUrl } from "../../api";
 import { deliveryIn, getCurrencySymbol } from "../../common";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../store/cartSlice";
@@ -21,6 +21,7 @@ const ProductCard = (props) => {
   const dispatch = useDispatch();
 
   const handleAddToCart = (e, product) => {
+    const userId = localStorage.getItem("userId");
     e.stopPropagation();
     const cartProduct = {
       productId: product.productId,
@@ -30,11 +31,13 @@ const ProductCard = (props) => {
       deliveryIn: product.deliveryIn,
       images: [product.images[0]],
       sizes: {
-        Upper: "",
-        Bottom: "",
+        Upper: "XS",
+        Bottom: "XS",
       },
     };
     dispatch(addToCart(cartProduct));
+    if (!userId) return;
+    addProductToCart({ cartProduct, userId });
   };
 
   return (

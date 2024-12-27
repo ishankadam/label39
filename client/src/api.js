@@ -42,7 +42,7 @@ export const login = async (user, error, setError, navigate) => {
       const result = await response.json();
       if (result.isValid) {
         localStorage.setItem("role", result.employeeDetails.role);
-        localStorage.setItem("email", result.employeeDetails.email);
+        localStorage.setItem("userId", result.employeeDetails.userId);
         localStorage.setItem("token", result.token);
 
         return result.employeeDetails;
@@ -227,7 +227,6 @@ export const createOrder = async (amount) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ amount }),
     });
-    console.log(response);
     if (!response.ok) {
       throw new Error("Failed to create order");
     }
@@ -235,6 +234,37 @@ export const createOrder = async (amount) => {
     return await response.json();
   } catch (err) {
     console.error("Error creating order:", err);
+    throw err;
+  }
+};
+
+export const verifyPayment = async ({
+  razorpay_order_id,
+  razorpay_payment_id,
+  razorpay_signature,
+  checkoutData,
+  cartItems,
+}) => {
+  try {
+    const response = await fetch(`${apiUrl}/verify-payment`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        razorpay_order_id,
+        razorpay_payment_id,
+        razorpay_signature,
+        checkoutData,
+        cartItems,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to verify payment");
+    }
+
+    return await response.json();
+  } catch (err) {
+    console.error("Error verifying payment:", err);
     throw err;
   }
 };
@@ -476,5 +506,65 @@ export const toggleCategoryStatus = async ({
   } catch (err) {
     console.error("Error disabling product:", err);
     if (setLoading) setLoading(false);
+  }
+};
+
+export const addProductToCart = async ({ cartProduct, userId }) => {
+  try {
+    const response = await fetch(`${apiUrl}/addToCart`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ cartItems: cartProduct, userId: userId }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to add product to cart");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    console.error("Error adding product to cart:", err);
+    throw err;
+  }
+};
+
+export const getCartItems = async ({ userId }) => {
+  try {
+    const response = await fetch(`${apiUrl}/getCartItems`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userId: userId }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch cart items");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    console.error("Error fetching cart items:", err);
+    throw err;
+  }
+};
+
+export const getAllOrders = async ({ setAllOrders }) => {
+  try {
+    const response = await fetch(`${apiUrl}/getOrders`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch orders");
+    }
+
+    const data = await response.json();
+    setAllOrders(data);
+    return data;
+  } catch (err) {
+    console.error("Error fetching orders:", err);
+    throw err;
   }
 };
