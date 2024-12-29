@@ -29,7 +29,7 @@ const ProductTable = (props) => {
     });
   };
 
-  const handleDisableProduct = (row, index) => {
+  const handleDisableProduct = (row) => {
     toggleProductStatus({
       product: row,
       setLoading: props.setLoading,
@@ -147,10 +147,6 @@ const ProductTable = (props) => {
       <CustomTable
         colDef={colDef}
         rowData={products}
-        disableContent={{
-          title: "Disable Confirmation",
-          message: "Are you sure you want to disable this product?",
-        }}
         loading={props.loading}
         pagination={true}
         setShowModal={setShowModal}

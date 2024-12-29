@@ -16,9 +16,8 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import _, { set } from "lodash";
+import _ from "lodash";
 import React, { useEffect, useState } from "react";
-import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { findLabelByValue } from "../../common";
 // import { imageUrl } from "../../api";
@@ -38,7 +37,10 @@ const CustomTable = (props) => {
     row: 0,
     index: 0,
     show: false,
-    deleteFunc: undefined,
+    disableFunc: undefined,
+    disableTitle: "",
+    disableMessage: "",
+    buttonLabel: "",
   });
   const [showViewProductModal, setShowViewProductModal] = useState({
     open: false,
@@ -54,7 +56,7 @@ const CustomTable = (props) => {
     data: {},
   });
   const [loading, setLoading] = useState(props.loading);
-  const handleChangePage = (event, newPage) => {
+  const handleChangePage = (_event, newPage) => {
     setPage(newPage);
   };
   useEffect(() => {
@@ -109,7 +111,7 @@ const CustomTable = (props) => {
     </Grid>
   );
 
-  const getCell = (colDef, row, rowIndex, colIndex) => {
+  const getCell = (colDef, row, rowIndex, _colIndex) => {
     let children;
     switch (colDef.type) {
       case "text":
@@ -241,7 +243,11 @@ const CustomTable = (props) => {
                       row: row,
                       index: rowIndex,
                       show: true,
-                      deleteFunc: colDef.disableFunc,
+                      disableFunc: colDef.disableFunc,
+                      disableTitle: "Disable Confirmation",
+                      disableMessage:
+                        "Are you sure you want to disable this product?",
+                      buttonLabel: "Disable",
                     });
                   }}
                   sx={{ cursor: "pointer" }}
@@ -255,7 +261,11 @@ const CustomTable = (props) => {
                       row: row,
                       index: rowIndex,
                       show: true,
-                      deleteFunc: colDef.disableFunc,
+                      disableFunc: colDef.disableFunc,
+                      disableTitle: "Enable Confirmation",
+                      disableMessage:
+                        "Are you sure you want to enable this product?",
+                      buttonLabel: "Enable",
                     });
                   }}
                   sx={{ cursor: "pointer" }}
@@ -363,13 +373,14 @@ const CustomTable = (props) => {
       {disableInfo.show ? (
         <ConfirmationModal
           open={disableInfo.show}
-          title={props.disableContent.title}
-          message={props.disableContent.message}
+          title={disableInfo.disableTitle}
+          message={disableInfo.disableMessage}
           handleConfirm={() => {
-            disableInfo.deleteFunc(disableInfo.row, disableInfo.index);
+            disableInfo.disableFunc(disableInfo.row, disableInfo.index);
             setDisableInfo({ show: false });
           }}
           handleCancel={() => setDisableInfo({ show: false })}
+          buttonLabel={disableInfo.buttonLabel}
         />
       ) : null}
       {showViewProductModal.open ? (

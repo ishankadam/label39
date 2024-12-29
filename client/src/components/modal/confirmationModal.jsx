@@ -83,11 +83,10 @@ export default function ConfirmationModal(props) {
         <Button
           onClick={props.handleConfirm}
           variant="contained"
-          color="error"
+          color="custom"
           className="confirmation-modal-confirm"
-          sx={{ backgroundColor: "red" }}
         >
-          {props.isDelete ? "Delete" : "Disable"}
+          {props.isDelete ? "Delete" : props.buttonLabel}
         </Button>
       </DialogActions>
     </Dialog>

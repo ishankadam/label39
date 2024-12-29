@@ -16,7 +16,6 @@ import PaymentPage from "./pages/payment/paymentPage";
 import DeliveryForm from "./pages/product/deliveryForm";
 import Dashboard from "./pages/dashboard/dashboard";
 import FindUs from "./pages/homepage/findUs";
-import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import { Fab, Tooltip } from "@mui/material";
 import { getAllProducts } from "./api";
 import TermsAndConditions from "./pages/termsAndCondition/termsAndCondition";
@@ -26,6 +25,9 @@ import PageNotFound from "./pages/not-found/pageNotFound";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
+import WhatsAppButton from "./components/actionButton/whatsappActionButton";
+import { whatsappQueryMessage } from "./common";
+import ProfilePage from "./pages/profile/profile";
 const App = () => {
   const [cartDetails, setCartDetails] = useState({
     open: false,
@@ -116,22 +118,10 @@ const App = () => {
                 },
               }}
             >
-              <Fab
-                color="success"
-                aria-label="add"
-                sx={{
-                  position: "fixed",
-                  bottom: 20,
-                  right: 20,
-                  zIndex: 1000,
-                  transition: "background-color 0.3s ease",
-                  "&:hover": {
-                    backgroundColor: "#4caf50",
-                  },
-                }}
-              >
-                <WhatsAppIcon sx={{ fontSize: 30 }} />
-              </Fab>
+              <WhatsAppButton
+                phoneNumber="+918652241163"
+                message={whatsappQueryMessage}
+              />
             </Tooltip>
             <Fab
               color="#A16149"
@@ -214,6 +204,7 @@ const App = () => {
             path="/termsAndCondition"
             element={<TermsAndConditions />}
           />
+          <Route exact path="/profile" element={<ProfilePage />} />
         </Routes>
         <CustomDrawer
           cartDetails={cartDetails}

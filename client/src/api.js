@@ -1,9 +1,10 @@
 import { urlToFile } from "./common";
 
-const { REACT_APP_API_URL, REACT_APP_IMAGE_URL } = process.env;
+const { REACT_APP_API_URL, REACT_APP_IMAGE_URL, REACT_APP_PHONE } = process.env;
 
 export const apiUrl = REACT_APP_API_URL;
 export const imageUrl = REACT_APP_IMAGE_URL;
+export const phoneNumber = REACT_APP_PHONE;
 
 // create User
 export const createUser = async ({ userDetails, navigate }) => {
@@ -25,7 +26,7 @@ export const createUser = async ({ userDetails, navigate }) => {
     });
 };
 
-export const login = async (user, error, setError, navigate) => {
+export const login = async (user, error, setError) => {
   const requestOptions = {
     method: "POST",
     body: JSON.stringify({

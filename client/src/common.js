@@ -27,7 +27,11 @@ export const dashboardTabValue = [
   { label: "Testimonials", value: "three", icon: <RecentActorsIcon /> },
   { label: "User", value: "four", icon: <GroupIcon /> },
   { label: "Orders", value: "five", icon: <GroupIcon /> },
+  { label: "Profile", value: "six", icon: <GroupIcon /> },
 ];
+
+export const whatsappQueryMessage =
+  "Hey Prachi your ORDER is yet to be fulfilled! \n\n📦 Meanwhile, enjoy purchasing with code MAMAFIRST10 to get 10% off 🎉\n\n As we have already been waiting for you for a long time 🥳";
 
 export const countries = [
   {

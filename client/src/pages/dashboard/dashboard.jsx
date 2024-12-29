@@ -8,12 +8,12 @@ import {
   getAllTestimonials,
   getAllUsers,
 } from "../../api";
-import { dashboardTabValue, findLabelByValue } from "../../common";
+import { dashboardTabValue } from "../../common";
 import _ from "lodash";
 import ProductTable from "./productTable";
 import ManageCategories from "./manageCategory";
 import ManageTestimonials from "./manageTestimonials";
-import { styled, useTheme } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -29,6 +29,7 @@ import PageNotFound from "../not-found/pageNotFound";
 import ManageUsers from "./manageUsers";
 import SelectDropdown from "../../components/select-dropdown/selectDropdown";
 import ManageOrders from "./manageOrders";
+import ProfilePage from "../profile/profile";
 
 const drawerWidth = 180;
 
@@ -114,7 +115,6 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 const Dashboard = (props) => {
-  const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [options, setOptions] = useState("Products");
   const [products, setProducts] = useState([]);
@@ -155,7 +155,6 @@ const Dashboard = (props) => {
     isEdit: false,
     data: {},
   });
-  const [sidebarOpen, setSidebarOpen] = useState(false); // Track sidebar open state
   const [categoryList, setCategoryList] = useState([]);
   useEffect(() => {
     setShowProductModal(props.showProductModal);
@@ -194,11 +193,6 @@ const Dashboard = (props) => {
         data: {},
       });
     }
-  };
-
-  const handleOptions = (event, newValue) => {
-    setOptions(findLabelByValue(dashboardTabValue, newValue));
-    setTabValue(newValue);
   };
 
   useEffect(() => {
@@ -460,6 +454,7 @@ const Dashboard = (props) => {
           {tabValue === "five" && (
             <ManageOrders allOrders={allOrders} page="Orders" />
           )}
+          {tabValue === "six" && <ProfilePage />}
         </Box>
       </Box>
     </Box>
