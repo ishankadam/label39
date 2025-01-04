@@ -5,6 +5,7 @@ const initialState = {
   openShopMenu: false,
   totalItems: 0,
   openCartDrawer: false,
+  giftCardOpen: false,
 };
 
 export const cartSlice = createSlice({
@@ -73,6 +74,12 @@ export const cartSlice = createSlice({
     closeCartDrawer: (state) => {
       state.openCartDrawer = false;
     },
+    openGiftCard: (state) => {
+      state.giftCardOpen = true;
+    },
+    closeGiftCard: (state) => {
+      state.giftCardOpen = false;
+    },
   },
 });
 
@@ -85,6 +92,8 @@ export const {
   closeDialog,
   openCartDrawer,
   closeCartDrawer,
+  openGiftCard,
+  closeGiftCard,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

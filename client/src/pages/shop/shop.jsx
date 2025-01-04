@@ -10,13 +10,14 @@ import {
   Pagination,
   ListItemSecondaryAction,
   IconButton,
+  Box,
 } from "@mui/material";
 import "../../css/shop.css";
 import ProductCard from "../../components/card/productCard";
 import CircleIcon from "@mui/icons-material/Circle";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import ViewProductModal from "../product/viewProduct";
-import _, { set } from "lodash";
+import _ from "lodash";
 import ClearIcon from "@mui/icons-material/Clear";
 import CustomTextfield from "../../components/textfield/customTextfield";
 
@@ -25,7 +26,7 @@ const ProductsPage = (props) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [loading, setLoading] = useState(props.loading || false);
   const [displayedProducts, setDisplayedProducts] = useState([]);
-  const toggleDrawer = (open) => (event) => {
+  const toggleDrawer = (open) => () => {
     setIsDrawerOpen(open);
   };
   const [page, setPage] = useState(1);
@@ -64,10 +65,30 @@ const ProductsPage = (props) => {
   const categories = ["Shirts", "Co-ords", "Kurtas", "Suits"];
   const priceRanges = [
     { label: "Under 10000", min: 0, max: 10000 },
-    { label: "10000-15000", min: 10000, max: 15000 },
-    { label: "15000-20000", min: 15000, max: 20000 },
+    { label: "10000-20000", min: 10000, max: 15000 },
+    { label: "Above 20000", min: 20000, max: 200000 },
   ];
-  const availableColors = ["Red", "Black", "Blue", "Green", "Yellow"];
+  const availableColors = [
+    "Red",
+    "Blue",
+    "Green",
+    "Yellow",
+    "Orange",
+    "Black",
+    "Ivory",
+    "Gray",
+    "Pink",
+    "Lilac",
+    "Purple",
+    "Beige",
+    "Brown",
+    "Peach",
+    "Off-white",
+    "Maroon",
+    "Gold",
+    "Silver",
+    "Print",
+  ];
 
   useEffect(() => {
     setLoading(true);
@@ -78,8 +99,8 @@ const ProductsPage = (props) => {
   };
 
   useEffect(() => {
-    const productsPerPage = page === 1 ? 12 : 8;
-    const startIdx = page === 1 ? 0 : 12 + (page - 2) * 10;
+    const productsPerPage = page === 1 ? 16 : 8;
+    const startIdx = page === 1 ? 0 : 16 + (page - 2) * 10;
     const endIdx = startIdx + productsPerPage;
 
     const filteredProducts = allProduct.filter((product) => {
@@ -363,73 +384,93 @@ const ProductsPage = (props) => {
               >
                 Color
               </Typography>
-              <List>
-                {availableColors.map((color, index) => {
-                  const isSelected = filter.color === color;
+              <Box
+                sx={{
+                  maxHeight: "250px",
+                  overflowY: "auto",
+                  "&::-webkit-scrollbar": {
+                    width: "6px", // Slim scrollbar width
+                  },
+                  "&::-webkit-scrollbar-track": {
+                    backgroundColor: "#f0f0f0", // Track background color
+                    borderRadius: "10px", // Rounded corners for the track
+                  },
+                  "&::-webkit-scrollbar-thumb": {
+                    backgroundColor: "#888", // Scrollbar thumb color
+                    borderRadius: "10px", // Pill-shaped scrollbar
+                  },
+                  "&::-webkit-scrollbar-thumb:hover": {
+                    backgroundColor: "#555", // Darker thumb color on hover
+                  },
+                }}
+              >
+                <List>
+                  {availableColors.map((color, index) => {
+                    const isSelected = filter.color === color;
 
-                  return (
-                    <ListItem key={index} disablePadding>
-                      <ListItemButton
-                        onClick={() => handleFilterChange(color, "color")}
-                        sx={{
-                          margin: "0 !important",
-                          Color: isSelected
-                            ? "rgba(0, 106, 25, 0.1)"
-                            : "transparent", // Apply green background when selected
-                          "&:focus": {
-                            fontWeight: "bold !important",
-                            Color: "rgba(0, 106, 25, 0.1) !important", // On focus
-                          },
-                          "&:hover": {
-                            backgroundColor: isSelected
-                              ? "rgba(0, 106, 25, 0.15)"
-                              : "#efefef", // Change hover effect when selected
-                          },
-                        }}
-                      >
-                        {isSelected && (
-                          <CircleIcon
-                            sx={{
-                              color: "#a16149",
-                              fontSize: "8px",
-                              marginRight: "8px",
+                    return (
+                      <ListItem key={index} disablePadding>
+                        <ListItemButton
+                          onClick={() => handleFilterChange(color, "color")}
+                          sx={{
+                            margin: "0 !important",
+                            Color: isSelected
+                              ? "rgba(0, 106, 25, 0.1)"
+                              : "transparent", // Apply green background when selected
+                            "&:focus": {
+                              fontWeight: "bold !important",
+                              Color: "rgba(0, 106, 25, 0.1) !important", // On focus
+                            },
+                            "&:hover": {
+                              backgroundColor: isSelected
+                                ? "rgba(0, 106, 25, 0.15)"
+                                : "#efefef", // Change hover effect when selected
+                            },
+                          }}
+                        >
+                          {isSelected && (
+                            <CircleIcon
+                              sx={{
+                                color: "#a16149",
+                                fontSize: "8px",
+                                marginRight: "8px",
+                              }}
+                            />
+                          )}
+                          <ListItemText
+                            primary={color}
+                            primaryTypographyProps={{
+                              fontFamily: " 'Roboto Serif', serif",
+                              fontSize: isSelected ? "16px" : "15px",
+                              fontWeight: isSelected ? "600" : "normal",
+                              color: isSelected ? "#a16149" : "black",
+                              margin: "0 !important", // Override margin
+                              padding: "0 !important", // Override padding
                             }}
                           />
-                        )}
-                        <ListItemText
-                          primary={color}
-                          primaryTypographyProps={{
-                            fontFamily: " 'Roboto Serif', serif",
-                            fontSize: isSelected ? "16px" : "15px",
-                            fontWeight: isSelected ? "600" : "normal",
-                            color: isSelected ? "#a16149" : "black",
-                            margin: "0 !important", // Override margin
-                            padding: "0 !important", // Override padding
-                          }}
-                        />
-                        {isSelected && (
-                          <ListItemSecondaryAction>
-                            <IconButton
-                              edge="end"
-                              aria-label="delete"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                setFilter((prev) => ({
-                                  ...prev,
-                                  price: "",
-                                }));
-                              }}
-                            >
-                              <ClearIcon />
-                            </IconButton>
-                          </ListItemSecondaryAction>
-                        )}
-                        s
-                      </ListItemButton>
-                    </ListItem>
-                  );
-                })}
-              </List>
+                          {isSelected && (
+                            <ListItemSecondaryAction>
+                              <IconButton
+                                edge="end"
+                                aria-label="delete"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setFilter((prev) => ({
+                                    ...prev,
+                                    price: "",
+                                  }));
+                                }}
+                              >
+                                <ClearIcon />
+                              </IconButton>
+                            </ListItemSecondaryAction>
+                          )}
+                        </ListItemButton>
+                      </ListItem>
+                    );
+                  })}
+                </List>
+              </Box>
             </div>
           </div>
 
@@ -456,7 +497,7 @@ const ProductsPage = (props) => {
           color="primary"
           variant="outlined"
           shape="rounded"
-          count={Math.ceil((allProduct?.length - 12) / 10) + 1}
+          count={Math.ceil((allProduct?.length - 16) / 10) + 1}
           page={page}
           onChange={handlePageChange}
           sx={{

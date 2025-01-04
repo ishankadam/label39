@@ -1,44 +1,14 @@
-import { useEffect, useState } from "react";
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-  Box,
-  Button,
-  IconButton,
-} from "@mui/material";
+import { useState } from "react";
+import { Card, CardContent, CardMedia, Typography, Box } from "@mui/material";
 import React from "react";
 import "./../../css/productCard.css";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import { addProductToCart, imageUrl } from "../../api";
-import { deliveryIn, getCurrencySymbol } from "../../common";
+import { imageUrl } from "../../api";
+import { getCurrencySymbol } from "../../common";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../../store/cartSlice";
 
 const ProductCard = (props) => {
   const [isHovered, setIsHovered] = useState(false);
   const dispatch = useDispatch();
-
-  const handleAddToCart = (e, product) => {
-    const userId = localStorage.getItem("userId");
-    e.stopPropagation();
-    const cartProduct = {
-      productId: product.productId,
-      name: product.name,
-      price: product.price,
-      quantity: 1,
-      deliveryIn: product.deliveryIn,
-      images: [product.images[0]],
-      sizes: {
-        Upper: "XS",
-        Bottom: "XS",
-      },
-    };
-    dispatch(addToCart(cartProduct));
-    if (!userId) return;
-    addProductToCart({ cartProduct, userId });
-  };
 
   return (
     <Card
@@ -177,40 +147,6 @@ const ProductCard = (props) => {
           {getCurrencySymbol(props.country)}. {props.product.price}
         </Typography>
       </CardContent>
-      <Box
-        className={`button-wrapper ${isHovered ? "show" : ""}`}
-        sx={{
-          flexDirection: { xs: "column", sm: "row", md: "row", lg: "row" },
-
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          display: { xs: "none", sm: "flex" },
-          justifyContent: "space-between",
-          alignItems: "center",
-          padding: "10px",
-          borderBottom: "1px solid  #ccc",
-          transition: "transform 300ms ease-in-out",
-          transform: isHovered ? "translateY(0)" : "translateY(100%)",
-          background: "#f9f9f9",
-          zIndex: 2,
-        }}
-      >
-        <IconButton
-          variant="outlined"
-          color="custom"
-          onClick={(e) => {
-            handleAddToCart(e, props.product);
-          }}
-        >
-          <ShoppingCartOutlinedIcon />
-        </IconButton>
-
-        <Button variant="outlined" color="custom">
-          Buy Now
-        </Button>
-      </Box>
     </Card>
   );
 };

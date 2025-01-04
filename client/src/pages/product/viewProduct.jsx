@@ -3,10 +3,8 @@ import {
   Box,
   Button,
   Typography,
-  IconButton,
   Grid,
   Modal,
-  Card,
   Link,
   ToggleButtonGroup,
   ToggleButton,
@@ -291,7 +289,7 @@ const ViewProductModal = (props) => {
                       <ToggleButtonGroup
                         exclusive
                         value={selectedSizes[category] || ""}
-                        onChange={(event, newSize) =>
+                        onChange={(_event, newSize) =>
                           handleSizeChange(category, newSize)
                         }
                         aria-label={`${category} sizes`}
@@ -443,7 +441,7 @@ const ViewProductModal = (props) => {
                         color: "rgba(55, 65, 81, 0.85)",
                       }}
                     >
-                      Delivery in:
+                      Delivery:
                     </Typography>
                     <Typography
                       sx={{
@@ -453,7 +451,7 @@ const ViewProductModal = (props) => {
                         color: "rgba(55, 65, 81, 0.85)",
                       }}
                     >
-                      {product["deliveryIn"]}
+                      Made to order <br></br> {product["deliveryIn"]}
                     </Typography>
                   </div>
                 </div>

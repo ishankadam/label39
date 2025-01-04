@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { Card, CardMedia, Button, Typography, Box } from "@mui/material";
-import video1 from "../../assets/video1.MOV";
-import video2 from "../../assets/video2.mov";
 import "./../../css/categorySection.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -200,6 +198,9 @@ const FeaturedSection = (props) => {
                         background: "#a16149",
                         borderColor: "#a16149",
                       },
+                    }}
+                    onClick={() => {
+                      props.handleViewProduct(item);
                     }}
                   >
                     SHOP NOW

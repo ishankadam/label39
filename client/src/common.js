@@ -103,9 +103,8 @@ export const fabrics = [
 
 export const priceRanges = [
   { label: "Under 10000", value: "under_10000" },
-  { label: "10000 To 15000", value: "10000_15000" },
-  { label: "15000 To 20000", value: "15000_20000" },
-  { label: "Above 10000", value: "above_20000" },
+  { label: "10000 To 20000", value: "10000_20000" },
+  { label: "Above 20000", value: "above_20000" },
 ];
 
 export const availableColors = [

@@ -74,6 +74,7 @@ const App = () => {
           setCountry={setCountry}
           userUpdated={userUpdated}
           setUserUpdated={setUserUpdated}
+          setIsGiftCardModalOpen={setIsGiftCardModalOpen}
         />
         {pathname === "/dashboard" ? (
           <Fab
@@ -171,6 +172,7 @@ const App = () => {
           <Route exact path="/aboutus" element={<AboutUs />} />
           <Route exact path="/contactus" element={<FindUs />} />
           <Route exact path="/product" element={<ViewProduct />} />
+          <Route exact path="/giftCard" element={<GiftCardModal />} />
           <Route
             exact
             path="/login"

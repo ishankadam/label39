@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import logo from "../../assets/logo 1.png";
 import {
   AppBar,
-  Avatar,
   Box,
   Button,
   IconButton,
@@ -20,7 +19,7 @@ import { countries } from "../../common";
 import { useNavigate } from "react-router-dom";
 import SelectDropdown from "../select-dropdown/selectDropdown";
 import PermIdentityRoundedIcon from "@mui/icons-material/PermIdentityRounded";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import CallOutlinedIcon from "@mui/icons-material/CallOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
 import "./../../css/appbar.css";
@@ -39,7 +38,7 @@ import { getCartItems } from "../../api";
 
 const CustomAppbar = (props) => {
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [, setIsAdmin] = useState(false);
   const [country, setCountry] = useState(props.country || "INRs");
   const [mobileOpen, setMobileOpen] = useState(false);
   const dispatch = useDispatch();
@@ -81,7 +80,8 @@ const CustomAppbar = (props) => {
     { text: "Home", page: "" },
     { text: "Shop", page: "shop" },
     { text: "About Us", page: "ourStory" },
-    { text: "Contact Us", page: "contactus" },
+    { text: "Gift card", page: "giftcard" },
+    { text: "Celebrity style", page: "celebrity" },
   ];
 
   useEffect(() => {
@@ -246,7 +246,11 @@ const CustomAppbar = (props) => {
                 className="nav-options"
                 key={item.text}
                 color="inherit"
-                onClick={() => handlePageChange(item.page)}
+                onClick={() =>
+                  item.page === "giftcard"
+                    ? props.setIsGiftCardModalOpen(true)
+                    : handlePageChange(item.page)
+                }
                 onMouseEnter={() => {
                   if (item.text === "Shop") {
                     dispatch(openDialog()); // Open dialog only for the "Shop" button
@@ -349,6 +353,19 @@ const CustomAppbar = (props) => {
                 overlap="circular" // Adjusts position for circular icons
               >
                 <ShoppingCartOutlinedIcon />
+              </Badge>
+            </IconButton>
+            <IconButton
+              color="inherit"
+              sx={{ opacity: 0.7, paddingRight: { xs: "0", sm: "auto" } }}
+              onClick={() => navigate("/contactUs")}
+            >
+              <Badge
+                badgeContent={cartItemCount} // Number of items
+                color="error" // Red badge
+                overlap="circular" // Adjusts position for circular icons
+              >
+                <CallOutlinedIcon />
               </Badge>
             </IconButton>
 
