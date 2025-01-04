@@ -80,12 +80,12 @@ const CategorySection = () => {
                   className="category-btn"
                   sx={{
                     width: {
-                      xs: "150px", // Small screen
+                      xs: "144px", // Small screen
                       sm: "220px", // Desktop
                       md: "250px", // Desktop
                     },
                     fontSize: {
-                      xs: "14px", // Small screen
+                      xs: "13px", // Small screen
                       sm: "16px", // Tablet
                       md: "18px", // Desktop
                     },
