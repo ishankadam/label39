@@ -8,7 +8,7 @@
 }
 
 .card-container {
-  max-width: 70%;
+  /* max-width: 70%; */
   height: 420px;
   border-radius: 8px; /* Rounded corners */
   transition: transform 0.2s; /* Smooth scaling effect on hover */

@@ -585,7 +585,7 @@ const CheckoutForm = (props) => {
               sx={{
                 fontFamily: "'Roboto Serif', serif",
                 fontWeight: "700",
-                fontSize: "18px",
+                fontSize: { xs: "18px" },
                 p: 1,
               }}
               disabled={isButtonDisabled}

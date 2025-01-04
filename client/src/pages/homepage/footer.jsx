@@ -1,61 +1,102 @@
 import React from "react";
-import {
-  Container,
-  Grid2,
-  Typography,
-  IconButton,
-  Link,
-  Box,
-} from "@mui/material";
-import { Twitter, Facebook, Instagram, LinkedIn } from "@mui/icons-material";
+import { Container, Grid2, Typography, Link, Box } from "@mui/material";
+// import { Twitter, Facebook, Instagram, LinkedIn } from "@mui/icons-material";
 import "../../css/footer.css";
-import textile from "../../assets/texttile.png";
+import textile from "../../assets/texttile.jpg";
+import textile2 from "../../assets/texttile2.jpeg";
+
 import woven from "../../assets/woven.png";
 import mindful from "../../assets/mindful.png";
 import sustainable from "../../assets/sustainable.png";
-import footerImg from "../../assets/footer.jpg";
-import TermsAndCondition from "../termsAndCondition/termsAndCondition.jsx";
+import footerImg from "../../assets/wine-os.png";
+// import TermsAndCondition from "../termsAndCondition/termsAndCondition.jsx";
 import { useNavigate } from "react-router-dom";
+import backgroundImage from "../../assets/backgroundfooter.jpg";
 const Footer = (props) => {
   const navigate = useNavigate();
 
-  const handlePageChange = () => {
-    navigate("/termsAndCondition");
+  const handlePageChange = (path) => {
+    const navigateToPage = (targetPath) => {
+      navigate(targetPath);
+    };
+
+    return (e) => {
+      e.preventDefault(); // Prevent default anchor behavior
+      navigateToPage(path);
+    };
   };
+
   return (
-    <div className="container">
-      <img src={footerImg} style={{ width: "100%", display: "block" }} alt="" />
+    <Box className="container">
+      <Box
+        component="img"
+        src={footerImg}
+        sx={{
+          width: "100%",
+          height: { xs: "90px", sm: "auto" },
+          display: "block",
+          // mixBlendMode: "multiply",
+          // filter: "brightness(0) invert(1)",
+        }}
+        alt=""
+      />
 
       {/* Top Section */}
       {props.topSection && (
-        <div className="top-section">
-          <div className="top-item">
-            <img src={textile} alt="textile" className="bottom-icons" />
-            <Typography>Textile Revival</Typography>
+        <Box>
+          <div className="top-section">
+            <div className="top-item">
+              <img src={textile} alt="textile" className="bottom-icons" />
+              <Typography>Textile Revival</Typography>
+            </div>
+            <div className="top-item">
+              <img src={sustainable} alt="textile" className="bottom-icons" />
+              <Typography>Textile Revival</Typography>
+            </div>
+            <div className="top-item">
+              <img src={textile2} alt="textile" className="bottom-icons" />
+              <Typography>Woven by Hand</Typography>
+            </div>
+            <div className="top-item">
+              <img src={mindful} alt="textile" className="bottom-icons" />
+              <Typography>Mindful Design</Typography>
+            </div>
+            <div className="top-item">
+              <img src={sustainable} alt="textile" className="bottom-icons" />
+              <Typography>Sustainable Practices</Typography>
+            </div>
           </div>
-          <div className="top-item">
-            <img src={woven} alt="textile" className="bottom-icons" />
-            <Typography>Woven by Hand</Typography>
-          </div>
-          <div className="top-item">
-            <img src={mindful} alt="textile" className="bottom-icons" />
-            <Typography>Mindful Design</Typography>
-          </div>
-          <div className="top-item">
-            <img src={sustainable} alt="textile" className="bottom-icons" />
-            <Typography>Sustainable Practices</Typography>
-          </div>
-        </div>
+        </Box>
       )}
       <footer
         style={{
-          backgroundColor: "#F7ECE9",
+          position: "relative",
+          backgroundImage: `url(${backgroundImage})`, // Path to your background image
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
           padding: "40px 0",
           color: "#fff",
         }}
       >
+        {/* Transparent Overlay */}
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "rgba(224, 211, 208, 0.9)", // Transparent brown color
+            zIndex: 1,
+          }}
+        ></div>
+
+        {/* Content */}
         <Container
           sx={{
+            position: "relative", // Ensure content stays above the overlay
+            zIndex: 2,
             maxWidth: "none !important",
             padding: {
               xs: "0 15px !important",
@@ -63,7 +104,7 @@ const Footer = (props) => {
               md: "0 30px !important",
               lg: "0 50px !important",
             },
-            textAlign: { xs: "start", sm: "center", md: "start", lg: "start" },
+            textAlign: { xs: "center", sm: "center", md: "start", lg: "start" },
           }}
         >
           <Grid2 container spacing={4}>
@@ -73,19 +114,8 @@ const Footer = (props) => {
                 variant="h5"
                 gutterBottom
                 sx={{
-                  padding: {
-                    xs: "0 6px !important",
-                    sm: "0 16px !important",
-                    md: "0 20px !important",
-                    lg: "0 20px !important",
-                  },
                   fontFamily: "'Cinzel', serif",
-                  fontSize: {
-                    xs: "20px",
-                    sm: "20px",
-                    md: "26px",
-                    lg: "28px",
-                  },
+                  fontSize: { xs: "20px", sm: "20px", md: "26px", lg: "28px" },
                   color: "#374151",
                   fontWeight: "bolder",
                 }}
@@ -97,22 +127,10 @@ const Footer = (props) => {
                 paragraph
                 sx={{
                   fontFamily: "'Cinzel', serif",
-                  fontSize: {
-                    xs: "15px",
-                    sm: "15px",
-                    md: "15px",
-                    lg: "15px",
-                  },
+                  fontSize: "16px",
                   fontWeight: "600",
-                  color: "rgba(55, 65, 81, 0.9);",
+                  color: "rgba(35, 42, 54, 0.8)",
                   lineHeight: "26px",
-                  margin: "0 !important",
-                  padding: {
-                    xs: "0 6px !important",
-                    sm: "0 16px !important",
-                    md: "0 20px !important",
-                    lg: "0 20px !important",
-                  },
                 }}
               >
                 Born from the sheer love for clothes, The Label 39 is a fusion
@@ -120,69 +138,36 @@ const Footer = (props) => {
                 from across the country to create conscious and intricate
                 clothing that is true to its craftsmanship.
               </Typography>
-              {/* Social Media Icons */}
-              <Box
-                sx={{ marginLeft: { xs: 0, sm: 0, md: "10px", lg: "10px" } }}
-              >
-                <IconButton
-                  className="footer-icon"
-                  sx={{
-                    color: "#374151",
-                    fontSize: "28px",
-                    // marginRight: "12px",
-                    // padding: "0px 20px !important",
-                  }}
-                  component={Link}
-                  href="#"
-                  aria-label="Facebook"
-                >
-                  <Facebook />
-                </IconButton>
-                <IconButton
-                  className="footer-icon"
-                  sx={{
-                    color: "#374151",
-                    fontSize: "28px",
-
-                    // marginRight: "12px",
-                  }}
-                  component={Link}
-                  href="#"
-                  aria-label="Instagram"
-                >
-                  <Instagram />
-                </IconButton>
-              </Box>
             </Grid2>
 
             {/* Center Section (Links) */}
-            <Grid2 item size={{ xs: 6, md: 2 }} sx={{ cursor: "pointer" }}>
+            <Grid2 item size={{ xs: 6, md: 2 }}>
               <Typography variant="h6" className="footer-links-header">
                 INFO
               </Typography>
-              <ul style={{}}>
+              <ul>
                 <li>
                   <Link
-                    href="#"
+                    onClick={handlePageChange("/ourStory")}
                     className="footer-links"
-                    sx={{ textDecoration: "none" }}
                   >
                     About us
                   </Link>
                 </li>
                 <li>
-                  <Link href="/contactus" className="footer-links">
+                  <Link
+                    onClick={handlePageChange("/contactUs")}
+                    className="footer-links"
+                  >
                     Contact us
                   </Link>
                 </li>
                 <li>
-                  <Link onClick={handlePageChange} className="footer-links">
-                    Terms and Condition
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="footer-links">
-                    Privacy Policy
+                  <Link
+                    onClick={handlePageChange("/termsAndCondition")}
+                    className="footer-links"
+                  >
+                    Terms & Condition
                   </Link>
                 </li>
               </ul>
@@ -193,7 +178,7 @@ const Footer = (props) => {
               <Typography variant="h6" className="footer-links-header">
                 PRODUCT
               </Typography>
-              <ul style={{ listStyleType: "none", padding: 0 }}>
+              <ul>
                 <li>
                   <Link href="#" className="footer-links">
                     Features
@@ -204,20 +189,10 @@ const Footer = (props) => {
                     Pricing
                   </Link>
                 </li>
-                <li>
-                  <Link href="#" className="footer-links">
-                    News
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="footer-links">
-                    Help desk
-                  </Link>
-                </li>
               </ul>
             </Grid2>
 
-            {/* Legal Section */}
+            {/* Subscribe Section */}
             <Grid2 item size={{ xs: 12, md: 4 }}>
               <div className="subscribe">
                 <h3 className="subscribe-title">Subscribe</h3>
@@ -234,7 +209,7 @@ const Footer = (props) => {
           </Grid2>
         </Container>
       </footer>
-    </div>
+    </Box>
   );
 };
 

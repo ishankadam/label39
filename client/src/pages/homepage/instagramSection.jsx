@@ -7,6 +7,7 @@ import bestSeller3 from "../../assets/bestseller3.jpeg"; // Importing images
 import bestSeller4 from "../../assets/bestseller4.jpeg"; // Importing images
 import bestSeller5 from "../../assets/bestseller5.JPG"; // Importing images
 import bestSeller6 from "../../assets/bestseller6.jpeg"; // Importing images
+import footerImg from "../../assets/footer2.jpg";
 
 const InstagramSection = () => {
   const images = [
@@ -39,73 +40,78 @@ const InstagramSection = () => {
   ]; // Array of images with texts and dates
 
   return (
-    <Box
-      sx={{
-        background: "#F7ECE9",
-        paddingTop: { xs: "20px", sm: "28px", md: "36px" },
-      }}
-    >
-      <Typography
+    <Box>
+      <Box
         sx={{
-          color: "#2f3e4e",
-          textAlign: "center",
-          mb: 1,
-          fontFamily: "'cinzel', serif",
-          fontWeight: "500",
-          fontSize: { xs: "22px", sm: "28px", md: "32px", lg: "34px" },
+          background: "#F7ECE9",
+          paddingTop: { xs: "20px", sm: "28px", md: "36px" },
         }}
       >
-        join us on instagram
-        <div
-          className="title-border"
-          style={{
-            width: "70px",
-            height: "3px",
-            borderRadius: "100px",
-            backgroundColor: "#2f3e4e",
-            margin: "0 auto",
-          }}
-        />
-      </Typography>
-      <main className="slider-main">
-        <div
-          className="slider"
-          reverse="true"
-          style={{
-            "--width": "300px",
-            "--height": "300px",
-            "--quantity": images.length,
+        <Typography
+          sx={{
+            color: "#2f3e4e",
+            textAlign: "center",
+            mb: 1,
+            fontFamily: "'cinzel', serif",
+            fontWeight: "500",
+            fontSize: { xs: "22px", sm: "28px", md: "32px", lg: "34px" },
           }}
         >
-          <div className="list">
-            {images.map((image, index) => (
-              <div
-                className="item"
-                key={index}
-                style={{ "--position": index + 1 }}
-              >
-                <img
-                  src={image.src}
-                  alt={`Slide ${index + 1}`}
-                  className="slider-img"
-                />
-                <div className="overlay">
-                  <Typography variant="h6" className="overlay-text">
-                    {image.text}
-                  </Typography>
-                  <Typography variant="body1" className="overlay-date">
-                    {image.date}
-                  </Typography>
+          join us on instagram
+          <div
+            className="title-border"
+            style={{
+              width: "70px",
+              height: "3px",
+              borderRadius: "100px",
+              backgroundColor: "#2f3e4e",
+              margin: "0 auto",
+            }}
+          />
+        </Typography>
+        <main className="slider-main">
+          <div
+            className="slider"
+            reverse="true"
+            style={{
+              "--width": "300px",
+              "--height": "300px",
+              "--quantity": images.length,
+            }}
+          >
+            <div className="list">
+              {images.map((image, index) => (
+                <div
+                  className="item"
+                  key={index}
+                  style={{ "--position": index + 1 }}
+                >
+                  <img
+                    src={image.src}
+                    alt={`Slide ${index + 1}`}
+                    className="slider-img"
+                  />
+                  <div className="overlay">
+                    <Typography variant="h6" className="overlay-text">
+                      {image.text}
+                    </Typography>
+                    <Typography variant="body1" className="overlay-date">
+                      {image.date}
+                    </Typography>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      </main>
-      <hr
-        className="footer-line"
-        style={{ marginTop: "24px", borderTop: "1px solid #d6d6d6 !important" }}
-      />
+        </main>
+        <hr
+          className="footer-line"
+          style={{
+            marginTop: "24px",
+            borderTop: "1px solid #d6d6d6 !important",
+          }}
+        />
+      </Box>
     </Box>
   );
 };

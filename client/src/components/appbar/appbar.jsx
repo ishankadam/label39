@@ -434,8 +434,8 @@ const CustomAppbar = (props) => {
       <Box
         sx={{
           position: "fixed",
-          bottom: 16,
-          left: 16,
+          bottom: 10,
+          left: 5,
           display: { xs: "block", sm: "block", md: "none" }, // Show on mobile and tablet
           zIndex: "1000",
         }}

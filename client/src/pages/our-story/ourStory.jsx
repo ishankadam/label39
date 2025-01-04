@@ -1,4 +1,4 @@
-import { Typography, Box } from "@mui/material";
+import { Typography, Box, imageListClasses } from "@mui/material";
 import React from "react";
 import story from "../../assets/aboutImg.jpeg";
 import Container from "@mui/material/Container";
@@ -6,49 +6,100 @@ import backgroundImage from "../../assets/aboutbg2.png";
 // import backgroundImage from "../../assets/about.png";
 // import backgroundImage from "../../assets/aboutbg3.jpg";
 // import backgroundImage from "../../assets/aboutbg4.png";
+import footerImg from "../../assets/wine-os.png";
 
 const OurStory = () => {
   return (
-    <div
-      style={{
-        background: "#F7ECE9",
-        backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: "auto 100%",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
-        minHeight: "100%",
-        padding: "33px 0px", // Optional: Add some padding
-        objectFit: "cover",
-      }}
-    >
-      <Container
-        maxWidth="lg"
+    <Box sx={{ marginBottom: "200px" }}>
+      <Typography
         sx={{
           textAlign: "center",
+          mb: 5,
+          mt: 3,
+          fontFamily: "'cinzel', serif",
+          fontWeight: "600",
+          fontSize: { xs: "22px", sm: "28px", md: "32px", lg: "34px" },
+        }}
+      >
+        OUR STORY
+        <div className="title-border" />
+      </Typography>
 
-          // padding: "40px 0", // Add some padding if needed
+      <Box
+        component="img"
+        src={footerImg}
+        sx={{
+          mb: 5,
+          width: "100%",
+          display: "block",
+          borderBottom: "1px solid #ccc",
+          // boxShadow:
+          //   "rgba(215, 180, 167, 0.4) -5px 5px, rgba(215, 180, 167, 0.3) -10px 10px, rgba(215, 180, 167, 0.2) -15px 15px, rgba(215, 180, 167, 0.1) -20px 20px, rgba(215, 180, 167, 0.05) -25px 25px",
+        }}
+        alt=""
+      />
+
+      <Container
+        className="story-wrapper"
+        sx={{
+          padding: "0 25px",
+          display: "flex",
+          justifyContent: "center",
+          // alignItems: "center",
+          flexDirection: { xs: "row", sm: "row", md: "row" }, // Default flex-direction for mobile (column layout)
         }}
       >
         <Typography
           sx={{
-            textAlign: "center",
-            mb: 4,
-            mt: 2,
-            fontFamily: "'cinzel', serif",
-            fontWeight: "600",
-            fontSize: { xs: "22px", sm: "28px", md: "32px", lg: "34px" },
+            color: "#494949",
+
+            textAlign: "justify",
+            fontFamily: "Roboto, serif",
+
+            fontSize: {
+              xs: "0.9rem",
+              sm: "0.9rem",
+              md: "1.0rem",
+              lg: "1.3rem",
+            }, // Responsive font sizes
+            order: { xs: 2, md: 1 },
+            // wordBreak: "break-word",
+            wordSpacing: "7px",
           }}
         >
-          OUR STORY
-          <div className="title-border" />
+          The Label 39 is the creative expression of a mother-daughter duo,
+          Anita and Prachi, who embarked on their journey in 2021. With Anita’s
+          20+ years of expertise in the fashion industry and Prachi’s refined
+          education from the prestigious London College of Fashion, the brand
+          seamlessly blends heritage with innovation.{" "}
+          {/* <Box sx={{ marginTop: 2 }} /> */}
+          The Label 39 began with a focus on pret wear—effortlessly chic and
+          versatile pieces that became an instant hit. Building on this success,
+          we introduced our Drape Collection in 2024, a celebration of festive
+          elegance filled with fusion, designed for modernity.
         </Typography>
-        <Container
-          className="story-wrapper"
+      </Container>
+      <hr className="footer-line" style={{ margin: "40px 0px" }} />
+
+      <Container
+        className="story-wrapper"
+        sx={{
+          padding: "0 25px",
+
+          display: "flex",
+          justifyContent: "center",
+          alignItems: { xs: "flex-start", sm: "center", md: "center" },
+          flexDirection: {
+            xs: "row",
+            sm: "row",
+            md: "row",
+          }, // Default flex-direction for mobile (column layout)
+        }}
+      >
+        <Box
           sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: { xs: "column", sm: "row", md: "row" }, // Default flex-direction for mobile (column layout)
+            display: { xs: "block", sm: "flex" }, // Block on mobile, flex on larger screens
+            alignItems: { xs: "flex-start", sm: "center", md: "center" },
           }}
         >
           <Box
@@ -57,97 +108,32 @@ const OurStory = () => {
             src={story}
             alt={`story-Thumbnail`}
             sx={{
+              float: { xs: "left", sm: "none" }, // Float image to the left on mobile
               width: {
-                xs: "100%",
-                sm: "40% !important",
-                md: "100%",
-                lg: "100%",
-              }, // Full width on mobile
-              maxWidth: "300px", // Fixed max-width for larger screens
-              height: "350px", // Maintain aspect ratio
-              borderRadius: "1%",
+                xs: "170px",
+                sm: "50% !important",
+                md: "50% !important",
+                lg: "350px",
+              },
+              maxWidth: "350px",
+              height: { xs: "300px", sm: "350px", md: "auto", lg: "auto" },
               objectFit: "cover",
-              marginRight: { xs: "0px", sm: "30px", md: "0", lg: "0" },
+              marginRight: { xs: "15px", sm: "30px", md: "0", lg: "0px" },
+              marginBottom: { xs: "0", sm: "0" }, // Add bottom margin for mobile
             }}
           />
           <Typography
             sx={{
               color: "#494949",
-
               textAlign: "justify",
               fontFamily: "Roboto, serif",
               marginLeft: { md: "40px" }, // Left margin on larger screens
               fontSize: {
-                xs: "0.8rem",
+                xs: "0.9rem",
                 sm: "0.9rem",
                 md: "1.0rem",
-                lg: "1.2rem",
+                lg: "1.3rem",
               }, // Responsive font sizes
-              order: { xs: 2, md: 1 },
-            }}
-          >
-            The Label 39 is the creative expression of a mother-daughter duo,
-            Anita and Prachi, who embarked on their journey in 2021. With
-            Anita’s 20+ years of expertise in the fashion industry and Prachi’s
-            refined education from the prestigious London College of Fashion,
-            the brand seamlessly blends heritage with innovation.{" "}
-            <Box sx={{ marginTop: 2 }} />
-            The Label 39 began with a focus on pret wear—effortlessly chic and
-            versatile pieces that became an instant hit. Building on this
-            success, we introduced our Drape Collection in 2024, a celebration
-            of festive elegance filled with fusion, designed for modernity.
-          </Typography>
-        </Container>
-
-        <Container
-          className="story-wrapper"
-          sx={{
-            mt: "80px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: {
-              xs: "column",
-              sm: "row-reverse",
-              md: "row-reverse",
-            }, // Default flex-direction for mobile (column layout)
-          }}
-        >
-          <Box
-            component={"img"}
-            key={`story-Thumbnail`}
-            src={story}
-            alt={`story-Thumbnail`}
-            sx={{
-              width: {
-                xs: "100%",
-                sm: "40% !important",
-                md: "100%",
-                lg: "100%",
-              }, // Full width on mobile
-              maxWidth: "300px", // Fixed max-width for larger screens
-              // height: "auto",
-              height: "350px", // Maintain aspect ratio
-
-              borderRadius: "1%",
-              objectFit: "cover",
-              marginLeft: { xs: "0px", sm: "30px", md: "0", lg: "0" },
-            }}
-          />
-          <Typography
-            sx={{
-              color: "#494949",
-
-              textAlign: "justify",
-              fontFamily: "Roboto, serif",
-              marginRight: { md: "40px" }, // Left margin on larger screens
-              fontSize: {
-                xs: "0.8rem",
-                sm: "0.9rem",
-                md: "1.0rem",
-                lg: "1.2rem",
-              }, // Responsive font sizes
-              order: { xs: 2, md: 1 },
             }}
           >
             Our creations feature intricate appliqué, embroidery, hand beadwork,
@@ -161,9 +147,9 @@ const OurStory = () => {
             artistry. We are proud to present a brand that values authenticity,
             sustainability, and the effortless charm of the modern woman.
           </Typography>
-        </Container>
+        </Box>
       </Container>
-    </div>
+    </Box>
   );
 };
 
