@@ -4,8 +4,6 @@ import NavigateNextOutlinedIcon from "@mui/icons-material/NavigateNextOutlined";
 import NavigateBeforeOutlinedIcon from "@mui/icons-material/NavigateBeforeOutlined";
 import video1 from "../../assets/video1.MOV";
 import video2 from "../../assets/video2.mov";
-import bestSeller1 from "../../assets/bestseller1.jpeg";
-import bestSeller3 from "../../assets/bestseller3.jpeg";
 import "./../../css/asSeenOn.css";
 import {
   Box,
@@ -15,7 +13,6 @@ import {
   CircularProgress,
 } from "@mui/material";
 import as_seen_on_hoverImg from "../../assets/as_seen_on_hover.jpeg";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { imageUrl } from "../../api";
 
 const AsSeenOn = (props) => {
@@ -88,7 +85,7 @@ const AsSeenOn = (props) => {
           fontWeight: "500",
         }}
       >
-        as seen on
+        Shop by video
         <Box
           sx={{
             width: "70px",

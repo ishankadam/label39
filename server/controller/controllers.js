@@ -15,10 +15,9 @@ const orders = require("../schema/orders");
 const crypto = require("crypto");
 
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
+  destination: (req, _file, cb) => {
     let category;
     try {
-      // Parse `req.body` based on whether it contains `products` or `categories`
       if (req.body.products) {
         category = "products";
       } else if (req.body.category) {
@@ -26,32 +25,60 @@ const storage = multer.diskStorage({
       } else if (req.body.testimonial) {
         category = "testimonial";
       } else {
-        return cb(new Error("Either products or categories data is required"));
+        return cb(
+          new Error(
+            "Either products, categories, or testimonial data is required"
+          )
+        );
       }
 
-      // Validate `category` existence
       if (!category) {
         return cb(new Error("Category is required"));
       }
 
-      // Define and create the directory path
-      const dir = path.join(parentDir, "uploads", category);
-      if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir, { recursive: true });
+      // For products, create separate directories for photos and videos
+      if (category === "products") {
+        const dir = path.join(parentDir, "uploads", category);
+        if (!fs.existsSync(dir)) {
+          fs.mkdirSync(dir, { recursive: true });
+        }
+        cb(null, dir);
+      } else {
+        const dir = path.join(parentDir, "uploads", category);
+        if (!fs.existsSync(dir)) {
+          fs.mkdirSync(dir, { recursive: true });
+        }
+        cb(null, dir);
       }
-      cb(null, dir); // Set the directory as the destination
     } catch (error) {
       console.error("Error parsing data:", error);
       return cb(new Error("Invalid data format in request body"));
     }
   },
-
-  filename: (req, file, cb) => {
-    cb(null, file.originalname); // Save file with its original name
-  },
 });
 
-const upload = multer({ storage });
+const fileFilter = (_req, file, cb) => {
+  // Accept image and video files
+  if (
+    file.mimetype.startsWith("image/") ||
+    file.mimetype.startsWith("video/")
+  ) {
+    cb(null, true);
+  } else {
+    cb(
+      new Error("Unsupported file type. Only images and videos are allowed."),
+      false
+    );
+  }
+};
+
+const upload = multer({
+  storage: storage,
+  fileFilter: fileFilter,
+  limits: {
+    fileSize: 100 * 1024 * 1024, // Limit file size to 100MB
+  },
+});
 
 const checkLoginInput = (password) => {
   const hashPassword = md5(password);
@@ -336,7 +363,7 @@ const trackDeliveryOrder = async (req, res) => {
   }
 };
 
-const get_all_categories = async (req, res) => {
+const get_all_categories = async (_req, res) => {
   try {
     const category = await Category.find({}).select("-_id -__v"); // Exclude _id and __v fields
     res.status(200).json(category); // Send the result as JSON
@@ -345,7 +372,7 @@ const get_all_categories = async (req, res) => {
   }
 };
 
-const get_all_testimonials = async (req, res) => {
+const get_all_testimonials = async (_req, res) => {
   try {
     const category = await Testimonial.find({}).select("-_id -__v"); // Exclude _id and __v fields
     res.status(200).json(category); // Send the result as JSON
@@ -549,7 +576,7 @@ const toggleCategoryStatus = async (req, res) => {
   }
 };
 
-const get_all_users = async (req, res) => {
+const get_all_users = async (_req, res) => {
   try {
     const users = await User.find({}).select("-_id -__v"); // Exclude _id and __v fields
     res.status(200).json(users); // Send the result as JSON
@@ -611,7 +638,7 @@ const getCartItems = async (req, res) => {
   }
 };
 
-const get_all_orders = async (req, res) => {
+const get_all_orders = async (_req, res) => {
   try {
     const ordersData = await orders.find({}).select("-_id -__v"); // Exclude _id and __v fields
     console.log(ordersData);

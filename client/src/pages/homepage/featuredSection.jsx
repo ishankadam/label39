@@ -85,7 +85,7 @@ const FeaturedSection = (props) => {
           fontWeight: "500",
         }}
       >
-        shop by videos
+        Celebrity style
         <div
           className="title-border"
           style={{
