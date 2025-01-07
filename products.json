@@ -21,6 +21,10 @@
         { "size": "XXL", "quantity": 10 }
       ]
     },
+    "priority": 1,
+    "isActive": true,
+    "bestseller": true,
+    "soldOut": false,
     "delivery In": "Shipped in 2-3 weeks",
     "price": 13300,
     "garmentDetails": [
@@ -61,6 +65,10 @@
         { "size": "XXL", "quantity": 10 }
       ]
     },
+    "priority": 2,
+    "isActive": true,
+    "bestseller": true,
+    "soldOut": false,
     "delivery In": "Shipped in 2-3 weeks",
     "price": 12040,
     "garmentDetails": [
@@ -95,6 +103,10 @@
         { "size": "XXL", "quantity": 10 }
       ]
     },
+    "priority": 3,
+    "isActive": true,
+    "bestseller": true,
+    "soldOut": false,
     "delivery In": "Shipped in 2-3 weeks",
     "price": 13300,
     "garmentDetails": [
@@ -129,6 +141,10 @@
         { "size": "XXL", "quantity": 10 }
       ]
     },
+    "priority": 4,
+    "isActive": true,
+    "bestseller": true,
+    "soldOut": false,
     "delivery In": "Shipped in 2-3 weeks",
     "price": 11550,
     "garmentDetails": [
@@ -169,6 +185,10 @@
         { "size": "XXL", "quantity": 10 }
       ]
     },
+    "priority": 5,
+    "isActive": true,
+    "bestseller": true,
+    "soldOut": false,
     "delivery In": "Shipped in 2-3 weeks",
     "price": 12530,
     "garmentDetails": [
@@ -203,6 +223,10 @@
         { "size": "XXL", "quantity": 10 }
       ]
     },
+    "priority": 6,
+    "isActive": true,
+    "bestseller": true,
+    "soldOut": false,
     "delivery In": "Shipped in 2-3 weeks",
     "price": 11480,
     "garmentDetails": [
@@ -236,6 +260,10 @@
         { "size": "XXL", "quantity": 10 }
       ]
     },
+    "priority": 7,
+    "isActive": true,
+    "bestseller": true,
+    "soldOut": false,
     "delivery In": "Shipped in 2-3 weeks",
     "price": 10654,
     "garmentDetails": [
@@ -270,6 +298,10 @@
         { "size": "XXL", "quantity": 10 }
       ]
     },
+    "priority": 10,
+    "isActive": true,
+    "bestseller": true,
+    "soldOut": false,
     "delivery In": "Shipped in 2-3 weeks",
     "price": 10900,
     "garmentDetails": [
@@ -304,6 +336,10 @@
         { "size": "XXL", "quantity": 10 }
       ]
     },
+    "priority": 11,
+    "isActive": true,
+    "bestseller": true,
+    "soldOut": false,
     "delivery In": "Shipped in 2-3 weeks",
     "price": 9940,
     "garmentDetails": [
@@ -338,6 +374,10 @@
         { "size": "XXL", "quantity": 10 }
       ]
     },
+    "priority": 12,
+    "isActive": true,
+    "bestseller": true,
+    "soldOut": false,
     "delivery In": "Shipped in 2-3 weeks",
     "price": 12155,
     "garmentDetails": [
@@ -378,6 +418,10 @@
         { "size": "XXL", "quantity": 10 }
       ]
     },
+    "priority": 13,
+    "isActive": true,
+    "bestseller": true,
+    "soldOut": false,
     "delivery In": "Shipped in 2-3 weeks",
     "price": 13510,
     "garmentDetails": [
@@ -418,6 +462,10 @@
         { "size": "XXL", "quantity": 10 }
       ]
     },
+    "priority": 9,
+    "isActive": true,
+    "bestseller": true,
+    "soldOut": false,
     "delivery In": "Shipped in 2-3 weeks",
     "price": 8960,
     "garmentDetails": [
@@ -458,6 +506,10 @@
         { "size": "XXL", "quantity": 10 }
       ]
     },
+    "priority": 8,
+    "isActive": true,
+    "bestseller": true,
+    "soldOut": false,
     "delivery In": "Shipped in 2-3 weeks",
     "price": 9875,
     "garmentDetails": [
@@ -498,6 +550,10 @@
         { "size": "XXL", "quantity": 10 }
       ]
     },
+    "priority": 14,
+    "isActive": true,
+    "bestseller": true,
+    "soldOut": false,
     "delivery In": "Shipped in 2-3 weeks",
     "price": 8960,
     "garmentDetails": [
@@ -538,6 +594,10 @@
         { "size": "XXL", "quantity": 10 }
       ]
     },
+    "priority": 15,
+    "isActive": true,
+    "bestseller": true,
+    "soldOut": false,
     "delivery In": "Shipped in 2-3 weeks",
     "price": 11788,
     "garmentDetails": [
@@ -577,6 +637,10 @@
         { "size": "XXL", "quantity": 10 }
       ]
     },
+    "priority": 16,
+    "isActive": true,
+    "bestseller": true,
+    "soldOut": false,
     "delivery In": "Shipped in 2-3 weeks",
     "price": 15105,
     "garmentDetails": [

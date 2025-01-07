@@ -72,6 +72,11 @@ const CustomTable = (props) => {
     setRowData(props.rowData);
   }, [props.rowData]);
 
+  const paginatedData = rowData.slice(
+    page * rowsPerPage,
+    page * rowsPerPage + rowsPerPage
+  );
+
   const handleView = (data) => {
     switch (props.page) {
       case "Products":
@@ -328,8 +333,8 @@ const CustomTable = (props) => {
           <TableBody>
             {loading ? (
               <CircularProgress></CircularProgress>
-            ) : rowData?.length > 0 ? (
-              rowData.map(
+            ) : paginatedData?.length > 0 ? (
+              paginatedData.map(
                 (row, rowIndex) =>
                   row && (
                     <TableRow

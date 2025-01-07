@@ -13,18 +13,12 @@ import {
 import CustomTextfield from "../../components/textfield/customTextfield";
 import SelectDropdown from "../../components/select-dropdown/selectDropdown";
 import UploadFiles from "../../components/upload/uploadFiles";
-import {
-  availableSizes,
-  deliveryIn,
-  garmentDetails,
-  sizeOptions,
-} from "../../common";
+import { availableSizes, deliveryIn, garmentDetails } from "../../common";
 import ChipTextfield from "../../components/textfield/chipTextfield";
 import { createProduct, editProduct } from "../../api";
 import "./addProduct.css";
 import ClearIcon from "@mui/icons-material/Clear";
 import AddIcon from "@mui/icons-material/Add";
-import ColorInputComponent from "../../components/color-picker/colorPicker";
 
 const AddEditProductModal = (props) => {
   const [images, setImages] = useState([]);
@@ -45,6 +39,7 @@ const AddEditProductModal = (props) => {
     images: [],
     bestseller: false,
     color: "",
+    priority: 0,
   });
 
   const colorList = [
@@ -167,6 +162,11 @@ const AddEditProductModal = (props) => {
           ? props.data.images
           : [props.data.images]
       );
+    } else {
+      setProductDetails((prev) => ({
+        ...prev,
+        priority: props.data.priority,
+      }));
     }
   }, [props.isEdit, props.data]);
 
@@ -457,6 +457,15 @@ const AddEditProductModal = (props) => {
             sx={{ width: "100%" }}
           />
         </Grid>
+        <Grid xs={12} mb={2}>
+          <CustomTextfield
+            label="priority"
+            value={productDetails.priority}
+            config={{ field: "priority", isRequired: true }}
+            handleEdit={handleEdit}
+            sx={{ width: "100%" }}
+          />
+        </Grid>
         <Grid sx={{ display: "flex", alignItems: "center", mb: 2 }}>
           <Checkbox
             sx={{ marginLeft: "-10px" }}
@@ -470,7 +479,7 @@ const AddEditProductModal = (props) => {
           <SelectDropdown
             label="Color"
             optionList={colorList}
-            // config={{ field: "size", index: index, section: "Upper" }}
+            config={{ field: "color" }}
             value={productDetails.color}
             handleEdit={handleEdit}
             sx={{ width: "100%" }}

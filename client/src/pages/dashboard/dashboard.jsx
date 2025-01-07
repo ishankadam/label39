@@ -118,7 +118,7 @@ const Dashboard = (props) => {
   const [open, setOpen] = React.useState(false);
   const [options, setOptions] = useState("Products");
   const [products, setProducts] = useState([]);
-  const [filterDataProducts, setfilterDataProducts] = useState([]);
+  const [filterDataProducts, setFilterDataProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
   const [users, setUsers] = useState([]);
@@ -128,15 +128,11 @@ const Dashboard = (props) => {
   const [usersloading, setUsersLoading] = useState(false);
   const [tabValue, setTabValue] = React.useState("one");
   const [filterOptions, setFilterOptions] = useState({
-    categories: "",
-    subcategories: "",
+    category: "all",
+    status: "all",
   });
   const [allOrders, setAllOrders] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [categoryData, setCategoryData] = useState({
-    categories: [],
-    subcategories: [],
-  });
   const [showCategoryModal, setShowCategoryModal] = useState({
     show: false,
     isEdit: false,
@@ -195,61 +191,30 @@ const Dashboard = (props) => {
     }
   };
 
-  useEffect(() => {
-    const categoriesArray = categories.map((item) => ({
-      label: item.name.toUpperCase(),
-      value: item.name.toLowerCase().replace(/ & /g, "-").replace(/\s+/g, "-"),
-    }));
-
-    setCategoryData((prev) => ({
-      ...prev,
-      categories: categoriesArray,
-    }));
-  }, [categories]);
-
-  // const handleChange = (value, field) => {
-  //   if (field === "categories") {
-  //     const selected = categories.find(
-  //       (item) =>
-  //         item.name.toLowerCase().replace(/ & /g, "-").replace(/\s+/g, "-") ===
-  //         value
-  //     );
-  //     const subcategories =
-  //       selected?.subcategories.map((subcategory) => ({
-  //         label: subcategory.toUpperCase(),
-  //         value: subcategory.toLowerCase().trim(),
-  //       })) || [];
-  //     setCategoryData((prev) => ({
-  //       ...prev,
-  //       subcategories,
-  //     }));
-  //     setFilterOptions((prevDetails) => ({
-  //       ...prevDetails,
-  //       categories: value,
-  //       subcategories: "",
-  //     }));
-  //   } else {
-  //     setFilterOptions((prevDetails) => ({
-  //       ...prevDetails,
-  //       [field]: value,
-  //     }));
-  //   }
-  // };
+  const handleChange = (value, field) => {
+    // set filter options based on vale and field
+    setFilterOptions((prev) => ({ ...prev, [field]: value }));
+  };
 
   useEffect(() => {
-    const filteredList = (products || []).filter((item) => {
-      const categoryFilter = filterOptions.categories
-        ? item.category === _.lowerCase(filterOptions.categories)
-        : true;
+    //filter products based on filterOptions
+    const productFilteredByCategory =
+      filterOptions.category !== "all"
+        ? products.filter((product) =>
+            product.category
+              .toLowerCase()
+              .includes(filterOptions.category.toLowerCase())
+          )
+        : products;
 
-      const subcategoryFilter = filterOptions.subcategories
-        ? item.subcategory === _.lowerCase(filterOptions.subcategories)
-        : true;
+    const productFilteredByStatus =
+      filterOptions.status !== "all"
+        ? productFilteredByCategory.filter(
+            (product) => product.isActive === filterOptions.status
+          )
+        : productFilteredByCategory;
 
-      return categoryFilter && subcategoryFilter;
-    });
-
-    setfilterDataProducts(filteredList);
+    setFilterDataProducts(productFilteredByStatus);
   }, [filterOptions, products]);
 
   useEffect(() => {
@@ -263,12 +228,14 @@ const Dashboard = (props) => {
       label: category.name,
       value: category.name.toLowerCase().replace(/\s+/g, ""),
     }));
+    newCategoriesList.unshift({ label: "All", value: "all" });
     setCategoryList(newCategoriesList);
   }, [categories]);
 
   const statusList = [
-    { label: "Active", value: "active" },
-    { label: "Inactive", value: "inactive" },
+    { label: "All", value: "all" },
+    { label: "Active", value: true },
+    { label: "Inactive", value: false },
   ];
 
   return isAdmin ? (
@@ -389,8 +356,8 @@ const Dashboard = (props) => {
                     label="status"
                     optionList={statusList}
                     config={{ field: "status" }}
-                    // handleEdit={handleChange}
-                    // value={country}
+                    handleEdit={handleChange}
+                    value={filterOptions.status}
                     sx={{ width: "200px" }}
                   />
                 </Grid2>
@@ -398,9 +365,9 @@ const Dashboard = (props) => {
                   <SelectDropdown
                     label="Category"
                     optionList={categoryList}
-                    config={{ field: "Category" }}
-                    // handleEdit={handleChange}
-                    // value={country}
+                    config={{ field: "category" }}
+                    handleEdit={handleChange}
+                    value={filterOptions.category}
                     sx={{ width: "200px" }}
                   />
                 </Grid2>
@@ -411,7 +378,7 @@ const Dashboard = (props) => {
           {/* Render Content Based on Tab Selection */}
           {tabValue === "one" && (
             <ProductTable
-              products={products}
+              products={filterDataProducts}
               setProducts={setProducts}
               loading={productsloading}
               setLoading={setProductsLoading}

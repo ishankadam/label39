@@ -58,7 +58,9 @@ const App = () => {
     setShowProductModal({
       show: true,
       isEdit: false,
-      data: {},
+      data: {
+        priority: allProduct.length + 1,
+      },
     });
   };
 

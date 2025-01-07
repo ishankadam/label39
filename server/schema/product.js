@@ -29,6 +29,7 @@ const productSchema = new mongoose.Schema({
   videoSrc: { type: String },
   isActive: { type: Boolean, default: true },
   color: { type: String },
+  priority: { type: Number },
 });
 
 // Create the model
