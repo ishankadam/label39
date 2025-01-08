@@ -16,8 +16,8 @@ import PaymentPage from "./pages/payment/paymentPage";
 import DeliveryForm from "./pages/product/deliveryForm";
 import Dashboard from "./pages/dashboard/dashboard";
 import FindUs from "./pages/homepage/findUs";
-import { Fab, Tooltip } from "@mui/material";
-import { getAllCategories, getAllProducts } from "./api";
+import { Box, Fab, Tooltip } from "@mui/material";
+import { getAllProducts } from "./api";
 import TermsAndConditions from "./pages/termsAndCondition/termsAndCondition";
 import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
 import GiftCardModal from "./form/giftCard/giftCard";
@@ -28,6 +28,7 @@ import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import WhatsAppButton from "./components/actionButton/whatsappActionButton";
 import { whatsappQueryMessage } from "./common";
 import ProfilePage from "./pages/profile/profile";
+
 const App = () => {
   const [cartDetails, setCartDetails] = useState({
     open: false,
@@ -35,7 +36,7 @@ const App = () => {
   });
   const [allCategories, setAllCategories] = useState([]);
   const [allProduct, setAllProduct] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true); // Start with loading true
   const [country, setCountry] = useState("INR");
   const [isGiftCardModalOpen, setIsGiftCardModalOpen] = useState(false);
   const [userUpdated, setUserUpdated] = useState(false);
@@ -44,8 +45,11 @@ const App = () => {
     isEdit: false,
     data: {},
   });
+  const location = useLocation(); // Access the current route
+
   const handleOpenGiftModal = () => setIsGiftCardModalOpen(true);
   const handleCloseGiftModal = () => setIsGiftCardModalOpen(false);
+
   useEffect(() => {
     getAllProducts({
       setProductsData: setAllProduct,
@@ -73,6 +77,28 @@ const App = () => {
 
   const pathname = useLocation().pathname;
 
+  // if (loading) {
+  //   return (
+  //     <Box
+  //       className="loader-container"
+  //       sx={{ display: "flex", flexDirection: "column" }}
+  //     >
+  //       <img src={LoaderGif} alt="Loading..." className="loader-gif" />
+  //       <Typography
+  //         sx={{
+  //           textAlign: "center",
+  //           mt: 2,
+  //           fontFamily: "'cinzel', serif",
+  //           fontWeight: "700",
+  //           color: "#a16149",
+  //         }}
+  //       >
+  //         loading . . .
+  //       </Typography>
+  //     </Box>
+  //   );
+  // }
+
   return (
     <Provider store={store}>
       <div>
@@ -90,9 +116,11 @@ const App = () => {
             color="#A16149"
             aria-label="add"
             sx={{
+              width: "50px",
+              height: "50px",
               background: "#A16149",
               position: "fixed",
-              bottom: 90,
+              bottom: 20,
               right: 20,
               zIndex: 1000,
               transition: "background-color 0.3s ease",
@@ -102,15 +130,21 @@ const App = () => {
             }}
           >
             <AddOutlinedIcon
-              sx={{ fontSize: 30, color: "white" }}
+              sx={{ fontSize: 25, color: "white" }}
               onClick={handleOpenAddProductModal}
             />
           </Fab>
         ) : (
           <>
+            <WhatsAppButton
+              phoneNumber="+918652241163"
+              message={whatsappQueryMessage}
+            />
+
             <Tooltip
-              title="Contact us on WhatsApp"
+              title="Purchase Giftcard"
               arrow
+              placement="left"
               PopperProps={{
                 sx: {
                   "& .MuiTooltip-tooltip": {
@@ -128,31 +162,27 @@ const App = () => {
                 },
               }}
             >
-              <WhatsAppButton
-                phoneNumber="+918652241163"
-                message={whatsappQueryMessage}
-              />
+              <Fab
+                color="#A16149"
+                aria-label="add"
+                sx={{
+                  background: "#A16149",
+                  position: "fixed",
+                  bottom: 90,
+                  right: 20,
+                  zIndex: 1000,
+                  transition: "background-color 0.3s ease",
+                  "&:hover": {
+                    backgroundColor: "#b77961",
+                  },
+                }}
+              >
+                <CardGiftcardIcon
+                  sx={{ fontSize: 30, color: "white" }}
+                  onClick={handleOpenGiftModal}
+                />
+              </Fab>
             </Tooltip>
-            <Fab
-              color="#A16149"
-              aria-label="add"
-              sx={{
-                background: "#A16149",
-                position: "fixed",
-                bottom: 90,
-                right: 20,
-                zIndex: 1000,
-                transition: "background-color 0.3s ease",
-                "&:hover": {
-                  backgroundColor: "#b77961",
-                },
-              }}
-            >
-              <CardGiftcardIcon
-                sx={{ fontSize: 30, color: "white" }}
-                onClick={handleOpenGiftModal}
-              />
-            </Fab>
           </>
         )}
 
@@ -180,7 +210,15 @@ const App = () => {
             }
           />
           <Route exact path="/aboutus" element={<AboutUs />} />
-          <Route exact path="/contactus" element={<FindUs />} />
+          <Route
+            exact
+            path="/contactus"
+            element={
+              <Box sx={{ marginBottom: "180px" }}>
+                <FindUs />
+              </Box>
+            }
+          />
           <Route exact path="/product" element={<ViewProduct />} />
           <Route exact path="/giftCard" element={<GiftCardModal />} />
           <Route
@@ -190,11 +228,6 @@ const App = () => {
           />
           <Route exact path="/signup" element={<Signup />} />
           <Route exact path="/ourstory" element={<OurStory />} />
-          {/* <Route
-            exact
-            path="/addProduct"
-            element={<AddEditProductModal open={true} />}
-          /> */}
           <Route exact path="/checkout" element={<Checkout />} />
           <Route exact path="/cart" element={<Cart />} />
           <Route exact path="/delivery" element={<DeliveryForm />} />
@@ -222,6 +255,7 @@ const App = () => {
           cartDetails={cartDetails}
           setCartDetails={setCartDetails}
         ></CustomDrawer>
+        {/* <Box sx={{ height: 100 }} /> */}
       </div>
     </Provider>
   );

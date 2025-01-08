@@ -193,20 +193,43 @@ const CustomDrawer = (props) => {
                 </Box>
               ))
             ) : (
-              <>
-                <Typography variant="h6" sx={{ textAlign: "center", mt: 2 }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                <Typography
+                  variant="h6"
+                  sx={{
+                    textAlign: "center",
+                    mt: 5,
+                    fontSize: { xs: "18px", sm: "18px", md: "18px" },
+                    fontFamily: "'Cinzel', serif",
+                    fontWeight: "300",
+                    color: "#9a847a",
+                  }}
+                >
                   Your cart is currently empty
                 </Typography>
                 <Button
+                  size="small"
+                  color="custom"
+                  variant="outlined"
                   onClick={() => {
                     navigate("/shop");
                     dispatch(closeCartDrawer());
                   }}
-                  sx={{ mt: 2 }}
+                  sx={{
+                    mt: 4,
+                    width: "140px",
+                  }}
                 >
                   Go to shop
                 </Button>
-              </>
+              </Box>
             )}
           </Box>
 

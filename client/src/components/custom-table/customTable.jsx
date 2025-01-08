@@ -241,41 +241,45 @@ const CustomTable = (props) => {
             )}
             {colDef.isDisable ? (
               row[colDef.disableKey] ? (
-                <VisibilityOffIcon
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setDisableInfo({
-                      row: row,
-                      index: rowIndex,
-                      show: true,
-                      disableFunc: colDef.disableFunc,
-                      disableTitle: "Disable Confirmation",
-                      disableMessage:
-                        "Are you sure you want to disable this product?",
-                      buttonLabel: "Disable",
-                    });
-                  }}
-                  sx={{ cursor: "pointer" }}
-                  id={`${colDef.deleteId}-${rowIndex}`}
-                ></VisibilityOffIcon>
+                <Tooltip title="Disable Product" arrow>
+                  <VisibilityOffIcon
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setDisableInfo({
+                        row: row,
+                        index: rowIndex,
+                        show: true,
+                        disableFunc: colDef.disableFunc,
+                        disableTitle: "Disable Confirmation",
+                        disableMessage:
+                          "Are you sure you want to disable this product?",
+                        buttonLabel: "Disable",
+                      });
+                    }}
+                    sx={{ cursor: "pointer", color: "warning.main" }}
+                    id={`${colDef.deleteId}-${rowIndex}`}
+                  />
+                </Tooltip>
               ) : (
-                <VisibilityIcon
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setDisableInfo({
-                      row: row,
-                      index: rowIndex,
-                      show: true,
-                      disableFunc: colDef.disableFunc,
-                      disableTitle: "Enable Confirmation",
-                      disableMessage:
-                        "Are you sure you want to enable this product?",
-                      buttonLabel: "Enable",
-                    });
-                  }}
-                  sx={{ cursor: "pointer" }}
-                  id={`${colDef.deleteId}-${rowIndex}`}
-                ></VisibilityIcon>
+                <Tooltip title="Enable Product" arrow>
+                  <VisibilityIcon
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setDisableInfo({
+                        row: row,
+                        index: rowIndex,
+                        show: true,
+                        disableFunc: colDef.disableFunc,
+                        disableTitle: "Enable Confirmation",
+                        disableMessage:
+                          "Are you sure you want to enable this product?",
+                        buttonLabel: "Enable",
+                      });
+                    }}
+                    sx={{ cursor: "pointer", color: "success.main" }}
+                    id={`${colDef.deleteId}-${rowIndex}`}
+                  ></VisibilityIcon>
+                </Tooltip>
               )
             ) : (
               ""
@@ -304,7 +308,7 @@ const CustomTable = (props) => {
           boxShadow: "none",
           border: "1px solid #ccc",
           // mx: 1,
-          mt: 1,
+          // mt: 1,
           width: "auto",
           // margin: "5px 20px",
         }}

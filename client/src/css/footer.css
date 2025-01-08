@@ -14,7 +14,7 @@
 ul {
   padding: 0;
   font-family: "Cinzel", serif;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   margin: 20px 0;
   line-height: 35px;
@@ -27,45 +27,87 @@ ul li {
 }
 
 .footer-links {
-  color: rgba(55, 65, 81, 0.6) !important;
+  cursor: pointer;
+  color: rgba(35, 42, 54, 0.7) !important;
   text-decoration: none !important;
 }
 
 ul li:hover,
-.footer-icon:hover {
+.footer-icon:hover,
+.footer-links:hover {
   color: #a16149 !important;
 }
 
+/* Default styles for larger devices */
 .top-section {
   display: flex;
   justify-content: space-around;
-  /* background-color: #2f3e4e; */
-  /* background-color: #e6beb8; */
   background-color: rgba(183, 121, 97, 0.7);
   backdrop-filter: blur(100px); /* Applies the glassy blur */
   -webkit-backdrop-filter: blur(10px); /* Safari support */
   padding: 16px;
   color: white;
   flex-wrap: nowrap; /* Prevents wrapping of items */
-  overflow-x: auto; /* Enables horizontal scrolling */
+  overflow: hidden; /* Prevents content overflow */
   gap: 16px; /* Adds spacing between items */
+  position: relative;
 }
 
 .top-item {
-  flex: 0 0 auto; /* Prevents shrinking and ensures items take up only their content size */
-  text-align: center; /* Centers text below icons */
-  width: 150px; /* Optional: Set a fixed width for consistency */
+  flex: 0 0 auto;
   text-align: center;
+  width: 150px;
 }
-
 .bottom-icons {
+  width: 30px; /* Reduce icon size for mobile */
+  height: 30px;
+}
+/* .bottom-icons {
   width: auto;
   height: auto;
-  /* font-size: 94px !important; */
+} */
+
+/* Apply marquee scrolling for mobile devices */
+@media (max-width: 768px) {
+  .top-section {
+    overflow: hidden; /* Ensure only the marquee content is visible */
+    height: auto; /* Let height adjust dynamically */
+    white-space: nowrap;
+    padding: 20px;
+  }
+
+  .top-section > div {
+    gap: 16px; /* Adds space between items */
+    /* animation: marquee 5s linear infinite;  */
+
+    animation: 3s marquee infinite linear;
+    display: inline-block;
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+  .top-item {
+    margin: 0 8px; /* Add some spacing between items */
+    width: auto; /* Adjust width for responsive layout */
+    font-size: 12px; /* Reduce text size on mobile */
+    flex-shrink: 0; /* Prevent shrinking of items */
+  }
+
+  .bottom-icons {
+    width: 34px; /* Reduce icon size for mobile */
+    height: 34px;
+  }
 }
 
 .subscribe {
-  background-color: #ebe4de;
+  /* background-color: rgba(204, 161, 144, 0.3); */
+  background-color: rgba(210, 188, 183, 0.7);
   /* display: flex; */
   padding: 20px;
   border-radius: 5px;
@@ -106,5 +148,6 @@ ul li:hover,
   font-family: "Cinzel", serif !important;
   font-size: 16px;
   font-weight: 600 !important;
-  color: #777;
+  /* color: #777; */
+  color: rgba(35, 42, 54, 0.7) !important;
 }

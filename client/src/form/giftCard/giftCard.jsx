@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { createOrder } from "../../api";
 import { razorpayId } from "../../pages/payment/paymentPage";
-import gift from "../../assets/gift.jpg";
+import gift from "../../assets/giftcard.jpg";
 import CloseIcon from "@mui/icons-material/Close";
 
 const GiftCardModal = ({ open, onClose }) => {
@@ -67,32 +67,35 @@ const GiftCardModal = ({ open, onClose }) => {
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          width: { xs: "350px", sm: "500px", md: "600px" },
+          width: { xs: "350px", sm: "700px", md: "800px" },
           bgcolor: "background.paper",
           boxShadow: 24,
-          p: 1,
+          // p: 1,
           borderRadius: "5px",
           border: "none !important",
-          display: { xs: "flex", sm: "flex", md: "flex" }, // Flexbox layout for side-by-side arrangement
+          display: "flex", // Default layout for larger screens
+          flexDirection: { xs: "column", sm: "row" },
           overflow: "hidden",
         }}
       >
         {/* Left Side: Image */}
         <Box
           sx={{
-            width: { xs: "0", sm: "40%" },
+            width: { xs: "100%", sm: "45%" }, // Full width on mobile, partial on larger screens
             backgroundImage: `url(${gift})`,
             backgroundSize: "contain",
-            backgroundPosition: "center",
+            backgroundPosition: "bottom",
             backgroundRepeat: "no-repeat",
+            borderBottom: "1px solid rgb(234, 229, 229)",
+            height: { xs: "200px", sm: "auto" }, // Fixed height for mobile to keep aspect ratio
           }}
-        ></Box>
+        />
 
         {/* Right Side: Content */}
         <Box
           sx={{
-            width: { xs: "100%", sm: "70%" }, // 50% of the modal for the content
-            p: { xs: 3, sm: 4 },
+            width: { xs: "100%", sm: "60%" }, // 50% of the modal for the content
+            p: { xs: 3, sm: 2 },
             // textAlign: "center",
             position: "relative",
           }}
@@ -130,10 +133,10 @@ const GiftCardModal = ({ open, onClose }) => {
             sx={{
               fontWeight: "400",
               fontSize: {
-                xs: "15px",
-                sm: "16px",
-                md: "18px",
-                lg: "19px",
+                xs: "14px",
+                sm: "14px",
+                md: "14px",
+                lg: "14px",
               },
               fontFamily: "'Roboto Serif', serif ",
             }}
@@ -172,6 +175,26 @@ const GiftCardModal = ({ open, onClose }) => {
             sx={{ mb: 2 }}
           />
 
+          <TextField
+            fullWidth
+            type="number"
+            label="Enter Amount"
+            value={amount}
+            onChange={handleChange}
+            inputProps={{ min: 0 }}
+            sx={{ mb: 2 }}
+          />
+
+          <TextField
+            fullWidth
+            type="number"
+            label="Enter Amount"
+            value={amount}
+            onChange={handleChange}
+            inputProps={{ min: 0 }}
+            sx={{ mb: 2 }}
+          />
+
           <Button
             variant="contained"
             fullWidth
@@ -180,6 +203,25 @@ const GiftCardModal = ({ open, onClose }) => {
           >
             Pay Now
           </Button>
+
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{
+              mt: 2,
+              fontWeight: "400",
+              fontSize: {
+                xs: "14px",
+                sm: "14px",
+                md: "14px",
+                lg: "14px",
+              },
+              fontFamily: "'Roboto Serif', serif ",
+            }}
+          >
+            Give the gift of choice to your loved ones. Let them pick what they
+            love and make them feel like a meadow, full of a million blooms.
+          </Typography>
         </Box>
       </Box>
     </Modal>

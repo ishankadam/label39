@@ -30,7 +30,6 @@ import ManageUsers from "./manageUsers";
 import SelectDropdown from "../../components/select-dropdown/selectDropdown";
 import ManageOrders from "./manageOrders";
 import ProfilePage from "../profile/profile";
-
 const drawerWidth = 180;
 
 const openedMixin = (theme) => ({
@@ -244,6 +243,8 @@ const Dashboard = (props) => {
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <Drawer variant="permanent" open={open}>
+          <Divider />
+
           <DrawerHeader>
             <IconButton onClick={() => setOpen(!open)}>
               {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
@@ -349,7 +350,13 @@ const Dashboard = (props) => {
               )}
             </Grid2>
             {options === "Products" && (
-              <>
+              <Box
+                sx={{
+                  justifyContent: "flex-end",
+                  flexDirection: "row",
+                  display: "flex",
+                }}
+              >
                 {" "}
                 <Grid2 item>
                   <SelectDropdown
@@ -358,7 +365,11 @@ const Dashboard = (props) => {
                     config={{ field: "status" }}
                     handleEdit={handleChange}
                     value={filterOptions.status}
-                    sx={{ width: "200px" }}
+                    sx={{
+                      width: { xs: "160px", sm: "200px", md: "200px" },
+                      marginRight: "10px",
+                      height: "50px",
+                    }}
                   />
                 </Grid2>
                 <Grid2 item>
@@ -368,12 +379,16 @@ const Dashboard = (props) => {
                     config={{ field: "category" }}
                     handleEdit={handleChange}
                     value={filterOptions.category}
-                    sx={{ width: "200px" }}
+                    sx={{
+                      width: { xs: "160px", sm: "200px", md: "200px" },
+                      height: "50px",
+                    }}
                   />
                 </Grid2>
-              </>
+              </Box>
             )}
           </Grid2>
+          <hr className="footer-line" style={{ marginBottom: "20px" }} />
 
           {/* Render Content Based on Tab Selection */}
           {tabValue === "one" && (

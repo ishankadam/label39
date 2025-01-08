@@ -14,20 +14,21 @@ import bestSeller7 from "./assets/bestSeller10.jpg";
 import bestSeller11 from "./assets/bestSeller11.jpg";
 import bestSeller12 from "./assets/bestSeller12.jpg";
 import bestSeller13 from "./assets/bestSeller13.jpg";
-import {
-  Dashboard as DashboardIcon,
-  Category as CategoryIcon,
-  RecentActors as RecentActorsIcon,
-} from "@mui/icons-material"; // Import icons
+
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import RecentActorsIcon from "@mui/icons-material/RecentActors";
+import CategoryIcon from "@mui/icons-material/Category";
 import GroupIcon from "@mui/icons-material/Group";
+import ViewModuleIcon from "@mui/icons-material/ViewModule";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 export const dashboardTabValue = [
   { label: "Products", value: "one", icon: <DashboardIcon /> },
   { label: "Categories", value: "two", icon: <CategoryIcon /> },
   { label: "Testimonials", value: "three", icon: <RecentActorsIcon /> },
   { label: "User", value: "four", icon: <GroupIcon /> },
-  { label: "Orders", value: "five", icon: <GroupIcon /> },
-  { label: "Profile", value: "six", icon: <GroupIcon /> },
+  { label: "Orders", value: "five", icon: <ViewModuleIcon /> },
+  { label: "Profile", value: "six", icon: <AccountCircleIcon /> },
 ];
 
 export const whatsappQueryMessage =
@@ -63,7 +64,7 @@ export const urlToFile = async (url, filename) => {
 
 export const categories = [
   {
-    label: "SHIRTS and Dresses",
+    label: "SHIRTS & Dresses",
     imgSrc: shirt,
     value: "shirts",
   },

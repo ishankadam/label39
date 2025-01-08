@@ -56,7 +56,10 @@ const FindUs = () => {
         />
       </Typography>
       <div className="findus-container">
-        <Card className="card-container">
+        <Card
+          className="card-container"
+          sx={{ maxWidth: { xs: "100%", sm: "95%", md: "800px", lg: "900px" } }}
+        >
           <Grid container>
             <Grid item xs={12} sm={6}>
               {showMap ? (
@@ -69,12 +72,12 @@ const FindUs = () => {
               ) : (
                 <Box
                   component="iframe"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224345.83918911796!2d77.06889984999999!3d28.4743844!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce1612dfde9c9%3A0x29a8983a3a749f20!2sThe%20Dhanmill!5e0!3m2!1sen!2sin!4v1692722440123!5m2!1sen!2sin"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.1017166108327!2d72.84595687466584!3d19.10319315111933!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c9b5a556b17f%3A0x707b76f49810088a!2sSun%20Vision%20Classic!5e0!3m2!1sen!2sin!4v1735222194257!5m2!1sen!2sin"
                   height="380px"
                   width="100%"
                   allowFullScreen
                   loading="lazy"
-                  title="The Dhanmill Location"
+                  title="TheLabel39 Location"
                   sx={{ border: 0 }}
                 />
               )}
@@ -198,8 +201,11 @@ const FindUs = () => {
                           sx={{
                             width: "100%",
                             "& .MuiInputLabel-root": {
-                              fontSize: "14px",
-                              top: "-5px",
+                              fontSize: "15px",
+                              top: "-6px",
+                            },
+                            "& .MuiInputLabel-root.MuiInputLabel-shrink": {
+                              top: "0",
                             },
                             "& .MuiOutlinedInput-root": {
                               height: "40px",
@@ -214,8 +220,11 @@ const FindUs = () => {
                           sx={{
                             width: "100%",
                             "& .MuiInputLabel-root": {
-                              fontSize: "14px",
-                              top: "-5px",
+                              fontSize: "15px",
+                              top: "-6px",
+                            },
+                            "& .MuiInputLabel-root.MuiInputLabel-shrink": {
+                              top: "0",
                             },
                             "& .MuiOutlinedInput-root": {
                               height: "40px",
@@ -230,8 +239,11 @@ const FindUs = () => {
                           sx={{
                             width: "100%",
                             "& .MuiInputLabel-root": {
-                              fontSize: "14px",
-                              top: "-5px",
+                              fontSize: "15px",
+                              top: "-6px",
+                            },
+                            "& .MuiInputLabel-root.MuiInputLabel-shrink": {
+                              top: "0",
                             },
                             "& .MuiOutlinedInput-root": {
                               height: "40px",
@@ -246,8 +258,11 @@ const FindUs = () => {
                           sx={{
                             width: "100%",
                             "& .MuiInputLabel-root": {
-                              fontSize: "14px",
-                              top: "-5px",
+                              fontSize: "15px",
+                              top: "-6px",
+                            },
+                            "& .MuiInputLabel-root.MuiInputLabel-shrink": {
+                              top: "0",
                             },
                             "& .MuiOutlinedInput-root": {
                               height: "40px",
