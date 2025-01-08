@@ -6,17 +6,14 @@ import {
   Link,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
-import bestseller1 from "../../assets/bestSellerP1.jpg";
-import bestseller2 from "../../assets/bestSellerP4.jpg";
 import CustomTextfield from "../textfield/customTextfield";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import {
   clearCart,
   closeCartDrawer,
-  closeDialog,
   removeFromCart,
   updateQuantity,
 } from "../../store/cartSlice";
@@ -49,10 +46,6 @@ const CustomDrawer = (props) => {
   const onClose = () => {
     dispatch(closeCartDrawer());
   };
-
-  useEffect(() => {
-    console.log(cartItems);
-  }, [cartItems]);
 
   return (
     <div>

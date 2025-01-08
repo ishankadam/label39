@@ -137,11 +137,9 @@ const CustomAppbar = (props) => {
   };
 
   const handleNavigation = (url) => {
-    console.log("test");
-    handleCloseUserMenu(null);
     navigate(url);
+    handleCloseUserMenu();
   };
-
   const cartItemCount = useSelector((state) => state.cart.totalItems);
 
   const handleMenuItemClick = (setting) => {
@@ -150,7 +148,7 @@ const CustomAppbar = (props) => {
     } else {
       handleNavigation(setting.url);
     }
-    handleCloseUserMenu(null); // Close the menu
+    handleCloseUserMenu(); // Close the menu
   };
 
   return (
@@ -302,46 +300,40 @@ const CustomAppbar = (props) => {
               }}
               onClick={handleOpenUserMenu}
             >
-              <Box sx={{ flexGrow: 0 }}>
-                <Tooltip title="Open settings">
-                  <PermIdentityRoundedIcon
-                    sx={{ p: 0 }}
-                  ></PermIdentityRoundedIcon>
-                </Tooltip>
-                <Menu
-                  sx={{ mt: "45px" }}
-                  id="menu-appbar"
-                  anchorEl={anchorElUser}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  open={anchorElUser}
-                  onClose={handleCloseUserMenu}
-                >
-                  {adminSettings.map((setting) => (
-                    <MenuItem
-                      key={setting.label}
-                      onClick={() => handleMenuItemClick(setting)}
-                    >
-                      <Typography
-                        sx={{
-                          textAlign: "center",
-                          fontFamily: "'Cinzel', serif !important",
-                        }}
-                      >
-                        {setting.label}
-                      </Typography>
-                    </MenuItem>
-                  ))}
-                </Menu>
-              </Box>
+              <Tooltip title="Open settings">
+                <PermIdentityRoundedIcon />
+              </Tooltip>
             </IconButton>
+            <Menu
+              sx={{ mt: "45px" }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              {adminSettings.map((setting) => (
+                <MenuItem
+                  key={setting.label}
+                  onClick={() => handleMenuItemClick(setting)}
+                >
+                  <Typography
+                    textAlign="center"
+                    sx={{ fontFamily: "'Cinzel', serif !important" }}
+                  >
+                    {setting.label}
+                  </Typography>
+                </MenuItem>
+              ))}
+            </Menu>
             <IconButton
               color="inherit"
               sx={{ opacity: 0.7, paddingRight: { xs: "0", sm: "auto" } }}

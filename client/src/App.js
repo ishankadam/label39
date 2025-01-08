@@ -17,7 +17,7 @@ import DeliveryForm from "./pages/product/deliveryForm";
 import Dashboard from "./pages/dashboard/dashboard";
 import FindUs from "./pages/homepage/findUs";
 import { Fab, Tooltip } from "@mui/material";
-import { getAllProducts } from "./api";
+import { getAllCategories, getAllProducts } from "./api";
 import TermsAndConditions from "./pages/termsAndCondition/termsAndCondition";
 import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
 import GiftCardModal from "./form/giftCard/giftCard";
@@ -33,6 +33,7 @@ const App = () => {
     open: false,
     data: [],
   });
+  const [allCategories, setAllCategories] = useState([]);
   const [allProduct, setAllProduct] = useState([]);
   const [loading, setLoading] = useState(false);
   const [country, setCountry] = useState("INR");
@@ -51,6 +52,12 @@ const App = () => {
       setLoading,
       country,
       isActive: true,
+    });
+  }, [country]);
+
+  useEffect(() => {
+    getAllCategories({
+      setCategories: setAllCategories,
     });
   }, [country]);
 
@@ -166,6 +173,7 @@ const App = () => {
             element={
               <Shop
                 allProduct={allProduct}
+                allCategories={allCategories}
                 loading={loading}
                 country={country}
               />

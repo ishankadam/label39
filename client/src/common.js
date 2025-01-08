@@ -108,11 +108,25 @@ export const priceRanges = [
 ];
 
 export const availableColors = [
-  { label: "Red", value: "red" },
-  { label: "Green", value: "green" },
-  { label: "Blue", value: "blue" },
-  { label: "Yellow", value: "yellow" },
-  { label: "Black", value: "black" },
+  "Red",
+  "Blue",
+  "Green",
+  "Yellow",
+  "Orange",
+  "Black",
+  "Ivory",
+  "Gray",
+  "Pink",
+  "Lilac",
+  "Purple",
+  "Beige",
+  "Brown",
+  "Peach",
+  "Off-white",
+  "Maroon",
+  "Gold",
+  "Silver",
+  "Print",
 ];
 
 export const hasEmptyField = (obj) => {
@@ -299,4 +313,21 @@ export const getUrl = () => {
   const url = new URL(window.location.origin);
   url.port = 5000;
   return url;
+};
+
+export const prepareOrderDetailsMessage = (orders) => {
+  let message = "Thank you for your order! Here are your order details:\n\n";
+
+  orders.forEach((order, index) => {
+    message += `Order ${index + 1}:\n`;
+    message += `Order ID: ${order.id}\n`;
+    message += `Total Amount: ${order.total_amount}\n`;
+    message += `Items:\n`;
+    order.items.forEach((item) => {
+      message += `  - ${item.name}: ${item.quantity} x ${item.price}\n`;
+    });
+    message += "\n";
+  });
+
+  return message;
 };

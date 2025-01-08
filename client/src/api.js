@@ -1,10 +1,16 @@
-import { urlToFile } from "./common";
+import { prepareOrderDetailsMessage, urlToFile } from "./common";
 
-const { REACT_APP_API_URL, REACT_APP_IMAGE_URL, REACT_APP_PHONE } = process.env;
+const {
+  REACT_APP_API_URL,
+  REACT_APP_IMAGE_URL,
+  REACT_APP_PHONE,
+  REACT_WHATSAPP_API_URL,
+} = process.env;
 
 export const apiUrl = REACT_APP_API_URL;
 export const imageUrl = REACT_APP_IMAGE_URL;
 export const phoneNumber = REACT_APP_PHONE;
+export const whatsAppUrl = REACT_WHATSAPP_API_URL;
 
 // create User
 export const createUser = async ({ userDetails, navigate }) => {
@@ -263,12 +269,51 @@ export const verifyPayment = async ({
       throw new Error("Failed to verify payment");
     }
 
-    return await response.json();
+    const data = await response.json();
+    console.log("Payment verification response:", data);
+
+    if (data.orders) {
+      // Prepare the order details message
+
+      // Send WhatsApp message
+      // await sendWhatsAppMessage(checkoutData.phoneNumber, orderDetails);
+
+      console.log("WhatsApp message sent successfully");
+    }
+
+    return data;
   } catch (err) {
     console.error("Error verifying payment:", err);
     throw err;
   }
 };
+
+// export async function sendWhatsAppMessage(to, body) {
+//   try {
+//     const response = await fetch(whatsAppUrl, {
+//       method: "POST",
+//       headers: {
+//         Authorization: `Bearer ${ACCESS_TOKEN}`,
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({
+//         messaging_product: "whatsapp",
+//         to: to,
+//         type: "text",
+//         text: { body: body },
+//       }),
+//     });
+
+//     if (!response.ok) {
+//       throw new Error("Failed to send WhatsApp message");
+//     }
+
+//     return await response.json();
+//   } catch (error) {
+//     console.error("Error sending WhatsApp message:", error);
+//     throw error;
+//   }
+// }
 
 export const createDeliveryOrder = async (deliveryData) => {
   try {

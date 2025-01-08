@@ -20,11 +20,13 @@ import ViewProductModal from "../product/viewProduct";
 import _ from "lodash";
 import ClearIcon from "@mui/icons-material/Clear";
 import CustomTextfield from "../../components/textfield/customTextfield";
+import { availableColors } from "../../common";
 
 const ProductsPage = (props) => {
   const [allProduct, setAllProduct] = useState(props.allProduct || []);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [loading, setLoading] = useState(props.loading || false);
+  const [categories, setCategories] = useState(props.allCategories || []);
   const [displayedProducts, setDisplayedProducts] = useState([]);
   const toggleDrawer = (open) => () => {
     setIsDrawerOpen(open);
@@ -49,6 +51,13 @@ const ProductsPage = (props) => {
     setLoading(props.loading);
   }, [props.loading]);
 
+  useEffect(() => {
+    const categoryList = props.allCategories.map((category) => {
+      return { label: category.name, value: category.value };
+    });
+    setCategories(categoryList);
+  }, [props.allCategories]);
+
   const handleFilterChange = (value, field) => {
     setFilter((prev) => ({
       ...prev,
@@ -61,33 +70,10 @@ const ProductsPage = (props) => {
       data: product,
     });
   };
-
-  const categories = ["Shirts", "Co-ords", "Kurtas", "Suits"];
   const priceRanges = [
     { label: "Under 10000", min: 0, max: 10000 },
     { label: "10000-20000", min: 10000, max: 15000 },
     { label: "Above 20000", min: 20000, max: 200000 },
-  ];
-  const availableColors = [
-    "Red",
-    "Blue",
-    "Green",
-    "Yellow",
-    "Orange",
-    "Black",
-    "Ivory",
-    "Gray",
-    "Pink",
-    "Lilac",
-    "Purple",
-    "Beige",
-    "Brown",
-    "Peach",
-    "Off-white",
-    "Maroon",
-    "Gold",
-    "Silver",
-    "Print",
   ];
 
   useEffect(() => {
@@ -97,6 +83,10 @@ const ProductsPage = (props) => {
   const handlePageChange = (event, value) => {
     setPage(value);
   };
+
+  useEffect(() => {
+    console.log(categories);
+  }, [categories]);
 
   useEffect(() => {
     const productsPerPage = page === 1 ? 16 : 8;
@@ -213,12 +203,14 @@ const ProductsPage = (props) => {
               </Typography>
               <List>
                 {categories.map((category, index) => {
-                  const isSelected = filter.category === category;
+                  const isSelected = filter.category === category.value;
 
                   return (
                     <ListItem key={index} disablePadding>
                       <ListItemButton
-                        onClick={() => handleFilterChange(category, "category")}
+                        onClick={() =>
+                          handleFilterChange(category.value, "category")
+                        }
                         sx={{
                           margin: "0 !important",
                           Color: isSelected
@@ -245,7 +237,7 @@ const ProductsPage = (props) => {
                           />
                         )}
                         <ListItemText
-                          primary={category}
+                          primary={category.label}
                           primaryTypographyProps={{
                             fontFamily: " 'Roboto Serif', serif",
                             fontSize: isSelected ? "16px" : "15px",
@@ -297,7 +289,7 @@ const ProductsPage = (props) => {
               </Typography>
               <List>
                 {priceRanges.map((priceRange, index) => {
-                  const isSelected = filter.price === priceRange.label;
+                  const isSelected = filter.price === priceRange;
 
                   return (
                     <ListItem
@@ -305,9 +297,7 @@ const ProductsPage = (props) => {
                       disablePadding
                     >
                       <ListItemButton
-                        onClick={() =>
-                          handleFilterChange(priceRange.label, "price")
-                        }
+                        onClick={() => handleFilterChange(priceRange, "price")}
                         sx={{
                           margin: "0 !important",
                           Color: isSelected
@@ -529,12 +519,14 @@ const ProductsPage = (props) => {
             </Typography>
             <List>
               {categories.map((category, index) => {
-                const isSelected = filter.category === category;
+                const isSelected = filter.category === category.value;
 
                 return (
                   <ListItem key={index} disablePadding>
                     <ListItemButton
-                      onClick={() => handleFilterChange(category, "category")}
+                      onClick={() =>
+                        handleFilterChange(category.value, "category")
+                      }
                       sx={{
                         margin: "0 !important",
                         Color: isSelected
@@ -561,7 +553,7 @@ const ProductsPage = (props) => {
                         />
                       )}
                       <ListItemText
-                        primary={category}
+                        primary={category.label}
                         primaryTypographyProps={{
                           fontFamily: " 'Roboto Serif', serif",
                           fontSize: isSelected
@@ -630,7 +622,7 @@ const ProductsPage = (props) => {
                         />
                       )}
                       <ListItemText
-                        primary={priceRange}
+                        primary={priceRange.label}
                         primaryTypographyProps={{
                           fontFamily: " 'Roboto Serif', serif",
                           fontSize: isSelected

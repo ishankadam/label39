@@ -295,6 +295,7 @@ const verifyPayment = async (req, res) => {
       await order.save();
 
       return res.status(200).json({
+        order: order,
         message: "Payment verified successfully",
         success: true,
       });
@@ -365,7 +366,9 @@ const trackDeliveryOrder = async (req, res) => {
 
 const get_all_categories = async (_req, res) => {
   try {
-    const category = await Category.find({}).select("-_id -__v"); // Exclude _id and __v fields
+    const category = await Category.find({})
+      .select("-_id -__v")
+      .sort({ order: 1 }); // Exclude _id and __v fields
     res.status(200).json(category); // Send the result as JSON
   } catch (error) {
     res.status(500).json({ message: "Error fetching events", error });
@@ -414,12 +417,9 @@ const toggleProductStatus = async (req, res) => {
 
 const edit_product = async (req, res) => {
   try {
-    const editData = JSON.parse(req.body.products); // Parse incoming product data
     const images = req.files.map((file) => file.filename);
 
     // Destructure productId and prepare updated product data
-    const { productId, ...editedProduct } = editData;
-    const productToBeEdited = await Product.findOne({ productId: productId });
     // const imagePath = path.join(
     //   parentDir,
     //   "uploads",

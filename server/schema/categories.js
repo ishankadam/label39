@@ -28,6 +28,7 @@ const categorySchema = new mongoose.Schema({
     type: Number,
   },
   isActive: { type: Boolean, default: true },
+  value: { type: String },
 });
 
 // Create the model
