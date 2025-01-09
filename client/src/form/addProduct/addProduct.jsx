@@ -9,6 +9,7 @@ import {
   DialogTitle,
   Switch,
   Grid,
+  Box,
 } from "@mui/material";
 import CustomTextfield from "../../components/textfield/customTextfield";
 import SelectDropdown from "../../components/select-dropdown/selectDropdown";
@@ -229,6 +230,7 @@ const AddEditProductModal = (props) => {
               md: "1.3rem",
               lg: "1.5rem",
             },
+            paddingBottom: "10px",
             borderBottom: "1px solid #ccc",
           }}
         >
@@ -238,7 +240,8 @@ const AddEditProductModal = (props) => {
       <DialogContent>
         <Grid container spacing={2} sx={{ pt: 1 }}>
           {/* Product Fields */}
-          <Grid xs={12} sm={6} mb={1}>
+
+          <Grid item xs={12} sm={6} mb={1}>
             <CustomTextfield
               label="Product Name"
               value={productDetails.name}
@@ -247,7 +250,7 @@ const AddEditProductModal = (props) => {
               sx={{ width: "100%" }}
             />
           </Grid>
-          <Grid xs={12} sm={6} mb={1}>
+          <Grid item xs={12} sm={6} mb={1}>
             <CustomTextfield
               label="Price"
               value={productDetails.price}
@@ -256,7 +259,7 @@ const AddEditProductModal = (props) => {
               sx={{ width: "100%" }}
             />
           </Grid>
-          <Grid xs={12} mb={2}>
+          <Grid item xs={12} mb={0}>
             <CustomTextfield
               label="Description"
               value={productDetails.description}
@@ -266,238 +269,268 @@ const AddEditProductModal = (props) => {
               sx={{ width: "100%" }}
             />
           </Grid>
-        </Grid>
 
-        <Grid xs={12} sm={12} mb={1}>
-          <SelectDropdown
-            label="Category"
-            optionList={categoryList}
-            config={{ field: "category", isRequired: true }}
-            handleEdit={handleEdit}
-            value={productDetails.category}
-            sx={{ width: "100%" }}
-          />
-        </Grid>
-        {/* Sizes Section */}
-        <Grid xs={12}>
-          <Typography variant="subtitle1">Sizes (Upper Section)</Typography>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <Checkbox onChange={(event) => handleAllSizes(event, "Upper")} />
-            <Typography>Add all sizes for upper?</Typography>
-          </div>
-          {productDetails.sizes.Upper.length > 0 &&
-            productDetails.sizes.Upper?.map((row, index) => (
-              <Grid container spacing={2} key={index} alignItems="center">
-                <Grid xs={4}>
-                  <SelectDropdown
-                    label="Size"
-                    optionList={availableSizes}
-                    config={{ field: "size", index: index, section: "Upper" }}
-                    value={row.size}
-                    handleEdit={handleEdit}
-                    sx={{ width: "100%" }}
-                  />
-                </Grid>
-                <Grid xs={4}>
-                  <CustomTextfield
-                    label="Quantity"
-                    value={row.quantity}
-                    config={{
-                      field: "quantity",
-                      index: index,
-                      section: "Upper",
-                    }}
-                    handleEdit={handleEdit}
-                    sx={{ width: "100%" }}
-                  />
-                </Grid>
-                <Grid xs={3}>
-                  <CustomTextfield
-                    label="Price"
-                    type="number"
-                    value={row.price}
-                    config={{
-                      field: "price",
-                      index: index,
-                      section: "Upper",
-                    }}
-                    handleEdit={handleEdit}
-                    sx={{ width: "100%" }}
-                  />
-                </Grid>
-                <Grid xs={1}>
-                  <Button
-                    color="custom"
-                    sx={{ width: "50px" }}
-                    className="add-size-button"
-                    onClick={() => removeSizeRow("Upper", index)}
-                  >
-                    <ClearIcon color="black" />
-                  </Button>
-                </Grid>
-              </Grid>
-            ))}
-          <Button
-            variant="outlined"
-            color="custom"
-            sx={{ width: "50px" }}
-            className="add-size-button"
-            onClick={() => addSizeRow("Upper")}
-          >
-            <AddIcon variant="contained" className="add-size-button" />
-          </Button>
-        </Grid>
-        {/* Bottom Section Toggle */}
-        <Grid xs={12} mt={2} mb={2}>
-          <Typography variant="subtitle1">
-            Add Bottom Section{" "}
-            <Switch
-              checked={showBottomSection}
-              onChange={() => handleAddBottomSection("Bottom")}
+          <Grid item xs={12} mb={0}>
+            <SelectDropdown
+              label="Category"
+              optionList={categoryList}
+              config={{ field: "category", isRequired: true }}
+              handleEdit={handleEdit}
+              value={productDetails.category}
+              sx={{ width: "100%" }}
             />
-          </Typography>
-          {showBottomSection && (
-            <>
-              <Typography variant="subtitle1" mt={1}>
-                Sizes (Bottom Section)
-              </Typography>
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <Checkbox
-                  onChange={(event) => handleAllSizes(event, "Bottom")}
-                />
-                <Typography>Add all sizes for bottom?</Typography>
-              </div>
-              {productDetails.sizes.Bottom.map((row, index) => (
-                <Grid container spacing={2} key={index} alignItems="center">
-                  <Grid item xs={4}>
+          </Grid>
+          {/* Sizes Section */}
+          <Grid item xs={12} mb={1}>
+            <Typography variant="subtitle1" sx={{ fontWeight: "600" }}>
+              Sizes (Upper Section)
+            </Typography>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <Checkbox
+                onChange={(event) => handleAllSizes(event, "Upper")}
+                sx={{ marginLeft: "-10px" }}
+              />
+              <Typography>Add all sizes for upper?</Typography>
+            </div>
+            {productDetails.sizes.Upper.length > 0 &&
+              productDetails.sizes.Upper?.map((row, index) => (
+                <Grid
+                  container
+                  spacing={{ xs: 1, sm: 2 }}
+                  key={index}
+                  alignItems="center"
+                  // sx={{ borderBottom: "1px solid #ccc" }}
+                >
+                  <Grid item xs={6} sm={4}>
                     <SelectDropdown
                       label="Size"
                       optionList={availableSizes}
+                      config={{ field: "size", index: index, section: "Upper" }}
                       value={row.size}
-                      config={{
-                        field: "size",
-                        index: index,
-                        section: "Bottom",
-                      }}
                       handleEdit={handleEdit}
                       sx={{ width: "100%" }}
                     />
                   </Grid>
-                  <Grid item xs={4}>
+                  <Grid item xs={6} sm={4}>
                     <CustomTextfield
                       label="Quantity"
                       value={row.quantity}
                       config={{
                         field: "quantity",
                         index: index,
-                        section: "Bottom",
+                        section: "Upper",
                       }}
                       handleEdit={handleEdit}
                       sx={{ width: "100%" }}
                     />
                   </Grid>
-                  <Grid item xs={3}>
+                  <Grid item xs={6} sm={3}>
                     <CustomTextfield
                       label="Price"
-                      value={row.price}
                       type="number"
+                      value={row.price}
                       config={{
                         field: "price",
                         index: index,
-
-                        section: "Bottom",
+                        section: "Upper",
                       }}
                       handleEdit={handleEdit}
                       sx={{ width: "100%" }}
                     />
                   </Grid>
-                  <Grid item xs={1}>
+                  <Grid item xs={6} sm={1}>
                     <Button
                       color="custom"
                       sx={{ width: "50px" }}
                       className="add-size-button"
-                      onClick={() => removeSizeRow("Bottom", index)}
+                      onClick={() => removeSizeRow("Upper", index)}
                     >
                       <ClearIcon color="black" />
                     </Button>
                   </Grid>
+                  <Grid item xs={12}>
+                    <Box
+                      sx={{
+                        borderBottom: "0.5px solid #ccc",
+                        margin: "4px auto 12px auto",
+                      }}
+                    />
+                  </Grid>
                 </Grid>
               ))}
+            <Button
+              variant="outlined"
+              color="custom"
+              sx={{ width: "50px", marginTop: "10px" }}
+              className="add-size-button"
+              onClick={() => addSizeRow("Upper")}
+            >
+              <AddIcon variant="contained" className="add-size-button" />
+            </Button>
+          </Grid>
+          {/* Bottom Section Toggle */}
+          <Grid item xs={12} mb={1}>
+            <Typography variant="subtitle1" sx={{ fontWeight: "600" }}>
+              Sizes (Bottom Section)
+              <Switch
+                checked={showBottomSection}
+                onChange={() => handleAddBottomSection("Bottom")}
+              />
+            </Typography>
+            {showBottomSection && (
+              <>
+                {/* <Typography variant="subtitle1" mt={1}>
+                  Sizes (Bottom Section)
+                </Typography> */}
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <Checkbox
+                    sx={{ marginLeft: "-10px" }}
+                    onChange={(event) => handleAllSizes(event, "Bottom")}
+                  />
+                  <Typography>Add all sizes for bottom?</Typography>
+                </div>
+                {productDetails.sizes.Bottom.map((row, index) => (
+                  <Grid container spacing={2} key={index} alignItems="center">
+                    <Grid item xs={6} sm={4}>
+                      <SelectDropdown
+                        label="Size"
+                        optionList={availableSizes}
+                        value={row.size}
+                        config={{
+                          field: "size",
+                          index: index,
+                          section: "Bottom",
+                        }}
+                        handleEdit={handleEdit}
+                        sx={{ width: "100%" }}
+                      />
+                    </Grid>
+                    <Grid item xs={6} sm={4}>
+                      <CustomTextfield
+                        label="Quantity"
+                        value={row.quantity}
+                        config={{
+                          field: "quantity",
+                          index: index,
+                          section: "Bottom",
+                        }}
+                        handleEdit={handleEdit}
+                        sx={{ width: "100%" }}
+                      />
+                    </Grid>
+                    <Grid item xs={6} sm={3}>
+                      <CustomTextfield
+                        label="Price"
+                        value={row.price}
+                        type="number"
+                        config={{
+                          field: "price",
+                          index: index,
 
-              <Button
-                variant="outlined"
-                color="custom"
-                sx={{ width: "50px" }}
-                className="add-size-button"
-                onClick={() => addSizeRow("Bottom")}
-              >
-                <AddIcon variant="contained" className="add-size-button" />
-              </Button>
-            </>
-          )}
-        </Grid>
-        {/* Other Fields */}
-        <Grid item xs={12} mb={2}>
-          <ChipTextfield
-            label="Garment Details"
-            predefinedOptions={garmentDetails}
-            handleEdit={handleEdit}
-            config={{ field: "garmentDetails", isRequired: true }}
-            value={productDetails.garmentDetails}
-            sx={{ width: "100%" }}
-          />
-        </Grid>
-        <Grid xs={12} sm={12} mb={2}>
-          <CustomTextfield
-            label="Delivery In"
-            predefinedOptions={deliveryIn}
-            config={{ field: "deliveryIn", isRequired: true }}
-            value={productDetails.deliveryIn}
-            handleEdit={handleEdit}
-            sx={{ width: "100%" }}
-          />
-        </Grid>
-        <Grid xs={12} mb={2}>
-          <CustomTextfield
-            label="priority"
-            value={productDetails.priority}
-            config={{ field: "priority", isRequired: true }}
-            handleEdit={handleEdit}
-            sx={{ width: "100%" }}
-          />
-        </Grid>
-        <Grid sx={{ display: "flex", alignItems: "center", mb: 2 }}>
-          <Checkbox
-            sx={{ marginLeft: "-10px" }}
-            checked={productDetails.bestseller}
-            config={{ field: "bestseller", isRequired: true }}
-            onChange={(e) => handleEdit(e.target.checked, "bestseller")}
-          />
-          <Typography>Is this a bestseller product ?</Typography>
-        </Grid>
-        <Grid xs={4}>
-          <SelectDropdown
-            label="Color"
-            optionList={colorList}
-            config={{ field: "color" }}
-            value={productDetails.color}
-            handleEdit={handleEdit}
-            sx={{ width: "100%" }}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <UploadFiles
-            updateData={handleFileUpload}
-            images={images}
-            isEdit={props.isEdit}
-            file={productDetails.images}
-            acceptedFiles="image/png, image/jpeg"
-            singleFile={false}
-            category="products"
-          />
-        </Grid>
-        <Grid item xs={12} sm={12}>
-          {/* <ColorInputComponent></ColorInputComponent> */}
+                          section: "Bottom",
+                        }}
+                        handleEdit={handleEdit}
+                        sx={{ width: "100%" }}
+                      />
+                    </Grid>
+                    <Grid item xs={6} sm={1}>
+                      <Button
+                        color="custom"
+                        sx={{ width: "50px" }}
+                        className="add-size-button"
+                        onClick={() => removeSizeRow("Bottom", index)}
+                      >
+                        <ClearIcon color="black" />
+                      </Button>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Box
+                        sx={{
+                          borderBottom: "0.5px solid #ccc",
+                          margin: "4px auto 12px auto",
+                        }}
+                      />
+                    </Grid>
+                  </Grid>
+                ))}
+
+                <Button
+                  variant="outlined"
+                  color="custom"
+                  sx={{ width: "50px", marginTop: "10px" }}
+                  className="add-size-button"
+                  onClick={() => addSizeRow("Bottom")}
+                >
+                  <AddIcon variant="contained" className="add-size-button" />
+                </Button>
+              </>
+            )}
+          </Grid>
+          {/* Other Fields */}
+          <Grid item xs={12} mb={1}>
+            <ChipTextfield
+              label="Garment Details"
+              predefinedOptions={garmentDetails}
+              handleEdit={handleEdit}
+              config={{ field: "garmentDetails", isRequired: true }}
+              value={productDetails.garmentDetails}
+              sx={{ width: "100%" }}
+            />
+          </Grid>
+          <Grid item xs={12} sm={12} mb={1}>
+            <CustomTextfield
+              label="Delivery In"
+              predefinedOptions={deliveryIn}
+              config={{ field: "deliveryIn", isRequired: true }}
+              value={productDetails.deliveryIn}
+              handleEdit={handleEdit}
+              sx={{ width: "100%" }}
+            />
+          </Grid>
+          <Grid item xs={12} mb={1}>
+            <CustomTextfield
+              label="priority"
+              value={productDetails.priority}
+              config={{ field: "priority", isRequired: true }}
+              handleEdit={handleEdit}
+              sx={{ width: "100%" }}
+            />
+          </Grid>
+          <Grid item sx={{ display: "flex", alignItems: "center", mb: 0 }}>
+            <Checkbox
+              sx={{ marginLeft: "-10px" }}
+              checked={productDetails.bestseller}
+              config={{ field: "bestseller", isRequired: true }}
+              onChange={(e) => handleEdit(e.target.checked, "bestseller")}
+            />
+            <Typography variant="subtitle1" sx={{ fontWeight: "600" }}>
+              Is this a bestseller product ?
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <SelectDropdown
+              label="Color"
+              optionList={colorList}
+              config={{ field: "color" }}
+              value={productDetails.color}
+              handleEdit={handleEdit}
+              sx={{ width: "100%" }}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <UploadFiles
+              updateData={handleFileUpload}
+              images={images}
+              isEdit={props.isEdit}
+              file={productDetails.images}
+              acceptedFiles="image/png, image/jpeg"
+              singleFile={false}
+              category="products"
+            />
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            {/* <ColorInputComponent></ColorInputComponent> */}
+          </Grid>
         </Grid>
       </DialogContent>
       <DialogActions>

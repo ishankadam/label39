@@ -278,9 +278,9 @@ const CustomAppbar = (props) => {
               margin="normal"
               sx={{
                 display: { xs: "none", md: "flex" },
-                width: "120px",
+                width: "110px",
                 height: "40px",
-                padding: "6px 4px",
+                padding: "6px 0px",
                 margin: "0px 10px !important",
                 fontSize: "14px",
               }} // Add margin to the left for spacing
@@ -297,6 +297,7 @@ const CustomAppbar = (props) => {
               sx={{
                 display: { xs: "none", md: "flex" }, // Hide on mobile
                 opacity: 0.7,
+                p: 1,
               }}
               onClick={handleOpenUserMenu}
             >
@@ -336,7 +337,7 @@ const CustomAppbar = (props) => {
             </Menu>
             <IconButton
               color="inherit"
-              sx={{ opacity: 0.7, paddingRight: { xs: "0", sm: "auto" } }}
+              sx={{ opacity: 0.7, p: 1 }}
               onClick={() => dispatch(openCartDrawer())}
             >
               <Badge
@@ -349,7 +350,7 @@ const CustomAppbar = (props) => {
             </IconButton>
             <IconButton
               color="inherit"
-              sx={{ opacity: 0.7, paddingRight: { xs: "0", sm: "auto" } }}
+              sx={{ opacity: 0.7, padding: "8px 0 8px 8px" }}
               onClick={() => navigate("/contactUs")}
             >
               <Badge

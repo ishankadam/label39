@@ -19,7 +19,7 @@ const theme = createTheme({
             letterSpacing: "1px",
             boxShadow: "none",
             padding: "8px 4px",
-            fontSize: "1rem",
+            fontSize: { xs: "0.8rem", sm: "1rem", md: "1rem" },
             fontFamily: '"Roboto Serif", serif',
             fontWeight: "600 !important",
             width: "100%",

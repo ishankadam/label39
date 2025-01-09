@@ -82,7 +82,8 @@ const CategorySection = () => {
                     width: {
                       xs: "144px", // Small screen
                       sm: "220px", // Desktop
-                      md: "250px", // Desktop
+                      md: "200px", // Desktop
+                      lg: "250px", // Desktop
                     },
                     fontSize: {
                       xs: "13px", // Small screen
