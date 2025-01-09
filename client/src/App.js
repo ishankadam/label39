@@ -17,7 +17,7 @@ import DeliveryForm from "./pages/product/deliveryForm";
 import Dashboard from "./pages/dashboard/dashboard";
 import FindUs from "./pages/homepage/findUs";
 import { Box, Fab, Tooltip } from "@mui/material";
-import { getAllProducts } from "./api";
+import { getAllCategories, getAllProducts } from "./api";
 import TermsAndConditions from "./pages/termsAndCondition/termsAndCondition";
 import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
 import GiftCardModal from "./form/giftCard/giftCard";
@@ -45,7 +45,6 @@ const App = () => {
     isEdit: false,
     data: {},
   });
-  const location = useLocation(); // Access the current route
 
   const handleOpenGiftModal = () => setIsGiftCardModalOpen(true);
   const handleCloseGiftModal = () => setIsGiftCardModalOpen(false);

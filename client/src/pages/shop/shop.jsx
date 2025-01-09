@@ -11,7 +11,6 @@ import {
   ListItemSecondaryAction,
   IconButton,
   Box,
-  Box,
 } from "@mui/material";
 import "../../css/shop.css";
 import ProductCard from "../../components/card/productCard";
