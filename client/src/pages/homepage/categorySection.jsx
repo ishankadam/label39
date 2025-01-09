@@ -15,10 +15,6 @@ const CategorySection = (props) => {
     setAllCategories(categories);
   }, [props.allCategories]);
 
-  useEffect(() => {
-    console.log(allCategories);
-  }, [allCategories]);
-
   return (
     <Box sx={{ marginTop: { xs: "20px", sm: "28px", md: "36px" } }}>
       <Typography

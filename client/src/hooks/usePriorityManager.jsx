@@ -24,7 +24,6 @@ export function usePriorityManager(initialEntities) {
   }, []);
 
   const saveEntities = useCallback(async (items, collection, setData) => {
-    console.log("Saving entities:", items); // Log the entities to be saved
     try {
       if (collection === "products") {
         await updateProductPriorities({

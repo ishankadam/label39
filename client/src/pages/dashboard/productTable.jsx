@@ -24,10 +24,6 @@ const ProductTable = (props) => {
   );
 
   useEffect(() => {
-    console.log(isModalOpen);
-  }, [isModalOpen]);
-
-  useEffect(() => {
     setShowModal(props.showModal);
   }, [props.showModal]);
 

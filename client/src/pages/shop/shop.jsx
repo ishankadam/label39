@@ -87,10 +87,6 @@ const ProductsPage = (props) => {
   };
 
   useEffect(() => {
-    console.log(categories);
-  }, [categories]);
-
-  useEffect(() => {
     const productsPerPage = page === 1 ? 16 : 8;
     const startIdx = page === 1 ? 0 : 16 + (page - 2) * 10;
     const endIdx = startIdx + productsPerPage;
