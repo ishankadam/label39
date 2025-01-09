@@ -194,7 +194,13 @@ const App = () => {
           <Route
             exact
             path="/"
-            element={<Home allProduct={allProduct} country={country} />}
+            element={
+              <Home
+                allProduct={allProduct}
+                allCategories={allCategories}
+                country={country}
+              />
+            }
           />
           <Route
             exact

@@ -1,19 +1,24 @@
-import {
-  Grid2,
-  Card,
-  CardContent,
-  CardMedia,
-  Button,
-  Typography,
-  Pagination,
-  Box,
-} from "@mui/material";
-import React from "react";
+import { Grid2, Card, CardMedia, Button, Typography, Box } from "@mui/material";
+import React, { useEffect, useState } from "react";
 
 import "./../../css/categorySection.css";
-import { categories } from "../../common";
+import { imageUrl } from "../../api";
 
-const CategorySection = () => {
+const CategorySection = (props) => {
+  const [allCategories, setAllCategories] = useState(props.allCategories);
+
+  useEffect(() => {
+    const categories = props.allCategories.map((category) => ({
+      label: category.name,
+      imgSrc: category.image[0],
+    }));
+    setAllCategories(categories);
+  }, [props.allCategories]);
+
+  useEffect(() => {
+    console.log(allCategories);
+  }, [allCategories]);
+
   return (
     <Box sx={{ marginTop: { xs: "20px", sm: "28px", md: "36px" } }}>
       <Typography
@@ -47,76 +52,77 @@ const CategorySection = () => {
           borderRadius: "5px",
         }}
       >
-        {categories.map((category) => (
-          <Grid2 size={{ xs: 6, sm: 6, md: 3 }} key={category.label}>
-            <Box sx={{ margin: "8px" }}>
-              <Card
-                sx={{
-                  margin: "4px",
-                  textAlign: "center",
-                  borderRadius: "3px",
-                  position: "relative",
-                  boxShadow: "none",
-                  border: "1px solid rgb(173, 173, 173)",
-                }}
-              >
-                <CardMedia
-                  component="img"
-                  image={category.imgSrc}
-                  alt={category.label}
+        {allCategories.length > 0 &&
+          allCategories.map((category) => (
+            <Grid2 size={{ xs: 6, sm: 6, md: 3 }} key={category.label}>
+              <Box sx={{ margin: "8px" }}>
+                <Card
                   sx={{
-                    objectFit: "cover",
-                    height: {
-                      xs: "350px",
-                      sm: "460px",
-                      md: "500px ",
-                      lg: "550px",
-                    },
-                  }}
-                />
-                {/* Glassy Dark Overlay */}
-
-                <Button
-                  className="category-btn"
-                  sx={{
-                    width: {
-                      xs: "144px", // Small screen
-                      sm: "220px", // Desktop
-                      md: "250px", // Desktop
-                    },
-                    fontSize: {
-                      xs: "13px", // Small screen
-                      sm: "16px", // Tablet
-                      md: "18px", // Desktop
-                    },
-                    fontWeight: "700",
-                    fontFamily: "'Cinzel', serif",
-                    position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    transform: "translate(-50%, -50%)",
-                    padding: "10px 0px !important",
-                    borderRadius: "2px",
-                    background: "#FAFDFF",
-                    color: "#a16149",
-                    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)", // Add shadow on hover
-
-                    // border: "1px solid #d6d6d6",
-                    transition: "0.2s ease", // Smooth transition for hover effect
-                    "&:hover": {
-                      backgroundColor: "#FAFDFF",
-                      color: "#a16149",
-                      boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
-                      transform: "translate(-50%, -50%) scale(1.1)",
-                    },
+                    margin: "4px",
+                    textAlign: "center",
+                    borderRadius: "3px",
+                    position: "relative",
+                    boxShadow: "none",
+                    border: "1px solid rgb(173, 173, 173)",
                   }}
                 >
-                  {category.label}
-                </Button>
-              </Card>
-            </Box>
-          </Grid2>
-        ))}
+                  <CardMedia
+                    component="img"
+                    image={`${imageUrl}categories/${category.imgSrc}`}
+                    alt={category.label}
+                    sx={{
+                      objectFit: "cover",
+                      height: {
+                        xs: "350px",
+                        sm: "460px",
+                        md: "500px ",
+                        lg: "550px",
+                      },
+                    }}
+                  />
+                  {/* Glassy Dark Overlay */}
+
+                  <Button
+                    className="category-btn"
+                    sx={{
+                      width: {
+                        xs: "144px", // Small screen
+                        sm: "220px", // Desktop
+                        md: "250px", // Desktop
+                      },
+                      fontSize: {
+                        xs: "13px", // Small screen
+                        sm: "16px", // Tablet
+                        md: "18px", // Desktop
+                      },
+                      fontWeight: "700",
+                      fontFamily: "'Cinzel', serif",
+                      position: "absolute",
+                      top: "50%",
+                      left: "50%",
+                      transform: "translate(-50%, -50%)",
+                      padding: "10px 0px !important",
+                      borderRadius: "2px",
+                      background: "#FAFDFF",
+                      color: "#a16149",
+                      boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)", // Add shadow on hover
+
+                      // border: "1px solid #d6d6d6",
+                      transition: "0.2s ease", // Smooth transition for hover effect
+                      "&:hover": {
+                        backgroundColor: "#FAFDFF",
+                        color: "#a16149",
+                        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+                        transform: "translate(-50%, -50%) scale(1.1)",
+                      },
+                    }}
+                  >
+                    {category.label}
+                  </Button>
+                </Card>
+              </Box>
+            </Grid2>
+          ))}
       </Grid2>
 
       {/* <hr className="footer-line" /> */}

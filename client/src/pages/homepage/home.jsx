@@ -13,6 +13,7 @@ import { getAllTestimonials } from "../../api";
 
 const Home = (props) => {
   const [allProduct, setAllProduct] = useState(props.allProduct || []);
+  const [allCategories, setAllCategories] = useState(props.allCategories);
   const [bestsellers, setBestsellers] = useState([]);
   const [asSeenOn, setAsSeenOn] = useState([]);
   const [shopByVideos, setshopByVideos] = useState([]);
@@ -25,6 +26,10 @@ const Home = (props) => {
   useEffect(() => {
     setAllProduct(props.allProduct);
   }, [props.allProduct]);
+
+  useEffect(() => {
+    setAllCategories(props.allCategories);
+  }, [props.allCategories]);
 
   useEffect(() => {
     if (allProduct.length > 0) {
@@ -51,7 +56,7 @@ const Home = (props) => {
   return (
     <div>
       <MainCorousel></MainCorousel>
-      <CategorySection></CategorySection>
+      <CategorySection allCategories={allCategories}></CategorySection>
       <FeaturedSection
         shopByVideos={shopByVideos}
         handleViewProduct={handleViewProduct}

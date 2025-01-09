@@ -15,30 +15,6 @@ const ManageUsers = (props) => {
     setShowModal(props.showModal);
   }, [props.showModal]);
 
-  const handleOpenModal = () => {
-    props.setShowModal({
-      show: true,
-      isEdit: false,
-      data: {},
-    });
-  };
-
-  const handleDeleteTestimonial = (row, index) => {
-    props.setLoading(true);
-    // deleteTestimonial({
-    //   testimonial: row,
-    //   setLoading: props.setLoading,
-    //   setTestimonials: props.setTestimonials,
-    // });
-  };
-
-  const handleOnClickView = (row) => {
-    props.setShowModal({
-      show: true,
-      isEdit: true,
-      data: row,
-    });
-  };
   const colDef = [
     {
       id: "name",
@@ -68,21 +44,21 @@ const ManageUsers = (props) => {
       type: "text",
       align: "left",
     },
-    {
-      id: "notification-icon",
-      label: "",
-      key: "editAction",
-      type: "action",
-      align: "center",
-      editId: "edit-icon",
-      deleteId: "delete-icon",
-      commentId: "comment-icon",
-      //   editFunc: (row, index) => handleOnClickView(row, true, index),
-      //   deleteFunc: (row, index) => handleDeleteTestimonial(row, index),
-      isDisable: true,
-      isEdit: true,
-      page: "JobListing",
-    },
+    // {
+    //   id: "notification-icon",
+    //   label: "",
+    //   key: "editAction",
+    //   type: "action",
+    //   align: "center",
+    //   editId: "edit-icon",
+    //   deleteId: "delete-icon",
+    //   commentId: "comment-icon",
+    //   //   editFunc: (row, index) => handleOnClickView(row, true, index),
+    //   //   deleteFunc: (row, index) => handleDeleteTestimonial(row, index),
+    //   isDisable: true,
+    //   isEdit: true,
+    //   page: "JobListing",
+    // },
   ];
 
   const [isEditing, setIsEditing] = useState(false);

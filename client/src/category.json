@@ -4,7 +4,7 @@
     "name": "SHIRTS and Dresses",
     "description": "A variety of stylish shirts for all occasions.",
     "image": "C-shirts.jpeg",
-    "order": 1,
+    "priority": 1,
     "isActive": true,
     "value": "shirts"
   },
@@ -13,7 +13,7 @@
     "name": "CO-ORDS",
     "description": "Trendy co-ord sets for a coordinated look.",
     "image": "C-cord.jpeg",
-    "order": 2,
+    "priority": 2,
     "isActive": true,
     "value": "cord"
   },
@@ -22,7 +22,7 @@
     "name": "KURTAS",
     "description": "Elegant suits for formal and semi-formal events.",
     "image": "C-kurta.jpeg",
-    "order": 3,
+    "priority": 3,
     "isActive": true,
     "value": "kurtas"
   },
@@ -31,7 +31,7 @@
     "name": "FESTIVE",
     "description": "Festive wear for celebrations and special occasions.",
     "image": "C-festive.jpeg",
-    "order": 4,
+    "priority": 4,
     "isActive": true,
     "value": "festive"
   }

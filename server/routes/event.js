@@ -1,5 +1,4 @@
 const express = require("express");
-const cors = require("cors");
 const router = express.Router();
 const controller = require("../controller/controllers");
 
@@ -20,6 +19,8 @@ router.put(
 );
 
 router.put("/product/:id/disable", controller.toggleProductStatus);
+
+router.put("/update-priorities", controller.updateProductPriorities);
 
 // Routes for categories
 router.get("/getCategories", controller.get_all_categories);
@@ -72,7 +73,7 @@ router.post("/addToCart", controller.add_to_cart);
 router.post("/getCartItems", controller.getCartItems);
 
 // Error handling middleware
-router.use((error, req, res, next) => {
+router.use((error, _req, res) => {
   const status = error.status || 500;
   const message = error.message || "Something went wrong.";
   res.status(status).json({ message: message });

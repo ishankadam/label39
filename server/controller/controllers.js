@@ -159,9 +159,13 @@ const get_all_products = async (req, res) => {
     // Fetch all products from the database
     let products;
     if (isActive) {
-      products = await Product.find({ isActive: true }).select("-_id");
+      products = await Product.find({ isActive: true }).select("-_id").sort({
+        priority: 1,
+      });
     } else {
-      products = await Product.find({}).select("-_id");
+      products = await Product.find({}).select("-_id").sort({
+        priority: 1,
+      });
     }
 
     // If the selected country is INR, no need to convert
@@ -419,21 +423,6 @@ const edit_product = async (req, res) => {
   try {
     const images = req.files.map((file) => file.filename);
 
-    // Destructure productId and prepare updated product data
-    // const imagePath = path.join(
-    //   parentDir,
-    //   "uploads",
-    //   productToBeEdited.category,
-    //   productToBeEdited.images[0]
-    // );
-
-    // fs.unlink(imagePath, (err) => {
-    //   if (err) {
-    //     console.error("Error deleting image file:", err);
-    //   } else {
-    //     console.log("Image file deleted successfully");
-    //   }
-    // });
     // Check if productId is defined
     if (!productId) {
       return res.status(400).send({ error: "productId is required" });
@@ -649,6 +638,43 @@ const get_all_orders = async (_req, res) => {
   }
 };
 
+const updateProductPriorities = async (req, res) => {
+  try {
+    // Get the list of products with their updated priorities from the request body
+    const { products } = req.body; // Assuming priorities is an array of objects like [{ productId: 1, priority: 2 }, ...]
+    console.log(products);
+    if (!products || !Array.isArray(products) || products.length === 0) {
+      return res
+        .status(400)
+        .send({ error: "Priorities array is required and cannot be empty" });
+    }
+
+    // Iterate through the priorities and update each product
+    const updatePromises = products.map(async (item) => {
+      const { productId, priority } = item;
+
+      if (!productId || typeof priority !== "number") {
+        throw new Error("Invalid productId or priority in the request");
+      }
+
+      // Update the product with the new priority
+      await Product.updateOne({ productId: productId }, { $set: { priority } });
+    });
+
+    // Wait for all updates to complete
+    await Promise.all(updatePromises);
+
+    // Send updated product list
+    const allProducts = await Product.find({}, { _id: 0 }).sort({
+      priority: 1,
+    });
+    res.send(allProducts); // Return the list of all products
+  } catch (error) {
+    console.error("Error in update_product_priorities:", error);
+    res.status(400).send({ error: error.message });
+  }
+};
+
 module.exports = {
   get_all_products,
   create_product,
@@ -670,4 +696,5 @@ module.exports = {
   getCartItems,
   verifyPayment,
   get_all_orders,
+  updateProductPriorities,
 };

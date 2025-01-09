@@ -1,4 +1,4 @@
-import { prepareOrderDetailsMessage, urlToFile } from "./common";
+import { urlToFile } from "./common";
 
 const {
   REACT_APP_API_URL,
@@ -611,6 +611,27 @@ export const getAllOrders = async ({ setAllOrders }) => {
     return data;
   } catch (err) {
     console.error("Error fetching orders:", err);
+    throw err;
+  }
+};
+
+export const updateProductPriorities = async ({ products, setProducts }) => {
+  try {
+    const response = await fetch(`${apiUrl}/update-priorities`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ products }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to update product priorities");
+    }
+
+    const data = await response.json();
+    setProducts(data);
+    return data;
+  } catch (err) {
+    console.error("Error updating product priorities:", err);
     throw err;
   }
 };

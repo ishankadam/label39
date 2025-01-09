@@ -3,9 +3,18 @@ import CustomTable from "../../components/custom-table/customTable";
 import { categories } from "../../common";
 import AddEditProductModal from "../../form/addProduct/addProduct";
 import { toggleProductStatus } from "../../api";
+import { PriorityModal } from "./updatePriority";
+import { Button, Snackbar } from "@mui/material";
+
+const fields = [
+  { key: "images", label: "Image", type: "image" },
+  { key: "name", label: "Name", type: "text" },
+];
 
 const ProductTable = (props) => {
   const [products, setProducts] = useState(props.products || []);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
   const [showModal, setShowModal] = useState(
     props.showModal || {
       show: false,
@@ -13,6 +22,10 @@ const ProductTable = (props) => {
       data: {},
     }
   );
+
+  useEffect(() => {
+    console.log(isModalOpen);
+  }, [isModalOpen]);
 
   useEffect(() => {
     setShowModal(props.showModal);
@@ -45,6 +58,30 @@ const ProductTable = (props) => {
     });
   };
 
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setIsSnackbarOpen(true);
+  };
+
+  const renderField = (item, field) => {
+    switch (field.type) {
+      case "image":
+        return (
+          <img
+            src={`/path/to/images/${item[field.key][0]}`}
+            alt={item.name}
+            style={{ width: 50, height: 50, objectFit: "cover" }}
+          />
+        );
+      case "boolean":
+        return item[field.key] ? "Yes" : "No";
+      case "number":
+      case "text":
+      default:
+        return item[field.key];
+    }
+  };
+
   const colDef = [
     {
       id: "image",
@@ -71,7 +108,7 @@ const ProductTable = (props) => {
     {
       id: "deliveryIn",
       label: "Delivery In",
-      key: "deliveryIn",
+      key: "delivery In",
       type: "text",
       align: "left",
     },
@@ -144,6 +181,18 @@ const ProductTable = (props) => {
   ];
   return (
     <>
+      <Button
+        variant="contained"
+        sx={{
+          width: "auto",
+          padding: "10px",
+          marginBottom: "10px",
+        }}
+        color="custom"
+        onClick={() => setIsModalOpen(true)}
+      >
+        Update Product Priorities
+      </Button>
       <CustomTable
         colDef={colDef}
         rowData={products}
@@ -165,6 +214,27 @@ const ProductTable = (props) => {
           setLoading={props.setLoading}
           setProducts={props.setProducts}
           categories={props.categories}
+        />
+      )}
+      {isModalOpen && (
+        <PriorityModal
+          open={isModalOpen}
+          onClose={handleCloseModal}
+          items={products}
+          fields={fields}
+          renderField={renderField}
+          setData={props.setProducts}
+          folder="products"
+          idKey="productId"
+          collection="products"
+        />
+      )}
+      {isSnackbarOpen && (
+        <Snackbar
+          open={isSnackbarOpen}
+          autoHideDuration={6000}
+          onClose={() => setIsSnackbarOpen(false)}
+          message="Product priorities saved successfully"
         />
       )}
     </>

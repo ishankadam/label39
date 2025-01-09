@@ -24,7 +24,7 @@ const categorySchema = new mongoose.Schema({
     type: Array,
     required: true,
   },
-  order: {
+  priority: {
     type: Number,
   },
   isActive: { type: Boolean, default: true },
