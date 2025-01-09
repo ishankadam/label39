@@ -73,10 +73,11 @@ const ProfilePage = () => {
     container: {
       // padding: "24px",
       maxWidth: "800px",
-      margin: "auto",
+      margin: "20px auto",
       minHeight: "100vh",
     },
     card: {
+      margin: "10px",
       borderRadius: "5px",
       boxShadow:
         "0px 1px 3px 0px rgba(0, 0, 0, 0.02), 0px 0px 0px 1px rgba(27, 31, 35, 0.15)",
@@ -122,7 +123,10 @@ const ProfilePage = () => {
   };
 
   return (
-    <Box style={styles.container}>
+    <Box
+      style={styles.container}
+      sx={{ pb: { xs: "170px", sm: "170px", md: "40px" } }}
+    >
       <Card style={styles.card}>
         <CardContent>
           <Box display="flex" flexDirection="column" alignItems="center" mb={3}>
@@ -175,9 +179,22 @@ const ProfilePage = () => {
               >
                 <Typography style={{ ...styles.label }}>Past Orders</Typography>
               </AccordionSummary>
-              <AccordionDetails>
+              <AccordionDetails
+                sx={{
+                  background: "#F9F9F9",
+                }}
+              >
                 {pastOrders.map((order) => (
-                  <Box key={order.orderId} mb={2} mt={2}>
+                  <Box
+                    key={order.orderId}
+                    mt={2}
+                    sx={{
+                      background: "#fff",
+                      padding: 2,
+                      borderRadius: "5px",
+                      border: "1px solid #ccc",
+                    }}
+                  >
                     <Typography
                       variant="subtitle2"
                       style={{ ...styles.label }}
@@ -266,7 +283,140 @@ const ProfilePage = () => {
                         borderRadius: "4px",
                         color: "#666",
                         textAlign: "left",
-                        backgroundColor: "#f9f9f9",
+                        backgroundColor: "#F7ECE9",
+                      }}
+                    >
+                      <Typography
+                        variant="subtitle1"
+                        sx={{
+                          fontFamily: "Roboto Serif, serif",
+                          fontWeight: "500",
+                        }}
+                      >
+                        Total :
+                      </Typography>
+                      <Typography
+                        variant="subtitle1"
+                        sx={{
+                          fontFamily: "Roboto Serif, serif",
+                          fontWeight: "600",
+                        }}
+                      >
+                        ₹
+                        {order.cartItems.reduce(
+                          (total, item) => total + item.price * item.quantity,
+                          0
+                        )}
+                      </Typography>
+                    </div>
+                  </Box>
+                ))}
+              </AccordionDetails>
+              <AccordionDetails
+                sx={{
+                  background: "#F9F9F9",
+                }}
+              >
+                {pastOrders.map((order) => (
+                  <Box
+                    key={order.orderId}
+                    mt={2}
+                    sx={{
+                      background: "#fff",
+                      padding: 2,
+                      borderRadius: "5px",
+                      border: "1px solid #ccc",
+                    }}
+                  >
+                    <Typography
+                      variant="subtitle2"
+                      style={{ ...styles.label }}
+                      sx={{ mb: 2 }}
+                    >
+                      Order ID: {order.orderId}
+                    </Typography>
+                    {order.paymentInfo.status === "success" ? (
+                      <Alert
+                        sx={{
+                          fontFamily: "Roboto Serif, serif",
+                          fontWeight: "500",
+                        }}
+                        icon={<CheckIcon fontSize="inherit" />}
+                        severity="success"
+                      >
+                        Payment Status : Success
+                      </Alert>
+                    ) : order.paymentInfo.status === "failed" ? (
+                      <Alert
+                        severity="error"
+                        sx={{
+                          fontFamily: "Roboto Serif, serif",
+                          fontWeight: "500",
+                        }}
+                      >
+                        Payment Status : Failed
+                      </Alert>
+                    ) : null}
+
+                    <Alert
+                      severity="info"
+                      sx={{
+                        mt: 2,
+                        fontFamily: "Roboto Serif, serif",
+                        fontWeight: "500",
+                      }}
+                    >
+                      Payment Method: {order.paymentInfo.method}
+                    </Alert>
+
+                    <List>
+                      {order.cartItems.map((item) => (
+                        <ListItem
+                          key={item.productId}
+                          style={styles.orderItem}
+                          sx={{ paddingLeft: 0 }}
+                        >
+                          <ListItemText
+                            sx={{ mb: 2 }}
+                            variant="subtitle2"
+                            primary={
+                              <span
+                                style={{
+                                  fontSize: "13px",
+                                  fontFamily: "Roboto Serif, serif",
+                                  fontWeight: "500",
+                                  color: "#333",
+                                }}
+                              >
+                                {item.name}
+                              </span>
+                            }
+                            secondary={
+                              <span
+                                style={{
+                                  fontSize: "12px",
+                                  fontFamily: "Roboto Serif, serif",
+                                }}
+                              >
+                                {`Quantity: ${item.quantity}, Price: ₹${item.price}, Size: Upper - ${item.sizes.Upper}, Bottom - ${item.sizes.Bottom}`}
+                              </span>
+                            }
+                          />
+                        </ListItem>
+                      ))}
+                    </List>
+                    <div
+                      // style={styles.value}
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        width: "100%",
+                        border: "1px solid #ddd",
+                        padding: "8px",
+                        borderRadius: "4px",
+                        color: "#666",
+                        textAlign: "left",
+                        backgroundColor: "#F7ECE9",
                       }}
                     >
                       <Typography
