@@ -41,13 +41,24 @@ export const PriorityModal = ({
 
   const handlePriorityChange = (itemId, newPriority) => {
     const priority = parseInt(newPriority, 10);
+
     if (!isNaN(priority) && priority > 0) {
       setItems((prevItems) => {
-        const updatedItems = prevItems.map((item) =>
-          item[idKey] === itemId ? { ...item, priority } : item
-        );
+        const updatedItems = prevItems.map((item) => {
+          if (item[idKey] === itemId) {
+            return { ...item, priority };
+          }
+
+          if (item.priority >= priority) {
+            return { ...item, priority: item.priority + 1 };
+          }
+
+          return item;
+        });
+
         return updatedItems.sort((a, b) => a.priority - b.priority);
       });
+
       setEditingId(null);
     }
   };
