@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Grid2, Typography, Link, Box } from "@mui/material";
 // import { Twitter, Facebook, Instagram, LinkedIn } from "@mui/icons-material";
 import "../../css/footer.css";
-import textile from "../../assets/texttile.jpg";
+import textile from "../../assets/2.png";
 import textile2 from "../../assets/texttile2.jpeg";
 
 import woven from "../../assets/woven.png";

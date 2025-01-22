@@ -28,7 +28,7 @@ import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import WhatsAppButton from "./components/actionButton/whatsappActionButton";
 import { whatsappQueryMessage } from "./common";
 import ProfilePage from "./pages/profile/profile";
-
+import ClientDiaryPage from "./pages/client-diary/clientDiaryPage";
 const App = () => {
   const [cartDetails, setCartDetails] = useState({
     open: false,
@@ -249,6 +249,7 @@ const App = () => {
             element={<TermsAndConditions />}
           />
           <Route exact path="/profile" element={<ProfilePage />} />
+          <Route exact path="/client-diary" element={<ClientDiaryPage />} />
         </Routes>
         <CustomDrawer
           cartDetails={cartDetails}
