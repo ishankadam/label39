@@ -29,6 +29,7 @@ import AddEditProductModal from "../../form/addProduct/addProduct";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import ConfirmationModal from "../modal/confirmationModal";
 import ViewOrders from "../../pages/dashboard/viewOrders";
+import ViewOrdersModal from "../../pages/dashboard/viewProductModal";
 const CustomTable = (props) => {
   const [rowData, setRowData] = useState(props.rowData);
   const [page, setPage] = React.useState(0);
@@ -414,11 +415,11 @@ const CustomTable = (props) => {
         ></AddEditProductModal>
       ) : null}
       {showViewOrders.open ? (
-        <ViewOrders
+        <ViewOrdersModal
           open={showViewOrders.open}
           data={showViewOrders.data}
           setShowModal={setShowViewOrders}
-        ></ViewOrders>
+        ></ViewOrdersModal>
       ) : null}
     </Paper>
   );
