@@ -62,10 +62,18 @@ const ViewProductModal = (props) => {
       if (upperSize) selectedPrice = upperSize.price;
     } else if (selectedSizes.Bottom) {
       // Find the price for the selected Bottom size
+      const upperSize = product.sizes.Upper?.find(
+        (item) => item.size === selectedSizes.Upper
+      );
       const bottomSize = product.sizes.Bottom?.find(
         (item) => item.size === selectedSizes.Bottom
       );
-      if (bottomSize) selectedPrice = bottomSize.price;
+      console.log(upperSize, bottomSize);
+      if (bottomSize.price > upperSize.price) {
+        selectedPrice = bottomSize.price;
+      } else {
+        selectedPrice = upperSize.price;
+      }
     }
     setPrice(selectedPrice || product.price); // Default to 0 if no size is selected
     setCartProduct((prev) => ({
@@ -80,16 +88,17 @@ const ViewProductModal = (props) => {
   }, [product.price]);
 
   const handleAddToCart = () => {
+    console.log(cartProduct);
     const newCartProduct = {
-      productId: cartProduct.cartProductId,
+      productId: cartProduct.productId,
       name: cartProduct.name,
       price: cartProduct.price,
       quantity: 1,
       deliveryIn: cartProduct.deliveryIn,
       images: [cartProduct.images[0]],
       sizes: {
-        Upper: "",
-        Bottom: "",
+        Upper: cartProduct.sizes.Upper,
+        Bottom: cartProduct.sizes.Bottom,
       },
     };
     dispatch(addToCart(newCartProduct));

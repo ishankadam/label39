@@ -1,6 +1,5 @@
 import React from "react";
 import CheckoutForm from "./checkoutForm";
-import CheckoutProducts from "./checkoutProducts";
 import { Box } from "@mui/material";
 
 const Checkout = () => {

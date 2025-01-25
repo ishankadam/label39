@@ -13,6 +13,7 @@ var _ = require("lodash");
 const { createJSONToken } = require("../auth");
 const orders = require("../schema/orders");
 const crypto = require("crypto");
+const ClientDiaries = require("../schema/clientDiaries");
 
 const storage = multer.diskStorage({
   destination: (req, _file, cb) => {
@@ -24,6 +25,8 @@ const storage = multer.diskStorage({
         category = "categories";
       } else if (req.body.testimonial) {
         category = "testimonial";
+      } else if (req.body.clientDiaries) {
+        category = "clientDiaries";
       } else {
         return cb(
           new Error(
@@ -630,7 +633,6 @@ const getCartItems = async (req, res) => {
 const get_all_orders = async (_req, res) => {
   try {
     const ordersData = await orders.find({}).select("-_id -__v"); // Exclude _id and __v fields
-    console.log(ordersData);
     res.status(200).json(ordersData); // Send the result as JSON
   } catch (error) {
     console.log(error);
@@ -642,7 +644,6 @@ const updateProductPriorities = async (req, res) => {
   try {
     // Get the list of products with their updated priorities from the request body
     const { products } = req.body; // Assuming priorities is an array of objects like [{ productId: 1, priority: 2 }, ...]
-    console.log(products);
     if (!products || !Array.isArray(products) || products.length === 0) {
       return res
         .status(400)
@@ -675,6 +676,51 @@ const updateProductPriorities = async (req, res) => {
   }
 };
 
+const create_client_diaries = async (req, res) => {
+  try {
+    // Parse the products data from the request body
+    const clientDiariesData = JSON.parse(req.body.clientDiaries); // Assuming it's a JSON string
+    const images = req.files || []; // Safely get images
+    // Validate the productsData structure
+    if (typeof clientDiariesData !== "object" || clientDiariesData === null) {
+      return res.status(400).send({
+        error: "Invalid data format. Expecting a Client Diaries object.",
+      });
+    }
+    const image =
+      Array.isArray(images) && images.length > 0
+        ? images[0].filename
+        : images.filename;
+
+    // Generate a unique product ID for each product
+    const newClientDiariesData = new ClientDiaries({
+      clientDiariesId: Math.floor(Math.random() * 9000000000) + 1,
+      name: clientDiariesData.name,
+      image: image,
+    });
+    console.log(newClientDiariesData);
+    await newClientDiariesData.save();
+
+    const allCategory = await ClientDiaries.find({});
+    res.send(allCategory);
+  } catch (error) {
+    console.log("Error while creating client diaries:", error);
+    res
+      .status(500)
+      .send({ error: "An error occurred while creating client diaries." });
+  }
+};
+
+const get_all_client_diaries = async (_req, res) => {
+  try {
+    const clientDiaries = await ClientDiaries.find({}).select("-_id -__v"); // Exclude _id and __v fields
+    res.status(200).json(clientDiaries); // Send the result as JSON
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Error fetching events", error });
+  }
+};
+
 module.exports = {
   get_all_products,
   create_product,
@@ -697,4 +743,6 @@ module.exports = {
   verifyPayment,
   get_all_orders,
   updateProductPriorities,
+  create_client_diaries,
+  get_all_client_diaries,
 };

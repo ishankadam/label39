@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 
 import {
   getAllCategories,
+  getAllClientDiaries,
   getAllOrders,
   getAllProducts,
   getAllTestimonials,
@@ -30,6 +31,7 @@ import ManageUsers from "./manageUsers";
 import SelectDropdown from "../../components/select-dropdown/selectDropdown";
 import ManageOrders from "./manageOrders";
 import ProfilePage from "../profile/profile";
+import ClientsDiaries from "./clientsDiaries";
 const drawerWidth = 180;
 
 const openedMixin = (theme) => ({
@@ -120,10 +122,13 @@ const Dashboard = (props) => {
   const [filterDataProducts, setFilterDataProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
+  const [clientDiaries, setClientDiaries] = useState([]);
+
   const [users, setUsers] = useState([]);
   const [productsloading, setProductsLoading] = useState(false);
   const [categoryloading, setCategoryLoading] = useState(false);
   const [testimonialsloading, setTestimonialsLoading] = useState(false);
+  const [, setClientDiariesLoading] = useState(false);
   const [usersloading, setUsersLoading] = useState(false);
   const [tabValue, setTabValue] = React.useState("one");
   const [filterOptions, setFilterOptions] = useState({
@@ -166,6 +171,10 @@ const Dashboard = (props) => {
     getAllTestimonials({ setTestimonials, setLoading: setTestimonialsLoading });
     getAllUsers({ setUsers, setLoading: setUsersLoading });
     getAllOrders({ setAllOrders });
+    getAllClientDiaries({
+      setClientDiaries,
+      setLoading: setClientDiariesLoading,
+    });
   }, []);
 
   const handleOpenForm = (page) => {
@@ -437,6 +446,12 @@ const Dashboard = (props) => {
             <ManageOrders allOrders={allOrders} page="Orders" />
           )}
           {tabValue === "six" && <ProfilePage />}
+          {tabValue === "seven" && (
+            <ClientsDiaries
+              clientDiaries={clientDiaries}
+              setClientDiaries={setClientDiaries}
+            />
+          )}
         </Box>
       </Box>
     </Box>

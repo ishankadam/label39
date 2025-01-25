@@ -202,7 +202,9 @@ const CheckoutForm = (props) => {
                       fontSize: { xs: "11px", sm: "12px", md: "13px" },
                     }}
                   >
-                    Size: {item.size}
+                    {`Size: Upper - ${item.sizes.Upper} | ${
+                      item.sizes.Bottom ? `Bottom - ${item.sizes.Bottom}` : ""
+                    }`}
                   </Typography>
                 </Box>
 
@@ -271,7 +273,7 @@ const CheckoutForm = (props) => {
                   fontWeight: "500",
                   fontSize: { xs: "11px", sm: "12px", md: "14px" },
                 }}
-              >{`Subtotal . ${cartItems.length} items`}</Typography>
+              >{`Subtotal: (${cartItems.length} items)`}</Typography>
               <Typography
                 sx={{
                   fontFamily: "'Roboto Serif', serif",
@@ -746,7 +748,9 @@ const CheckoutForm = (props) => {
                 fontWeight: "500",
                 fontSize: { xs: "11px", sm: "12px", md: "14px" },
               }}
-            >{`Subtotal . ${cartItems.length} items`}</Typography>
+            >{`Subtotal (${cartItems.length} ${
+              cartItems.length > 1 ? "items" : "item"
+            })`}</Typography>
             <Typography
               sx={{
                 fontFamily: "'Roboto Serif', serif",

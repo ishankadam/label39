@@ -72,6 +72,15 @@ router.post("/addToCart", controller.add_to_cart);
 // Get Cart Items
 router.post("/getCartItems", controller.getCartItems);
 
+//create client diaries
+router.post(
+  "/createClientDiaries",
+  controller.upload.array("image"),
+  controller.create_client_diaries
+);
+// get all client diaries
+router.get("/getClientDiaries", controller.get_all_client_diaries);
+
 // Error handling middleware
 router.use((error, _req, res) => {
   const status = error.status || 500;

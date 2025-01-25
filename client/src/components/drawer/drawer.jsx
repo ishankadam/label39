@@ -12,7 +12,6 @@ import CustomTextfield from "../textfield/customTextfield";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import {
-  clearCart,
   closeCartDrawer,
   removeFromCart,
   updateQuantity,
@@ -21,7 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { imageUrl } from "../../api";
 import { useNavigate } from "react-router-dom";
 
-const CustomDrawer = (props) => {
+const CustomDrawer = () => {
   const [displayNote, setDisplayNote] = useState(false);
   const openDrawer = useSelector((state) => state.cart.openCartDrawer);
   const cartItems = useSelector((state) => state.cart.items);
@@ -35,10 +34,6 @@ const CustomDrawer = (props) => {
     dispatch(updateQuantity({ productId, operation }));
   };
 
-  const handleClearCart = () => {
-    dispatch(clearCart());
-  };
-
   const handleOrderNote = () => {
     setDisplayNote(!displayNote);
   };
@@ -46,6 +41,8 @@ const CustomDrawer = (props) => {
   const onClose = () => {
     dispatch(closeCartDrawer());
   };
+
+  console.log(cartItems);
 
   return (
     <div>
@@ -91,107 +88,118 @@ const CustomDrawer = (props) => {
           <Box sx={{ overflowY: "scroll", height: "80%" }}>
             {/* Cart item */}
             {cartItems.length > 0 ? (
-              cartItems.map((item) => (
-                <Box
-                  key={item.id}
-                  sx={{
-                    display: "flex",
-                    mt: 2,
-                    mb: 2,
-                  }}
-                >
-                  <img
-                    src={`${imageUrl}products/${item.images[0]}`}
-                    alt={item.name}
-                    style={{
-                      aspectRatio: "2:3",
-                      width: "120px",
-                      height: "180px",
-                      marginRight: 16,
+              cartItems.map((item) => {
+                console.log(item);
+                return (
+                  <Box
+                    key={item.id}
+                    sx={{
+                      display: "flex",
+                      mt: 2,
+                      mb: 2,
                     }}
-                  />
-                  <Box>
-                    <Typography
-                      sx={{
-                        fontFamily: "'Roboto Serif', serif",
-                        fontWeight: "400",
-                        fontSize: { xs: "11px", sm: "12px", md: "16px" },
-                        mb: 1,
+                  >
+                    <img
+                      src={`${imageUrl}products/${item.images[0]}`}
+                      alt={item.name}
+                      style={{
+                        aspectRatio: "2:3",
+                        width: "120px",
+                        height: "180px",
+                        marginRight: 16,
                       }}
-                    >
-                      {item.name}
-                    </Typography>
-                    <Typography
-                      sx={{
-                        fontFamily: "'Roboto Serif', serif",
-                        fontWeight: "400",
-                        fontSize: { xs: "11px", sm: "12px", md: "15px" },
-                        mb: 1,
-                      }}
-                      color="textSecondary"
-                    >
-                      Size : {item.size}
-                    </Typography>
-                    <Typography
-                      sx={{
-                        fontFamily: "'Roboto Serif', serif",
-                        fontWeight: "400",
-                        fontSize: { xs: "11px", sm: "12px", md: "15px" },
-                        mb: 1,
-                      }}
-                      color="textSecondary"
-                    >{`Rs. ${item.price}`}</Typography>
-                    <IconButton
-                      onClick={() =>
-                        handleUpdateQuantity(item.productId, "decrease")
-                      }
-                      size="small"
-                      sx={{
-                        border: "1px solid #ccc", // Outlined style
-                        borderRadius: "4px",
-                        padding: "4px",
-                        mr: 1,
-                      }}
-                    >
-                      <RemoveIcon />
-                    </IconButton>
-                    <Typography variant="body1" component="span" sx={{ mx: 1 }}>
-                      {item.quantity}
-                    </Typography>
-                    <IconButton
-                      onClick={() =>
-                        handleUpdateQuantity(item.productId, "increase")
-                      }
-                      size="small"
-                      sx={{
-                        border: "1px solid #ccc", // Outlined style
-                        borderRadius: "4px",
-                        padding: "4px",
-                        ml: 1,
-                      }}
-                    >
-                      <AddIcon />
-                    </IconButton>
-                    {/* <br /> */}
-                    <Button
-                      // onClick={() => handleRemoveItem(item.id)}
-                      color="textSecondary"
-                      size="small"
-                      sx={{
-                        ml: 2,
-                        fontFamily: "'Roboto Serif', serif",
-                        fontWeight: "400",
-                        fontSize: { xs: "11px", sm: "12px", md: "13px" },
-                        mt: 1,
-                        textDecoration: "underline !important",
-                      }}
-                      onClick={() => handleRemoveItem(item.productId)}
-                    >
-                      Remove
-                    </Button>
+                    />
+                    <Box>
+                      <Typography
+                        sx={{
+                          fontFamily: "'Roboto Serif', serif",
+                          fontWeight: "400",
+                          fontSize: { xs: "11px", sm: "12px", md: "16px" },
+                          mb: 1,
+                        }}
+                      >
+                        {item.name}
+                      </Typography>
+                      <Typography
+                        sx={{
+                          fontFamily: "'Roboto Serif', serif",
+                          fontWeight: "400",
+                          fontSize: { xs: "11px", sm: "12px", md: "15px" },
+                          mb: 1,
+                        }}
+                        color="textSecondary"
+                      >
+                        {`Size: Upper - ${item.sizes.Upper} | ${
+                          item.sizes.Bottom
+                            ? `Bottom - ${item.sizes.Bottom}`
+                            : ""
+                        }`}
+                      </Typography>
+                      <Typography
+                        sx={{
+                          fontFamily: "'Roboto Serif', serif",
+                          fontWeight: "400",
+                          fontSize: { xs: "11px", sm: "12px", md: "15px" },
+                          mb: 1,
+                        }}
+                        color="textSecondary"
+                      >{`Rs. ${item.price}`}</Typography>
+                      <IconButton
+                        onClick={() =>
+                          handleUpdateQuantity(item.productId, "decrease")
+                        }
+                        size="small"
+                        sx={{
+                          border: "1px solid #ccc", // Outlined style
+                          borderRadius: "4px",
+                          padding: "4px",
+                          mr: 1,
+                        }}
+                      >
+                        <RemoveIcon />
+                      </IconButton>
+                      <Typography
+                        variant="body1"
+                        component="span"
+                        sx={{ mx: 1 }}
+                      >
+                        {item.quantity}
+                      </Typography>
+                      <IconButton
+                        onClick={() =>
+                          handleUpdateQuantity(item.productId, "increase")
+                        }
+                        size="small"
+                        sx={{
+                          border: "1px solid #ccc", // Outlined style
+                          borderRadius: "4px",
+                          padding: "4px",
+                          ml: 1,
+                        }}
+                      >
+                        <AddIcon />
+                      </IconButton>
+                      {/* <br /> */}
+                      <Button
+                        // onClick={() => handleRemoveItem(item.id)}
+                        color="textSecondary"
+                        size="small"
+                        sx={{
+                          ml: 2,
+                          fontFamily: "'Roboto Serif', serif",
+                          fontWeight: "400",
+                          fontSize: { xs: "11px", sm: "12px", md: "13px" },
+                          mt: 1,
+                          textDecoration: "underline !important",
+                        }}
+                        onClick={() => handleRemoveItem(item.productId)}
+                      >
+                        Remove
+                      </Button>
+                    </Box>
                   </Box>
-                </Box>
-              ))
+                );
+              })
             ) : (
               <Box
                 sx={{

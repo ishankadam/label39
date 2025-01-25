@@ -3,11 +3,9 @@ import { Card, CardContent, CardMedia, Typography, Box } from "@mui/material";
 import React from "react";
 import "./../../css/productCard.css";
 import { imageUrl } from "../../api";
-import { getCurrencySymbol } from "../../common";
-import { useDispatch } from "react-redux";
+import { addCommaToPrice, getCurrencySymbol } from "../../common";
 
 const ProductCard = (props) => {
-  const [isHovered, setIsHovered] = useState(false);
   const [imageIndex, setImageIndex] = useState(0); // Initial image index is 0
 
   const handleMouseEnter = () => {
@@ -32,8 +30,6 @@ const ProductCard = (props) => {
         cursor: "pointer",
         background: "#f9f9f9",
       }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
       onClick={() => {
         props.handleViewProduct(props.product);
       }}
@@ -100,53 +96,6 @@ const ProductCard = (props) => {
           image={`${imageUrl}products/${props.product.images[imageIndex]}`}
           alt={props.product.label}
         />
-        {/* Button Wrapper */}
-        {/* <Box
-          className={`button-wrapper ${isHovered ? "show" : ""}`}
-          sx={{
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            display: "flex",
-            justifyContent: "space-between",
-            padding: "10px",
-            borderBottom: "1px solid  #ccc",
-            transition: "transform 300ms ease-in-out",
-            transform: isHovered ? "translateY(0)" : "translateY(100%)",
-            background: "#f9f9f9",
-            zIndex: 2,
-          }}
-        >
-          <Button
-            variant="outlined"
-            color="success"
-            size="small"
-            sx={{
-              width: "30%",
-              padding: "0 !important",
-              border: "2px solid #006a19",
-            }}
-          >
-            <IconButton color="inherit">
-              <ShoppingCartOutlinedIcon sx={{ color: "#006a19" }} />
-            </IconButton>
-          </Button>
-          <Button
-            variant="contained"
-            color="success"
-            size="small"
-            sx={{
-              width: "65%",
-              padding: "0 !important",
-              fontWeight: "600",
-              fontSize: "14px ",
-              fontFamily: "'Poppins', serif",
-            }}
-          >
-            Buy Now
-          </Button>
-        </Box> */}
       </Box>
 
       <CardContent
@@ -178,43 +127,10 @@ const ProductCard = (props) => {
             fontFamily: "'Poppins', sans-serif",
           }}
         >
-          {getCurrencySymbol(props.country)}. {props.product.price}
+          {getCurrencySymbol(props.country)}.{" "}
+          {addCommaToPrice(props.product.price)}
         </Typography>
       </CardContent>
-      {/* <Box
-        className={`button-wrapper ${isHovered ? "show" : ""}`}
-        sx={{
-          flexDirection: { xs: "column", sm: "row", md: "row", lg: "row" },
-
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          display: { xs: "none", sm: "flex" },
-          justifyContent: "space-between",
-          alignItems: "center",
-          padding: "10px",
-          borderBottom: "1px solid  #ccc",
-          transition: "transform 300ms ease-in-out",
-          transform: isHovered ? "translateY(0)" : "translateY(100%)",
-          background: "#f9f9f9",
-          zIndex: 2,
-        }}
-      >
-        <IconButton
-          variant="outlined"
-          color="custom"
-          onClick={(e) => {
-            handleAddToCart(e, props.product);
-          }}
-        >
-          <ShoppingCartOutlinedIcon />
-        </IconButton>
-
-        <Button variant="outlined" color="custom">
-          Buy Now
-        </Button>
-      </Box> */}
     </Card>
   );
 };

@@ -38,14 +38,13 @@ import { getCartItems } from "../../api";
 
 const CustomAppbar = (props) => {
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const [, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [country, setCountry] = useState(props.country || "INRs");
   const [mobileOpen, setMobileOpen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [adminSettings, setAdminSettings] = useState([
     { label: "Profile", url: "/profile", type: "navigate" },
-    { label: "Dashboard", url: "/dashboard", type: "navigate" },
   ]);
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -128,6 +127,21 @@ const CustomAppbar = (props) => {
     // Set isAdmin state based on role
     setIsAdmin(role === "admin");
   }, [props.userUpdated]);
+
+  useEffect(() => {
+    if (isAdmin) {
+      setAdminSettings((prev) => {
+        return [
+          ...prev,
+          { label: "Dashboard", url: "/dashboard", type: "navigate" },
+        ];
+      });
+    } else {
+      setAdminSettings((prev) => {
+        return prev.filter((item) => item.label !== "Dashboard");
+      });
+    }
+  }, [isAdmin]);
 
   const logout = () => {
     localStorage.clear();

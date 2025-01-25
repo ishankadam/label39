@@ -14,7 +14,12 @@ import {
 import CustomTextfield from "../../components/textfield/customTextfield";
 import SelectDropdown from "../../components/select-dropdown/selectDropdown";
 import UploadFiles from "../../components/upload/uploadFiles";
-import { availableSizes, deliveryIn, garmentDetails } from "../../common";
+import {
+  availableColors,
+  availableSizes,
+  deliveryIn,
+  garmentDetails,
+} from "../../common";
 import ChipTextfield from "../../components/textfield/chipTextfield";
 import { createProduct, editProduct } from "../../api";
 import "./addProduct.css";
@@ -32,7 +37,7 @@ const AddEditProductModal = (props) => {
     description: "",
     category: "",
     sizes: {
-      Upper: [{ size: "", quantity: "", price: price }],
+      Upper: [{ size: "", quantity: "", price: price, isCustom: false }],
       Bottom: [],
     },
     garmentDetails: [],
@@ -43,13 +48,10 @@ const AddEditProductModal = (props) => {
     priority: 0,
   });
 
-  const colorList = [
-    { label: "Red", value: "red" },
-    { label: "Black", value: "black" },
-    { label: "Blue", value: "blue" },
-    { label: "Green", value: "green" },
-    { label: "Yellow", value: "yellow" },
-  ];
+  const colorList = availableColors.map((color) => ({
+    label: color,
+    value: color.toLowerCase().replace(/\s+/g, "-"), // Convert to lowercase and replace spaces with hyphens
+  }));
 
   // Handle input changes
   const handleEdit = (value, field, index, section) => {
@@ -95,14 +97,14 @@ const AddEditProductModal = (props) => {
   };
 
   // Add a new row in sizes
-  const addSizeRow = (section) => {
+  const addSizeRow = (section, IsCustom) => {
     setProductDetails((prev) => ({
       ...prev,
       sizes: {
         ...prev.sizes,
         [section]: [
           ...prev.sizes[section],
-          { size: "", quantity: "", price: "" },
+          { size: "", quantity: "", price: "", isCustom: IsCustom },
         ],
       },
     }));
@@ -118,6 +120,7 @@ const AddEditProductModal = (props) => {
 
   // Submit product details
   const handleSubmit = () => {
+    console.log(productDetails);
     try {
       if (props.isEdit) {
         editProduct({
@@ -302,14 +305,32 @@ const AddEditProductModal = (props) => {
                   // sx={{ borderBottom: "1px solid #ccc" }}
                 >
                   <Grid item xs={6} sm={4}>
-                    <SelectDropdown
-                      label="Size"
-                      optionList={availableSizes}
-                      config={{ field: "size", index: index, section: "Upper" }}
-                      value={row.size}
-                      handleEdit={handleEdit}
-                      sx={{ width: "100%" }}
-                    />
+                    {!row.isCustom ? (
+                      <SelectDropdown
+                        label="Size"
+                        optionList={availableSizes}
+                        config={{
+                          field: "size",
+                          index: index,
+                          section: "Upper",
+                        }}
+                        value={row.size}
+                        handleEdit={handleEdit}
+                        sx={{ width: "100%" }}
+                      />
+                    ) : (
+                      <CustomTextfield
+                        label="Size"
+                        value={row.size}
+                        config={{
+                          field: "size",
+                          index: index,
+                          section: "Upper",
+                        }}
+                        handleEdit={handleEdit}
+                        sx={{ width: "100%" }}
+                      />
+                    )}
                   </Grid>
                   <Grid item xs={6} sm={4}>
                     <CustomTextfield
@@ -367,6 +388,15 @@ const AddEditProductModal = (props) => {
             >
               <AddIcon variant="contained" className="add-size-button" />
             </Button>
+            <Button
+              variant="outlined"
+              color="custom"
+              sx={{ width: "150px", marginTop: "10px", marginLeft: "10px" }}
+              className="add-size-button"
+              onClick={() => addSizeRow("Upper", true)}
+            >
+              Add custom size
+            </Button>
           </Grid>
           {/* Bottom Section Toggle */}
           <Grid item xs={12} mb={1}>
@@ -392,18 +422,32 @@ const AddEditProductModal = (props) => {
                 {productDetails.sizes.Bottom.map((row, index) => (
                   <Grid container spacing={2} key={index} alignItems="center">
                     <Grid item xs={6} sm={4}>
-                      <SelectDropdown
-                        label="Size"
-                        optionList={availableSizes}
-                        value={row.size}
-                        config={{
-                          field: "size",
-                          index: index,
-                          section: "Bottom",
-                        }}
-                        handleEdit={handleEdit}
-                        sx={{ width: "100%" }}
-                      />
+                      {!row.isCustom ? (
+                        <SelectDropdown
+                          label="Size"
+                          optionList={availableSizes}
+                          value={row.size}
+                          config={{
+                            field: "size",
+                            index: index,
+                            section: "Bottom",
+                          }}
+                          handleEdit={handleEdit}
+                          sx={{ width: "100%" }}
+                        />
+                      ) : (
+                        <CustomTextfield
+                          label="Size"
+                          value={row.size}
+                          config={{
+                            field: "size",
+                            index: index,
+                            section: "Bottom",
+                          }}
+                          handleEdit={handleEdit}
+                          sx={{ width: "100%" }}
+                        />
+                      )}
                     </Grid>
                     <Grid item xs={6} sm={4}>
                       <CustomTextfield
@@ -462,6 +506,15 @@ const AddEditProductModal = (props) => {
                   onClick={() => addSizeRow("Bottom")}
                 >
                   <AddIcon variant="contained" className="add-size-button" />
+                </Button>
+                <Button
+                  variant="outlined"
+                  color="custom"
+                  sx={{ width: "150px", marginTop: "10px", marginLeft: "10px" }}
+                  className="add-size-button"
+                  onClick={() => addSizeRow("Bottom", true)}
+                >
+                  Add custom size
                 </Button>
               </>
             )}

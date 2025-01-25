@@ -635,3 +635,69 @@ export const updateProductPriorities = async ({ products, setProducts }) => {
     throw err;
   }
 };
+
+export const createClientDiaries = async ({
+  clientDiaries,
+  setLoading,
+  setClientDiaries,
+}) => {
+  setLoading(true);
+  const formData = new FormData();
+
+  formData.append("clientDiaries", JSON.stringify(clientDiaries));
+
+  if (clientDiaries.image && Array.isArray(clientDiaries.image)) {
+    clientDiaries.image.forEach((img) => {
+      if (img instanceof File) {
+        formData.append("image", img); // Add images
+      }
+    });
+  }
+
+  const requestOptions = {
+    method: "POST",
+    body: formData,
+  };
+
+  try {
+    const response = await fetch(
+      `${apiUrl}/createClientDiaries`,
+      requestOptions
+    );
+
+    if (response.ok) {
+      const data = await response.json();
+      setClientDiaries(data);
+    } else {
+      const errorData = await response.json();
+      console.error("Error creating Client Diaries:", errorData);
+    }
+  } catch (e) {
+    console.error("Fetch error:", e);
+  } finally {
+    setLoading(false);
+  }
+};
+
+export const getAllClientDiaries = async ({ setClientDiaries, setLoading }) => {
+  try {
+    const response = await fetch(`${apiUrl}/getClientDiaries`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (!response.ok) {
+      if (response.status === 401) {
+        console.error("Unauthorized access");
+      }
+      throw new Error("Failed to fetch products");
+    }
+
+    const data = await response.json();
+    setClientDiaries(data);
+    setLoading && setLoading(false);
+    return data;
+  } catch (err) {
+    console.error("Error fetching products:", err);
+  }
+};

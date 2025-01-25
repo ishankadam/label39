@@ -117,6 +117,14 @@ const ProductTable = (props) => {
       icon: "₹",
     },
     {
+      id: "category",
+      label: "Category",
+      key: "category",
+      type: "dropdown",
+      align: "left",
+      optionList: categories,
+    },
+    {
       id: "garmentDetails",
       label: "Garment Details",
       key: "garmentDetails",
@@ -199,6 +207,7 @@ const ProductTable = (props) => {
         setProducts={props.setProducts}
         handleModalClose={handleModalClose}
         page="Products"
+        allowView={true}
       ></CustomTable>
       {showModal.show && (
         <AddEditProductModal

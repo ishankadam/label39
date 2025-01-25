@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../../css/login2.css";
 import LoginImg from "../../assets/login.png";
 import SignupImg from "../../assets/signup.png";
@@ -29,13 +29,6 @@ const Login = (props) => {
 
   const navigate = useNavigate();
   // Function to automatically slide the images
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveSlide((prevSlide) => (prevSlide + 1) % images.length);
-    }, 2000); // Change slide every 2 seconds
-
-    return () => clearInterval(interval); // Cleanup the interval on component unmount
-  }, [images.length]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -54,6 +47,7 @@ const Login = (props) => {
   const handleEdit = (value, field) => {
     setUser({ ...user, [field]: value });
   };
+
   return (
     <div
       style={{

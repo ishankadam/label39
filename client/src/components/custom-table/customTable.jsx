@@ -106,13 +106,14 @@ const CustomTable = (props) => {
 
   const renderTooltipContent = (items) => (
     <Grid container spacing={1}>
-      {items.map((item) => (
-        <Grid xs={12} key={item.size}>
-          <Typography variant="body2">
-            {item.size}: {item.quantity}
-          </Typography>
-        </Grid>
-      ))}
+      {items &&
+        items.map((item) => (
+          <Grid xs={12} key={item.size}>
+            <Typography variant="body2">
+              {item.size}: {item.quantity}
+            </Typography>
+          </Grid>
+        ))}
     </Grid>
   );
 
@@ -345,9 +346,9 @@ const CustomTable = (props) => {
                       key={`row-${rowIndex}`}
                       sx={{
                         "&:last-child td, &:last-child th": { border: 0 },
-                        cursor: "pointer",
+                        cursor: props.allowView ? "pointer" : "default",
                       }}
-                      onClick={() => handleView(row)}
+                      onClick={() => props.allowView && handleView(row)}
                     >
                       {props.colDef.map((column, colIndex) => {
                         return getCell(column, row, rowIndex, colIndex);
