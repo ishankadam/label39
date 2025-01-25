@@ -22,7 +22,7 @@ import {
   Phone,
   Home,
 } from "@mui/icons-material";
-
+import CheckCircleIcon from "@mui/icons-material/CheckCircleOutline";
 function ViewOrders(props) {
   const {
     orderId,
@@ -40,75 +40,214 @@ function ViewOrders(props) {
 
   return (
     <Container maxWidth="md" sx={{ py: 4 }}>
-      <Typography variant="h4" gutterBottom sx={{ mb: 3 }}>
-        Order Details
-      </Typography>
-
-      <Card elevation={3} sx={{ mb: 3 }}>
+      <Card
+        elevation={3}
+        sx={{
+          // background: "#F9F9F9",
+          // padding: 2,
+          borderRadius: "5px",
+          border: "1px solid #ccc",
+          mb: 3,
+          boxShadow: "none",
+        }}
+      >
         <CardContent>
-          <Grid container spacing={2} alignItems="center">
+          <Grid container spacing={2} alignItems="start">
             <Grid item xs={12} sm={6}>
-              <Typography variant="h6" gutterBottom>
+              <Typography
+                variant="subtitle1"
+                sx={{
+                  fontWeight: "600",
+                  fontFamily: "Roboto Serif, serif",
+                  color: "#333",
+                  mb: 1,
+                }}
+                gutterBottom
+              >
                 Order Summary
               </Typography>
-              <Typography variant="body1">Order ID: {orderId}</Typography>
-              <Typography variant="body1">Payment ID: {paymentId}</Typography>
-              <Typography variant="body1">
+              <Typography
+                variant="subtitle2"
+                sx={{
+                  fontWeight: "500",
+                  fontFamily: "Roboto Serif, serif",
+                  color: "#333",
+                  mb: "4px",
+                }}
+              >
+                Order ID: {orderId}
+              </Typography>
+              <Typography
+                variant="subtitle2"
+                sx={{
+                  fontWeight: "500",
+                  fontFamily: "Roboto Serif, serif",
+                  color: "#333",
+                  mb: "4px",
+                }}
+              >
+                Payment ID: {paymentId}
+              </Typography>
+              <Typography
+                variant="subtitle2"
+                sx={{
+                  fontWeight: "500",
+                  fontFamily: "Roboto Serif, serif",
+                  color: "#333",
+                  mb: "4px",
+                }}
+              >
                 Date: {new Date(createdAt).toLocaleString()}
               </Typography>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Typography variant="h6" gutterBottom>
+              <Typography
+                variant="subtitle1"
+                sx={{
+                  fontWeight: "600",
+                  fontFamily: "Roboto Serif, serif",
+                  color: "#333",
+                  mb: 1,
+                }}
+                gutterBottom
+              >
                 Payment Info
               </Typography>
-              <Box display="flex" alignItems="center" mb={1}>
-                <CreditCard sx={{ mr: 1 }} />
-                <Typography variant="body1">
-                  Method: {paymentInfo.method}
-                </Typography>
+              <Box
+                display="flex"
+                flexDirection={"column"}
+                alignItems="start"
+                mb={1}
+              >
+                <Chip
+                  icon={<CreditCard />}
+                  label={`Method = ${paymentInfo.method}`}
+                  color="info"
+                  sx={{ mb: 1, textTransform: "capitalize" }}
+                />
+                <Chip
+                  icon={<CheckCircleIcon />}
+                  label={`Status = ${paymentInfo.status}`}
+                  sx={{ textTransform: "capitalize" }}
+                  color={
+                    paymentInfo.status === "success" ? "success" : "default"
+                  }
+                />
               </Box>
-              <Chip
-                icon={<CreditCard />}
-                label={`Status: ${paymentInfo.status}`}
-                color={paymentInfo.status === "success" ? "success" : "default"}
-              />
             </Grid>
           </Grid>
         </CardContent>
       </Card>
 
-      <Card elevation={3} sx={{ mb: 3 }}>
+      <Card
+        elevation={3}
+        sx={{
+          // background: "#F9F9F9",
+          // padding: 2,
+          borderRadius: "5px",
+          border: "1px solid #ccc",
+          mb: 3,
+          boxShadow: "none",
+        }}
+      >
         <CardContent>
-          <Typography variant="h6" gutterBottom>
-            Customer Information
-          </Typography>
-          <Grid container spacing={2}>
+          <Grid container spacing={2} alignItems="start">
             <Grid item xs={12} sm={6}>
-              <List dense>
-                <ListItem>
+              <Typography
+                variant="subtitle1"
+                sx={{
+                  fontWeight: "600",
+                  fontFamily: "Roboto Serif, serif",
+                  color: "#333",
+                  mb: 1,
+                }}
+                gutterBottom
+              >
+                Customer Information
+              </Typography>
+              <List sx={{ padding: 0 }}>
+                <ListItem sx={{ padding: 0 }}>
                   <Person sx={{ mr: 2 }} />
                   <ListItemText
-                    primary={`${checkoutData.firstName} ${checkoutData.lastName}`}
+                    primary={
+                      <span
+                        style={{
+                          fontSize: "14px",
+                          fontFamily: "Roboto Serif, serif",
+                          fontWeight: "500",
+                          color: "#333",
+                        }}
+                      >{`${checkoutData.firstName} ${checkoutData.lastName}`}</span>
+                    }
                   />
                 </ListItem>
-                <ListItem>
+                <ListItem sx={{ padding: 0 }}>
                   <Email sx={{ mr: 2 }} />
-                  <ListItemText primary={checkoutData.email} />
+                  <ListItemText
+                    primary={
+                      <span
+                        style={{
+                          fontSize: "14px",
+                          fontFamily: "Roboto Serif, serif",
+                          fontWeight: "500",
+                          color: "#333",
+                        }}
+                      >
+                        {checkoutData.email}{" "}
+                      </span>
+                    }
+                  />
                 </ListItem>
-                <ListItem>
+                <ListItem sx={{ padding: 0 }}>
                   <Phone sx={{ mr: 2 }} />
-                  <ListItemText primary={checkoutData.phone} />
+                  <ListItemText
+                    primary={
+                      <span
+                        style={{
+                          fontSize: "14px",
+                          fontFamily: "Roboto Serif, serif",
+                          fontWeight: "500",
+                          color: "#333",
+                        }}
+                      >
+                        {checkoutData.phone}
+                      </span>
+                    }
+                  />
                 </ListItem>
               </List>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <List dense>
-                <ListItem>
+              <Typography
+                variant="subtitle1"
+                sx={{
+                  fontWeight: "600",
+                  fontFamily: "Roboto Serif, serif",
+                  color: "#333",
+                  mb: 1,
+                }}
+                gutterBottom
+              >
+                Shipping Address
+              </Typography>
+              <List sx={{ padding: 0 }}>
+                <ListItem sx={{ padding: 0 }}>
                   <Home sx={{ mr: 2 }} />
                   <ListItemText
-                    primary="Shipping Address"
-                    secondary={`${checkoutData.address}, ${checkoutData.apartment}, ${checkoutData.city}, ${checkoutData.state} ${checkoutData.pincode}`}
-                  />
+                    sx={{
+                      fontFamily: "Roboto Serif, serif",
+                      fontWeight: "500",
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontSize: "14px",
+                        fontFamily: "Roboto Serif, serif",
+                        fontWeight: "500",
+                        color: "#333",
+                      }}
+                    >{`${checkoutData.address}, ${checkoutData.apartment}, ${checkoutData.city}, ${checkoutData.state} ${checkoutData.pincode}`}</span>
+                  </ListItemText>
                 </ListItem>
               </List>
             </Grid>
@@ -116,30 +255,67 @@ function ViewOrders(props) {
         </CardContent>
       </Card>
 
-      <Card elevation={3}>
+      <Card
+        elevation={3}
+        sx={{
+          background: "#fff",
+          borderRadius: "5px",
+          border: "1px solid #ccc",
+          mb: 1,
+          boxShadow: "none",
+        }}
+      >
         <CardContent>
-          <Typography variant="h6" gutterBottom>
+          <Typography
+            variant="subtitle1"
+            sx={{
+              fontWeight: "600",
+              fontFamily: "Roboto Serif, serif",
+              color: "#333",
+              mb: 1,
+            }}
+            gutterBottom
+          >
             Order Items
           </Typography>
-          <List>
+          <List sx={{ padding: "0" }}>
             {cartItems.map((item, index) => (
               <React.Fragment key={item.productId}>
                 {index > 0 && <Divider />}
-                <ListItem alignItems="flex-start">
-                  <Avatar
+                <ListItem alignItems="center" sx={{ padding: "0" }}>
+                  {/* <Avatar
                     src={`/placeholder.svg?height=60&width=60`}
                     alt={item.name}
                     variant="rounded"
                     sx={{ mr: 2, width: 60, height: 60 }}
-                  />
+                  /> */}
                   <ListItemText
-                    primary={item.name}
+                    sx={{ m: "12px 0" }}
+                    variant="subtitle2"
+                    primary={
+                      <span
+                        style={{
+                          fontSize: "13px",
+                          fontFamily: "Roboto Serif, serif",
+                          fontWeight: "500",
+                          color: "#333",
+                        }}
+                      >
+                        {item.name}
+                      </span>
+                    }
                     secondary={
                       <React.Fragment>
                         <Typography
                           component="span"
                           variant="body2"
                           color="text.primary"
+                          sx={{
+                            fontSize: "13px",
+                            fontFamily: "Roboto Serif, serif",
+                            fontWeight: "500",
+                            color: "#333",
+                          }}
                         >
                           ₹{item.price.toLocaleString()} x {item.quantity}
                         </Typography>
@@ -149,11 +325,26 @@ function ViewOrders(props) {
                             key={key}
                             component="span"
                             variant="body2"
+                            sx={{
+                              fontSize: "13px",
+                              fontFamily: "Roboto Serif, serif",
+                              fontWeight: "500",
+                              color: "#333",
+                            }}
                           >
                             {key}: {value}{" "}
                           </Typography>
                         ))}
-                        <Typography variant="caption" display="block">
+                        <Typography
+                          variant="caption"
+                          display="block"
+                          sx={{
+                            fontSize: "13px",
+                            fontFamily: "Roboto Serif, serif",
+                            fontWeight: "500",
+                            // color: "#333",
+                          }}
+                        >
                           {item.deliveryIn[0]}
                         </Typography>
                       </React.Fragment>
@@ -161,7 +352,14 @@ function ViewOrders(props) {
                   />
                   <Typography
                     variant="subtitle1"
-                    sx={{ minWidth: 80, textAlign: "right" }}
+                    sx={{
+                      minWidth: 80,
+                      textAlign: "right",
+                      fontSize: "14px",
+                      fontFamily: "Roboto Serif, serif",
+                      fontWeight: "500",
+                      color: "#333",
+                    }}
                   >
                     ₹{(item.price * item.quantity).toLocaleString()}
                   </Typography>
@@ -175,8 +373,22 @@ function ViewOrders(props) {
             justifyContent="space-between"
             alignItems="center"
           >
-            <Typography variant="h6">Total</Typography>
-            <Typography variant="h6">
+            <Typography
+              variant="subtitle1"
+              sx={{
+                fontFamily: "Roboto Serif, serif",
+                fontWeight: "500",
+              }}
+            >
+              Total
+            </Typography>
+            <Typography
+              variant="subtitle1"
+              sx={{
+                fontFamily: "Roboto Serif, serif",
+                fontWeight: "600",
+              }}
+            >
               ₹{totalAmount.toLocaleString()}
             </Typography>
           </Box>

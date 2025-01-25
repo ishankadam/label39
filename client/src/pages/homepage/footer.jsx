@@ -2,12 +2,12 @@ import React from "react";
 import { Container, Grid2, Typography, Link, Box } from "@mui/material";
 // import { Twitter, Facebook, Instagram, LinkedIn } from "@mui/icons-material";
 import "../../css/footer.css";
-import textile from "../../assets/texttile.jpg";
-import textile2 from "../../assets/texttile2.jpeg";
+import textile from "../../assets/1.png";
+import textile2 from "../../assets/5.png";
 
-import woven from "../../assets/woven.png";
-import mindful from "../../assets/mindful.png";
-import sustainable from "../../assets/sustainable.png";
+import woven from "../../assets/2.png";
+import mindful from "../../assets/4.png";
+import sustainable from "../../assets/31.png";
 import footerImg from "../../assets/wine-os.png";
 // import TermsAndCondition from "../termsAndCondition/termsAndCondition.jsx";
 import { useNavigate } from "react-router-dom";
@@ -47,23 +47,63 @@ const Footer = (props) => {
           <div className="top-section">
             <div className="top-item">
               <img src={textile} alt="textile" className="bottom-icons" />
-              <Typography>Textile Revival</Typography>
-            </div>
-            <div className="top-item">
-              <img src={sustainable} alt="textile" className="bottom-icons" />
-              <Typography>Textile Revival</Typography>
+              <Typography
+                sx={{
+                  fontSize: "14px",
+                  fontFamily: "Roboto Serif, serif",
+                  fontWeight: "500",
+                }}
+              >
+                Textile Revival
+              </Typography>
             </div>
             <div className="top-item">
               <img src={textile2} alt="textile" className="bottom-icons" />
-              <Typography>Woven by Hand</Typography>
+              <Typography
+                sx={{
+                  fontSize: "14px",
+                  fontFamily: "Roboto Serif, serif",
+                  fontWeight: "500",
+                }}
+              >
+                Hand Embroidered
+              </Typography>
+            </div>
+            <div className="top-item">
+              <img src={woven} alt="textile" className="bottom-icons" />
+              <Typography
+                sx={{
+                  fontSize: "14px",
+                  fontFamily: "Roboto Serif, serif",
+                  fontWeight: "500",
+                }}
+              >
+                Mindful Design
+              </Typography>
             </div>
             <div className="top-item">
               <img src={mindful} alt="textile" className="bottom-icons" />
-              <Typography>Mindful Design</Typography>
+              <Typography
+                sx={{
+                  fontSize: "14px",
+                  fontFamily: "Roboto Serif, serif",
+                  fontWeight: "500",
+                }}
+              >
+                Crafted With Love
+              </Typography>
             </div>
             <div className="top-item">
               <img src={sustainable} alt="textile" className="bottom-icons" />
-              <Typography>Sustainable Practices</Typography>
+              <Typography
+                sx={{
+                  fontSize: "14px",
+                  fontFamily: "Roboto Serif, serif",
+                  fontWeight: "500",
+                }}
+              >
+                Sustainable
+              </Typography>
             </div>
           </div>
         </Box>
