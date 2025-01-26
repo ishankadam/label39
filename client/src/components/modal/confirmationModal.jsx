@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { Close as CloseIcon } from "@mui/icons-material";
 
-export default function ConfirmationModal(props) {
+const ConfirmationModal = (props) => {
   return (
     <Dialog
       open={props.open}
@@ -91,4 +91,6 @@ export default function ConfirmationModal(props) {
       </DialogActions>
     </Dialog>
   );
-}
+};
+
+export default ConfirmationModal;

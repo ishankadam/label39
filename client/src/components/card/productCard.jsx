@@ -42,8 +42,11 @@ const ProductCard = (props) => {
             position: "absolute",
             top: "8px",
             left: "0px",
-            background: props.product.soldOut ? "#405468" : "#db5858", // Gold for Best Seller
-            color: props.product.soldOut ? "#fff" : "#fff",
+            // background: props.product.soldOut ? "#405468" : "#db5858",
+            background: props.product.soldOut ? "#56728f" : "#fff",
+            // color: props.product.soldOut ? "#fff" : "#fff",
+            color: props.product.soldOut ? "#fff" : "#2F3E4E",
+
             fontFamily: "'Poppins', sans-serif",
             fontSize: { xs: "10px", sm: "12px", md: "11.5px" },
             // padding: { xs: "3px 8px", sm: "4px 10px", md: "4px 10px" },

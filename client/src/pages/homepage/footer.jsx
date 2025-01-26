@@ -1,10 +1,10 @@
 import React from "react";
-import { Container, Grid2, Typography, Link, Box } from "@mui/material";
+import { Container, Grid2, Typography, Link, Box, Stack } from "@mui/material";
 // import { Twitter, Facebook, Instagram, LinkedIn } from "@mui/icons-material";
 import "../../css/footer.css";
 import textile from "../../assets/1.png";
 import textile2 from "../../assets/5.png";
-
+import { useState, useEffect } from "react";
 import woven from "../../assets/2.png";
 import mindful from "../../assets/4.png";
 import sustainable from "../../assets/31.png";
@@ -26,6 +26,23 @@ const Footer = (props) => {
     };
   };
 
+  const items = [
+    { img: textile, text: "Textile Revival" },
+    { img: textile2, text: "Hand Embroidered" },
+    { img: woven, text: "Mindful Design" },
+    { img: mindful, text: "Crafted With Love" },
+    { img: sustainable, text: "Sustainable" },
+  ];
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkIfMobile = () => setIsMobile(window.innerWidth <= 640);
+    checkIfMobile();
+    window.addEventListener("resize", checkIfMobile);
+    return () => window.removeEventListener("resize", checkIfMobile);
+  }, []);
+
   return (
     <Box className="container">
       <Box
@@ -42,72 +59,80 @@ const Footer = (props) => {
       />
 
       {/* Top Section */}
-      {props.topSection && (
-        <Box>
-          <div className="top-section">
-            <div className="top-item">
-              <img src={textile} alt="textile" className="bottom-icons" />
+
+      <Box
+        sx={{
+          backgroundColor: "rgba(183, 121, 97, 0.7)",
+          backdropFilter: "blur(100px)",
+          WebkitBackdropFilter: "blur(10px)",
+          padding: "16px",
+          color: "white",
+          overflow: "hidden",
+          position: "relative",
+        }}
+      >
+        <Stack
+          direction="row"
+          sx={{
+            gap: "16px",
+            flexWrap: isMobile ? "nowrap" : "wrap",
+            justifyContent: isMobile ? "flex-start" : "space-around",
+            animation: isMobile ? "marquee 10s linear infinite" : "none",
+            "&:hover": {
+              animationPlayState: isMobile ? "paused" : "running",
+            },
+            "@keyframes marquee": {
+              "0%": { transform: "translateX(0%)" },
+              "100%": { transform: "translateX(-100%)" },
+            },
+            "&::after": isMobile
+              ? {
+                  content: '""',
+                  position: "absolute",
+                  top: 0,
+                  left: "100%",
+                  width: "100%",
+                  height: "100%",
+                  background: "inherit",
+                }
+              : {},
+          }}
+        >
+          {(isMobile ? [...items, ...items] : items).map((item, index) => (
+            <Box
+              key={isMobile ? index : item.text}
+              sx={{
+                flex: isMobile ? "0 0 auto" : "1 1 auto",
+                textAlign: "center",
+                minWidth: isMobile ? "120px" : "auto",
+                maxWidth: isMobile ? "none" : "20%",
+              }}
+            >
+              <Box
+                component="img"
+                src={item.img}
+                alt={item.text}
+                sx={{
+                  width: "45px",
+                  height: "45px",
+                  marginBottom: "8px",
+                }}
+              />
               <Typography
                 sx={{
                   fontSize: "14px",
                   fontFamily: "Roboto Serif, serif",
-                  fontWeight: "500",
+                  fontWeight: 500,
+                  whiteSpace: isMobile ? "nowrap" : "normal",
                 }}
               >
-                Textile Revival
+                {item.text}
               </Typography>
-            </div>
-            <div className="top-item">
-              <img src={textile2} alt="textile" className="bottom-icons" />
-              <Typography
-                sx={{
-                  fontSize: "14px",
-                  fontFamily: "Roboto Serif, serif",
-                  fontWeight: "500",
-                }}
-              >
-                Hand Embroidered
-              </Typography>
-            </div>
-            <div className="top-item">
-              <img src={woven} alt="textile" className="bottom-icons" />
-              <Typography
-                sx={{
-                  fontSize: "14px",
-                  fontFamily: "Roboto Serif, serif",
-                  fontWeight: "500",
-                }}
-              >
-                Mindful Design
-              </Typography>
-            </div>
-            <div className="top-item">
-              <img src={mindful} alt="textile" className="bottom-icons" />
-              <Typography
-                sx={{
-                  fontSize: "14px",
-                  fontFamily: "Roboto Serif, serif",
-                  fontWeight: "500",
-                }}
-              >
-                Crafted With Love
-              </Typography>
-            </div>
-            <div className="top-item">
-              <img src={sustainable} alt="textile" className="bottom-icons" />
-              <Typography
-                sx={{
-                  fontSize: "14px",
-                  fontFamily: "Roboto Serif, serif",
-                  fontWeight: "500",
-                }}
-              >
-                Sustainable
-              </Typography>
-            </div>
-          </div>
-        </Box>
-      )}
+            </Box>
+          ))}
+        </Stack>
+      </Box>
+
       <footer
         style={{
           position: "relative",

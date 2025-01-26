@@ -1,6 +1,6 @@
 const { read } = require("fs");
 const mongoose = require("mongoose");
-const { fabrics } = require("../../client/src/common");
+// const { fabrics } = require("../../client/src/common");
 
 // Define the schema
 const productSchema = new mongoose.Schema({

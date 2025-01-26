@@ -43,13 +43,13 @@ ul li:hover,
   display: flex;
   justify-content: space-around;
   background-color: rgba(183, 121, 97, 0.7);
-  backdrop-filter: blur(100px); /* Applies the glassy blur */
-  -webkit-backdrop-filter: blur(10px); /* Safari support */
+  backdrop-filter: blur(100px);
+  -webkit-backdrop-filter: blur(10px);
   padding: 16px;
   color: white;
-  flex-wrap: nowrap; /* Prevents wrapping of items */
-  overflow: hidden; /* Prevents content overflow */
-  gap: 16px; /* Adds spacing between items */
+  flex-wrap: nowrap;
+  overflow: hidden;
+  gap: 16px;
   position: relative;
 }
 

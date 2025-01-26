@@ -18,10 +18,23 @@ import { imageUrl, verifyPayment } from "../../api";
 import { createOrder } from "../../api";
 import { useNavigate } from "react-router-dom";
 import { clearCart } from "../../store/cartSlice";
+import SuccessModal from "../../components/modal/successModal";
+
 const { RAZORPAY_KEY_ID } = process.env;
 export const razorpayId = RAZORPAY_KEY_ID;
 
 const CheckoutForm = (props) => {
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const handlePayNowClick = () => {
+    // Logic for payment (if any) can go here
+    setModalOpen(true); // Open the modal
+  };
+
+  const handleModalClose = () => {
+    setModalOpen(false); // Close the modal
+  };
+
   const cartItems = useSelector((state) => state.cart.items);
   const [paymentDetails, setPaymentDetails] = useState({});
   const [paymentSuccess, setPaymentSuccess] = useState(false);
@@ -591,10 +604,13 @@ const CheckoutForm = (props) => {
                 p: 1,
               }}
               disabled={isButtonDisabled}
-              onClick={() => handleOrderPlacement()}
+              // onClick={() => handleOrderPlacement()}
+              onClick={handlePayNowClick}
             >
               Pay Now
             </Button>
+
+            <SuccessModal open={isModalOpen} onClose={handleModalClose} />
           </Box>
         </Card>
 
