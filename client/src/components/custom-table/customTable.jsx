@@ -28,7 +28,6 @@ import { imageUrl } from "../../api";
 import AddEditProductModal from "../../form/addProduct/addProduct";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import ConfirmationModal from "../modal/confirmationModal";
-import ViewOrders from "../../pages/dashboard/viewOrders";
 import ViewOrdersModal from "../../pages/dashboard/viewProductModal";
 const CustomTable = (props) => {
   const [rowData, setRowData] = useState(props.rowData);
@@ -318,10 +317,10 @@ const CustomTable = (props) => {
         <Table aria-label="simple table">
           <TableHead className="job-table-header">
             <TableRow sx={{ position: "sticky", zIndex: 900, top: 0 }}>
-              {props.colDef.map((column) => (
+              {props.colDef.map((column, index) => (
                 <TableCell
                   align={column.align}
-                  key={`header-${column.id}`}
+                  key={`header-${column.id}-${index}`}
                   id={`${column.id}-column-header`}
                   sx={{
                     fontWeight: "bold", // Makes the header bold

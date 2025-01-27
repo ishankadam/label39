@@ -9,6 +9,7 @@ import FindUs from "./findUs";
 import InstagramSection from "./instagramSection";
 import ViewProductModal from "../product/viewProduct";
 import { getAllTestimonials } from "../../api";
+import AsSeenOn from "./asSeenOn";
 
 const Home = (props) => {
   const [allProduct, setAllProduct] = useState(props.allProduct || []);
@@ -17,8 +18,8 @@ const Home = (props) => {
   );
   const [allCategories, setAllCategories] = useState(props.allCategories);
   const [bestsellers, setBestsellers] = useState([]);
-  const [asSeenOn, setAsSeenOn] = useState([]);
-  const [, setshopByVideos] = useState([]);
+  const [, setAsSeenOn] = useState([]);
+  const [shopByVideos, setshopByVideos] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
   const [showModal, setShowModal] = useState({
     open: false,
@@ -34,7 +35,10 @@ const Home = (props) => {
   }, [props.celebrityStyles]);
 
   useEffect(() => {
-    setAllCategories(props.allCategories);
+    const filteredCategories = props.allCategories.filter(
+      (category) => category.show
+    );
+    setAllCategories(filteredCategories);
   }, [props.allCategories]);
 
   useEffect(() => {
@@ -74,13 +78,13 @@ const Home = (props) => {
         handleViewProduct={handleViewProduct}
         country={props.country}
       ></BestSellerSection>
-      {/* {asSeenOn.length > 0 && (
+      {shopByVideos.length > 0 && (
         <AsSeenOn
           handleViewProduct={handleViewProduct}
-          asSeenOn={asSeenOn}
+          shopByVideos={shopByVideos}
           country={props.country}
         ></AsSeenOn>
-      )} */}
+      )}
       <Testimonials testimonials={testimonials}></Testimonials>
       <InstagramSection></InstagramSection>
       <FindUs></FindUs>

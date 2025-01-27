@@ -208,3 +208,16 @@ export const addCommaToPrice = (price) => {
   }
   return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
+
+export const calculatePriceAfterDiscount = (price, type, value) => {
+  let finalPrice = price;
+  if (type === "Percentage") {
+    finalPrice = ((price * (100 - value)) / 100).toFixed(2);
+  } else if (type === "Amount") {
+    finalPrice = (price - value).toFixed(2);
+  } else {
+    finalPrice = price;
+  }
+  console.log(finalPrice);
+  return finalPrice;
+};

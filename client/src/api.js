@@ -810,7 +810,7 @@ export const getAllSales = async ({ setSaleData, setLoading }) => {
       if (response.status === 401) {
         console.error("Unauthorized access");
       }
-      throw new Error("Failed to fetch products");
+      throw new Error("Failed to fetch sale");
     }
 
     const data = await response.json();
@@ -818,7 +818,7 @@ export const getAllSales = async ({ setSaleData, setLoading }) => {
     setLoading && setLoading(false);
     return data;
   } catch (err) {
-    console.error("Error fetching products:", err);
+    console.error(err);
     throw err;
   }
 };

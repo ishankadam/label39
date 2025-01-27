@@ -3,7 +3,11 @@ import { Card, CardContent, CardMedia, Typography, Box } from "@mui/material";
 import React from "react";
 import "./../../css/productCard.css";
 import { imageUrl } from "../../api";
-import { addCommaToPrice, getCurrencySymbol } from "../../common";
+import {
+  addCommaToPrice,
+  calculatePriceAfterDiscount,
+  getCurrencySymbol,
+} from "../../common";
 
 const ProductCard = (props) => {
   const [imageIndex, setImageIndex] = useState(0); // Initial image index is 0
@@ -15,6 +19,10 @@ const ProductCard = (props) => {
   const handleMouseLeave = () => {
     setImageIndex(0); // Change image back to index 0 when hover ends
   };
+
+  console.log(
+    props.product.sale && props.product.sale.isActive && props.product
+  );
 
   return (
     <Card
@@ -131,7 +139,31 @@ const ProductCard = (props) => {
           }}
         >
           {getCurrencySymbol(props.country)}.{" "}
-          {addCommaToPrice(props.product.price)}
+          {props.product.sale && props.product.sale.isActive ? (
+            <>
+              <span
+                style={{ textDecoration: "line-through", marginRight: "8px" }}
+              >
+                {addCommaToPrice(props.product.price)}
+              </span>
+              <span style={{ marginRight: "8px" }}>
+                {`${props.product.sale.discountValue} ${
+                  props.product.sale.discountType === "Percentage"
+                    ? "%"
+                    : getCurrencySymbol(props.country)
+                } off`}
+              </span>
+              <span style={{ color: "#a16149", fontWeight: "bold" }}>
+                {calculatePriceAfterDiscount(
+                  props.product.price,
+                  props.product.sale.discountType,
+                  props.product.sale.discountValue
+                )}
+              </span>
+            </>
+          ) : (
+            addCommaToPrice(props.product.price)
+          )}
         </Typography>
       </CardContent>
     </Card>

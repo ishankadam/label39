@@ -3,14 +3,13 @@ import {
   TextField,
   Button,
   MenuItem,
-  Checkbox,
-  FormControlLabel,
   Typography,
   Box,
   Dialog,
 } from "@mui/material";
 import CustomTextfield from "../../components/textfield/customTextfield";
-import CustomAutocomplete from "../../components/autocomplete/autocomplete";
+import AutocompleteWithImage from "../../components/autocomplete/autocompleteWithImage";
+import { createSale } from "../../api";
 
 const SaleForm = (props) => {
   const [products, setProducts] = useState(props.products || []);
@@ -20,7 +19,7 @@ const SaleForm = (props) => {
   }, [props.products]);
 
   const [open, setOpen] = useState(false);
-  const [saleData, serSaleData] = useState({
+  const [saleData, setSaleData] = useState({
     name: "",
     discountType: "Percentage",
     discountValue: 0,
@@ -35,24 +34,26 @@ const SaleForm = (props) => {
       products?.map((product) => ({
         label: product.name,
         value: product.productId,
+        image: product.images[0],
       }));
     setProductsArray(newProductsArray);
   }, [products]);
 
   const handleEdit = (value, field) => {
-    serSaleData({
+    setSaleData({
       ...saleData,
       [field]: value,
     });
   };
 
   useEffect(() => {
+    console.log(props.open);
     setOpen(props.open);
   }, [props.open]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    serSaleData({
+    setSaleData({
       ...saleData,
       [name]: type === "checkbox" ? checked : value,
     });
@@ -60,7 +61,12 @@ const SaleForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(saleData);
+    createSale({
+      saleData,
+      setLoading: props.setLoading,
+      setSaleData: props.setSaleData,
+    });
+    props.handleModalClose();
   };
 
   return (
@@ -71,8 +77,8 @@ const SaleForm = (props) => {
         style: {
           borderRadius: "10px",
           padding: "20px",
-          maxWidth: "600px",
-          width: "100%",
+          maxWidth: "auto",
+          width: "900px",
           boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.2)",
         },
       }}
@@ -128,28 +134,17 @@ const SaleForm = (props) => {
           inputProps={{ min: 0 }}
         />
 
-        <CustomAutocomplete
+        <AutocompleteWithImage
           label="Products"
           name="products"
-          option={productsArray}
+          options={productsArray}
           config={{ field: "products", isRequired: true }}
           value={saleData.products}
           handleEdit={handleEdit}
           inputProps={{ min: 0 }}
         />
 
-        <FormControlLabel
-          control={
-            <Checkbox
-              name="isActive"
-              checked={saleData.isActive}
-              onChange={handleChange}
-            />
-          }
-          label="Is Active"
-        />
-
-        <Button variant="contained" color="primary" type="submit">
+        <Button variant="contained" color="primary" onClick={handleSubmit}>
           Submit
         </Button>
       </Box>

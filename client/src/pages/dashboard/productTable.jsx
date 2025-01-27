@@ -138,14 +138,6 @@ const ProductTable = (props) => {
       type: "dataOnHover",
       align: "left",
     },
-    {
-      id: "category",
-      label: "Category",
-      key: "category",
-      type: "dropdown",
-      align: "left",
-      optionList: categories,
-    },
 
     // {
     //   id: "category",

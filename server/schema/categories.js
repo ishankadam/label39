@@ -29,6 +29,8 @@ const categorySchema = new mongoose.Schema({
   },
   isActive: { type: Boolean, default: true },
   value: { type: String },
+  show: { type: Boolean, default: true },
+  dropdownOption: { type: Boolean, default: true },
 });
 
 // Create the model

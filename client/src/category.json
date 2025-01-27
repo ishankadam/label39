@@ -1,38 +1,68 @@
 [
   {
-    "categoryId": 1,
-    "name": "SHIRTS and Dresses",
-    "description": "A variety of stylish shirts for all occasions.",
-    "image": "C-shirts.jpeg",
-    "priority": 1,
-    "isActive": true,
-    "value": "shirts"
-  },
-  {
-    "categoryId": 2,
+    "categoryId": 6009689297,
     "name": "CO-ORDS",
-    "description": "Trendy co-ord sets for a coordinated look.",
-    "image": "C-cord.jpeg",
-    "priority": 2,
+    "description": "",
+    "image": "C-cords.jpeg",
     "isActive": true,
-    "value": "cord"
+    "priority": 1,
+    "value": "cord",
+    "show": true,
+    "dropdownOption": true
   },
   {
-    "categoryId": 3,
+    "categoryId": 332975476,
     "name": "KURTAS",
-    "description": "Elegant suits for formal and semi-formal events.",
+    "description": "",
     "image": "C-kurta.jpeg",
-    "priority": 3,
     "isActive": true,
-    "value": "kurtas"
+    "priority": 2,
+    "value": "kurtas",
+    "show": true,
+    "dropdownOption": true
   },
   {
-    "categoryId": 4,
-    "name": "FESTIVE",
-    "description": "Festive wear for celebrations and special occasions.",
-    "image": "C-festive.jpeg",
-    "priority": 4,
+    "categoryId": 3225035965,
+    "name": "SHIRTS",
+    "description": "",
+    "image": "C-shirts.jpeg",
     "isActive": true,
-    "value": "festive"
+    "priority": 3,
+    "value": "shirt",
+    "show": false,
+    "dropdownOption": true
+  },
+  {
+    "categoryId": 1492634508,
+    "name": "FESTIVE",
+    "description": "",
+    "image": "C-festive.jpeg",
+    "isActive": true,
+    "priority": 4,
+    "value": "festive",
+    "show": true,
+    "dropdownOption": true
+  },
+  {
+    "categoryId": 2223264144,
+    "name": "DRESSES",
+    "description": "",
+    "image": "C-dress.jpeg",
+    "isActive": true,
+    "priority": 5,
+    "value": "dress",
+    "show": false,
+    "dropdownOption": true
+  },
+  {
+    "categoryId": 945895391,
+    "name": "SHIRTS & DRESSES",
+    "description": "",
+    "image": "C-shirts.jpeg",
+    "isActive": true,
+    "priority": 6,
+    "value": "shirtsAndDresses",
+    "show": true,
+    "dropdownOption": false
   }
 ]

@@ -21,7 +21,6 @@ const Sale = require("../schema/sale");
 const storage = multer.diskStorage({
   destination: (req, _file, cb) => {
     let category;
-    console.log(req.body.clientDiaries);
     try {
       if (req.body.products) {
         category = "products";
@@ -296,7 +295,6 @@ const verifyPayment = async (req, res) => {
       giftCardData,
       type,
     } = req.body;
-    console.log(req.body);
     console.log(razorpay_order_id, razorpay_payment_id, razorpay_signature);
 
     const sign = razorpay_order_id + "|" + razorpay_payment_id;
@@ -327,7 +325,6 @@ const verifyPayment = async (req, res) => {
           success: true,
         });
       } else if (type === "giftcard") {
-        console.log(giftCardData);
         const giftCart = new Giftcard({
           balance: giftCardData.balance,
           email: giftCardData.email,
@@ -721,9 +718,7 @@ const updateProductPriorities = async (req, res) => {
 const create_client_diaries = async (req, res) => {
   try {
     // Parse the products data from the request body
-    console.log(req.body.clientDiaries);
     const clientDiariesData = JSON.parse(req.body.clientDiaries); // Assuming it's a JSON string
-    console.log(clientDiariesData);
     const images = req.files || []; // Safely get images
     // Validate the productsData structure
     if (typeof clientDiariesData !== "object" || clientDiariesData === null) {
@@ -741,7 +736,6 @@ const create_client_diaries = async (req, res) => {
       image: image,
       productId: clientDiariesData.productId,
     });
-    console.log(newclientDiariesData);
     await newclientDiariesData.save();
 
     const allClientDiaries = await clientDiaries.find({});
@@ -777,7 +771,6 @@ const get_all_client_diaries = async (_req, res) => {
         },
       },
     ]);
-    console.log(allClientDiaries);
 
     // i want to get product detials from product collection in same query as client diaries
 
@@ -824,7 +817,6 @@ const create_celebrity_styles = async (req, res) => {
       image: image,
       productId: celebrityStylesData.productId,
     });
-    console.log(newcelebrityStylesData);
     await newcelebrityStylesData.save();
 
     const allCelebrityStyles = await CelebrityStyle.find({});
@@ -852,7 +844,6 @@ const get_all_celebrity_styles = async (_req, res) => {
         },
       },
     ]);
-    console.log(allCelebrityStyles);
 
     // i want to get product detials from product collection in same query as celebrityStyles
 
@@ -867,7 +858,12 @@ const get_all_celebrity_styles = async (_req, res) => {
 
 const createSale = async (req, res) => {
   try {
-    const saleData = JSON.parse(req.body.saleData); // Assuming it's a JSON string
+    console.log(req.body);
+
+    // Assuming the incoming data is already parsed (using express.json middleware)
+    const saleData = req.body;
+
+    // Create and save the new sale
     const newSale = new Sale({
       name: saleData.name,
       discountType: saleData.discountType,
@@ -875,31 +871,40 @@ const createSale = async (req, res) => {
       products: saleData.products,
       isActive: saleData.isActive,
     });
-    //update the products set sale with discountType and discountValue
     await newSale.save();
-    saleData.products.forEach(async (product) => {
+
+    // Update each product to include sale details
+    for (const product of saleData.products) {
       const productToUpdate = await Product.findOne({
-        productId: product.productId,
+        productId: product.value,
       });
-      productToUpdate.sale = {
-        discountType: saleData.discountType,
-        discountValue: saleData.discountValue,
-        isActive: saleData.isActive,
-      };
-      await productToUpdate.save();
-    });
-    const allSale = await Sale.find({});
-    res.send(allSale);
+      if (productToUpdate) {
+        productToUpdate.sale = {
+          discountType: saleData.discountType,
+          discountValue: saleData.discountValue,
+          isActive: saleData.isActive,
+        };
+        await productToUpdate.save();
+      } else {
+        console.warn(`Product with ID ${product.value} not found.`);
+      }
+    }
+
+    // Retrieve and send all sales
+    const allSales = await Sale.find({});
+    res.send(allSales);
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.status(500).json({ message: "Error creating sale", error });
   }
 };
 
 const getAllSales = async (_req, res) => {
+  console.log("getAllSales");
   try {
     const allSale = await Sale.find({}).select("-_id -__v"); // Exclude _id and __v fields
     res.status(200).json(allSale); // Send the result as JSON
+    console.log(allSale);
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Error fetching events", error });

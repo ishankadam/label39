@@ -54,9 +54,11 @@ const ProductsPage = (props) => {
   }, [props.loading]);
 
   useEffect(() => {
-    const categoryList = props.allCategories.map((category) => {
-      return { label: category.name, value: category.value };
-    });
+    const categoryList = props.allCategories
+      .filter((row) => row.show)
+      .map((category) => {
+        return { label: category.name, value: category.value };
+      });
     setCategories(categoryList);
   }, [props.allCategories]);
 

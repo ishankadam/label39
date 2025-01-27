@@ -95,15 +95,15 @@ router.get("/getCelebrityStyles", controller.get_all_celebrity_styles);
 //create giftcard
 router.post("/createGiftcard", controller.create_giftcard);
 
+// Sales
+router.post("/createSale", controller.createSale);
+router.get("/getSales", controller.getAllSales);
+
 // Error handling middleware
 router.use((error, _req, res) => {
   const status = error.status || 500;
   const message = error.message || "Something went wrong.";
   res.status(status).json({ message: message });
 });
-
-// Sales
-router.post("/createSale", controller.createSale);
-router.get("/getSales", controller.getAllSales);
 
 module.exports = router;

@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import video1 from "../../assets/video1.MOV";
-import video2 from "../../assets/video2.mov";
 import "./../../css/asSeenOn.css";
 import {
   Box,
@@ -10,7 +8,6 @@ import {
   Card,
   CardMedia,
 } from "@mui/material";
-import as_seen_on_hoverImg from "../../assets/as_seen_on_hover.jpeg";
 import { imageUrl } from "../../api";
 import Slider from "react-slick";
 import { NextArrow, PrevArrow } from "../../components/arrow-component"; // Update the import path as needed
@@ -18,13 +15,13 @@ import { NextArrow, PrevArrow } from "../../components/arrow-component"; // Upda
 const AsSeenOn = (props) => {
   const [slideNumber, setSlideNumber] = useState(0);
   const [showProductInfo, setShowProductInfo] = useState(false); // For mobile hover effect
-  const [products, setProducts] = useState(props.asSeenOn || []);
+  const [products, setProducts] = useState(props.shopByVideos || []);
 
   useEffect(() => {
-    if (props.asSeenOn.length > 0) {
-      setProducts(props.asSeenOn);
+    if (props.shopByVideos.length > 0) {
+      setProducts(props.shopByVideos);
     }
-  }, [props.asSeenOn]);
+  }, [props.shopByVideos]);
 
   const settings = {
     dots: false,
@@ -103,7 +100,7 @@ const AsSeenOn = (props) => {
           fontWeight: "500",
         }}
       >
-        Celebrity style
+        Shop by videos
         <div
           className="title-border"
           style={{
@@ -138,12 +135,8 @@ const AsSeenOn = (props) => {
                   }}
                 >
                   <CardMedia
-                    component={item.videoSrc ? "video" : "img"}
-                    src={
-                      item.videoSrc
-                        ? `${imageUrl}${item.videoSrc}`
-                        : `${imageUrl}celebrityStyles/${item.image[0]}`
-                    }
+                    component={"video"}
+                    src={`${imageUrl}products/${item.videoSrc}`}
                     autoPlay
                     loop
                     muted
@@ -185,7 +178,7 @@ const AsSeenOn = (props) => {
                         fontWeight: { xs: "700", sm: "600", md: "700" },
                       }}
                     >
-                      {item.name ? `As seen on ${item.name}` : ""}
+                      {item.name}
                     </Typography>
                     {/* <Button
                     variant="contained"

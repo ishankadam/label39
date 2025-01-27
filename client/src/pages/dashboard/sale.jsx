@@ -11,7 +11,6 @@ const Sale = (props) => {
   });
 
   const [saleData, setSaleData] = useState([]);
-  const [, setLoading] = useState(false);
 
   const handleModalClose = () => {
     setShowSaleModal({
@@ -23,6 +22,7 @@ const Sale = (props) => {
 
   useEffect(() => {
     setSaleData(props.saleData);
+    console.log(props.saleData);
   }, [props.saleData]);
 
   const handleOnClickView = (row) => {
@@ -43,21 +43,26 @@ const Sale = (props) => {
 
   const colDef = [
     {
-      id: "image",
-      label: "Image",
-      key: "image",
-      type: "image",
-      align: "center",
-      folderName: "saleData",
-    },
-    {
       id: "name",
       label: "Name",
       key: "name",
       type: "text",
       align: "left",
     },
-
+    {
+      id: "type",
+      label: "Type",
+      key: "discountType",
+      type: "text",
+      align: "left",
+    },
+    {
+      id: "value",
+      label: "Value",
+      key: "discountValue",
+      type: "text",
+      align: "left",
+    },
     {
       id: "notification-icon",
       label: "",
@@ -102,7 +107,7 @@ const Sale = (props) => {
           data={showSaleModal.data}
           handleModalClose={handleModalClose}
           setShowModal={setShowSaleModal}
-          setLoading={setLoading}
+          setLoading={props.setLoading}
           setSaleData={props.setSaleData}
           products={props.products}
         ></SaleForm>

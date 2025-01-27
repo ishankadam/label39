@@ -151,10 +151,12 @@ const AddEditProductModal = (props) => {
   };
 
   useEffect(() => {
-    const newCategoriesList = props.categories?.map((category) => ({
-      label: category.name,
-      value: category.name.toLowerCase().replace(/\s+/g, ""),
-    }));
+    const newCategoriesList = props.categories
+      ?.filter((row) => row.dropdownOption)
+      .map((category) => ({
+        label: category.name,
+        value: category.name.toLowerCase().replace(/\s+/g, ""),
+      }));
     setCategoryList(newCategoriesList);
   }, [props.categories]);
 
