@@ -13,11 +13,15 @@ var _ = require("lodash");
 const { createJSONToken } = require("../auth");
 const orders = require("../schema/orders");
 const crypto = require("crypto");
-const ClientDiaries = require("../schema/clientDiaries");
+const Giftcard = require("../schema/giftCard");
+const clientDiaries = require("../schema/clientDiaries");
+const CelebrityStyle = require("../schema/celebrityStyle");
+const Sale = require("../schema/sale");
 
 const storage = multer.diskStorage({
   destination: (req, _file, cb) => {
     let category;
+    console.log(req.body.clientDiaries);
     try {
       if (req.body.products) {
         category = "products";
@@ -27,6 +31,8 @@ const storage = multer.diskStorage({
         category = "testimonial";
       } else if (req.body.clientDiaries) {
         category = "clientDiaries";
+      } else if (req.body.celebrityStyles) {
+        category = "celebrityStyles";
       } else {
         return cb(
           new Error(
@@ -56,6 +62,17 @@ const storage = multer.diskStorage({
     } catch (error) {
       console.error("Error parsing data:", error);
       return cb(new Error("Invalid data format in request body"));
+    }
+  },
+  filename: (_req, file, cb) => {
+    try {
+      if (!file || !file.originalname) {
+        throw new Error("File or original name is missing.");
+      }
+      cb(null, file.originalname); // Use the original name as the filename
+    } catch (error) {
+      console.error("Error in filename function:", error);
+      cb(new Error("Failed to process file name."));
     }
   },
 });
@@ -276,8 +293,10 @@ const verifyPayment = async (req, res) => {
       razorpay_signature,
       checkoutData,
       cartItems,
+      giftCardData,
+      type,
     } = req.body;
-
+    console.log(req.body);
     console.log(razorpay_order_id, razorpay_payment_id, razorpay_signature);
 
     const sign = razorpay_order_id + "|" + razorpay_payment_id;
@@ -289,28 +308,51 @@ const verifyPayment = async (req, res) => {
 
     if (razorpay_signature === expectedSign) {
       // Payment is successful, store data in the database
-      const order = new orders({
-        orderId: razorpay_order_id,
-        paymentId: razorpay_payment_id,
-        checkoutData: checkoutData,
-        paymentInfo: {
-          status: "success",
-          method: "razorpay",
-        },
-        cartItems,
-      });
-      await order.save();
+      if (type === "order") {
+        const order = new orders({
+          orderId: razorpay_order_id,
+          paymentId: razorpay_payment_id,
+          checkoutData: checkoutData,
+          paymentInfo: {
+            status: "success",
+            method: "razorpay",
+          },
+          cartItems,
+        });
+        await order.save();
 
-      return res.status(200).json({
-        order: order,
-        message: "Payment verified successfully",
-        success: true,
-      });
-    } else {
-      return res.status(400).json({
-        message: "Invalid signature sent!",
-        success: false,
-      });
+        return res.status(200).json({
+          order: order,
+          message: "Payment verified successfully",
+          success: true,
+        });
+      } else if (type === "giftcard") {
+        console.log(giftCardData);
+        const giftCart = new Giftcard({
+          balance: giftCardData.balance,
+          email: giftCardData.email,
+          phone: giftCardData.phone,
+          code: crypto.randomBytes(16).toString("hex"),
+          expiryDate: new Date(
+            Date.now() + 183 * 24 * 60 * 60 * 1000
+          ).toISOString(),
+          status: "active",
+          transactions: [],
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+        });
+        await giftCart.save();
+        return res.status(200).json({
+          order: giftCart,
+          message: "Gift card verified successfully",
+          success: true,
+        });
+      } else {
+        return res.status(400).json({
+          message: "Invalid signature sent!",
+          success: false,
+        });
+      }
     }
   } catch (error) {
     console.log(error);
@@ -679,30 +721,31 @@ const updateProductPriorities = async (req, res) => {
 const create_client_diaries = async (req, res) => {
   try {
     // Parse the products data from the request body
+    console.log(req.body.clientDiaries);
     const clientDiariesData = JSON.parse(req.body.clientDiaries); // Assuming it's a JSON string
+    console.log(clientDiariesData);
     const images = req.files || []; // Safely get images
     // Validate the productsData structure
     if (typeof clientDiariesData !== "object" || clientDiariesData === null) {
       return res.status(400).send({
-        error: "Invalid data format. Expecting a Client Diaries object.",
+        error: "Invalid data format. Expecting a client diaries object.",
       });
     }
     const image =
       Array.isArray(images) && images.length > 0
-        ? images[0].filename
-        : images.filename;
-
-    // Generate a unique product ID for each product
-    const newClientDiariesData = new ClientDiaries({
+        ? images[0].originalname
+        : images.originalname; // Generate a unique product ID for each product
+    const newclientDiariesData = new clientDiaries({
       clientDiariesId: Math.floor(Math.random() * 9000000000) + 1,
       name: clientDiariesData.name,
       image: image,
+      productId: clientDiariesData.productId,
     });
-    console.log(newClientDiariesData);
-    await newClientDiariesData.save();
+    console.log(newclientDiariesData);
+    await newclientDiariesData.save();
 
-    const allCategory = await ClientDiaries.find({});
-    res.send(allCategory);
+    const allClientDiaries = await clientDiaries.find({});
+    res.send(allClientDiaries);
   } catch (error) {
     console.log("Error while creating client diaries:", error);
     res
@@ -713,8 +756,150 @@ const create_client_diaries = async (req, res) => {
 
 const get_all_client_diaries = async (_req, res) => {
   try {
-    const clientDiaries = await ClientDiaries.find({}).select("-_id -__v"); // Exclude _id and __v fields
-    res.status(200).json(clientDiaries); // Send the result as JSON
+    // const allClientDiaries = await clientDiaries.find({}).select("-_id -__v"); // Exclude _id and __v fields
+    const allClientDiaries = await clientDiaries.aggregate([
+      {
+        $lookup: {
+          from: "products", // Replace with your products collection name
+          localField: "productId.value", // Field in clientDiaries containing the product ID
+          foreignField: "productId", // Field in products matching the product ID
+          as: "productDetails", // Name of the array where matched documents will be stored
+        },
+      },
+      {
+        $match: {
+          "productId.value": { $exists: true }, // Ensures productId.value exists
+        },
+      },
+      {
+        $sort: {
+          _id: -1,
+        },
+      },
+    ]);
+    console.log(allClientDiaries);
+
+    // i want to get product detials from product collection in same query as client diaries
+
+    res.status(200).json(allClientDiaries); // Send the result as JSON
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Error fetching events", error });
+  }
+};
+
+const create_giftcard = async (req, res) => {
+  try {
+    const giftcardDetails = req.body;
+    const newGiftcard = new Giftcard(giftcardDetails);
+    await newGiftcard.save();
+    res.status(201).json(giftcardDetails);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Error creating giftcard", error });
+  }
+};
+
+const create_celebrity_styles = async (req, res) => {
+  try {
+    // Parse the products data from the request body
+    const celebrityStylesData = JSON.parse(req.body.celebrityStyles); // Assuming it's a JSON string
+    const images = req.files || []; // Safely get images
+    // Validate the productsData structure
+    if (
+      typeof celebrityStylesData !== "object" ||
+      celebrityStylesData === null
+    ) {
+      return res.status(400).send({
+        error: "Invalid data format. Expecting a celebrity style object.",
+      });
+    }
+    const image =
+      Array.isArray(images) && images.length > 0
+        ? images[0].originalname
+        : images.originalname; // Generate a unique product ID for each product
+    const newcelebrityStylesData = new CelebrityStyle({
+      celebrityStyleId: Math.floor(Math.random() * 9000000000) + 1,
+      name: celebrityStylesData.name,
+      image: image,
+      productId: celebrityStylesData.productId,
+    });
+    console.log(newcelebrityStylesData);
+    await newcelebrityStylesData.save();
+
+    const allCelebrityStyles = await CelebrityStyle.find({});
+    res.send(allCelebrityStyles);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Error creating celebrity styles", error });
+  }
+};
+
+const get_all_celebrity_styles = async (_req, res) => {
+  try {
+    const allCelebrityStyles = await CelebrityStyle.aggregate([
+      {
+        $lookup: {
+          from: "products", // Replace with your products collection name
+          localField: "productId.value", // Field in celebrityStyles containing the product ID
+          foreignField: "productId", // Field in products matching the product ID
+          as: "productDetails", // Name of the array where matched documents will be stored
+        },
+      },
+      {
+        $match: {
+          "productId.value": { $exists: true }, // Ensures productId.value exists
+        },
+      },
+    ]);
+    console.log(allCelebrityStyles);
+
+    // i want to get product detials from product collection in same query as celebrityStyles
+
+    res.status(200).json(allCelebrityStyles); // Send the result as JSON
+  } catch (error) {
+    console.error("Error fetching products or exchange rates:", error);
+    res
+      .status(500)
+      .json({ message: "Error fetching products or exchange rates", error });
+  }
+};
+
+const createSale = async (req, res) => {
+  try {
+    const saleData = JSON.parse(req.body.saleData); // Assuming it's a JSON string
+    const newSale = new Sale({
+      name: saleData.name,
+      discountType: saleData.discountType,
+      discountValue: saleData.discountValue,
+      products: saleData.products,
+      isActive: saleData.isActive,
+    });
+    //update the products set sale with discountType and discountValue
+    await newSale.save();
+    saleData.products.forEach(async (product) => {
+      const productToUpdate = await Product.findOne({
+        productId: product.productId,
+      });
+      productToUpdate.sale = {
+        discountType: saleData.discountType,
+        discountValue: saleData.discountValue,
+        isActive: saleData.isActive,
+      };
+      await productToUpdate.save();
+    });
+    const allSale = await Sale.find({});
+    res.send(allSale);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Error creating sale", error });
+  }
+};
+
+const getAllSales = async (_req, res) => {
+  try {
+    const allSale = await Sale.find({}).select("-_id -__v"); // Exclude _id and __v fields
+    res.status(200).json(allSale); // Send the result as JSON
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Error fetching events", error });
@@ -745,4 +930,9 @@ module.exports = {
   updateProductPriorities,
   create_client_diaries,
   get_all_client_diaries,
+  create_giftcard,
+  create_celebrity_styles,
+  get_all_celebrity_styles,
+  createSale,
+  getAllSales,
 };

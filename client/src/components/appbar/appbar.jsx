@@ -80,7 +80,7 @@ const CustomAppbar = (props) => {
     { text: "Shop", page: "shop" },
     { text: "About Us", page: "ourStory" },
     { text: "Gift card", page: "giftcard" },
-    { text: "Celebrity style", page: "celebrity" },
+    { text: "Client Diaries", page: "clientsDiaries" },
   ];
 
   useEffect(() => {
@@ -367,13 +367,7 @@ const CustomAppbar = (props) => {
               sx={{ opacity: 0.7, padding: "8px 0 8px 8px" }}
               onClick={() => navigate("/contactUs")}
             >
-              <Badge
-                badgeContent={cartItemCount} // Number of items
-                color="error" // Red badge
-                overlap="circular" // Adjusts position for circular icons
-              >
-                <CallOutlinedIcon />
-              </Badge>
+              <CallOutlinedIcon />
             </IconButton>
 
             {/* User Menu for Admins */}

@@ -251,6 +251,8 @@ export const verifyPayment = async ({
   razorpay_signature,
   checkoutData,
   cartItems,
+  giftCardData,
+  type,
 }) => {
   try {
     const response = await fetch(`${apiUrl}/verify-payment`, {
@@ -262,6 +264,8 @@ export const verifyPayment = async ({
         razorpay_signature,
         checkoutData,
         cartItems,
+        giftCardData,
+        type,
       }),
     });
 
@@ -667,10 +671,11 @@ export const createClientDiaries = async ({
 
     if (response.ok) {
       const data = await response.json();
+      console.log(data);
       setClientDiaries(data);
     } else {
       const errorData = await response.json();
-      console.error("Error creating Client Diaries:", errorData);
+      console.error("Error creating client diaries:", errorData);
     }
   } catch (e) {
     console.error("Fetch error:", e);
@@ -699,5 +704,121 @@ export const getAllClientDiaries = async ({ setClientDiaries, setLoading }) => {
     return data;
   } catch (err) {
     console.error("Error fetching products:", err);
+    throw err;
+  }
+};
+
+export const createCelebrityStyles = async ({
+  celebrityStyles,
+  setLoading,
+  setCelebrityStyles,
+}) => {
+  setLoading(true);
+  const formData = new FormData();
+
+  formData.append("celebrityStyles", JSON.stringify(celebrityStyles));
+
+  if (celebrityStyles.image && Array.isArray(celebrityStyles.image)) {
+    celebrityStyles.image.forEach((img) => {
+      if (img instanceof File) {
+        formData.append("image", img); // Add images
+      }
+    });
+  }
+
+  const requestOptions = {
+    method: "POST",
+    body: formData,
+  };
+
+  try {
+    const response = await fetch(
+      `${apiUrl}/createCelebrityStyles`,
+      requestOptions
+    );
+
+    if (response.ok) {
+      const data = await response.json();
+      setCelebrityStyles(data);
+    } else {
+      const errorData = await response.json();
+      console.error("Error creating celebrity styles:", errorData);
+    }
+  } catch (e) {
+    console.error("Fetch error:", e);
+  } finally {
+    setLoading(false);
+  }
+};
+
+export const getAllCelebrityStyles = async ({
+  setCelebrityStyles,
+  setLoading,
+}) => {
+  try {
+    const response = await fetch(`${apiUrl}/getCelebrityStyles`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (!response.ok) {
+      if (response.status === 401) {
+        console.error("Unauthorized access");
+      }
+      throw new Error("Failed to fetch products");
+    }
+
+    const data = await response.json();
+    setCelebrityStyles(data);
+    setLoading && setLoading(false);
+    return data;
+  } catch (err) {
+    console.error("Error fetching products:", err);
+    throw err;
+  }
+};
+
+export const createSale = async ({ saleData, setLoading, setSaleData }) => {
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(saleData),
+  };
+  fetch(`${apiUrl}/createSale`, requestOptions)
+    .then(async (res) => {
+      if (res.ok) {
+        const data = await res.json();
+        setSaleData(data);
+        setLoading && setLoading(false);
+      }
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+};
+
+export const getAllSales = async ({ setSaleData, setLoading }) => {
+  try {
+    const response = await fetch(`${apiUrl}/getSales`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (!response.ok) {
+      if (response.status === 401) {
+        console.error("Unauthorized access");
+      }
+      throw new Error("Failed to fetch products");
+    }
+
+    const data = await response.json();
+    setSaleData(data);
+    setLoading && setLoading(false);
+    return data;
+  } catch (err) {
+    console.error("Error fetching products:", err);
+    throw err;
   }
 };

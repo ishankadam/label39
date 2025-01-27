@@ -11,6 +11,7 @@ import CategoryIcon from "@mui/icons-material/Category";
 import GroupIcon from "@mui/icons-material/Group";
 import ViewModuleIcon from "@mui/icons-material/ViewModule";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import GroupAddIcon from "@mui/icons-material/GroupAdd";
 
 export const dashboardTabValue = [
   { label: "Products", value: "one", icon: <DashboardIcon /> },
@@ -19,7 +20,9 @@ export const dashboardTabValue = [
   { label: "User", value: "four", icon: <GroupIcon /> },
   { label: "Orders", value: "five", icon: <ViewModuleIcon /> },
   { label: "Profile", value: "six", icon: <AccountCircleIcon /> },
-  { label: "Celebrity Style", value: "seven", icon: <AccountCircleIcon /> },
+  { label: "Client Diaries", value: "seven", icon: <GroupAddIcon /> },
+  { label: "Celebrity Style", value: "eight", icon: <GroupAddIcon /> },
+  { label: "Sales", value: "nine", icon: <GroupAddIcon /> },
 ];
 
 export const whatsappQueryMessage =
@@ -155,7 +158,6 @@ export const availableSizes = [
   { label: "M", value: "M" },
   { label: "L", value: "L" },
   { label: "XL", value: "XL" },
-  { label: "XXL", value: "XXL" },
 ];
 
 export const garmentDetails = ["100% cotton", "Machine washable.", "Printed"];

@@ -78,8 +78,22 @@ router.post(
   controller.upload.array("image"),
   controller.create_client_diaries
 );
+
 // get all client diaries
 router.get("/getClientDiaries", controller.get_all_client_diaries);
+
+// create celebrity style
+router.post(
+  "/createCelebrityStyles",
+  controller.upload.array("image"),
+  controller.create_celebrity_styles
+);
+
+// get all celebrity styles
+router.get("/getCelebrityStyles", controller.get_all_celebrity_styles);
+
+//create giftcard
+router.post("/createGiftcard", controller.create_giftcard);
 
 // Error handling middleware
 router.use((error, _req, res) => {
@@ -87,5 +101,9 @@ router.use((error, _req, res) => {
   const message = error.message || "Something went wrong.";
   res.status(status).json({ message: message });
 });
+
+// Sales
+router.post("/createSale", controller.createSale);
+router.get("/getSales", controller.getAllSales);
 
 module.exports = router;

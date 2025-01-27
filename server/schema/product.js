@@ -1,6 +1,4 @@
-const { read } = require("fs");
 const mongoose = require("mongoose");
-// const { fabrics } = require("../../client/src/common");
 
 // Define the schema
 const productSchema = new mongoose.Schema({
@@ -34,6 +32,7 @@ const productSchema = new mongoose.Schema({
   priority: { type: Number },
   readyToShip: { type: Boolean, default: true },
   fabric: { type: String },
+  sale: { type: Object },
 });
 
 // Create the model

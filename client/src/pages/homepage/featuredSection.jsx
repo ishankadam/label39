@@ -8,11 +8,15 @@ import { imageUrl } from "../../api";
 import { NextArrow, PrevArrow } from "../../components/arrow-component"; // Update the import path as needed
 
 const FeaturedSection = (props) => {
-  const [shopByVideos, setshopByVideos] = useState(props.shopByVideos || []);
+  const [celebrityStyles, setCelebrityStyles] = useState([]);
 
   useEffect(() => {
-    setshopByVideos(props.shopByVideos);
-  }, [props.shopByVideos]);
+    setCelebrityStyles(props.celebrityStyles);
+  }, [props.celebrityStyles]);
+
+  useEffect(() => {
+    console.log(celebrityStyles);
+  }, [celebrityStyles]);
 
   // const featured = [
   //   { label: "NEW ARRIVAL", videoSrc: video1 },
@@ -26,7 +30,7 @@ const FeaturedSection = (props) => {
   // Slick settings for responsive slider
   const settings = {
     dots: false,
-    infinite: shopByVideos.length > 4,
+    infinite: celebrityStyles.length > 4,
     speed: 500,
     slidesToShow: 4, // 5 cards on laptop
     autoplay: true, // Enable automatic sliding
@@ -108,62 +112,68 @@ const FeaturedSection = (props) => {
         }}
       >
         <Slider {...settings}>
-          {shopByVideos.map((item, index) => (
-            <Box key={index}>
-              <Card
-                sx={{
-                  position: "relative",
-                  margin: { xs: "0 5px", sm: "0 10px", md: "0 16px" },
-                  overflow: "hidden",
-                }}
-              >
-                <CardMedia
-                  component="video"
-                  src={`${imageUrl}${item.videoSrc}`}
-                  autoPlay
-                  loop
-                  muted
+          {celebrityStyles.map((item, index) => {
+            console.log(item);
+            return (
+              <Box key={index}>
+                <Card
                   sx={{
-                    height: {
-                      xs: "450px",
-                      sm: "auto",
-                      md: "500px",
-                      lg: "550px",
-                    },
-
-                    width: "100%",
-                    objectFit: "cover",
-                  }} // Ensure video fills the card
-                />
-                <Box
-                  sx={{
-                    position: "absolute",
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    height: "70px",
-                    background:
-                      "linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0))",
-                    // "linear-gradient(0deg, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 63%, rgba(0, 0, 0, 0) 86%)",
-                    borderImage: "initial",
-                    boxShadow: "rgb(0, 0, 0) 0px 0px 0px",
-                    color: "white",
-                    padding: { xs: "6px", sm: "6px", md: "10px", lg: "10px" },
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
+                    position: "relative",
+                    margin: { xs: "0 5px", sm: "0 10px", md: "0 16px" },
+                    overflow: "hidden",
                   }}
                 >
-                  <Typography
+                  <CardMedia
+                    component={item.videoSrc ? "video" : "img"}
+                    src={
+                      item.videoSrc
+                        ? `${imageUrl}${item.videoSrc}`
+                        : `${imageUrl}celebrityStyles/${item.image[0]}`
+                    }
+                    autoPlay
+                    loop
+                    muted
                     sx={{
-                      fontSize: { xs: "14px", sm: "13px", md: "16px" },
-                      fontFamily: "'Cinzel', serif", // Ensure the font is applied here
-                      fontWeight: { xs: "700", sm: "600", md: "700" },
+                      height: {
+                        xs: "450px",
+                        sm: "auto",
+                        md: "500px",
+                        lg: "550px",
+                      },
+
+                      width: "100%",
+                      objectFit: "cover",
+                    }} // Ensure video fills the card
+                  />
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      height: "70px",
+                      background:
+                        "linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0))",
+                      // "linear-gradient(0deg, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 63%, rgba(0, 0, 0, 0) 86%)",
+                      borderImage: "initial",
+                      boxShadow: "rgb(0, 0, 0) 0px 0px 0px",
+                      color: "white",
+                      padding: { xs: "6px", sm: "6px", md: "10px", lg: "10px" },
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
                     }}
                   >
-                    {item.asSeenOn ? `As seen on ${item.asSeenOn}` : ""}
-                  </Typography>
-                  {/* <Button
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", sm: "13px", md: "16px" },
+                        fontFamily: "'Cinzel', serif", // Ensure the font is applied here
+                        fontWeight: { xs: "700", sm: "600", md: "700" },
+                      }}
+                    >
+                      {item.name ? `As seen on ${item.name}` : ""}
+                    </Typography>
+                    {/* <Button
                     variant="contained"
                     // color="white"
                     sx={{
@@ -181,34 +191,35 @@ const FeaturedSection = (props) => {
                   >
                     SHOP NOW
                   </Button> */}
-                  <Button
-                    variant="outlined"
-                    // color="white"
-                    sx={{
-                      // background: "#c4907c",
-                      color: "white",
-                      fontFamily: "'Cinzel', serif",
-                      fontWeight: { xs: "700", sm: "600", md: "700" },
-                      fontSize: { xs: "14px", sm: "13px", md: "16px" },
-                      padding: { xs: "6px" },
-                      borderRadius: "2px",
-                      borderColor: "white",
-                      "&:hover": {
+                    <Button
+                      variant="outlined"
+                      // color="white"
+                      sx={{
+                        // background: "#c4907c",
                         color: "white",
-                        background: "#a16149",
-                        borderColor: "#a16149",
-                      },
-                    }}
-                    onClick={() => {
-                      props.handleViewProduct(item);
-                    }}
-                  >
-                    SHOP NOW
-                  </Button>{" "}
-                </Box>
-              </Card>
-            </Box>
-          ))}
+                        fontFamily: "'Cinzel', serif",
+                        fontWeight: { xs: "700", sm: "600", md: "700" },
+                        fontSize: { xs: "14px", sm: "13px", md: "16px" },
+                        padding: { xs: "6px" },
+                        borderRadius: "2px",
+                        borderColor: "white",
+                        "&:hover": {
+                          color: "white",
+                          background: "#a16149",
+                          borderColor: "#a16149",
+                        },
+                      }}
+                      onClick={() => {
+                        props.handleViewProduct(item.productDetails[0]);
+                      }}
+                    >
+                      SHOP NOW
+                    </Button>{" "}
+                  </Box>
+                </Card>
+              </Box>
+            );
+          })}
         </Slider>
       </Box>
 

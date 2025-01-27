@@ -41,13 +41,13 @@ const ShopDialog = ({ onMouseEnter, onMouseLeave }) => {
             CATEGORIES
           </Typography>
           <Button sx={{ textAlign: "left", width: "100%", color: "#677489" }}>
-            SHIRTS
-          </Button>
-          <Button sx={{ textAlign: "left", width: "100%", color: "#677489" }}>
             CO-ORD SETS
           </Button>
           <Button sx={{ textAlign: "left", width: "100%", color: "#677489" }}>
-            SUITS
+            KURTAS
+          </Button>
+          <Button sx={{ textAlign: "left", width: "100%", color: "#677489" }}>
+            SHIRTS AND DRESSES
           </Button>
           <Button sx={{ textAlign: "left", width: "100%", color: "#677489" }}>
             FESTIVE
@@ -70,16 +70,16 @@ const ShopDialog = ({ onMouseEnter, onMouseLeave }) => {
             NEW ARRIVAL
           </Button>
           <Button sx={{ textAlign: "left", width: "100%", color: "#677489" }}>
+            BEST SELLERS
+          </Button>
+          <Button sx={{ textAlign: "left", width: "100%", color: "#677489" }}>
+            Ready to ship
+          </Button>
+          <Button sx={{ textAlign: "left", width: "100%", color: "#677489" }}>
             AS SEEN ON - CELEBRITY STYLE
           </Button>
           <Button sx={{ textAlign: "left", width: "100%", color: "#677489" }}>
             CLIENTS DAIRY
-          </Button>
-          <Button sx={{ textAlign: "left", width: "100%", color: "#677489" }}>
-            KURTA SETS
-          </Button>
-          <Button sx={{ textAlign: "left", width: "100%", color: "#677489" }}>
-            BEST SELLERS
           </Button>
         </Box>
 

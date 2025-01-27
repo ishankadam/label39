@@ -3,44 +3,72 @@ import {
   Box,
   Modal,
   Typography,
-  TextField,
   Button,
   Chip,
   Stack,
   IconButton,
 } from "@mui/material";
-import { createOrder } from "../../api";
+import { createOrder, verifyPayment } from "../../api";
 import { razorpayId } from "../../pages/payment/paymentPage";
 import gift from "../../assets/giftcard.jpg";
 import CloseIcon from "@mui/icons-material/Close";
+import CustomTextfield from "../../components/textfield/customTextfield";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { closeGiftCard } from "../../store/cartSlice";
 
 const GiftCardModal = ({ open, onClose }) => {
-  const [amount, setAmount] = useState("");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [giftcardDetails, setGiftcardDetails] = useState({
+    balance: "",
+    email: "",
+    phone: "",
+  });
+
+  const handleEdit = (value, field) => {
+    setGiftcardDetails((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
   const predefinedValues = [500, 1000, 2000, 5000]; // Predefined amounts
 
   const handleChipClick = (value) => {
-    setAmount(value); // Set the selected value in TextField
-  };
-
-  const handleChange = (event) => {
-    setAmount(event.target.value); // Update amount from TextField
+    setGiftcardDetails((prev) => ({
+      ...prev,
+      balance: value,
+    }));
   };
 
   const handlePay = async () => {
     try {
       // Call createOrder to get the Razorpay order ID
-      const { orderId } = await createOrder(amount);
+      const { orderId } = await createOrder(giftcardDetails.balance);
 
       const options = {
         key: razorpayId, // Replace with your key_id
-        amount: amount * 100, // Amount in the smallest currency unit
+        amount: giftcardDetails.balance * 100, // Amount in the smallest currency unit
         currency: "INR",
         name: "The Label 39",
         description: "Payment Description",
         order_id: orderId,
-        handler: function (response) {
-          alert("Payment Successful!");
-          console.log(response);
+        handler: async function (response) {
+          const result = await verifyPayment({
+            razorpay_order_id: response.razorpay_order_id,
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_signature: response.razorpay_signature,
+            giftCardData: giftcardDetails,
+            type: "giftcard",
+          });
+
+          if (result.success) {
+            onClose();
+            alert("Payment Successful");
+            navigate("/");
+          } else {
+            alert("Payment Failed");
+          }
         },
         prefill: {
           name: "TheLabel39",
@@ -153,8 +181,11 @@ const GiftCardModal = ({ open, onClose }) => {
                 sx={{
                   fontWeight: "600",
                   cursor: "pointer",
-                  bgcolor: amount === value ? "#A16149" : "transparent",
-                  color: amount === value ? "white" : "#A16149",
+                  bgcolor:
+                    giftcardDetails.amount === value
+                      ? "#A16149"
+                      : "transparent",
+                  color: giftcardDetails.amount === value ? "white" : "#A16149",
                   border: `1px solid #A16149`, // Outline with #A16149
                   "&:hover": {
                     bgcolor: "#A16149",
@@ -165,34 +196,37 @@ const GiftCardModal = ({ open, onClose }) => {
             ))}
           </Stack>
 
-          <TextField
+          <CustomTextfield
             fullWidth
             type="number"
             label="Enter Amount"
-            value={amount}
-            onChange={handleChange}
+            config={{ field: "amount" }}
+            value={giftcardDetails.balance}
+            handleEdit={handleEdit}
             inputProps={{ min: 0 }}
-            sx={{ mb: 2 }}
+            sx={{ mb: 2, width: "100%" }}
           />
 
-          <TextField
+          <CustomTextfield
             fullWidth
-            type="number"
-            label="Enter Amount"
-            value={amount}
-            onChange={handleChange}
+            type="email"
+            label="Enter Email"
+            config={{ field: "email" }}
+            value={giftcardDetails.email}
+            handleEdit={handleEdit}
             inputProps={{ min: 0 }}
-            sx={{ mb: 2 }}
+            sx={{ mb: 2, width: "100%" }}
           />
 
-          <TextField
+          <CustomTextfield
             fullWidth
-            type="number"
-            label="Enter Amount"
-            value={amount}
-            onChange={handleChange}
+            type="phone"
+            label="Enter Phone Number"
+            config={{ field: "phone" }}
+            value={giftcardDetails.phone}
+            handleEdit={handleEdit}
             inputProps={{ min: 0 }}
-            sx={{ mb: 2 }}
+            sx={{ mb: 2, width: "100%" }}
           />
 
           <Button

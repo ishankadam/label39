@@ -17,7 +17,12 @@ import DeliveryForm from "./pages/product/deliveryForm";
 import Dashboard from "./pages/dashboard/dashboard";
 import FindUs from "./pages/homepage/findUs";
 import { Box, Fab, Tooltip } from "@mui/material";
-import { getAllCategories, getAllProducts } from "./api";
+import {
+  getAllCategories,
+  getAllCelebrityStyles,
+  getAllClientDiaries,
+  getAllProducts,
+} from "./api";
 import TermsAndConditions from "./pages/termsAndCondition/termsAndCondition";
 import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
 import GiftCardModal from "./form/giftCard/giftCard";
@@ -34,6 +39,8 @@ const App = () => {
     open: false,
     data: [],
   });
+  const [clientDiaries, setClientDiaries] = useState([]);
+  const [celebrityStyles, setCelebrityStyles] = useState([]);
   const [allCategories, setAllCategories] = useState([]);
   const [allProduct, setAllProduct] = useState([]);
   const [loading, setLoading] = useState(true); // Start with loading true
@@ -57,6 +64,19 @@ const App = () => {
       isActive: true,
     });
   }, [country]);
+
+  useEffect(() => {
+    getAllClientDiaries({
+      setClientDiaries,
+    });
+    getAllCelebrityStyles({
+      setCelebrityStyles,
+    });
+  }, []);
+
+  useEffect(() => {
+    console.log(clientDiaries);
+  }, [clientDiaries]);
 
   useEffect(() => {
     getAllCategories({
@@ -199,6 +219,7 @@ const App = () => {
                 allProduct={allProduct}
                 allCategories={allCategories}
                 country={country}
+                celebrityStyles={celebrityStyles}
               />
             }
           />
@@ -255,7 +276,11 @@ const App = () => {
             element={<TermsAndConditions />}
           />
           <Route exact path="/profile" element={<ProfilePage />} />
-          <Route exact path="/client-diary" element={<ClientDiaryPage />} />
+          <Route
+            exact
+            path="/clientsDiaries"
+            element={<ClientDiaryPage clientDiaries={clientDiaries} />}
+          />
         </Routes>
         <CustomDrawer
           cartDetails={cartDetails}

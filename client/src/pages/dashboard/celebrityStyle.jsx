@@ -1,20 +1,20 @@
 import { Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import CustomTable from "../../components/custom-table/customTable";
-import ClientDiariesForm from "../../form/clientDiaries/clientDiariesForm";
+import CelebrityStyleForm from "../../form/celebrityStyle/celebrityStyleForm";
 
-const ClientsDiaries = (props) => {
-  const [showClientDiariesModal, setShowClienDiariesModal] = useState({
+const CelebrityStyle = (props) => {
+  const [showCelebrityStyleModal, setShowCelebrityStyleModal] = useState({
     show: false,
     isEdit: false,
     data: {},
   });
 
-  const [clientDiaries, setClientDiaries] = useState([]);
+  const [celebrityStyles, setCelebrityStyles] = useState([]);
   const [, setLoading] = useState(false);
 
   const handleModalClose = () => {
-    setShowClienDiariesModal({
+    setShowCelebrityStyleModal({
       show: false,
       isEdit: false,
       data: {},
@@ -22,11 +22,11 @@ const ClientsDiaries = (props) => {
   };
 
   useEffect(() => {
-    setClientDiaries(props.clientDiaries);
-  }, [props.clientDiaries]);
+    setCelebrityStyles(props.celebrityStyles);
+  }, [props.celebrityStyles]);
 
   const handleOnClickView = (row) => {
-    setShowClienDiariesModal({
+    setShowCelebrityStyleModal({
       show: true,
       isEdit: true,
       data: row,
@@ -34,7 +34,7 @@ const ClientsDiaries = (props) => {
   };
 
   const handleOpenForm = () => {
-    setShowClienDiariesModal({
+    setShowCelebrityStyleModal({
       show: true,
       isEdit: false,
       data: {},
@@ -48,7 +48,7 @@ const ClientsDiaries = (props) => {
       key: "image",
       type: "image",
       align: "center",
-      folderName: "clientDiaries",
+      folderName: "celebrityStyles",
     },
     {
       id: "name",
@@ -84,31 +84,31 @@ const ClientsDiaries = (props) => {
         sx={{ width: "300px" }}
         onClick={handleOpenForm}
       >
-        Create client diaries
+        Create celebrity style
       </Button>
       <CustomTable
         colDef={colDef}
-        rowData={clientDiaries}
+        rowData={celebrityStyles}
         loading={props.loading}
         pagination={true}
-        setShowModal={setShowClienDiariesModal}
+        setShowModal={setShowCelebrityStyleModal}
         handleModalClose={handleModalClose}
         page="Products"
       ></CustomTable>
-      {showClientDiariesModal.show && (
-        <ClientDiariesForm
-          open={showClientDiariesModal.show}
-          isEdit={showClientDiariesModal.isEdit}
-          data={showClientDiariesModal.data}
+      {showCelebrityStyleModal.show && (
+        <CelebrityStyleForm
+          open={showCelebrityStyleModal.show}
+          isEdit={showCelebrityStyleModal.isEdit}
+          data={showCelebrityStyleModal.data}
           handleModalClose={handleModalClose}
-          setShowModal={setShowClienDiariesModal}
+          setShowModal={setShowCelebrityStyleModal}
           setLoading={setLoading}
-          setClientDiaries={props.setClientDiaries}
+          setCelebrityStyles={props.setCelebrityStyles}
           products={props.products}
-        ></ClientDiariesForm>
+        ></CelebrityStyleForm>
       )}
     </div>
   );
 };
 
-export default ClientsDiaries;
+export default CelebrityStyle;

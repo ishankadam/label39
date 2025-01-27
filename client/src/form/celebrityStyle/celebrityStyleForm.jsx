@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Button, Typography, Box, Dialog } from "@mui/material";
 import CustomTextfield from "../../components/textfield/customTextfield";
 import UploadFiles from "../../components/upload/uploadFiles";
-import { createClientDiaries } from "../../api";
 import CustomAutocomplete from "../../components/autocomplete/autocomplete";
+import { createCelebrityStyles } from "../../api";
 // import UploadVideos from "../../components/upload/uploadVideos";
 
-const ClientDiariesForm = (props) => {
-  const [clientDiaries, setclientDiaries] = useState({
+const CelebrityStyleForm = (props) => {
+  const [celebrityStyles, setCelebrityStyles] = useState({
     name: "",
     image: null,
     videoSrc: null,
@@ -39,7 +39,7 @@ const ClientDiariesForm = (props) => {
 
   const handleEdit = (value, field) => {
     console.log(value, field);
-    setclientDiaries((prev) => ({
+    setCelebrityStyles((prev) => ({
       ...prev,
       [field]: value,
     }));
@@ -50,11 +50,11 @@ const ClientDiariesForm = (props) => {
   }, [props.open]);
 
   useEffect(() => {
-    console.log(clientDiaries);
-  }, [clientDiaries]);
+    console.log(celebrityStyles);
+  }, [celebrityStyles]);
 
   const handleFileUpload = (files) => {
-    setclientDiaries((prev) => ({
+    setCelebrityStyles((prev) => ({
       ...prev,
       image: files,
     }));
@@ -62,7 +62,7 @@ const ClientDiariesForm = (props) => {
 
   useEffect(() => {
     if (props.isEdit && props.data) {
-      setclientDiaries({ ...props.data });
+      setCelebrityStyles({ ...props.data });
       setImages(
         Array.isArray(props.data.image) ? props.data.image : [props.data.image]
       );
@@ -71,13 +71,13 @@ const ClientDiariesForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form Data Submitted", clientDiaries);
-    alert("Client Diary submitted successfully!");
-    console.log(clientDiaries);
-    createClientDiaries({
-      clientDiaries,
+    console.log("Form Data Submitted", celebrityStyles);
+    alert("Celebrity style submitted successfully!");
+    console.log(celebrityStyles);
+    createCelebrityStyles({
+      celebrityStyles,
       setLoading,
-      setClientDiaries: props.setClientDiaries,
+      setCelebrityStyles: props.setCelebrityStyles,
     });
     props.setShowModal((prev) => ({
       ...prev,
@@ -117,7 +117,7 @@ const ClientDiariesForm = (props) => {
             color: "#555",
           }}
         >
-          Add Client Diary
+          Add Celebrity style
         </Typography>
         <form
           onSubmit={handleSubmit}
@@ -130,7 +130,7 @@ const ClientDiariesForm = (props) => {
         >
           <CustomTextfield
             label="Name"
-            value={clientDiaries.name}
+            value={celebrityStyles.name}
             config={{ field: "name", isRequired: true }}
             handleEdit={handleEdit}
             sx={{ width: "100%" }}
@@ -140,7 +140,7 @@ const ClientDiariesForm = (props) => {
             options={productsArray}
             handleEdit={handleEdit}
             config={{ field: "productId", isRequired: true }}
-            value={clientDiaries.productId}
+            value={celebrityStyles.productId}
             sx={{ width: "100%" }}
           />
 
@@ -148,9 +148,9 @@ const ClientDiariesForm = (props) => {
             updateData={(files) => handleFileUpload(files)}
             isEdit={true}
             images={images}
-            file={clientDiaries.image}
+            file={celebrityStyles.image}
             acceptedFiles="image/png, image/jpeg"
-            category="clientDiaries"
+            category="celebrityStyles"
           />
           {/* <UploadVideos handleEdit={handleEdit} /> */}
 
@@ -170,4 +170,4 @@ const ClientDiariesForm = (props) => {
   );
 };
 
-export default ClientDiariesForm;
+export default CelebrityStyleForm;

@@ -3,9 +3,11 @@ import React, { useEffect, useState } from "react";
 
 import {
   getAllCategories,
+  getAllCelebrityStyles,
   getAllClientDiaries,
   getAllOrders,
   getAllProducts,
+  getAllSales,
   getAllTestimonials,
   getAllUsers,
 } from "../../api";
@@ -32,6 +34,8 @@ import SelectDropdown from "../../components/select-dropdown/selectDropdown";
 import ManageOrders from "./manageOrders";
 import ProfilePage from "../profile/profile";
 import ClientsDiaries from "./clientsDiaries";
+import CelebrityStyle from "./celebrityStyle";
+import Sale from "./sale";
 const drawerWidth = 180;
 
 const openedMixin = (theme) => ({
@@ -123,12 +127,15 @@ const Dashboard = (props) => {
   const [categories, setCategories] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
   const [clientDiaries, setClientDiaries] = useState([]);
-
+  const [celebrityStyles, setCelebrityStyles] = useState([]);
+  const [saleData, setSaleData] = useState([]);
   const [users, setUsers] = useState([]);
   const [productsloading, setProductsLoading] = useState(false);
   const [categoryloading, setCategoryLoading] = useState(false);
   const [testimonialsloading, setTestimonialsLoading] = useState(false);
-  const [, setClientDiariesLoading] = useState(false);
+  const [clientDiariesLoading, setclientDiariesLoading] = useState(false);
+  const [celebrityStylesLoading, setcelebrityStylesLoading] = useState(false);
+  const [saleLoading, setsaleLoading] = useState(false);
   const [usersloading, setUsersLoading] = useState(false);
   const [tabValue, setTabValue] = React.useState("one");
   const [filterOptions, setFilterOptions] = useState({
@@ -173,8 +180,13 @@ const Dashboard = (props) => {
     getAllOrders({ setAllOrders });
     getAllClientDiaries({
       setClientDiaries,
-      setLoading: setClientDiariesLoading,
+      setLoading: setclientDiariesLoading,
     });
+    getAllCelebrityStyles({
+      setCelebrityStyles,
+      setLoading: setcelebrityStylesLoading,
+    });
+    getAllSales({ setSaleData, setLoading: setsaleLoading });
   }, []);
 
   const handleOpenForm = (page) => {
@@ -450,6 +462,27 @@ const Dashboard = (props) => {
             <ClientsDiaries
               clientDiaries={clientDiaries}
               setClientDiaries={setClientDiaries}
+              loading={clientDiariesLoading}
+              setLoading={setclientDiariesLoading}
+              products={products}
+            />
+          )}
+          {tabValue === "eight" && (
+            <CelebrityStyle
+              celebrityStyles={celebrityStyles}
+              setCelebrityStyles={setCelebrityStyles}
+              loading={celebrityStylesLoading}
+              setLoading={setcelebrityStylesLoading}
+              products={products}
+            />
+          )}
+          {tabValue === "nine" && (
+            <Sale
+              saleData={saleData}
+              setSaleData={setSaleData}
+              loading={saleLoading}
+              setLoading={setsaleLoading}
+              products={products}
             />
           )}
         </Box>

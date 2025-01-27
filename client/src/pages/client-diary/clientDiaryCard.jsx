@@ -1,7 +1,8 @@
 import React from "react";
-import { Box, Button, Card, CardMedia, CardActions } from "@mui/material";
+import { Button, Card, CardMedia, CardActions } from "@mui/material";
+import { imageUrl } from "../../api";
 
-function ClientDiaryCard({ imageUrl, title }) {
+const ClientDiaryCard = (props) => {
   return (
     <Card
       sx={{
@@ -16,10 +17,10 @@ function ClientDiaryCard({ imageUrl, title }) {
     >
       <CardMedia
         component="img"
-        image={imageUrl}
-        alt={title}
+        image={`${imageUrl}clientDiaries/${props.clientDiary.image[0]}`}
+        alt={props.clientDiary.name}
         sx={{
-          height: "auto",
+          height: "100%",
           objectFit: "cover",
         }}
       />
@@ -44,6 +45,12 @@ function ClientDiaryCard({ imageUrl, title }) {
               borderColor: "#A16149",
             },
           }}
+          onClick={() => {
+            props.setShowModal({
+              open: true,
+              data: props.clientDiary.productDetails[0],
+            });
+          }}
         >
           View Product
         </Button>
@@ -66,6 +73,6 @@ function ClientDiaryCard({ imageUrl, title }) {
       </CardActions>
     </Card>
   );
-}
+};
 
 export default ClientDiaryCard;

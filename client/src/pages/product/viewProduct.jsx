@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -12,7 +12,7 @@ import {
 import ShareIcon from "@mui/icons-material/Share";
 import ChatIcon from "@mui/icons-material/Chat";
 import Footer from "../homepage/footer";
-import { imageUrl } from "../../api";
+import { addProductToCart, imageUrl } from "../../api";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../store/cartSlice";
 import { useNavigate } from "react-router-dom";
@@ -28,7 +28,7 @@ const ViewProductModal = (props) => {
     Upper: "XS",
     Bottom: "XS",
   });
-
+  const userId = localStorage.getItem("userId");
   const [price, setPrice] = useState(product.price);
   const [cartProduct, setCartProduct] = useState(product);
 
@@ -68,8 +68,11 @@ const ViewProductModal = (props) => {
       const bottomSize = product.sizes.Bottom?.find(
         (item) => item.size === selectedSizes.Bottom
       );
-      console.log(upperSize, bottomSize);
-      if (bottomSize.price > upperSize.price) {
+      if (
+        bottomSize?.price &&
+        upperSize?.price &&
+        bottomSize?.price > upperSize?.price
+      ) {
         selectedPrice = bottomSize.price;
       } else {
         selectedPrice = upperSize.price;
@@ -88,20 +91,24 @@ const ViewProductModal = (props) => {
   }, [product.price]);
 
   const handleAddToCart = () => {
-    console.log(cartProduct);
-    const newCartProduct = {
-      productId: cartProduct.productId,
-      name: cartProduct.name,
-      price: cartProduct.price,
-      quantity: 1,
-      deliveryIn: cartProduct.deliveryIn,
-      images: [cartProduct.images[0]],
-      sizes: {
-        Upper: cartProduct.sizes.Upper,
-        Bottom: cartProduct.sizes.Bottom,
-      },
-    };
-    dispatch(addToCart(newCartProduct));
+    if (!userId) {
+      navigate("/login");
+    } else {
+      const newCartProduct = {
+        productId: cartProduct.productId,
+        name: cartProduct.name,
+        price: cartProduct.price,
+        quantity: 1,
+        deliveryIn: cartProduct.deliveryIn,
+        images: [cartProduct.images[0]],
+        sizes: {
+          Upper: cartProduct.sizes.Upper,
+          Bottom: cartProduct.sizes.Bottom,
+        },
+      };
+      dispatch(addToCart(newCartProduct));
+      addProductToCart({ cartProduct: newCartProduct, userId: userId });
+    }
   };
 
   const handleBuyNow = () => {

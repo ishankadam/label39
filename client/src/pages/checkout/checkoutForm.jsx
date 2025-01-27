@@ -92,6 +92,7 @@ const CheckoutForm = (props) => {
             razorpay_signature: response.razorpay_signature,
             checkoutData,
             cartItems,
+            type: "order",
           });
 
           if (result.success) {

@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
 // Define the schema
-const clientDiariesSchema = new mongoose.Schema({
-  clientDiariesId: {
+const celebrityStyleSchema = new mongoose.Schema({
+  celebrityStyleId: {
     type: Number,
     required: true,
     validate: {
@@ -31,6 +31,6 @@ const clientDiariesSchema = new mongoose.Schema({
 });
 
 // Create the model
-const clientDiaries = mongoose.model("clientDiaries", clientDiariesSchema);
+const CelebrityStyle = mongoose.model("celebrityStyle", celebrityStyleSchema);
 
-module.exports = clientDiaries;
+module.exports = CelebrityStyle;

@@ -3,7 +3,6 @@ import MainCorousel from "./mainCorousel";
 import CategorySection from "./categorySection";
 import FeaturedSection from "./featuredSection";
 import BestSellerSection from "./bestSellerSection";
-import AsSeenOn from "./asSeenOn";
 import Testimonials from "./testimonials";
 import Footer from "./footer";
 import FindUs from "./findUs";
@@ -13,10 +12,13 @@ import { getAllTestimonials } from "../../api";
 
 const Home = (props) => {
   const [allProduct, setAllProduct] = useState(props.allProduct || []);
+  const [celebrityStyles, setCelebrityStyles] = useState(
+    props.celebrityStyles || []
+  );
   const [allCategories, setAllCategories] = useState(props.allCategories);
   const [bestsellers, setBestsellers] = useState([]);
   const [asSeenOn, setAsSeenOn] = useState([]);
-  const [shopByVideos, setshopByVideos] = useState([]);
+  const [, setshopByVideos] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
   const [showModal, setShowModal] = useState({
     open: false,
@@ -26,6 +28,10 @@ const Home = (props) => {
   useEffect(() => {
     setAllProduct(props.allProduct);
   }, [props.allProduct]);
+
+  useEffect(() => {
+    setCelebrityStyles(props.celebrityStyles);
+  }, [props.celebrityStyles]);
 
   useEffect(() => {
     setAllCategories(props.allCategories);
@@ -47,6 +53,7 @@ const Home = (props) => {
   }, []);
 
   const handleViewProduct = (product) => {
+    console.log(product);
     setShowModal({
       open: true,
       data: product,
@@ -58,7 +65,7 @@ const Home = (props) => {
       <MainCorousel></MainCorousel>
       <CategorySection allCategories={allCategories}></CategorySection>
       <FeaturedSection
-        shopByVideos={shopByVideos}
+        celebrityStyles={celebrityStyles}
         handleViewProduct={handleViewProduct}
         country={props.country}
       ></FeaturedSection>
@@ -67,13 +74,13 @@ const Home = (props) => {
         handleViewProduct={handleViewProduct}
         country={props.country}
       ></BestSellerSection>
-      {asSeenOn.length > 0 && (
+      {/* {asSeenOn.length > 0 && (
         <AsSeenOn
           handleViewProduct={handleViewProduct}
           asSeenOn={asSeenOn}
           country={props.country}
         ></AsSeenOn>
-      )}
+      )} */}
       <Testimonials testimonials={testimonials}></Testimonials>
       <InstagramSection></InstagramSection>
       <FindUs></FindUs>

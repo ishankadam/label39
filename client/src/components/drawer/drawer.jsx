@@ -42,8 +42,6 @@ const CustomDrawer = () => {
     dispatch(closeCartDrawer());
   };
 
-  console.log(cartItems);
-
   return (
     <div>
       <Drawer
@@ -89,7 +87,6 @@ const CustomDrawer = () => {
             {/* Cart item */}
             {cartItems.length > 0 ? (
               cartItems.map((item) => {
-                console.log(item);
                 return (
                   <Box
                     key={item.id}
