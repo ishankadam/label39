@@ -77,7 +77,7 @@ const SaleForm = (props) => {
         style: {
           borderRadius: "10px",
           padding: "20px",
-          maxWidth: "auto",
+          maxWidth: "900px",
           width: "900px",
           boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.2)",
         },
@@ -90,12 +90,13 @@ const SaleForm = (props) => {
           display: "flex",
           flexDirection: "column",
           gap: 2,
-          maxWidth: 500,
+          maxWidth: "900px",
           margin: "0 auto",
           padding: 2,
           boxShadow: 3,
           borderRadius: 2,
           backgroundColor: "#fff",
+          width: "800px",
         }}
       >
         <Typography variant="h5" align="center" gutterBottom>
