@@ -927,17 +927,6 @@ const getAllSales = async (_req, res) => {
   }
 };
 
-const get_instagram_posts = async (_req, res) => {
-  try {
-    const allInstagram = await Instagram.find({}).select("-_id -__v"); // Exclude _id and __v fields
-    res.status(200).json(allInstagram); // Send the result as JSON
-    console.log(allInstagram);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: "Error fetching instagram posts", error });
-  }
-};
-
 module.exports = {
   get_all_products,
   create_product,
@@ -967,6 +956,5 @@ module.exports = {
   get_all_celebrity_styles,
   createSale,
   getAllSales,
-  get_instagram_posts,
   get_all_giftcard,
 };

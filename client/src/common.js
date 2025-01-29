@@ -259,7 +259,9 @@ export const prepareOrderDetailsMessage = (orders) => {
 
 export const addCommaToPrice = (price) => {
   if (typeof price !== "number") {
-    throw new Error("Input must be a number");
+    return Number(price)
+      .toString()
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
   return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };

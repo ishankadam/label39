@@ -1,43 +1,19 @@
 import { Box, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getInstagramPosts } from "../../api";
 import "./Slider.css"; // Assuming you have the relevant CSS file here
-import bestSeller1 from "../../assets/bestseller1.jpeg"; // Importing images
-import bestSeller2 from "../../assets/bestseller2.jpeg"; // Importing images
-import bestSeller3 from "../../assets/bestseller3.jpeg"; // Importing images
-import bestSeller4 from "../../assets/bestseller4.jpeg"; // Importing images
-import bestSeller5 from "../../assets/bestseller5.JPG"; // Importing images
-import bestSeller6 from "../../assets/bestseller6.jpeg"; // Importing images
-import footerImg from "../../assets/footer2.jpg";
 
 const InstagramSection = () => {
-  const images = [
-    {
-      src: bestSeller1,
-      date: "2024-10-01",
-      text: "Hand-painted sunflowers art meets fashion, creating the perfect harmony.",
-    },
-    {
-      src: bestSeller2,
-      date: "2024-10-02",
-      text: "Hand-painted sunflowers art meets fashion, creating the perfect harmony.",
-    },
-    {
-      src: bestSeller3,
-      date: "2024-10-03",
-      text: "Hand-painted sunflowers art meets fashion, creating the perfect harmony.",
-    },
-    {
-      src: bestSeller4,
-      date: "2024-10-04",
-      text: "Ut labore et dolore magna aliqua",
-    },
-    { src: bestSeller5, date: "2024-10-05", text: "Ut enim ad minim veniam" },
-    {
-      src: bestSeller6,
-      date: "2024-10-06",
-      text: "Quis nostrud exercitation ullamco",
-    },
-  ]; // Array of images with texts and dates
+  const [instaPosts, setInstaPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    getInstagramPosts({ setInstagramData: setInstaPosts, setLoading });
+  }, []);
+
+  useEffect(() => {
+    console.log(instaPosts);
+    console.log(loading);
+  }, [instaPosts]);
 
   return (
     <Box>
@@ -76,27 +52,27 @@ const InstagramSection = () => {
             style={{
               "--width": "300px",
               "--height": "300px",
-              "--quantity": images.length,
+              "--quantity": instaPosts.length,
             }}
           >
             <div className="list">
-              {images.map((image, index) => (
+              {instaPosts.map((post, index) => (
                 <div
                   className="item"
                   key={index}
                   style={{ "--position": index + 1 }}
                 >
                   <img
-                    src={image.src}
+                    src={post.media_url}
                     alt={`Slide ${index + 1}`}
                     className="slider-img"
                   />
                   <div className="overlay">
                     <Typography variant="h6" className="overlay-text">
-                      {image.text}
+                      {post.caption}
                     </Typography>
                     <Typography variant="body1" className="overlay-date">
-                      {image.date}
+                      {post.date}
                     </Typography>
                   </div>
                 </div>

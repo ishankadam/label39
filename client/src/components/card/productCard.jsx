@@ -152,7 +152,8 @@ const ProductCard = (props) => {
                 {calculatePriceAfterDiscount(
                   props.product.price,
                   props.product.sale.discountType,
-                  props.product.sale.discountValue
+                  props.product.sale.discountValue,
+                  props.country
                 )}
               </span>
             </>

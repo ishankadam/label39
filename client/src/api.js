@@ -4,14 +4,15 @@ const {
   REACT_APP_API_URL,
   REACT_APP_IMAGE_URL,
   REACT_APP_PHONE,
-  REACT_WHATSAPP_API_URL,
+  REACT_APP_WHATSAPP_API_URL,
+  REACT_APP_INSTAGRAM_ACCESS_TOKEN,
 } = process.env;
-
+console.log(process.env);
 export const apiUrl = REACT_APP_API_URL;
 export const imageUrl = REACT_APP_IMAGE_URL;
 export const phoneNumber = REACT_APP_PHONE;
-export const whatsAppUrl = REACT_WHATSAPP_API_URL;
-
+export const whatsAppUrl = REACT_APP_WHATSAPP_API_URL;
+export const instagramToken = REACT_APP_INSTAGRAM_ACCESS_TOKEN;
 // create User
 export const createUser = async ({ userDetails, navigate }) => {
   const requestOptions = {
@@ -824,22 +825,18 @@ export const getAllSales = async ({ setSaleData, setLoading }) => {
 
 export const getInstagramPosts = async ({ setInstagramData, setLoading }) => {
   try {
-    const response = await fetch(`${apiUrl}/getInstagramPosts`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    });
-
-    if (!response.ok) {
-      if (response.status === 401) {
-        console.error("Unauthorized access");
-      }
-      throw new Error("Failed to fetch instagram data");
-    }
-
-    const data = await response.json();
-    setInstagramData(data);
-    setLoading && setLoading(false);
-    return data;
+    console.log(instagramToken);
+    fetch(
+      `https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink&access_token=${instagramToken}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setInstagramData(data.data);
+        setLoading && setLoading(false);
+      })
+      .catch((error) =>
+        console.error("Error fetching Instagram posts:", error)
+      );
   } catch (err) {
     console.error("Error fetching instagram data:", err);
     throw err;

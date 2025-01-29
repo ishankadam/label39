@@ -47,8 +47,6 @@ const CustomDrawer = (props) => {
     dispatch(closeCartDrawer());
   };
 
-  console.log(cartItems);
-
   return (
     <div>
       <Drawer

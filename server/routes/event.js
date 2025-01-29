@@ -102,9 +102,6 @@ router.get("/getGiftcard", controller.get_all_giftcard);
 router.post("/createSale", controller.createSale);
 router.get("/getSales", controller.getAllSales);
 
-//  Instagram Data
-router.get("/getInstagramPosts", controller.get_instagram_posts);
-
 // Error handling middleware
 router.use((error, _req, res) => {
   const status = error.status || 500;
