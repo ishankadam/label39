@@ -1,21 +1,21 @@
-import { useEffect, useState } from "react";
+import ChatIcon from "@mui/icons-material/Chat";
+import ShareIcon from "@mui/icons-material/Share";
 import {
   Box,
   Button,
-  Typography,
   Grid,
-  Modal,
   Link,
-  ToggleButtonGroup,
+  Modal,
   ToggleButton,
+  ToggleButtonGroup,
+  Typography,
 } from "@mui/material";
-import ShareIcon from "@mui/icons-material/Share";
-import ChatIcon from "@mui/icons-material/Chat";
-import Footer from "../homepage/footer";
-import { addProductToCart, imageUrl } from "../../api";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../../store/cartSlice";
 import { useNavigate } from "react-router-dom";
+import { addProductToCart, imageUrl } from "../../api";
+import { addToCart } from "../../store/cartSlice";
+import Footer from "../homepage/footer";
 
 const ViewProductModal = (props) => {
   const { isAdmin, product, open, setShowModal } = props;
@@ -105,6 +105,7 @@ const ViewProductModal = (props) => {
           Upper: cartProduct.sizes.Upper,
           Bottom: cartProduct.sizes.Bottom,
         },
+        sale: cartProduct.sale,
       };
       dispatch(addToCart(newCartProduct));
       addProductToCart({ cartProduct: newCartProduct, userId: userId });
@@ -123,6 +124,7 @@ const ViewProductModal = (props) => {
         Upper: "",
         Bottom: "",
       },
+      sale: cartProduct.sale,
     };
     dispatch(addToCart(newCartProduct));
     navigate("/checkout");

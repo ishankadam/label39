@@ -1,13 +1,12 @@
-import { useState } from "react";
-import { Card, CardContent, CardMedia, Typography, Box } from "@mui/material";
-import React from "react";
-import "./../../css/productCard.css";
+import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
+import React, { useState } from "react";
 import { imageUrl } from "../../api";
 import {
   addCommaToPrice,
   calculatePriceAfterDiscount,
   getCurrencySymbol,
 } from "../../common";
+import "./../../css/productCard.css";
 
 const ProductCard = (props) => {
   const [imageIndex, setImageIndex] = useState(0); // Initial image index is 0
@@ -19,10 +18,6 @@ const ProductCard = (props) => {
   const handleMouseLeave = () => {
     setImageIndex(0); // Change image back to index 0 when hover ends
   };
-
-  console.log(
-    props.product.sale && props.product.sale.isActive && props.product
-  );
 
   return (
     <Card

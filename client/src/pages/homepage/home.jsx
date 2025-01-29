@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import MainCorousel from "./mainCorousel";
+import { getAllTestimonials } from "../../api";
+import ViewProductModal from "../product/viewProduct";
+import AsSeenOn from "./asSeenOn";
+import BestSellerSection from "./bestSellerSection";
 import CategorySection from "./categorySection";
 import FeaturedSection from "./featuredSection";
-import BestSellerSection from "./bestSellerSection";
-import Testimonials from "./testimonials";
-import Footer from "./footer";
 import FindUs from "./findUs";
+import Footer from "./footer";
 import InstagramSection from "./instagramSection";
-import ViewProductModal from "../product/viewProduct";
-import { getAllTestimonials } from "../../api";
-import AsSeenOn from "./asSeenOn";
+import MainCorousel from "./mainCorousel";
+import Testimonials from "./testimonials";
 
 const Home = (props) => {
   const [allProduct, setAllProduct] = useState(props.allProduct || []);
@@ -57,7 +57,6 @@ const Home = (props) => {
   }, []);
 
   const handleViewProduct = (product) => {
-    console.log(product);
     setShowModal({
       open: true,
       data: product,

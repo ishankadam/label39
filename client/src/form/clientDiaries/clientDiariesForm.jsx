@@ -1,9 +1,9 @@
+import { Box, Button, Dialog, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { Button, Typography, Box, Dialog } from "@mui/material";
-import CustomTextfield from "../../components/textfield/customTextfield";
-import UploadFiles from "../../components/upload/uploadFiles";
 import { createClientDiaries } from "../../api";
 import CustomAutocomplete from "../../components/autocomplete/autocomplete";
+import CustomTextfield from "../../components/textfield/customTextfield";
+import UploadFiles from "../../components/upload/uploadFiles";
 // import UploadVideos from "../../components/upload/uploadVideos";
 
 const ClientDiariesForm = (props) => {
@@ -33,12 +33,10 @@ const ClientDiariesForm = (props) => {
         label: product.name,
         value: product.productId,
       }));
-    console.log(newProductsArray);
     setProductsArray(newProductsArray);
   }, [products]);
 
   const handleEdit = (value, field) => {
-    console.log(value, field);
     setclientDiaries((prev) => ({
       ...prev,
       [field]: value,
@@ -48,10 +46,6 @@ const ClientDiariesForm = (props) => {
   useEffect(() => {
     setOpen(props.open);
   }, [props.open]);
-
-  useEffect(() => {
-    console.log(clientDiaries);
-  }, [clientDiaries]);
 
   const handleFileUpload = (files) => {
     setclientDiaries((prev) => ({
@@ -73,7 +67,6 @@ const ClientDiariesForm = (props) => {
     e.preventDefault();
     console.log("Form Data Submitted", clientDiaries);
     alert("Client Diary submitted successfully!");
-    console.log(clientDiaries);
     createClientDiaries({
       clientDiaries,
       setLoading,

@@ -1,7 +1,7 @@
+import { Box, Container, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { Box, Typography, Grid, Container } from "@mui/material";
-import ClientDiaryCard from "./clientDiaryCard";
 import ViewProductModal from "../product/viewProduct";
+import ClientDiaryCard from "./clientDiaryCard";
 
 const ClientDiaryPage = (props) => {
   const [clientDiaries, setclientDiaries] = useState([]);
@@ -12,10 +12,6 @@ const ClientDiaryPage = (props) => {
   useEffect(() => {
     setclientDiaries(props.clientDiaries);
   }, [props.clientDiaries]);
-
-  useEffect(() => {
-    console.log(clientDiaries);
-  }, [clientDiaries]);
 
   return (
     <>

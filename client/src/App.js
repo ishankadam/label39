@@ -1,39 +1,39 @@
-import { Route, Routes, useLocation } from "react-router-dom";
-import "./App.css";
-import CustomAppbar from "./components/appbar/appbar";
-import Home from "./pages/homepage/home";
-import Shop from "./pages/shop/shop";
-import AboutUs from "./pages/about-us/aboutUs";
-import ViewProduct from "./pages/product/viewProduct";
-import OurStory from "./pages/our-story/ourStory";
-import Login from "./form/login/login";
-import Signup from "./form/signup/signup";
-import CustomDrawer from "./components/drawer/drawer";
-import { useEffect, useState } from "react";
-import Cart from "./pages/cart/cart";
-import Checkout from "./pages/checkout/checkout";
-import PaymentPage from "./pages/payment/paymentPage";
-import DeliveryForm from "./pages/product/deliveryForm";
-import Dashboard from "./pages/dashboard/dashboard";
-import FindUs from "./pages/homepage/findUs";
+import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
+import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
 import { Box, Fab, Tooltip } from "@mui/material";
+import { useEffect, useState } from "react";
+import { Provider } from "react-redux";
+import { Route, Routes, useLocation } from "react-router-dom";
 import {
   getAllCategories,
   getAllCelebrityStyles,
   getAllClientDiaries,
   getAllProducts,
 } from "./api";
-import TermsAndConditions from "./pages/termsAndCondition/termsAndCondition";
-import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
-import GiftCardModal from "./form/giftCard/giftCard";
-import PageNotFound from "./pages/not-found/pageNotFound";
-import { Provider } from "react-redux";
-import { store } from "./store/store";
-import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-import WhatsAppButton from "./components/actionButton/whatsappActionButton";
+import "./App.css";
 import { whatsappQueryMessage } from "./common";
-import ProfilePage from "./pages/profile/profile";
+import WhatsAppButton from "./components/actionButton/whatsappActionButton";
+import CustomAppbar from "./components/appbar/appbar";
+import CustomDrawer from "./components/drawer/drawer";
+import GiftCardModal from "./form/giftCard/giftCard";
+import Login from "./form/login/login";
+import Signup from "./form/signup/signup";
+import AboutUs from "./pages/about-us/aboutUs";
+import Cart from "./pages/cart/cart";
+import Checkout from "./pages/checkout/checkout";
 import ClientDiaryPage from "./pages/client-diary/clientDiaryPage";
+import Dashboard from "./pages/dashboard/dashboard";
+import FindUs from "./pages/homepage/findUs";
+import Home from "./pages/homepage/home";
+import PageNotFound from "./pages/not-found/pageNotFound";
+import OurStory from "./pages/our-story/ourStory";
+import PaymentPage from "./pages/payment/paymentPage";
+import DeliveryForm from "./pages/product/deliveryForm";
+import ViewProduct from "./pages/product/viewProduct";
+import ProfilePage from "./pages/profile/profile";
+import Shop from "./pages/shop/shop";
+import TermsAndConditions from "./pages/termsAndCondition/termsAndCondition";
+import { store } from "./store/store";
 const App = () => {
   const [cartDetails, setCartDetails] = useState({
     open: false,
@@ -73,10 +73,6 @@ const App = () => {
       setCelebrityStyles,
     });
   }, []);
-
-  useEffect(() => {
-    console.log(clientDiaries);
-  }, [clientDiaries]);
 
   useEffect(() => {
     getAllCategories({

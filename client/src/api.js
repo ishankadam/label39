@@ -671,7 +671,6 @@ export const createClientDiaries = async ({
 
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
       setClientDiaries(data);
     } else {
       const errorData = await response.json();
@@ -819,6 +818,54 @@ export const getAllSales = async ({ setSaleData, setLoading }) => {
     return data;
   } catch (err) {
     console.error(err);
+    throw err;
+  }
+};
+
+export const getInstagramPosts = async ({ setInstagramData, setLoading }) => {
+  try {
+    const response = await fetch(`${apiUrl}/getInstagramPosts`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (!response.ok) {
+      if (response.status === 401) {
+        console.error("Unauthorized access");
+      }
+      throw new Error("Failed to fetch instagram data");
+    }
+
+    const data = await response.json();
+    setInstagramData(data);
+    setLoading && setLoading(false);
+    return data;
+  } catch (err) {
+    console.error("Error fetching instagram data:", err);
+    throw err;
+  }
+};
+
+export const getAllGiftcard = async ({ setGiftCards, setLoading }) => {
+  try {
+    const response = await fetch(`${apiUrl}/getGiftcard`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (!response.ok) {
+      if (response.status === 401) {
+        console.error("Unauthorized access");
+      }
+      throw new Error("Failed to fetch giftcard");
+    }
+
+    const data = await response.json();
+    setGiftCards(data);
+    setLoading && setLoading(false);
+    return data;
+  } catch (err) {
+    console.error("Error fetching giftcard:", err);
     throw err;
   }
 };

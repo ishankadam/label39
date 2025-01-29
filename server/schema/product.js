@@ -28,7 +28,7 @@ const productSchema = new mongoose.Schema({
   asSeenOn: { type: String },
   videoSrc: { type: String },
   isActive: { type: Boolean, default: true },
-  color: { type: String },
+  color: { type: Array },
   priority: { type: Number },
   readyToShip: { type: Boolean, default: true },
   fabric: { type: String },

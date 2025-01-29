@@ -17,6 +17,7 @@ const Giftcard = require("../schema/giftCard");
 const clientDiaries = require("../schema/clientDiaries");
 const CelebrityStyle = require("../schema/celebrityStyle");
 const Sale = require("../schema/sale");
+const sendEmail = require("../emailer");
 
 const storage = multer.diskStorage({
   destination: (req, _file, cb) => {
@@ -339,6 +340,11 @@ const verifyPayment = async (req, res) => {
           updatedAt: new Date().toISOString(),
         });
         await giftCart.save();
+        const toEmail = "ishankadamlol@gmail.com";
+        const subject = "THE LABEL 39 - Gift Card";
+        const htmlFilePath = "./html/email.html";
+
+        await sendEmail(toEmail, subject, htmlFilePath);
         return res.status(200).json({
           order: giftCart,
           message: "Gift card verified successfully",
@@ -793,6 +799,16 @@ const create_giftcard = async (req, res) => {
   }
 };
 
+const get_all_giftcard = async (_req, res) => {
+  try {
+    const allGiftcard = await Giftcard.find({}).select("-_id -__v"); // Exclude _id and __v fields
+    res.status(200).json(allGiftcard); // Send the result as JSON
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Error fetching events", error });
+  }
+};
+
 const create_celebrity_styles = async (req, res) => {
   try {
     // Parse the products data from the request body
@@ -911,6 +927,17 @@ const getAllSales = async (_req, res) => {
   }
 };
 
+const get_instagram_posts = async (_req, res) => {
+  try {
+    const allInstagram = await Instagram.find({}).select("-_id -__v"); // Exclude _id and __v fields
+    res.status(200).json(allInstagram); // Send the result as JSON
+    console.log(allInstagram);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Error fetching instagram posts", error });
+  }
+};
+
 module.exports = {
   get_all_products,
   create_product,
@@ -940,4 +967,6 @@ module.exports = {
   get_all_celebrity_styles,
   createSale,
   getAllSales,
+  get_instagram_posts,
+  get_all_giftcard,
 };

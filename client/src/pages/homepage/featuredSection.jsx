@@ -1,11 +1,11 @@
+import { Box, Button, Card, CardMedia, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
-import { Card, CardMedia, Button, Typography, Box } from "@mui/material";
-import "./../../css/categorySection.css";
-import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
 import { imageUrl } from "../../api";
 import { NextArrow, PrevArrow } from "../../components/arrow-component"; // Update the import path as needed
+import "./../../css/categorySection.css";
 
 const FeaturedSection = (props) => {
   const [celebrityStyles, setCelebrityStyles] = useState([]);
@@ -13,10 +13,6 @@ const FeaturedSection = (props) => {
   useEffect(() => {
     setCelebrityStyles(props.celebrityStyles);
   }, [props.celebrityStyles]);
-
-  useEffect(() => {
-    console.log(celebrityStyles);
-  }, [celebrityStyles]);
 
   // const featured = [
   //   { label: "NEW ARRIVAL", videoSrc: video1 },
@@ -113,7 +109,6 @@ const FeaturedSection = (props) => {
       >
         <Slider {...settings}>
           {celebrityStyles.map((item, index) => {
-            console.log(item);
             return (
               <Box key={index}>
                 <Card

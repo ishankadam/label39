@@ -1,10 +1,23 @@
-import { Box, Button, Typography, Grid2 } from "@mui/material";
+import { Box, Button, Grid2, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import CssBaseline from "@mui/material/CssBaseline";
+import Divider from "@mui/material/Divider";
+import MuiDrawer from "@mui/material/Drawer";
+import IconButton from "@mui/material/IconButton";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import { styled } from "@mui/material/styles";
 import {
   getAllCategories,
   getAllCelebrityStyles,
   getAllClientDiaries,
+  getAllGiftcard,
   getAllOrders,
   getAllProducts,
   getAllSales,
@@ -12,29 +25,17 @@ import {
   getAllUsers,
 } from "../../api";
 import { dashboardTabValue } from "../../common";
-import _ from "lodash";
-import ProductTable from "./productTable";
-import ManageCategories from "./manageCategory";
-import ManageTestimonials from "./manageTestimonials";
-import { styled } from "@mui/material/styles";
-import MuiDrawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import CssBaseline from "@mui/material/CssBaseline";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import PageNotFound from "../not-found/pageNotFound";
-import ManageUsers from "./manageUsers";
 import SelectDropdown from "../../components/select-dropdown/selectDropdown";
-import ManageOrders from "./manageOrders";
+import PageNotFound from "../not-found/pageNotFound";
 import ProfilePage from "../profile/profile";
-import ClientsDiaries from "./clientsDiaries";
 import CelebrityStyle from "./celebrityStyle";
+import ClientsDiaries from "./clientsDiaries";
+import GiftCardPage from "./giftCard";
+import ManageCategories from "./manageCategory";
+import ManageOrders from "./manageOrders";
+import ManageTestimonials from "./manageTestimonials";
+import ManageUsers from "./manageUsers";
+import ProductTable from "./productTable";
 import Sale from "./sale";
 const drawerWidth = 180;
 
@@ -128,6 +129,8 @@ const Dashboard = (props) => {
   const [testimonials, setTestimonials] = useState([]);
   const [clientDiaries, setClientDiaries] = useState([]);
   const [celebrityStyles, setCelebrityStyles] = useState([]);
+  const [giftCards, setGiftCards] = useState([]);
+
   const [saleData, setSaleData] = useState([]);
   const [users, setUsers] = useState([]);
   const [productsloading, setProductsLoading] = useState(false);
@@ -135,6 +138,7 @@ const Dashboard = (props) => {
   const [testimonialsloading, setTestimonialsLoading] = useState(false);
   const [clientDiariesLoading, setclientDiariesLoading] = useState(false);
   const [celebrityStylesLoading, setcelebrityStylesLoading] = useState(false);
+  const [giftCardLoading, setGiftCardLoading] = useState(false);
   const [saleLoading, setsaleLoading] = useState(false);
   const [usersloading, setUsersLoading] = useState(false);
   const [tabValue, setTabValue] = React.useState("one");
@@ -187,6 +191,7 @@ const Dashboard = (props) => {
       setLoading: setcelebrityStylesLoading,
     });
     getAllSales({ setSaleData, setLoading: setsaleLoading });
+    getAllGiftcard({ setGiftCards, setLoading: setGiftCardLoading });
   }, []);
 
   const handleOpenForm = (page) => {
@@ -483,6 +488,14 @@ const Dashboard = (props) => {
               loading={saleLoading}
               setLoading={setsaleLoading}
               products={products}
+            />
+          )}
+          {tabValue === "ten" && (
+            <GiftCardPage
+              giftCards={giftCards}
+              setGiftCards={setGiftCards}
+              loading={giftCardLoading}
+              setLoading={setGiftCardLoading}
             />
           )}
         </Box>

@@ -1,29 +1,29 @@
-import React, { useEffect, useState } from "react";
+import CircleIcon from "@mui/icons-material/Circle";
+import ClearIcon from "@mui/icons-material/Clear";
+import CloseIcon from "@mui/icons-material/Close";
+import FilterListIcon from "@mui/icons-material/FilterList";
+import SearchIcon from "@mui/icons-material/Search";
 import {
-  Typography,
+  Box,
+  Button,
+  Drawer,
+  IconButton,
   List,
   ListItem,
   ListItemButton,
-  ListItemText,
-  Drawer,
-  Button,
-  Pagination,
   ListItemSecondaryAction,
-  IconButton,
-  Box,
+  ListItemText,
+  Pagination,
+  Typography,
 } from "@mui/material";
-import "../../css/shop.css";
-import ProductCard from "../../components/card/productCard";
-import CircleIcon from "@mui/icons-material/Circle";
-import FilterListIcon from "@mui/icons-material/FilterList";
-import ViewProductModal from "../product/viewProduct";
-import _ from "lodash";
-import ClearIcon from "@mui/icons-material/Clear";
-import CustomTextfield from "../../components/textfield/customTextfield";
-import { availableColors } from "../../common";
-import SearchIcon from "@mui/icons-material/Search";
-import CloseIcon from "@mui/icons-material/Close";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
+import _ from "lodash";
+import React, { useEffect, useState } from "react";
+import { availableColors } from "../../common";
+import ProductCard from "../../components/card/productCard";
+import CustomTextfield from "../../components/textfield/customTextfield";
+import "../../css/shop.css";
+import ViewProductModal from "../product/viewProduct";
 const ProductsPage = (props) => {
   const [allProduct, setAllProduct] = useState(props.allProduct || []);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -76,7 +76,7 @@ const ProductsPage = (props) => {
   };
   const priceRanges = [
     { label: "Under 10000", min: 0, max: 10000 },
-    { label: "10000-20000", min: 10000, max: 15000 },
+    { label: "10000-20000", min: 10000, max: 20000 },
     { label: "Above 20000", min: 20000, max: 200000 },
   ];
 
@@ -94,11 +94,13 @@ const ProductsPage = (props) => {
     const endIdx = startIdx + productsPerPage;
 
     const filteredProducts = allProduct.filter((product) => {
-      // Category Filter
+      // Category Filter if filter.category is shirtsAndDresses then filter products with category shirts and also for category dresses
       const categoryFilter =
         filter.category !== ""
-          ? _.lowerCase(product.category) === _.lowerCase(filter.category) // Match category case-insensitively
-          : true; // If no category filter, include all
+          ? filter.category === "shirtsAndDresses"
+            ? ["shirts", "dresses"].includes(_.lowerCase(product.category))
+            : _.lowerCase(product.category) === _.lowerCase(filter.category)
+          : true;
 
       // Price Filter
       const priceFilter =
@@ -120,8 +122,17 @@ const ProductsPage = (props) => {
               .includes(filter.search.toLowerCase())
           : true;
 
+      const colorFilter =
+        filter.color !== ""
+          ? Array.isArray(product.color)
+            ? product.color.some((color) =>
+                color.toLowerCase().includes(filter.color.toLowerCase())
+              )
+            : product.color.toLowerCase().includes(filter.color.toLowerCase())
+          : true;
+
       // Return true only if both filters match
-      return categoryFilter && priceFilter && searchFilter;
+      return categoryFilter && priceFilter && searchFilter && colorFilter;
     });
 
     const productList = filteredProducts.slice(startIdx, endIdx);
@@ -471,8 +482,7 @@ const ProductsPage = (props) => {
               </Typography>
               <List>
                 {priceRanges.map((priceRange, index) => {
-                  const isSelected = filter.price === priceRange;
-
+                  const isSelected = filter.price.label === priceRange.label;
                   return (
                     <ListItem
                       key={`${priceRange.label}${index}`}

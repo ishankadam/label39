@@ -1,17 +1,20 @@
 import indianFlag from "../src/assets/india.png";
 import UsaFlag from "../src/assets/usa.png";
-import shirt from "./assets/SHIRTS.png";
 import coords from "./assets/COORDS.png";
-import suits from "./assets/SUITS.png";
 import festive from "./assets/FESTIVE.png";
+import shirt from "./assets/SHIRTS.png";
+import suits from "./assets/SUITS.png";
 
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import RecentActorsIcon from "@mui/icons-material/RecentActors";
-import CategoryIcon from "@mui/icons-material/Category";
-import GroupIcon from "@mui/icons-material/Group";
-import ViewModuleIcon from "@mui/icons-material/ViewModule";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import AttributionIcon from "@mui/icons-material/Attribution";
+import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
+import CategoryIcon from "@mui/icons-material/Category";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import GroupIcon from "@mui/icons-material/Group";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
+import LoyaltyIcon from "@mui/icons-material/Loyalty";
+import RecentActorsIcon from "@mui/icons-material/RecentActors";
+import ViewModuleIcon from "@mui/icons-material/ViewModule";
 
 export const dashboardTabValue = [
   { label: "Products", value: "one", icon: <DashboardIcon /> },
@@ -21,8 +24,9 @@ export const dashboardTabValue = [
   { label: "Orders", value: "five", icon: <ViewModuleIcon /> },
   { label: "Profile", value: "six", icon: <AccountCircleIcon /> },
   { label: "Client Diaries", value: "seven", icon: <GroupAddIcon /> },
-  { label: "Celebrity Style", value: "eight", icon: <GroupAddIcon /> },
-  { label: "Sales", value: "nine", icon: <GroupAddIcon /> },
+  { label: "Celebrity Style", value: "eight", icon: <AttributionIcon /> },
+  { label: "Sales", value: "nine", icon: <LoyaltyIcon /> },
+  { label: "Gift Card", value: "ten", icon: <CardGiftcardIcon /> },
 ];
 
 export const whatsappQueryMessage =
@@ -160,8 +164,59 @@ export const availableSizes = [
   { label: "XL", value: "XL" },
 ];
 
-export const garmentDetails = ["100% cotton", "Machine washable.", "Printed"];
-export const deliveryIn = ["Available", "In 2-3 days", "In a week"];
+export const garmentDetails = [
+  "Fabric: Pure Silk Chanderi",
+  "Fabric: Cotton Linen",
+  "Fabric: Pure Silk",
+  "Fabric: Pure Linen",
+  "Fabric: Crepe",
+  "Fabric: Cotton Silk",
+  "Fabric: Dupion Silk",
+  "Fabric: Pure Raw Silk",
+  "Fabric: Pure Organza",
+  "Fabric: Denim Cotton",
+  "Fabric: Mul Chanderi",
+  "Fabric: Mul Cotton",
+  "Lining - cotton",
+  "No. of Components: 1",
+  "No. of Components: 2",
+  "No. of Components: 3",
+  "No. of Components: 4",
+  "No. of Components: 5",
+  "No. of Components: 6",
+  "No. of Components: 7",
+  "Dispatch Timeline: 2-3 Weeks",
+  "Dispatch Timeline: Made to order",
+  "Dispatch Timeline: Ready to ship",
+  "Dispatch Timeline: Delivery in 2-3 weeks",
+  "Dispatch Timeline: Delivery in 3-4 weeks",
+  "Dispatch Timeline: Delivery in 4-5 weeks",
+  "Dispatch Timeline: One Month",
+  "Dispatch Timeline: 20 days",
+  "Dispatch Timeline: 60 days",
+  "Dispatch Timeline: 45 days",
+  "Dispatch Timeline: Delivery in 20 Days",
+  "Dispatch Timeline: Express delivery",
+  "Wash Care: Dry clean only",
+  "Wash Care: Gentle hand wash",
+  "Wash Care: Machine wash",
+  "Wash Care: Tumble dry",
+  "Wash Care: Hand/Machine washable",
+];
+
+export const deliveryIn = [
+  "Made to order",
+  "Ready to ship",
+  "Delivery in 2-3 weeks",
+  "Delivery in 3-4 weeks",
+  "Delivery in 4-5 weeks",
+  "Delivery in 20 days ",
+  "Delivery in 45 days",
+  "Delivery in 60 days",
+  "Delivery in 1 month",
+  "Express Delivery",
+  "Sold Out",
+];
 
 export const findLabelByValue = (array, value) => {
   const option = array.find((option) => option.value === value);
@@ -218,6 +273,5 @@ export const calculatePriceAfterDiscount = (price, type, value) => {
   } else {
     finalPrice = price;
   }
-  console.log(finalPrice);
   return finalPrice;
 };

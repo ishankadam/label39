@@ -22,7 +22,6 @@ const Sale = (props) => {
 
   useEffect(() => {
     setSaleData(props.saleData);
-    console.log(props.saleData);
   }, [props.saleData]);
 
   const handleOnClickView = (row) => {

@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+import EditIcon from "@mui/icons-material/Edit";
 import {
   Chip,
   CircularProgress,
@@ -18,17 +19,16 @@ import {
 } from "@mui/material";
 import _ from "lodash";
 import React, { useEffect, useState } from "react";
-import EditIcon from "@mui/icons-material/Edit";
 import { findLabelByValue } from "../../common";
 // import { imageUrl } from "../../api";
 // import ConfirmationModal from "../modal/confirmation-modal";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import ViewProductModal from "../../pages/product/viewProduct";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { imageUrl } from "../../api";
 import AddEditProductModal from "../../form/addProduct/addProduct";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import ConfirmationModal from "../modal/confirmationModal";
 import ViewOrdersModal from "../../pages/dashboard/viewProductModal";
+import ViewProductModal from "../../pages/product/viewProduct";
+import ConfirmationModal from "../modal/confirmationModal";
 const CustomTable = (props) => {
   const [rowData, setRowData] = useState(props.rowData);
   const [page, setPage] = React.useState(0);
@@ -214,7 +214,9 @@ const CustomTable = (props) => {
           />
         ));
         break;
-
+      case "date":
+        children = new Date(row[colDef.key]).toLocaleDateString();
+        break;
       //   case "categoryImage":
       //     children = (
       //       <img

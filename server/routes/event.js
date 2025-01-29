@@ -95,9 +95,15 @@ router.get("/getCelebrityStyles", controller.get_all_celebrity_styles);
 //create giftcard
 router.post("/createGiftcard", controller.create_giftcard);
 
+// get all giftcard
+router.get("/getGiftcard", controller.get_all_giftcard);
+
 // Sales
 router.post("/createSale", controller.createSale);
 router.get("/getSales", controller.getAllSales);
+
+//  Instagram Data
+router.get("/getInstagramPosts", controller.get_instagram_posts);
 
 // Error handling middleware
 router.use((error, _req, res) => {

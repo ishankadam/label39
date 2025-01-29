@@ -1,30 +1,30 @@
-import React, { useEffect, useState } from "react";
+import AddIcon from "@mui/icons-material/Add";
+import ClearIcon from "@mui/icons-material/Clear";
 import {
+  Box,
   Button,
   Checkbox,
-  Typography,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
-  Switch,
   Grid,
-  Box,
+  Switch,
+  Typography,
 } from "@mui/material";
-import CustomTextfield from "../../components/textfield/customTextfield";
-import SelectDropdown from "../../components/select-dropdown/selectDropdown";
-import UploadFiles from "../../components/upload/uploadFiles";
+import React, { useEffect, useState } from "react";
+import { createProduct, editProduct } from "../../api";
 import {
   availableColors,
   availableSizes,
   deliveryIn,
   garmentDetails,
 } from "../../common";
+import SelectDropdown from "../../components/select-dropdown/selectDropdown";
 import ChipTextfield from "../../components/textfield/chipTextfield";
-import { createProduct, editProduct } from "../../api";
+import CustomTextfield from "../../components/textfield/customTextfield";
+import UploadFiles from "../../components/upload/uploadFiles";
 import "./addProduct.css";
-import ClearIcon from "@mui/icons-material/Clear";
-import AddIcon from "@mui/icons-material/Add";
 
 const AddEditProductModal = (props) => {
   const [images, setImages] = useState([]);
@@ -44,7 +44,7 @@ const AddEditProductModal = (props) => {
     deliveryIn: [],
     images: [],
     bestseller: false,
-    color: "",
+    color: [],
     priority: 0,
   });
 
@@ -120,7 +120,6 @@ const AddEditProductModal = (props) => {
 
   // Submit product details
   const handleSubmit = () => {
-    console.log(productDetails);
     try {
       if (props.isEdit) {
         editProduct({
@@ -533,7 +532,7 @@ const AddEditProductModal = (props) => {
             />
           </Grid>
           <Grid item xs={12} sm={12} mb={1}>
-            <CustomTextfield
+            <ChipTextfield
               label="Delivery In"
               predefinedOptions={deliveryIn}
               config={{ field: "deliveryIn", isRequired: true }}
@@ -563,10 +562,10 @@ const AddEditProductModal = (props) => {
             </Typography>
           </Grid>
           <Grid item xs={12}>
-            <SelectDropdown
+            <ChipTextfield
               label="Color"
-              optionList={colorList}
-              config={{ field: "color" }}
+              predefinedOptions={colorList}
+              config={{ field: "color", isRequired: true }}
               value={productDetails.color}
               handleEdit={handleEdit}
               sx={{ width: "100%" }}

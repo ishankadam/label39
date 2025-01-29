@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
 import {
-  TextField,
-  Button,
-  MenuItem,
-  Typography,
   Box,
+  Button,
   Dialog,
+  MenuItem,
+  TextField,
+  Typography,
 } from "@mui/material";
-import CustomTextfield from "../../components/textfield/customTextfield";
-import AutocompleteWithImage from "../../components/autocomplete/autocompleteWithImage";
+import React, { useEffect, useState } from "react";
 import { createSale } from "../../api";
+import AutocompleteWithImage from "../../components/autocomplete/autocompleteWithImage";
+import CustomTextfield from "../../components/textfield/customTextfield";
 
 const SaleForm = (props) => {
   const [products, setProducts] = useState(props.products || []);
@@ -47,7 +47,6 @@ const SaleForm = (props) => {
   };
 
   useEffect(() => {
-    console.log(props.open);
     setOpen(props.open);
   }, [props.open]);
 

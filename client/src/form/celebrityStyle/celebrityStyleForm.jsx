@@ -1,9 +1,9 @@
+import { Box, Button, Dialog, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { Button, Typography, Box, Dialog } from "@mui/material";
+import { createCelebrityStyles } from "../../api";
+import CustomAutocomplete from "../../components/autocomplete/autocomplete";
 import CustomTextfield from "../../components/textfield/customTextfield";
 import UploadFiles from "../../components/upload/uploadFiles";
-import CustomAutocomplete from "../../components/autocomplete/autocomplete";
-import { createCelebrityStyles } from "../../api";
 // import UploadVideos from "../../components/upload/uploadVideos";
 
 const CelebrityStyleForm = (props) => {
@@ -33,12 +33,10 @@ const CelebrityStyleForm = (props) => {
         label: product.name,
         value: product.productId,
       }));
-    console.log(newProductsArray);
     setProductsArray(newProductsArray);
   }, [products]);
 
   const handleEdit = (value, field) => {
-    console.log(value, field);
     setCelebrityStyles((prev) => ({
       ...prev,
       [field]: value,
@@ -48,10 +46,6 @@ const CelebrityStyleForm = (props) => {
   useEffect(() => {
     setOpen(props.open);
   }, [props.open]);
-
-  useEffect(() => {
-    console.log(celebrityStyles);
-  }, [celebrityStyles]);
 
   const handleFileUpload = (files) => {
     setCelebrityStyles((prev) => ({
@@ -73,7 +67,6 @@ const CelebrityStyleForm = (props) => {
     e.preventDefault();
     console.log("Form Data Submitted", celebrityStyles);
     alert("Celebrity style submitted successfully!");
-    console.log(celebrityStyles);
     createCelebrityStyles({
       celebrityStyles,
       setLoading,

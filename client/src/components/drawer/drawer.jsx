@@ -1,3 +1,6 @@
+import AddIcon from "@mui/icons-material/Add";
+import CloseIcon from "@mui/icons-material/Close";
+import RemoveIcon from "@mui/icons-material/Remove";
 import {
   Box,
   Button,
@@ -7,20 +10,22 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
-import CloseIcon from "@mui/icons-material/Close";
-import CustomTextfield from "../textfield/customTextfield";
-import RemoveIcon from "@mui/icons-material/Remove";
-import AddIcon from "@mui/icons-material/Add";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { imageUrl } from "../../api";
+import {
+  addCommaToPrice,
+  calculatePriceAfterDiscount,
+  getCurrencySymbol,
+} from "../../common";
 import {
   closeCartDrawer,
   removeFromCart,
   updateQuantity,
 } from "../../store/cartSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { imageUrl } from "../../api";
-import { useNavigate } from "react-router-dom";
+import CustomTextfield from "../textfield/customTextfield";
 
-const CustomDrawer = () => {
+const CustomDrawer = (props) => {
   const [displayNote, setDisplayNote] = useState(false);
   const openDrawer = useSelector((state) => state.cart.openCartDrawer);
   const cartItems = useSelector((state) => state.cart.items);
@@ -41,6 +46,8 @@ const CustomDrawer = () => {
   const onClose = () => {
     dispatch(closeCartDrawer());
   };
+
+  console.log(cartItems);
 
   return (
     <div>
@@ -140,7 +147,38 @@ const CustomDrawer = () => {
                           mb: 1,
                         }}
                         color="textSecondary"
-                      >{`Rs. ${item.price}`}</Typography>
+                      >
+                        {item.sale && item.sale.isActive ? (
+                          <>
+                            <span
+                              style={{
+                                textDecoration: "line-through",
+                                marginRight: "8px",
+                              }}
+                            >
+                              {addCommaToPrice(item.price)}
+                            </span>
+                            <span style={{ marginRight: "8px" }}>
+                              {`${item.sale.discountValue}${
+                                item.sale.discountType === "Percentage"
+                                  ? "%"
+                                  : getCurrencySymbol(props.country)
+                              } off`}
+                            </span>
+                            <span
+                              style={{ color: "#a16149", fontWeight: "bold" }}
+                            >
+                              {calculatePriceAfterDiscount(
+                                item.price,
+                                item.sale.discountType,
+                                item.sale.discountValue
+                              )}
+                            </span>
+                          </>
+                        ) : (
+                          addCommaToPrice(item.price)
+                        )}
+                      </Typography>
                       <IconButton
                         onClick={() =>
                           handleUpdateQuantity(item.productId, "decrease")

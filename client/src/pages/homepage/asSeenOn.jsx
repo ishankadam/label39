@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
-import "./../../css/asSeenOn.css";
 import {
   Box,
   Button,
-  Typography,
-  CircularProgress,
   Card,
   CardMedia,
+  CircularProgress,
+  Typography,
 } from "@mui/material";
-import { imageUrl } from "../../api";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
+import { imageUrl } from "../../api";
 import { NextArrow, PrevArrow } from "../../components/arrow-component"; // Update the import path as needed
+import "./../../css/asSeenOn.css";
 
 const AsSeenOn = (props) => {
   const [slideNumber, setSlideNumber] = useState(0);
@@ -124,7 +124,6 @@ const AsSeenOn = (props) => {
       >
         <Slider {...settings}>
           {products.map((item, index) => {
-            console.log(item);
             return (
               <Box key={index}>
                 <Card
