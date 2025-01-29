@@ -81,7 +81,7 @@ const CelebrityStyle = (props) => {
       <Button
         color="custom"
         variant="contained"
-        sx={{ width: "300px" }}
+        sx={{ width: "260px", marginBottom: "20px" }}
         onClick={handleOpenForm}
       >
         Create celebrity style

@@ -1,11 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Button, Typography, Box, Dialog } from "@mui/material";
+import {
+  Button,
+  Typography,
+  Box,
+  Dialog,
+  DialogTitle,
+  Stack,
+  IconButton,
+} from "@mui/material";
 import CustomTextfield from "../../components/textfield/customTextfield";
 import UploadFiles from "../../components/upload/uploadFiles";
 import { createClientDiaries } from "../../api";
 import CustomAutocomplete from "../../components/autocomplete/autocomplete";
 // import UploadVideos from "../../components/upload/uploadVideos";
-
+import CloseIcon from "@mui/icons-material/Close";
 const ClientDiariesForm = (props) => {
   const [clientDiaries, setclientDiaries] = useState({
     name: "",
@@ -86,39 +94,42 @@ const ClientDiariesForm = (props) => {
   };
 
   return (
-    <Dialog
-      open={open}
-      onClose={props.handleModalClose}
-      PaperProps={{
-        style: {
-          borderRadius: "10px",
-          padding: "20px",
-          maxWidth: "600px",
-          width: "100%",
-          boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.2)",
-        },
-      }}
-    >
+    <Dialog open={open} onClose={props.handleModalClose} fullWidth>
       <Box
         sx={{
-          maxWidth: 500,
-          margin: "0 auto",
           display: "flex",
           flexDirection: "column",
-          gap: 2,
-          padding: "20px",
+          padding: 2,
         }}
       >
-        <Typography
-          variant="h4"
-          align="center"
-          style={{
-            margin: "10px 0",
-            color: "#555",
-          }}
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          sx={{ paddingBottom: 3 }}
         >
-          Add Client Diary
-        </Typography>
+          <Typography
+            variant="h5"
+            sx={{
+              fontFamily: "'Roboto Serif', serif",
+              color: "#a16149",
+              fontWeight: "600",
+              textAlign: { xs: "center", md: "left" },
+              fontSize: {
+                xs: "1rem",
+                sm: "1.1rem",
+                md: "1.3rem",
+                lg: "1.5rem",
+              },
+            }}
+          >
+            Add Client Diary
+          </Typography>
+          <IconButton onClick={props.handleModalClose}>
+            <CloseIcon />
+          </IconButton>
+        </Stack>
+
         <form
           onSubmit={handleSubmit}
           style={{
@@ -154,14 +165,7 @@ const ClientDiariesForm = (props) => {
           />
           {/* <UploadVideos handleEdit={handleEdit} /> */}
 
-          <Button
-            type="submit"
-            variant="contained"
-            fullWidth
-            color="custom"
-            onMouseOver={(e) => (e.target.style.backgroundColor = "#155a9c")}
-            onMouseOut={(e) => (e.target.style.backgroundColor = "#1976d2")}
-          >
+          <Button type="submit" variant="contained" fullWidth color="custom">
             Submit
           </Button>
         </form>

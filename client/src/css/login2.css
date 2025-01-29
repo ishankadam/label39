@@ -233,6 +233,7 @@ main.sign-up-mode .carousel {
 .image {
   object-fit: cover;
   width: 100%;
+  height: 500px;
   grid-column: 1/2;
   grid-row: 1/2;
   opacity: 0;

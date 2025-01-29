@@ -129,40 +129,58 @@ const ProductCard = (props) => {
             ? `${props.product.asSeenOn} in ${props.product.name}`
             : props.product.name}
         </Typography>
+
         <Typography
           variant="h6"
-          color="textSecondary"
           align="center"
           sx={{
             fontSize: { xs: "12px", sm: "13px", md: "16px" },
-            fontFamily: "'Poppins', sans-serif",
+            // fontFamily: "'Poppins', sans-serif",
+            fontFamily: "'Roboto Serif', serif",
+            color: "#a16149",
           }}
         >
-          {getCurrencySymbol(props.country)}.{" "}
-          {props.product.sale && props.product.sale.isActive ? (
-            <>
-              <span
-                style={{ textDecoration: "line-through", marginRight: "8px" }}
-              >
-                {addCommaToPrice(props.product.price)}
-              </span>
-              <span style={{ marginRight: "8px" }}>
-                {`${props.product.sale.discountValue} ${
-                  props.product.sale.discountType === "Percentage"
-                    ? "%"
-                    : getCurrencySymbol(props.country)
-                } off`}
-              </span>
-              <span style={{ color: "#a16149", fontWeight: "bold" }}>
-                {calculatePriceAfterDiscount(
+          <span style={{ fontWeight: "600", color: "#a16149" }}>
+            {getCurrencySymbol(props.country)}{" "}
+            {props.product.sale && props.product.sale.isActive
+              ? calculatePriceAfterDiscount(
                   props.product.price,
                   props.product.sale.discountType,
                   props.product.sale.discountValue
-                )}
+                )
+              : addCommaToPrice(props.product.price)}
+          </span>
+          <br />
+          {props.product.sale && props.product.sale.isActive && (
+            <>
+              <span
+                style={{
+                  textDecoration: "line-through",
+                  marginLeft: "8px",
+                  color: "#989898",
+                  fontSize: "14px",
+                  fontFamily: "'Roboto Serif', serif",
+                }}
+              >
+                {getCurrencySymbol(props.country)}{" "}
+                {addCommaToPrice(props.product.price)}
+              </span>
+              <span
+                style={{
+                  marginLeft: "8px",
+                  color: "#989898",
+                  fontSize: "14px",
+                  fontFamily: "'Roboto Serif', serif",
+                  fontWeight: "500",
+                }}
+              >
+                {`(${props.product.sale.discountValue}${
+                  props.product.sale.discountType === "Percentage"
+                    ? "%"
+                    : getCurrencySymbol(props.country)
+                } off)`}
               </span>
             </>
-          ) : (
-            addCommaToPrice(props.product.price)
           )}
         </Typography>
       </CardContent>

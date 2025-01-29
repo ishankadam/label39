@@ -81,7 +81,7 @@ const ClientsDiaries = (props) => {
       <Button
         color="custom"
         variant="contained"
-        sx={{ width: "300px" }}
+        sx={{ width: "240px", marginBottom: "20px" }}
         onClick={handleOpenForm}
       >
         Create client diaries

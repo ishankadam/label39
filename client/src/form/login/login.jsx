@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import "../../css/login2.css";
-import LoginImg from "../../assets/login.png";
-import SignupImg from "../../assets/signup.png";
-import { Button, Typography } from "@mui/material";
+// import LoginImg from "../../assets/login.jpg";
+import SignupImg from "../../assets/signup.jpeg";
+import { Box, Button, Typography } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import CustomTextfield from "../../components/textfield/customTextfield";
-import backgroundImage from "../../assets/about.png"; // Import your background image
+import backgroundImage from "../../assets/backgroundfooter.jpg"; // Import your background image
 import TextField from "@mui/material/TextField";
 import { login } from "../../api";
 
@@ -21,7 +21,7 @@ const Login = (props) => {
     email: false,
     password: false,
   });
-  const images = [LoginImg, SignupImg];
+  const images = [SignupImg];
 
   const handleToggle = () => {
     setIsSignUpMode(!isSignUpMode);
@@ -51,6 +51,7 @@ const Login = (props) => {
   return (
     <div
       style={{
+        position: "relative",
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
@@ -58,7 +59,26 @@ const Login = (props) => {
         padding: "20px 0px", // Optional: Add some padding
       }}
     >
-      <main id="main" className={isSignUpMode ? "sign-up-mode" : ""}>
+      {/* Transparent Overlay */}
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: "rgba(224, 211, 208, 0.9)", // Transparent brown color
+          zIndex: 1,
+        }}
+      ></div>
+      <main
+        id="main"
+        className={isSignUpMode ? "sign-up-mode" : ""}
+        style={{
+          position: "relative", // Ensure content stays above the overlay
+          zIndex: 2,
+        }}
+      >
         <div className="box">
           <div className="inner-box">
             <div className="forms-wrap">
