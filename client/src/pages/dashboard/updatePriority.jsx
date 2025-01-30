@@ -15,9 +15,12 @@ import {
   Button,
   Typography,
   CircularProgress,
+  IconButton,
+  Stack,
 } from "@mui/material";
 import { imageUrl } from "../../api";
 import { usePriorityManager } from "../../hooks/usePriorityManager";
+import CloseIcon from "@mui/icons-material/Close";
 
 export const PriorityModal = ({
   open,
@@ -76,8 +79,40 @@ export const PriorityModal = ({
   };
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
-      <DialogTitle>Update Priorities</DialogTitle>
+    <Dialog
+      open={open}
+      onClose={onClose}
+      maxWidth="md"
+      fullWidth
+      sx={{ padding: 2 }}
+    >
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        sx={{ padding: 2 }}
+      >
+        <Typography
+          variant="h5"
+          sx={{
+            fontFamily: "'Roboto Serif', serif",
+            color: "#a16149",
+            fontWeight: "600",
+            textAlign: { xs: "center", md: "left" },
+            fontSize: {
+              xs: "1rem",
+              sm: "1.1rem",
+              md: "1.3rem",
+              lg: "1.5rem",
+            },
+          }}
+        >
+          Update Priorities
+        </Typography>
+        <IconButton onClick={onClose}>
+          <CloseIcon />
+        </IconButton>
+      </Stack>
       <DialogContent>
         <TableContainer component={Paper}>
           <Table>
@@ -133,6 +168,10 @@ export const PriorityModal = ({
                       />
                     ) : (
                       <Button
+                        sx={{
+                          border: "1px solid #a16149",
+                        }}
+                        color="#a16149"
                         variant="outlined"
                         size="small"
                         onClick={() => setEditingId(item[idKey])}
@@ -148,8 +187,21 @@ export const PriorityModal = ({
         </TableContainer>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
-        <Button onClick={handleSave} color="primary" disabled={isSaving}>
+        <Button
+          onClick={onClose}
+          color="custom"
+          variant="outlined"
+          sx={{ width: "200px" }}
+        >
+          Cancel
+        </Button>
+        <Button
+          onClick={handleSave}
+          color="custom"
+          variant="contained"
+          sx={{ width: "200px" }}
+          disabled={isSaving}
+        >
           {isSaving ? <CircularProgress size={24} /> : "Save Changes"}
         </Button>
       </DialogActions>

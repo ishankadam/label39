@@ -14,6 +14,7 @@ import {
   List,
   ListItem,
   Badge,
+  Collapse,
 } from "@mui/material";
 import { countries } from "../../common";
 import { useNavigate } from "react-router-dom";
@@ -35,8 +36,11 @@ import {
   openDialog,
 } from "../../store/cartSlice";
 import { getCartItems } from "../../api";
+import AddIcon from "@mui/icons-material/Add"; // Add the plus icon
 
 const CustomAppbar = (props) => {
+  const [isShopOpen, setIsShopOpen] = useState(false);
+
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [country, setCountry] = useState(props.country || "INRs");
@@ -82,6 +86,13 @@ const CustomAppbar = (props) => {
     { text: "Gift card", page: "giftcard" },
     { text: "Client Diaries", page: "clientsDiaries" },
   ];
+
+  const [openShopMenu, setOpenShopMenu] = useState(false); // State for toggling the shop menu
+
+  // Function to toggle the shop menu
+  const toggleShopMenu = () => {
+    setOpenShopMenu((prev) => !prev);
+  };
 
   useEffect(() => {
     const role = localStorage.getItem("role");
@@ -251,6 +262,55 @@ const CustomAppbar = (props) => {
             sx={{ display: { xs: "none", md: "flex" }, flexGrow: 0.7 }}
           >
             {menuItems.map((item) => (
+              <Box
+                key={item.text}
+                onMouseEnter={() => item.text === "Shop" && setIsShopOpen(true)}
+                onMouseLeave={() => setIsShopOpen(false)}
+                style={{ position: "relative" }} // Ensure relative positioning for absolute dialog
+              >
+                <Button
+                  style={{ backgroundColor: "transparent" }}
+                  className="nav-options"
+                  color="inherit"
+                  onClick={() =>
+                    item.page === "giftcard"
+                      ? props.setIsGiftCardModalOpen(true)
+                      : handlePageChange(item.page)
+                  }
+                  sx={{ fontWeight: "bold", cursor: "pointer" }}
+                >
+                  {item.text}
+                </Button>
+
+                {/* ShopDialog - Display only on hover */}
+                {item.text === "Shop" && isShopOpen && (
+                  <Box
+                    onMouseEnter={() => setIsShopOpen(true)}
+                    onMouseLeave={() => setIsShopOpen(false)}
+                    sx={{
+                      position: "absolute",
+                      top: "100%", // Positioned right below the button
+                      left: "50%", // Centered with respect to the Shop button
+                      transform: "translateX(-50%)", // Moves it back by half its width
+                      zIndex: 1000,
+                      backgroundColor: "white",
+
+                      // padding: 2,
+                      paddingTop: "12px",
+                      minWidth: "600px", // Ensures dialog width
+                    }}
+                  >
+                    <ShopDialog />
+                  </Box>
+                )}
+              </Box>
+            ))}
+          </Box>
+          {/* <Box
+            className="page-wrapper"
+            sx={{ display: { xs: "none", md: "flex" }, flexGrow: 0.7 }}
+          >
+            {menuItems.map((item) => (
               <Button
                 style={{
                   backgroundColor: "transparent",
@@ -263,20 +323,23 @@ const CustomAppbar = (props) => {
                     ? props.setIsGiftCardModalOpen(true)
                     : handlePageChange(item.page)
                 }
+          
                 onMouseEnter={() => {
                   if (item.text === "Shop") {
-                    dispatch(openDialog()); // Open dialog only for the "Shop" button
+                    dispatch(openDialog());
                   }
                 }}
                 onMouseLeave={() => {
-                  dispatch(closeDialog()); // Close dialog only for the "Shop" button
+                  if (item.text !== "Shop") {
+                    dispatch(closeDialog());
+                  }
                 }}
                 sx={{ fontWeight: "bold", cursor: "pointer" }}
               >
                 {item.text}
               </Button>
             ))}
-          </Box>
+          </Box> */}
 
           {/* Right-side icons (only visible on larger screens) */}
           <div
@@ -376,13 +439,7 @@ const CustomAppbar = (props) => {
 
         {/* Mobile Drawer */}
         <Drawer anchor="left" open={mobileOpen} onClose={toggleDrawer(false)}>
-          <Box
-            sx={{
-              width: 220,
-              position: "relative", // Allow positioning of the close icon
-            }}
-            role="presentation"
-          >
+          <Box sx={{ width: 220, position: "relative" }} role="presentation">
             {/* Close Icon */}
             <IconButton
               onClick={toggleDrawer(false)} // Close the drawer when clicked
@@ -398,32 +455,110 @@ const CustomAppbar = (props) => {
 
             {/* Nav Options */}
             <List sx={{ mt: "50px", mx: 2, borderBottom: "1px solid #ccc" }}>
-              {" "}
-              {/* Add margin to push content below the close icon */}
-              {menuItems.map((item) => (
-                <ListItem
-                  button
-                  key={item.text}
-                  onClick={() => handlePageChange(item.page)}
-                  sx={{
-                    display: { xs: "flex", md: "none" },
-                    justifyContent: "left",
-                    borderBottom: "1px solid #ccc",
-                    borderWidth: "60%",
-                  }}
-                >
-                  <Typography
-                    sx={{
-                      fontFamily: "'Cinzel', serif !important",
-                      fontSize: "14px",
-                      fontWeight: "500",
-                      padding: "8px 0px",
-                    }}
-                  >
-                    {item.text}
-                  </Typography>
-                </ListItem>
-              ))}
+              {menuItems.map((item) => {
+                if (item.text === "Shop") {
+                  return (
+                    <div key={item.text}>
+                      {/* Shop item with toggle */}
+                      <ListItem
+                        button
+                        onClick={toggleShopMenu}
+                        sx={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <Typography
+                          sx={{
+                            fontFamily: "'Cinzel', serif !important",
+                            fontSize: "14px",
+                            fontWeight: "500",
+                            padding: "8px 0px",
+                          }}
+                        >
+                          {item.text}
+                        </Typography>
+                        <IconButton
+                          onClick={toggleShopMenu} // Toggle shop menu
+                          sx={{ padding: 0 }}
+                        >
+                          <AddIcon />
+                        </IconButton>
+                      </ListItem>
+
+                      {/* Collapse menu for shop options */}
+                      <Collapse in={openShopMenu} timeout="auto" unmountOnExit>
+                        <List>
+                          {/* Replace the items below with your actual shop options */}
+                          <ListItem button>
+                            <Typography
+                              sx={{
+                                fontFamily: "'Cinzel', serif",
+                                fontWeight: "500",
+                                fontSize: "14px",
+                                padding: "8px 0px",
+                              }}
+                            >
+                              Shop Option 1
+                            </Typography>
+                          </ListItem>
+                          <ListItem button>
+                            <Typography
+                              sx={{
+                                fontFamily: "'Cinzel', serif",
+                                fontWeight: "500",
+                                fontSize: "14px",
+                                padding: "8px 0px",
+                              }}
+                            >
+                              Shop Option 2
+                            </Typography>
+                          </ListItem>
+                          <ListItem button>
+                            <Typography
+                              sx={{
+                                fontFamily: "'Cinzel', serif",
+                                fontWeight: "500",
+                                fontSize: "14px",
+                                padding: "8px 0px",
+                              }}
+                            >
+                              Shop Option 3
+                            </Typography>
+                          </ListItem>
+                          {/* Add more options as needed */}
+                        </List>
+                      </Collapse>
+                    </div>
+                  );
+                } else {
+                  return (
+                    <ListItem
+                      button
+                      key={item.text}
+                      onClick={() => handlePageChange(item.page)}
+                      sx={{
+                        display: { xs: "flex", md: "none" },
+                        justifyContent: "left",
+                        borderBottom: "1px solid #ccc",
+                        borderWidth: "60%",
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          fontFamily: "'Cinzel', serif !important",
+                          fontSize: "14px",
+                          fontWeight: "500",
+                          padding: "8px 0px",
+                        }}
+                      >
+                        {item.text}
+                      </Typography>
+                    </ListItem>
+                  );
+                }
+              })}
+
               {/* Account Icon: Visible only on mobile */}
               <ListItem
                 button
@@ -480,7 +615,6 @@ const CustomAppbar = (props) => {
           optionList={countries}
         />
       </Box>
-      <ShopDialog></ShopDialog>
     </>
   );
 };

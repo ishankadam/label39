@@ -1,32 +1,10 @@
 import * as React from "react";
 import { Typography, Box, Button } from "@mui/material";
 import shopImage from "../../assets/SHIRTS.png";
-import { useSelector } from "react-redux";
 
-const ShopDialog = ({ onMouseEnter, onMouseLeave }) => {
-  const openShopMenu = useSelector((state) => state.cart.openShopMenu);
-
-  if (!openShopMenu) return null;
-
+const ShopDialog = () => {
   return (
-    <Box
-      sx={{
-        position: "absolute",
-        left: "50%",
-        transform: "translateX(-50%)",
-        zIndex: 1000,
-        backgroundColor: "white",
-        border: "1px solid #ccc",
-        borderRadius: "8px",
-        padding: "20px",
-        marginTop: "0",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-    >
+    <Box sx={{ border: "1px solid #ccc", padding: 2, borderRadius: 1 }}>
       <Box sx={{ display: "flex", flexDirection: "row", width: "100%" }}>
         <Box sx={{ marginBottom: "20px", textAlign: "center" }}>
           <Typography
@@ -66,40 +44,40 @@ const ShopDialog = ({ onMouseEnter, onMouseLeave }) => {
           >
             FEATURED
           </Typography>
-          <Button sx={{ textAlign: "left", width: "100%", color: "#677489" }}>
-            NEW ARRIVAL
-          </Button>
-          <Button sx={{ textAlign: "left", width: "100%", color: "#677489" }}>
-            BEST SELLERS
-          </Button>
-          <Button sx={{ textAlign: "left", width: "100%", color: "#677489" }}>
-            Ready to ship
-          </Button>
-          <Button sx={{ textAlign: "left", width: "100%", color: "#677489" }}>
-            AS SEEN ON - CELEBRITY STYLE
-          </Button>
-          <Button sx={{ textAlign: "left", width: "100%", color: "#677489" }}>
-            CLIENTS DAIRY
-          </Button>
+          {[
+            "NEW ARRIVAL",
+            "BEST SELLERS",
+            "Ready to ship",
+            "AS SEEN ON - CELEBRITY STYLE",
+            "CLIENTS DAIRY",
+          ].map((feature) => (
+            <Button
+              key={feature}
+              sx={{ textAlign: "left", width: "100%", color: "#677489" }}
+            >
+              {feature}
+            </Button>
+          ))}
         </Box>
 
-        <Box
+        {/* <Box
           sx={{
             display: "flex",
             justifyContent: "center",
             mt: 2,
             height: "200px",
+            width: "200px",
           }}
         >
           <img
             src={shopImage}
-            alt="Example"
+            alt="Shop Preview"
             style={{
               maxWidth: "100%",
               height: "auto",
             }}
           />
-        </Box>
+        </Box> */}
       </Box>
     </Box>
   );

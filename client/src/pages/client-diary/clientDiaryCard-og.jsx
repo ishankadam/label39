@@ -1,30 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { Button, Card, CardMedia, CardActions } from "@mui/material";
 
-function ClientDiaryCard({ imageUrl, title }) {
+import { imageUrl } from "../../api";
+
+const ClientDiaryCard = (props) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [fadeIn, setFadeIn] = useState(true);
 
-  const imageArray = Array.isArray(imageUrl) ? imageUrl : [imageUrl];
+  // const imageArray = Array.isArray(imageUrl) ? imageUrl : [imageUrl];
 
-  useEffect(() => {
-    if (imageArray.length > 1) {
-      const interval = setInterval(() => {
-        setFadeIn(false);
-        setTimeout(() => {
-          setCurrentImageIndex(
-            (prevIndex) => (prevIndex + 1) % imageArray.length
-          );
-          setFadeIn(true);
-        }, 500); // Wait for fade out before changing image
-      }, 2000); // Change image every 3 seconds
+  // useEffect(() => {
+  //   if (imageArray.length > 1) {
+  //     const interval = setInterval(() => {
+  //       setFadeIn(false);
+  //       setTimeout(() => {
+  //         setCurrentImageIndex(
+  //           (prevIndex) => (prevIndex + 1) % imageArray.length
+  //         );
+  //         setFadeIn(true);
+  //       }, 500); // Wait for fade out before changing image
+  //     }, 3000); // Change image every 3 seconds
 
-      return () => clearInterval(interval);
-    }
-  }, [imageArray]);
+  //     return () => clearInterval(interval);
+  //   }
+  // }, [imageArray]);
 
-  const currentImage =
-    imageArray[currentImageIndex] || "/placeholder.svg?height=200&width=300";
+  // const currentImage =
+  //   imageArray[currentImageIndex] || "/placeholder.svg?height=200&width=300";
 
   return (
     <Card
@@ -40,10 +42,10 @@ function ClientDiaryCard({ imageUrl, title }) {
     >
       <CardMedia
         component="img"
-        image={currentImage}
-        alt={title || "Product Image"}
+        image={`${imageUrl}clientDiaries/${props.clientDiary.image[0]}`}
+        alt={props.clientDiary.name}
         sx={{
-          height: "auto",
+          height: "100%",
           objectFit: "cover",
           transition: "opacity 0.5s ease-in-out",
           opacity: fadeIn ? 1 : 0.5,
@@ -69,12 +71,18 @@ function ClientDiaryCard({ imageUrl, title }) {
               borderColor: "#A16149",
             },
           }}
+          onClick={() => {
+            props.setShowModal({
+              open: true,
+              data: props.clientDiary.productDetails[0],
+            });
+          }}
         >
           View Product
         </Button>
       </CardActions>
     </Card>
   );
-}
+};
 
 export default ClientDiaryCard;

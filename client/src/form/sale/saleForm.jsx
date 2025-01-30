@@ -1,8 +1,11 @@
+import CloseIcon from "@mui/icons-material/Close";
 import {
   Box,
   Button,
   Dialog,
+  IconButton,
   MenuItem,
+  Stack,
   TextField,
   Typography,
 } from "@mui/material";
@@ -10,7 +13,6 @@ import React, { useEffect, useState } from "react";
 import { createSale } from "../../api";
 import AutocompleteWithImage from "../../components/autocomplete/autocompleteWithImage";
 import CustomTextfield from "../../components/textfield/customTextfield";
-
 const SaleForm = (props) => {
   const [products, setProducts] = useState(props.products || []);
   const [productsArray, setProductsArray] = useState([]);
@@ -69,84 +71,96 @@ const SaleForm = (props) => {
   };
 
   return (
-    <Dialog
-      open={open}
-      onClose={props.handleModalClose}
-      PaperProps={{
-        style: {
-          borderRadius: "10px",
-          padding: "20px",
-          maxWidth: "900px",
-          width: "900px",
-          boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.2)",
-        },
-      }}
-    >
+    <Dialog open={open} onClose={props.handleModalClose} fullWidth>
       <Box
-        component="form"
-        onSubmit={handleSubmit}
         sx={{
+          gap: 2,
           display: "flex",
           flexDirection: "column",
-          gap: 2,
-          maxWidth: "900px",
-          margin: "0 auto",
           padding: 2,
-          boxShadow: 3,
-          borderRadius: 2,
-          backgroundColor: "#fff",
-          width: "800px",
         }}
       >
-        <Typography variant="h5" align="center" gutterBottom>
-          Create a Sale
-        </Typography>
-
-        <CustomTextfield
-          label="Sale Name"
-          name="name"
-          config={{ field: "name", isRequired: true }}
-          value={saleData.name}
-          handleEdit={handleEdit}
-          required
-        />
-
-        <TextField
-          label="Discount Type"
-          name="discountType"
-          select
-          value={saleData.discountType}
-          onChange={handleChange}
-          required
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          sx={{ paddingBottom: 3 }}
         >
-          <MenuItem value="Percentage">Percentage</MenuItem>
-          <MenuItem value="Amount">Amount</MenuItem>
-        </TextField>
+          <Typography
+            variant="h5"
+            sx={{
+              fontFamily: "'Roboto Serif', serif",
+              color: "#a16149",
+              fontWeight: "600",
+              textAlign: { xs: "center", md: "left" },
+              fontSize: {
+                xs: "1rem",
+                sm: "1.1rem",
+                md: "1.3rem",
+                lg: "1.5rem",
+              },
+            }}
+          >
+            Add Sale
+          </Typography>
+          <IconButton onClick={props.handleModalClose}>
+            <CloseIcon />
+          </IconButton>
+        </Stack>
+        <form
+          onSubmit={handleSubmit}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "25px",
+          }}
+        >
+          <CustomTextfield
+            label="Sale Name"
+            name="name"
+            config={{ field: "name", isRequired: true }}
+            value={saleData.name}
+            handleEdit={handleEdit}
+            required
+          />
 
-        <CustomTextfield
-          label="Discount Value"
-          name="discountValue"
-          type="number"
-          config={{ field: "discountValue", isRequired: true }}
-          value={saleData.discountValue}
-          handleEdit={handleEdit}
-          required
-          inputProps={{ min: 0 }}
-        />
+          <TextField
+            label="Discount Type"
+            name="discountType"
+            select
+            value={saleData.discountType}
+            onChange={handleChange}
+            required
+          >
+            <MenuItem value="Percentage">Percentage</MenuItem>
+            <MenuItem value="Amount">Amount</MenuItem>
+          </TextField>
 
-        <AutocompleteWithImage
-          label="Products"
-          name="products"
-          options={productsArray}
-          config={{ field: "products", isRequired: true }}
-          value={saleData.products}
-          handleEdit={handleEdit}
-          inputProps={{ min: 0 }}
-        />
+          <CustomTextfield
+            label="Discount Value"
+            name="discountValue"
+            type="number"
+            config={{ field: "discountValue", isRequired: true }}
+            value={saleData.discountValue}
+            handleEdit={handleEdit}
+            required
+            inputProps={{ min: 0 }}
+          />
 
-        <Button variant="contained" color="primary" onClick={handleSubmit}>
-          Submit
-        </Button>
+          <AutocompleteWithImage
+            label="Products"
+            name="products"
+            options={productsArray}
+            config={{ field: "products", isRequired: true }}
+            value={saleData.products}
+            handleEdit={handleEdit}
+            inputProps={{ min: 0 }}
+          />
+
+          <Button variant="contained" color="custom" onClick={handleSubmit}>
+            Submit
+          </Button>
+        </form>
       </Box>
     </Dialog>
   );

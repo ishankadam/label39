@@ -74,9 +74,8 @@ const ConfirmationModal = (props) => {
         <Button
           onClick={props.handleCancel}
           variant="outlined"
-          color="success"
           className="confirmation-modal-cancel"
-          sx={{ borderColor: "green", color: "green" }}
+          color="custom"
         >
           Cancel
         </Button>

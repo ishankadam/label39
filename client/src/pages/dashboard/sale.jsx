@@ -85,7 +85,7 @@ const Sale = (props) => {
       <Button
         color="custom"
         variant="contained"
-        sx={{ width: "300px" }}
+        sx={{ width: "200px", marginBottom: "20px" }}
         onClick={handleOpenForm}
       >
         Create sale
