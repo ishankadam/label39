@@ -47,6 +47,7 @@ const ProductsPage = (props) => {
 
   useEffect(() => {
     setAllProduct(props.allProduct);
+    console.log(props.allProduct);
   }, [props.allProduct]);
 
   useEffect(() => {

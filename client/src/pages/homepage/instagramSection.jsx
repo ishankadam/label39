@@ -4,16 +4,19 @@ import { getInstagramPosts } from "../../api";
 import "./Slider.css"; // Assuming you have the relevant CSS file here
 
 const InstagramSection = () => {
+  const [instagramData, setInstagramData] = useState([]);
   const [instaPosts, setInstaPosts] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [, setLoading] = useState(false);
   useEffect(() => {
-    getInstagramPosts({ setInstagramData: setInstaPosts, setLoading });
+    getInstagramPosts({ setInstagramData: setInstagramData, setLoading });
   }, []);
 
   useEffect(() => {
-    console.log(instaPosts);
-    console.log(loading);
-  }, [instaPosts]);
+    const instagramPostData = instagramData.filter(
+      (row) => row.media_type === "IMAGE" || row.media_type === "CAROUSEL_ALBUM"
+    );
+    setInstaPosts(instagramPostData);
+  }, [instagramData]);
 
   return (
     <Box>
@@ -53,30 +56,36 @@ const InstagramSection = () => {
               "--width": "300px",
               "--height": "300px",
               "--quantity": instaPosts.length,
+              cursor: "pointer",
             }}
           >
             <div className="list">
-              {instaPosts.map((post, index) => (
-                <div
-                  className="item"
-                  key={index}
-                  style={{ "--position": index + 1 }}
-                >
-                  <img
-                    src={post.media_url}
-                    alt={`Slide ${index + 1}`}
-                    className="slider-img"
-                  />
-                  <div className="overlay">
-                    <Typography variant="h6" className="overlay-text">
-                      {post.caption}
-                    </Typography>
-                    <Typography variant="body1" className="overlay-date">
-                      {post.date}
-                    </Typography>
+              {instaPosts.map((post, index) => {
+                return (
+                  <div
+                    className="item"
+                    key={index}
+                    style={{ "--position": index + 1 }}
+                    onClick={() => {
+                      window.open(post.permalink);
+                    }}
+                  >
+                    <img
+                      src={post.media_url}
+                      alt={`Slide ${index + 1}`}
+                      className="slider-img"
+                    />
+                    <div className="overlay">
+                      <Typography variant="h6" className="overlay-text">
+                        {post.caption}
+                      </Typography>
+                      <Typography variant="body1" className="overlay-date">
+                        {post.date}
+                      </Typography>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </main>

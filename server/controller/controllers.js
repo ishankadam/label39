@@ -211,8 +211,17 @@ const get_all_products = async (req, res) => {
     // Convert product prices based on the exchange rate
     const updatedProducts = products.map((product) => ({
       ...product._doc, // Spread original product data
-      price: (product.price * exchangeRate).toFixed(2), // Convert price from INR to the selected currency
+      price: Number((product.price * exchangeRate).toFixed(2)), // Convert price from INR to the selected currency
       currency: country, // Add the currency code (USD, GBP, etc.)
+      sale: product.sale
+        ? {
+            ...product.sale,
+            discountValue:
+              product.sale.discountType === "Amount"
+                ? (product.sale.discountValue * exchangeRate).toFixed(2) // Convert amount if discount type is 'amount'
+                : product.sale.discountValue, // Leave it unchanged for other discount types
+          }
+        : null, // If no sale, set to null or handle as needed
     }));
 
     // Send updated products in the response
