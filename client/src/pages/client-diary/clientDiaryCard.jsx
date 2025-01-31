@@ -2,7 +2,7 @@ import { Button, Card, CardActions, CardMedia } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { imageUrl } from "../../api";
 
-function ClientDiaryCard({ diary }) {
+function ClientDiaryCard({ diary, setShowModal }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [fadeIn, setFadeIn] = useState(true);
 
@@ -64,6 +64,12 @@ function ClientDiaryCard({ diary }) {
               color: "white",
               borderColor: "#A16149",
             },
+          }}
+          onClick={() => {
+            setShowModal({
+              open: true,
+              data: diary.productDetails[0],
+            });
           }}
         >
           View Product

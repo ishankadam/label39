@@ -41,6 +41,9 @@ router.get("/trackOrder/:trackingId", controller.trackDeliveryOrder);
 // Get all orders
 router.post("/getOrders", controller.get_all_orders);
 
+// Change order status
+router.post("/changeOrderStatus", controller.change_order_status);
+
 //create Category
 router.post(
   "/createCategory",

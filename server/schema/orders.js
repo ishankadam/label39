@@ -6,6 +6,10 @@ const OrderSchema = new mongoose.Schema({
   checkoutData: Object,
   paymentInfo: Object,
   cartItems: Array,
+  status: {
+    type: String,
+    default: "placed",
+  },
   createdAt: {
     type: Date,
     default: Date.now,

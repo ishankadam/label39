@@ -2,15 +2,8 @@ import { Box, Button, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { featured } from "../../common";
 import { setFilter } from "../../store/cartSlice";
-
-const featured = [
-  { label: "NEW ARRIVAL", value: "newArrival" },
-  { label: "BEST SELLERS", value: "bestSellers" },
-  { label: "Ready to ship", value: "readyToShip" },
-  { label: "AS SEEN ON - CELEBRITY STYLE", value: "asSeenOn" },
-  { label: "CLIENTS DAIRY", value: "clientsDiaries" },
-];
 
 const ShopDialog = (props) => {
   const [categories, setCategories] = useState(props.allCategories);

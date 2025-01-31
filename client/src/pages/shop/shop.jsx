@@ -651,6 +651,107 @@ const ProductsPage = (props) => {
                 </List>
               </Box>
             </div>
+            {/* <div className="color-filter">
+              <Typography
+                variant="h5"
+                sx={{
+                  color: "#494949",
+                  fontWeight: "600",
+                  fontSize: "16px",
+                  fontFamily: " 'Roboto Serif', serif",
+                  textTransform: "uppercase",
+                  padding: "10px",
+                  borderTop: "1px solid #ccc",
+                  borderBottom: "1px solid #ccc",
+                }}
+              >
+                Featured
+              </Typography>
+              <Box
+                sx={{
+                  maxHeight: "250px",
+                  overflowY: "auto",
+                  "&::-webkit-scrollbar": {
+                    width: "6px", // Slim scrollbar width
+                  },
+                  "&::-webkit-scrollbar-track": {
+                    backgroundColor: "#f0f0f0", // Track background color
+                    borderRadius: "10px", // Rounded corners for the track
+                  },
+                  "&::-webkit-scrollbar-thumb": {
+                    backgroundColor: "#888", // Scrollbar thumb color
+                    borderRadius: "10px", // Pill-shaped scrollbar
+                  },
+                  "&::-webkit-scrollbar-thumb:hover": {
+                    backgroundColor: "#555", // Darker thumb color on hover
+                  },
+                }}
+              >
+                <List>
+                  {featured.map((color, index) => {
+                    const isSelected = filter.color === color;
+
+                    return (
+                      <ListItem key={index} disablePadding>
+                        <ListItemButton
+                          onClick={() => handleFilterChange(color, "color")}
+                          sx={{
+                            margin: "0 !important",
+                            Color: isSelected
+                              ? "rgba(0, 106, 25, 0.1)"
+                              : "transparent", // Apply green background when selected
+                            "&:focus": {
+                              fontWeight: "bold !important",
+                              Color: "rgba(0, 106, 25, 0.1) !important", // On focus
+                            },
+                            "&:hover": {
+                              backgroundColor: isSelected
+                                ? "rgba(0, 106, 25, 0.15)"
+                                : "#efefef", // Change hover effect when selected
+                            },
+                          }}
+                        >
+                          {isSelected && (
+                            <CircleIcon
+                              sx={{
+                                color: "#a16149",
+                                fontSize: "8px",
+                                marginRight: "8px",
+                              }}
+                            />
+                          )}
+                          <ListItemText
+                            primary={color}
+                            primaryTypographyProps={{
+                              fontFamily: " 'Roboto Serif', serif",
+                              fontSize: isSelected ? "16px" : "15px",
+                              fontWeight: isSelected ? "600" : "normal",
+                              color: isSelected ? "#a16149" : "black",
+                              margin: "0 !important", // Override margin
+                              padding: "0 !important", // Override padding
+                            }}
+                          />
+                          {isSelected && (
+                            <ListItemSecondaryAction>
+                              <IconButton
+                                edge="end"
+                                aria-label="delete"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleFilterChange("", "color");
+                                }}
+                              >
+                                <ClearIcon />
+                              </IconButton>
+                            </ListItemSecondaryAction>
+                          )}
+                        </ListItemButton>
+                      </ListItem>
+                    );
+                  })}
+                </List>
+              </Box>
+            </div> */}
           </div>
 
           {/* Products card container */}

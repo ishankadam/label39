@@ -94,7 +94,7 @@ const CustomDrawer = (props) => {
               cartItems.map((item) => {
                 return (
                   <Box
-                    key={item.id}
+                    key={`${item.id}-cart-item`}
                     sx={{
                       display: "flex",
                       mt: 2,

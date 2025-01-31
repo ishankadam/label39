@@ -893,3 +893,30 @@ export const sendQueryEmail = async ({ query }) => {
     console.error("Error sending query email:", err);
   }
 };
+
+export const changeOrderStatus = async ({
+  orderId,
+  orderStatus,
+  setLoading,
+  setOrders,
+}) => {
+  try {
+    const response = await fetch(`${apiUrl}/changeOrderStatus`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ orderId, orderStatus }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to change order status");
+    }
+
+    const data = await response.json();
+    setOrders(data);
+    setLoading && setLoading(false);
+    return data;
+  } catch (err) {
+    console.error("Error changing order status:", err);
+    throw err;
+  }
+};

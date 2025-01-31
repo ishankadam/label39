@@ -1,8 +1,34 @@
 import React, { useEffect, useState } from "react";
+import { orderStatus } from "../../common";
 import CustomTable from "../../components/custom-table/customTable";
+import StatusChangeModal from "../../components/modal/orderStatusModal";
 
 function ManageOrders(props) {
   const [allOrders, setAllOrders] = useState(props.allOrders || []);
+  const [orderStatusValue, setOrderStatusValue] = useState("");
+  const [orderStatusModal, setOrderStatusModal] = useState({
+    open: false,
+    data: {},
+  });
+
+  const handleDropdownChange = (value) => {
+    setOrderStatusValue(value);
+  };
+
+  const handleOnClickView = (row) => {
+    setOrderStatusModal({
+      open: true,
+      data: row,
+    });
+  };
+
+  const handleCloseModal = () => {
+    setOrderStatusModal({ open: false, data: {} });
+  };
+
+  useEffect(() => {
+    setAllOrders(props.allOrders);
+  }, [props.allOrders]);
 
   const colDef = [
     {
@@ -36,24 +62,33 @@ function ManageOrders(props) {
       type: "nestedText",
       align: "left",
     },
-    // {
-    //   id: "notification-icon",
-    //   label: "",
-    //   key: "editAction",
-    //   type: "action",
-    //   align: "center",
-    //   editId: "edit-icon",
-    //   deleteId: "delete-icon",
-    //   commentId: "comment-icon",
-    //   //   editFunc: (row, index) => handleOnClickView(row, true, index),
-    //   //   deleteFunc: (row, index) => handleDeleteTestimonial(row, index),
-    //   isDisable: true,
-    //   isEdit: true,
-    //   page: "JobListing",
-    // },
+    {
+      id: "orderStatus",
+      label: "Order Status",
+      key: "status",
+      type: "dropdown",
+      align: "left",
+      optionList: orderStatus,
+    },
+    {
+      id: "notification-icon",
+      label: "Change order status",
+      key: "editAction",
+      type: "action",
+      align: "center",
+      editId: "edit-icon",
+      deleteId: "delete-icon",
+      commentId: "comment-icon",
+      editFunc: (row, index) => handleOnClickView(row, true, index),
+      //   deleteFunc: (row, index) => handleDeleteTestimonial(row, index),
+      // isDisable: true,
+      isEdit: true,
+      page: "JobListing",
+    },
   ];
 
   useEffect(() => {
+    console.log(props.allOrders);
     setAllOrders(props.allOrders);
   }, [props.allOrders]);
 
@@ -70,7 +105,17 @@ function ManageOrders(props) {
         pagination={true}
         page="Orders"
         allowView={true}
+        handleDropdownChange={handleDropdownChange}
+        dropdownValue={orderStatusValue}
       ></CustomTable>
+      {orderStatusModal.open && (
+        <StatusChangeModal
+          open={orderStatusModal.open}
+          handleClose={handleCloseModal}
+          data={orderStatusModal.data}
+          setAllOrders={props.setAllOrders}
+        />
+      )}
     </div>
   );
 }

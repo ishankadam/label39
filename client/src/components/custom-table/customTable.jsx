@@ -29,6 +29,7 @@ import AddEditProductModal from "../../form/addProduct/addProduct";
 import ViewOrdersModal from "../../pages/dashboard/viewProductModal";
 import ViewProductModal from "../../pages/product/viewProduct";
 import ConfirmationModal from "../modal/confirmationModal";
+import SelectDropdown from "../select-dropdown/selectDropdown";
 const CustomTable = (props) => {
   const [rowData, setRowData] = useState(props.rowData);
   const [page, setPage] = React.useState(0);
@@ -192,6 +193,18 @@ const CustomTable = (props) => {
       case "dropdown":
         const label = findLabelByValue(colDef.optionList, row[colDef.key]);
         children = <Typography>{label}</Typography>;
+        break;
+      case "actionDropdown":
+        children = (
+          <SelectDropdown
+            label="Category"
+            optionList={colDef.optionList}
+            config={{ field: "category", isRequired: true }}
+            handleEdit={props.handleDropdownChange}
+            value={props.orderStatusValue}
+            sx={{ width: "100%" }}
+          />
+        );
         break;
       case "image":
         children = (

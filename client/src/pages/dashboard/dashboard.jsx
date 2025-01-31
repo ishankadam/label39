@@ -460,7 +460,11 @@ const Dashboard = (props) => {
             />
           )}
           {tabValue === "five" && (
-            <ManageOrders allOrders={allOrders} page="Orders" />
+            <ManageOrders
+              allOrders={allOrders}
+              page="Orders"
+              setAllOrders={setAllOrders}
+            />
           )}
           {tabValue === "six" && <ProfilePage />}
           {tabValue === "seven" && (

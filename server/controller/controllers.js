@@ -984,6 +984,23 @@ const sendQueryEmail = async (req, res) => {
   }
 };
 
+const change_order_status = async (req, res) => {
+  try {
+    const orderId = req.body.orderId;
+    const orderStatus = req.body.orderStatus;
+    const order = await orders.findOneAndUpdate(
+      { orderId },
+      { $set: { status: orderStatus } },
+      { new: true }
+    );
+    const allOrders = await orders.find({}).select("-_id -__v"); // Exclude _id and __v fields
+    res.status(200).json(allOrders);
+  } catch (error) {
+    console.error("Error changing order status:", error);
+    res.status(500).json({ message: "Error changing order status", error });
+  }
+};
+
 module.exports = {
   get_all_products,
   create_product,
@@ -1015,4 +1032,5 @@ module.exports = {
   getAllSales,
   get_all_giftcard,
   sendQueryEmail,
+  change_order_status,
 };

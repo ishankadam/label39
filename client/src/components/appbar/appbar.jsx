@@ -281,12 +281,16 @@ const CustomAppbar = (props) => {
               textAlign: { xs: "center", sm: "center", md: "left" },
             }}
           >
-            <IconButton edge="start" color="inherit" aria-label="logo">
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="logo"
+              onClick={() => handlePageChange("")}
+            >
               <img
                 src={logo}
                 alt="logo"
                 style={{ height: "40px", width: "auto" }}
-                onClick={() => handlePageChange("")}
               />
             </IconButton>
           </Box>

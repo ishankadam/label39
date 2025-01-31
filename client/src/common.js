@@ -278,3 +278,18 @@ export const calculatePriceAfterDiscount = (price, type, value) => {
   }
   return finalPrice;
 };
+
+export const orderStatus = [
+  { label: "Order Placed", value: "placed" },
+  { label: "Shipped", value: "shipped" },
+  { label: "Delivered", value: "delivered" },
+  { label: "Rejected", value: "rejected" },
+];
+
+export const featured = [
+  { label: "NEW ARRIVAL", value: "newArrival" },
+  { label: "BEST SELLERS", value: "bestSellers" },
+  { label: "Ready to ship", value: "readyToShip" },
+  { label: "AS SEEN ON - CELEBRITY STYLE", value: "asSeenOn" },
+  { label: "CLIENTS DAIRY", value: "clientsDiaries" },
+];
