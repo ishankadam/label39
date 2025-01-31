@@ -83,6 +83,7 @@ const GiftCardModal = ({ open, onClose }) => {
             onClose();
             alert("Payment Successful");
             navigate("/");
+            setGiftcardDetails({});
           } else {
             alert("Payment Failed");
           }

@@ -39,7 +39,7 @@ router.post("/createDelivery", controller.createDeliveryOrder);
 router.get("/trackOrder/:trackingId", controller.trackDeliveryOrder);
 
 // Get all orders
-router.get("/getOrders", controller.get_all_orders);
+router.post("/getOrders", controller.get_all_orders);
 
 //create Category
 router.post(

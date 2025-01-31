@@ -32,7 +32,10 @@ const sendEmail = async ({
           .replace(`<span id="recipient-name"></span>`, data.name)
           .replace(`<span id="amount"></span>`, `${data.balance}`)
           .replace(`<span id="gc-code"></span>`, data.code)
-          .replace(`<span id="expiry-date"></span>`, data.expiryDate);
+          .replace(
+            `<span id="expiry-date"></span>`,
+            new Date(data.expiryDate).toLocaleDateString("en-GB")
+          );
         break;
       default:
         htmlData = body;

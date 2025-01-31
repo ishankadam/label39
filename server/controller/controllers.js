@@ -703,10 +703,17 @@ const getCartItems = async (req, res) => {
   }
 };
 
-const get_all_orders = async (_req, res) => {
+const get_all_orders = async (req, res) => {
   try {
-    const ordersData = await orders.find({}).select("-_id -__v"); // Exclude _id and __v fields
-    res.status(200).json(ordersData); // Send the result as JSON
+    const userId = req.body.userId;
+    const role = req.body.role;
+    if (role === "admin") {
+      const ordersData = await orders.find({}).select("-_id -__v"); // Exclude _id and __v fields
+      res.status(200).json(ordersData); // Send the result as JSON
+    } else {
+      const ordersData = await orders.find({ userId }).select("-_id -__v"); // Exclude _id and __v fields
+      res.status(200).json(ordersData); // Send the result as JSON
+    }
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Error fetching events", error });

@@ -181,7 +181,7 @@ const Dashboard = (props) => {
     getAllCategories({ setCategories, setLoading: setCategoryLoading });
     getAllTestimonials({ setTestimonials, setLoading: setTestimonialsLoading });
     getAllUsers({ setUsers, setLoading: setUsersLoading });
-    getAllOrders({ setAllOrders });
+    getAllOrders({ role: "admin", setAllOrders });
     getAllClientDiaries({
       setClientDiaries,
       setLoading: setclientDiariesLoading,

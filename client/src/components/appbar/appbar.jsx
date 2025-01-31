@@ -1,4 +1,4 @@
-import AddIcon from "@mui/icons-material/Add"; // Add the plus icon
+import AddIcon from "@mui/icons-material/Add";
 import CallOutlinedIcon from "@mui/icons-material/CallOutlined";
 import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -139,21 +139,53 @@ const CustomAppbar = (props) => {
 
     // Set isAdmin state based on role
     setIsAdmin(role === "admin");
+    handleOptionListUpdate();
   }, [props.userUpdated]);
 
-  useEffect(() => {
+  const handleOptionListUpdate = () => {
+    console.log(localStorage.getItem("userId"));
+    const userId = localStorage.getItem("userId");
     if (isAdmin) {
       setAdminSettings((prev) => {
-        return [
-          ...prev,
-          { label: "Dashboard", url: "/dashboard", type: "navigate" },
-        ];
+        const filtered = prev.filter((item) => item.label !== "Orders"); // Remove "Orders"
+
+        // Add "Dashboard" only if it does not exist
+        if (!filtered.some((item) => item.label === "Dashboard")) {
+          filtered.push({
+            label: "Dashboard",
+            url: "/dashboard",
+            type: "navigate",
+          });
+        }
+
+        return filtered;
+      });
+    } else if (userId) {
+      console.log("user");
+      setAdminSettings((prev) => {
+        const filtered = prev.filter((item) => item.label !== "Dashboard"); // Remove "Dashboard"
+
+        // Add "Orders" only if it does not exist
+        if (!filtered.some((item) => item.label === "Orders")) {
+          filtered.push({ label: "Orders", url: "/orders", type: "navigate" });
+        }
+
+        return filtered;
       });
     } else {
       setAdminSettings((prev) => {
-        return prev.filter((item) => item.label !== "Dashboard");
+        const filtered = prev.filter(
+          (item) => item.label !== "Orders" && item.label !== "Dashboard"
+        ); // Remove both
+
+        return filtered; // Return the cleaned array
       });
     }
+  };
+
+  useEffect(() => {
+    console.log(localStorage.getItem("userId"));
+    handleOptionListUpdate();
   }, [isAdmin]);
 
   const logout = () => {
@@ -175,6 +207,7 @@ const CustomAppbar = (props) => {
     } else {
       handleNavigation(setting.url);
     }
+    handleOptionListUpdate();
     handleCloseUserMenu(); // Close the menu
   };
 

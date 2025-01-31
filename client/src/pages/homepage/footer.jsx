@@ -10,10 +10,10 @@ import textile2 from "../../assets/5.png";
 import footerImg from "../../assets/wine-os.png";
 import "../../css/footer.css";
 // import TermsAndCondition from "../termsAndCondition/termsAndCondition.jsx";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import backgroundImage from "../../assets/backgroundfooter.jpg";
 import { setFilter } from "../../store/cartSlice";
+import { useDispatch } from "react-redux";
 const Footer = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ const Footer = () => {
   const handlePageChange = (path, filter) => {
     const navigateToPage = (targetPath) => {
       navigate(targetPath);
-      dispatch(setFilter({ [filter.field]: filter.value }));
+      filter && dispatch(setFilter({ [filter.field]: filter.value }));
     };
 
     return (e) => {

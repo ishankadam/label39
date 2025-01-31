@@ -69,6 +69,7 @@ function ManageOrders(props) {
         loading={props.loading}
         pagination={true}
         page="Orders"
+        allowView={true}
       ></CustomTable>
     </div>
   );

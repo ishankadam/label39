@@ -33,6 +33,7 @@ import ViewProduct from "./pages/product/viewProduct";
 import ProfilePage from "./pages/profile/profile";
 import Shop from "./pages/shop/shop";
 import TermsAndConditions from "./pages/termsAndCondition/termsAndCondition";
+import UserOrders from "./pages/user-orders/userOrders";
 import { store } from "./store/store";
 const App = () => {
   const [cartDetails, setCartDetails] = useState({
@@ -255,6 +256,7 @@ const App = () => {
           <Route exact path="/cart" element={<Cart />} />
           <Route exact path="/delivery" element={<DeliveryForm />} />
           <Route exact path="/payment" element={<PaymentPage />} />
+          <Route exact path="/orders" element={<UserOrders />} />
           <Route
             exact
             path="/dashboard"

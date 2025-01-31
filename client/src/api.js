@@ -600,11 +600,17 @@ export const getCartItems = async ({ userId }) => {
   }
 };
 
-export const getAllOrders = async ({ setAllOrders }) => {
+export const getAllOrders = async ({
+  userId,
+  role,
+  setAllOrders,
+  setLoading,
+}) => {
   try {
     const response = await fetch(`${apiUrl}/getOrders`, {
-      method: "GET",
+      method: "POST",
       headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userId, role }),
     });
 
     if (!response.ok) {
@@ -613,6 +619,7 @@ export const getAllOrders = async ({ setAllOrders }) => {
 
     const data = await response.json();
     setAllOrders(data);
+    setLoading && setLoading(false);
     return data;
   } catch (err) {
     console.error("Error fetching orders:", err);
