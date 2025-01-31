@@ -1,5 +1,4 @@
 import { TextField } from "@mui/material";
-import _ from "lodash";
 import React, { useEffect, useState } from "react";
 import {
   isValidPhoneNumber,
@@ -21,11 +20,7 @@ const CustomTextfield = (props) => {
     };
     const key = props.config.field;
     if (props.config.type === "email") {
-      if (_.includes(inputValue, ".")) {
-        errObj.isError = !validateEmail(inputValue);
-      } else {
-        errObj.isError = false;
-      }
+      errObj.isError = !validateEmail(inputValue);
     } else if (props.config.type === "password") {
       const passwordValid = validatePassword(inputValue);
       errObj.isError = !passwordValid;

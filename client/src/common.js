@@ -135,7 +135,8 @@ export const hasEmptyField = (obj) => {
 };
 
 export const validateEmail = (passedEmail) => {
-  let emailRegex = /^[A-Za-z0-9_.-]{3,}@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+  let emailRegex =
+    /^[A-Za-z0-9]([A-Za-z0-9_.-]*[A-Za-z0-9])?@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
   return emailRegex.test(passedEmail);
 };
 

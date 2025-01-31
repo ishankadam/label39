@@ -1,34 +1,63 @@
 import {
+  Box,
   Button,
   Card,
-  CardActionArea,
   CardContent,
   CardMedia,
-  Divider,
-  Typography,
   Grid,
-  Container,
-  Grid2,
   IconButton,
   Link,
-  Box,
+  Typography,
 } from "@mui/material";
 
-import React, { useState } from "react";
+import { Facebook, Instagram } from "@mui/icons-material";
+import React, { useEffect, useState } from "react";
 import findUs1 from "../../assets/findus1.JPG";
 import "./../../css/findUs.css";
-import NavigateNextOutlinedIcon from "@mui/icons-material/NavigateNextOutlined";
-import NavigateBeforeOutlinedIcon from "@mui/icons-material/NavigateBeforeOutlined";
-import { Twitter, Facebook, Instagram, LinkedIn } from "@mui/icons-material";
 
+import { sendQueryEmail } from "../../api";
 import CustomTextfield from "../../components/textfield/customTextfield";
 
 const FindUs = () => {
-  const [addressSlide, setAddressSlide] = useState(true);
   const [showMap, setShowMap] = useState(false);
 
   const toggleMapVisibility = () => {
     setShowMap((prev) => !prev); // Toggle map visibility
+  };
+  const [, setButtonDisabled] = useState(true);
+  const [query, setQuery] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+
+  const [error, setError] = useState({
+    name: false,
+    email: false,
+    phone: false,
+    message: false,
+  });
+
+  useEffect(() => {
+    const { name, email, phone, message } = query;
+    if (!name || !email || !phone || !message) {
+      setButtonDisabled(true);
+    } else {
+      setButtonDisabled(false);
+    }
+  }, [query]);
+
+  const handleEdit = (value, field) => {
+    setQuery((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
+  const handleSubmit = () => {
+    sendQueryEmail({ query });
+    setQuery({ name: "", email: "", phone: "", message: "" });
   };
 
   return (
@@ -198,6 +227,15 @@ const FindUs = () => {
                         <CustomTextfield
                           multiple={true}
                           label="Name"
+                          config={{ field: "name" }}
+                          value={query.name}
+                          handleEdit={handleEdit}
+                          error={error.name}
+                          errorObj={error}
+                          setError={setError}
+                          helperText={
+                            error.name ? "Please enter your name" : ""
+                          }
                           sx={{
                             width: "100%",
                             "& .MuiInputLabel-root": {
@@ -217,6 +255,15 @@ const FindUs = () => {
                         <CustomTextfield
                           multiple={true}
                           label="Email Address"
+                          config={{ field: "email", type: "email" }}
+                          value={query.email}
+                          handleEdit={handleEdit}
+                          error={error.email}
+                          errorObj={error}
+                          setError={setError}
+                          helperText={
+                            error.email ? "Please enter correct Email" : ""
+                          }
                           sx={{
                             width: "100%",
                             "& .MuiInputLabel-root": {
@@ -236,6 +283,17 @@ const FindUs = () => {
                         <CustomTextfield
                           multiple={true}
                           label="Phone Number"
+                          config={{ field: "phone", type: "phone" }}
+                          value={query.phone}
+                          handleEdit={handleEdit}
+                          error={error.phone}
+                          errorObj={error}
+                          setError={setError}
+                          helperText={
+                            error.phone
+                              ? "Please enter correct Phone Number"
+                              : ""
+                          }
                           sx={{
                             width: "100%",
                             "& .MuiInputLabel-root": {
@@ -255,6 +313,15 @@ const FindUs = () => {
                         <CustomTextfield
                           multiple={true}
                           label="Message"
+                          config={{ field: "message" }}
+                          value={query.message}
+                          handleEdit={handleEdit}
+                          error={error.message}
+                          errorObj={error}
+                          setError={setError}
+                          helperText={
+                            error.message ? "Please enter a message" : ""
+                          }
                           sx={{
                             width: "100%",
                             "& .MuiInputLabel-root": {
@@ -271,7 +338,11 @@ const FindUs = () => {
                         />
                       </Grid>
                       <Grid item xs={12} sm={12}>
-                        <Button color="custom" variant="contained">
+                        <Button
+                          color="custom"
+                          variant="contained"
+                          onClick={handleSubmit}
+                        >
                           Submit
                         </Button>
                       </Grid>

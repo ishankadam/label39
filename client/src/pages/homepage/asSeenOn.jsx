@@ -216,7 +216,7 @@ const AsSeenOn = (props) => {
                         },
                       }}
                       onClick={() => {
-                        props.handleViewProduct(item.productDetails[0]);
+                        props.handleViewProduct(item);
                       }}
                     >
                       SHOP NOW

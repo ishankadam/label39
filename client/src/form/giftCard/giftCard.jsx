@@ -1,29 +1,34 @@
-import React, { useState } from "react";
+import CloseIcon from "@mui/icons-material/Close";
 import {
   Box,
-  Modal,
-  Typography,
   Button,
   Chip,
-  Stack,
   IconButton,
+  Modal,
+  Stack,
+  Typography,
 } from "@mui/material";
-import { createOrder, verifyPayment } from "../../api";
-import { razorpayId } from "../../pages/payment/paymentPage";
-import gift from "../../assets/giftcard.jpg";
-import CloseIcon from "@mui/icons-material/Close";
-import CustomTextfield from "../../components/textfield/customTextfield";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { closeGiftCard } from "../../store/cartSlice";
+import { createOrder, verifyPayment } from "../../api";
+import gift from "../../assets/giftcard.jpg";
+import CustomTextfield from "../../components/textfield/customTextfield";
+import { razorpayId } from "../../pages/payment/paymentPage";
 
 const GiftCardModal = ({ open, onClose }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const [buttonDisabled, setButtonDisabled] = useState(true);
   const [giftcardDetails, setGiftcardDetails] = useState({
     balance: "",
+    name: "",
     email: "",
     phone: "",
+  });
+
+  const [error, setError] = useState({
+    name: false,
+    email: false,
+    phone: false,
   });
 
   const handleEdit = (value, field) => {
@@ -32,6 +37,18 @@ const GiftCardModal = ({ open, onClose }) => {
       [field]: value,
     }));
   };
+
+  useEffect(() => {
+    const { name, balance, email, phone } = giftcardDetails;
+
+    // Check if any field is empty or if any field has an error
+    if (!balance || !email || !phone || !name || error.email || error.phone) {
+      setButtonDisabled(true);
+    } else {
+      setButtonDisabled(false);
+    }
+  }, [giftcardDetails, error]);
+
   const predefinedValues = [500, 1000, 2000, 5000]; // Predefined amounts
 
   const handleChipClick = (value) => {
@@ -42,6 +59,7 @@ const GiftCardModal = ({ open, onClose }) => {
   };
 
   const handlePay = async () => {
+    console.log(error);
     try {
       // Call createOrder to get the Razorpay order ID
       const { orderId } = await createOrder(giftcardDetails.balance);
@@ -61,7 +79,6 @@ const GiftCardModal = ({ open, onClose }) => {
             giftCardData: giftcardDetails,
             type: "giftcard",
           });
-
           if (result.success) {
             onClose();
             alert("Payment Successful");
@@ -209,24 +226,47 @@ const GiftCardModal = ({ open, onClose }) => {
 
           <CustomTextfield
             fullWidth
+            type="name"
+            label="Enter name"
+            config={{ field: "name" }}
+            value={giftcardDetails.name}
+            handleEdit={handleEdit}
+            inputProps={{ min: 0 }}
+            sx={{ mb: 2, width: "100%" }}
+            error={error.name}
+            errorObj={error}
+            setError={setError}
+            helperText={error.name ? "Please enter your name" : ""}
+          />
+
+          <CustomTextfield
+            fullWidth
             type="email"
             label="Enter Email"
-            config={{ field: "email" }}
+            config={{ field: "email", type: "email" }}
             value={giftcardDetails.email}
             handleEdit={handleEdit}
             inputProps={{ min: 0 }}
             sx={{ mb: 2, width: "100%" }}
+            error={error.email}
+            errorObj={error}
+            setError={setError}
+            helperText={error.email ? "Please enter correct Email" : ""}
           />
 
           <CustomTextfield
             fullWidth
             type="phone"
             label="Enter Phone Number"
-            config={{ field: "phone" }}
+            config={{ field: "phone", type: "phone" }}
             value={giftcardDetails.phone}
             handleEdit={handleEdit}
             inputProps={{ min: 0 }}
             sx={{ mb: 2, width: "100%" }}
+            error={error.phone}
+            errorObj={error}
+            setError={setError}
+            helperText={error.phone ? "Please enter correct Phone Number" : ""}
           />
 
           <Button
@@ -234,6 +274,7 @@ const GiftCardModal = ({ open, onClose }) => {
             fullWidth
             color="custom"
             onClick={handlePay}
+            disabled={buttonDisabled}
           >
             Pay Now
           </Button>

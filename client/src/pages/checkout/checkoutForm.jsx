@@ -1,35 +1,29 @@
-import React, { useEffect, useState } from "react";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Badge,
+  Box,
   Button,
   Card,
-  Typography,
   Grid,
-  Box,
-  Badge,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
   Snackbar,
+  Typography,
 } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import CustomTextfield from "../../components/textfield/customTextfield";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { imageUrl, verifyPayment } from "../../api";
-import { createOrder } from "../../api";
 import { useNavigate } from "react-router-dom";
-import { clearCart } from "../../store/cartSlice";
+import { createOrder, imageUrl, verifyPayment } from "../../api";
 import SuccessModal from "../../components/modal/successModal";
+import CustomTextfield from "../../components/textfield/customTextfield";
+import { clearCart } from "../../store/cartSlice";
 
 const { RAZORPAY_KEY_ID } = process.env;
 export const razorpayId = RAZORPAY_KEY_ID;
 
 const CheckoutForm = (props) => {
   const [isModalOpen, setModalOpen] = useState(false);
-
-  const handlePayNowClick = () => {
-    // Logic for payment (if any) can go here
-    setModalOpen(true); // Open the modal
-  };
 
   const handleModalClose = () => {
     setModalOpen(false); // Close the modal
@@ -96,7 +90,7 @@ const CheckoutForm = (props) => {
           });
 
           if (result.success) {
-            alert("Payment Successful");
+            setModalOpen(true);
             navigate("/shop");
             dispatch(clearCart());
           } else {
@@ -605,8 +599,8 @@ const CheckoutForm = (props) => {
                 p: 1,
               }}
               disabled={isButtonDisabled}
-              // onClick={() => handleOrderPlacement()}
-              onClick={handlePayNowClick}
+              onClick={() => handleOrderPlacement()}
+              // onClick={handlePayNowClick}
             >
               Pay Now
             </Button>

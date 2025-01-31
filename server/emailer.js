@@ -10,10 +10,34 @@ AWS.config.update({
 
 const ses = new AWS.SES();
 
-const sendEmail = async (toEmail, subject, htmlFilePath) => {
+const sendEmail = async ({
+  to: toEmail,
+  subject,
+  emailBody,
+  isHtml,
+  data,
+  type,
+}) => {
   try {
     // Read the HTML file content
-    const htmlContent = fs.readFileSync(path.resolve(htmlFilePath), "utf-8");
+    const body = isHtml
+      ? fs.readFileSync(path.resolve(emailBody), "utf-8")
+      : emailBody;
+
+    console.log(data);
+    let htmlData;
+    switch (type) {
+      case "giftcard":
+        htmlData = body
+          .replace(`<span id="recipient-name"></span>`, data.name)
+          .replace(`<span id="amount"></span>`, `${data.balance}`)
+          .replace(`<span id="gc-code"></span>`, data.code)
+          .replace(`<span id="expiry-date"></span>`, data.expiryDate);
+        break;
+      default:
+        htmlData = body;
+        break;
+    }
 
     const params = {
       Source: "ishan.kadam_19@sakec.ac.in", // Replace with your verified email
@@ -21,19 +45,15 @@ const sendEmail = async (toEmail, subject, htmlFilePath) => {
         ToAddresses: [toEmail],
       },
       Message: {
-        Body: {
-          Html: {
-            Charset: "UTF-8",
-            Data: htmlContent,
-          },
-        },
+        Body: isHtml
+          ? { Html: { Charset: "UTF-8", Data: htmlData } }
+          : { Text: { Charset: "UTF-8", Data: body } },
         Subject: {
           Charset: "UTF-8",
           Data: subject,
         },
       },
     };
-
     const result = await ses.sendEmail(params).promise();
     console.log("Email sent successfully:", result);
     return result;

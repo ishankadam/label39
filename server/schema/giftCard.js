@@ -9,6 +9,10 @@ const giftCardSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  name: {
+    type: String,
+    required: true,
+  },
   phone: {
     type: String,
     required: true,

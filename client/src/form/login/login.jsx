@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import "../../css/login2.css";
 // import LoginImg from "../../assets/login.jpg";
-import SignupImg from "../../assets/signup.jpeg";
-import { Box, Button, Typography } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
-import CustomTextfield from "../../components/textfield/customTextfield";
-import backgroundImage from "../../assets/backgroundfooter.jpg"; // Import your background image
+import { Button, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../api";
+import backgroundImage from "../../assets/backgroundfooter.jpg"; // Import your background image
+import SignupImg from "../../assets/signup.jpeg";
+import CustomTextfield from "../../components/textfield/customTextfield";
 
 const Login = (props) => {
   const [isSignUpMode, setIsSignUpMode] = useState(false);
@@ -21,6 +21,7 @@ const Login = (props) => {
     email: false,
     password: false,
   });
+
   const images = [SignupImg];
 
   const handleToggle = () => {

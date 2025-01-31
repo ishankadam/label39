@@ -38,14 +38,14 @@ const ClientDiaryPage = (props) => {
           />
         </Typography>
         <Grid container spacing={{ xs: 2, sm: 4, lg: 4 }}>
-          {clientDiaries.map((diary) => (
-            <Grid item xs={6} sm={6} md={4} key={diary.id}>
-              <ClientDiaryCard
-                imageUrl={diary.imageUrl || diary.images}
-                title={diary.title}
-              />
-            </Grid>
-          ))}
+          {clientDiaries.map((diary) => {
+            console.log(diary);
+            return (
+              <Grid item xs={6} sm={6} md={4} key={diary.id}>
+                <ClientDiaryCard diary={diary} />
+              </Grid>
+            );
+          })}
         </Grid>
       </Container>
     </Box>

@@ -1,19 +1,30 @@
-import { Grid2, Card, CardMedia, Button, Typography, Box } from "@mui/material";
+import { Box, Button, Card, CardMedia, Grid2, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
-import "./../../css/categorySection.css";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { imageUrl } from "../../api";
+import { setFilter } from "../../store/cartSlice";
+import "./../../css/categorySection.css";
 
 const CategorySection = (props) => {
   const [allCategories, setAllCategories] = useState(props.allCategories);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const categories = props.allCategories.map((category) => ({
       label: category.name,
       imgSrc: category.image[0],
+      value: category.value,
     }));
     setAllCategories(categories);
   }, [props.allCategories]);
+
+  const handleCategoryNavigation = (category) => {
+    dispatch(setFilter({ category }));
+    navigate("/shop");
+  };
 
   return (
     <Box sx={{ marginTop: { xs: "20px", sm: "28px", md: "36px" } }}>
@@ -61,6 +72,7 @@ const CategorySection = (props) => {
                     boxShadow: "none",
                     border: "1px solid rgb(173, 173, 173)",
                   }}
+                  onClick={() => handleCategoryNavigation(category.value)}
                 >
                   <CardMedia
                     component="img"

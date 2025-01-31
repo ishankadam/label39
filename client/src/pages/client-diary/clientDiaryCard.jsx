@@ -1,19 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { Button, Card, CardMedia, CardActions } from "@mui/material";
+import { Button, Card, CardActions, CardMedia } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { imageUrl } from "../../api";
 
-function ClientDiaryCard({ imageUrl, title }) {
+function ClientDiaryCard({ diary }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [fadeIn, setFadeIn] = useState(true);
 
-  const imageArray = Array.isArray(imageUrl) ? imageUrl : [imageUrl];
-
   useEffect(() => {
-    if (imageArray.length > 1) {
+    if (diary.image.length > 1) {
       const interval = setInterval(() => {
         setFadeIn(false);
         setTimeout(() => {
           setCurrentImageIndex(
-            (prevIndex) => (prevIndex + 1) % imageArray.length
+            (prevIndex) => (prevIndex + 1) % diary.image.length
           );
           setFadeIn(true);
         }, 500); // Wait for fade out before changing image
@@ -21,10 +20,7 @@ function ClientDiaryCard({ imageUrl, title }) {
 
       return () => clearInterval(interval);
     }
-  }, [imageArray]);
-
-  const currentImage =
-    imageArray[currentImageIndex] || "/placeholder.svg?height=200&width=300";
+  }, [diary.image]);
 
   return (
     <Card
@@ -40,8 +36,8 @@ function ClientDiaryCard({ imageUrl, title }) {
     >
       <CardMedia
         component="img"
-        image={currentImage}
-        alt={title || "Product Image"}
+        image={`${imageUrl}clientDiaries/${diary.image[currentImageIndex]}`}
+        alt={diary.name || ""}
         sx={{
           height: "auto",
           objectFit: "cover",

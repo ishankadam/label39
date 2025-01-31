@@ -328,6 +328,16 @@ const verifyPayment = async (req, res) => {
           cartItems,
         });
         await order.save();
+        const toEmail = "ishan.kadam_19@sakec.ac.in";
+        const subject = "THE LABEL 39 - Order Confirmed";
+        const htmlFilePath = "./html/order_confirm_email.html";
+
+        await sendEmail({
+          to: toEmail,
+          subject,
+          emailBody: htmlFilePath,
+          isHtml: true,
+        });
 
         return res.status(200).json({
           order: order,
@@ -339,6 +349,7 @@ const verifyPayment = async (req, res) => {
           balance: giftCardData.balance,
           email: giftCardData.email,
           phone: giftCardData.phone,
+          name: giftCardData.name,
           code: crypto.randomBytes(16).toString("hex"),
           expiryDate: new Date(
             Date.now() + 183 * 24 * 60 * 60 * 1000
@@ -349,11 +360,19 @@ const verifyPayment = async (req, res) => {
           updatedAt: new Date().toISOString(),
         });
         await giftCart.save();
-        const toEmail = "ishankadamlol@gmail.com";
+        const toEmail = giftCardData.email;
         const subject = "THE LABEL 39 - Gift Card";
-        const htmlFilePath = "./html/email.html";
+        const htmlFilePath = "./html/gift_card.html";
 
-        await sendEmail(toEmail, subject, htmlFilePath);
+        await sendEmail({
+          to: toEmail,
+          subject,
+          emailBody: htmlFilePath,
+          isHtml: true,
+          type: "giftcard",
+          data: giftCart,
+        });
+
         return res.status(200).json({
           order: giftCart,
           message: "Gift card verified successfully",
@@ -429,7 +448,7 @@ const get_all_categories = async (_req, res) => {
   try {
     const category = await Category.find({})
       .select("-_id -__v")
-      .sort({ order: 1 }); // Exclude _id and __v fields
+      .sort({ priority: 1 }); // Exclude _id and __v fields
     res.status(200).json(category); // Send the result as JSON
   } catch (error) {
     res.status(500).json({ message: "Error fetching events", error });
@@ -936,6 +955,28 @@ const getAllSales = async (_req, res) => {
   }
 };
 
+const sendQueryEmail = async (req, res) => {
+  try {
+    const { name, phone, email, message } = req.body;
+    const subject = "Message";
+
+    const body = `${message}\n\nYou can contact me on: ${phone}\n\n${name}`;
+
+    await sendEmail({
+      to: email,
+      subject,
+      emailBody: body,
+      isHtml: false,
+      type: "contact",
+    });
+
+    res.status(200).json({ message: "Email sent successfully" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Error sending query email", error });
+  }
+};
+
 module.exports = {
   get_all_products,
   create_product,
@@ -966,4 +1007,5 @@ module.exports = {
   createSale,
   getAllSales,
   get_all_giftcard,
+  sendQueryEmail,
 };

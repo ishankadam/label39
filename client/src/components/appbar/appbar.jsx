@@ -1,46 +1,44 @@
-import React, { useEffect, useState } from "react";
-import logo from "../../assets/logo 1.png";
+import AddIcon from "@mui/icons-material/Add"; // Add the plus icon
+import CallOutlinedIcon from "@mui/icons-material/CallOutlined";
+import CloseIcon from "@mui/icons-material/Close";
+import MenuIcon from "@mui/icons-material/Menu";
+import PermIdentityRoundedIcon from "@mui/icons-material/PermIdentityRounded";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import {
   AppBar,
+  Badge,
   Box,
   Button,
+  Collapse,
+  Drawer,
   IconButton,
+  List,
+  ListItem,
   Menu,
   MenuItem,
   Toolbar,
   Tooltip,
   Typography,
-  Drawer,
-  List,
-  ListItem,
-  Badge,
-  Collapse,
 } from "@mui/material";
-import { countries } from "../../common";
-import { useNavigate } from "react-router-dom";
-import SelectDropdown from "../select-dropdown/selectDropdown";
-import PermIdentityRoundedIcon from "@mui/icons-material/PermIdentityRounded";
-import CallOutlinedIcon from "@mui/icons-material/CallOutlined";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import MenuIcon from "@mui/icons-material/Menu";
-import "./../../css/appbar.css";
-import CloseIcon from "@mui/icons-material/Close";
-import ShopDialog from "../../pages/homepage/shopDialog";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { getCartItems } from "../../api";
+import logo from "../../assets/logo 1.png";
+import { countries } from "../../common";
+import ShopDialog from "../../pages/homepage/shopDialog";
 import {
   addToCart,
   clearCart,
   closeCartDrawer,
-  closeDialog,
   openCartDrawer,
-  openDialog,
 } from "../../store/cartSlice";
-import { getCartItems } from "../../api";
-import AddIcon from "@mui/icons-material/Add"; // Add the plus icon
+import SelectDropdown from "../select-dropdown/selectDropdown";
+import "./../../css/appbar.css";
 
 const CustomAppbar = (props) => {
   const [isShopOpen, setIsShopOpen] = useState(false);
-
+  const [categories, setCategories] = useState(props.allCategories);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [country, setCountry] = useState(props.country || "INRs");
@@ -57,6 +55,10 @@ const CustomAppbar = (props) => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  useEffect(() => {
+    setCategories(props.allCategories);
+  }, [props.allCategories]);
 
   useEffect(() => {
     setCountry(props.country);
@@ -300,7 +302,7 @@ const CustomAppbar = (props) => {
                       minWidth: "600px", // Ensures dialog width
                     }}
                   >
-                    <ShopDialog />
+                    <ShopDialog categories={categories} />
                   </Box>
                 )}
               </Box>

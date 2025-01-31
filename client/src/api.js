@@ -866,3 +866,23 @@ export const getAllGiftcard = async ({ setGiftCards, setLoading }) => {
     throw err;
   }
 };
+
+export const sendQueryEmail = async ({ query }) => {
+  try {
+    const response = await fetch(`${apiUrl}/send-query-email`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(query),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to send query email");
+    }
+    return response;
+  } catch (err) {
+    console.log(err);
+    console.error("Error sending query email:", err);
+  }
+};

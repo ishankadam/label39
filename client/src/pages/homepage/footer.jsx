@@ -1,23 +1,27 @@
+import { Box, Container, Grid2, Link, Stack, Typography } from "@mui/material";
 import React from "react";
-import { Container, Grid2, Typography, Link, Box, Stack } from "@mui/material";
 // import { Twitter, Facebook, Instagram, LinkedIn } from "@mui/icons-material";
-import "../../css/footer.css";
+import { useEffect, useState } from "react";
 import textile from "../../assets/1.png";
-import textile2 from "../../assets/5.png";
-import { useState, useEffect } from "react";
 import woven from "../../assets/2.png";
-import mindful from "../../assets/4.png";
 import sustainable from "../../assets/31.png";
+import mindful from "../../assets/4.png";
+import textile2 from "../../assets/5.png";
 import footerImg from "../../assets/wine-os.png";
+import "../../css/footer.css";
 // import TermsAndCondition from "../termsAndCondition/termsAndCondition.jsx";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import backgroundImage from "../../assets/backgroundfooter.jpg";
-const Footer = (props) => {
+import { setFilter } from "../../store/cartSlice";
+const Footer = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const handlePageChange = (path) => {
+  const handlePageChange = (path, filter) => {
     const navigateToPage = (targetPath) => {
       navigate(targetPath);
+      dispatch(setFilter({ [filter.field]: filter.value }));
     };
 
     return (e) => {
@@ -245,13 +249,51 @@ const Footer = (props) => {
               </Typography>
               <ul>
                 <li>
-                  <Link href="#" className="footer-links">
-                    Features
+                  <Link
+                    href="#"
+                    className="footer-links"
+                    onClick={handlePageChange("/shop", {
+                      field: "category",
+                      value: "cord",
+                    })}
+                  >
+                    CO-ORDS
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="footer-links">
-                    Pricing
+                  <Link
+                    href="#"
+                    className="footer-links"
+                    onClick={handlePageChange("/shop", {
+                      field: "category",
+                      value: "festive",
+                    })}
+                  >
+                    FESTIVE
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#"
+                    className="footer-links"
+                    onClick={handlePageChange("/shop", {
+                      field: "category",
+                      value: "kurtas",
+                    })}
+                  >
+                    KURTAS
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#"
+                    className="footer-links"
+                    onClick={handlePageChange("/shop", {
+                      field: "category",
+                      value: "shirtsAndDresses",
+                    })}
+                  >
+                    SHIRTS AND DRESSES
                   </Link>
                 </li>
               </ul>

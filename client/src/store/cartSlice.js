@@ -6,6 +6,12 @@ const initialState = {
   totalItems: 0,
   openCartDrawer: false,
   giftCardOpen: false,
+  filter: {
+    category: "",
+    price: "",
+    color: "",
+    search: "",
+  },
 };
 
 export const cartSlice = createSlice({
@@ -80,6 +86,10 @@ export const cartSlice = createSlice({
     closeGiftCard: (state) => {
       state.giftCardOpen = false;
     },
+    setFilter: (state, action) => {
+      console.log(action.payload);
+      state.filter = { ...state.filter, ...action.payload };
+    },
   },
 });
 
@@ -94,6 +104,7 @@ export const {
   closeCartDrawer,
   openGiftCard,
   closeGiftCard,
+  setFilter,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

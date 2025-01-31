@@ -102,6 +102,9 @@ router.get("/getGiftcard", controller.get_all_giftcard);
 router.post("/createSale", controller.createSale);
 router.get("/getSales", controller.getAllSales);
 
+// query email
+router.post("/send-query-email", controller.sendQueryEmail);
+
 // Error handling middleware
 router.use((error, _req, res) => {
   const status = error.status || 500;

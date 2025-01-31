@@ -19,12 +19,15 @@ import {
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import _ from "lodash";
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { availableColors } from "../../common";
 import ProductCard from "../../components/card/productCard";
 import CustomTextfield from "../../components/textfield/customTextfield";
 import "../../css/shop.css";
+import { setFilter } from "../../store/cartSlice";
 import ViewProductModal from "../product/viewProduct";
 const ProductsPage = (props) => {
+  const dispatch = useDispatch();
   const [allProduct, setAllProduct] = useState(props.allProduct || []);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [loading, setLoading] = useState(props.loading || false);
@@ -38,16 +41,17 @@ const ProductsPage = (props) => {
     open: false,
     data: {},
   });
-  const [filter, setFilter] = useState({
-    category: "",
-    price: "",
-    color: "",
-    search: "",
-  });
+  // const [filter, setFilter] = useState({
+  //   category: "",
+  //   price: "",
+  //   color: "",
+  //   search: "",
+  // });
+
+  const filter = useSelector((state) => state.cart.filter);
 
   useEffect(() => {
     setAllProduct(props.allProduct);
-    console.log(props.allProduct);
   }, [props.allProduct]);
 
   useEffect(() => {
@@ -64,10 +68,11 @@ const ProductsPage = (props) => {
   }, [props.allCategories]);
 
   const handleFilterChange = (value, field) => {
-    setFilter((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
+    // setFilter((prev) => ({
+    //   ...prev,
+    //   [field]: value,
+    // }));
+    dispatch(setFilter({ [field]: value }));
   };
   const handleViewProduct = (product) => {
     setShowModal({
@@ -93,7 +98,6 @@ const ProductsPage = (props) => {
     const productsPerPage = page === 1 ? 16 : 8;
     const startIdx = page === 1 ? 0 : 16 + (page - 2) * 10;
     const endIdx = startIdx + productsPerPage;
-
     const filteredProducts = allProduct.filter((product) => {
       // Category Filter if filter.category is shirtsAndDresses then filter products with category shirts and also for category dresses
       const categoryFilter =
@@ -108,8 +112,9 @@ const ProductsPage = (props) => {
         filter.price !== "" // Check if a price range is selected
           ? (() => {
               const price = product.price; // Get product price
-              const range = priceRanges.find((r) => r.label === filter.price); // Find the selected range
-
+              const range = priceRanges.find(
+                (r) => r.label === filter.price.label
+              ); // Find the selected range
               // Return true if price falls within the selected range
               return range && price >= range.min && price <= range.max;
             })()
@@ -117,19 +122,19 @@ const ProductsPage = (props) => {
 
       const searchFilter =
         filter.search !== ""
-          ? product.name.toLowerCase().includes(filter.search.toLowerCase()) ||
+          ? product.name.toLowerCase().includes(filter.search?.toLowerCase()) ||
             product.description
               .toLowerCase()
-              .includes(filter.search.toLowerCase())
+              .includes(filter.search?.toLowerCase())
           : true;
 
       const colorFilter =
         filter.color !== ""
           ? Array.isArray(product.color)
             ? product.color.some((color) =>
-                color.toLowerCase().includes(filter.color.toLowerCase())
+                color.toLowerCase().includes(filter.color?.toLowerCase())
               )
-            : product.color.toLowerCase().includes(filter.color.toLowerCase())
+            : product.color.toLowerCase().includes(filter.color?.toLowerCase())
           : true;
 
       // Return true only if both filters match
@@ -448,10 +453,7 @@ const ProductsPage = (props) => {
                               aria-label="delete"
                               onClick={(e) => {
                                 e.stopPropagation();
-                                setFilter((prev) => ({
-                                  ...prev,
-                                  category: "",
-                                }));
+                                handleFilterChange("", "category");
                               }}
                             >
                               <ClearIcon />
@@ -483,7 +485,7 @@ const ProductsPage = (props) => {
               </Typography>
               <List>
                 {priceRanges.map((priceRange, index) => {
-                  const isSelected = filter.price.label === priceRange.label;
+                  const isSelected = filter.price?.label === priceRange.label;
                   return (
                     <ListItem
                       key={`${priceRange.label}${index}`}
@@ -534,10 +536,7 @@ const ProductsPage = (props) => {
                               aria-label="delete"
                               onClick={(e) => {
                                 e.stopPropagation();
-                                setFilter((prev) => ({
-                                  ...prev,
-                                  price: "",
-                                }));
+                                handleFilterChange("", "price");
                               }}
                             >
                               <ClearIcon />
@@ -638,10 +637,7 @@ const ProductsPage = (props) => {
                                 aria-label="delete"
                                 onClick={(e) => {
                                   e.stopPropagation();
-                                  setFilter((prev) => ({
-                                    ...prev,
-                                    price: "",
-                                  }));
+                                  handleFilterChange("", "color");
                                 }}
                               >
                                 <ClearIcon />

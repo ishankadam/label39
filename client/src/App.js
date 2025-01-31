@@ -120,6 +120,7 @@ const App = () => {
         <CustomAppbar
           cartDetails={cartDetails}
           setCartDetails={setCartDetails}
+          allCategories={allCategories}
           country={country}
           setCountry={setCountry}
           userUpdated={userUpdated}
