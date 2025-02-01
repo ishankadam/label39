@@ -45,6 +45,54 @@ export const countries = [
     flag: UsaFlag,
     currency: "$",
   },
+  {
+    label: "Europe",
+    value: "EUR",
+    flag: indianFlag, // Add the appropriate flag image
+    currency: "€",
+  },
+  {
+    label: "Indonesia",
+    value: "IDR",
+    flag: indianFlag, // Add the appropriate flag image
+    currency: "Rp",
+  },
+  {
+    label: "United Kingdom",
+    value: "GBP",
+    flag: indianFlag, // Add the appropriate flag image
+    currency: "£",
+  },
+  {
+    label: "Canada",
+    value: "CAD",
+    flag: indianFlag, // Add the appropriate flag image
+    currency: "C$",
+  },
+  {
+    label: "United Arab Emirates",
+    value: "AED",
+    flag: indianFlag, // Add the appropriate flag image
+    currency: "د.إ",
+  },
+  {
+    label: "Australia",
+    value: "AUD",
+    flag: indianFlag, // Add the appropriate flag image
+    currency: "A$",
+  },
+  {
+    label: "Singapore",
+    value: "SGD",
+    flag: indianFlag, // Add the appropriate flag image
+    currency: "S$",
+  },
+  {
+    label: "Thailand",
+    value: "THB",
+    flag: indianFlag, // Add the appropriate flag image
+    currency: "฿",
+  },
 ];
 
 export const getCurrencySymbol = (country) => {

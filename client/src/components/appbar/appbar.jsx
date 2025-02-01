@@ -242,8 +242,8 @@ const CustomAppbar = (props) => {
             },
           }}
         >
-          free domestic shipping | free international shipping over Rs. 25000 |
-          use code 'welcome10' on first order
+          WORLDWIDE SHIPPING | FREE SHIPPING IN INDIA | USE CODE WELCOME10 TO
+          GET 10% OFF ON YOUR FIRST PURCHASE
         </Typography>
       </Box>
 

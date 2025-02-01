@@ -48,10 +48,10 @@ const AddEditProductModal = (props) => {
     priority: 0,
   });
 
-  const colorList = availableColors.map((color) => ({
-    label: color,
-    value: color.toLowerCase().replace(/\s+/g, "-"), // Convert to lowercase and replace spaces with hyphens
-  }));
+  // const colorList = availableColors.map((color) => ({
+  //   label: color,
+  //   value: color.toLowerCase().replace(/\s+/g, "-"), // Convert to lowercase and replace spaces with hyphens
+  // }));
 
   // Handle input changes
   const handleEdit = (value, field, index, section) => {
@@ -564,7 +564,7 @@ const AddEditProductModal = (props) => {
           <Grid item xs={12}>
             <ChipTextfield
               label="Color"
-              predefinedOptions={colorList}
+              predefinedOptions={availableColors}
               config={{ field: "color", isRequired: true }}
               value={productDetails.color}
               handleEdit={handleEdit}

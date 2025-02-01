@@ -20,13 +20,14 @@ import ClickAwayListener from "@mui/material/ClickAwayListener";
 import _ from "lodash";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import NoProductEror from "../../assets/no_product.svg";
 import { availableColors } from "../../common";
 import ProductCard from "../../components/card/productCard";
+import CustomLoader from "../../components/customLoader";
 import CustomTextfield from "../../components/textfield/customTextfield";
 import "../../css/shop.css";
 import { setFilter } from "../../store/cartSlice";
 import ViewProductModal from "../product/viewProduct";
-import NoProductEror from "../../assets/no_product.svg";
 
 const ProductsPage = (props) => {
   const dispatch = useDispatch();
@@ -92,7 +93,7 @@ const ProductsPage = (props) => {
     setLoading(true);
   }, []);
 
-  const handlePageChange = (event, value) => {
+  const handlePageChange = (_event, value) => {
     setPage(value);
   };
 
@@ -759,7 +760,9 @@ const ProductsPage = (props) => {
 
           {/* Products card container */}
           <div>
-            {displayedProducts.length < 1 ? (
+            {loading ? (
+              <CustomLoader />
+            ) : displayedProducts.length < 1 ? (
               // <Box>
               //   <Typography
               //     variant="h3"

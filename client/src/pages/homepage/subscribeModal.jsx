@@ -1,11 +1,10 @@
-import { Box, Button, IconButton, Modal, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import CustomTextfield from "../../components/textfield/customTextfield";
 import CloseIcon from "@mui/icons-material/Close";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import { Box, Button, IconButton, Modal, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import story from "../../assets/aboutImg.jpeg";
-import { Padding } from "@mui/icons-material";
+import CustomTextfield from "../../components/textfield/customTextfield";
 
 const SubscribeModal = () => {
   const [open, setOpen] = useState(false);
@@ -141,8 +140,14 @@ const SubscribeModal = () => {
           <Box
             sx={{ mt: 2, display: "flex", justifyContent: "center", gap: 1 }}
           >
-            <FacebookIcon />
-            <InstagramIcon />
+            <FacebookIcon
+              sx={{ cursor: "pointer" }}
+              onClick={() => alert("Facebook")}
+            />
+            <InstagramIcon
+              sx={{ cursor: "pointer" }}
+              onClick={() => alert("Instagram")}
+            />
           </Box>
         </Box>
       </Box>
