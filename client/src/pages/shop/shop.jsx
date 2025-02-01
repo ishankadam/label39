@@ -26,6 +26,8 @@ import CustomTextfield from "../../components/textfield/customTextfield";
 import "../../css/shop.css";
 import { setFilter } from "../../store/cartSlice";
 import ViewProductModal from "../product/viewProduct";
+import NoProductEror from "../../assets/no_product.svg";
+
 const ProductsPage = (props) => {
   const dispatch = useDispatch();
   const [allProduct, setAllProduct] = useState(props.allProduct || []);
@@ -216,7 +218,7 @@ const ProductsPage = (props) => {
           sx={{
             fontSize: { xs: "21px", sm: "28px", md: "32px" },
             textAlign: "center",
-            marginLeft: { xs: "6px", sm: "12px", md: "16px" },
+            // marginLeft: { xs: "6px", sm: "12px", md: "16px" },
             fontFamily: "'Cinzel', serif",
             fontWeight: "500",
             color: "#292929",
@@ -224,7 +226,8 @@ const ProductsPage = (props) => {
             marginLeft: {
               xs: "5px",
               sm: "12px",
-              md: isSearchOpen ? "286px" : "0",
+              // md: isSearchOpen ? "286px" : "0",
+              md: isSearchOpen ? "350px" : "64px",
             },
           }}
         >
@@ -439,7 +442,7 @@ const ProductsPage = (props) => {
                           primary={category.label}
                           primaryTypographyProps={{
                             fontFamily: " 'Roboto Serif', serif",
-                            fontSize: isSelected ? "16px" : "15px",
+                            fontSize: isSelected ? "14px" : "14px",
                             fontWeight: isSelected ? "600" : "normal",
                             color: isSelected ? "#a16149" : "black",
                             margin: "0 !important", // Override margin
@@ -522,7 +525,7 @@ const ProductsPage = (props) => {
                           primary={priceRange.label}
                           primaryTypographyProps={{
                             fontFamily: " 'Roboto Serif', serif",
-                            fontSize: isSelected ? "16px" : "15px",
+                            fontSize: isSelected ? "14px" : "14px",
                             fontWeight: isSelected ? "600" : "normal",
                             color: isSelected ? "#a16149" : "black",
                             margin: "0 !important", // Override margin
@@ -755,41 +758,103 @@ const ProductsPage = (props) => {
           </div>
 
           {/* Products card container */}
-          <div className="products-container">
+          <div>
             {displayedProducts.length < 1 ? (
+              // <Box>
+              //   <Typography
+              //     variant="h3"
+              //     sx={{
+              //       fontSize: { xs: "18px", sm: "22px", md: "24px" },
+              //       textAlign: "center",
+              //       fontFamily: "'Roboto Serif', serif",
+              //       fontWeight: "500",
+              //       color: "gray",
+              //     }}
+              //   >
+              //     Uh oh! 😞 <br />
+              //     No records found
+              //   </Typography>
+              // </Box>
               <Box
                 sx={{
-                  justifyContent: "center", // Center horizontally
-                  textAlign: "center",
+                  padding: "50px 0",
                   display: "flex",
-
-                  width: "100%",
-                  marginTop: "20px",
-                  // marginLeft: "10px",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: { xs: "100vw", sm: "100vw", md: "70vw" },
+                  // height: "100vh",
+                  textAlign: "center",
+                  // bgcolor: "#f5f5f5",
                 }}
               >
+                {/* Image */}
+                <Box
+                  component="img"
+                  src={NoProductEror}
+                  alt="No products found"
+                  sx={{
+                    width: { xs: "80%", sm: "60%", md: "40%" },
+                    maxWidth: "130px",
+                    height: "auto",
+                    mb: 2,
+                  }}
+                />
+
+                {/* Title */}
                 <Typography
-                  variant="h3"
+                  variant="h5"
                   sx={{
                     fontSize: { xs: "18px", sm: "22px", md: "24px" },
-                    textAlign: "center",
-                    fontFamily: "'Roboto Serif', serif",
-                    fontWeight: "500",
+                    fontWeight: "600",
                     color: "gray",
+                    mb: 1,
                   }}
                 >
-                  No Records Found
+                  No Products Found
+                </Typography>
+
+                {/* Subtitle */}
+                <Typography
+                  variant="body2"
+                  sx={{
+                    fontSize: { xs: "14px", sm: "16px" },
+                    color: "gray",
+                    // maxWidth: "80%",
+                  }}
+                >
+                  Your search did not match any products. <br /> Please try
+                  again.
                 </Typography>
               </Box>
             ) : (
-              displayedProducts.map((product, index) => (
-                <ProductCard
-                  key={index}
-                  product={product}
-                  handleViewProduct={handleViewProduct}
-                  country={props.country}
-                />
-              ))
+              // <Box
+              //   className="products-container"
+              //   sx={{
+              //     display: "flex",
+              //     justifyContent: "center",
+
+              //     width: "85vw",
+              //   }}
+              // >
+              //   <img
+              //     src={NoProductEror}
+              //     alt="No products found"
+              //     width={350}
+              //     height={350}
+              //     style={{ maxWidth: "100%", height: "auto" }}
+              //   />
+              // </Box>
+              <div className="products-container">
+                {displayedProducts.map((product, index) => (
+                  <ProductCard
+                    key={index}
+                    product={product}
+                    handleViewProduct={handleViewProduct}
+                    country={props.country}
+                  />
+                ))}
+              </div>
             )}
           </div>
         </div>

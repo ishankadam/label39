@@ -411,7 +411,7 @@ const CustomAppbar = (props) => {
             <IconButton
               color="inherit"
               sx={{
-                display: { xs: "none", md: "flex" }, // Hide on mobile
+                display: { xs: "flex", md: "flex" },
                 opacity: 0.7,
                 p: 1,
               }}
@@ -466,7 +466,11 @@ const CustomAppbar = (props) => {
             </IconButton>
             <IconButton
               color="inherit"
-              sx={{ opacity: 0.7, padding: "8px 0 8px 8px" }}
+              sx={{
+                opacity: 0.7,
+                padding: "8px 0 8px 8px",
+                display: { xs: "none", md: "flex" }, // Hide on mobile
+              }}
               onClick={() => navigate("/contactUs")}
             >
               <CallOutlinedIcon />
@@ -497,11 +501,14 @@ const CustomAppbar = (props) => {
               {menuItems.map((item) => {
                 if (item.text === "Shop") {
                   return (
-                    <div key={item.text}>
+                    <div
+                      key={item.text}
+                      style={{ borderBottom: "1px solid #ccc" }}
+                    >
                       {/* Shop item with toggle */}
                       <ListItem
                         button
-                        onClick={toggleShopMenu}
+                        // onClick={toggleShopMenu}
                         sx={{
                           display: "flex",
                           justifyContent: "space-between",
@@ -601,6 +608,7 @@ const CustomAppbar = (props) => {
               {/* Account Icon: Visible only on mobile */}
               <ListItem
                 button
+                onClick={() => navigate("/contactUs")}
                 sx={{
                   display: { xs: "flex", md: "none" },
                   justifyContent: "left",
@@ -614,7 +622,7 @@ const CustomAppbar = (props) => {
                     padding: "8px 0px",
                   }}
                 >
-                  Account
+                  Contact us
                 </Typography>
               </ListItem>
             </List>

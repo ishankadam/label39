@@ -35,6 +35,7 @@ import Shop from "./pages/shop/shop";
 import TermsAndConditions from "./pages/termsAndCondition/termsAndCondition";
 import UserOrders from "./pages/user-orders/userOrders";
 import { store } from "./store/store";
+import LoaderTestPage from "./components/loaderTestPage";
 const App = () => {
   const [cartDetails, setCartDetails] = useState({
     open: false,
@@ -233,6 +234,7 @@ const App = () => {
               />
             }
           />
+          <Route exact path="/loaderTest" element={<LoaderTestPage />} />
           <Route exact path="/aboutus" element={<AboutUs />} />
           <Route
             exact

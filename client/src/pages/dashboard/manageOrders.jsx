@@ -66,7 +66,7 @@ function ManageOrders(props) {
       id: "orderStatus",
       label: "Order Status",
       key: "status",
-      type: "dropdown",
+      type: "orderStatus",
       align: "left",
       optionList: orderStatus,
     },

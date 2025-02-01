@@ -216,6 +216,30 @@ const CustomTable = (props) => {
           />
         );
         break;
+
+      case "orderStatus":
+        const statusStyles = {
+          placed: { bgcolor: "#1976d2", color: "white" },
+          shipped: { bgcolor: "#ed6c02", color: "white" },
+          delivered: { bgcolor: "#2e7d32", color: "white" },
+          rejected: { bgcolor: "#d32f2f", color: "white" },
+        };
+
+        const status = row[colDef.key];
+        children = (
+          <Chip
+            label={status}
+            sx={{
+              minWidth: 80,
+              fontWeight: "500",
+              textTransform: "capitalize",
+              bgcolor: statusStyles[status]?.bgcolor || "grey.300",
+              color: statusStyles[status]?.color || "black",
+            }}
+          />
+        );
+        break;
+
       case "chipsArray":
         children = row[colDef.key].map((label) => (
           <Chip
