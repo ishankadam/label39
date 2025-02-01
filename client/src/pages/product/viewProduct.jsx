@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addProductToCart, imageUrl } from "../../api";
-import { addToCart } from "../../store/cartSlice";
+import { addToCart, showSnackbar } from "../../store/cartSlice";
 import Footer from "../homepage/footer";
 
 const ViewProductModal = (props) => {
@@ -108,7 +108,14 @@ const ViewProductModal = (props) => {
         sale: cartProduct.sale,
       };
       dispatch(addToCart(newCartProduct));
+      handleClose();
       addProductToCart({ cartProduct: newCartProduct, userId: userId });
+      dispatch(
+        showSnackbar({
+          message: `${cartProduct.name} added to cart`,
+          severity: "success",
+        })
+      );
     }
   };
 

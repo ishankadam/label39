@@ -12,6 +12,7 @@ const initialState = {
     color: "",
     search: "",
   },
+  snackbars: [],
 };
 
 export const cartSlice = createSlice({
@@ -90,6 +91,14 @@ export const cartSlice = createSlice({
       console.log(action.payload);
       state.filter = { ...state.filter, ...action.payload };
     },
+    showSnackbar: (state, action) => {
+      state.snackbars.push({ id: Date.now(), ...action.payload });
+    },
+    hideSnackbar: (state, action) => {
+      state.snackbars = state.snackbars.filter(
+        (snack) => snack.id !== action.payload
+      );
+    },
   },
 });
 
@@ -105,6 +114,8 @@ export const {
   openGiftCard,
   closeGiftCard,
   setFilter,
+  showSnackbar,
+  hideSnackbar,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

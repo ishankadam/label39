@@ -1,19 +1,18 @@
+import CheckIcon from "@mui/icons-material/Check";
 import {
   Alert,
-  Button,
   Box,
+  Chip,
   List,
   ListItem,
   ListItemText,
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { getAllOrders } from "../../api";
-import CheckIcon from "@mui/icons-material/Check";
-import { imageUrl } from "../../api";
-import { Chip } from "@mui/material";
+import { getAllOrders, imageUrl } from "../../api";
+import { findLabelByValue, orderStatus } from "../../common";
 
-const UserOrders = (props) => {
+const UserOrders = () => {
   const [orders, setOrders] = useState([]);
   const [, setLoading] = useState(false);
 
@@ -115,7 +114,7 @@ const UserOrders = (props) => {
             }}
           />
         </Typography>
-        {orders.map((order, index) => (
+        {orders.map((order) => (
           <Box
             maxWidth="lg"
             key={order.orderId}
@@ -145,13 +144,12 @@ const UserOrders = (props) => {
 
               {/* Order Status Chip */}
               <Chip
-                label={order.orderStatus}
+                label={findLabelByValue(orderStatus, order.status)}
                 sx={{
                   fontWeight: "500",
                   textTransform: "capitalize",
-                  bgcolor:
-                    statusStyles[order.orderStatus]?.bgcolor || "grey.300",
-                  color: statusStyles[order.orderStatus]?.color || "black",
+                  bgcolor: statusStyles[order.status]?.bgcolor || "grey.300",
+                  color: statusStyles[order.status]?.color || "black",
                 }}
               />
             </Box>

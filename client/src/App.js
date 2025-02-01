@@ -15,6 +15,7 @@ import { whatsappQueryMessage } from "./common";
 import WhatsAppButton from "./components/actionButton/whatsappActionButton";
 import CustomAppbar from "./components/appbar/appbar";
 import CustomDrawer from "./components/drawer/drawer";
+import LoaderTestPage from "./components/loaderTestPage";
 import GiftCardModal from "./form/giftCard/giftCard";
 import Login from "./form/login/login";
 import Signup from "./form/signup/signup";
@@ -34,8 +35,8 @@ import ProfilePage from "./pages/profile/profile";
 import Shop from "./pages/shop/shop";
 import TermsAndConditions from "./pages/termsAndCondition/termsAndCondition";
 import UserOrders from "./pages/user-orders/userOrders";
+import CustomSnackbar from "./snackbar/customSnackbar";
 import { store } from "./store/store";
-import LoaderTestPage from "./components/loaderTestPage";
 const App = () => {
   const [cartDetails, setCartDetails] = useState({
     open: false,
@@ -287,6 +288,7 @@ const App = () => {
           cartDetails={cartDetails}
           setCartDetails={setCartDetails}
         ></CustomDrawer>
+        <CustomSnackbar />
         {/* <Box sx={{ height: 100 }} /> */}
       </div>
     </Provider>
