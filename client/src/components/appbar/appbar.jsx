@@ -32,6 +32,7 @@ import {
   clearCart,
   closeCartDrawer,
   openCartDrawer,
+  showSnackbar,
 } from "../../store/cartSlice";
 import SelectDropdown from "../select-dropdown/selectDropdown";
 import "./../../css/appbar.css";
@@ -192,6 +193,12 @@ const CustomAppbar = (props) => {
     localStorage.clear();
     navigate("/");
     dispatch(clearCart());
+    dispatch(
+      showSnackbar({
+        message: `You've been logged out. See you next time!`,
+        severity: "warning",
+      })
+    );
     props.setUserUpdated(false);
   };
 
@@ -399,7 +406,7 @@ const CustomAppbar = (props) => {
                 padding: "6px 0px",
                 margin: "0px 10px !important",
                 fontSize: "14px",
-              }} // Add margin to the left for spacing
+              }}
               required
               select
               name="country"

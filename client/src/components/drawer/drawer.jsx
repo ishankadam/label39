@@ -21,6 +21,7 @@ import {
 import {
   closeCartDrawer,
   removeFromCart,
+  showSnackbar,
   updateQuantity,
 } from "../../store/cartSlice";
 import CustomTextfield from "../textfield/customTextfield";
@@ -31,8 +32,14 @@ const CustomDrawer = (props) => {
   const cartItems = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleRemoveItem = (productId) => {
+  const handleRemoveItem = (productId, item) => {
     dispatch(removeFromCart(productId));
+    dispatch(
+      showSnackbar({
+        message: `${(productId, item.name)} HAS BEEN REMOVED FROM YOUR CART`,
+        severity: "error",
+      })
+    );
   };
 
   const handleUpdateQuantity = (productId, operation) => {
@@ -225,7 +232,7 @@ const CustomDrawer = (props) => {
                           mt: 1,
                           textDecoration: "underline !important",
                         }}
-                        onClick={() => handleRemoveItem(item.productId)}
+                        onClick={() => handleRemoveItem(item.productId, item)}
                       >
                         Remove
                       </Button>

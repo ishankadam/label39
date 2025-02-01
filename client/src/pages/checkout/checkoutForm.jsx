@@ -17,7 +17,7 @@ import { useNavigate } from "react-router-dom";
 import { createOrder, imageUrl, verifyPayment } from "../../api";
 import SuccessModal from "../../components/modal/successModal";
 import CustomTextfield from "../../components/textfield/customTextfield";
-import { clearCart } from "../../store/cartSlice";
+import { clearCart, showSnackbar } from "../../store/cartSlice";
 
 const { RAZORPAY_KEY_ID } = process.env;
 export const razorpayId = RAZORPAY_KEY_ID;
@@ -63,6 +63,15 @@ const CheckoutForm = (props) => {
       ...prev,
       [field]: value,
     }));
+  };
+
+  const handleApplyDiscount = async () => {
+    dispatch(
+      showSnackbar({
+        message: `DISCOUNT HAS BEEN APPLIED`,
+        severity: "success",
+      })
+    );
   };
 
   const handleOrderPlacement = async () => {
@@ -249,6 +258,7 @@ const CheckoutForm = (props) => {
                 value={checkoutData.pincode}
               />
               <Button
+                onClick={handleApplyDiscount}
                 variant="contained"
                 sx={{
                   height: "56px", // Matches the height of the CustomTextfield
