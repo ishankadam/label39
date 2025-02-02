@@ -37,6 +37,9 @@ const sendEmail = async ({
             new Date(data.expiryDate).toLocaleDateString("en-GB")
           );
         break;
+      case "resetPassword":
+        htmlData = body.replace("confirmation_link", data);
+        break;
       default:
         htmlData = body;
         break;

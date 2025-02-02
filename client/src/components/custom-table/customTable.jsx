@@ -251,6 +251,9 @@ const CustomTable = (props) => {
           />
         ));
         break;
+      case "boolean":
+        children = row[colDef.key] ? "Yes" : "No";
+        break;
       case "date":
         children = new Date(row[colDef.key]).toLocaleDateString();
         break;

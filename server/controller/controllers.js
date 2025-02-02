@@ -18,6 +18,8 @@ const clientDiaries = require("../schema/clientDiaries");
 const CelebrityStyle = require("../schema/celebrityStyle");
 const Sale = require("../schema/sale");
 const sendEmail = require("../emailer");
+const discount = require("../schema/discount");
+const jwt = require("jsonwebtoken");
 
 const storage = multer.diskStorage({
   destination: (req, _file, cb) => {
@@ -304,6 +306,7 @@ const verifyPayment = async (req, res) => {
       cartItems,
       giftCardData,
       type,
+      userId,
     } = req.body;
     console.log(razorpay_order_id, razorpay_payment_id, razorpay_signature);
 
@@ -326,6 +329,7 @@ const verifyPayment = async (req, res) => {
             method: "razorpay",
           },
           cartItems,
+          userId,
         });
         await order.save();
         const toEmail = "ishan.kadam_19@sakec.ac.in";
@@ -338,6 +342,12 @@ const verifyPayment = async (req, res) => {
           emailBody: htmlFilePath,
           isHtml: true,
         });
+
+        // remove order from cart from user schema
+        const user = await User.findOne({ userId: order.userId });
+        // clear cart
+        user.cart = [];
+        await user.save();
 
         return res.status(200).json({
           order: order,
@@ -689,17 +699,61 @@ const add_to_cart = async (req, res) => {
 };
 
 const getCartItems = async (req, res) => {
-  const userId = req.body.userId;
+  const { userId, country } = req.body;
+
   try {
-    const user = await User.findOne({ userId: userId })
+    const user = await User.findOne({ userId })
       .select("cart")
       .populate("cart")
       .lean();
+
     const cartItems = user?.cart || [];
-    res.status(200).json(cartItems);
+
+    if (country === "INR") {
+      return res.status(200).json(cartItems);
+    }
+
+    // Fetch exchange rates
+    const EXCHANGE_API_URL = "https://open.er-api.com/v6/latest/INR";
+    const exchangeResponse = await axios.get(EXCHANGE_API_URL);
+    const rates = exchangeResponse.data.rates;
+
+    if (!rates || !rates[country]) {
+      return res
+        .status(400)
+        .json({ message: "Exchange rate not found for this country" });
+    }
+
+    const exchangeRate = rates[country];
+
+    // Convert prices based on exchange rate
+    const updatedCartItems = cartItems.map((item) => ({
+      ...item,
+      price: Math.round(item.price * exchangeRate), // Convert price to requested currency
+    }));
+
+    res.status(200).json(updatedCartItems);
   } catch (error) {
     console.error("Error fetching cart items:", error);
     res.status(500).json({ message: "Failed to fetch cart items" });
+  }
+};
+
+module.exports = { getCartItems };
+
+const updateCart = async (req, res) => {
+  try {
+    const userId = req.body.userId;
+    const cartItems = req.body.cartItems;
+    const updatedCart = await User.findOneAndUpdate(
+      { userId: userId },
+      { $set: { cart: cartItems } },
+      { new: true }
+    );
+    res.status(200).json(updatedCart);
+  } catch (error) {
+    console.error("Error updating cart:", error);
+    res.status(500).json({ message: "Failed to update cart" });
   }
 };
 
@@ -984,20 +1038,178 @@ const sendQueryEmail = async (req, res) => {
   }
 };
 
-const change_order_status = async (req, res) => {
+const change_order_status = async (_req, res) => {
   try {
-    const orderId = req.body.orderId;
-    const orderStatus = req.body.orderStatus;
-    const order = await orders.findOneAndUpdate(
-      { orderId },
-      { $set: { status: orderStatus } },
-      { new: true }
-    );
     const allOrders = await orders.find({}).select("-_id -__v"); // Exclude _id and __v fields
     res.status(200).json(allOrders);
   } catch (error) {
     console.error("Error changing order status:", error);
     res.status(500).json({ message: "Error changing order status", error });
+  }
+};
+
+const checkDiscountCode = async (req, res) => {
+  try {
+    const { userId, code } = req.body;
+
+    // Check if the code is a valid discount code
+    let discountData = await discount.findOne({ code });
+    let giftCardData = await Giftcard.findOne({ code });
+
+    let activeCode = discountData || giftCardData;
+
+    // If no valid discount or gift card is found
+    if (!activeCode) {
+      return res.status(200).json({ message: "Invalid code", isValid: false });
+    }
+
+    // Handle discount code specific validations
+    if (discountData) {
+      // Check expiration date
+      if (discountData.expiresAt && new Date() > discountData.expiresAt) {
+        return res
+          .status(200)
+          .json({ message: "Discount code has expired", isValid: false });
+      }
+
+      // Check if usage limit is exceeded
+      if (
+        discountData.usageLimit &&
+        discountData.usedCount >= discountData.usageLimit
+      ) {
+        return res.status(200).json({
+          message: "Discount code usage limit reached",
+          isValid: false,
+        });
+      }
+
+      // Special validation for "WELCOME10" (new users only)
+      if (discountData.code === "WELCOME10") {
+        const previousOrders = await orders.findOne({ userId });
+        if (previousOrders) {
+          return res.status(200).json({
+            message: "WELCOME10 is only valid for new users",
+            isValid: false,
+          });
+        }
+      }
+    }
+
+    // Handle gift card specific validations
+    if (giftCardData) {
+      // Check expiration date
+      if (new Date(giftCardData.expiryDate) < new Date()) {
+        return res
+          .status(200)
+          .json({ message: "Gift card has expired", isValid: false });
+      }
+
+      // Check if the gift card has balance
+      if (giftCardData.balance <= 0) {
+        return res.status(200).json({
+          message: "Gift card has no remaining balance",
+          isValid: false,
+        });
+      }
+    }
+
+    // Return valid code info (discount or gift card)
+    return res.status(200).json({
+      message: "Code is valid",
+      isValid: true,
+      discountType: activeCode.discountType || null, // In case it's a gift card, there might not be a discountType
+      value: activeCode.value || activeCode.balance, // Return the discount value or gift card balance
+    });
+  } catch (error) {
+    console.error("Error validating code:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+const createDiscount = async (req, res) => {
+  try {
+    const discountData = req.body;
+    const newDiscount = new discount({
+      code: discountData.code,
+      discountType: discountData.discountType,
+      value: discountData.value,
+      expiresAt: new Date(discountData.expiresAt),
+      usageLimit: discountData.usageLimit,
+      onlyForNewUsers: discountData.onlyForNewUsers,
+      description: discountData.description,
+    });
+    await newDiscount.save();
+    const allDiscount = await discount.find({});
+    res.send(allDiscount);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Error creating discount", error });
+  }
+};
+
+const getAllDiscounts = async (_req, res) => {
+  try {
+    const allDiscount = await discount.find({}).select("-_id -__v"); // Exclude _id and __v fields
+    res.status(200).json(allDiscount); // Send the result as JSON
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Error fetching events", error });
+  }
+};
+
+const resetPassword = async (req, res) => {
+  try {
+    const { token, newPassword } = req.body;
+    const user = await User.findOne({ resetPasswordToken: token });
+
+    if (!user) {
+      return res.status(404).json({ message: "Invalid token" });
+    }
+
+    user.password = md5(newPassword);
+    await user.save();
+
+    return res.status(200).json({ message: "Password reset successfully" });
+  } catch (error) {
+    console.error("Error resetting password:", error);
+    res.status(500).json({ message: "Error resetting password", error });
+  }
+};
+
+const forgotPassword = async (req, res) => {
+  const { email } = req.body;
+  // Send email with reset link
+
+  try {
+    // Check if the user exists
+    const user = await User.findOne({ email });
+    if (!user)
+      return res
+        .status(200)
+        .json({ isValid: false, message: "User not found" });
+
+    // Generate a reset password token
+    const resetToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "1h", // Token expires in 1 hour
+    });
+
+    // Create reset password link
+    const resetPasswordLink = `${process.env.CLIENT_URL}/resetPassword/${resetToken}`;
+    const toEmail = email;
+    const subject = "THE LABEL 39 - Reset Password";
+    const htmlFilePath = "./html/reset_password.html";
+
+    await sendEmail({
+      to: toEmail,
+      subject,
+      emailBody: htmlFilePath,
+      isHtml: true,
+      type: "resetPassword",
+      data: resetPasswordLink,
+    });
+    return res.status(200).json({ isValid: true, message: "User not found" });
+  } catch (error) {
+    res.status(500).json({ message: "Error sending email", error });
   }
 };
 
@@ -1033,4 +1245,10 @@ module.exports = {
   get_all_giftcard,
   sendQueryEmail,
   change_order_status,
+  updateCart,
+  checkDiscountCode,
+  createDiscount,
+  getAllDiscounts,
+  resetPassword,
+  forgotPassword,
 };

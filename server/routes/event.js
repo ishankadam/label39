@@ -44,6 +44,9 @@ router.post("/getOrders", controller.get_all_orders);
 // Change order status
 router.post("/changeOrderStatus", controller.change_order_status);
 
+// Update cart
+router.post("/updateCart", controller.updateCart);
+
 //create Category
 router.post(
   "/createCategory",
@@ -101,12 +104,25 @@ router.post("/createGiftcard", controller.create_giftcard);
 // get all giftcard
 router.get("/getGiftcard", controller.get_all_giftcard);
 
+// check discount code
+router.post("/check-discount-code", controller.checkDiscountCode);
+
 // Sales
 router.post("/createSale", controller.createSale);
 router.get("/getSales", controller.getAllSales);
 
 // query email
 router.post("/send-query-email", controller.sendQueryEmail);
+
+// discount
+router.post("/createDiscount", controller.createDiscount);
+router.get("/getDiscounts", controller.getAllDiscounts);
+
+// reset password
+router.post("/reset-password/:token", controller.resetPassword);
+
+// forgot password
+router.post("/forgot-password", controller.forgotPassword);
 
 // Error handling middleware
 router.use((error, _req, res) => {

@@ -9,13 +9,21 @@ import {
   Card,
   Grid,
   Snackbar,
+  Switch,
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { createOrder, imageUrl, verifyPayment } from "../../api";
+import {
+  checkDiscountCode,
+  createOrder,
+  imageUrl,
+  verifyPayment,
+} from "../../api";
+import { countries } from "../../common";
 import SuccessModal from "../../components/modal/successModal";
+import SelectDropdown from "../../components/select-dropdown/selectDropdown";
 import CustomTextfield from "../../components/textfield/customTextfield";
 import { clearCart } from "../../store/cartSlice";
 
@@ -23,60 +31,158 @@ const { RAZORPAY_KEY_ID } = process.env;
 export const razorpayId = RAZORPAY_KEY_ID;
 
 const CheckoutForm = (props) => {
+  const navigate = useNavigate();
   const [isModalOpen, setModalOpen] = useState(false);
-
+  const [code, setCode] = useState("");
+  const [discount, setDiscount] = useState({
+    isValid: true,
+  });
+  const [isDifferentBilling, setIsDifferentBilling] = useState(false);
+  const [discountLoading, setDiscountLoading] = useState(false);
   const handleModalClose = () => {
     setModalOpen(false); // Close the modal
   };
 
+  const dispatch = useDispatch();
+
   const cartItems = useSelector((state) => state.cart.items);
   const [paymentDetails, setPaymentDetails] = useState({});
+  const [currency, setCurrency] = useState("₹");
+  const [billAmount, setBillAmount] = useState(0);
   const [paymentSuccess, setPaymentSuccess] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const totalPrice = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
-  );
   const [checkoutData, setCheckoutData] = useState({
-    firstName: "",
-    lastName: "",
-    address: "",
-    apartment: "",
-    city: "",
-    state: "",
-    pincode: "",
-    phone: "",
-    email: "",
+    country: props.country,
+    shippingAddress: {},
+    billingAddress: {},
   });
 
-  useEffect(() => {
-    const allFieldsFilled = Object.values(checkoutData).every(
-      (field) => field.trim() !== ""
-    );
-    setIsButtonDisabled(!allFieldsFilled); // Disable button if any field is empty
-  }, [checkoutData]);
-
-  const handleEdit = (value, field) => {
-    setCheckoutData((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
+  const handleCodeChange = (value) => {
+    setCode(value);
+    if (value.length > 0) {
+      setDiscount({
+        isValid: false,
+      });
+    } else {
+      setDiscount({
+        isValid: true,
+      });
+    }
   };
 
-  const handleOrderPlacement = async () => {
+  useEffect(() => {
+    setCheckoutData((prev) => ({
+      ...prev,
+      country: props.country,
+    }));
+  }, [props.country]);
+
+  useEffect(() => {
+    const selectedCountry = countries.find(
+      (row) => row.value === checkoutData.country
+    );
+
+    if (selectedCountry) {
+      setCurrency(selectedCountry.currency);
+
+      // Generate new fields for shipping and billing addresses
+      const updatedFields = selectedCountry.fields.reduce(
+        (acc, field) => ({ ...acc, [field]: "" }),
+        {}
+      );
+
+      setCheckoutData((prevData) => {
+        return {
+          ...prevData,
+          country: props.country,
+          shippingAddress:
+            prevData.shippingAddress &&
+            Object.keys(prevData.shippingAddress).length
+              ? prevData.shippingAddress
+              : updatedFields, // Don't overwrite if it has data
+          billingAddress: isDifferentBilling
+            ? updatedFields
+            : prevData.billingAddress,
+        };
+      });
+    }
+  }, [checkoutData.country, isDifferentBilling]);
+
+  useEffect(() => {
+    const allFieldsFilled = (obj) =>
+      Object.values(obj).every((value) =>
+        typeof value === "object" ? allFieldsFilled(value) : value.trim() !== ""
+      );
+
+    setIsButtonDisabled(!allFieldsFilled(checkoutData)); // Disable button if any field is empty
+    console.log(checkoutData);
+  }, [checkoutData]);
+
+  const handleEdit = (value, field, index, section) => {
+    console.log(section);
+
+    if (field === "country") {
+      props.setCountry(value);
+    } else {
+      setCheckoutData((prev) => {
+        // Preserve both shippingAddress and billingAddress while updating the correct section
+        if (section) {
+          return {
+            ...prev,
+            [section]: {
+              ...prev[section], // Preserve existing fields in the current section
+              [field]: value, // Update the specific field in the section
+            },
+          };
+        } else {
+          console.log(field, value);
+          // Update top-level field if no section is specified
+          return {
+            ...prev,
+            [field]: value,
+          };
+        }
+      });
+    }
+  };
+
+  const handleApply = async () => {
+    setDiscountLoading(true);
+    checkDiscountCode({
+      userId: localStorage.getItem("userId"),
+      code: code,
+      setLoading: setDiscountLoading,
+      setDiscount,
+    });
+  };
+
+  useEffect(() => {
+    // Calculate the total amount before discount
     const amount = cartItems.reduce(
       (total, item) => total + item.price * item.quantity,
       0
     );
+
+    let finalAmount = amount;
+    if (discount.isValid) {
+      if (discount.discountType === "Percentage") {
+        finalAmount = amount - (amount * discount.value) / 100;
+      } else if (discount.discountType === "Fixed") {
+        finalAmount = amount - discount.value;
+      }
+    }
+
+    setBillAmount(finalAmount);
+  }, [discount, cartItems]);
+
+  const handleOrderPlacement = async () => {
     try {
-      const { orderId } = await createOrder(amount);
+      const { orderId } = await createOrder(billAmount);
       const options = {
         key: process.env.REACT_APP_RAZORPAY_KEY_ID,
-        amount: amount,
-        currency: "INR",
-        name: "Your Company Name",
+        amount: billAmount,
+        currency: checkoutData.country,
+        name: "The Label39",
         description: "Test Transaction",
         order_id: orderId,
         handler: async function (response) {
@@ -87,6 +193,7 @@ const CheckoutForm = (props) => {
             checkoutData,
             cartItems,
             type: "order",
+            userId: localStorage.getItem("userId"),
           });
 
           if (result.success) {
@@ -109,6 +216,7 @@ const CheckoutForm = (props) => {
 
       const rzp = new window.Razorpay(options);
       rzp.open();
+      console.log(checkoutData);
     } catch (error) {
       console.error("Payment failed:", error);
     }
@@ -225,7 +333,9 @@ const CheckoutForm = (props) => {
                     fontSize: { xs: "11px", sm: "12px", md: "14px" },
                   }}
                 >
-                  {`Rs. ${(item.price * item.quantity).toLocaleString()}`}
+                  {`${currency} ${(
+                    item.price * item.quantity
+                  ).toLocaleString()}`}
                 </Typography>
               </Grid>
             ))}
@@ -240,13 +350,19 @@ const CheckoutForm = (props) => {
             >
               <CustomTextfield
                 label="Discount code and Gift card"
-                config={{ field: "pincode", isRequired: true }}
-                handleEdit={handleEdit}
+                config={{ field: "code", isRequired: true }}
+                handleEdit={handleCodeChange}
                 sx={{
                   flex: 1, // Allows the TextField to take remaining space
                   height: "56px", // Matches the default Button height
                 }}
-                value={checkoutData.pincode}
+                value={code}
+                error={!discount.isValid}
+                helperText={
+                  code.length > 0 && !discount.isValid && discount.message
+                    ? discount.message
+                    : ""
+                }
               />
               <Button
                 variant="contained"
@@ -261,8 +377,10 @@ const CheckoutForm = (props) => {
                     boxShadow: "none",
                   },
                 }}
+                disabled={code.length <= 0}
+                onClick={handleApply}
               >
-                Apply
+                {discountLoading ? "Checking..." : "Apply"}
               </Button>
             </Box>
 
@@ -289,7 +407,7 @@ const CheckoutForm = (props) => {
                   fontSize: { xs: "11px", sm: "12px", md: "14px" },
                 }}
               >
-                {`INR. ₹ ${totalPrice.toLocaleString()}`}
+                {`${currency} ${billAmount.toLocaleString()}`}
               </Typography>
             </Box>
 
@@ -347,7 +465,7 @@ const CheckoutForm = (props) => {
                   fontSize: { xs: "12px", sm: "14px", md: "16px" },
                 }}
               >
-                {`INR. ₹ ${totalPrice.toLocaleString()}`}
+                {`INR. ₹ ${billAmount.toLocaleString()}`}
               </Typography>
             </Box>
           </Card>
@@ -399,6 +517,32 @@ const CheckoutForm = (props) => {
                   mb: 2,
                 }}
               >
+                Country
+              </Typography>
+              <SelectDropdown
+                className="country-dropdown"
+                variant="outlined"
+                margin="normal"
+                sx={{
+                  display: { xs: "none", md: "flex" },
+                  width: "100%",
+                }} // Add margin to the left for spacing
+                required
+                select
+                name="country"
+                value={checkoutData.country}
+                config={{ field: "country" }}
+                handleEdit={handleEdit}
+                optionList={countries}
+              />
+              <Typography
+                variant="h6"
+                sx={{
+                  fontFamily: "'Roboto Serif', serif",
+                  fontWeight: "600",
+                  mb: 2,
+                }}
+              >
                 Contact
               </Typography>
               <CustomTextfield
@@ -416,17 +560,20 @@ const CheckoutForm = (props) => {
                   fontWeight: "600",
                 }}
               >
-                Delivery
+                Shipping Address
               </Typography>
             </Grid>
-
             {/* First Name and Last Name on the same row */}
             <Grid item xs={12} sm={6}>
               <CustomTextfield
                 label="First Name"
                 variant="outlined"
-                value={checkoutData.firstName}
-                config={{ field: "firstName", isRequired: true }}
+                value={checkoutData.shippingAddress.firstName}
+                config={{
+                  field: "firstName",
+                  isRequired: true,
+                  section: "shippingAddress",
+                }}
                 handleEdit={handleEdit}
                 fullWidth
                 required
@@ -437,8 +584,12 @@ const CheckoutForm = (props) => {
               <CustomTextfield
                 label="Last Name"
                 variant="outlined"
-                value={checkoutData.lastName}
-                config={{ field: "lastName", isRequired: true }}
+                value={checkoutData.shippingAddress.lastName}
+                config={{
+                  field: "lastName",
+                  isRequired: true,
+                  section: "shippingAddress",
+                }}
                 handleEdit={handleEdit}
                 fullWidth
                 required
@@ -449,67 +600,363 @@ const CheckoutForm = (props) => {
               <CustomTextfield
                 label="Email"
                 variant="outlined"
-                value={checkoutData.email}
-                config={{ field: "email", type: "email", isRequired: true }}
+                value={checkoutData.shippingAddress.email}
+                config={{
+                  field: "email",
+                  type: "email",
+                  isRequired: true,
+                  section: "shippingAddress",
+                }}
                 handleEdit={handleEdit}
                 fullWidth
                 required
                 sx={{ width: "100%" }}
               />
             </Grid>
-
             {/* Address Field */}
             <Grid item xs={12}>
               <CustomTextfield
                 label="Address"
-                value={checkoutData.address}
-                config={{ field: "address", isRequired: true }}
+                value={checkoutData.shippingAddress.address}
+                config={{
+                  field: "address",
+                  isRequired: true,
+                  section: "shippingAddress",
+                }}
                 handleEdit={handleEdit}
                 fullWidth
                 sx={{ width: "100%" }}
               />
             </Grid>
-
             <Grid item xs={12}>
               <CustomTextfield
                 label="Apartment, Suite, etc. (optional)"
-                value={checkoutData.apartment}
-                config={{ field: "apartment", isRequired: true }}
+                value={checkoutData.shippingAddress.apartment}
+                config={{
+                  field: "apartment",
+                  isRequired: true,
+                  section: "shippingAddress",
+                }}
                 handleEdit={handleEdit}
                 fullWidth
                 sx={{ width: "100%" }}
               />
             </Grid>
-            <Grid item xs={12} sm={4}>
-              <CustomTextfield
-                label="City"
-                value={checkoutData.city}
-                config={{ field: "city", isRequired: true }}
-                handleEdit={handleEdit}
-                fullWidth
-                sx={{ width: "100%" }}
-              />
+            {checkoutData.shippingAddress.city !== undefined && (
+              <Grid item xs={12} sm={4}>
+                <CustomTextfield
+                  label="City"
+                  value={checkoutData.shippingAddress.city}
+                  config={{
+                    field: "city",
+                    isRequired: true,
+                    section: "shippingAddress",
+                  }}
+                  handleEdit={handleEdit}
+                  fullWidth
+                  sx={{ width: "100%" }}
+                />
+              </Grid>
+            )}
+            {checkoutData.shippingAddress.state !== undefined && (
+              <Grid item xs={12} sm={4}>
+                <CustomTextfield
+                  label="State"
+                  value={checkoutData.shippingAddress.state}
+                  config={{
+                    field: "state",
+                    isRequired: true,
+                    section: "shippingAddress",
+                  }}
+                  handleEdit={handleEdit}
+                  fullWidth
+                  sx={{ width: "100%" }}
+                />
+              </Grid>
+            )}
+            {checkoutData.shippingAddress.pincode !== undefined && (
+              <Grid item xs={12} sm={4}>
+                <CustomTextfield
+                  label="Pincode"
+                  value={checkoutData.shippingAddress.pincode}
+                  config={{
+                    field: "pincode",
+                    isRequired: true,
+                    section: "shippingAddress",
+                  }}
+                  handleEdit={handleEdit}
+                  fullWidth
+                  sx={{ width: "100%" }}
+                />
+              </Grid>
+            )}
+            {checkoutData.shippingAddress.province !== undefined && (
+              <Grid item xs={12} sm={4}>
+                <CustomTextfield
+                  label="Province"
+                  value={checkoutData.shippingAddress.province}
+                  config={{
+                    field: "province",
+                    isRequired: true,
+                    section: "shippingAddress",
+                  }}
+                  handleEdit={handleEdit}
+                  fullWidth
+                  sx={{ width: "100%" }}
+                />
+              </Grid>
+            )}
+            {checkoutData.shippingAddress.zipcode !== undefined && (
+              <Grid item xs={12} sm={4}>
+                <CustomTextfield
+                  label="Zipcode"
+                  value={checkoutData.shippingAddress.zipcode}
+                  config={{
+                    field: "zipcode",
+                    isRequired: true,
+                    section: "shippingAddress",
+                  }}
+                  handleEdit={handleEdit}
+                  fullWidth
+                  sx={{ width: "100%" }}
+                />
+              </Grid>
+            )}
+            {checkoutData.shippingAddress.postalcode !== undefined && (
+              <Grid item xs={12} sm={4}>
+                <CustomTextfield
+                  label="Postalcode"
+                  value={checkoutData.shippingAddress.postalcode}
+                  config={{
+                    field: "postalcode",
+                    isRequired: true,
+                    section: "shippingAddress",
+                  }}
+                  handleEdit={handleEdit}
+                  fullWidth
+                  sx={{ width: "100%" }}
+                />
+              </Grid>
+            )}
+            {checkoutData.shippingAddress.emirate !== undefined && (
+              <Grid item xs={12} sm={4}>
+                <CustomTextfield
+                  label="Emirate"
+                  value={checkoutData.shippingAddress.emirate}
+                  config={{
+                    field: "emirate",
+                    isRequired: true,
+                    section: "shippingAddress",
+                  }}
+                  handleEdit={handleEdit}
+                  fullWidth
+                  sx={{ width: "100%" }}
+                />
+              </Grid>
+            )}
+            <Grid item xs={12}>
+              <Typography variant="subtitle1" sx={{ fontWeight: "600" }}>
+                Use a different billing address
+                <Switch
+                  checked={isDifferentBilling}
+                  onChange={(e) => setIsDifferentBilling(e.target.checked)}
+                />
+              </Typography>
             </Grid>
-            <Grid item xs={12} sm={4}>
-              <CustomTextfield
-                label="State"
-                value={checkoutData.state}
-                config={{ field: "state", isRequired: true }}
-                handleEdit={handleEdit}
-                fullWidth
-                sx={{ width: "100%" }}
-              />
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              <CustomTextfield
-                label="Pincode"
-                value={checkoutData.pincode}
-                config={{ field: "pincode", isRequired: true }}
-                handleEdit={handleEdit}
-                fullWidth
-                sx={{ width: "100%" }}
-              />
-            </Grid>
+            {isDifferentBilling && (
+              <>
+                <Grid item xs={12} sm={6}>
+                  <CustomTextfield
+                    label="First Name"
+                    variant="outlined"
+                    value={checkoutData.billingAddress.firstName}
+                    config={{
+                      field: "firstName",
+                      isRequired: true,
+                      section: "billingAddress",
+                    }}
+                    handleEdit={handleEdit}
+                    fullWidth
+                    required
+                    sx={{ width: "100%" }}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <CustomTextfield
+                    label="Last Name"
+                    variant="outlined"
+                    value={checkoutData.billingAddress.lastName}
+                    config={{
+                      field: "lastName",
+                      isRequired: true,
+                      section: "billingAddress",
+                    }}
+                    handleEdit={handleEdit}
+                    fullWidth
+                    required
+                    sx={{ width: "100%" }}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <CustomTextfield
+                    label="Email"
+                    variant="outlined"
+                    value={checkoutData.billingAddress.email}
+                    config={{
+                      field: "email",
+                      type: "email",
+                      isRequired: true,
+                      section: "billingAddress",
+                    }}
+                    handleEdit={handleEdit}
+                    fullWidth
+                    required
+                    sx={{ width: "100%" }}
+                  />
+                </Grid>
+                {/* Address Field */}
+                <Grid item xs={12}>
+                  <CustomTextfield
+                    label="Address"
+                    value={checkoutData.billingAddress.address}
+                    config={{
+                      field: "address",
+                      isRequired: true,
+                      section: "billingAddress",
+                    }}
+                    handleEdit={handleEdit}
+                    fullWidth
+                    sx={{ width: "100%" }}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <CustomTextfield
+                    label="Apartment, Suite, etc. (optional)"
+                    value={checkoutData.billingAddress.apartment}
+                    config={{
+                      field: "apartment",
+                      isRequired: true,
+                      section: "billingAddress",
+                    }}
+                    handleEdit={handleEdit}
+                    fullWidth
+                    sx={{ width: "100%" }}
+                  />
+                </Grid>
+                {checkoutData.billingAddress.city !== undefined && (
+                  <Grid item xs={12} sm={4}>
+                    <CustomTextfield
+                      label="City"
+                      value={checkoutData.billingAddress.city}
+                      config={{
+                        field: "city",
+                        isRequired: true,
+                        section: "billingAddress",
+                      }}
+                      handleEdit={handleEdit}
+                      fullWidth
+                      sx={{ width: "100%" }}
+                    />
+                  </Grid>
+                )}
+                {checkoutData.billingAddress.state !== undefined && (
+                  <Grid item xs={12} sm={4}>
+                    <CustomTextfield
+                      label="State"
+                      value={checkoutData.billingAddress.state}
+                      config={{
+                        field: "state",
+                        isRequired: true,
+                        section: "billingAddress",
+                      }}
+                      handleEdit={handleEdit}
+                      fullWidth
+                      sx={{ width: "100%" }}
+                    />
+                  </Grid>
+                )}
+                {checkoutData.billingAddress.pincode !== undefined && (
+                  <Grid item xs={12} sm={4}>
+                    <CustomTextfield
+                      label="Pincode"
+                      value={checkoutData.billingAddress.pincode}
+                      config={{
+                        field: "pincode",
+                        isRequired: true,
+                        section: "billingAddress",
+                      }}
+                      handleEdit={handleEdit}
+                      fullWidth
+                      sx={{ width: "100%" }}
+                    />
+                  </Grid>
+                )}
+                {checkoutData.billingAddress.province !== undefined && (
+                  <Grid item xs={12} sm={4}>
+                    <CustomTextfield
+                      label="Province"
+                      value={checkoutData.billingAddress.province}
+                      config={{
+                        field: "province",
+                        isRequired: true,
+                        section: "billingAddress",
+                      }}
+                      handleEdit={handleEdit}
+                      fullWidth
+                      sx={{ width: "100%" }}
+                    />
+                  </Grid>
+                )}
+                {checkoutData.billingAddress.zipcode !== undefined && (
+                  <Grid item xs={12} sm={4}>
+                    <CustomTextfield
+                      label="Zipcode"
+                      value={checkoutData.billingAddress.zipcode}
+                      config={{
+                        field: "zipcode",
+                        isRequired: true,
+                        section: "billingAddress",
+                      }}
+                      handleEdit={handleEdit}
+                      fullWidth
+                      sx={{ width: "100%" }}
+                    />
+                  </Grid>
+                )}
+                {checkoutData.billingAddress.postalcode !== undefined && (
+                  <Grid item xs={12} sm={4}>
+                    <CustomTextfield
+                      label="Postalcode"
+                      value={checkoutData.billingAddress.postalcode}
+                      config={{
+                        field: "postalcode",
+                        isRequired: true,
+                        section: "billingAddress",
+                      }}
+                      handleEdit={handleEdit}
+                      fullWidth
+                      sx={{ width: "100%" }}
+                    />
+                  </Grid>
+                )}
+                {checkoutData.billingAddress.emirate !== undefined && (
+                  <Grid item xs={12} sm={4}>
+                    <CustomTextfield
+                      label="Emirate"
+                      value={checkoutData.billingAddress.emirate}
+                      config={{
+                        field: "emirate",
+                        isRequired: true,
+                        section: "billingAddress",
+                      }}
+                      handleEdit={handleEdit}
+                      fullWidth
+                      sx={{ width: "100%" }}
+                    />
+                  </Grid>
+                )}
+              </>
+            )}
             <Grid item xs={12}>
               <Typography
                 variant="h6"
@@ -570,7 +1017,6 @@ const CheckoutForm = (props) => {
                 Payment
               </Typography>
             </Grid>
-
             <Grid item xs={12}>
               <Typography
                 variant="subtitle2"
@@ -704,7 +1150,7 @@ const CheckoutForm = (props) => {
                   fontSize: { xs: "11px", sm: "12px", md: "14px" },
                 }}
               >
-                {`Rs. ${(item.price * item.quantity).toLocaleString()}`}
+                {`${currency} ${(item.price * item.quantity).toLocaleString()}`}
               </Typography>
             </Grid>
           ))}
@@ -719,12 +1165,18 @@ const CheckoutForm = (props) => {
           >
             <CustomTextfield
               label="Discount code and Gift card"
-              config={{ field: "pincode", isRequired: true }}
-              handleEdit={props.handleEdit}
+              config={{ field: "code", isRequired: true }}
+              handleEdit={handleCodeChange}
               sx={{
                 flex: 1, // Allows the TextField to take remaining space
                 height: "56px", // Matches the default Button height
               }}
+              error={!discount.isValid}
+              helperText={
+                code.length > 0 && !discount.isValid && discount.message
+                  ? discount.message
+                  : ""
+              }
             />
             <Button
               variant="contained"
@@ -739,8 +1191,10 @@ const CheckoutForm = (props) => {
                   boxShadow: "none",
                 },
               }}
+              onClick={handleApply}
+              disabled={code.length <= 0}
             >
-              Apply
+              {discountLoading ? "Checking..." : "Apply"}
             </Button>
           </Box>
 
@@ -769,7 +1223,7 @@ const CheckoutForm = (props) => {
                 fontSize: { xs: "11px", sm: "12px", md: "14px" },
               }}
             >
-              {`INR. ₹ ${totalPrice.toLocaleString()}`}
+              {`${currency} ${billAmount.toLocaleString()}`}
             </Typography>
           </Box>
 
@@ -827,7 +1281,7 @@ const CheckoutForm = (props) => {
                 fontSize: { xs: "12px", sm: "14px", md: "16px" },
               }}
             >
-              {`INR. ₹ ${totalPrice.toLocaleString()}`}
+              {`${currency} ${billAmount.toLocaleString()}`}
             </Typography>
           </Box>
         </Card>

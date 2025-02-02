@@ -20,22 +20,22 @@ const giftCardSchema = new mongoose.Schema({
   code: {
     type: String,
     required: true,
-    uqiue: true,
+    unqiue: true,
   },
   transactions: {
     type: Array,
     required: true,
   },
   createdAt: {
-    type: String,
+    type: Date,
     default: Date.now(),
   },
   updatedAt: {
-    type: String,
+    type: Date,
     default: Date.now(),
   },
   expiryDate: {
-    type: String,
+    type: Date,
     required: true,
   },
   status: {

@@ -103,7 +103,7 @@ const CustomAppbar = (props) => {
       const userId = localStorage.getItem("userId");
       if (userId) {
         async function getCartItemsForUser() {
-          const cartItems = await getCartItems({ userId });
+          const cartItems = await getCartItems({ userId, country });
           if (cartItems.length === 0) return;
           dispatch(addToCart(cartItems));
           dispatch(closeCartDrawer());
@@ -140,7 +140,7 @@ const CustomAppbar = (props) => {
     // Set isAdmin state based on role
     setIsAdmin(role === "admin");
     handleOptionListUpdate();
-  }, [props.userUpdated]);
+  }, [props.userUpdated, country]);
 
   const handleOptionListUpdate = () => {
     console.log(localStorage.getItem("userId"));

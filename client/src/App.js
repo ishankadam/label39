@@ -18,6 +18,8 @@ import CustomDrawer from "./components/drawer/drawer";
 import LoaderTestPage from "./components/loaderTestPage";
 import GiftCardModal from "./form/giftCard/giftCard";
 import Login from "./form/login/login";
+import ResetPassword from "./form/login/resetPassword";
+import ForgotPassword from "./form/login/sendResetPasswordLimk";
 import Signup from "./form/signup/signup";
 import AboutUs from "./pages/about-us/aboutUs";
 import Cart from "./pages/cart/cart";
@@ -26,6 +28,7 @@ import ClientDiaryPage from "./pages/client-diary/clientDiaryPage";
 import Dashboard from "./pages/dashboard/dashboard";
 import FindUs from "./pages/homepage/findUs";
 import Home from "./pages/homepage/home";
+import SubscribeModal from "./pages/homepage/subscribeModal";
 import PageNotFound from "./pages/not-found/pageNotFound";
 import OurStory from "./pages/our-story/ourStory";
 import PaymentPage from "./pages/payment/paymentPage";
@@ -205,7 +208,7 @@ const App = () => {
           </>
         )}
 
-        {/* <SubscribeModal></SubscribeModal> */}
+        <SubscribeModal></SubscribeModal>
         <GiftCardModal
           open={isGiftCardModalOpen}
           onClose={handleCloseGiftModal}
@@ -255,7 +258,11 @@ const App = () => {
           />
           <Route exact path="/signup" element={<Signup />} />
           <Route exact path="/ourstory" element={<OurStory />} />
-          <Route exact path="/checkout" element={<Checkout />} />
+          <Route
+            exact
+            path="/checkout"
+            element={<Checkout country={country} setCountry={setCountry} />}
+          />
           <Route exact path="/cart" element={<Cart />} />
           <Route exact path="/delivery" element={<DeliveryForm />} />
           <Route exact path="/payment" element={<PaymentPage />} />
@@ -283,11 +290,14 @@ const App = () => {
             path="/clientsDiaries"
             element={<ClientDiaryPage clientDiaries={clientDiaries} />}
           />
+          <Route path="/resetPassword/:token" element={<ResetPassword />} />
+          <Route exact path="/forgotPassword" element={<ForgotPassword />} />
         </Routes>
         <CustomDrawer
           cartDetails={cartDetails}
           setCartDetails={setCartDetails}
         ></CustomDrawer>
+
         <CustomSnackbar />
         {/* <Box sx={{ height: 100 }} /> */}
       </div>

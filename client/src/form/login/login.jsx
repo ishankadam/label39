@@ -11,7 +11,7 @@ import CustomTextfield from "../../components/textfield/customTextfield";
 
 const Login = (props) => {
   const [isSignUpMode, setIsSignUpMode] = useState(false);
-  const [activeSlide, setActiveSlide] = useState(0); // 0-based index for the first image
+  const [activeSlide] = useState(0); // 0-based index for the first image
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -135,7 +135,7 @@ const Login = (props) => {
                         }
                         config={{ field: "email", type: "email" }}
                         handleEdit={handleEdit}
-                        sx={{ width: "100%" }}
+                        sx={{ width: "100%", marginBottom: "50px" }}
                       />
                     </div>
 
@@ -162,7 +162,7 @@ const Login = (props) => {
                           width: "100%",
                         }}
                       />
-                      <Link href="#">
+                      <Link to="/forgotPassword">
                         <Typography
                           sx={{
                             fontSize: "13px",

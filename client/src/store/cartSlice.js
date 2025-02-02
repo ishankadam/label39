@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { updateCart } from "../api";
 
 const initialState = {
   items: [],
@@ -63,6 +64,10 @@ export const cartSlice = createSlice({
           // Handle direct quantity updates
           item.quantity = Math.max(1, action.payload.quantity);
         }
+        updateCart({
+          userId: localStorage.getItem("userId"),
+          cartItems: state.items,
+        });
       }
     },
     clearCart: (state) => {

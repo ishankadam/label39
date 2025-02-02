@@ -254,6 +254,7 @@ export const verifyPayment = async ({
   cartItems,
   giftCardData,
   type,
+  userId,
 }) => {
   try {
     const response = await fetch(`${apiUrl}/verify-payment`, {
@@ -267,6 +268,7 @@ export const verifyPayment = async ({
         cartItems,
         giftCardData,
         type,
+        userId,
       }),
     });
 
@@ -580,12 +582,32 @@ export const addProductToCart = async ({ cartProduct, userId }) => {
   }
 };
 
-export const getCartItems = async ({ userId }) => {
+export const updateCart = async ({ userId, cartItems }) => {
+  try {
+    const response = await fetch(`${apiUrl}/updateCart`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userId: userId, cartItems: cartItems }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to update cart");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    console.error("Error updating cart:", err);
+    throw err;
+  }
+};
+
+export const getCartItems = async ({ userId, country }) => {
   try {
     const response = await fetch(`${apiUrl}/getCartItems`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId: userId }),
+      body: JSON.stringify({ userId: userId, country: country }),
     });
 
     if (!response.ok) {
@@ -917,6 +939,125 @@ export const changeOrderStatus = async ({
     return data;
   } catch (err) {
     console.error("Error changing order status:", err);
+    throw err;
+  }
+};
+
+export const checkDiscountCode = async ({
+  userId,
+  code,
+  setLoading,
+  setDiscount,
+}) => {
+  try {
+    const response = await fetch(`${apiUrl}/check-discount-code`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userId, code }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to check discount code");
+    }
+
+    const data = await response.json();
+    setDiscount(data);
+    setLoading && setLoading(false);
+    return data;
+  } catch (err) {
+    console.error("Error checking discount code:", err);
+    throw err;
+  }
+};
+
+export const createDiscount = async ({
+  discountData,
+  setLoading,
+  setDiscountData,
+}) => {
+  try {
+    const response = await fetch(`${apiUrl}/createDiscount`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(discountData),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to create discount");
+    }
+
+    const data = await response.json();
+    setDiscountData(data);
+    setLoading && setLoading(false);
+    return data;
+  } catch (err) {
+    console.error("Error creating discount:", err);
+    throw err;
+  }
+};
+
+export const getAllDiscounts = async ({ setDiscountData, setLoading }) => {
+  try {
+    const response = await fetch(`${apiUrl}/getDiscounts`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (!response.ok) {
+      if (response.status === 401) {
+        console.error("Unauthorized access");
+      }
+      throw new Error("Failed to fetch discounts");
+    }
+
+    const data = await response.json();
+    setDiscountData(data);
+    setLoading && setLoading(false);
+    return data;
+  } catch (err) {
+    console.error("Error fetching discounts:", err);
+    throw err;
+  }
+};
+
+export const resetPassword = async ({ token, newPassword }) => {
+  try {
+    const response = await fetch(`${apiUrl}/reset-password/${token}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ newPassword }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to reset password");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    console.error("Error resetting password:", err);
+    throw err;
+  }
+};
+
+export const forgotPassword = async ({ email }) => {
+  try {
+    const response = await fetch(`${apiUrl}/forgot-password`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to send reset link");
+    }
+
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+    console.error("Error sending reset link:", err);
     throw err;
   }
 };

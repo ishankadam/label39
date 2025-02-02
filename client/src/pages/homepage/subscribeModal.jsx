@@ -112,6 +112,18 @@ const SubscribeModal = () => {
               },
             }}
           />
+          <CustomTextfield
+            variant="outlined"
+            // fullWidth
+            placeholder="Enter Phone number here"
+            sx={{
+              mb: 2,
+              width: "100%", // Adjust width as required
+              "& .MuiOutlinedInput-root": {
+                padding: "0px 2px", // Padding for the input field
+              },
+            }}
+          />
           <Button
             variant="contained"
             color="custom"

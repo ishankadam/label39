@@ -27,6 +27,7 @@ export const dashboardTabValue = [
   { label: "Celebrity Style", value: "eight", icon: <AttributionIcon /> },
   { label: "Sales", value: "nine", icon: <LoyaltyIcon /> },
   { label: "Gift Card", value: "ten", icon: <CardGiftcardIcon /> },
+  { label: "Discount", value: "eleven", icon: <CardGiftcardIcon /> },
 ];
 
 export const whatsappQueryMessage =
@@ -38,60 +39,153 @@ export const countries = [
     value: "INR",
     flag: indianFlag,
     currency: "₹",
+    fields: [
+      "firstName",
+      "lastName",
+      "address",
+      "apartment",
+      "email",
+      "state",
+      "city",
+      "pincode",
+    ],
   },
   {
     label: "USA",
     value: "USD",
     flag: UsaFlag,
     currency: "$",
+    fields: [
+      "firstName",
+      "lastName",
+      "address",
+      "apartment",
+      "email",
+      "state",
+      "zipcode",
+    ],
   },
   {
     label: "Europe",
     value: "EUR",
     flag: indianFlag, // Add the appropriate flag image
     currency: "€",
+    fields: [
+      "firstName",
+      "lastName",
+      "address",
+      "apartment",
+      "email",
+      "state",
+      "postalcode",
+    ],
   },
   {
     label: "Indonesia",
     value: "IDR",
     flag: indianFlag, // Add the appropriate flag image
     currency: "Rp",
+    fields: [
+      "firstName",
+      "lastName",
+      "address",
+      "apartment",
+      "email",
+      "province",
+      "postalcode",
+    ],
   },
   {
     label: "United Kingdom",
     value: "GBP",
     flag: indianFlag, // Add the appropriate flag image
     currency: "£",
+    fields: [
+      "firstName",
+      "lastName",
+      "address",
+      "apartment",
+      "email",
+      "state",
+      "postcode",
+    ],
   },
   {
     label: "Canada",
     value: "CAD",
     flag: indianFlag, // Add the appropriate flag image
     currency: "C$",
+    fields: [
+      "firstName",
+      "lastName",
+      "address",
+      "apartment",
+      "email",
+      "city",
+      "province",
+      "postalcode",
+    ],
   },
   {
     label: "United Arab Emirates",
     value: "AED",
     flag: indianFlag, // Add the appropriate flag image
     currency: "د.إ",
+    fields: [
+      "firstName",
+      "lastName",
+      "address",
+      "apartment",
+      "email",
+      "city",
+      "emirate",
+    ],
   },
   {
     label: "Australia",
     value: "AUD",
     flag: indianFlag, // Add the appropriate flag image
     currency: "A$",
+    fields: [
+      "firstName",
+      "lastName",
+      "address",
+      "apartment",
+      "email",
+      "city",
+      "state/territory",
+      "postcode",
+    ],
   },
   {
     label: "Singapore",
     value: "SGD",
     flag: indianFlag, // Add the appropriate flag image
     currency: "S$",
+    fields: [
+      "firstName",
+      "lastName",
+      "address",
+      "apartment",
+      "email",
+      "postalcode",
+    ],
   },
   {
     label: "Thailand",
     value: "THB",
     flag: indianFlag, // Add the appropriate flag image
     currency: "฿",
+    fields: [
+      "firstName",
+      "lastName",
+      "address",
+      "apartment",
+      "email",
+      "city",
+      "province",
+      "postalcode",
+    ],
   },
 ];
 
@@ -190,7 +284,7 @@ export const validateEmail = (passedEmail) => {
 
 export const isValidPhoneNumber = (phoneNumber) => {
   // Regex to check if the cleaned number is a 10-digit number starting with 7-9
-  const phoneRegex = /^[7-9]\d{9}$/;
+  const phoneRegex = /^[6-9]\d{9}$/;
 
   return phoneRegex.test(phoneNumber);
 };

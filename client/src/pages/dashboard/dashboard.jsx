@@ -32,6 +32,7 @@ import CelebrityStyle from "./celebrityStyle";
 import ClientsDiaries from "./clientsDiaries";
 import GiftCardPage from "./giftCard";
 import ManageCategories from "./manageCategory";
+import ManageDiscount from "./manageDiscount";
 import ManageOrders from "./manageOrders";
 import ManageTestimonials from "./manageTestimonials";
 import ManageUsers from "./manageUsers";
@@ -130,7 +131,7 @@ const Dashboard = (props) => {
   const [clientDiaries, setClientDiaries] = useState([]);
   const [celebrityStyles, setCelebrityStyles] = useState([]);
   const [giftCards, setGiftCards] = useState([]);
-
+  const [discountData, setDiscountData] = useState([]);
   const [saleData, setSaleData] = useState([]);
   const [users, setUsers] = useState([]);
   const [productsloading, setProductsLoading] = useState(false);
@@ -138,6 +139,7 @@ const Dashboard = (props) => {
   const [testimonialsloading, setTestimonialsLoading] = useState(false);
   const [clientDiariesLoading, setclientDiariesLoading] = useState(false);
   const [celebrityStylesLoading, setcelebrityStylesLoading] = useState(false);
+  const [discountLoading, setDiscountLoading] = useState(false);
   const [giftCardLoading, setGiftCardLoading] = useState(false);
   const [saleLoading, setsaleLoading] = useState(false);
   const [usersloading, setUsersLoading] = useState(false);
@@ -500,6 +502,14 @@ const Dashboard = (props) => {
               setGiftCards={setGiftCards}
               loading={giftCardLoading}
               setLoading={setGiftCardLoading}
+            />
+          )}
+          {tabValue === "eleven" && (
+            <ManageDiscount
+              discountData={discountData}
+              setDiscountData={setDiscountData}
+              loading={discountLoading}
+              setLoading={setDiscountLoading}
             />
           )}
         </Box>
