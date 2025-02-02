@@ -7,74 +7,102 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { forgotPassword } from "../../api";
 import CustomTextfield from "../../components/textfield/customTextfield";
 import { showSnackbar } from "../../store/cartSlice";
-
+import backgroundImage from "../../assets/backgroundfooter.jpg";
+import LockIcon from "@mui/icons-material/Lock";
 function ForgotPassword() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const dispatch = useDispatch();
-  const handleEdit = (value) => {
-    setEmail(value);
-  };
-
-  const snackbar = useSelector((state) => state.cart.snackbars);
-  console.log(snackbar);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await forgotPassword({ email });
-      console.log(response);
-      // Assuming the response has the structure { isValid: false, message: 'User not found' }
+
       if (!response.isValid) {
-        setMessage(response.message); // Set the error message if user is not found
+        setMessage(response.message);
         dispatch(
-          showSnackbar({
-            message: response.message,
-            severity: "error",
-          })
+          showSnackbar({ message: response.message, severity: "error" })
         );
       } else {
-        console.log("test");
         dispatch(
           showSnackbar({
             message: "A reset link has been sent to your email.",
             severity: "success",
           })
         );
+        setMessage(""); // Clear error message if successful
       }
     } catch (error) {
-      console.error(error);
-
-      // Improved error handling
-      if (error.response) {
-        // Check if error.response and error.response.data exist before accessing message
-        setMessage(
-          error.response.data?.message || "An unexpected error occurred."
-        );
-      } else {
-        setMessage(
-          "Network error. Please check your connection and try again."
-        );
-      }
+      setMessage(
+        error.response?.data?.message || "Network error. Please try again."
+      );
     }
   };
 
   return (
     <Box
       sx={{
+        minHeight: "calc(100vh)",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        minHeight: "100vh",
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        position: "relative",
+        // p: 2,
       }}
     >
-      <Card sx={{ maxWidth: 400, width: "100%", boxShadow: 3 }}>
-        <CardContent sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-          <Typography variant="h5" component="h2" gutterBottom>
+      {/* Transparent Overlay */}
+      <Box
+        sx={{
+          position: "absolute",
+          inset: 0,
+          backgroundColor: "rgba(224, 211, 208, 0.9)",
+        }}
+      />
+
+      <Card
+        sx={{
+          margin: "20px",
+          marginTop: "-15vh",
+          position: "relative",
+          maxWidth: 400,
+          width: "100%",
+          boxShadow: 2,
+          zIndex: 1,
+        }}
+      >
+        <CardContent
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 2,
+            // justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <LockIcon sx={{ fontSize: 80, color: "#A16149" }} />
+          <Typography
+            variant="h6"
+            sx={{
+              // mb: 2,
+              fontWeight: "600",
+              fontSize: {
+                xs: "20px",
+                sm: "22px",
+                md: "24px",
+                lg: "28px",
+              },
+              color: "#2F3E4E",
+              fontFamily: "'Cinzel', serif ",
+            }}
+          >
             Forgot Password
           </Typography>
           <CustomTextfield
@@ -82,10 +110,11 @@ function ForgotPassword() {
             type="email"
             config={{ field: "email" }}
             value={email}
-            handleEdit={handleEdit}
+            handleEdit={setEmail}
             required
             fullWidth
             variant="outlined"
+            sx={{ width: "100%" }}
           />
           <Button
             type="submit"
@@ -96,11 +125,17 @@ function ForgotPassword() {
           >
             Send Reset Link
           </Button>
-          {message && (
-            <Alert severity="error" sx={{ mt: 2 }}>
-              {message}
-            </Alert>
-          )}
+          <Typography
+            variant="body2"
+            sx={{
+              mt: 1,
+              textAlign: "center",
+              fontFamily: "'Roboto Serif', serif",
+            }}
+          >
+            We'll send you an email with instructions to reset your password.
+          </Typography>
+          {/* {message && <Alert severity="error">{message}</Alert>} */}
         </CardContent>
       </Card>
     </Box>

@@ -1,15 +1,25 @@
 import React, { useState } from "react";
-import heroImage from "../../assets/hero.jpg";
-import heroImage2 from "../../assets/hero2.jpg";
-import heroImage3 from "../../assets/hero3.jpg";
-import heroImage4 from "../../assets/hero4.jpg";
-import { Card, CardMedia, Button, Typography, Box } from "@mui/material";
-
+import { Box, Typography } from "@mui/material";
+import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
-import Slider from "react-slick";
 import "./../../css/mainCarousel.css";
+
+import heroImage1 from "../../assets/cover1.jpg";
+import heroImage2 from "../../assets/cover2.jpg";
+import heroImage3 from "../../assets/cover3.jpg";
+import heroImage4 from "../../assets/cover4.jpg";
+import heroImage5 from "../../assets/cover5.jpg";
+import heroImage6 from "../../assets/cover6.jpg";
+
+const images = [
+  { src: heroImage1, text: "ready to ship", align: "left" },
+  { src: heroImage2, text: "new arrival", align: "right" },
+  { src: heroImage3, text: "best seller", align: "left" },
+  { src: heroImage4, text: "exclusive offer", align: "right" },
+  { src: heroImage5, text: "limited edition", align: "left" },
+  { src: heroImage6, text: "trending now", align: "right" },
+];
 
 const MainCarousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -29,158 +39,28 @@ const MainCarousel = () => {
   return (
     <Box className="hero-section">
       <Slider {...settings}>
-        <Box className="carousel-item">
-          <img src={heroImage} width="100%" alt="hero-image" />
-          <Box
-            style={{ textAlign: "left" }}
-            className={`carousel-text left ${
-              currentSlide === 0 ? "animate" : ""
-            }`}
-          >
-            <Typography
-              sx={{
-                color: "white",
-                fontSize: { xs: "14px", sm: "18px", md: "32px" },
-                fontWeight: "bold",
-                fontFamily: "'Cinzel', serif",
-              }}
+        {images.map((image, index) => (
+          <Box key={index} className="carousel-item">
+            <img src={image.src} width="100%" alt={`hero-image-${index}`} />
+            <Box
+              style={{ textAlign: image.align }}
+              className={`carousel-text ${image.align} ${
+                currentSlide === index ? "animate" : ""
+              }`}
             >
-              ready to ship
-            </Typography>
-            {/* <Button
-              variant="outlined"
-              sx={{
-                color: "white",
-                fontFamily: "'Cinzel', serif",
-                fontWeight: "800",
-                padding: "10px 20px",
-                borderRadius: "2px",
-                borderColor: "white",
-                "&:hover": {
-                  color: "#a16149",
-                  background: "white",
-                  borderColor: "white",
-                },
-              }}
-            >
-              SHOP NOW
-            </Button> */}
+              <Typography
+                sx={{
+                  color: "white",
+                  fontSize: { xs: "14px", sm: "18px", md: "32px" },
+                  fontWeight: "bold",
+                  fontFamily: "'Cinzel', serif",
+                }}
+              >
+                {image.text}
+              </Typography>
+            </Box>
           </Box>
-        </Box>
-        <Box className="carousel-item">
-          <img src={heroImage2} width="100%" alt="hero-image" />
-          <Box
-            style={{ textAlign: "right" }}
-            className={`carousel-text right ${
-              currentSlide === 1 ? "animate" : ""
-            }`}
-          >
-            <Typography
-              sx={{
-                color: "white",
-                fontSize: { xs: "14px", sm: "18px", md: "32px" },
-                fontWeight: "bold",
-                fontFamily: "'Cinzel', serif",
-              }}
-            >
-              new arrival
-            </Typography>
-            {/* <Button
-              variant="outlined"
-              sx={{
-                color: "white",
-                fontFamily: "'Cinzel', serif",
-                fontWeight: "800",
-                padding: "10px 20px",
-                borderRadius: "2px",
-                borderColor: "white",
-                "&:hover": {
-                  color: "#a16149",
-                  background: "white",
-                  borderColor: "white",
-                },
-              }}
-            >
-              SHOP NOW
-            </Button> */}
-          </Box>
-        </Box>
-        <Box className="carousel-item">
-          <img src={heroImage3} width="100%" alt="hero-image" />
-          <Box
-            style={{ textAlign: "left" }}
-            className={`carousel-text left ${
-              currentSlide === 2 ? "animate" : ""
-            }`}
-          >
-            <Typography
-              sx={{
-                color: "white",
-                fontSize: { xs: "14px", sm: "18px", md: "32px" },
-                fontWeight: "bold",
-                fontFamily: "'Cinzel', serif",
-              }}
-            >
-              best seller
-            </Typography>
-            {/* <Button
-              variant="outlined"
-              sx={{
-                color: "white",
-                fontFamily: "'Cinzel', serif",
-                fontWeight: "800",
-                padding: "10px 20px",
-                borderRadius: "2px",
-                borderColor: "white",
-                "&:hover": {
-                  color: "#a16149",
-                  background: "white",
-                  borderColor: "white",
-                },
-              }}
-            >
-              SHOP NOW
-            </Button> */}
-          </Box>
-        </Box>
-        <Box className="carousel-item">
-          <img src={heroImage4} width="100%" alt="hero-image" />
-          <Box
-            style={{ textAlign: "right" }}
-            className={`carousel-text right ${
-              currentSlide === 3 ? "animate" : ""
-            }`}
-          >
-            <Typography
-              sx={{
-                color: "white",
-                fontSize: { xs: "14px", sm: "18px", md: "32px" },
-                fontWeight: "bold",
-                fontFamily: "'Cinzel', serif",
-              }}
-            >
-              exclusive offer
-            </Typography>
-            {/* <Button
-              variant="outlined"
-              sx={{
-                color: "white",
-                fontFamily: "'Cinzel', serif",
-                fontWeight: "800",
-                padding: "10px 20px",
-                borderRadius: "2px",
-                borderColor: "white",
-                "&:hover": {
-                  color: "#a16149",
-                  background: "white",
-                  borderColor: "white",
-                },
-              }}
-            >
-              SHOP NOW
-            </Button> */}
-          </Box>
-        </Box>
+        ))}
       </Slider>
     </Box>
   );

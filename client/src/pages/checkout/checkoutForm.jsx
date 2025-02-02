@@ -365,7 +365,6 @@ const CheckoutForm = (props) => {
                 }
               />
               <Button
-                onClick={handleApplyDiscount}
                 variant="contained"
                 sx={{
                   height: "56px", // Matches the height of the CustomTextfield

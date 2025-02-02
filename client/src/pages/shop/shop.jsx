@@ -776,7 +776,7 @@ const ProductsPage = (props) => {
                   padding: "50px 0",
 
                   width: { xs: "100vw", sm: "100vw", md: "70vw" },
-                  height: "100vh",
+
                   marginTop: "100px",
                   display: "flex",
                   flexDirection: "column",

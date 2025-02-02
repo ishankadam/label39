@@ -126,6 +126,12 @@ form.sign-up-form {
   margin-bottom: 2rem;
 }
 
+.login-input-wrap {
+  position: relative;
+  height: 37px;
+  margin-bottom: 3.5rem;
+}
+
 .input-field {
   position: absolute;
   width: 100%;

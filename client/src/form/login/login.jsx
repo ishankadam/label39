@@ -15,7 +15,7 @@ const Login = (props) => {
   const dispatch = useDispatch();
 
   const [isSignUpMode, setIsSignUpMode] = useState(false);
-  const [activeSlide] = useState(0); // 0-based index for the first image
+  const [activeSlide, setActiveSlide] = useState(0); // 0-based index for the first image
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -134,7 +134,7 @@ const Login = (props) => {
                     >
                       LOGIN
                     </Typography> */}
-                    <div className="input-wrap">
+                    <div className="login-input-wrap">
                       <CustomTextfield
                         id="login-email"
                         label="Email"
@@ -151,11 +151,11 @@ const Login = (props) => {
                         }
                         config={{ field: "email", type: "email" }}
                         handleEdit={handleEdit}
-                        sx={{ width: "100%", marginBottom: "50px" }}
+                        sx={{ width: "100%" }}
                       />
                     </div>
 
-                    <div className="input-wrap">
+                    <div className="login-input-wrap">
                       <CustomTextfield
                         label="Password"
                         variant="outlined"
