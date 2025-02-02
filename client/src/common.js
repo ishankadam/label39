@@ -1,20 +1,19 @@
-import indianFlag from "../src/assets/countryFlags/india.png";
-import usaFlag from "../src/assets/countryFlags/usa.png";
-import ukFlag from "../src/assets/countryFlags/uk.png";
+import aeFlag from "../src/assets/countryFlags/ae.png";
 import ausFlag from "../src/assets/countryFlags/au.png";
 import caFlag from "../src/assets/countryFlags/ca.png";
-import sgFlag from "../src/assets/countryFlags/sg.png";
-import thFlag from "../src/assets/countryFlags/th.png";
-import aeFlag from "../src/assets/countryFlags/ae.png";
 import euFlag from "../src/assets/countryFlags/eu.png";
 import idFlag from "../src/assets/countryFlags/id.png";
+import indianFlag from "../src/assets/countryFlags/india.png";
+import sgFlag from "../src/assets/countryFlags/sg.png";
+import thFlag from "../src/assets/countryFlags/th.png";
+import ukFlag from "../src/assets/countryFlags/uk.png";
+import usaFlag from "../src/assets/countryFlags/usa.png";
 
 import coords from "./assets/COORDS.png";
 import festive from "./assets/FESTIVE.png";
 import shirt from "./assets/SHIRTS.png";
 import suits from "./assets/SUITS.png";
 
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AttributionIcon from "@mui/icons-material/Attribution";
 import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
 import CategoryIcon from "@mui/icons-material/Category";
@@ -31,7 +30,7 @@ export const dashboardTabValue = [
   { label: "Testimonials", value: "three", icon: <RecentActorsIcon /> },
   { label: "User", value: "four", icon: <GroupIcon /> },
   { label: "Orders", value: "five", icon: <ViewModuleIcon /> },
-  { label: "Profile", value: "six", icon: <AccountCircleIcon /> },
+  // { label: "Profile", value: "six", icon: <AccountCircleIcon /> },
   { label: "Client Diaries", value: "seven", icon: <GroupAddIcon /> },
   { label: "Celebrity Style", value: "eight", icon: <AttributionIcon /> },
   { label: "Sales", value: "nine", icon: <LoyaltyIcon /> },

@@ -365,7 +365,7 @@ const Dashboard = (props) => {
               </Typography>
             </Grid2>
             <Grid2 item>
-              {options !== "Products" && (
+              {["Categories"].includes(options) && (
                 <Button
                   variant="contained"
                   onClick={() => handleOpenForm(options)}

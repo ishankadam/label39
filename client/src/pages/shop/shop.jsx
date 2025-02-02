@@ -3,7 +3,6 @@ import ClearIcon from "@mui/icons-material/Clear";
 import CloseIcon from "@mui/icons-material/Close";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import SearchIcon from "@mui/icons-material/Search";
-import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 
 import {
   Box,
@@ -23,7 +22,6 @@ import ClickAwayListener from "@mui/material/ClickAwayListener";
 import _ from "lodash";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import NoProductEror from "../../assets/no_product.svg";
 import { availableColors } from "../../common";
 import ProductCard from "../../components/card/productCard";
 import CustomLoader from "../../components/customLoader";
@@ -91,10 +89,6 @@ const ProductsPage = (props) => {
     { label: "10000-20000", min: 10000, max: 20000 },
     { label: "Above 20000", min: 20000, max: 200000 },
   ];
-
-  useEffect(() => {
-    setLoading(true);
-  }, []);
 
   const handlePageChange = (_event, value) => {
     setPage(value);

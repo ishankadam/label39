@@ -70,7 +70,7 @@ const CelebrityStyle = (props) => {
       disableKey: "isActive",
       editFunc: (row, index) => handleOnClickView(row, true, index),
       // disableFunc: (row, index) => handleDisableProduct(row, index),
-      isDisable: true,
+      // isDisable: true,
       isEdit: true,
       page: "JobListing",
     },
