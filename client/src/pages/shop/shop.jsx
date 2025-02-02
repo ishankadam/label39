@@ -3,6 +3,8 @@ import ClearIcon from "@mui/icons-material/Clear";
 import CloseIcon from "@mui/icons-material/Close";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import SearchIcon from "@mui/icons-material/Search";
+import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
+
 import {
   Box,
   Button,
@@ -15,6 +17,7 @@ import {
   ListItemText,
   Pagination,
   Typography,
+  keyframes,
 } from "@mui/material";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import _ from "lodash";
@@ -156,7 +159,14 @@ const ProductsPage = (props) => {
   const closeSearch = () => {
     setIsSearchOpen(false);
   };
-
+  const bounce = keyframes`
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+`;
   return (
     <div className="products-page">
       {/* <div className="header">
@@ -761,7 +771,24 @@ const ProductsPage = (props) => {
           {/* Products card container */}
           <div>
             {loading ? (
-              <CustomLoader />
+              <Box
+                sx={{
+                  padding: "50px 0",
+
+                  width: { xs: "100vw", sm: "100vw", md: "70vw" },
+                  height: "100vh",
+                  marginTop: "100px",
+                  display: "flex",
+                  flexDirection: "column",
+                  // alignItems: "center",
+                  justifyContent: "center",
+                  // background: "linear-gradient(to right, #ffe4e1, #e6e6fa)",
+                  textAlign: "center",
+                  p: 3,
+                }}
+              >
+                <CustomLoader />
+              </Box>
             ) : displayedProducts.length < 1 ? (
               // <Box>
               //   <Typography
@@ -781,56 +808,121 @@ const ProductsPage = (props) => {
               <Box
                 sx={{
                   padding: "50px 0",
+
+                  width: { xs: "100vw", sm: "100vw", md: "80vw" },
+                  // height: "100vh",
+                  marginTop: "100px",
                   display: "flex",
                   flexDirection: "column",
-                  justifyContent: "center",
                   alignItems: "center",
-                  width: { xs: "100vw", sm: "100vw", md: "70vw" },
-                  // height: "100vh",
+                  justifyContent: "center",
+                  // background: "linear-gradient(to right, #ffe4e1, #e6e6fa)",
                   textAlign: "center",
-                  // bgcolor: "#f5f5f5",
+                  p: 3,
                 }}
               >
-                {/* Image */}
                 <Box
-                  component="img"
-                  src={NoProductEror}
-                  alt="No products found"
                   sx={{
-                    width: { xs: "80%", sm: "60%", md: "40%" },
-                    maxWidth: "130px",
-                    height: "auto",
-                    mb: 2,
+                    width: 96,
+                    height: 96,
+                    mb: 4,
+                    animation: `${bounce} 1.5s infinite`,
                   }}
-                />
+                >
+                  {/* <NotificationsActiveIcon
+                    sx={{ fontSize: 96, color: "#a16149" }}
+                  /> */}
 
-                {/* Title */}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    color="#a16149"
+                  >
+                    <path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.47a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.47a2 2 0 00-1.34-2.23z" />
+                  </svg>
+                </Box>
+                <Typography
+                  variant="h3"
+                  fontWeight="bold"
+                  sx={{
+                    color: "#2F3E4E",
+                    fontFamily: "Cinzel, serif",
+                    fontSize: { xs: "26px", sm: "32px", md: "36px" },
+                  }}
+                  mb={3}
+                >
+                  Coming Soon
+                </Typography>
                 <Typography
                   variant="h5"
+                  color="text.secondary"
+                  mb={3}
                   sx={{
+                    fontFamily: "Roboto serif",
                     fontSize: { xs: "18px", sm: "22px", md: "24px" },
-                    fontWeight: "600",
-                    color: "gray",
-                    mb: 1,
                   }}
                 >
-                  No Products Found
-                </Typography>
-
-                {/* Subtitle */}
-                <Typography
-                  variant="body2"
-                  sx={{
-                    fontSize: { xs: "14px", sm: "16px" },
-                    color: "gray",
-                    // maxWidth: "80%",
-                  }}
-                >
-                  Your search did not match any products. <br /> Please try
-                  again.
+                  We're adding more amazing products to our collection.
                 </Typography>
               </Box>
             ) : (
+              // <Box
+              //   sx={{
+              //     padding: "50px 0",
+              //     display: "flex",
+              //     flexDirection: "column",
+              //     justifyContent: "center",
+              //     alignItems: "center",
+              //     width: { xs: "100vw", sm: "100vw", md: "70vw" },
+              //     // height: "100vh",
+              //     textAlign: "center",
+              //     // bgcolor: "#f5f5f5",
+              //   }}
+              // >
+              //   {/* Image */}
+              //   <Box
+              //     component="img"
+              //     src={NoProductEror}
+              //     alt="No products found"
+              //     sx={{
+              //       width: { xs: "80%", sm: "60%", md: "40%" },
+              //       maxWidth: "130px",
+              //       height: "auto",
+              //       mb: 2,
+              //     }}
+              //   />
+
+              //   {/* Title */}
+              //   <Typography
+              //     variant="h5"
+              //     sx={{
+              //       fontSize: { xs: "18px", sm: "22px", md: "24px" },
+              //       fontWeight: "600",
+              //       color: "gray",
+              //       mb: 1,
+              //     }}
+              //   >
+              //     No Products Found
+              //   </Typography>
+
+              //   {/* Subtitle */}
+              //   <Typography
+              //     variant="body2"
+              //     sx={{
+              //       fontSize: { xs: "14px", sm: "16px" },
+              //       color: "gray",
+              //       // maxWidth: "80%",
+              //     }}
+              //   >
+              //     Your search did not match any products. <br /> Please try
+              //     again.
+              //   </Typography>
+              // </Box>
               // <Box
               //   className="products-container"
               //   sx={{

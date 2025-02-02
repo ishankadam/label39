@@ -1,5 +1,14 @@
-import indianFlag from "../src/assets/india.png";
-import UsaFlag from "../src/assets/usa.png";
+import indianFlag from "../src/assets/countryFlags/india.png";
+import usaFlag from "../src/assets/countryFlags/usa.png";
+import ukFlag from "../src/assets/countryFlags/uk.png";
+import ausFlag from "../src/assets/countryFlags/au.png";
+import caFlag from "../src/assets/countryFlags/ca.png";
+import sgFlag from "../src/assets/countryFlags/sg.png";
+import thFlag from "../src/assets/countryFlags/th.png";
+import aeFlag from "../src/assets/countryFlags/ae.png";
+import euFlag from "../src/assets/countryFlags/eu.png";
+import idFlag from "../src/assets/countryFlags/id.png";
+
 import coords from "./assets/COORDS.png";
 import festive from "./assets/FESTIVE.png";
 import shirt from "./assets/SHIRTS.png";
@@ -53,7 +62,7 @@ export const countries = [
   {
     label: "USA",
     value: "USD",
-    flag: UsaFlag,
+    flag: usaFlag,
     currency: "$",
     fields: [
       "firstName",
@@ -65,10 +74,11 @@ export const countries = [
       "zipcode",
     ],
   },
+
   {
     label: "Europe",
     value: "EUR",
-    flag: indianFlag, // Add the appropriate flag image
+    flag: euFlag,
     currency: "€",
     fields: [
       "firstName",
@@ -83,7 +93,7 @@ export const countries = [
   {
     label: "Indonesia",
     value: "IDR",
-    flag: indianFlag, // Add the appropriate flag image
+    flag: idFlag,
     currency: "Rp",
     fields: [
       "firstName",
@@ -98,7 +108,7 @@ export const countries = [
   {
     label: "United Kingdom",
     value: "GBP",
-    flag: indianFlag, // Add the appropriate flag image
+    flag: ukFlag,
     currency: "£",
     fields: [
       "firstName",
@@ -113,7 +123,7 @@ export const countries = [
   {
     label: "Canada",
     value: "CAD",
-    flag: indianFlag, // Add the appropriate flag image
+    flag: caFlag,
     currency: "C$",
     fields: [
       "firstName",
@@ -129,7 +139,7 @@ export const countries = [
   {
     label: "United Arab Emirates",
     value: "AED",
-    flag: indianFlag, // Add the appropriate flag image
+    flag: aeFlag,
     currency: "د.إ",
     fields: [
       "firstName",
@@ -144,7 +154,7 @@ export const countries = [
   {
     label: "Australia",
     value: "AUD",
-    flag: indianFlag, // Add the appropriate flag image
+    flag: ausFlag,
     currency: "A$",
     fields: [
       "firstName",
@@ -160,7 +170,7 @@ export const countries = [
   {
     label: "Singapore",
     value: "SGD",
-    flag: indianFlag, // Add the appropriate flag image
+    flag: sgFlag,
     currency: "S$",
     fields: [
       "firstName",
@@ -174,7 +184,7 @@ export const countries = [
   {
     label: "Thailand",
     value: "THB",
-    flag: indianFlag, // Add the appropriate flag image
+    flag: thFlag,
     currency: "฿",
     fields: [
       "firstName",

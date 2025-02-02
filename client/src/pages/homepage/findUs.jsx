@@ -17,8 +17,12 @@ import "./../../css/findUs.css";
 
 import { sendQueryEmail } from "../../api";
 import CustomTextfield from "../../components/textfield/customTextfield";
+import { useDispatch } from "react-redux";
+import { showSnackbar } from "../../store/cartSlice";
 
 const FindUs = () => {
+  const dispatch = useDispatch();
+
   const [showMap, setShowMap] = useState(false);
 
   const toggleMapVisibility = () => {
@@ -56,6 +60,12 @@ const FindUs = () => {
   };
 
   const handleSubmit = () => {
+    dispatch(
+      showSnackbar({
+        message: `EMAIL SENT SUCCESSFULLY`,
+        severity: "success",
+      })
+    );
     sendQueryEmail({ query });
     setQuery({ name: "", email: "", phone: "", message: "" });
   };

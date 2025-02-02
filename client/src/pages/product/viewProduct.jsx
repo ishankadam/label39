@@ -112,7 +112,7 @@ const ViewProductModal = (props) => {
       addProductToCart({ cartProduct: newCartProduct, userId: userId });
       dispatch(
         showSnackbar({
-          message: `${cartProduct.name} added to cart`,
+          message: `${cartProduct.name} ADDED TO CART`,
           severity: "success",
         })
       );

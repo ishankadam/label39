@@ -9,7 +9,7 @@ const CustomLoader = ({ size = 100 }) => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "100vh", // Full screen height
+        // height: "100vh", // Full screen height
         top: 0,
         left: "50%",
       }}

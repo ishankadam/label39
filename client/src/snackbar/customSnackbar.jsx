@@ -20,7 +20,8 @@ const CustomSnackbar = () => {
           <Alert
             onClose={() => dispatch(hideSnackbar(id))}
             severity={severity}
-            variant="filled"
+            // variant="filled"
+            sx={{ fontWeight: "500" }}
           >
             {message}
           </Alert>

@@ -8,8 +8,12 @@ import { login } from "../../api";
 import backgroundImage from "../../assets/backgroundfooter.jpg"; // Import your background image
 import SignupImg from "../../assets/signup.jpeg";
 import CustomTextfield from "../../components/textfield/customTextfield";
+import { showSnackbar } from "../../store/cartSlice";
+import { useDispatch } from "react-redux";
 
 const Login = (props) => {
+  const dispatch = useDispatch();
+
   const [isSignUpMode, setIsSignUpMode] = useState(false);
   const [activeSlide] = useState(0); // 0-based index for the first image
   const [user, setUser] = useState({
@@ -39,9 +43,21 @@ const Login = (props) => {
       if (loggedInUser) {
         navigate("/"); // Redirect to the homepage or another route after successful login
         props.setUserUpdated(true);
+        dispatch(
+          showSnackbar({
+            message: `Welcome! You're now logged in. `,
+            severity: "success",
+          })
+        );
       }
     } catch (err) {
       console.error("Login failed:", err);
+      dispatch(
+        showSnackbar({
+          message: "Oops! Something went wrong. Unable to log in.",
+          severity: "error",
+        })
+      );
     }
   };
 
