@@ -116,31 +116,40 @@ const sendEmail = async ({
           .replace(
             `<span id="billing_apartment_address"></span>`,
             data.checkoutData.billingAddress.apartment
+              ? data.checkoutData.billingAddress.apartment
+              : data.checkoutData.shippingAddress.apartment
           )
           .replace(
             `<span id="billing_address"></span>`,
             data.checkoutData.billingAddress.address
+              ? data.checkoutData.billingAddress.address
+              : data.checkoutData.shippingAddress.address
           )
           .replace(
             `<span id="billing_city"></span>`,
             data.checkoutData.billingAddress.city
+              ? data.checkoutData.billingAddress.city
+              : data.checkoutData.shippingAddress.city
           )
           .replace(
             `<span id="billing_state"></span>`,
             data.checkoutData.billingAddress.state
+              ? data.checkoutData.billingAddress.state
+              : data.checkoutData.shippingAddress.state
           )
           .replace(
             `<span id="billing_pincode"></span>`,
             data.checkoutData.billingAddress.pincode
+              ? data.checkoutData.billingAddress.pincode
+              : data.checkoutData.shippingAddress.pincode
           )
           .replace(
             `<span id="country"></span>`,
             data.checkoutData.billingAddress.country
+              ? data.checkoutData.billingAddress.country
+              : data.checkoutData.shippingAddress.country
           )
-          .replace(
-            `<span id="billing_phone"></span>`,
-            data.checkoutData.billingAddress.phone
-          )
+          .replace(`<span id="billing_phone"></span>`, data.checkoutData.phone)
           .replace(`<tr id="cart_items_placeholder"></tr>`, cartItemsHtml)
           .replace(`<span id="currency"></span>`, currency);
         break;
@@ -222,30 +231,44 @@ const sendEmail = async ({
           .replace(
             `<span id="billing_apartment_address"></span>`,
             data.checkoutData.billingAddress.apartment
+              ? data.checkoutData.billingAddress.apartment
+              : data.checkoutData.shippingAddress.apartment
           )
           .replace(
             `<span id="billing_address"></span>`,
-            data.checkoutData.billingAddress.address
+            data.checkoutData.billingAddress.address.length > 0
+              ? data.checkoutData.billingAddress.address
+              : data.checkoutData.shippingAddress.address
           )
           .replace(
             `<span id="billing_city"></span>`,
             data.checkoutData.billingAddress.city
+              ? data.checkoutData.billingAddress.city
+              : data.checkoutData.shippingAddress.city
           )
           .replace(
             `<span id="billing_state"></span>`,
             data.checkoutData.billingAddress.state
+              ? data.checkoutData.billingAddress.state
+              : data.checkoutData.shippingAddress.state
           )
           .replace(
             `<span id="billing_pincode"></span>`,
             data.checkoutData.billingAddress.pincode
+              ? data.checkoutData.billingAddress.pincode
+              : data.checkoutData.shippingAddress.pincode
           )
           .replace(
             `<span id="country"></span>`,
             data.checkoutData.billingAddress.country
+              ? data.checkoutData.billingAddress.country
+              : data.checkoutData.shippingAddress.country
           )
           .replace(
             `<span id="billing_phone"></span>`,
-            data.checkoutData.billingAddress.phone
+            data.checkoutData.phone
+              ? data.checkoutData.phone
+              : data.checkoutData.shippingAddress.phone
           )
           .replace(
             `<tr id="cart_items_placeholder"></tr>`,
@@ -259,7 +282,7 @@ const sendEmail = async ({
     }
 
     const params = {
-      Source: "ishan.kadam_19@sakec.ac.in", // Replace with your verified email
+      Source: "thelabel39@gmail.com", // Replace with your verified email
       Destination: {
         ToAddresses: [toEmail],
       },
