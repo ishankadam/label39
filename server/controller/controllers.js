@@ -332,7 +332,8 @@ const verifyPayment = async (req, res) => {
           userId,
         });
         await order.save();
-        const toEmail = "ishan.kadam_19@sakec.ac.in";
+        console.log(checkoutData);
+        const toEmail = checkoutData.shippingAddress.email;
         const subject = "THE LABEL 39 - Order Confirmed";
         const htmlFilePath = "./html/order_confirm_email.html";
 
@@ -341,6 +342,8 @@ const verifyPayment = async (req, res) => {
           subject,
           emailBody: htmlFilePath,
           isHtml: true,
+          type: "order_confirm",
+          data: order,
         });
 
         // remove order from cart from user schema
@@ -1038,16 +1041,6 @@ const sendQueryEmail = async (req, res) => {
   }
 };
 
-const change_order_status = async (_req, res) => {
-  try {
-    const allOrders = await orders.find({}).select("-_id -__v"); // Exclude _id and __v fields
-    res.status(200).json(allOrders);
-  } catch (error) {
-    console.error("Error changing order status:", error);
-    res.status(500).json({ message: "Error changing order status", error });
-  }
-};
-
 const checkDiscountCode = async (req, res) => {
   try {
     const { userId, code } = req.body;
@@ -1210,6 +1203,37 @@ const forgotPassword = async (req, res) => {
     return res.status(200).json({ isValid: true, message: "User not found" });
   } catch (error) {
     res.status(500).json({ message: "Error sending email", error });
+  }
+};
+
+const change_order_status = async (req, res) => {
+  try {
+    const orderId = req.body.orderId;
+    const orderStatus = req.body.orderStatus;
+    const order = await orders.findOneAndUpdate(
+      { orderId },
+      { $set: { status: orderStatus } },
+      { new: true }
+    );
+    if (orderStatus === "delivered") {
+      const toEmail = order.checkoutData.shippingAddress.email;
+      const subject = "THE LABEL 39 - Order Delivered";
+      const htmlFilePath = "./html/order_delivered_email.html";
+
+      await sendEmail({
+        to: toEmail,
+        subject,
+        emailBody: htmlFilePath,
+        isHtml: true,
+        type: "order_delivered",
+        data: order,
+      });
+    }
+    const allOrders = await orders.find({}).select("-_id -__v"); // Exclude _id and __v fields
+    res.status(200).json(allOrders);
+  } catch (error) {
+    console.error("Error changing order status:", error);
+    (500).json({ message: "Error changing order status", error });
   }
 };
 

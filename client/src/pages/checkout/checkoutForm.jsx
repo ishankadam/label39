@@ -54,9 +54,8 @@ const CheckoutForm = (props) => {
   const [checkoutData, setCheckoutData] = useState({
     country: props.country,
     shippingAddress: {},
-    billingAddress: {},
   });
-
+  const [billingAddress, setBillingAddress] = useState({});
   const handleCodeChange = (value) => {
     setCode(value);
     if (value.length > 0) {
@@ -95,16 +94,27 @@ const CheckoutForm = (props) => {
         return {
           ...prevData,
           country: props.country,
-          shippingAddress:
-            prevData.shippingAddress &&
-            Object.keys(prevData.shippingAddress).length
-              ? prevData.shippingAddress
-              : updatedFields, // Don't overwrite if it has data
-          billingAddress: isDifferentBilling
-            ? updatedFields
-            : prevData.billingAddress,
+          // Reset both shipping and billing addresses if country changes
+          shippingAddress: updatedFields,
         };
       });
+    }
+  }, [checkoutData.country]);
+
+  useEffect(() => {
+    const selectedCountry = countries.find(
+      (row) => row.value === checkoutData.country
+    );
+
+    if (selectedCountry) {
+      setCurrency(selectedCountry.currency);
+
+      // Generate new fields for shipping and billing addresses
+      const updatedFields = selectedCountry.fields.reduce(
+        (acc, field) => ({ ...acc, [field]: "" }),
+        {}
+      );
+      setBillingAddress(updatedFields);
     }
   }, [checkoutData.country, isDifferentBilling]);
 
@@ -146,6 +156,13 @@ const CheckoutForm = (props) => {
     }
   };
 
+  const handleEditBillingAddress = (value, field) => {
+    setBillingAddress((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
   const handleApply = async () => {
     setDiscountLoading(true);
     checkDiscountCode({
@@ -176,6 +193,11 @@ const CheckoutForm = (props) => {
   }, [discount, cartItems]);
 
   const handleOrderPlacement = async () => {
+    const orderData = {
+      ...checkoutData,
+      billingAddress: billingAddress,
+    };
+    console.log(orderData);
     try {
       const { orderId } = await createOrder(billAmount);
       const options = {
@@ -190,7 +212,7 @@ const CheckoutForm = (props) => {
             razorpay_order_id: response.razorpay_order_id,
             razorpay_payment_id: response.razorpay_payment_id,
             razorpay_signature: response.razorpay_signature,
-            checkoutData,
+            checkoutData: orderData,
             cartItems,
             type: "order",
             userId: localStorage.getItem("userId"),
@@ -269,7 +291,15 @@ const CheckoutForm = (props) => {
                   margin: "2vh 0",
                 }}
               >
-                <Badge badgeContent={item.quantity} color="warning">
+                <Badge
+                  badgeContent={item.quantity}
+                  sx={{
+                    "& .MuiBadge-badge": {
+                      backgroundColor: "#a16149",
+                      color: "white",
+                    },
+                  }}
+                >
                   <Box
                     sx={{
                       position: "relative",
@@ -365,7 +395,6 @@ const CheckoutForm = (props) => {
                 }
               />
               <Button
-                onClick={handleApplyDiscount}
                 variant="contained"
                 sx={{
                   height: "56px", // Matches the height of the CustomTextfield
@@ -770,13 +799,13 @@ const CheckoutForm = (props) => {
                   <CustomTextfield
                     label="First Name"
                     variant="outlined"
-                    value={checkoutData.billingAddress.firstName}
+                    value={billingAddress.firstName}
                     config={{
                       field: "firstName",
                       isRequired: true,
                       section: "billingAddress",
                     }}
-                    handleEdit={handleEdit}
+                    handleEdit={handleEditBillingAddress}
                     fullWidth
                     required
                     sx={{ width: "100%" }}
@@ -786,13 +815,13 @@ const CheckoutForm = (props) => {
                   <CustomTextfield
                     label="Last Name"
                     variant="outlined"
-                    value={checkoutData.billingAddress.lastName}
+                    value={billingAddress.lastName}
                     config={{
                       field: "lastName",
                       isRequired: true,
                       section: "billingAddress",
                     }}
-                    handleEdit={handleEdit}
+                    handleEdit={handleEditBillingAddress}
                     fullWidth
                     required
                     sx={{ width: "100%" }}
@@ -802,14 +831,14 @@ const CheckoutForm = (props) => {
                   <CustomTextfield
                     label="Email"
                     variant="outlined"
-                    value={checkoutData.billingAddress.email}
+                    value={billingAddress.email}
                     config={{
                       field: "email",
                       type: "email",
                       isRequired: true,
                       section: "billingAddress",
                     }}
-                    handleEdit={handleEdit}
+                    handleEdit={handleEditBillingAddress}
                     fullWidth
                     required
                     sx={{ width: "100%" }}
@@ -819,13 +848,13 @@ const CheckoutForm = (props) => {
                 <Grid item xs={12}>
                   <CustomTextfield
                     label="Address"
-                    value={checkoutData.billingAddress.address}
+                    value={billingAddress.address}
                     config={{
                       field: "address",
                       isRequired: true,
                       section: "billingAddress",
                     }}
-                    handleEdit={handleEdit}
+                    handleEdit={handleEditBillingAddress}
                     fullWidth
                     sx={{ width: "100%" }}
                   />
@@ -833,124 +862,124 @@ const CheckoutForm = (props) => {
                 <Grid item xs={12}>
                   <CustomTextfield
                     label="Apartment, Suite, etc. (optional)"
-                    value={checkoutData.billingAddress.apartment}
+                    value={billingAddress.apartment}
                     config={{
                       field: "apartment",
                       isRequired: true,
                       section: "billingAddress",
                     }}
-                    handleEdit={handleEdit}
+                    handleEdit={handleEditBillingAddress}
                     fullWidth
                     sx={{ width: "100%" }}
                   />
                 </Grid>
-                {checkoutData.billingAddress.city !== undefined && (
+                {billingAddress.city !== undefined && (
                   <Grid item xs={12} sm={4}>
                     <CustomTextfield
                       label="City"
-                      value={checkoutData.billingAddress.city}
+                      value={billingAddress.city}
                       config={{
                         field: "city",
                         isRequired: true,
                         section: "billingAddress",
                       }}
-                      handleEdit={handleEdit}
+                      handleEdit={handleEditBillingAddress}
                       fullWidth
                       sx={{ width: "100%" }}
                     />
                   </Grid>
                 )}
-                {checkoutData.billingAddress.state !== undefined && (
+                {billingAddress.state !== undefined && (
                   <Grid item xs={12} sm={4}>
                     <CustomTextfield
                       label="State"
-                      value={checkoutData.billingAddress.state}
+                      value={billingAddress.state}
                       config={{
                         field: "state",
                         isRequired: true,
                         section: "billingAddress",
                       }}
-                      handleEdit={handleEdit}
+                      handleEdit={handleEditBillingAddress}
                       fullWidth
                       sx={{ width: "100%" }}
                     />
                   </Grid>
                 )}
-                {checkoutData.billingAddress.pincode !== undefined && (
+                {billingAddress.pincode !== undefined && (
                   <Grid item xs={12} sm={4}>
                     <CustomTextfield
                       label="Pincode"
-                      value={checkoutData.billingAddress.pincode}
+                      value={billingAddress.pincode}
                       config={{
                         field: "pincode",
                         isRequired: true,
                         section: "billingAddress",
                       }}
-                      handleEdit={handleEdit}
+                      handleEdit={handleEditBillingAddress}
                       fullWidth
                       sx={{ width: "100%" }}
                     />
                   </Grid>
                 )}
-                {checkoutData.billingAddress.province !== undefined && (
+                {billingAddress.province !== undefined && (
                   <Grid item xs={12} sm={4}>
                     <CustomTextfield
                       label="Province"
-                      value={checkoutData.billingAddress.province}
+                      value={billingAddress.province}
                       config={{
                         field: "province",
                         isRequired: true,
                         section: "billingAddress",
                       }}
-                      handleEdit={handleEdit}
+                      handleEdit={handleEditBillingAddress}
                       fullWidth
                       sx={{ width: "100%" }}
                     />
                   </Grid>
                 )}
-                {checkoutData.billingAddress.zipcode !== undefined && (
+                {billingAddress.zipcode !== undefined && (
                   <Grid item xs={12} sm={4}>
                     <CustomTextfield
                       label="Zipcode"
-                      value={checkoutData.billingAddress.zipcode}
+                      value={billingAddress.zipcode}
                       config={{
                         field: "zipcode",
                         isRequired: true,
                         section: "billingAddress",
                       }}
-                      handleEdit={handleEdit}
+                      handleEdit={handleEditBillingAddress}
                       fullWidth
                       sx={{ width: "100%" }}
                     />
                   </Grid>
                 )}
-                {checkoutData.billingAddress.postalcode !== undefined && (
+                {billingAddress.postalcode !== undefined && (
                   <Grid item xs={12} sm={4}>
                     <CustomTextfield
                       label="Postalcode"
-                      value={checkoutData.billingAddress.postalcode}
+                      value={billingAddress.postalcode}
                       config={{
                         field: "postalcode",
                         isRequired: true,
                         section: "billingAddress",
                       }}
-                      handleEdit={handleEdit}
+                      handleEdit={handleEditBillingAddress}
                       fullWidth
                       sx={{ width: "100%" }}
                     />
                   </Grid>
                 )}
-                {checkoutData.billingAddress.emirate !== undefined && (
+                {billingAddress.emirate !== undefined && (
                   <Grid item xs={12} sm={4}>
                     <CustomTextfield
                       label="Emirate"
-                      value={checkoutData.billingAddress.emirate}
+                      value={billingAddress.emirate}
                       config={{
                         field: "emirate",
                         isRequired: true,
                         section: "billingAddress",
                       }}
-                      handleEdit={handleEdit}
+                      handleEdit={handleEditBillingAddress}
                       fullWidth
                       sx={{ width: "100%" }}
                     />
@@ -1087,7 +1116,15 @@ const CheckoutForm = (props) => {
                 margin: "2vh 0",
               }}
             >
-              <Badge badgeContent={item.quantity} color="warning">
+              <Badge
+                badgeContent={item.quantity}
+                sx={{
+                  "& .MuiBadge-badge": {
+                    backgroundColor: "#a16149",
+                    color: "white",
+                  },
+                }}
+              >
                 <Box
                   sx={{
                     position: "relative",

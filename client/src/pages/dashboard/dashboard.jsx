@@ -17,6 +17,7 @@ import {
   getAllCategories,
   getAllCelebrityStyles,
   getAllClientDiaries,
+  getAllDiscounts,
   getAllGiftcard,
   getAllOrders,
   getAllProducts,
@@ -194,6 +195,7 @@ const Dashboard = (props) => {
     });
     getAllSales({ setSaleData, setLoading: setsaleLoading });
     getAllGiftcard({ setGiftCards, setLoading: setGiftCardLoading });
+    getAllDiscounts({ setDiscountData, setLoading: setDiscountLoading });
   }, []);
 
   const handleOpenForm = (page) => {

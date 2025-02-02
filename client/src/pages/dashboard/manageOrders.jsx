@@ -42,8 +42,9 @@ function ManageOrders(props) {
       id: "Customer Name",
       label: "Customer Name",
       key: "checkoutData",
-      nestedKey: "firstName",
-      type: "nestedText",
+      nestedKey: "shippingAddress",
+      doubleNestedKey: "firstName",
+      type: "doubleNestedText",
       align: "left",
     },
     {
@@ -51,7 +52,7 @@ function ManageOrders(props) {
       label: "Phone",
       key: "checkoutData",
       nestedKey: "phone",
-      type: "nestedText",
+      type: "nestedText", // This will show the phone number of the customer
       align: "left",
     },
     {

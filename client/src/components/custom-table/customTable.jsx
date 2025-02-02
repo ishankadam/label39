@@ -135,6 +135,15 @@ const CustomTable = (props) => {
           <Typography>{row[colDef.key][colDef.nestedKey]}</Typography>
         );
         break;
+      case "doubleNestedText":
+        children = colDef.capitalize ? (
+          <Typography>{_.capitalize(row[colDef.key])}</Typography>
+        ) : (
+          <Typography>
+            {row[colDef.key][colDef.nestedKey][colDef.doubleNestedKey]}
+          </Typography>
+        );
+        break;
       case "textWithStartIcon":
         children = (
           <Typography>

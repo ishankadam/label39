@@ -40,6 +40,221 @@ const sendEmail = async ({
       case "resetPassword":
         htmlData = body.replace("confirmation_link", data);
         break;
+      case "order_confirm":
+        const currency = "₹";
+        let cartItemsHtml = data.cartItems
+          .map(
+            (row) => `
+      <tr>
+          <td
+            style="
+                        padding: 10px;
+                        border-bottom: 1px solid #eee;
+                        font-size: 14px;
+                        color: #666;
+                      "
+          >
+            ${row.name}
+            <br />
+          </td>
+          <td
+            style="
+                        padding: 10px;
+                        border-bottom: 1px solid #eee;
+                        font-size: 14px;
+                        color: #666;
+                      "
+          >
+            ${row.quantity}
+          </td>
+          <td
+            style="
+                        padding: 10px;
+                        border-bottom: 1px solid #eee;
+                        font-size: 14px;
+                        color: #666;
+                      "
+          >
+            <span id="currency"></span>
+            ${row.price}
+          </td>
+        </tr>`
+          )
+          .join("");
+        htmlData = body
+          .replace(
+            `<span id="user_name"></span>`,
+            data.checkoutData.shippingAddress.firstName +
+              " " +
+              data.checkoutData.shippingAddress.lastName
+          )
+          .replace(`<span id="order_id"></span>`, data.orderId)
+          .replace(`<span id="created_at"></span>`, data.createdAt)
+          .replace(
+            `<span id="shipping_apartment_address"></span>`,
+            data.checkoutData.shippingAddress.apartment
+          )
+          .replace(
+            `<span id="shipping_address"></span>`,
+            data.checkoutData.shippingAddress.address
+          )
+          .replace(
+            `<span id="shipping_city"></span>`,
+            data.checkoutData.shippingAddress.city
+          )
+          .replace(
+            `<span id="shipping_state"></span>`,
+            data.checkoutData.shippingAddress.state
+          )
+          .replace(
+            `<span id="shipping_pincode"></span>`,
+            data.checkoutData.shippingAddress.pincode
+          )
+          .replace(`<span id="country"></span>`, data.checkoutData.country)
+          .replace(
+            `<span id="shipping_phone"></span>`,
+            data.checkoutData.shippingAddress.phone
+          )
+          .replace(
+            `<span id="billing_apartment_address"></span>`,
+            data.checkoutData.billingAddress.apartment
+          )
+          .replace(
+            `<span id="billing_address"></span>`,
+            data.checkoutData.billingAddress.address
+          )
+          .replace(
+            `<span id="billing_city"></span>`,
+            data.checkoutData.billingAddress.city
+          )
+          .replace(
+            `<span id="billing_state"></span>`,
+            data.checkoutData.billingAddress.state
+          )
+          .replace(
+            `<span id="billing_pincode"></span>`,
+            data.checkoutData.billingAddress.pincode
+          )
+          .replace(
+            `<span id="country"></span>`,
+            data.checkoutData.billingAddress.country
+          )
+          .replace(
+            `<span id="billing_phone"></span>`,
+            data.checkoutData.billingAddress.phone
+          )
+          .replace(`<tr id="cart_items_placeholder"></tr>`, cartItemsHtml)
+          .replace(`<span id="currency"></span>`, currency);
+        break;
+      case "order_delivered":
+        const deliveredCurrency = "₹";
+        let deliveredCartItemsHtml = data.cartItems
+          .map(
+            (row) => `
+      <tr>
+          <td
+            style="
+                        padding: 10px;
+                        border-bottom: 1px solid #eee;
+                        font-size: 14px;
+                        color: #666;
+                      "
+          >
+            ${row.name}
+            <br />
+          </td>
+          <td
+            style="
+                        padding: 10px;
+                        border-bottom: 1px solid #eee;
+                        font-size: 14px;
+                        color: #666;
+                      "
+          >
+            ${row.quantity}
+          </td>
+          <td
+            style="
+                        padding: 10px;
+                        border-bottom: 1px solid #eee;
+                        font-size: 14px;
+                        color: #666;
+                      "
+          >
+            <span id="currency"></span>
+            ${row.price}
+          </td>
+        </tr>`
+          )
+          .join("");
+        htmlData = body
+          .replace(
+            `<span id="user_name"></span>`,
+            data.checkoutData.shippingAddress.firstName +
+              " " +
+              data.checkoutData.shippingAddress.lastName
+          )
+          .replace(`<span id="order_id"></span>`, data.orderId)
+          .replace(`<span id="created_at"></span>`, data.createdAt)
+          .replace(
+            `<span id="shipping_apartment_address"></span>`,
+            data.checkoutData.shippingAddress.apartment
+          )
+          .replace(
+            `<span id="shipping_address"></span>`,
+            data.checkoutData.shippingAddress.address
+          )
+          .replace(
+            `<span id="shipping_city"></span>`,
+            data.checkoutData.shippingAddress.city
+          )
+          .replace(
+            `<span id="shipping_state"></span>`,
+            data.checkoutData.shippingAddress.state
+          )
+          .replace(
+            `<span id="shipping_pincode"></span>`,
+            data.checkoutData.shippingAddress.pincode
+          )
+          .replace(`<span id="country"></span>`, data.checkoutData.country)
+          .replace(
+            `<span id="shipping_phone"></span>`,
+            data.checkoutData.shippingAddress.phone
+          )
+          .replace(
+            `<span id="billing_apartment_address"></span>`,
+            data.checkoutData.billingAddress.apartment
+          )
+          .replace(
+            `<span id="billing_address"></span>`,
+            data.checkoutData.billingAddress.address
+          )
+          .replace(
+            `<span id="billing_city"></span>`,
+            data.checkoutData.billingAddress.city
+          )
+          .replace(
+            `<span id="billing_state"></span>`,
+            data.checkoutData.billingAddress.state
+          )
+          .replace(
+            `<span id="billing_pincode"></span>`,
+            data.checkoutData.billingAddress.pincode
+          )
+          .replace(
+            `<span id="country"></span>`,
+            data.checkoutData.billingAddress.country
+          )
+          .replace(
+            `<span id="billing_phone"></span>`,
+            data.checkoutData.billingAddress.phone
+          )
+          .replace(
+            `<tr id="cart_items_placeholder"></tr>`,
+            deliveredCartItemsHtml
+          )
+          .replace(`<span id="currency"></span>`, deliveredCurrency);
+        break;
       default:
         htmlData = body;
         break;
