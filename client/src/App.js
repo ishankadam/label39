@@ -291,6 +291,7 @@ const App = () => {
             element={<ClientDiaryPage clientDiaries={clientDiaries} />}
           />
           <Route path="/resetPassword/:token" element={<ResetPassword />} />
+
           <Route exact path="/forgotPassword" element={<ForgotPassword />} />
         </Routes>
         <CustomDrawer
