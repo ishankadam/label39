@@ -23,10 +23,6 @@ const UserOrders = () => {
     getAllOrders({ userId, role, setAllOrders: setOrders, setLoading });
   }, []);
 
-  useEffect(() => {
-    console.log(orders);
-  }, [orders]);
-
   const statusStyles = {
     placed: { bgcolor: "#1976d2", color: "white" }, // Primary Blue
     shipped: { bgcolor: "#ed6c02", color: "white" }, // Warning Orange

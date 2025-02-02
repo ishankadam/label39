@@ -7,10 +7,6 @@ function ClientDiaryCard({ diary, setShowModal }) {
   const [fadeIn, setFadeIn] = useState(true);
 
   useEffect(() => {
-    console.log("Diary Data:", diary); // Logs the diary prop
-  }, [diary]); // Runs every time diary changes
-
-  useEffect(() => {
     if (diary.image.length > 1) {
       const interval = setInterval(() => {
         setFadeIn(false);

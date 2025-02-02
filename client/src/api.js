@@ -7,7 +7,6 @@ const {
   REACT_APP_WHATSAPP_API_URL,
   REACT_APP_INSTAGRAM_ACCESS_TOKEN,
 } = process.env;
-console.log(process.env);
 export const apiUrl = REACT_APP_API_URL;
 export const imageUrl = REACT_APP_IMAGE_URL;
 export const phoneNumber = REACT_APP_PHONE;
@@ -854,7 +853,6 @@ export const getAllSales = async ({ setSaleData, setLoading }) => {
 
 export const getInstagramPosts = async ({ setInstagramData, setLoading }) => {
   try {
-    console.log(instagramToken);
     fetch(
       `https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink&access_token=${instagramToken}`
     )
@@ -1053,7 +1051,6 @@ export const forgotPassword = async ({ email }) => {
     }
 
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (err) {
     console.log(err);

@@ -26,7 +26,6 @@ const ShopDialog = (props) => {
   }, [categories]);
 
   const handlePageChange = (page, category) => {
-    console.log(page);
     navigate(page);
     category && dispatch(setFilter({ category }));
   };

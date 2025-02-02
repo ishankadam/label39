@@ -144,7 +144,6 @@ const CustomAppbar = (props) => {
   }, [props.userUpdated, country]);
 
   const handleOptionListUpdate = () => {
-    console.log(localStorage.getItem("userId"));
     const userId = localStorage.getItem("userId");
     if (isAdmin) {
       setAdminSettings((prev) => {
@@ -162,7 +161,6 @@ const CustomAppbar = (props) => {
         return filtered;
       });
     } else if (userId) {
-      console.log("user");
       setAdminSettings((prev) => {
         const filtered = prev.filter((item) => item.label !== "Dashboard"); // Remove "Dashboard"
 
@@ -185,7 +183,6 @@ const CustomAppbar = (props) => {
   };
 
   useEffect(() => {
-    console.log(localStorage.getItem("userId"));
     handleOptionListUpdate();
   }, [isAdmin]);
 

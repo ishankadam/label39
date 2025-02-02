@@ -89,7 +89,6 @@ function ManageOrders(props) {
   ];
 
   useEffect(() => {
-    console.log(props.allOrders);
     setAllOrders(props.allOrders);
   }, [props.allOrders]);
 

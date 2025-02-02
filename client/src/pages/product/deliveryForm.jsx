@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { createDeliveryOrder, trackDeliveryOrder } from "../../api";
+import { trackDeliveryOrder } from "../../api";
 
 const DeliveryForm = () => {
   // const [deliveryData, setDeliveryData] = useState({});
@@ -68,15 +68,11 @@ const DeliveryForm = () => {
     shipping_charges: 50.0,
   };
 
-  const handleCreateOrder = async () => {
-    const result = await createDeliveryOrder(deliveryData);
-    console.log("Delivery Order Created:", result);
-  };
+  const handleCreateOrder = async () => {};
 
   const handleTrackOrder = async () => {
     const result = await trackDeliveryOrder(trackingId);
     setTrackingInfo(result);
-    console.log("Tracking Info:", result);
   };
 
   return (

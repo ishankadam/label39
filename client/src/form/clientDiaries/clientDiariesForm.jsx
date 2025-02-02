@@ -72,7 +72,6 @@ const ClientDiariesForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form Data Submitted", clientDiaries);
     alert("Client Diary submitted successfully!");
     createClientDiaries({
       clientDiaries,

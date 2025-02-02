@@ -308,14 +308,12 @@ const verifyPayment = async (req, res) => {
       type,
       userId,
     } = req.body;
-    console.log(razorpay_order_id, razorpay_payment_id, razorpay_signature);
 
     const sign = razorpay_order_id + "|" + razorpay_payment_id;
     const expectedSign = crypto
       .createHmac("sha256", process.env.RAZORPAY_SECRET)
       .update(sign.toString())
       .digest("hex");
-    console.log(expectedSign);
 
     if (razorpay_signature === expectedSign) {
       // Payment is successful, store data in the database
@@ -332,7 +330,6 @@ const verifyPayment = async (req, res) => {
           userId,
         });
         await order.save();
-        console.log(checkoutData);
         const toEmail = checkoutData.shippingAddress.email;
         const subject = "THE LABEL 39 - Order Confirmed";
         const htmlFilePath = "./html/order_confirm_email.html";
@@ -966,8 +963,6 @@ const get_all_celebrity_styles = async (_req, res) => {
 
 const createSale = async (req, res) => {
   try {
-    console.log(req.body);
-
     // Assuming the incoming data is already parsed (using express.json middleware)
     const saleData = req.body;
 
@@ -1008,7 +1003,6 @@ const createSale = async (req, res) => {
 };
 
 const getAllSales = async (_req, res) => {
-  console.log("getAllSales");
   try {
     const allSale = await Sale.find({}).select("-_id -__v"); // Exclude _id and __v fields
     res.status(200).json(allSale); // Send the result as JSON

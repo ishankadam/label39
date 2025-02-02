@@ -23,8 +23,6 @@ const sendEmail = async ({
     const body = isHtml
       ? fs.readFileSync(path.resolve(emailBody), "utf-8")
       : emailBody;
-
-    console.log(data);
     let htmlData;
     switch (type) {
       case "giftcard":

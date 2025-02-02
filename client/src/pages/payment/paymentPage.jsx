@@ -1,6 +1,6 @@
+import { Button } from "@mui/material";
 import React, { useState } from "react";
 import { createOrder } from "../../api";
-import { Button } from "@mui/material";
 const { RAZORPAY_KEY_ID } = process.env;
 
 export const razorpayId = RAZORPAY_KEY_ID;
@@ -19,9 +19,8 @@ const PaymentPage = () => {
         name: "The Label 39",
         description: "Payment Description",
         order_id: orderId,
-        handler: function (response) {
+        handler: function () {
           alert("Payment Successful!");
-          console.log(response);
         },
         prefill: {
           name: "TheLabel39",

@@ -73,7 +73,7 @@ const CelebrityStyleForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form Data Submitted", celebrityStyles);
+
     alert("Celebrity style submitted successfully!");
     createCelebrityStyles({
       celebrityStyles,

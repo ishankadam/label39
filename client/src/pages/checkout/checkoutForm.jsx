@@ -125,12 +125,9 @@ const CheckoutForm = (props) => {
       );
 
     setIsButtonDisabled(!allFieldsFilled(checkoutData)); // Disable button if any field is empty
-    console.log(checkoutData);
   }, [checkoutData]);
 
   const handleEdit = (value, field, index, section) => {
-    console.log(section);
-
     if (field === "country") {
       props.setCountry(value);
     } else {
@@ -145,7 +142,6 @@ const CheckoutForm = (props) => {
             },
           };
         } else {
-          console.log(field, value);
           // Update top-level field if no section is specified
           return {
             ...prev,
@@ -197,7 +193,6 @@ const CheckoutForm = (props) => {
       ...checkoutData,
       billingAddress: billingAddress,
     };
-    console.log(orderData);
     try {
       const { orderId } = await createOrder(billAmount);
       const options = {
@@ -238,7 +233,6 @@ const CheckoutForm = (props) => {
 
       const rzp = new window.Razorpay(options);
       rzp.open();
-      console.log(checkoutData);
     } catch (error) {
       console.error("Payment failed:", error);
     }
