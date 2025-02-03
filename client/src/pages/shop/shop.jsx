@@ -22,13 +22,14 @@ import ClickAwayListener from "@mui/material/ClickAwayListener";
 import _ from "lodash";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { availableColors } from "../../common";
+import { availableColors, findLabelByValue } from "../../common";
 import ProductCard from "../../components/card/productCard";
 import CustomLoader from "../../components/customLoader";
 import CustomTextfield from "../../components/textfield/customTextfield";
 import "../../css/shop.css";
 import { setFilter } from "../../store/cartSlice";
 import ViewProductModal from "../product/viewProduct";
+import { featured } from "../../common";
 
 const ProductsPage = (props) => {
   const dispatch = useDispatch();
@@ -95,9 +96,11 @@ const ProductsPage = (props) => {
   };
 
   useEffect(() => {
-    const productsPerPage = page === 1 ? 16 : 8;
-    const startIdx = page === 1 ? 0 : 16 + (page - 2) * 10;
-    const endIdx = startIdx + productsPerPage;
+    const startIdx = (page - 1) * 16;
+    const endIdx = startIdx + 16;
+
+    console.log(startIdx, endIdx);
+
     const filteredProducts = allProduct.filter((product) => {
       // Category Filter if filter.category is shirtsAndDresses then filter products with category shirts and also for category dresses
       const categoryFilter =
@@ -236,7 +239,9 @@ const ProductsPage = (props) => {
             },
           }}
         >
-          {filter.category || "Shop"}
+          {filter.category
+            ? findLabelByValue(categories, filter.category)
+            : "Shop"}
         </Typography>
 
         {/* Search Box */}
@@ -445,6 +450,89 @@ const ProductsPage = (props) => {
                         )}
                         <ListItemText
                           primary={category.label}
+                          primaryTypographyProps={{
+                            fontFamily: " 'Roboto Serif', serif",
+                            fontSize: isSelected ? "14px" : "14px",
+                            fontWeight: isSelected ? "600" : "normal",
+                            color: isSelected ? "#a16149" : "black",
+                            margin: "0 !important", // Override margin
+                            padding: "0 !important", // Override padding
+                          }}
+                        />
+                        {isSelected && (
+                          <ListItemSecondaryAction>
+                            <IconButton
+                              edge="end"
+                              aria-label="delete"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleFilterChange("", "category");
+                              }}
+                            >
+                              <ClearIcon />
+                            </IconButton>
+                          </ListItemSecondaryAction>
+                        )}
+                      </ListItemButton>
+                    </ListItem>
+                  );
+                })}
+              </List>
+            </div>
+
+            <div className="featured-filter">
+              <Typography
+                variant="h5"
+                sx={{
+                  color: "#494949",
+                  fontWeight: "600",
+                  fontSize: "16px",
+                  fontFamily: " 'Roboto Serif', serif",
+                  textTransform: "uppercase",
+                  padding: "10px",
+                  borderBottom: "1px solid #ccc",
+                  borderTop: "1px solid #ccc",
+                }}
+              >
+                Featured
+              </Typography>
+              <List>
+                {featured.map((featured, index) => {
+                  const isSelected = filter.featured === featured.value;
+
+                  return (
+                    <ListItem key={index} disablePadding>
+                      <ListItemButton
+                        onClick={() =>
+                          handleFilterChange(featured.value, "featured")
+                        }
+                        sx={{
+                          margin: "0 !important",
+                          Color: isSelected
+                            ? "rgba(0, 106, 25, 0.1)"
+                            : "transparent", // Apply green background when selected
+                          "&:focus": {
+                            fontWeight: "bold !important",
+                            Color: "rgba(0, 106, 25, 0.1) !important", // On focus
+                          },
+                          "&:hover": {
+                            backgroundColor: isSelected
+                              ? "rgba(0, 106, 25, 0.15)"
+                              : "#efefef", // Change hover effect when selected
+                          },
+                        }}
+                      >
+                        {isSelected && (
+                          <CircleIcon
+                            sx={{
+                              color: "#a16149",
+                              fontSize: "8px",
+                              marginRight: "8px",
+                            }}
+                          />
+                        )}
+                        <ListItemText
+                          primary={featured.label}
                           primaryTypographyProps={{
                             fontFamily: " 'Roboto Serif', serif",
                             fontSize: isSelected ? "14px" : "14px",
@@ -1059,7 +1147,91 @@ const ProductsPage = (props) => {
               })}
             </List>
           </div>
+          <div className="featured-filter">
+            <Typography
+              variant="h5"
+              sx={{
+                color: "#494949",
+                fontWeight: "600",
+                fontSize: { xs: "12px", sm: "12px", md: "16px" },
+                fontFamily: " 'Roboto Serif', serif",
+                textTransform: "uppercase",
+                padding: "10px",
+                borderBottom: "1px solid #ccc",
+                borderTop: "1px solid #ccc",
+              }}
+            >
+              Featured
+            </Typography>
+            <List>
+              {featured.map((featured, index) => {
+                const isSelected = filter.featured === featured.value;
 
+                return (
+                  <ListItem key={index} disablePadding>
+                    <ListItemButton
+                      onClick={() =>
+                        handleFilterChange(featured.value, "featured")
+                      }
+                      sx={{
+                        margin: "0 !important",
+                        Color: isSelected
+                          ? "rgba(0, 106, 25, 0.1)"
+                          : "transparent", // Apply green background when selected
+                        "&:focus": {
+                          fontWeight: "bold !important",
+                          Color: "rgba(0, 106, 25, 0.1) !important", // On focus
+                        },
+                        "&:hover": {
+                          backgroundColor: isSelected
+                            ? "rgba(0, 106, 25, 0.15)"
+                            : "#efefef", // Change hover effect when selected
+                        },
+                      }}
+                    >
+                      {isSelected && (
+                        <CircleIcon
+                          sx={{
+                            color: "#a16149",
+                            fontSize: "8px",
+                            marginRight: "8px",
+                          }}
+                        />
+                      )}
+                      <ListItemText
+                        primary={featured.label}
+                        primaryTypographyProps={{
+                          fontFamily: " 'Roboto Serif', serif",
+                          fontSize: isSelected
+                            ? { xs: "12px", sm: "12px", md: "16px" }
+                            : { xs: "11px", sm: "11px", md: "15px" },
+                          fontWeight: isSelected ? "600" : "normal",
+                          color: isSelected ? "#a16149" : "black",
+                          margin: "0 !important", // Override margin
+                          padding: "0 !important", // Override padding
+                        }}
+                      />
+                      {isSelected && (
+                        <ListItemSecondaryAction>
+                          <IconButton
+                            sx={{ zIndex: 10 }}
+                            edge="end"
+                            aria-label="delete"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleFilterChange("", "category");
+                            }}
+                          >
+                            <ClearIcon />
+                          </IconButton>
+                        </ListItemSecondaryAction>
+                      )}
+                    </ListItemButton>
+                  </ListItem>
+                );
+              })}
+            </List>
+          </div>
           <div className="price-filter">
             <Typography
               variant="h5"

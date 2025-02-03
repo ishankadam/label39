@@ -12,12 +12,20 @@ import "../../css/footer.css";
 // import TermsAndCondition from "../termsAndCondition/termsAndCondition.jsx";
 import { useNavigate } from "react-router-dom";
 import backgroundImage from "../../assets/backgroundfooter.jpg";
-import { setFilter } from "../../store/cartSlice";
+import { setFilter, showSnackbar } from "../../store/cartSlice";
 import { useDispatch } from "react-redux";
 const Footer = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const handleSubscribe = () => {
+    dispatch(
+      showSnackbar({
+        message: `You've successfully subscribed to TheLabel39!`,
+        severity: "success",
+      })
+    );
+  };
   const handlePageChange = (path, filter) => {
     const navigateToPage = (targetPath) => {
       navigate(targetPath);
@@ -305,7 +313,9 @@ const Footer = () => {
                 <h3 className="subscribe-title">Subscribe</h3>
                 <form>
                   <input type="email" placeholder="Email address" />
-                  <button type="submit">➔</button>
+                  <button type="submit" onClick={handleSubscribe}>
+                    ➔
+                  </button>
                 </form>
                 <Typography className="subscribe-text">
                   Stay in the loop with the latest updates, unlock exclusive

@@ -49,7 +49,7 @@ const GiftCardModal = ({ open, onClose }) => {
     }
   }, [giftcardDetails, error]);
 
-  const predefinedValues = [500, 1000, 2000, 5000]; // Predefined amounts
+  const predefinedValues = [5000, 10000, 15000, 20000]; // Predefined amounts
 
   const handleChipClick = (value) => {
     setGiftcardDetails((prev) => ({
@@ -113,35 +113,39 @@ const GiftCardModal = ({ open, onClose }) => {
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          width: { xs: "350px", sm: "700px", md: "800px" },
+          width: { xs: "90%", sm: "90%", md: "800px" },
           bgcolor: "background.paper",
           boxShadow: 24,
           // p: 1,
           borderRadius: "5px",
           border: "none !important",
-          display: "flex", // Default layout for larger screens
+          display: "flex",
           flexDirection: { xs: "column", sm: "row" },
-          overflow: "hidden",
+          maxHeight: { xs: "90vh", sm: "auto" }, // Limits height for scrolling on mobile
+          overflowY: { xs: "auto", sm: "hidden" }, // Enables scroll on mobile
+          margin: "auto", // Keeps modal centered
         }}
       >
         {/* Left Side: Image */}
         <Box
           sx={{
-            width: { xs: "100%", sm: "45%" }, // Full width on mobile, partial on larger screens
+            width: { xs: "100%", sm: "45%" },
             backgroundImage: `url(${gift})`,
             backgroundSize: "contain",
             backgroundPosition: "bottom",
             backgroundRepeat: "no-repeat",
             borderBottom: "1px solid rgb(234, 229, 229)",
-            height: { xs: "200px", sm: "auto" }, // Fixed height for mobile to keep aspect ratio
+            display: { xs: "block", sm: "block" },
+            height: { xs: "180px", sm: "auto" },
+            minHeight: "180px",
           }}
         />
 
         {/* Right Side: Content */}
         <Box
           sx={{
-            width: { xs: "100%", sm: "60%" }, // 50% of the modal for the content
-            p: { xs: 3, sm: 2 },
+            width: { xs: "100%", sm: "55%" },
+            p: { xs: 2, sm: 2 },
             // textAlign: "center",
             position: "relative",
           }}
@@ -222,7 +226,20 @@ const GiftCardModal = ({ open, onClose }) => {
             value={giftcardDetails.balance}
             handleEdit={handleEdit}
             inputProps={{ min: 0 }}
-            sx={{ mb: 2, width: "100%" }}
+            sx={{
+              mt: 1,
+              width: "100%",
+              "& .MuiInputLabel-root": {
+                fontSize: "15px",
+                top: "-6px",
+              },
+              "& .MuiInputLabel-root.MuiInputLabel-shrink": {
+                top: "0",
+              },
+              "& .MuiOutlinedInput-root": {
+                height: "40px",
+              },
+            }}
           />
 
           <CustomTextfield
@@ -233,11 +250,24 @@ const GiftCardModal = ({ open, onClose }) => {
             value={giftcardDetails.name}
             handleEdit={handleEdit}
             inputProps={{ min: 0 }}
-            sx={{ mb: 2, width: "100%" }}
             error={error.name}
             errorObj={error}
             setError={setError}
             helperText={error.name ? "Please enter your name" : ""}
+            sx={{
+              mt: "20px",
+              width: "100%",
+              "& .MuiInputLabel-root": {
+                fontSize: "15px",
+                top: "-6px",
+              },
+              "& .MuiInputLabel-root.MuiInputLabel-shrink": {
+                top: "0",
+              },
+              "& .MuiOutlinedInput-root": {
+                height: "40px",
+              },
+            }}
           />
 
           <CustomTextfield
@@ -248,11 +278,24 @@ const GiftCardModal = ({ open, onClose }) => {
             value={giftcardDetails.email}
             handleEdit={handleEdit}
             inputProps={{ min: 0 }}
-            sx={{ mb: 2, width: "100%" }}
             error={error.email}
             errorObj={error}
             setError={setError}
             helperText={error.email ? "Please enter correct Email" : ""}
+            sx={{
+              mt: "20px",
+              width: "100%",
+              "& .MuiInputLabel-root": {
+                fontSize: "15px",
+                top: "-6px",
+              },
+              "& .MuiInputLabel-root.MuiInputLabel-shrink": {
+                top: "0",
+              },
+              "& .MuiOutlinedInput-root": {
+                height: "40px",
+              },
+            }}
           />
 
           <CustomTextfield
@@ -263,14 +306,28 @@ const GiftCardModal = ({ open, onClose }) => {
             value={giftcardDetails.phone}
             handleEdit={handleEdit}
             inputProps={{ min: 0 }}
-            sx={{ mb: 2, width: "100%" }}
             error={error.phone}
             errorObj={error}
             setError={setError}
             helperText={error.phone ? "Please enter correct Phone Number" : ""}
+            sx={{
+              mt: "20px",
+              width: "100%",
+              "& .MuiInputLabel-root": {
+                fontSize: "15px",
+                top: "-6px",
+              },
+              "& .MuiInputLabel-root.MuiInputLabel-shrink": {
+                top: "0",
+              },
+              "& .MuiOutlinedInput-root": {
+                height: "40px",
+              },
+            }}
           />
 
           <Button
+            sx={{ mt: "20px" }}
             variant="contained"
             fullWidth
             color="custom"
@@ -287,8 +344,8 @@ const GiftCardModal = ({ open, onClose }) => {
               mt: 2,
               fontWeight: "400",
               fontSize: {
-                xs: "14px",
-                sm: "14px",
+                xs: "13px",
+                sm: "13px",
                 md: "14px",
                 lg: "14px",
               },

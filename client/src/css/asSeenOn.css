@@ -83,3 +83,17 @@
     display: block; /* Show product card on hover (if needed) */
   }
 }
+
+/* For mobile arrows */
+@media (max-width: 600px) {
+  .slick-prev {
+    left: -25px !important;
+  }
+  .slick-next {
+    right: -25px !important;
+  }
+  .slick-prev:before,
+  .slick-next:before {
+    font-size: 30px !important;
+  }
+}

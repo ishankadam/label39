@@ -5,8 +5,11 @@ import { Box, Button, IconButton, Modal, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import story from "../../assets/aboutImg.jpeg";
 import CustomTextfield from "../../components/textfield/customTextfield";
+import { useDispatch } from "react-redux";
+import { showSnackbar } from "../../store/cartSlice";
 
 const SubscribeModal = () => {
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -16,6 +19,15 @@ const SubscribeModal = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  const handleSubscribe = () => {
+    dispatch(
+      showSnackbar({
+        message: `You've successfully subscribed to TheLabel39!`,
+        severity: "success",
+      })
+    );
+    handleClose();
+  };
   const handleClose = () => setOpen(false);
 
   return (
@@ -129,6 +141,7 @@ const SubscribeModal = () => {
             color="custom"
             fullWidth
             sx={{ mb: 2, color: "white" }}
+            onClick={handleSubscribe}
           >
             SUBSCRIBE
           </Button>

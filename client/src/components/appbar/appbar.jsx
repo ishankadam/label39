@@ -1,4 +1,5 @@
 import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 import CallOutlinedIcon from "@mui/icons-material/CallOutlined";
 import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -36,6 +37,9 @@ import {
 } from "../../store/cartSlice";
 import SelectDropdown from "../select-dropdown/selectDropdown";
 import "./../../css/appbar.css";
+import { featured } from "../../common";
+import { setFilter } from "../../store/cartSlice";
+import { ExpandLess, ExpandMore } from "@mui/icons-material";
 
 const CustomAppbar = (props) => {
   const [isShopOpen, setIsShopOpen] = useState(false);
@@ -68,19 +72,21 @@ const CustomAppbar = (props) => {
     navigate(`/${pageName}`);
   };
 
-  const toggleDrawer = (open) => (event) => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
+  const toggleDrawer = (open) => () => {
     setMobileOpen(open);
   };
 
   const handleChange = (value) => {
     props.setCountry(value);
   };
+
+  const handleMobileShopPageChange = (page, category) => {
+    navigate(page);
+    category && dispatch(setFilter({ category }));
+    toggleDrawer(false)();
+  };
+  const [openCategories, setOpenCategories] = useState(false);
+  const [openFeatured, setOpenFeatured] = useState(false);
 
   const menuItems = [
     { text: "Home", page: "" },
@@ -215,6 +221,19 @@ const CustomAppbar = (props) => {
     handleCloseUserMenu(); // Close the menu
   };
 
+  // Add these to your mobile component
+  const [formattedCategories, setFormattedCategories] = useState([]);
+
+  useEffect(() => {
+    if (!categories) return;
+    const formatted = categories
+      .filter((row) => row.show)
+      .map((category) => ({
+        label: category.name,
+        value: category.value,
+      }));
+    setFormattedCategories(formatted);
+  }, [categories]);
   return (
     <>
       <Box
@@ -349,40 +368,6 @@ const CustomAppbar = (props) => {
               </Box>
             ))}
           </Box>
-          {/* <Box
-            className="page-wrapper"
-            sx={{ display: { xs: "none", md: "flex" }, flexGrow: 0.7 }}
-          >
-            {menuItems.map((item) => (
-              <Button
-                style={{
-                  backgroundColor: "transparent",
-                }}
-                className="nav-options"
-                key={item.text}
-                color="inherit"
-                onClick={() =>
-                  item.page === "giftcard"
-                    ? props.setIsGiftCardModalOpen(true)
-                    : handlePageChange(item.page)
-                }
-          
-                onMouseEnter={() => {
-                  if (item.text === "Shop") {
-                    dispatch(openDialog());
-                  }
-                }}
-                onMouseLeave={() => {
-                  if (item.text !== "Shop") {
-                    dispatch(closeDialog());
-                  }
-                }}
-                sx={{ fontWeight: "bold", cursor: "pointer" }}
-              >
-                {item.text}
-              </Button>
-            ))}
-          </Box> */}
 
           {/* Right-side icons (only visible on larger screens) */}
           <div
@@ -486,7 +471,7 @@ const CustomAppbar = (props) => {
 
         {/* Mobile Drawer */}
         <Drawer anchor="left" open={mobileOpen} onClose={toggleDrawer(false)}>
-          <Box sx={{ width: 220, position: "relative" }} role="presentation">
+          <Box sx={{ width: 280, position: "relative" }} role="presentation">
             {/* Close Icon */}
             <IconButton
               onClick={toggleDrawer(false)} // Close the drawer when clicked
@@ -521,62 +506,156 @@ const CustomAppbar = (props) => {
                         <Typography
                           sx={{
                             fontFamily: "'Cinzel', serif !important",
-                            fontSize: "14px",
+                            fontSize: "15px",
                             fontWeight: "500",
                             padding: "8px 0px",
+                            textTransform: "uppercase",
                           }}
                         >
                           {item.text}
                         </Typography>
+                        <IconButton size="small" onClick={toggleShopMenu}>
+                          {openShopMenu ? <RemoveIcon /> : <AddIcon />}
+                        </IconButton>
+                        {/* 
                         <IconButton
                           onClick={toggleShopMenu} // Toggle shop menu
                           sx={{ padding: 0 }}
                         >
                           <AddIcon />
-                        </IconButton>
+                        </IconButton> */}
                       </ListItem>
 
                       {/* Collapse menu for shop options */}
-                      <Collapse in={openShopMenu} timeout="auto" unmountOnExit>
-                        <List>
-                          {/* Replace the items below with your actual shop options */}
-                          <ListItem button>
+                      <Collapse
+                        in={openShopMenu}
+                        timeout="auto"
+                        unmountOnExit
+                        sx={{ backgroundColor: "#F8F8FF" }}
+                      >
+                        <List sx={{ marginLeft: "10px" }}>
+                          {/* Categories */}
+                          <ListItem
+                            sx={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                            }}
+                            button
+                            onClick={() => setOpenCategories(!openCategories)}
+                          >
                             <Typography
                               sx={{
-                                fontFamily: "'Cinzel', serif",
+                                fontFamily: "'Cinzel', serif !important",
+                                fontSize: "15px",
                                 fontWeight: "500",
-                                fontSize: "14px",
                                 padding: "8px 0px",
+                                textTransform: "uppercase",
+                                // color: "#5c5c5c",
                               }}
                             >
-                              Shop Option 1
+                              CATEGORIES
                             </Typography>
+                            <IconButton size="small">
+                              {openCategories ? <RemoveIcon /> : <AddIcon />}
+                            </IconButton>
                           </ListItem>
-                          <ListItem button>
+                          <Collapse
+                            in={openCategories}
+                            timeout="auto"
+                            unmountOnExit
+                          >
+                            <List>
+                              {formattedCategories.map((category) => (
+                                <ListItem
+                                  button
+                                  key={category.value}
+                                  onClick={() => {
+                                    handleMobileShopPageChange(
+                                      "/shop",
+                                      category.value
+                                    );
+                                    toggleDrawer(false)();
+                                  }}
+                                  sx={{
+                                    borderLeft: "1px solid #ccc",
+                                    marginLeft: "16px",
+                                  }}
+                                >
+                                  <Typography
+                                    sx={{
+                                      fontFamily: "'Cinzel', serif",
+                                      fontWeight: "500",
+                                      fontSize: "15px",
+                                      padding: "8px 0px",
+                                      textTransform: "uppercase",
+                                    }}
+                                  >
+                                    {category.label}
+                                  </Typography>
+                                </ListItem>
+                              ))}
+                            </List>
+                          </Collapse>
+
+                          {/* Featured Items */}
+                          <ListItem
+                            sx={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                            }}
+                            button
+                            onClick={() => setOpenFeatured(!openFeatured)}
+                          >
                             <Typography
                               sx={{
-                                fontFamily: "'Cinzel', serif",
+                                fontFamily: "'Cinzel', serif !important",
+                                fontSize: "15px",
                                 fontWeight: "500",
-                                fontSize: "14px",
                                 padding: "8px 0px",
+                                // color: "#5c5c5c",
+                                textTransform: "uppercase",
                               }}
                             >
-                              Shop Option 2
+                              FEATURED
                             </Typography>
+                            <IconButton size="small">
+                              {openFeatured ? <RemoveIcon /> : <AddIcon />}
+                            </IconButton>
                           </ListItem>
-                          <ListItem button>
-                            <Typography
-                              sx={{
-                                fontFamily: "'Cinzel', serif",
-                                fontWeight: "500",
-                                fontSize: "14px",
-                                padding: "8px 0px",
-                              }}
-                            >
-                              Shop Option 3
-                            </Typography>
-                          </ListItem>
-                          {/* Add more options as needed */}
+                          <Collapse
+                            in={openFeatured}
+                            timeout="auto"
+                            unmountOnExit
+                          >
+                            <List>
+                              {featured.map((feature) => (
+                                <ListItem
+                                  button
+                                  key={feature.value}
+                                  onClick={() => {
+                                    handleMobileShopPageChange(feature.value);
+                                    toggleDrawer(false)();
+                                  }}
+                                  sx={{
+                                    borderLeft: "1px solid #ccc",
+                                    marginLeft: "16px",
+                                  }}
+                                >
+                                  <Typography
+                                    sx={{
+                                      fontFamily: "'Cinzel', serif",
+                                      fontWeight: "500",
+                                      fontSize: "15px",
+                                      padding: "8px 0px",
+                                      textTransform: "uppercase",
+                                    }}
+                                  >
+                                    {feature.label}
+                                  </Typography>
+                                </ListItem>
+                              ))}
+                            </List>
+                          </Collapse>
                         </List>
                       </Collapse>
                     </div>
@@ -586,7 +665,15 @@ const CustomAppbar = (props) => {
                     <ListItem
                       button
                       key={item.text}
-                      onClick={() => handlePageChange(item.page)}
+                      // onClick={() => handlePageChange(item.page)}
+                      onClick={() => {
+                        if (item.page === "giftcard") {
+                          props.setIsGiftCardModalOpen(true);
+                        } else {
+                          handlePageChange(item.page);
+                        }
+                        toggleDrawer(false)();
+                      }}
                       sx={{
                         display: { xs: "flex", md: "none" },
                         justifyContent: "left",
@@ -597,9 +684,10 @@ const CustomAppbar = (props) => {
                       <Typography
                         sx={{
                           fontFamily: "'Cinzel', serif !important",
-                          fontSize: "14px",
+                          fontSize: "15px",
                           fontWeight: "500",
                           padding: "8px 0px",
+                          textTransform: "uppercase",
                         }}
                       >
                         {item.text}
@@ -612,7 +700,10 @@ const CustomAppbar = (props) => {
               {/* Account Icon: Visible only on mobile */}
               <ListItem
                 button
-                onClick={() => navigate("/contactUs")}
+                onClick={() => {
+                  navigate("/contactUs");
+                  toggleDrawer(false)();
+                }}
                 sx={{
                   display: { xs: "flex", md: "none" },
                   justifyContent: "left",
@@ -622,8 +713,9 @@ const CustomAppbar = (props) => {
                   sx={{
                     fontFamily: "'Cinzel', serif",
                     fontWeight: "500",
-                    fontSize: "14px",
+                    fontSize: "15px",
                     padding: "8px 0px",
+                    textTransform: "uppercase",
                   }}
                 >
                   Contact us
