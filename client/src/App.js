@@ -34,6 +34,7 @@ import OurStory from "./pages/our-story/ourStory";
 import PaymentPage from "./pages/payment/paymentPage";
 import DeliveryForm from "./pages/product/deliveryForm";
 import ViewProduct from "./pages/product/viewProduct";
+import ViewProductPage from "./pages/product/viewProductPage";
 import ProfilePage from "./pages/profile/profile";
 import Shop from "./pages/shop/shop";
 import TermsAndConditions from "./pages/termsAndCondition/termsAndCondition";
@@ -59,6 +60,8 @@ const App = () => {
     data: {},
   });
 
+  const [openSubscribeModal, setOpenSubscribeModal] = useState(false);
+
   const handleOpenGiftModal = () => setIsGiftCardModalOpen(true);
   const handleCloseGiftModal = () => setIsGiftCardModalOpen(false);
 
@@ -78,6 +81,10 @@ const App = () => {
     getAllCelebrityStyles({
       setCelebrityStyles,
     });
+    const timer = setTimeout(() => {
+      setOpenSubscribeModal(true);
+    }, 100);
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -132,6 +139,7 @@ const App = () => {
           userUpdated={userUpdated}
           setUserUpdated={setUserUpdated}
           setIsGiftCardModalOpen={setIsGiftCardModalOpen}
+          setOpenSubscribeModal={setOpenSubscribeModal}
         />
         {pathname === "/dashboard" ? (
           <Fab
@@ -208,7 +216,10 @@ const App = () => {
           </>
         )}
 
-        <SubscribeModal></SubscribeModal>
+        <SubscribeModal
+          open={openSubscribeModal}
+          setOpenSubscribeModal={setOpenSubscribeModal}
+        ></SubscribeModal>
         <GiftCardModal
           open={isGiftCardModalOpen}
           onClose={handleCloseGiftModal}
@@ -223,6 +234,7 @@ const App = () => {
                 allCategories={allCategories}
                 country={country}
                 celebrityStyles={celebrityStyles}
+                setOpenSubscribeModal={setOpenSubscribeModal}
               />
             }
           />
@@ -291,6 +303,7 @@ const App = () => {
             element={<ClientDiaryPage clientDiaries={clientDiaries} />}
           />
           <Route path="/resetPassword/:token" element={<ResetPassword />} />
+          <Route path="/products/:productId" element={<ViewProductPage />} />
 
           <Route exact path="/forgotPassword" element={<ForgotPassword />} />
         </Routes>

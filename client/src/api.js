@@ -6,12 +6,14 @@ const {
   REACT_APP_PHONE,
   REACT_APP_WHATSAPP_API_URL,
   REACT_APP_INSTAGRAM_ACCESS_TOKEN,
+  REACT_APP_URL,
 } = process.env;
 export const apiUrl = REACT_APP_API_URL;
 export const imageUrl = REACT_APP_IMAGE_URL;
 export const phoneNumber = REACT_APP_PHONE;
 export const whatsAppUrl = REACT_APP_WHATSAPP_API_URL;
 export const instagramToken = REACT_APP_INSTAGRAM_ACCESS_TOKEN;
+export const appUrl = REACT_APP_URL;
 // create User
 export const createUser = async ({ userDetails, navigate }) => {
   const requestOptions = {
@@ -1056,5 +1058,212 @@ export const forgotPassword = async ({ email }) => {
     console.log(err);
     console.error("Error sending reset link:", err);
     throw err;
+  }
+};
+
+export const getProductDetails = async ({ productId, setProduct }) => {
+  try {
+    const response = await fetch(`${apiUrl}/getProductDetails/${productId}`);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    setProduct(data); // Return the product details
+    return data; // Return the product details
+  } catch (err) {
+    console.error("Failed to fetch product details:", err);
+    return null; // Handle errors gracefully
+  }
+};
+
+export const createSubscription = async ({ email, phone }) => {
+  try {
+    const response = await fetch(`${apiUrl}/createSubscribers`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, phone }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to create subscription");
+    }
+
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error("Error creating subscription:", error);
+    return null;
+  }
+};
+
+export const getAllSubscribers = async () => {
+  try {
+    const response = await fetch(`${apiUrl}/subscribers`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch subscribers");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching subscribers:", error);
+    return null;
+  }
+};
+
+export const getUserDetails = async ({ userId, setUserDetails }) => {
+  try {
+    const response = await fetch(`${apiUrl}/getUserDetails/${userId}`);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    setUserDetails(data); // Return the product details
+    return data; // Return the product details
+  } catch (err) {
+    console.error("Failed to fetch product details:", err);
+    return null; // Handle errors gracefully
+  }
+};
+
+export const createTestimonial = async ({
+  testimonialDetails,
+  setLoading,
+  setTestimonials,
+}) => {
+  setLoading(true);
+  const formData = new FormData();
+
+  // Append product details as JSON
+  formData.append(
+    "testimonials",
+    JSON.stringify(testimonialDetails) // Wrap the product in an array
+  );
+
+  if (testimonialDetails.image && Array.isArray(testimonialDetails.image)) {
+    testimonialDetails.image.forEach((img) => {
+      if (img instanceof File) {
+        formData.append("images", img); // Add images
+      }
+    });
+  }
+
+  // Prepare request options
+  const requestOptions = {
+    method: "POST",
+    body: formData,
+  };
+
+  try {
+    const response = await fetch(`${apiUrl}/createTestimonials`, {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error(
+        (await response.json()).message || "Failed to create testimonial"
+      );
+    }
+
+    const data = await response.json();
+    setTestimonials((prev) => [...prev, data]); // Append the new testimonial
+  } catch (error) {
+    console.error("Error creating testimonial:", error.message);
+    alert(`Error: ${error.message}`);
+  } finally {
+    setLoading(false);
+  }
+};
+
+export const editTestimonial = async ({
+  testimonial,
+  setTestimonials,
+  setLoading,
+}) => {
+  setLoading(true);
+  const formData = new FormData();
+
+  // Append product details as JSON
+  formData.append(
+    "testimonial",
+    JSON.stringify(testimonial) // Wrap the product in an array
+  );
+
+  if (testimonial.image && Array.isArray(testimonial.image)) {
+    testimonial.image.forEach((img) => {
+      if (img instanceof File) {
+        formData.append("images", img); // Add images
+      }
+    });
+  }
+
+  const requestOptions = {
+    method: "PUT",
+    body: formData,
+  };
+
+  try {
+    const response = await fetch(`${apiUrl}/editTestimonial`, requestOptions);
+    if (response.ok) {
+      const data = await response.json();
+      setTestimonials(data);
+    } else {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Network response was not ok.");
+    }
+  } catch (error) {
+    console.log(error);
+    throw error;
+  } finally {
+    setLoading(false);
+  }
+};
+
+export const toggleTestimonialStatus = async ({
+  testimonial,
+  setTestimonials,
+  setLoading,
+}) => {
+  try {
+    if (setLoading) setLoading(true);
+
+    const response = await fetch(
+      `${apiUrl}/testimonial/${testimonial.testimonialId}/disable`,
+      {
+        method: "PUT", // Change to PUT for updates
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+
+    if (!response.ok) {
+      if (response.status === 404) {
+        console.error("Testimonial not found");
+      } else {
+        console.error("Failed to disable the testimonial");
+      }
+      throw new Error("Failed to disable testimonial");
+    }
+
+    const data = await response.json();
+    setTestimonials(data.allTestimonial); // Update state with the API response
+    if (setLoading) setLoading(false);
+    return data;
+  } catch (err) {
+    console.error("Error disabling testimonial:", err);
+    if (setLoading) setLoading(false);
   }
 };

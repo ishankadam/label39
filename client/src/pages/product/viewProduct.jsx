@@ -1,9 +1,11 @@
 import ChatIcon from "@mui/icons-material/Chat";
+import CloseIcon from "@mui/icons-material/Close";
 import ShareIcon from "@mui/icons-material/Share";
 import {
   Box,
   Button,
   Grid,
+  IconButton,
   Link,
   Modal,
   ToggleButton,
@@ -13,11 +15,9 @@ import {
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { addProductToCart, imageUrl } from "../../api";
+import { addProductToCart, appUrl, imageUrl } from "../../api";
 import { addToCart, showSnackbar } from "../../store/cartSlice";
 import Footer from "../homepage/footer";
-import CloseIcon from "@mui/icons-material/Close";
-import { IconButton } from "@mui/material";
 
 const ViewProductModal = (props) => {
   const { isAdmin, product, open, setShowModal } = props;
@@ -91,6 +91,20 @@ const ViewProductModal = (props) => {
   useEffect(() => {
     setPrice(product.price);
   }, [product.price]);
+
+  const handleCopy = async ({ link }) => {
+    try {
+      await navigator.clipboard.writeText(link);
+      dispatch(
+        showSnackbar({
+          message: `Link copied to clipboard!`,
+          severity: "success",
+        })
+      );
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+    }
+  };
 
   const handleAddToCart = () => {
     if (!userId) {
@@ -417,6 +431,11 @@ const ViewProductModal = (props) => {
                         sx={{
                           width: "50%",
                         }}
+                        onClick={() =>
+                          handleCopy({
+                            link: `${appUrl}/products/${product.productId}`,
+                          })
+                        }
                       >
                         Share
                       </Button>

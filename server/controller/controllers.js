@@ -20,17 +20,19 @@ const Sale = require("../schema/sale");
 const sendEmail = require("../emailer");
 const discount = require("../schema/discount");
 const jwt = require("jsonwebtoken");
+const Subscriber = require("../schema/subscribers");
 
 const storage = multer.diskStorage({
   destination: (req, _file, cb) => {
     let category;
+    console.log(req.body.testimonials);
     try {
       if (req.body.products) {
         category = "products";
       } else if (req.body.category) {
         category = "categories";
-      } else if (req.body.testimonial) {
-        category = "testimonial";
+      } else if (req.body.testimonials) {
+        category = "testimonials";
       } else if (req.body.clientDiaries) {
         category = "clientDiaries";
       } else if (req.body.celebrityStyles) {
@@ -990,6 +992,22 @@ const createSale = async (req, res) => {
       }
     }
 
+    const subscribers = await Subscriber.find({});
+    const emailList = subscribers.map((subscriber) => subscriber.email);
+    const subject = "THE LABEL 39 - Sale alert!";
+    const htmlFilePath = "./html/sale.html";
+
+    for (const email of emailList) {
+      await sendEmail({
+        to: email,
+        subject,
+        emailBody: htmlFilePath,
+        isHtml: true,
+        type: "sale",
+        data: newSale,
+      });
+    }
+
     // Retrieve and send all sales
     const allSales = await Sale.find({});
     res.send(allSales);
@@ -1003,7 +1021,6 @@ const getAllSales = async (_req, res) => {
   try {
     const allSale = await Sale.find({}).select("-_id -__v"); // Exclude _id and __v fields
     res.status(200).json(allSale); // Send the result as JSON
-    console.log(allSale);
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Error fetching events", error });
@@ -1123,6 +1140,22 @@ const createDiscount = async (req, res) => {
       description: discountData.description,
     });
     await newDiscount.save();
+
+    const subscribers = await Subscriber.find({});
+    const emailList = subscribers.map((subscriber) => subscriber.email);
+    const subject = "THE LABEL 39 - Discount alert!";
+    const htmlFilePath = "./html/discount.html";
+
+    for (const email of emailList) {
+      await sendEmail({
+        to: email,
+        subject,
+        emailBody: htmlFilePath,
+        isHtml: true,
+        type: "discount",
+        data: newDiscount,
+      });
+    }
     const allDiscount = await discount.find({});
     res.send(allDiscount);
   } catch (error) {
@@ -1228,6 +1261,102 @@ const change_order_status = async (req, res) => {
   }
 };
 
+const getProductDetails = async (req, res) => {
+  try {
+    const productId = req.params.productId;
+    const product = await Product.findOne({ productId: productId });
+    res.status(200).json(product);
+  } catch (error) {
+    console.error("Error getting product details:", error);
+    (500).json({ message: "Error getting product details", error });
+  }
+};
+
+const create_subscriber = async (req, res) => {
+  try {
+    const { email, phone } = req.body;
+
+    // Check if email or phone already exists
+    const existingSubscriber = await Subscriber.findOne({
+      $or: [{ email }, { phone }],
+    });
+
+    if (existingSubscriber) {
+      return res.status(200).json({
+        message: "Subscriber with this email or phone number already exists",
+        severity: "error",
+      });
+    }
+
+    // Create new subscriber
+    const newSubscriber = new Subscriber({ email, phone });
+    await newSubscriber.save();
+
+    res.status(200).json({
+      message: "You've successfully subscribed to TheLabel39!",
+      severity: "success",
+    });
+  } catch (error) {
+    console.error("Error creating subscriber:", error);
+    res.status(500).json({
+      message: "Error creating subscriber",
+      severity: "error",
+      error,
+    });
+  }
+};
+
+const get_all_subscribers = async (req, res) => {
+  try {
+    const subscribers = await Subscriber.find({});
+    res.status(200).json(subscribers);
+  } catch (error) {
+    console.error("Error fetching subscribers:", error);
+    res.status(500).json({ message: "Error fetching subscribers", error });
+  }
+};
+
+const get_user_details = async (req, res) => {
+  try {
+    const userId = Number(req.params.userId);
+    const user = await User.findOne({ userId });
+    const pastOrders = await orders.find({ userId });
+    const userDetails = { user, pastOrders };
+    res.status(200).json(userDetails);
+  } catch (error) {
+    console.error("Error fetching user details:", error);
+    res.status(500).json({ message: "Error fetching user details", error });
+  }
+};
+
+const create_testimonial = async (req, res) => {
+  try {
+    console.log("Request Body:", req.body);
+    console.log("Uploaded Files:", req.files);
+
+    if (!req.body.testimonials) {
+      return res.status(400).json({ message: "Missing testimonial details" });
+    }
+
+    const testimonial = JSON.parse(req.body.testimonials); // Now it should work
+    const images = req.files?.image?.map((file) => file.filename) || [];
+
+    const testimonialData = new Testimonial({
+      testimonialId: Math.floor(Math.random() * 9000000000) + 1,
+      name: testimonial.name,
+      comments: testimonial.comments,
+      rating: testimonial.rating,
+      image: images,
+    });
+
+    await testimonialData.save();
+    res.status(201).json(testimonialData);
+  } catch (error) {
+    console.error("Error creating testimonial:", error);
+    res.status(500).json({ message: "Error creating testimonial", error });
+  }
+};
+
 module.exports = {
   get_all_products,
   create_product,
@@ -1266,4 +1395,9 @@ module.exports = {
   getAllDiscounts,
   resetPassword,
   forgotPassword,
+  getProductDetails,
+  create_subscriber,
+  get_all_subscribers,
+  get_user_details,
+  create_testimonial,
 };

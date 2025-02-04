@@ -25,9 +25,9 @@ const ShopDialog = (props) => {
     setFormattedCategories(formattedCategories);
   }, [categories]);
 
-  const handlePageChange = (page, category) => {
+  const handlePageChange = (page, category, field) => {
     navigate(page);
-    category && dispatch(setFilter({ category }));
+    category && dispatch(setFilter({ [field]: category }));
   };
 
   return (
@@ -52,7 +52,9 @@ const ShopDialog = (props) => {
                 <Button
                   key={category.label}
                   sx={{ textAlign: "left", width: "100%", color: "#677489" }}
-                  onClick={() => handlePageChange("/shop", category.value)}
+                  onClick={() =>
+                    handlePageChange("/shop", category.value, "category")
+                  }
                 >
                   {category.label}
                 </Button>
@@ -77,7 +79,9 @@ const ShopDialog = (props) => {
             <Button
               key={feature}
               sx={{ textAlign: "left", width: "100%", color: "#677489" }}
-              onClick={() => handlePageChange(feature.value)}
+              onClick={() =>
+                handlePageChange("/shop", feature.value, "featured")
+              }
             >
               {feature.label}
             </Button>

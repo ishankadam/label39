@@ -124,6 +124,28 @@ router.post("/reset-password/:token", controller.resetPassword);
 // forgot password
 router.post("/forgot-password", controller.forgotPassword);
 
+// get product details
+router.get("/getProductDetails/:productId", controller.getProductDetails);
+
+// create subscription
+router.post("/createSubscribers", controller.create_subscriber);
+
+// get all subscribers
+router.get("/subscribers", controller.get_all_subscribers);
+
+// get user details
+router.get("/getUserDetails/:userId", controller.get_user_details);
+
+// create testimonial
+router.post(
+  "/createTestimonials",
+  controller.upload.array("image"),
+  controller.create_testimonial
+);
+
+// edit testimonial
+// router.put("/editTestimonial", controller.edit_testimonial);
+
 // Error handling middleware
 router.use((error, _req, res) => {
   const status = error.status || 500;

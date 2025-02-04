@@ -1,21 +1,22 @@
-import React, { useState } from "react";
+import { ExpandMore as ExpandMoreIcon } from "@mui/icons-material";
+import CheckIcon from "@mui/icons-material/Check";
 import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Alert,
+  Box,
   Card,
   CardContent,
-  Typography,
-  Box,
   Divider,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
+  Grid,
   List,
   ListItem,
   ListItemText,
-  Grid,
-  Alert,
+  Typography,
 } from "@mui/material";
-import { ExpandMore as ExpandMoreIcon } from "@mui/icons-material";
-import CheckIcon from "@mui/icons-material/Check";
+import React, { useEffect, useState } from "react";
+import { getUserDetails } from "../../api";
 
 const ProfilePage = () => {
   const [expanded, setExpanded] = useState(false);
@@ -24,50 +25,57 @@ const ProfilePage = () => {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const profileData = {
-    firstName: "Ishan ",
-    lastName: "Kadam",
-    address: "oahoiqwdnqndoiq andq wiqd qjwndiqw",
-    apartment: "oheqeqh",
-    city: " qndioqdi",
-    state: "wqenoqhe",
-    pincode: "400963",
-    phone: "8652241163",
-    email: "ishan@gmail.com",
-  };
+  const [profileData, setProfileData] = useState({});
 
-  const pastOrders = [
-    {
-      _id: { $oid: "676bf3c584e68854faaeba2f" },
-      orderId: "order_PbOwSQX4eBPSJN",
-      paymentId: "pay_PbOwcplBtXWQ9H",
-      paymentInfo: { status: "success", method: "Razorpay" },
-      cartItems: [
-        {
-          productId: 5722614439,
-          name: "IVORY APPLIQUE AND CUTWORK CO-ORD SET",
-          price: 13300,
-          quantity: 1,
-          sizes: { Upper: "XS", Bottom: "XS" },
-        },
-        {
-          productId: 7719436122,
-          name: "MYSTIC IVORY CO-ORD",
-          price: 12530,
-          quantity: 1,
-          sizes: { Upper: "XS", Bottom: "XS" },
-        },
-        {
-          productId: 6538646960,
-          name: "STRIPE FLORAL HAND PAINTED CO-ORD SET",
-          price: 15105,
-          quantity: 1,
-          sizes: { Upper: "XS", Bottom: "XS" },
-        },
-      ],
-      createdAt: { $date: { $numberLong: "1735128005833" } },
-    },
-  ];
+  useEffect(() => {
+    const userId = localStorage.getItem("userId");
+    getUserDetails({ userId, setUserDetails: setProfileData });
+  }, []);
+
+  // const profileData = {
+  //   firstName: "Ishan ",
+  //   lastName: "Kadam",
+  //   address: "oahoiqwdnqndoiq andq wiqd qjwndiqw",
+  //   apartment: "oheqeqh",
+  //   city: " qndioqdi",
+  //   state: "wqenoqhe",
+  //   pincode: "400963",
+  //   phone: "8652241163",
+  //   email: "ishan@gmail.com",
+  // };
+
+  // const pastOrders = [
+  //   {
+  //     _id: { $oid: "676bf3c584e68854faaeba2f" },
+  //     orderId: "order_PbOwSQX4eBPSJN",
+  //     paymentId: "pay_PbOwcplBtXWQ9H",
+  //     paymentInfo: { status: "success", method: "Razorpay" },
+  //     cartItems: [
+  //       {
+  //         productId: 5722614439,
+  //         name: "IVORY APPLIQUE AND CUTWORK CO-ORD SET",
+  //         price: 13300,
+  //         quantity: 1,
+  //         sizes: { Upper: "XS", Bottom: "XS" },
+  //       },
+  //       {
+  //         productId: 7719436122,
+  //         name: "MYSTIC IVORY CO-ORD",
+  //         price: 12530,
+  //         quantity: 1,
+  //         sizes: { Upper: "XS", Bottom: "XS" },
+  //       },
+  //       {
+  //         productId: 6538646960,
+  //         name: "STRIPE FLORAL HAND PAINTED CO-ORD SET",
+  //         price: 15105,
+  //         quantity: 1,
+  //         sizes: { Upper: "XS", Bottom: "XS" },
+  //       },
+  //     ],
+  //     createdAt: { $date: { $numberLong: "1735128005833" } },
+  //   },
+  // ];
 
   const styles = {
     container: {
@@ -139,35 +147,117 @@ const ProfilePage = () => {
                 color: "#8C4E3D",
               }}
             >
-              {profileData.firstName} {profileData.lastName}
+              {profileData.user?.name}
             </Typography>
           </Box>
 
           <Divider style={{ margin: "16px 0" }} />
 
           <Box>
-            {[
-              { label: "Email", value: profileData.email },
-              { label: "Phone", value: profileData.phone },
-              { label: "Address", value: profileData.address },
-              { label: "City", value: profileData.city },
-              { label: "State", value: profileData.state },
-              { label: "Pincode", value: profileData.pincode },
-            ].map((field, index) => (
-              <Box key={index} style={styles.fieldWrapper}>
-                <Grid container alignItems="center">
-                  <Grid item xs={4}>
-                    <Typography style={styles.label}>{field.label}</Typography>
-                  </Grid>
-                  <Grid item xs={8}>
-                    <Box style={styles.value}>{field.value}</Box>
-                  </Grid>
+            <Box style={styles.fieldWrapper}>
+              <Grid container alignItems="center">
+                <Grid item xs={4}>
+                  <Typography style={styles.label}>Email</Typography>
                 </Grid>
-              </Box>
-            ))}
+                <Grid item xs={8}>
+                  <Box style={styles.value}>{profileData.user?.email}</Box>
+                </Grid>
+              </Grid>
+            </Box>
+            <Box style={styles.fieldWrapper}>
+              <Grid container alignItems="center">
+                <Grid item xs={4}>
+                  <Typography style={styles.label}>Phone</Typography>
+                </Grid>
+                <Grid item xs={8}>
+                  <Box style={styles.value}>{profileData.user?.phone}</Box>
+                </Grid>
+              </Grid>
+            </Box>
+            {profileData.pastOrders?.length > 0 ? (
+              <>
+                <Box style={styles.fieldWrapper}>
+                  <Grid container alignItems="center">
+                    <Grid item xs={4}>
+                      <Typography style={styles.label}>Address</Typography>
+                    </Grid>
+                    <Grid item xs={8}>
+                      <Box style={styles.value}>
+                        {
+                          profileData.pastOrders[0]?.checkoutData
+                            ?.shippingAddress.address
+                        }
+                      </Box>
+                    </Grid>
+                  </Grid>
+                </Box>
+                <Box style={styles.fieldWrapper}>
+                  <Grid container alignItems="center">
+                    <Grid item xs={4}>
+                      <Typography style={styles.label}>Apartment</Typography>
+                    </Grid>
+                    <Grid item xs={8}>
+                      <Box style={styles.value}>
+                        {
+                          profileData.pastOrders[0]?.checkoutData
+                            ?.shippingAddress.apartment
+                        }
+                      </Box>
+                    </Grid>
+                  </Grid>
+                </Box>
+                <Box style={styles.fieldWrapper}>
+                  <Grid container alignItems="center">
+                    <Grid item xs={4}>
+                      <Typography style={styles.label}>City</Typography>
+                    </Grid>
+                    <Grid item xs={8}>
+                      <Box style={styles.value}>
+                        {
+                          profileData.pastOrders[0]?.checkoutData
+                            ?.shippingAddress.city
+                        }
+                      </Box>
+                    </Grid>
+                  </Grid>
+                </Box>
+                <Box style={styles.fieldWrapper}>
+                  <Grid container alignItems="center">
+                    <Grid item xs={4}>
+                      <Typography style={styles.label}>State</Typography>
+                    </Grid>
+                    <Grid item xs={8}>
+                      <Box style={styles.value}>
+                        {
+                          profileData.pastOrders[0]?.checkoutData
+                            ?.shippingAddress.state
+                        }
+                      </Box>
+                    </Grid>
+                  </Grid>
+                </Box>
+                <Box style={styles.fieldWrapper}>
+                  <Grid container alignItems="center">
+                    <Grid item xs={4}>
+                      <Typography style={styles.label}>Pincode</Typography>
+                    </Grid>
+                    <Grid item xs={8}>
+                      <Box style={styles.value}>
+                        {
+                          profileData.pastOrders[0]?.checkoutData
+                            ?.shippingAddress.pincode
+                        }
+                      </Box>
+                    </Grid>
+                  </Grid>
+                </Box>
+              </>
+            ) : (
+              <></>
+            )}
           </Box>
 
-          {pastOrders.length > 0 ? (
+          {profileData.pastOrders?.length > 0 ? (
             <Accordion
               expanded={expanded === "panel1"}
               onChange={handleChange("panel1")}
@@ -184,7 +274,7 @@ const ProfilePage = () => {
                   background: "#F9F9F9",
                 }}
               >
-                {pastOrders.map((order) => (
+                {profileData.pastOrders?.map((order) => (
                   <Box
                     key={order.orderId}
                     mt={2}
@@ -317,7 +407,7 @@ const ProfilePage = () => {
                   background: "#F9F9F9",
                 }}
               >
-                {pastOrders.map((order) => (
+                {profileData.pastOrders.map((order) => (
                   <Box
                     key={order.orderId}
                     mt={2}

@@ -94,7 +94,10 @@ const Home = (props) => {
           setShowModal={setShowModal}
         ></ViewProductModal>
       ) : null}
-      <Footer topSection={true}></Footer>
+      <Footer
+        topSection={true}
+        setOpenSubscribeModal={props.setOpenSubscribeModal}
+      ></Footer>
     </div>
   );
 };

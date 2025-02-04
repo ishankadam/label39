@@ -3,32 +3,49 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import { Box, Button, IconButton, Modal, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { createSubscription } from "../../api";
 import story from "../../assets/aboutImg.jpeg";
 import CustomTextfield from "../../components/textfield/customTextfield";
-import { useDispatch } from "react-redux";
 import { showSnackbar } from "../../store/cartSlice";
 
-const SubscribeModal = () => {
+const SubscribeModal = (props) => {
   const dispatch = useDispatch();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(props.open || false);
+  const [subscriber, setSubscriber] = useState({
+    email: "",
+    phone: "",
+  });
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setOpen(true);
-    }, 100);
-    return () => clearTimeout(timer);
-  }, []);
+    setOpen(props.open);
+  }, [props.open]);
 
-  const handleSubscribe = () => {
+  const [error, setError] = useState({
+    email: "",
+    phone: "",
+  });
+
+  const handleEdit = (value, field) => {
+    setSubscriber((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+  const handleSubscribe = async () => {
+    const data = await createSubscription({
+      email: subscriber.email,
+      phone: subscriber.phone,
+    });
     dispatch(
       showSnackbar({
-        message: `You've successfully subscribed to TheLabel39!`,
-        severity: "success",
+        message: data.message,
+        severity: data.severity,
       })
     );
     handleClose();
   };
-  const handleClose = () => setOpen(false);
+  const handleClose = () => props.setOpenSubscribeModal(false);
 
   return (
     <Modal open={open} onClose={handleClose} aria-labelledby="subscribe-modal">
@@ -123,6 +140,14 @@ const SubscribeModal = () => {
                 padding: "0px 2px", // Padding for the input field
               },
             }}
+            label="Email Address"
+            config={{ field: "email", type: "email" }}
+            value={subscriber.email}
+            handleEdit={handleEdit}
+            error={error.email}
+            errorObj={error}
+            setError={setError}
+            helperText={error.email ? "Please enter correct Email" : ""}
           />
           <CustomTextfield
             variant="outlined"
@@ -135,6 +160,14 @@ const SubscribeModal = () => {
                 padding: "0px 2px", // Padding for the input field
               },
             }}
+            label="Phone Number"
+            config={{ field: "phone", type: "phone" }}
+            value={subscriber.phone}
+            handleEdit={handleEdit}
+            error={error.phone}
+            errorObj={error}
+            setError={setError}
+            helperText={error.phone ? "Please enter correct Phone Number" : ""}
           />
           <Button
             variant="contained"

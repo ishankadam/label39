@@ -1,9 +1,10 @@
 import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import CallOutlinedIcon from "@mui/icons-material/CallOutlined";
 import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
 import PermIdentityRoundedIcon from "@mui/icons-material/PermIdentityRounded";
+import RemoveIcon from "@mui/icons-material/Remove";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import {
   AppBar,
@@ -26,21 +27,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getCartItems } from "../../api";
 import logo from "../../assets/logo 1.png";
-import { countries } from "../../common";
+import { countries, featured } from "../../common";
 import ShopDialog from "../../pages/homepage/shopDialog";
 import {
   addToCart,
   clearCart,
   closeCartDrawer,
   openCartDrawer,
+  setFilter,
   showSnackbar,
 } from "../../store/cartSlice";
 import SelectDropdown from "../select-dropdown/selectDropdown";
 import "./../../css/appbar.css";
-import { featured } from "../../common";
-import { setFilter } from "../../store/cartSlice";
-import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 const CustomAppbar = (props) => {
   const [isShopOpen, setIsShopOpen] = useState(false);
@@ -81,9 +79,9 @@ const CustomAppbar = (props) => {
     props.setCountry(value);
   };
 
-  const handleMobileShopPageChange = (page, category) => {
+  const handleMobileShopPageChange = (page, value, field) => {
     navigate(page);
-    category && dispatch(setFilter({ category }));
+    value && dispatch(setFilter({ [field]: value }));
     toggleDrawer(false)();
   };
   const [openCategories, setOpenCategories] = useState(false);
@@ -601,7 +599,8 @@ const CustomAppbar = (props) => {
                                   onClick={() => {
                                     handleMobileShopPageChange(
                                       "/shop",
-                                      category.value
+                                      category.value,
+                                      "category"
                                     );
                                     toggleDrawer(false)();
                                   }}
@@ -662,7 +661,11 @@ const CustomAppbar = (props) => {
                                   button
                                   key={feature.value}
                                   onClick={() => {
-                                    handleMobileShopPageChange(feature.value);
+                                    handleMobileShopPageChange(
+                                      "/shop",
+                                      feature.value,
+                                      "featured"
+                                    );
                                     toggleDrawer(false)();
                                   }}
                                   sx={{
@@ -755,7 +758,7 @@ const CustomAppbar = (props) => {
               <ListItem
                 button
                 onClick={() => {
-                  navigate("/subscribe"); //pending
+                  props.setOpenSubscribeModal(true);
                   toggleDrawer(false)();
                 }}
                 sx={{

@@ -22,14 +22,13 @@ import ClickAwayListener from "@mui/material/ClickAwayListener";
 import _ from "lodash";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { availableColors, findLabelByValue } from "../../common";
+import { availableColors, featured, findLabelByValue } from "../../common";
 import ProductCard from "../../components/card/productCard";
 import CustomLoader from "../../components/customLoader";
 import CustomTextfield from "../../components/textfield/customTextfield";
 import "../../css/shop.css";
 import { setFilter } from "../../store/cartSlice";
 import ViewProductModal from "../product/viewProduct";
-import { featured } from "../../common";
 
 const ProductsPage = (props) => {
   const dispatch = useDispatch();
@@ -95,12 +94,32 @@ const ProductsPage = (props) => {
     setPage(value);
   };
 
+  const filterProducts = (products, featured) => {
+    if (!featured) {
+      return products; // Return all products if no filter is applied
+    }
+
+    switch (featured) {
+      case "newArrivals":
+        return products.sort((a, b) => a.priority - b.priority); // Sort by priority (higher priority comes first)
+
+      case "bestSellers":
+        return products.filter((product) => product.bestseller === true); // Only bestsellers
+
+      case "readyToShip":
+        return products.filter((product) => product.readyToShip === true); // Ready-to-ship products
+
+      case "asSeenOn":
+        return products.filter((product) => Boolean(product.asSeenOn)); // Products that have 'asSeenOn' value
+
+      default:
+        return products; // Return all products if the filter is unknown
+    }
+  };
+
   useEffect(() => {
     const startIdx = (page - 1) * 16;
     const endIdx = startIdx + 16;
-
-    console.log(startIdx, endIdx);
-
     const filteredProducts = allProduct.filter((product) => {
       // Category Filter if filter.category is shirtsAndDresses then filter products with category shirts and also for category dresses
       const categoryFilter =
@@ -144,7 +163,11 @@ const ProductsPage = (props) => {
       return categoryFilter && priceFilter && searchFilter && colorFilter;
     });
 
-    const productList = filteredProducts.slice(startIdx, endIdx);
+    const filteredProductsWithFeatured = filterProducts(
+      filteredProducts,
+      filter.featured
+    );
+    const productList = filteredProductsWithFeatured.slice(startIdx, endIdx);
     setDisplayedProducts(productList);
   }, [allProduct, page, filter]);
 

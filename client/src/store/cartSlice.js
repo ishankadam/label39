@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { updateCart } from "../api";
-import { featured } from "../common";
 
 const initialState = {
   items: [],
@@ -95,7 +94,6 @@ export const cartSlice = createSlice({
       state.giftCardOpen = false;
     },
     setFilter: (state, action) => {
-      console.log(action.payload);
       state.filter = { ...state.filter, ...action.payload };
     },
     showSnackbar: (state, action) => {

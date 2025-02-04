@@ -10,6 +10,19 @@ AWS.config.update({
 
 const ses = new AWS.SES();
 
+const getDaysUntilExpiry = (expiresAt) => {
+  const today = new Date(); // Current date
+  const expiryDate = new Date(expiresAt); // Convert expiresAt to Date object
+
+  // Calculate difference in milliseconds
+  const differenceInTime = expiryDate.getTime() - today.getTime();
+
+  // Convert milliseconds to days
+  const differenceInDays = Math.ceil(differenceInTime / (1000 * 3600 * 24));
+
+  return differenceInDays;
+};
+
 const sendEmail = async ({
   to: toEmail,
   subject,
@@ -275,6 +288,27 @@ const sendEmail = async ({
             deliveredCartItemsHtml
           )
           .replace(`<span id="currency"></span>`, deliveredCurrency);
+        break;
+      case "sale":
+        htmlData = body
+          .replace(`<span id="sale_discount_value"></span>`, data.discountValue)
+          .replace(
+            `<span id="sale_type"></span>`,
+            data.discountType === "Amount" ? "₹" : "%"
+          );
+        break;
+      case "discount":
+        htmlData = body
+          .replace(`<span id="discount_coupon_code"></span>`, data.code)
+          .replace(`<span id="sale_discount_value"></span>`, data.value)
+          .replace(
+            `<span id="sale_type"></span>`,
+            data.discountType === "Amount" ? "₹" : "%"
+          )
+          .replace(
+            `<span id="days_for_expiry"></span>`,
+            getDaysUntilExpiry(data.expiresAt)
+          );
         break;
       default:
         htmlData = body;

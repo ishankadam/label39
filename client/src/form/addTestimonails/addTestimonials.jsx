@@ -1,68 +1,19 @@
-import React, { useEffect, useState } from "react";
+import { Close as CloseIcon } from "@mui/icons-material";
+import StarIcon from "@mui/icons-material/Star";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
+
 import {
   Box,
   Button,
-  Modal,
-  Typography,
   IconButton,
+  Modal,
   Stack,
-  Rating,
-  styled,
+  Typography,
 } from "@mui/material";
-import { Close as CloseIcon } from "@mui/icons-material";
+import React, { useEffect, useState } from "react";
+import { createTestimonial } from "../../api";
 import CustomTextfield from "../../components/textfield/customTextfield";
 import UploadFiles from "../../components/upload/uploadFiles";
-import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
-import SentimentDissatisfiedIcon from "@mui/icons-material/SentimentDissatisfied";
-import SentimentSatisfiedIcon from "@mui/icons-material/SentimentSatisfied";
-import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAltOutlined";
-import SentimentVerySatisfiedIcon from "@mui/icons-material/SentimentVerySatisfied";
-import StarIcon from "@mui/icons-material/Star";
-
-const StyledRating = styled(Rating)(({ theme }) => ({
-  "& .MuiRating-iconEmpty .MuiSvgIcon-root": {
-    color: theme.palette.action.disabled,
-  },
-}));
-
-const customIcons = {
-  1: {
-    icon: <SentimentVeryDissatisfiedIcon color="error" />,
-    label: "Very Dissatisfied",
-  },
-  2: {
-    icon: (
-      <SentimentDissatisfiedIcon color="error" sx={{ marginLeft: "30px" }} />
-    ),
-    label: "Dissatisfied",
-  },
-  3: {
-    icon: (
-      <SentimentSatisfiedIcon color="warning" sx={{ marginLeft: "60px" }} />
-    ),
-    label: "Neutral",
-  },
-  4: {
-    icon: (
-      <SentimentSatisfiedAltIcon color="success" sx={{ marginLeft: "90px" }} />
-    ),
-    label: "Satisfied",
-  },
-  5: {
-    icon: (
-      <SentimentVerySatisfiedIcon
-        color="success"
-        sx={{ marginLeft: "120px" }}
-      />
-    ),
-    label: "Very Satisfied",
-  },
-};
-
-function IconContainer(props) {
-  const { value, ...other } = props;
-  return <span {...other}>{customIcons[value]?.icon}</span>;
-}
 
 const TestimonialModal = (props) => {
   const [buttonDisabled, setButtonDisabled] = useState(true);
@@ -72,9 +23,9 @@ const TestimonialModal = (props) => {
     image: null,
     rating: 0, // Initialize rating
   });
+
+  const [loading, setLoading] = useState(false);
   const [images, setImages] = useState([]);
-  const [value, setValue] = useState(0);
-  const [hover, setHover] = React.useState(-1);
 
   const handleChange = (value, field) => {
     setTestimonial((prevDetails) => ({
@@ -105,6 +56,11 @@ const TestimonialModal = (props) => {
 
   const handleTestimonialSubmit = (e) => {
     e.preventDefault();
+    createTestimonial({
+      testimonialDetails: testimonial,
+      setLoading: props.setLoading,
+      setTestimonials: props.setTestimonials,
+    });
     props.handleModalClose();
   };
 
@@ -116,8 +72,7 @@ const TestimonialModal = (props) => {
     if (
       !testimonial.name ||
       !testimonial.comments ||
-      images.length < 1 ||
-      testimonial.rating === 0
+      testimonial.image.length < 1
     ) {
       setButtonDisabled(true);
     } else {
@@ -213,27 +168,26 @@ const TestimonialModal = (props) => {
           {/* Rating Component */}
           <Box mb={2} display="flex" alignItems="center">
             <Typography sx={{ mr: 2 }}>Rating:</Typography>
-            <StyledRating
-              name="hover-feedback"
-              value={testimonial.rating}
-              precision={1}
-              onChange={(event, newValue) => {
-                handleChange(newValue, "rating"); // Update rating in state
-              }}
-              onChangeActive={(event, newHover) => {
-                setHover(newHover);
-              }}
-              getLabelText={(value) => customIcons[value]?.label || ""}
-              IconContainerComponent={IconContainer}
-              emptyIcon={
-                <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
-              }
-            />
-            {hover !== -1 && (
-              <Typography sx={{ ml: 2 }}>
-                {customIcons[hover]?.label ||
-                  customIcons[testimonial.rating]?.label}
-              </Typography>
+            {Array.from({ length: 5 }, (_, i) =>
+              testimonial.rating >= i ? (
+                <StarIcon
+                  key={i}
+                  sx={{
+                    color: "#f5a623",
+                    fontSize: "1.5rem",
+                  }}
+                  onClick={() => handleChange(i, "rating")}
+                />
+              ) : (
+                <StarBorderIcon
+                  key={i}
+                  sx={{
+                    color: "#a16149",
+                    fontSize: "1.5rem",
+                  }}
+                  onClick={() => handleChange(i, "rating")}
+                />
+              )
             )}
           </Box>
 

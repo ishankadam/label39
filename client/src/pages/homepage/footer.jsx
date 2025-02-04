@@ -1,4 +1,12 @@
-import { Box, Container, Grid2, Link, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Grid2,
+  Link,
+  Stack,
+  Typography,
+} from "@mui/material";
 import React from "react";
 // import { Twitter, Facebook, Instagram, LinkedIn } from "@mui/icons-material";
 import { useEffect, useState } from "react";
@@ -10,22 +18,14 @@ import textile2 from "../../assets/5.png";
 import footerImg from "../../assets/wine-os.png";
 import "../../css/footer.css";
 // import TermsAndCondition from "../termsAndCondition/termsAndCondition.jsx";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import backgroundImage from "../../assets/backgroundfooter.jpg";
-import { setFilter, showSnackbar } from "../../store/cartSlice";
-import { useDispatch } from "react-redux";
-const Footer = () => {
+import { setFilter } from "../../store/cartSlice";
+const Footer = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleSubscribe = () => {
-    dispatch(
-      showSnackbar({
-        message: `You've successfully subscribed to TheLabel39!`,
-        severity: "success",
-      })
-    );
-  };
   const handlePageChange = (path, filter) => {
     const navigateToPage = (targetPath) => {
       navigate(targetPath);
@@ -311,16 +311,17 @@ const Footer = () => {
             <Grid2 item size={{ xs: 12, md: 4 }}>
               <div className="subscribe">
                 <h3 className="subscribe-title">Subscribe</h3>
-                <form>
-                  <input type="email" placeholder="Email address" />
-                  <button type="submit" onClick={handleSubscribe}>
-                    ➔
-                  </button>
-                </form>
+                <form></form>
                 <Typography className="subscribe-text">
                   Stay in the loop with the latest updates, unlock exclusive
                   deals, and be the first to know about exciting offers!
                 </Typography>
+                <Button
+                  type="submit"
+                  onClick={() => props.setOpenSubscribeModal(true)}
+                >
+                  Subscribe
+                </Button>
               </div>
             </Grid2>
           </Grid2>
