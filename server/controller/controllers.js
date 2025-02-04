@@ -814,21 +814,18 @@ const create_client_diaries = async (req, res) => {
   try {
     // Parse the products data from the request body
     const clientDiariesData = JSON.parse(req.body.clientDiaries); // Assuming it's a JSON string
-    const images = req.files || []; // Safely get images
     // Validate the productsData structure
     if (typeof clientDiariesData !== "object" || clientDiariesData === null) {
       return res.status(400).send({
         error: "Invalid data format. Expecting a client diaries object.",
       });
     }
-    const image =
-      Array.isArray(images) && images.length > 0
-        ? images[0].originalname
-        : images.originalname; // Generate a unique product ID for each product
+
+    const images = req.files.map((file) => file.filename);
     const newclientDiariesData = new clientDiaries({
       clientDiariesId: Math.floor(Math.random() * 9000000000) + 1,
       name: clientDiariesData.name,
-      image: image,
+      image: images,
       productId: clientDiariesData.productId,
     });
     await newclientDiariesData.save();

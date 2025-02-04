@@ -87,7 +87,7 @@ const ProductsPage = (props) => {
   };
   const priceRanges = [
     { label: "Under 10000", min: 0, max: 10000 },
-    { label: "10000-20000", min: 10000, max: 20000 },
+    { label: "10000 - 20000", min: 10000, max: 20000 },
     { label: "Above 20000", min: 20000, max: 200000 },
   ];
 
@@ -549,7 +549,7 @@ const ProductsPage = (props) => {
                               aria-label="delete"
                               onClick={(e) => {
                                 e.stopPropagation();
-                                handleFilterChange("", "category");
+                                handleFilterChange("", "featured");
                               }}
                             >
                               <ClearIcon />
@@ -1084,7 +1084,7 @@ const ProductsPage = (props) => {
               sx={{
                 color: "#494949",
                 fontWeight: "600",
-                fontSize: { xs: "12px", sm: "12px", md: "16px" },
+                fontSize: { xs: "15px", sm: "15px", md: "16px" },
                 fontFamily: " 'Roboto Serif', serif",
                 textTransform: "uppercase",
                 padding: "10px",
@@ -1133,27 +1133,42 @@ const ProductsPage = (props) => {
                         primaryTypographyProps={{
                           fontFamily: " 'Roboto Serif', serif",
                           fontSize: isSelected
-                            ? { xs: "12px", sm: "12px", md: "16px" }
-                            : { xs: "11px", sm: "11px", md: "15px" },
+                            ? { xs: "14px", sm: "14px", md: "16px" }
+                            : { xs: "14px" },
                           fontWeight: isSelected ? "600" : "normal",
                           color: isSelected ? "#a16149" : "black",
                           margin: "0 !important", // Override margin
                           padding: "0 !important", // Override padding
                         }}
                       />
+                      {isSelected && (
+                        <ListItemSecondaryAction>
+                          <IconButton
+                            edge="end"
+                            aria-label="delete"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleFilterChange("", "category");
+                            }}
+                          >
+                            <ClearIcon />
+                          </IconButton>
+                        </ListItemSecondaryAction>
+                      )}
                     </ListItemButton>
                   </ListItem>
                 );
               })}
             </List>
           </div>
+
           <div className="featured-filter">
             <Typography
               variant="h5"
               sx={{
                 color: "#494949",
                 fontWeight: "600",
-                fontSize: { xs: "12px", sm: "12px", md: "16px" },
+                fontSize: { xs: "15px", sm: "15px", md: "16px" },
                 fontFamily: " 'Roboto Serif', serif",
                 textTransform: "uppercase",
                 padding: "10px",
@@ -1203,8 +1218,8 @@ const ProductsPage = (props) => {
                         primaryTypographyProps={{
                           fontFamily: " 'Roboto Serif', serif",
                           fontSize: isSelected
-                            ? { xs: "12px", sm: "12px", md: "16px" }
-                            : { xs: "11px", sm: "11px", md: "15px" },
+                            ? { xs: "14px", sm: "14px", md: "16px" }
+                            : { xs: "14px" },
                           fontWeight: isSelected ? "600" : "normal",
                           color: isSelected ? "#a16149" : "black",
                           margin: "0 !important", // Override margin
@@ -1219,7 +1234,7 @@ const ProductsPage = (props) => {
                             aria-label="delete"
                             onClick={(e) => {
                               e.stopPropagation();
-                              handleFilterChange("", "category");
+                              handleFilterChange("", "featured");
                             }}
                           >
                             <ClearIcon />
@@ -1238,7 +1253,7 @@ const ProductsPage = (props) => {
               sx={{
                 color: "#494949",
                 fontWeight: "600",
-                fontSize: { xs: "12px", sm: "12px", md: "16px" },
+                fontSize: { xs: "15px", sm: "15px", md: "16px" },
                 fontFamily: " 'Roboto Serif', serif",
                 textTransform: "uppercase",
                 padding: "10px",
@@ -1250,10 +1265,9 @@ const ProductsPage = (props) => {
             </Typography>
             <List>
               {priceRanges.map((priceRange, index) => {
-                const isSelected = filter.price === priceRange;
-
+                const isSelected = filter.price?.label === priceRange.label;
                 return (
-                  <ListItem key={index} disablePadding>
+                  <ListItem key={`${priceRange.label}${index}`} disablePadding>
                     <ListItemButton
                       onClick={() => handleFilterChange(priceRange, "price")}
                       sx={{
@@ -1284,16 +1298,31 @@ const ProductsPage = (props) => {
                       <ListItemText
                         primary={priceRange.label}
                         primaryTypographyProps={{
-                          fontFamily: " 'Roboto Serif', serif",
+                          textTransform: "uppercase",
+                          fontFamily: " 'Roboto', serif",
                           fontSize: isSelected
-                            ? { xs: "12px", sm: "12px", md: "16px" }
-                            : { xs: "11px", sm: "11px", md: "15px" },
+                            ? { xs: "14px", sm: "14px", md: "16px" }
+                            : { xs: "14px" },
                           fontWeight: isSelected ? "600" : "normal",
                           color: isSelected ? "#a16149" : "black",
                           margin: "0 !important", // Override margin
                           padding: "0 !important", // Override padding
                         }}
                       />
+                      {isSelected && (
+                        <ListItemSecondaryAction>
+                          <IconButton
+                            edge="end"
+                            aria-label="delete"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleFilterChange("", "price");
+                            }}
+                          >
+                            <ClearIcon />
+                          </IconButton>
+                        </ListItemSecondaryAction>
+                      )}
                     </ListItemButton>
                   </ListItem>
                 );
@@ -1307,7 +1336,7 @@ const ProductsPage = (props) => {
               sx={{
                 color: "#494949",
                 fontWeight: "600",
-                fontSize: { xs: "12px", sm: "12px", md: "16px" },
+                fontSize: { xs: "15px", sm: "15px", md: "16px" },
                 fontFamily: " 'Roboto Serif', serif",
                 textTransform: "uppercase",
                 padding: "10px",
@@ -1353,16 +1382,31 @@ const ProductsPage = (props) => {
                       <ListItemText
                         primary={color}
                         primaryTypographyProps={{
+                          textTransform: "uppercase",
                           fontFamily: " 'Roboto Serif', serif",
                           fontSize: isSelected
-                            ? { xs: "12px", sm: "12px", md: "16px" }
-                            : { xs: "11px", sm: "11px", md: "15px" },
+                            ? { xs: "14px", sm: "14px", md: "16px" }
+                            : { xs: "14px" },
                           fontWeight: isSelected ? "600" : "normal",
                           color: isSelected ? "#a16149" : "black",
                           margin: "0 !important", // Override margin
                           padding: "0 !important", // Override padding
                         }}
                       />
+                      {isSelected && (
+                        <ListItemSecondaryAction>
+                          <IconButton
+                            edge="end"
+                            aria-label="delete"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleFilterChange("", "color");
+                            }}
+                          >
+                            <ClearIcon />
+                          </IconButton>
+                        </ListItemSecondaryAction>
+                      )}
                     </ListItemButton>
                   </ListItem>
                 );

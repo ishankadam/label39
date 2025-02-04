@@ -40,6 +40,7 @@ import "./../../css/appbar.css";
 import { featured } from "../../common";
 import { setFilter } from "../../store/cartSlice";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 const CustomAppbar = (props) => {
   const [isShopOpen, setIsShopOpen] = useState(false);
@@ -96,8 +97,7 @@ const CustomAppbar = (props) => {
     { text: "Client Diaries", page: "clientsDiaries" },
   ];
 
-  const [openShopMenu, setOpenShopMenu] = useState(false); // State for toggling the shop menu
-
+  const [openShopMenu, setOpenShopMenu] = useState(false);
   // Function to toggle the shop menu
   const toggleShopMenu = () => {
     setOpenShopMenu((prev) => !prev);
@@ -534,7 +534,36 @@ const CustomAppbar = (props) => {
                         sx={{ backgroundColor: "#F8F8FF" }}
                       >
                         <List sx={{ marginLeft: "10px" }}>
-                          {/* Categories */}
+                          {/* Products */}
+                          <ListItem
+                            sx={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                            }}
+                            button
+                            onClick={() => {
+                              navigate(`/shop`);
+                              dispatch(setFilter({ category: "" }));
+                              toggleDrawer(false)();
+                            }}
+                          >
+                            <Typography
+                              sx={{
+                                fontFamily: "'Cinzel', serif !important",
+                                fontSize: "15px",
+                                fontWeight: "500",
+                                padding: "8px 0px",
+                                textTransform: "uppercase",
+                                // color: "#5c5c5c",
+                              }}
+                            >
+                              Products
+                            </Typography>
+                            <IconButton size="small">
+                              <ArrowRightAltIcon />
+                            </IconButton>
+                          </ListItem>
+
                           <ListItem
                             sx={{
                               display: "flex",
@@ -707,6 +736,8 @@ const CustomAppbar = (props) => {
                 sx={{
                   display: { xs: "flex", md: "none" },
                   justifyContent: "left",
+                  borderBottom: "1px solid #ccc",
+                  borderWidth: "60%",
                 }}
               >
                 <Typography
@@ -719,6 +750,29 @@ const CustomAppbar = (props) => {
                   }}
                 >
                   Contact us
+                </Typography>
+              </ListItem>
+              <ListItem
+                button
+                onClick={() => {
+                  navigate("/subscribe"); //pending
+                  toggleDrawer(false)();
+                }}
+                sx={{
+                  display: { xs: "flex", md: "none" },
+                  justifyContent: "left",
+                }}
+              >
+                <Typography
+                  sx={{
+                    fontFamily: "'Cinzel', serif",
+                    fontWeight: "500",
+                    fontSize: "15px",
+                    padding: "8px 0px",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  Subscribe
                 </Typography>
               </ListItem>
             </List>
