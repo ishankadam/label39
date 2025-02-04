@@ -42,7 +42,7 @@ const ClientDiaryPage = (props) => {
           <Grid container spacing={{ xs: 2, sm: 4, lg: 4 }}>
             {clientDiaries.map((diary, index) => {
               return (
-                <Grid item xs={6} sm={6} md={4} key={`${index}-client-diary`}>
+                <Grid item xs={6} sm={4} md={4} key={`${index}-client-diary`}>
                   <ClientDiaryCard diary={diary} setShowModal={setShowModal} />
                 </Grid>
               );

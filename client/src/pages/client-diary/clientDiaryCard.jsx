@@ -39,7 +39,7 @@ function ClientDiaryCard({ diary, setShowModal }) {
         image={`${imageUrl}clientDiaries/${diary.image[currentImageIndex]}`}
         alt={diary.name || ""}
         sx={{
-          height: "auto",
+          height: { xs: "320px", sm: "350px", md: "450px", lg: "500px" },
           objectFit: "cover",
           transition: "opacity 0.5s ease-in-out",
           opacity: fadeIn ? 1 : 0.5,

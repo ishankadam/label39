@@ -92,28 +92,13 @@ export const countries = [
       "postalcode",
     ],
   },
-  {
-    countryName: "Indonesia",
-    value: "IDR",
-    flag: idFlag,
-    currency: "Rp",
-    label: "Rupiah (IDR)",
-    fields: [
-      "firstName",
-      "lastName",
-      "address",
-      "apartment",
-      "email",
-      "province",
-      "postalcode",
-    ],
-  },
+
   {
     countryName: "United Kingdom",
     value: "GBP",
     flag: ukFlag,
     currency: "£",
-    label: "Pound (GBP)",
+    label: "British Pound (GBP)",
     fields: [
       "firstName",
       "lastName",
@@ -174,6 +159,24 @@ export const countries = [
       "postcode",
     ],
   },
+
+  {
+    countryName: "Indonesia",
+    value: "IDR",
+    flag: idFlag,
+    currency: "Rp",
+    label: "Rupiah (IDR)",
+    fields: [
+      "firstName",
+      "lastName",
+      "address",
+      "apartment",
+      "email",
+      "province",
+      "postalcode",
+    ],
+  },
+
   {
     countryName: "Singapore",
     value: "SGD",
