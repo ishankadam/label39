@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { updateCart } from "../api";
+import { featured } from "../common";
 
 const initialState = {
   items: [],
@@ -12,6 +13,7 @@ const initialState = {
     price: "",
     color: "",
     search: "",
+    featured: "",
   },
   snackbars: [],
 };

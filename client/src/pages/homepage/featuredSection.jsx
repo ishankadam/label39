@@ -62,6 +62,7 @@ const FeaturedSection = (props) => {
         settings: {
           slidesToShow: 1, // 1 card on mobile
           slidesToScroll: 1,
+          arrows: true,
         },
       },
     ],
@@ -85,7 +86,7 @@ const FeaturedSection = (props) => {
           fontWeight: "500",
         }}
       >
-        Celebrity style
+        celebrity style
         <div
           className="title-border"
           style={{
@@ -145,22 +146,22 @@ const FeaturedSection = (props) => {
                       position: "absolute",
                       bottom: 0,
                       left: 0,
-                      right: 0,
-                      height: "70px",
+                      width: "100%",
                       background:
                         "linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0))",
                       // "linear-gradient(0deg, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 63%, rgba(0, 0, 0, 0) 86%)",
                       borderImage: "initial",
                       boxShadow: "rgb(0, 0, 0) 0px 0px 0px",
                       color: "white",
-                      padding: { xs: "6px", sm: "6px", md: "10px", lg: "10px" },
                       display: "flex",
                       justifyContent: "space-between",
                       alignItems: "center",
+                      padding: 1,
                     }}
                   >
                     <Typography
                       sx={{
+                        flex: 7,
                         fontSize: { xs: "14px", sm: "13px", md: "16px" },
                         fontFamily: "'Cinzel', serif", // Ensure the font is applied here
                         fontWeight: { xs: "700", sm: "600", md: "700" },
@@ -190,12 +191,16 @@ const FeaturedSection = (props) => {
                       variant="outlined"
                       // color="white"
                       sx={{
+                        flex: 3,
+                        minWidth: "80px",
+                        width: "80px",
                         // background: "#c4907c",
                         color: "white",
                         fontFamily: "'Cinzel', serif",
                         fontWeight: { xs: "700", sm: "600", md: "700" },
-                        fontSize: { xs: "14px", sm: "13px", md: "16px" },
-                        padding: { xs: "6px" },
+                        fontSize: { xs: "14px", sm: "14px", md: "16px" },
+                        padding: "6px",
+                        marginLeft: "10px",
                         borderRadius: "2px",
                         borderColor: "white",
                         "&:hover": {
@@ -208,7 +213,7 @@ const FeaturedSection = (props) => {
                         props.handleViewProduct(item.productDetails[0]);
                       }}
                     >
-                      SHOP NOW
+                      shop
                     </Button>{" "}
                   </Box>
                 </Card>

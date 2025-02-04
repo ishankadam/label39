@@ -16,6 +16,8 @@ import { useNavigate } from "react-router-dom";
 import { addProductToCart, imageUrl } from "../../api";
 import { addToCart, showSnackbar } from "../../store/cartSlice";
 import Footer from "../homepage/footer";
+import CloseIcon from "@mui/icons-material/Close";
+import { IconButton } from "@mui/material";
 
 const ViewProductModal = (props) => {
   const { isAdmin, product, open, setShowModal } = props;
@@ -153,7 +155,7 @@ const ViewProductModal = (props) => {
           sx={{
             bgcolor: "background.paper",
             padding: { xs: "20px 10px", sm: "20px 30px" },
-            width: { xs: "100%", sm: "80%", md: "90%", lg: "70%" },
+            width: { xs: "95%", sm: "80%", md: "90%", lg: "75%" },
             maxHeight: "100%",
             maxWidth: "100%",
             overflowY: "auto",
@@ -162,6 +164,26 @@ const ViewProductModal = (props) => {
             border: "2px solid #d7d7d7",
           }}
         >
+          {/* Close Icon Button */}
+          <IconButton
+            onClick={handleClose}
+            sx={{
+              position: "absolute",
+              top: { xs: "5px", sm: "10px" },
+              right: { xs: "5px", sm: "10px" },
+              zIndex: 10, // Ensure it is above other elements
+              backgroundColor: "rgba(255,255,255,0.8)", // Slight background to make it visible
+              color: "#494949",
+              width: { xs: "35px", sm: "auto" }, // Increase touchable area on mobile
+              height: { xs: "35px", sm: "auto" }, // Increase touchable area on mobile
+              "&:hover": {
+                backgroundColor: "#f5f5f5",
+              },
+            }}
+          >
+            <CloseIcon sx={{ fontSize: { xs: "24px", sm: "28px" } }} />
+          </IconButton>
+
           <Grid container spacing={2}>
             {/* Left: Image Section */}
             <Grid
@@ -203,8 +225,9 @@ const ViewProductModal = (props) => {
                   src={`${imageUrl}products/${selectedImage}`}
                   alt="Selected Product"
                   sx={{
+                    marginTop: "20px",
                     width: "100%",
-                    height: { xs: "370px", sm: "450px", md: "500px" },
+                    height: { xs: "350px", sm: "450px", md: "500px" },
                     objectFit: "contain",
                     marginBottom: "20px",
                   }}

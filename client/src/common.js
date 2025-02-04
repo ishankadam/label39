@@ -39,14 +39,15 @@ export const dashboardTabValue = [
 ];
 
 export const whatsappQueryMessage =
-  "Hey Prachi your ORDER is yet to be fulfilled! \n\n📦 Meanwhile, enjoy purchasing with code MAMAFIRST10 to get 10% off 🎉\n\n As we have already been waiting for you for a long time 🥳";
+  "I'm excited about your products and have a few questions—can you guide me through?";
 
 export const countries = [
   {
-    label: "India",
+    countryName: "India",
     value: "INR",
     flag: indianFlag,
     currency: "₹",
+    label: "Rupee (INR)",
     fields: [
       "firstName",
       "lastName",
@@ -59,10 +60,11 @@ export const countries = [
     ],
   },
   {
-    label: "USA",
+    countryName: "USA",
     value: "USD",
     flag: usaFlag,
     currency: "$",
+    label: "US Dollar (USD)",
     fields: [
       "firstName",
       "lastName",
@@ -75,10 +77,11 @@ export const countries = [
   },
 
   {
-    label: "Europe",
+    countryName: "Europe",
     value: "EUR",
     flag: euFlag,
     currency: "€",
+    label: "Euro (EUR)",
     fields: [
       "firstName",
       "lastName",
@@ -90,10 +93,11 @@ export const countries = [
     ],
   },
   {
-    label: "Indonesia",
+    countryName: "Indonesia",
     value: "IDR",
     flag: idFlag,
     currency: "Rp",
+    label: "Rupiah (IDR)",
     fields: [
       "firstName",
       "lastName",
@@ -105,10 +109,11 @@ export const countries = [
     ],
   },
   {
-    label: "United Kingdom",
+    countryName: "United Kingdom",
     value: "GBP",
     flag: ukFlag,
     currency: "£",
+    label: "Pound (GBP)",
     fields: [
       "firstName",
       "lastName",
@@ -120,10 +125,11 @@ export const countries = [
     ],
   },
   {
-    label: "Canada",
+    countryName: "Canada",
     value: "CAD",
     flag: caFlag,
     currency: "C$",
+    label: "Canadian Dollar (CAD)",
     fields: [
       "firstName",
       "lastName",
@@ -136,10 +142,11 @@ export const countries = [
     ],
   },
   {
-    label: "United Arab Emirates",
+    countryName: "United Arab Emirates",
     value: "AED",
     flag: aeFlag,
     currency: "د.إ",
+    label: "Dirham (AED)",
     fields: [
       "firstName",
       "lastName",
@@ -151,10 +158,11 @@ export const countries = [
     ],
   },
   {
-    label: "Australia",
+    countryName: "Australia",
     value: "AUD",
     flag: ausFlag,
     currency: "A$",
+    label: "Australian Dollar (AUD)",
     fields: [
       "firstName",
       "lastName",
@@ -167,10 +175,11 @@ export const countries = [
     ],
   },
   {
-    label: "Singapore",
+    countryName: "Singapore",
     value: "SGD",
     flag: sgFlag,
     currency: "S$",
+    label: "Singapore Dollar (SGD)",
     fields: [
       "firstName",
       "lastName",
@@ -181,10 +190,11 @@ export const countries = [
     ],
   },
   {
-    label: "Thailand",
+    countryName: "Thailand",
     value: "THB",
     flag: thFlag,
     currency: "฿",
+    label: "Baht (THB)",
     fields: [
       "firstName",
       "lastName",
@@ -213,7 +223,7 @@ export const urlToFile = async (url, filename) => {
 
 export const categories = [
   {
-    label: "SHIRTS & Dresses",
+    label: "SHIRTS & DRESSES",
     imgSrc: shirt,
     value: "shirts",
   },
@@ -440,7 +450,7 @@ export const orderStatus = [
 export const featured = [
   { label: "NEW ARRIVAL", value: "newArrival" },
   { label: "BEST SELLERS", value: "bestSellers" },
-  { label: "Ready to ship", value: "readyToShip" },
-  { label: "AS SEEN ON - CELEBRITY STYLE", value: "asSeenOn" },
-  { label: "CLIENTS DAIRY", value: "clientsDiaries" },
+  { label: "READY TO SHIP", value: "readyToShip" },
+  { label: "CELEBRITY STYLE", value: "asSeenOn" },
+  // { label: "CLIENTS DAIRY", value: "clientsDiaries" },
 ];

@@ -174,8 +174,8 @@ const TermsAndConditions = () => {
           <strong
             style={{ fontFamily: "'Roboto Serif', serif", fontWeight: "600" }}
           >
-            Sizing:
-          </strong>
+            Sizing :
+          </strong>{" "}
           Our standard size chart with body measurements in inches is attached
           for each product. We add easing to create a comfortable and relaxed
           fit. Extra charges apply for sizes above XL due to intricate
@@ -185,17 +185,17 @@ const TermsAndConditions = () => {
           <strong
             style={{ fontFamily: "'Roboto Serif', serif", fontWeight: "600" }}
           >
-            Customizations:
-          </strong>
+            Customizations :
+          </strong>{" "}
           For custom orders, please contact us at +91 9137845071. We are happy
           to create a specially crafted outfit for you.
         </Typography>
-        <Typography paragraph sx={{ color: "#66544B", mb: 2 }}>
+        <Typography paragraph sx={{ color: "#66544B", mb: "120px" }}>
           <strong
             style={{ fontFamily: "'Roboto Serif', serif", fontWeight: "600" }}
           >
-            Wash Care:
-          </strong>
+            Wash Care :
+          </strong>{" "}
           We strictly prohibit washing our outfits as they are hand-dyed and
           made with silk fabric with intricate embroidery. We are not
           responsible for any damage caused to the garment in case of contact
