@@ -167,7 +167,7 @@ const App = () => {
         ) : (
           <>
             <WhatsAppButton
-              phoneNumber="+918652241163"
+              phoneNumber="+9191378 45071"
               message={whatsappQueryMessage}
             />
 
