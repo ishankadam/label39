@@ -112,120 +112,13 @@ const FeaturedSection = (props) => {
           {celebrityStyles.map((item, index) => {
             return (
               <Box key={index}>
-                {/* <Card
-                    sx={{
-                      position: "relative",
-                      margin: { xs: "0 5px", sm: "0 10px", md: "0 16px" },
-                      overflow: "hidden",
-                    }}
-                  >
-                    <CardMedia
-                      component={item.videoSrc ? "video" : "img"}
-                      src={
-                        item.videoSrc
-                          ? `${imageUrl}${item.videoSrc}`
-                          : `${imageUrl}celebrityStyles/${item.image[0]}`
-                      }
-                      autoPlay
-                      loop
-                      muted
-                      sx={{
-                        height: {
-                          xs: "450px",
-                          sm: "auto",
-                          md: "500px",
-                          lg: "550px",
-                        },
-
-                        width: "100%",
-                        objectFit: "contain",
-                      }} 
-                    />
-                    <Box
-                      sx={{
-                        position: "absolute",
-                        bottom: 0,
-                        left: 0,
-                        width: "100%",
-                        background:
-                          "linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0))",
-                        borderImage: "initial",
-                        boxShadow: "rgb(0, 0, 0) 0px 0px 0px",
-                        color: "white",
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        padding: 1,
-                      }}
-                    >
-                      <Typography
-                        sx={{
-                          flex: 7,
-                          fontSize: { xs: "14px", sm: "13px", md: "16px" },
-                          fontFamily: "'Cinzel', serif", // Ensure the font is applied here
-                          fontWeight: { xs: "700", sm: "600", md: "700" },
-                        }}
-                      >
-                        {item.name ? `As seen on ${item.name}` : ""}
-                      </Typography>
-                  
-                      <Button
-                        variant="outlined"
-                        sx={{
-                          flex: 3,
-                          minWidth: "80px",
-                          width: "80px",
-                          color: "white",
-                          fontFamily: "'Cinzel', serif",
-                          fontWeight: { xs: "700", sm: "600", md: "700" },
-                          fontSize: { xs: "14px", sm: "14px", md: "16px" },
-                          padding: "6px",
-                          marginLeft: "10px",
-                          borderRadius: "2px",
-                          borderColor: "white",
-                          "&:hover": {
-                            color: "white",
-                            background: "#a16149",
-                            borderColor: "#a16149",
-                          },
-                        }}
-                        onClick={() => {
-                          props.handleViewProduct(item.productDetails[0]);
-                        }}
-                      >
-                        shop
-                      </Button>{" "}
-                    </Box>
-                  </Card> */}
-
                 <Card
                   sx={{
                     position: "relative",
                     margin: { xs: "0 5px", sm: "0 10px", md: "0 16px" },
                     overflow: "hidden",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    backgroundImage: `url(${imageUrl}celebrityStyles/${item.image[0]})`, // Use the same image
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    // filter: "blur(20px)", // Blur effect
                   }}
                 >
-                  {/* Blurred Background Layer */}
-                  <Box
-                    sx={{
-                      position: "absolute",
-                      width: "100%",
-                      height: "100%",
-                      backgroundImage: `url(${imageUrl}celebrityStyles/${item.image[0]})`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                      filter: "blur(15px)", // Apply blur
-                      zIndex: 1,
-                    }}
-                  />
-
                   <CardMedia
                     component={item.videoSrc ? "video" : "img"}
                     src={
@@ -237,17 +130,16 @@ const FeaturedSection = (props) => {
                     loop
                     muted
                     sx={{
-                      position: "relative",
-                      zIndex: 2,
                       height: {
                         xs: "450px",
-                        sm: "420px",
+                        sm: "auto",
                         md: "500px",
                         lg: "550px",
                       },
+
                       width: "100%",
-                      objectFit: "contain",
-                    }}
+                      objectFit: "cover",
+                    }} // Ensure video fills the card
                   />
                   <Box
                     sx={{
@@ -257,6 +149,7 @@ const FeaturedSection = (props) => {
                       width: "100%",
                       background:
                         "linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0))",
+                      // "linear-gradient(0deg, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 63%, rgba(0, 0, 0, 0) 86%)",
                       borderImage: "initial",
                       boxShadow: "rgb(0, 0, 0) 0px 0px 0px",
                       color: "white",
@@ -264,7 +157,6 @@ const FeaturedSection = (props) => {
                       justifyContent: "space-between",
                       alignItems: "center",
                       padding: 1,
-                      zIndex: 3,
                     }}
                   >
                     <Typography
@@ -277,12 +169,32 @@ const FeaturedSection = (props) => {
                     >
                       {item.name ? `As seen on ${item.name}` : ""}
                     </Typography>
+                    {/* <Button
+                    variant="contained"
+                    // color="white"
+                    sx={{
+                      background: "#c4907c",
+                      fontFamily: "'Cinzel', serif",
+                      fontWeight: "700",
+                      padding: "10px 14px",
+                      borderRadius: "2px",
+                      "&:hover": {
+                        color: "white",
+                        background: "#c4907c",
+                        borderColor: "#c4907c",
+                      },
+                    }}
+                  >
+                    SHOP NOW
+                  </Button> */}
                     <Button
                       variant="outlined"
+                      // color="white"
                       sx={{
                         flex: 3,
                         minWidth: "80px",
                         width: "80px",
+                        // background: "#c4907c",
                         color: "white",
                         fontFamily: "'Cinzel', serif",
                         fontWeight: { xs: "700", sm: "600", md: "700" },

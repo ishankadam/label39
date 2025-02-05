@@ -420,7 +420,7 @@ const ProductsPage = (props) => {
       <div className="shop-wrapper">
         <div className="content">
           {/* Filter section for larger screens */}
-          <div className="filter-section">
+          <Box className="filter-section">
             <div className="category-filter">
               <Typography
                 variant="h5"
@@ -871,7 +871,7 @@ const ProductsPage = (props) => {
                 </List>
               </Box>
             </div> */}
-          </div>
+          </Box>
 
           {/* Products card container */}
           <div>

@@ -67,7 +67,7 @@
   background: rgba(0, 0, 0, 0.7) !important; /* Glassy dark effect */
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   opacity: 0; /* Initially hidden */
   transition: opacity 0.3s ease; /* Smooth fade-in effect */

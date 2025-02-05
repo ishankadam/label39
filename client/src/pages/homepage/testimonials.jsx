@@ -122,9 +122,10 @@ const Testimonials = (props) => {
                   image={`${imageUrl}/testimonials/${slide.image}`}
                   alt={`slide-${currentSlide + index}`}
                   sx={{
-                    paddingLeft: { xs: "0", sm: "0", md: "10px" },
-                    width: { xs: "34%", sm: "40%", md: "40%" },
-                    objectFit: { xs: "contain", sm: "contain", md: "contain" },
+                    // background: "#fff",
+                    paddingLeft: { xs: "0", sm: "0", md: "0" },
+                    width: { xs: "40%", sm: "40%", md: "40%" },
+                    objectFit: { xs: "stretch", sm: "cover", md: "cover" },
                     // height: "400px",
                   }}
                 />

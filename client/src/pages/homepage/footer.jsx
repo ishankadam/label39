@@ -211,7 +211,7 @@ const Footer = (props) => {
                 }}
               >
                 Born from the sheer love for clothes, The Label 39 is a fusion
-                of simple and sophistication. We work directly with artisans
+                of simplicity and sophistication. We work directly with artisans
                 from across the country to create conscious and intricate
                 clothing that is true to its craftsmanship.
               </Typography>
@@ -312,15 +312,28 @@ const Footer = (props) => {
               <div className="subscribe">
                 <h3 className="subscribe-title">Subscribe</h3>
                 <form></form>
-                <Typography className="subscribe-text">
+                <Typography
+                  variant="h6"
+                  sx={{
+                    marginBottom: "20px",
+                    textAlign: "center",
+                    fontSize: "16px",
+                    fontWeight: "700",
+                    fontFamily: "'Cinzel', serif ",
+                    color: "rgba(55, 65, 81, 0.85)",
+                  }}
+                >
                   Stay in the loop with the latest updates, unlock exclusive
                   deals, and be the first to know about exciting offers!
                 </Typography>
                 <Button
+                  variant="contained"
+                  color="custom"
                   type="submit"
+                  sx={{ width: "160px", borderRadius: "20px" }}
                   onClick={() => props.setOpenSubscribeModal(true)}
                 >
-                  Subscribe
+                  subscribe
                 </Button>
               </div>
             </Grid2>

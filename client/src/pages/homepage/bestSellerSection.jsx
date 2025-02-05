@@ -70,6 +70,14 @@ const BestSellerSection = (props) => {
     prevArrow: <PrevArrow />,
     responsive: [
       {
+        breakpoint: 1440, // Small laptop (or adjust this value as needed)
+        settings: {
+          slidesToShow: 3, // Show 3 cards on small laptops
+          slidesToScroll: 1,
+          arrows: true, // Hide arrows on small laptops
+        },
+      },
+      {
         breakpoint: 1024, // Tablet and below
         settings: {
           slidesToShow: 3, // Show 3 cards on tablets
@@ -80,7 +88,7 @@ const BestSellerSection = (props) => {
       {
         breakpoint: 600, // Mobile
         settings: {
-          slidesToShow: 2, // Show 1 card on mobile
+          slidesToShow: 2, // Show 2 cards on mobile
           slidesToScroll: 1,
           arrows: false, // Hide arrows on mobile
         },
