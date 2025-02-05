@@ -1,3 +1,6 @@
+import NavigateBeforeOutlinedIcon from "@mui/icons-material/NavigateBeforeOutlined";
+import NavigateNextOutlinedIcon from "@mui/icons-material/NavigateNextOutlined";
+import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import {
   Box,
   Card,
@@ -7,9 +10,6 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import NavigateNextOutlinedIcon from "@mui/icons-material/NavigateNextOutlined";
-import NavigateBeforeOutlinedIcon from "@mui/icons-material/NavigateBeforeOutlined";
-import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import { imageUrl } from "../../api";
 
 const Testimonials = (props) => {

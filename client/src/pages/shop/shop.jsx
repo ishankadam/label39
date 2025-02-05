@@ -125,7 +125,7 @@ const ProductsPage = (props) => {
       const categoryFilter =
         filter.category !== ""
           ? filter.category === "shirtsAndDresses"
-            ? ["shirts", "dresses"].includes(_.lowerCase(product.category))
+            ? ["shirt", "dress"].includes(_.lowerCase(product.category))
             : _.lowerCase(product.category) === _.lowerCase(filter.category)
           : true;
 
