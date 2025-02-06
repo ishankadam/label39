@@ -15,7 +15,8 @@ import {
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { addProductToCart, appUrl, imageUrl } from "../../api";
+import { addProductToCart, appUrl, imageUrl, phoneNumber } from "../../api";
+import { whatsappQueryMessage } from "../../common";
 import { addToCart, showSnackbar } from "../../store/cartSlice";
 import Footer from "../homepage/footer";
 
@@ -51,6 +52,20 @@ const ViewProductModal = (props) => {
       ...prevSelectedSizes,
       [category]: newSize,
     }));
+  };
+
+  const handleTalkToUs = () => {
+    // Format the phone number (remove any non-digit characters)
+    const formattedNumber = phoneNumber.replace(/\D/g, "");
+
+    // Encode the message for URL
+    const encodedMessage = encodeURIComponent(whatsappQueryMessage);
+
+    // Construct the WhatsApp URL
+    const whatsappUrl = `https://wa.me/${formattedNumber}?text=${encodedMessage}`;
+
+    // Redirect to WhatsApp
+    window.open(whatsappUrl, "_blank");
   };
 
   useEffect(() => {
@@ -421,6 +436,7 @@ const ViewProductModal = (props) => {
                         sx={{
                           width: "50%",
                         }}
+                        onClick={handleTalkToUs}
                       >
                         Talk to Us
                       </Button>

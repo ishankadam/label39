@@ -166,7 +166,6 @@ const Testimonials = (props) => {
                       sx={{
                         fontFamily: "'Roboto Serif', serif",
                         fontWeight: 500,
-                        textTransform: "capitalize",
                         fontSize: {
                           xs: "11px",
                           sm: "14px",

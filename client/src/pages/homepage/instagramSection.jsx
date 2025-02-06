@@ -51,7 +51,6 @@ const InstagramSection = () => {
         <main className="slider-main">
           <div
             className="slider"
-            reverse="true"
             style={{
               "--width": "300px",
               "--height": "300px",

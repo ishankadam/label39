@@ -25,18 +25,17 @@ const Subscriber = require("../schema/subscribers");
 const storage = multer.diskStorage({
   destination: (req, _file, cb) => {
     let category;
-    console.log(req.body.testimonials);
     try {
       if (req.body.products) {
         category = "products";
       } else if (req.body.category) {
         category = "categories";
-      } else if (req.body.testimonials) {
-        category = "testimonials";
       } else if (req.body.clientDiaries) {
         category = "clientDiaries";
       } else if (req.body.celebrityStyles) {
         category = "celebrityStyles";
+      } else if (req.body.testimonials) {
+        category = "testimonials";
       } else {
         return cb(
           new Error(
@@ -58,6 +57,7 @@ const storage = multer.diskStorage({
         cb(null, dir);
       } else {
         const dir = path.join(parentDir, "uploads", category);
+        console.log(dir);
         if (!fs.existsSync(dir)) {
           fs.mkdirSync(dir, { recursive: true });
         }
@@ -823,7 +823,7 @@ const create_client_diaries = async (req, res) => {
       });
     }
 
-    const images = req.files.map((file) => file.filename);
+    const images = req.files.map((file) => file.originalname);
     const newclientDiariesData = new clientDiaries({
       clientDiariesId: Math.floor(Math.random() * 9000000000) + 1,
       name: clientDiariesData.name,
@@ -1328,32 +1328,72 @@ const get_user_details = async (req, res) => {
     res.status(500).json({ message: "Error fetching user details", error });
   }
 };
-
 const create_testimonial = async (req, res) => {
   try {
-    console.log("Request Body:", req.body);
-    console.log("Uploaded Files:", req.files);
-
-    if (!req.body.testimonials) {
-      return res.status(400).json({ message: "Missing testimonial details" });
+    console.log(req.body);
+    const testimonialsData = JSON.parse(req.body.testimonials); // Assuming it's a JSON string
+    const images = req.files || []; // Safely get images
+    if (typeof testimonialsData !== "object" || testimonialsData === null) {
+      return res.status(400).send({
+        error: "Invalid data format. Expecting a testimonial object.",
+      });
     }
+    const image =
+      Array.isArray(images) && images.length > 0
+        ? images[0].filename
+        : images.filename;
 
-    const testimonial = JSON.parse(req.body.testimonials); // Now it should work
-    const images = req.files?.image?.map((file) => file.filename) || [];
-
-    const testimonialData = new Testimonial({
+    const newCreatedTestimonial = new Testimonial({
       testimonialId: Math.floor(Math.random() * 9000000000) + 1,
-      name: testimonial.name,
-      comments: testimonial.comments,
-      rating: testimonial.rating,
-      image: images,
+      name: testimonialsData.name,
+      comments: testimonialsData.comments,
+      rating: testimonialsData.rating,
+      image: image,
     });
+    await newCreatedTestimonial.save();
 
-    await testimonialData.save();
-    res.status(201).json(testimonialData);
+    const allTestimonials = await Testimonial.find({});
+    res.send(allTestimonials);
   } catch (error) {
-    console.error("Error creating testimonial:", error);
-    res.status(500).json({ message: "Error creating testimonial", error });
+    console.log("Error while creating testimonials:", error);
+    res
+      .status(500)
+      .send({ error: "An error occurred while creating testimonials." });
+  }
+};
+
+const edit_testimonial = async (req, res) => {
+  try {
+    const editData = JSON.parse(req.body.testimonials); // Parse incoming category data
+    const { testimonialId, ...editedTestimonial } = editData;
+    console.log(req.files);
+    const images = Array.isArray(req.files)
+      ? req.files // If `req.files` is directly an array
+      : req.files.image || []; // Access specific field name if `req.files` is an object
+
+    // Prepare updatedCategory with name, images, and testimonialId
+
+    const updatedTestimonials = {
+      testimonialId, // Add testimonialId to retain it in the document
+      ...editedTestimonial,
+      image: images.map((image) => image.originalname)[0], // Array of filenames
+    };
+
+    // Replace or insert the category with upsert
+    await Testimonial.replaceOne(
+      { testimonialId: testimonialId },
+      updatedTestimonials,
+      {
+        upsert: true,
+      }
+    );
+
+    // Retrieve all categories excluding _id
+    const allTestimonials = await Testimonial.find({}, { _id: 0 });
+    res.send(allTestimonials); // Send the updated category list
+  } catch (error) {
+    console.error("Error in edit testimonial:", error);
+    res.status(400).send({ error: error.message });
   }
 };
 
@@ -1400,4 +1440,5 @@ module.exports = {
   get_all_subscribers,
   get_user_details,
   create_testimonial,
+  edit_testimonial,
 };

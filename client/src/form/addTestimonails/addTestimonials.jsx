@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { createTestimonial } from "../../api";
+import { createTestimonial, editTestimonials } from "../../api";
 import CustomTextfield from "../../components/textfield/customTextfield";
 import UploadFiles from "../../components/upload/uploadFiles";
 
@@ -56,11 +56,20 @@ const TestimonialModal = (props) => {
 
   const handleTestimonialSubmit = (e) => {
     e.preventDefault();
-    createTestimonial({
-      testimonialDetails: testimonial,
-      setLoading: props.setLoading,
-      setTestimonials: props.setTestimonials,
-    });
+    console.log(props.isEdit);
+    if (props.isEdit) {
+      editTestimonials({
+        testimonials: testimonial,
+        setTestimonials: props.setTestimonials,
+        setLoading: props.setLoading,
+      });
+    } else {
+      createTestimonial({
+        testimonials: testimonial,
+        setLoading: props.setLoading,
+        setTestimonials: props.setTestimonials,
+      });
+    }
     props.handleModalClose();
   };
 
@@ -198,7 +207,7 @@ const TestimonialModal = (props) => {
               images={images}
               file={testimonial.image}
               singleFile={true}
-              category="testimonial"
+              category="testimonials"
               acceptedFiles="image/png, image/jpeg"
               parentClass="testimonial-form-container"
             />

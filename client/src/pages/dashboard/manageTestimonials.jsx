@@ -17,6 +17,14 @@ const ManageTestimonials = (props) => {
     setShowModal(props.showModal);
   }, [props.showModal]);
 
+  const handleOnClickView = (row, isEdit, index) => {
+    setShowModal({
+      show: true,
+      isEdit: isEdit,
+      data: row,
+    });
+  };
+
   const colDef = [
     {
       id: "image",
@@ -41,21 +49,21 @@ const ManageTestimonials = (props) => {
       type: "text",
       align: "left",
     },
-    // {
-    //   id: "notification-icon",
-    //   label: "",
-    //   key: "editAction",
-    //   type: "action",
-    //   align: "center",
-    //   editId: "edit-icon",
-    //   deleteId: "delete-icon",
-    //   commentId: "comment-icon",
-    //   editFunc: (row, index) => handleOnClickView(row, true, index),
-    //   deleteFunc: (row, index) => handleDeleteTestimonial(row, index),
-    //   isDisable: true,
-    //   isEdit: true,
-    //   page: "JobListing",
-    // },
+    {
+      id: "notification-icon",
+      label: "",
+      key: "editAction",
+      type: "action",
+      align: "center",
+      editId: "edit-icon",
+      deleteId: "delete-icon",
+      commentId: "comment-icon",
+      editFunc: (row, index) => handleOnClickView(row, true, index),
+      // deleteFunc: (row, index) => handleDeleteTestimonial(row, index),
+      isDisable: true,
+      isEdit: true,
+      page: "JobListing",
+    },
   ];
 
   const [isEditing, setIsEditing] = useState(false);

@@ -57,18 +57,20 @@ const Footer = (props) => {
 
   return (
     <Box className="container">
-      <Box
-        component="img"
-        src={footerImg}
-        sx={{
-          width: "100%",
-          height: { xs: "90px", sm: "auto" },
-          display: "block",
-          // mixBlendMode: "multiply",
-          // filter: "brightness(0) invert(1)",
-        }}
-        alt=""
-      />
+      {props.topSection && (
+        <Box
+          component="img"
+          src={footerImg}
+          sx={{
+            width: "100%",
+            height: { xs: "90px", sm: "auto" },
+            display: "block",
+            // mixBlendMode: "multiply",
+            // filter: "brightness(0) invert(1)",
+          }}
+          alt=""
+        />
+      )}
 
       {/* Top Section */}
 
@@ -211,7 +213,7 @@ const Footer = (props) => {
                 }}
               >
                 Born from the sheer love for clothes, The Label 39 is a fusion
-                of simple and sophistication. We work directly with artisans
+                of simplicity and sophistication. We work directly with artisans
                 from across the country to create conscious and intricate
                 clothing that is true to its craftsmanship.
               </Typography>

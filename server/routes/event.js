@@ -143,6 +143,12 @@ router.post(
   controller.create_testimonial
 );
 
+router.put(
+  "/editTestimonials",
+  controller.upload.array("image"),
+  controller.edit_testimonial
+);
+
 // edit testimonial
 // router.put("/editTestimonial", controller.edit_testimonial);
 

@@ -490,9 +490,14 @@ export const editCategory = async ({ category, setCategory, setLoading }) => {
   const formData = new FormData();
 
   formData.append("category", JSON.stringify(category));
+
   if (category.image) {
-    if (category.image instanceof File) {
-      formData.append("image", category.image);
+    if (category.image && Array.isArray(category.image)) {
+      category.image.forEach((img) => {
+        if (img instanceof File) {
+          formData.append("image", img); // Add images
+        }
+      });
     } else if (typeof category.image === "string") {
       try {
         const file = await urlToFile(
@@ -1139,100 +1144,6 @@ export const getUserDetails = async ({ userId, setUserDetails }) => {
   }
 };
 
-export const createTestimonial = async ({
-  testimonialDetails,
-  setLoading,
-  setTestimonials,
-}) => {
-  setLoading(true);
-  const formData = new FormData();
-
-  // Append product details as JSON
-  formData.append(
-    "testimonials",
-    JSON.stringify(testimonialDetails) // Wrap the product in an array
-  );
-
-  if (testimonialDetails.image && Array.isArray(testimonialDetails.image)) {
-    testimonialDetails.image.forEach((img) => {
-      if (img instanceof File) {
-        formData.append("images", img); // Add images
-      }
-    });
-  }
-
-  // Prepare request options
-  const requestOptions = {
-    method: "POST",
-    body: formData,
-  };
-
-  try {
-    const response = await fetch(`${apiUrl}/createTestimonials`, {
-      method: "POST",
-      body: formData,
-    });
-
-    if (!response.ok) {
-      throw new Error(
-        (await response.json()).message || "Failed to create testimonial"
-      );
-    }
-
-    const data = await response.json();
-    setTestimonials((prev) => [...prev, data]); // Append the new testimonial
-  } catch (error) {
-    console.error("Error creating testimonial:", error.message);
-    alert(`Error: ${error.message}`);
-  } finally {
-    setLoading(false);
-  }
-};
-
-export const editTestimonial = async ({
-  testimonial,
-  setTestimonials,
-  setLoading,
-}) => {
-  setLoading(true);
-  const formData = new FormData();
-
-  // Append product details as JSON
-  formData.append(
-    "testimonial",
-    JSON.stringify(testimonial) // Wrap the product in an array
-  );
-
-  if (testimonial.image && Array.isArray(testimonial.image)) {
-    testimonial.image.forEach((img) => {
-      if (img instanceof File) {
-        formData.append("images", img); // Add images
-      }
-    });
-  }
-
-  const requestOptions = {
-    method: "PUT",
-    body: formData,
-  };
-
-  try {
-    const response = await fetch(`${apiUrl}/editTestimonial`, requestOptions);
-    if (response.ok) {
-      const data = await response.json();
-      setTestimonials(data);
-    } else {
-      const errorData = await response.json();
-      throw new Error(errorData.message || "Network response was not ok.");
-    }
-  } catch (error) {
-    console.log(error);
-    throw error;
-  } finally {
-    setLoading(false);
-  }
-};
-
 export const toggleTestimonialStatus = async ({
   testimonial,
   setTestimonials,
@@ -1265,5 +1176,129 @@ export const toggleTestimonialStatus = async ({
   } catch (err) {
     console.error("Error disabling testimonial:", err);
     if (setLoading) setLoading(false);
+  }
+};
+
+export const createTestimonial = async ({
+  testimonials,
+  setLoading,
+  setTestimonials,
+}) => {
+  setLoading(true);
+  const formData = new FormData();
+
+  formData.append("testimonials", JSON.stringify(testimonials));
+
+  if (testimonials.image && Array.isArray(testimonials.image)) {
+    testimonials.image.forEach((img) => {
+      if (img instanceof File) {
+        formData.append("image", img); // Add images
+      }
+    });
+  }
+
+  const requestOptions = {
+    method: "POST",
+    body: formData,
+  };
+
+  try {
+    const response = await fetch(
+      `${apiUrl}/createTestimonials`,
+      requestOptions
+    );
+
+    if (response.ok) {
+      const data = await response.json();
+      setTestimonials(data);
+    } else {
+      const errorData = await response.json();
+      console.error("Error creating Categories:", errorData);
+    }
+  } catch (e) {
+    console.error("Fetch error:", e);
+  } finally {
+    setLoading(false);
+  }
+};
+
+export const editTestimonials = async ({
+  testimonials,
+  setTestimonials,
+  setLoading,
+}) => {
+  setLoading(true);
+
+  const formData = new FormData();
+
+  formData.append("testimonials", JSON.stringify(testimonials));
+  if (testimonials.image) {
+    if (testimonials.image && Array.isArray(testimonials.image)) {
+      testimonials.image.forEach((img) => {
+        if (img instanceof File) {
+          formData.append("image", img); // Add images
+        }
+      });
+    } else if (typeof testimonials.image === "string") {
+      try {
+        const file = await urlToFile(
+          testimonials.image,
+          testimonials.image.split("/").pop()
+        );
+        formData.append("image", file);
+      } catch (error) {
+        console.error("Error converting URL to File:", error);
+      }
+    }
+  }
+
+  const requestOptions = {
+    method: "PUT",
+    body: formData,
+  };
+
+  try {
+    const response = await fetch(`${apiUrl}/editTestimonials`, requestOptions);
+    if (response.ok) {
+      const data = await response.json();
+      setTestimonials(data);
+    } else {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Network response was not ok.");
+    }
+  } catch (error) {
+    console.log(error);
+    throw error;
+  } finally {
+    setLoading(false);
+  }
+};
+
+export const deleteTestimonials = async ({
+  testimonialId,
+  setLoading,
+  setTestimonials,
+}) => {
+  setLoading(true);
+
+  const requestOptions = {
+    method: "DELETE",
+  };
+
+  try {
+    const response = await fetch(
+      `${apiUrl}/deleteTestimonials/${testimonialId}`,
+      requestOptions
+    );
+    if (response.ok) {
+      const data = await response.json();
+    } else {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Network response was not ok.");
+    }
+  } catch (error) {
+    console.error("Error in deleteTestimonials:", error);
+  } finally {
+    setLoading(false);
   }
 };
