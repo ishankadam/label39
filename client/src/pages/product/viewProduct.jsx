@@ -285,7 +285,12 @@ const ViewProductModal = (props) => {
                 <Typography
                   sx={{
                     marginBottom: "10px",
-                    marginRight: "10px",
+                    marginRight: {
+                      xs: "auto",
+                      sm: "auto",
+                      md: "35px",
+                      lg: "50px",
+                    },
                     display: "flex",
                     justifyContent: { xs: "center", sm: "center", md: "left" },
                     textAlign: { xs: "center", sm: "center", md: "left" },
