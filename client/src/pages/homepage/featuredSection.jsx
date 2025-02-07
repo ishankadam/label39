@@ -26,13 +26,13 @@ const FeaturedSection = (props) => {
   // Slick settings for responsive slider
   const settings = {
     dots: false,
-    infinite: celebrityStyles.length > 4,
+    infinite: true,
     speed: 500,
     slidesToShow: 4, // 5 cards on laptop
     autoplay: true, // Enable automatic sliding
-    autoplaySpeed: 3000,
+    autoplaySpeed: 4000,
     slidesToScroll: 1,
-    arrows: false,
+    arrows: true,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     responsive: [
@@ -62,7 +62,6 @@ const FeaturedSection = (props) => {
         settings: {
           slidesToShow: 1, // 1 card on mobile
           slidesToScroll: 1,
-          arrows: true,
         },
       },
     ],
@@ -101,10 +100,9 @@ const FeaturedSection = (props) => {
 
       <Box
         sx={{
-          // maxWidth: "1200px",
-          width: { xs: "70%", sm: "100%" },
-          maxWidth: { xs: "270px", sm: "100%" },
+          maxWidth: { xs: "75%", sm: "90%", md: "90%", lg: "90%" },
           margin: "20px auto",
+          padding: { xs: "0 10px", sm: "0 10px", md: "0 10px", lg: "0 10px" },
           // overflow: "hidden", // Hide overflow
         }}
       >
@@ -213,7 +211,7 @@ const FeaturedSection = (props) => {
                   }}
                 >
                   {/* Blurred Background Layer */}
-                  <Box
+                  {/* <Box
                     sx={{
                       position: "absolute",
                       width: "100%",
@@ -224,7 +222,7 @@ const FeaturedSection = (props) => {
                       filter: "blur(15px)", // Apply blur
                       zIndex: 1,
                     }}
-                  />
+                  /> */}
 
                   <CardMedia
                     component={item.videoSrc ? "video" : "img"}
@@ -237,8 +235,10 @@ const FeaturedSection = (props) => {
                     loop
                     muted
                     sx={{
-                      position: "relative",
-                      zIndex: 2,
+                      objectPosition: "top",
+
+                      // position: "relative",
+                      // zIndex: 2,
                       height: {
                         xs: "450px",
                         sm: "420px",
@@ -246,7 +246,7 @@ const FeaturedSection = (props) => {
                         lg: "550px",
                       },
                       width: "100%",
-                      objectFit: "contain",
+                      objectFit: "cover",
                     }}
                   />
                   <Box
@@ -270,12 +270,19 @@ const FeaturedSection = (props) => {
                     <Typography
                       sx={{
                         flex: 7,
-                        fontSize: { xs: "14px", sm: "13px", md: "16px" },
+                        fontSize: { xs: "13px", sm: "14px", md: "15px" },
                         fontFamily: "'Cinzel', serif", // Ensure the font is applied here
                         fontWeight: { xs: "700", sm: "600", md: "700" },
+                        display: "-webkit-box",
+                        WebkitBoxOrient: "vertical",
+                        WebkitLineClamp: 2, // Restricts to 2 lines
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
                       }}
                     >
-                      {item.name ? `As seen on ${item.name}` : ""}
+                      {item.name
+                        ? ` ${item.name} in ${item.productDetails[0].name}`
+                        : ""}
                     </Typography>
                     <Button
                       variant="outlined"

@@ -1,13 +1,4 @@
 import React, { useEffect, useState } from "react";
-import bestSeller1 from "../../assets/bestSellerP1.jpg";
-import bestSeller2 from "../../assets/bestSellerP2.jpg";
-import bestSeller3 from "../../assets/bestSellerP3.jpg";
-import bestSeller4 from "../../assets/bestSellerP4.jpg";
-import bestSeller5 from "../../assets/bestSellerP5.jpg";
-import bestSeller5hover from "../../assets/bestseller5-hover.JPG";
-import bestSeller6 from "../../assets/bestSellerP6.jpg";
-import bestSeller6Hover from "../../assets/bestseller6-hover.jpeg";
-
 import { Box, Typography } from "@mui/material";
 import Slider from "react-slick";
 import ProductCard from "../../components/card/productCard";
@@ -22,41 +13,6 @@ const BestSellerSection = (props) => {
     setBestsellers(props.bestsellers);
   }, [props.bestsellers]);
 
-  // const bestSellers = [
-  //   {
-  //     name: "Sapphire Applique Kurta Set",
-  //     images: ["Cord10.jpg"],
-  //     hoverImgSrc: bestSeller5hover,
-  //     price: 9999,
-  //   },
-  //   {
-  //     name: "Sapphire Applique Kurta Set",
-  //     images: ["Cord61.jpg"],
-  //     hoverImgSrc: bestSeller6Hover,
-  //     price: 9999,
-  //   },
-  //   {
-  //     name: "Sapphire Applique Kurta Set",
-  //     images: ["Cord21.jpg"],
-  //     price: 9999,
-  //   },
-  //   {
-  //     name: "Sapphire Applique Kurta Set",
-  //     images: ["Cord31.jpg"],
-  //     price: 9999,
-  //   },
-  //   {
-  //     name: "Sapphire Applique Kurta Set",
-  //     images: ["Cord41.jpg"],
-  //     price: 9999,
-  //   },
-  //   {
-  //     name: "Sapphire Applique Kurta Set",
-  //     images: ["Cord51.jpg"],
-  //     price: 9999,
-  //   },
-  // ];
-
   // Slick Slider settings
   const settings = {
     dots: false,
@@ -64,7 +20,7 @@ const BestSellerSection = (props) => {
     speed: 500,
     slidesToShow: 4, // Default for laptops
     autoplay: true, // Enable automatic sliding
-    autoplaySpeed: 3000,
+    autoplaySpeed: 4000,
     slidesToScroll: 1,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
@@ -72,7 +28,7 @@ const BestSellerSection = (props) => {
       {
         breakpoint: 1440, // Small laptop (or adjust this value as needed)
         settings: {
-          slidesToShow: 3, // Show 3 cards on small laptops
+          slidesToShow: 4, // Show 3 cards on small laptops
           slidesToScroll: 1,
           arrows: true, // Hide arrows on small laptops
         },
@@ -82,7 +38,7 @@ const BestSellerSection = (props) => {
         settings: {
           slidesToShow: 3, // Show 3 cards on tablets
           slidesToScroll: 1,
-          arrows: false, // Hide arrows on tablets
+          arrows: true, // Hide arrows on tablets
         },
       },
       {
@@ -120,7 +76,13 @@ const BestSellerSection = (props) => {
           }}
         />
       </Typography>
-      <div className="slider-wrapper">
+      <Box
+        sx={{
+          maxWidth: { xs: "100%", sm: "90%", md: "90%", lg: "90%" },
+          margin: "20px auto",
+          padding: { xs: "0", sm: "0 10px", md: "0 10px", lg: "0 10px" },
+        }}
+      >
         <Slider {...settings}>
           {bestsellers.map((product, index) => (
             <div key={index}>
@@ -132,7 +94,7 @@ const BestSellerSection = (props) => {
             </div>
           ))}
         </Slider>
-      </div>
+      </Box>
     </Box>
   );
 };

@@ -64,6 +64,8 @@ const Footer = (props) => {
           width: "100%",
           height: { xs: "90px", sm: "auto" },
           display: "block",
+          marginTop: "50px",
+
           // mixBlendMode: "multiply",
           // filter: "brightness(0) invert(1)",
         }}

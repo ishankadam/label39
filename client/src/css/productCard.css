@@ -7,6 +7,8 @@
 .product-card img {
   object-fit: cover;
   height: 450px;
+  object-position: top;
+
   /* transition: all 300ms ease-in-out; */
   transition: transform 300ms ease-in-out; /* Smooth zoom transition */
 }

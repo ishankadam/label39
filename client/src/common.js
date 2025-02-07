@@ -454,6 +454,6 @@ export const featured = [
   { label: "NEW ARRIVAL", value: "newArrival" },
   { label: "BEST SELLERS", value: "bestSellers" },
   { label: "READY TO SHIP", value: "readyToShip" },
-  { label: "As seen on", value: "asSeenOn" },
+  { label: "Celebrity Style", value: "asSeenOn" },
   // { label: "CLIENTS DAIRY", value: "clientsDiaries" },
 ];

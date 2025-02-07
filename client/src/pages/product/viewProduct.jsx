@@ -285,15 +285,16 @@ const ViewProductModal = (props) => {
                 <Typography
                   sx={{
                     marginBottom: "10px",
+                    marginRight: "10px",
                     display: "flex",
                     justifyContent: { xs: "center", sm: "center", md: "left" },
                     textAlign: { xs: "center", sm: "center", md: "left" },
                     fontWeight: "600",
                     fontSize: {
-                      xs: "18px",
+                      xs: "17px",
                       sm: "18px",
                       md: "20px",
-                      lg: "24px",
+                      lg: "22px",
                     },
                     color: "#494949",
                     fontFamily: "'Cinzel Serif', serif ",
@@ -306,7 +307,7 @@ const ViewProductModal = (props) => {
                   // color="text.secondary"
                   sx={{
                     marginBottom: "20px",
-                    fontSize: { xs: "18px", sm: "18px", md: "20px" },
+                    fontSize: { xs: "17px", sm: "18px", md: "20px" },
                     color: "rgba(55, 65, 81, 0.85)",
                     fontFamily: "'Roboto Condensed', serif ",
                     display: "flex",
@@ -323,7 +324,7 @@ const ViewProductModal = (props) => {
                   sx={{
                     marginBottom: "15px",
                     display: "block",
-                    fontSize: "16px",
+                    fontSize: { xs: "14px", sm: "16px" },
                     fontWeight: "600",
                     fontFamily: "'Roboto Serif', serif ",
 

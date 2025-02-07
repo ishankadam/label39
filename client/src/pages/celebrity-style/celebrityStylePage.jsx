@@ -1,22 +1,40 @@
-import { Box, Container, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import {
+  Box,
+  Button,
+  Card,
+  CardMedia,
+  Container,
+  Grid,
+  Typography,
+} from "@mui/material";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
+import { imageUrl } from "../../api";
+import { NextArrow, PrevArrow } from "../../components/arrow-component"; // Update the import path as needed
+import "./../../css/categorySection.css";
+import CelebrityStyleCard from "./celebrityStyleCard";
 import ViewProductModal from "../product/viewProduct";
-import ClientDiaryCard from "./clientDiaryCard";
 
-const ClientDiaryPage = (props) => {
-  const [clientDiaries, setclientDiaries] = useState([]);
+function CelebrityStylePage(props) {
+  const [celebrityStyles, setCelebrityStyles] = useState([]);
   const [showModal, setShowModal] = useState({
     open: false,
     data: {},
   });
   useEffect(() => {
-    setclientDiaries(props.clientDiaries);
-  }, [props.clientDiaries]);
+    setCelebrityStyles(props.celebrityStyles);
+  }, [props.celebrityStyles]);
+
+  useEffect(() => {
+    console.log(celebrityStyles);
+  }, [celebrityStyles]);
 
   return (
     <>
       <Box sx={{ bgcolor: "#FFF8F5", py: 4, borderTop: "1px solid #E5E5E5" }}>
-        <Container maxWidth="lg" sx={{ mb: "150px" }}>
+        <Container maxWidth="xl" sx={{ mb: "150px" }}>
           <Typography
             sx={{
               fontSize: { xs: "26px", sm: "28px", md: "32px", lg: "34px" },
@@ -27,7 +45,7 @@ const ClientDiaryPage = (props) => {
               fontWeight: "500",
             }}
           >
-            client diaries
+            celebrity style
             <div
               className="title-border"
               style={{
@@ -40,17 +58,21 @@ const ClientDiaryPage = (props) => {
             />
           </Typography>
           <Grid container spacing={{ xs: 2, sm: 4, lg: 4 }}>
-            {clientDiaries.map((diary, index) => {
+            {celebrityStyles.map((celebrityDiary, index) => {
               return (
                 <Grid
+                  sx={{ marginBottom: "16px" }}
                   item
                   xs={6}
                   sm={4}
                   md={4}
+                  lg={3}
                   key={`${index}-client-diary`}
-                  sx={{ marginBottom: "16px" }}
                 >
-                  <ClientDiaryCard diary={diary} setShowModal={setShowModal} />
+                  <CelebrityStyleCard
+                    celebrityDiary={celebrityDiary}
+                    setShowModal={setShowModal}
+                  />
                 </Grid>
               );
             })}
@@ -66,6 +88,6 @@ const ClientDiaryPage = (props) => {
       ) : null}
     </>
   );
-};
+}
 
-export default ClientDiaryPage;
+export default CelebrityStylePage;

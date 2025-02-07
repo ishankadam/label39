@@ -27,7 +27,11 @@ const CategorySection = (props) => {
   };
 
   return (
-    <Box sx={{ marginTop: { xs: "20px", sm: "28px", md: "36px" } }}>
+    <Box
+      sx={{
+        margin: { xs: "20px 0", sm: "25px", md: "25px 5px", lg: "25px 20px" },
+      }}
+    >
       <Typography
         sx={{
           fontSize: { xs: "26px", sm: "28px", md: "32px", lg: "34px" },

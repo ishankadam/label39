@@ -152,6 +152,7 @@ const CelebrityStyleForm = (props) => {
             updateData={(files) => handleFileUpload(files)}
             isEdit={true}
             images={images}
+            singleFile={true}
             file={celebrityStyles.image}
             acceptedFiles="image/png, image/jpeg"
             category="celebrityStyles"

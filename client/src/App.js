@@ -41,6 +41,8 @@ import TermsAndConditions from "./pages/termsAndCondition/termsAndCondition";
 import UserOrders from "./pages/user-orders/userOrders";
 import CustomSnackbar from "./snackbar/customSnackbar";
 import { store } from "./store/store";
+import CelebrityStyle from "./pages/dashboard/celebrityStyle";
+import CelebrityStylePage from "./pages/celebrity-style/celebrityStylePage";
 const App = () => {
   const [cartDetails, setCartDetails] = useState({
     open: false,
@@ -304,6 +306,11 @@ const App = () => {
           />
           <Route path="/resetPassword/:token" element={<ResetPassword />} />
           <Route path="/products/:productId" element={<ViewProductPage />} />
+          <Route
+            exact
+            path="/celebrityStylePage"
+            element={<CelebrityStylePage celebrityStyles={celebrityStyles} />}
+          />
 
           <Route exact path="/forgotPassword" element={<ForgotPassword />} />
         </Routes>

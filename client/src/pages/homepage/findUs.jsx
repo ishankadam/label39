@@ -210,7 +210,9 @@ const FindUs = () => {
                             // marginRight: "12px",
                           }}
                           component={Link}
-                          href="#"
+                          href="https://www.facebook.com/thelabel39/"
+                          target="_blank"
+                          rel="noopener noreferrer"
                           aria-label="Facebook"
                         >
                           <Facebook />
@@ -220,11 +222,11 @@ const FindUs = () => {
                           sx={{
                             color: "#1F2020",
                             fontSize: "28px",
-
-                            // marginRight: "12px",
                           }}
                           component={Link}
-                          href="#"
+                          href="https://www.instagram.com/thelabel39/"
+                          target="_blank"
+                          rel="noopener noreferrer"
                           aria-label="Instagram"
                         >
                           <Instagram />
