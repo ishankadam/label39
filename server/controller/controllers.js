@@ -241,7 +241,7 @@ const get_all_products = async (req, res) => {
 const create_product = async (req, res) => {
   try {
     const productsData = JSON.parse(req.body.products); // This will now be an array
-    const images = req.files.map((file) => file.filename);
+    const images = req.files.map((file) => file.originalname);
 
     const newProduct = {
       productId: Math.floor(Math.random() * 9000000000) + 1,
@@ -509,7 +509,7 @@ const toggleProductStatus = async (req, res) => {
 
 const edit_product = async (req, res) => {
   try {
-    const images = req.files.map((file) => file.filename);
+    const images = req.files.map((file) => file.originalname);
 
     // Check if productId is defined
     if (!productId) {
@@ -553,8 +553,8 @@ const create_category = async (req, res) => {
     }
     const image =
       Array.isArray(images) && images.length > 0
-        ? images[0].filename
-        : images.filename;
+        ? images[0].originalname
+        : images.originalname;
 
     // Generate a unique product ID for each product
     const newCreatedCategory = new Category({
@@ -1340,8 +1340,8 @@ const create_testimonial = async (req, res) => {
     }
     const image =
       Array.isArray(images) && images.length > 0
-        ? images[0].filename
-        : images.filename;
+        ? images[0].originalname
+        : images.originalname;
 
     const newCreatedTestimonial = new Testimonial({
       testimonialId: Math.floor(Math.random() * 9000000000) + 1,
