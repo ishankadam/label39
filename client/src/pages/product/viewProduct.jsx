@@ -1,4 +1,3 @@
-import ChatIcon from "@mui/icons-material/Chat";
 import CloseIcon from "@mui/icons-material/Close";
 import ShareIcon from "@mui/icons-material/Share";
 import {
@@ -16,9 +15,15 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addProductToCart, appUrl, imageUrl, phoneNumber } from "../../api";
-import { whatsappQueryMessage } from "../../common";
+import {
+  addCommaToPrice,
+  calculatePriceAfterDiscount,
+  getCurrencySymbol,
+  whatsappQueryMessage,
+} from "../../common";
 import { addToCart, showSnackbar } from "../../store/cartSlice";
 import Footer from "../homepage/footer";
+import ShareViaWhatsApp from "../share-via-whatsapp/shareViaWhatsapp";
 
 const ViewProductModal = (props) => {
   const { isAdmin, product, open, setShowModal } = props;
@@ -95,10 +100,10 @@ const ViewProductModal = (props) => {
         selectedPrice = upperSize.price;
       }
     }
-    setPrice(selectedPrice || product.price); // Default to 0 if no size is selected
+
     setCartProduct((prev) => ({
       ...prev,
-      price: selectedPrice || prev.price,
+      price: selectedPrice,
       sizes: selectedSizes,
     }));
   }, [selectedSizes, product]);
@@ -323,18 +328,55 @@ const ViewProductModal = (props) => {
                   {product.name}
                 </Typography>
                 <Typography
-                  variant="h5"
-                  // color="text.secondary"
+                  variant="h6"
                   sx={{
-                    marginBottom: "20px",
-                    fontSize: { xs: "17px", sm: "18px", md: "20px" },
-                    color: "rgba(55, 65, 81, 0.85)",
-                    fontFamily: "'Roboto Condensed', serif ",
-                    display: "flex",
-                    justifyContent: { xs: "center", sm: "center", md: "left" },
+                    fontSize: { xs: "14px", sm: "16px", md: "18px" },
+                    // fontFamily: "'Poppins', sans-serif",
+                    fontFamily: "'Roboto Serif', serif",
+                    color: "#a16149",
                   }}
                 >
-                  RS. {price ? price : product.price}
+                  <span style={{ fontWeight: "600", color: "#a16149" }}>
+                    {getCurrencySymbol(props.country)}{" "}
+                    {props.product.sale && props.product.sale.isActive
+                      ? calculatePriceAfterDiscount(
+                          props.product.price,
+                          props.product.sale.discountType,
+                          props.product.sale.discountValue
+                        )
+                      : addCommaToPrice(props.product.price)}
+                  </span>
+                  {props.product.sale && props.product.sale.isActive && (
+                    <>
+                      <span
+                        style={{
+                          textDecoration: "line-through",
+                          marginLeft: "8px",
+                          color: "#989898",
+                          fontSize: { xs: "14px", sm: "16px", md: "18px" },
+                          fontFamily: "'Roboto Serif', serif",
+                        }}
+                      >
+                        {getCurrencySymbol(props.country)}{" "}
+                        {addCommaToPrice(props.product.price)}
+                      </span>
+                      <span
+                        style={{
+                          marginLeft: "8px",
+                          color: "#989898",
+                          fontSize: { xs: "12px", sm: "13px", md: "15px" },
+                          fontFamily: "'Roboto Serif', serif",
+                          fontWeight: "500",
+                        }}
+                      >
+                        {`(${props.product.sale.discountValue}${
+                          props.product.sale.discountType === "Percentage"
+                            ? "%"
+                            : getCurrencySymbol(props.country)
+                        } off)`}
+                      </span>
+                    </>
+                  )}
                 </Typography>
 
                 {/* Size Chart */}
@@ -435,7 +477,7 @@ const ViewProductModal = (props) => {
                       </Button>
                     </Box>
                     <Box sx={{ display: "flex", gap: 2, marginBottom: "25px" }}>
-                      <Button
+                      {/* <Button
                         startIcon={<ChatIcon />}
                         variant="outlined"
                         color="custom"
@@ -445,7 +487,8 @@ const ViewProductModal = (props) => {
                         onClick={handleTalkToUs}
                       >
                         Talk to Us
-                      </Button>
+                      </Button> */}
+                      <ShareViaWhatsApp product={product} />
                       <Button
                         startIcon={<ShareIcon />}
                         variant="outlined"
@@ -459,7 +502,7 @@ const ViewProductModal = (props) => {
                           })
                         }
                       >
-                        Share
+                        Copy Url
                       </Button>
                     </Box>
                   </Box>

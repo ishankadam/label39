@@ -34,6 +34,7 @@ import {
   clearCart,
   closeCartDrawer,
   openCartDrawer,
+  setCurrency,
   setFilter,
   showSnackbar,
 } from "../../store/cartSlice";
@@ -76,6 +77,7 @@ const CustomAppbar = (props) => {
   };
 
   const handleChange = (value) => {
+    dispatch(setCurrency(value));
     props.setCountry(value);
   };
 

@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   addProductToCart,
@@ -19,6 +19,11 @@ import {
   getProductDetails,
   imageUrl,
 } from "../../api";
+import {
+  addCommaToPrice,
+  calculatePriceAfterDiscount,
+  getCurrencySymbol,
+} from "../../common";
 import { addToCart, showSnackbar } from "../../store/cartSlice";
 
 const ViewProductPage = () => {
@@ -91,6 +96,7 @@ const ViewProductPage = () => {
   };
 
   const selectedImage = product?.images?.[selectedImageIndex];
+  const currency = useSelector((state) => state.cart.currency);
 
   const handleAddToCart = () => {
     if (!userId) {
@@ -274,6 +280,57 @@ const ViewProductPage = () => {
                 }}
               >
                 RS. {price ? price : product.price}
+              </Typography>
+              <Typography
+                variant="h6"
+                sx={{
+                  fontSize: { xs: "14px", sm: "16px", md: "18px" },
+                  // fontFamily: "'Poppins', sans-serif",
+                  fontFamily: "'Roboto Serif', serif",
+                  color: "#a16149",
+                }}
+              >
+                <span style={{ fontWeight: "600", color: "#a16149" }}>
+                  {getCurrencySymbol(currency)}{" "}
+                  {product.sale && product.sale.isActive
+                    ? calculatePriceAfterDiscount(
+                        product.price,
+                        product.sale.discountType,
+                        product.sale.discountValue
+                      )
+                    : addCommaToPrice(product.price)}
+                </span>
+                {product.sale && product.sale.isActive && (
+                  <>
+                    <span
+                      style={{
+                        textDecoration: "line-through",
+                        marginLeft: "8px",
+                        color: "#989898",
+                        fontSize: { xs: "14px", sm: "16px", md: "18px" },
+                        fontFamily: "'Roboto Serif', serif",
+                      }}
+                    >
+                      {getCurrencySymbol(currency)}{" "}
+                      {addCommaToPrice(product.price)}
+                    </span>
+                    <span
+                      style={{
+                        marginLeft: "8px",
+                        color: "#989898",
+                        fontSize: { xs: "12px", sm: "13px", md: "15px" },
+                        fontFamily: "'Roboto Serif', serif",
+                        fontWeight: "500",
+                      }}
+                    >
+                      {`(${product.sale.discountValue}${
+                        product.sale.discountType === "Percentage"
+                          ? "%"
+                          : getCurrencySymbol(currency)
+                      } off)`}
+                    </span>
+                  </>
+                )}
               </Typography>
 
               {/* Size Chart */}

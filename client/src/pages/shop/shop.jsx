@@ -22,6 +22,7 @@ import ClickAwayListener from "@mui/material/ClickAwayListener";
 import _ from "lodash";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { availableColors, featured, findLabelByValue } from "../../common";
 import ProductCard from "../../components/card/productCard";
 import CustomLoader from "../../components/customLoader";
@@ -32,6 +33,7 @@ import ViewProductModal from "../product/viewProduct";
 
 const ProductsPage = (props) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [allProduct, setAllProduct] = useState(props.allProduct || []);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [loading, setLoading] = useState(props.loading || false);
@@ -99,6 +101,11 @@ const ProductsPage = (props) => {
       return products; // Return all products if no filter is applied
     }
 
+    if (featured === "asSeenOn") {
+      dispatch(setFilter({ featured: "" }));
+      navigate("/celebrityStylePage");
+    }
+
     switch (featured) {
       case "newArrivals":
         return products.sort((a, b) => a.priority - b.priority); // Sort by priority (higher priority comes first)
@@ -108,9 +115,6 @@ const ProductsPage = (props) => {
 
       case "readyToShip":
         return products.filter((product) => product.readyToShip === true); // Ready-to-ship products
-
-      case "asSeenOn":
-        return products.filter((product) => Boolean(product.asSeenOn)); // Products that have 'asSeenOn' value
 
       default:
         return products; // Return all products if the filter is unknown

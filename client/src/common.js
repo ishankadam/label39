@@ -440,7 +440,7 @@ export const calculatePriceAfterDiscount = (price, type, value) => {
   } else {
     finalPrice = price;
   }
-  return finalPrice;
+  return addCommaToPrice(finalPrice);
 };
 
 export const orderStatus = [

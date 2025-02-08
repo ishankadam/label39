@@ -15,6 +15,7 @@ const initialState = {
     featured: "",
   },
   snackbars: [],
+  currency: "INR",
 };
 
 export const cartSlice = createSlice({
@@ -104,6 +105,9 @@ export const cartSlice = createSlice({
         (snack) => snack.id !== action.payload
       );
     },
+    setCurrency: (state, action) => {
+      state.currency = action.payload;
+    },
   },
 });
 
@@ -121,6 +125,7 @@ export const {
   setFilter,
   showSnackbar,
   hideSnackbar,
+  setCurrency,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

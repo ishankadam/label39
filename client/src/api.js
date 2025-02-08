@@ -7,6 +7,7 @@ const {
   REACT_APP_WHATSAPP_API_URL,
   REACT_APP_INSTAGRAM_ACCESS_TOKEN,
   REACT_APP_URL,
+  REACT_APP_MESSAGE_URL,
 } = process.env;
 export const apiUrl = REACT_APP_API_URL;
 export const imageUrl = REACT_APP_IMAGE_URL;
@@ -14,6 +15,7 @@ export const phoneNumber = REACT_APP_PHONE;
 export const whatsAppUrl = REACT_APP_WHATSAPP_API_URL;
 export const instagramToken = REACT_APP_INSTAGRAM_ACCESS_TOKEN;
 export const appUrl = REACT_APP_URL;
+export const messageUrl = REACT_APP_MESSAGE_URL;
 // create User
 export const createUser = async ({ userDetails, navigate }) => {
   const requestOptions = {
