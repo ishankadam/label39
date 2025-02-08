@@ -1,7 +1,13 @@
 import CloseIcon from "@mui/icons-material/Close";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import { Box, Button, IconButton, Modal, Typography } from "@mui/material";
+import { Facebook, Instagram } from "@mui/icons-material";
+import {
+  Box,
+  Button,
+  IconButton,
+  Modal,
+  Typography,
+  Link,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { createSubscription } from "../../api";
@@ -198,14 +204,35 @@ const SubscribeModal = (props) => {
           <Box
             sx={{ mt: 2, display: "flex", justifyContent: "center", gap: 1 }}
           >
-            <FacebookIcon
-              sx={{ cursor: "pointer" }}
-              onClick={() => alert("Facebook")}
-            />
-            <InstagramIcon
-              sx={{ cursor: "pointer" }}
-              onClick={() => alert("Instagram")}
-            />
+            <IconButton
+              className="findus-icon"
+              sx={{
+                color: "#1F2020",
+                fontSize: "28px",
+                // marginRight: "12px",
+              }}
+              component={Link}
+              href="https://www.facebook.com/thelabel39/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+            >
+              <Facebook />
+            </IconButton>
+            <IconButton
+              className="findus-icon"
+              sx={{
+                color: "#1F2020",
+                fontSize: "28px",
+              }}
+              component={Link}
+              href="https://www.instagram.com/thelabel39/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+            >
+              <Instagram />
+            </IconButton>
           </Box>
         </Box>
       </Box>

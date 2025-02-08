@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Container, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -31,13 +31,30 @@ const ShopDialog = (props) => {
   };
 
   return (
-    <Box sx={{ border: "1px solid #ccc", padding: 2, borderRadius: 1 }}>
-      <Box sx={{ display: "flex", flexDirection: "row", width: "100%" }}>
-        <Box sx={{ marginBottom: "20px", textAlign: "center" }}>
+    <Container
+      maxWidth="lg"
+      sx={{
+        border: "1px solid #ccc",
+        padding: 2,
+        borderRadius: 1,
+        margin: "2px",
+        width: { sm: "460px", md: "460px", lg: "480px" },
+      }}
+    >
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          width: "100%",
+          justifyContent: "center",
+        }}
+      >
+        <Box sx={{ marginBottom: "5px", textAlign: "center" }}>
           {}
           <Typography
             variant="h6"
             sx={{
+              fontSize: { xs: "14px", sm: "16px", md: "18px" },
               color: "#2f3e4e",
               mb: 1,
               fontFamily: "'Cinzel', serif",
@@ -51,7 +68,18 @@ const ShopDialog = (props) => {
               return (
                 <Button
                   key={category.label}
-                  sx={{ textAlign: "left", width: "100%", color: "#677489" }}
+                  sx={{
+                    textAlign: "center",
+                    width: "100%",
+                    color: "#677489",
+                    fontFamily: "'Cinzel', serif",
+                    fontWeight: "600",
+                    mb: "5px",
+                    "&:hover": {
+                      color: "#a16149",
+                      backgroundColor: "transparent",
+                    },
+                  }}
                   onClick={() =>
                     handlePageChange("/shop", category.value, "category")
                   }
@@ -63,11 +91,12 @@ const ShopDialog = (props) => {
           </>
         </Box>
 
-        <Box sx={{ marginBottom: "20px", textAlign: "center" }}>
+        <Box sx={{ marginBottom: "5px", textAlign: "center" }}>
           <Typography
             variant="h6"
             sx={{
               color: "#2f3e4e",
+              fontSize: { xs: "14px", sm: "16px", md: "18px" },
               mb: 1,
               fontFamily: "'Cinzel', serif",
               fontWeight: "600",
@@ -78,7 +107,18 @@ const ShopDialog = (props) => {
           {featured.map((feature) => (
             <Button
               key={feature}
-              sx={{ textAlign: "left", width: "100%", color: "#677489" }}
+              sx={{
+                textAlign: "center",
+                width: "100%",
+                color: "#677489",
+                fontFamily: "'Cinzel', serif",
+                fontWeight: "600",
+                mb: "5px",
+                "&:hover": {
+                  color: "#a16149",
+                  backgroundColor: "transparent",
+                },
+              }}
               onClick={() =>
                 handlePageChange("/shop", feature.value, "featured")
               }
@@ -107,7 +147,7 @@ const ShopDialog = (props) => {
           />
         </Box> */}
       </Box>
-    </Box>
+    </Container>
   );
 };
 

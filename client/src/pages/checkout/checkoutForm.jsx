@@ -7,6 +7,9 @@ import {
   Box,
   Button,
   Card,
+  Checkbox,
+  FormControlLabel,
+  FormGroup,
   Grid,
   Snackbar,
   Switch,
@@ -14,7 +17,7 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   checkDiscountCode,
   createOrder,
@@ -538,7 +541,7 @@ const CheckoutForm = (props) => {
                 sx={{
                   fontFamily: "'Roboto Serif', serif",
                   fontWeight: "600",
-                  mb: 2,
+                  mb: 1,
                 }}
               >
                 Country
@@ -564,11 +567,13 @@ const CheckoutForm = (props) => {
                 sx={{
                   fontFamily: "'Roboto Serif', serif",
                   fontWeight: "600",
-                  mb: 2,
+                  mt: 3,
                 }}
               >
                 Contact
               </Typography>
+            </Grid>
+            <Grid item xs={12}>
               <CustomTextfield
                 label="Phone number"
                 value={checkoutData.phone}
@@ -587,6 +592,7 @@ const CheckoutForm = (props) => {
                 Shipping Address
               </Typography>
             </Grid>
+
             {/* First Name and Last Name on the same row */}
             <Grid item xs={12} sm={6}>
               <CustomTextfield
@@ -779,7 +785,14 @@ const CheckoutForm = (props) => {
               </Grid>
             )}
             <Grid item xs={12}>
-              <Typography variant="subtitle1" sx={{ fontWeight: "600" }}>
+              <Typography
+                variant="h6"
+                sx={{
+                  fontFamily: "'Roboto Serif', serif",
+                  mt: 3,
+                  fontWeight: "600",
+                }}
+              >
                 Use a different billing address
                 <Switch
                   checked={isDifferentBilling}
@@ -986,7 +999,7 @@ const CheckoutForm = (props) => {
                 variant="h6"
                 sx={{
                   fontFamily: "'Roboto Serif', serif",
-                  mt: 3,
+                  mt: 2,
                   fontWeight: "600",
                 }}
               >
@@ -1030,6 +1043,47 @@ const CheckoutForm = (props) => {
                   FREE
                 </Typography>
               </Box>
+              <Typography
+                variant="h6"
+                sx={{
+                  fontFamily: "'Roboto Serif', serif",
+                  mt: 3,
+                  fontWeight: "600",
+                }}
+              >
+                Terms & Conditions
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  marginLeft: "-10px",
+                }}
+              >
+                <Checkbox
+                  // checked={checked}
+                  // onChange={handleChange}
+                  sx={{
+                    "&.Mui-checked": {
+                      color: "#a16149", // Ensures checked state has the same color
+                    },
+                  }}
+                />
+
+                <Typography
+                  variant="subtitle2"
+                  sx={{
+                    fontFamily: "'Roboto Serif', serif",
+                    fontWeight: "500",
+                  }}
+                >
+                  I acknowledge and agree to the{" "}
+                  <Link to="/termsAndCondition">Terms and Conditions</Link>
+                </Typography>
+              </Box>
+
               <Typography
                 variant="h6"
                 sx={{

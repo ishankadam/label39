@@ -19,6 +19,8 @@ const ProductCard = (props) => {
     setImageIndex(0); // Change image back to index 0 when hover ends
   };
 
+  const isSaleActive = props.product.sale && props.product.sale.isActive;
+
   return (
     <Card
       className="product-card"
@@ -97,6 +99,7 @@ const ProductCard = (props) => {
           component="img"
           sx={{
             transition: "100ms ease-in-out", // Apply transition
+            objectPosition: "top",
           }}
           // image={`${imageUrl}products/${props.product.images[0]}`}
           image={`${imageUrl}products/${props.product.images[imageIndex]}`}
@@ -106,7 +109,7 @@ const ProductCard = (props) => {
 
       <CardContent
         sx={{
-          padding: "10px 16px",
+          padding: { xs: "10px", sm: "10px 12px", md: "10px 16px" },
         }}
       >
         <Typography
@@ -115,9 +118,23 @@ const ProductCard = (props) => {
           component="div"
           align="center"
           sx={{
+            // mt: props.product.sale?.isActive ? 0 : 2,
+            marginTop: isSaleActive
+              ? 0
+              : { xs: "12px", sm: "14px", md: "15px", lg: "16px" },
+            textTransform: "uppercase",
             fontFamily: "'Roboto Serif', serif",
             fontWeight: "400",
-            fontSize: { xs: "11px", sm: "12px", md: "16px" },
+            fontSize: { xs: "12px", sm: "13px", md: "15px" },
+            whiteSpace: "nowrap", // Ensures text stays on a single line
+            overflow: "hidden", // Hides overflow text
+            textOverflow: "ellipsis", // Adds "..." when text overflows
+            width: "100%", // Ensure it takes the full width
+            // display: "-webkit-box",
+            // WebkitBoxOrient: "vertical",
+            // WebkitLineClamp: 2,
+            // overflow: "hidden",
+            // textOverflow: "ellipsis",
           }}
         >
           {props.asSeenOn && props.product.asSeenOn
@@ -129,7 +146,7 @@ const ProductCard = (props) => {
           variant="h6"
           align="center"
           sx={{
-            fontSize: { xs: "12px", sm: "13px", md: "16px" },
+            fontSize: { xs: "12px", sm: "13px", md: "15px" },
             // fontFamily: "'Poppins', sans-serif",
             fontFamily: "'Roboto Serif', serif",
             color: "#a16149",
@@ -153,7 +170,7 @@ const ProductCard = (props) => {
                   textDecoration: "line-through",
                   marginLeft: "8px",
                   color: "#989898",
-                  fontSize: "14px",
+                  fontSize: { xs: "12px", sm: "13px", md: "15px" },
                   fontFamily: "'Roboto Serif', serif",
                 }}
               >
@@ -164,7 +181,7 @@ const ProductCard = (props) => {
                 style={{
                   marginLeft: "8px",
                   color: "#989898",
-                  fontSize: "14px",
+                  fontSize: { xs: "12px", sm: "13px", md: "15px" },
                   fontFamily: "'Roboto Serif', serif",
                   fontWeight: "500",
                 }}

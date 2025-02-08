@@ -106,6 +106,10 @@ ul li:hover,
 }
 
 .subscribe {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   /* background-color: rgba(204, 161, 144, 0.3); */
   background-color: rgba(210, 188, 183, 0.7);
   /* display: flex; */
@@ -116,35 +120,16 @@ ul li:hover,
 .subscribe-title {
   font-family: "Berkshire Swash", serif;
   font-weight: 400;
-  font-size: 20px;
+  font-size: 22px;
   margin-bottom: 20px !important;
   margin-top: 0px !important;
 
   color: #374151;
 }
-.subscribe input {
-  width: 70%;
-  flex-grow: 1;
-  padding: 10px;
-  border-radius: 5px 0 0 5px;
-  border: 1px solid #ccc;
-  /* margin-bottom: 20px; */
-}
-
-.subscribe button {
-  border: 1px solid #ccc;
-
-  background-color: #a16149;
-  color: white;
-  border: none;
-  padding: 11px 15px;
-  margin-bottom: 20px;
-  border-radius: 0 5px 5px 0;
-  cursor: pointer;
-}
 
 .subscribe-text {
-  margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 30px;
   font-family: "Cinzel", serif !important;
   font-size: 16px;
   font-weight: 600 !important;

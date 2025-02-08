@@ -33,6 +33,7 @@ const MainCarousel = () => {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2500,
+    arrows: false,
     beforeChange: (oldIndex, newIndex) => setCurrentSlide(newIndex),
   };
 

@@ -1,4 +1,4 @@
-import { Button, Card, CardActions, CardMedia } from "@mui/material";
+import { Box, Button, Card, CardActions, CardMedia } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { imageUrl } from "../../api";
 
@@ -23,59 +23,60 @@ function ClientDiaryCard({ diary, setShowModal }) {
   }, [diary.image]);
 
   return (
-    <Card
-      sx={{
-        bgcolor: "#FFF8F5",
-        display: "flex",
-        flexDirection: "column",
-        height: "100%",
-        boxShadow: "none",
-        borderRadius: "2px",
-        overflow: "hidden",
-      }}
-    >
-      <CardMedia
-        component="img"
-        image={`${imageUrl}clientDiaries/${diary.image[currentImageIndex]}`}
-        alt={diary.name || ""}
+    <Box>
+      <Card
         sx={{
-          height: { xs: "320px", sm: "350px", md: "450px", lg: "500px" },
-          objectFit: "cover",
-          transition: "opacity 0.5s ease-in-out",
-          opacity: fadeIn ? 1 : 0.5,
-        }}
-      />
-      <CardActions
-        sx={{
-          mt: "auto",
-          justifyContent: "space-between",
-          padding: "16px 0",
+          borderRadius: "2px",
+          boxShadow: "none",
+          position: "relative",
+          overflow: "hidden",
+
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          height: "100%",
         }}
       >
-        <Button
-          color="custom"
-          variant="outlined"
+        <CardMedia
+          component="img"
+          image={`${imageUrl}clientDiaries/${diary.image[currentImageIndex]}`}
+          alt={diary.name || ""}
           sx={{
-            flex: 1,
-            borderColor: "#A16149",
-            color: "#A16149",
-            "&:hover": {
-              backgroundColor: "#A16149",
-              color: "white",
-              borderColor: "#A16149",
-            },
+            height: { xs: "320px", sm: "360px", md: "480px", lg: "500px" },
+            objectFit: "cover",
+            width: "100%",
+            objectPosition: "top", // Add this property
           }}
-          onClick={() => {
-            setShowModal({
-              open: true,
-              data: diary.productDetails[0],
-            });
+        />
+        {/* <CardActions
+          sx={{
+            mt: "auto",
+            justifyContent: "space-between",
+            padding: "16px 0",
           }}
-        >
-          View Product
-        </Button>
-      </CardActions>
-    </Card>
+        ></CardActions> */}
+      </Card>
+      <Button
+        color="custom"
+        variant="outlined"
+        sx={{
+          width: "100%", // Full width
+          marginTop: 1, // Add space between card and button
+          //   fontFamily: "'Cinzel', serif",
+          //   fontWeight: { xs: "700", sm: "600", md: "700" },
+          //   fontSize: { xs: "14px", sm: "14px", md: "16px" },
+          padding: "10px",
+          borderRadius: "2px",
+        }}
+        onClick={() => {
+          setShowModal({
+            open: true,
+            data: diary.productDetails[0],
+          });
+        }}
+      >
+        View Product
+      </Button>
+    </Box>
   );
 }
 

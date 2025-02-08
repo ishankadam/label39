@@ -65,6 +65,8 @@ const Footer = (props) => {
             width: "100%",
             height: { xs: "90px", sm: "auto" },
             display: "block",
+            marginTop: "50px",
+
             // mixBlendMode: "multiply",
             // filter: "brightness(0) invert(1)",
           }}
@@ -314,15 +316,28 @@ const Footer = (props) => {
               <div className="subscribe">
                 <h3 className="subscribe-title">Subscribe</h3>
                 <form></form>
-                <Typography className="subscribe-text">
+                <Typography
+                  variant="h6"
+                  sx={{
+                    marginBottom: "20px",
+                    textAlign: "center",
+                    fontSize: "16px",
+                    fontWeight: "700",
+                    fontFamily: "'Cinzel', serif ",
+                    color: "rgba(55, 65, 81, 0.85)",
+                  }}
+                >
                   Stay in the loop with the latest updates, unlock exclusive
                   deals, and be the first to know about exciting offers!
                 </Typography>
                 <Button
+                  variant="contained"
+                  color="custom"
                   type="submit"
+                  sx={{ width: "160px", borderRadius: "20px" }}
                   onClick={() => props.setOpenSubscribeModal(true)}
                 >
-                  Subscribe
+                  subscribe
                 </Button>
               </div>
             </Grid2>

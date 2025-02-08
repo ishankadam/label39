@@ -420,7 +420,7 @@ const ProductsPage = (props) => {
       <div className="shop-wrapper">
         <div className="content">
           {/* Filter section for larger screens */}
-          <div className="filter-section">
+          <Box className="filter-section">
             <div className="category-filter">
               <Typography
                 variant="h5"
@@ -448,17 +448,13 @@ const ProductsPage = (props) => {
                         }
                         sx={{
                           margin: "0 !important",
-                          Color: isSelected
-                            ? "rgba(0, 106, 25, 0.1)"
-                            : "transparent", // Apply green background when selected
+                          Color: isSelected ? "#F7ECE9" : "transparent",
                           "&:focus": {
                             fontWeight: "bold !important",
-                            Color: "rgba(0, 106, 25, 0.1) !important", // On focus
+                            Color: "#F7ECE9 !important", // On focus
                           },
                           "&:hover": {
-                            backgroundColor: isSelected
-                              ? "rgba(0, 106, 25, 0.15)"
-                              : "#efefef", // Change hover effect when selected
+                            backgroundColor: isSelected ? "#F7ECE9" : "#efefef", // Change hover effect when selected
                           },
                         }}
                       >
@@ -474,8 +470,10 @@ const ProductsPage = (props) => {
                         <ListItemText
                           primary={category.label}
                           primaryTypographyProps={{
+                            paddingRight: "20px",
+
                             fontFamily: " 'Roboto Serif', serif",
-                            fontSize: isSelected ? "14px" : "14px",
+                            fontSize: isSelected ? "13px" : "13px",
                             fontWeight: isSelected ? "600" : "normal",
                             color: isSelected ? "#a16149" : "black",
                             margin: "0 !important", // Override margin
@@ -531,17 +529,14 @@ const ProductsPage = (props) => {
                         }
                         sx={{
                           margin: "0 !important",
-                          Color: isSelected
-                            ? "rgba(0, 106, 25, 0.1)"
-                            : "transparent", // Apply green background when selected
+
+                          Color: isSelected ? "#F7ECE9" : "transparent",
                           "&:focus": {
                             fontWeight: "bold !important",
-                            Color: "rgba(0, 106, 25, 0.1) !important", // On focus
+                            Color: "#F7ECE9 !important", // On focus
                           },
                           "&:hover": {
-                            backgroundColor: isSelected
-                              ? "rgba(0, 106, 25, 0.15)"
-                              : "#efefef", // Change hover effect when selected
+                            backgroundColor: isSelected ? "#F7ECE9" : "#efefef", // Change hover effect when selected
                           },
                         }}
                       >
@@ -557,8 +552,9 @@ const ProductsPage = (props) => {
                         <ListItemText
                           primary={featured.label}
                           primaryTypographyProps={{
+                            textTransform: "uppercase",
                             fontFamily: " 'Roboto Serif', serif",
-                            fontSize: isSelected ? "14px" : "14px",
+                            fontSize: isSelected ? "13px" : "13px",
                             fontWeight: isSelected ? "600" : "normal",
                             color: isSelected ? "#a16149" : "black",
                             margin: "0 !important", // Override margin
@@ -614,17 +610,13 @@ const ProductsPage = (props) => {
                         onClick={() => handleFilterChange(priceRange, "price")}
                         sx={{
                           margin: "0 !important",
-                          Color: isSelected
-                            ? "rgba(0, 106, 25, 0.1)"
-                            : "transparent", // Apply green background when selected
+                          Color: isSelected ? "#F7ECE9" : "transparent",
                           "&:focus": {
                             fontWeight: "bold !important",
-                            Color: "rgba(0, 106, 25, 0.1) !important", // On focus
+                            Color: "#F7ECE9 !important", // On focus
                           },
                           "&:hover": {
-                            backgroundColor: isSelected
-                              ? "rgba(0, 106, 25, 0.15)"
-                              : "#efefef", // Change hover effect when selected
+                            backgroundColor: isSelected ? "#F7ECE9" : "#efefef", // Change hover effect when selected
                           },
                         }}
                       >
@@ -640,8 +632,9 @@ const ProductsPage = (props) => {
                         <ListItemText
                           primary={priceRange.label}
                           primaryTypographyProps={{
+                            textTransform: "uppercase",
                             fontFamily: " 'Roboto Serif', serif",
-                            fontSize: isSelected ? "14px" : "14px",
+                            fontSize: isSelected ? "13px" : "13px",
                             fontWeight: isSelected ? "600" : "normal",
                             color: isSelected ? "#a16149" : "black",
                             margin: "0 !important", // Override margin
@@ -715,16 +708,14 @@ const ProductsPage = (props) => {
                           onClick={() => handleFilterChange(color, "color")}
                           sx={{
                             margin: "0 !important",
-                            Color: isSelected
-                              ? "rgba(0, 106, 25, 0.1)"
-                              : "transparent", // Apply green background when selected
+                            Color: isSelected ? "#F7ECE9" : "transparent",
                             "&:focus": {
                               fontWeight: "bold !important",
-                              Color: "rgba(0, 106, 25, 0.1) !important", // On focus
+                              Color: "#F7ECE9 !important", // On focus
                             },
                             "&:hover": {
                               backgroundColor: isSelected
-                                ? "rgba(0, 106, 25, 0.15)"
+                                ? "#F7ECE9"
                                 : "#efefef", // Change hover effect when selected
                             },
                           }}
@@ -741,8 +732,9 @@ const ProductsPage = (props) => {
                           <ListItemText
                             primary={color}
                             primaryTypographyProps={{
+                              textTransform: "uppercase",
                               fontFamily: " 'Roboto Serif', serif",
-                              fontSize: isSelected ? "16px" : "15px",
+                              fontSize: isSelected ? "13px" : "13px",
                               fontWeight: isSelected ? "600" : "normal",
                               color: isSelected ? "#a16149" : "black",
                               margin: "0 !important", // Override margin
@@ -871,7 +863,7 @@ const ProductsPage = (props) => {
                 </List>
               </Box>
             </div> */}
-          </div>
+          </Box>
 
           {/* Products card container */}
           <div>
@@ -1128,17 +1120,13 @@ const ProductsPage = (props) => {
                       }
                       sx={{
                         margin: "0 !important",
-                        Color: isSelected
-                          ? "rgba(0, 106, 25, 0.1)"
-                          : "transparent", // Apply green background when selected
+                        Color: isSelected ? "#F7ECE9" : "transparent",
                         "&:focus": {
                           fontWeight: "bold !important",
-                          Color: "rgba(0, 106, 25, 0.1) !important", // On focus
+                          Color: "#F7ECE9 !important", // On focus
                         },
                         "&:hover": {
-                          backgroundColor: isSelected
-                            ? "rgba(0, 106, 25, 0.15)"
-                            : "#efefef", // Change hover effect when selected
+                          backgroundColor: isSelected ? "#F7ECE9" : "#efefef", // Change hover effect when selected
                         },
                       }}
                     >
@@ -1213,17 +1201,13 @@ const ProductsPage = (props) => {
                       }
                       sx={{
                         margin: "0 !important",
-                        Color: isSelected
-                          ? "rgba(0, 106, 25, 0.1)"
-                          : "transparent", // Apply green background when selected
+                        Color: isSelected ? "#F7ECE9" : "transparent",
                         "&:focus": {
                           fontWeight: "bold !important",
-                          Color: "rgba(0, 106, 25, 0.1) !important", // On focus
+                          Color: "#F7ECE9 !important", // On focus
                         },
                         "&:hover": {
-                          backgroundColor: isSelected
-                            ? "rgba(0, 106, 25, 0.15)"
-                            : "#efefef", // Change hover effect when selected
+                          backgroundColor: isSelected ? "#F7ECE9" : "#efefef", // Change hover effect when selected
                         },
                       }}
                     >
@@ -1239,6 +1223,7 @@ const ProductsPage = (props) => {
                       <ListItemText
                         primary={featured.label}
                         primaryTypographyProps={{
+                          textTransform: "uppercase",
                           fontFamily: " 'Roboto Serif', serif",
                           fontSize: isSelected
                             ? { xs: "14px", sm: "14px", md: "16px" }
@@ -1295,17 +1280,13 @@ const ProductsPage = (props) => {
                       onClick={() => handleFilterChange(priceRange, "price")}
                       sx={{
                         margin: "0 !important",
-                        Color: isSelected
-                          ? "rgba(0, 106, 25, 0.1)"
-                          : "transparent", // Apply green background when selected
+                        Color: isSelected ? "#F7ECE9" : "transparent",
                         "&:focus": {
                           fontWeight: "bold !important",
-                          Color: "rgba(0, 106, 25, 0.1) !important", // On focus
+                          Color: "#F7ECE9 !important", // On focus
                         },
                         "&:hover": {
-                          backgroundColor: isSelected
-                            ? "rgba(0, 106, 25, 0.15)"
-                            : "#efefef", // Change hover effect when selected
+                          backgroundColor: isSelected ? "#F7ECE9" : "#efefef", // Change hover effect when selected
                         },
                       }}
                     >
@@ -1379,17 +1360,13 @@ const ProductsPage = (props) => {
                       onClick={() => handleFilterChange(color, "color")}
                       sx={{
                         margin: "0 !important",
-                        Color: isSelected
-                          ? "rgba(0, 106, 25, 0.1)"
-                          : "transparent", // Apply green background when selected
+                        Color: isSelected ? "#F7ECE9" : "transparent",
                         "&:focus": {
                           fontWeight: "bold !important",
-                          Color: "rgba(0, 106, 25, 0.1) !important", // On focus
+                          Color: "#F7ECE9 !important", // On focus
                         },
                         "&:hover": {
-                          backgroundColor: isSelected
-                            ? "rgba(0, 106, 25, 0.15)"
-                            : "#efefef", // Change hover effect when selected
+                          backgroundColor: isSelected ? "#F7ECE9" : "#efefef", // Change hover effect when selected
                         },
                       }}
                     >

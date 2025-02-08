@@ -93,6 +93,7 @@ const CustomAppbar = (props) => {
     { text: "About Us", page: "ourStory" },
     { text: "Gift card", page: "giftcard" },
     { text: "Client Diaries", page: "clientsDiaries" },
+    { text: "Celebrity Style", page: "celebrityStylePage" },
   ];
 
   const [openShopMenu, setOpenShopMenu] = useState(false);
@@ -345,6 +346,7 @@ const CustomAppbar = (props) => {
                 {/* ShopDialog - Display only on hover */}
                 {item.text === "Shop" && isShopOpen && (
                   <Box
+                    maxWidth="lg"
                     onMouseEnter={() => setIsShopOpen(true)}
                     onMouseLeave={() => setIsShopOpen(false)}
                     sx={{
@@ -357,7 +359,6 @@ const CustomAppbar = (props) => {
 
                       // padding: 2,
                       paddingTop: "12px",
-                      minWidth: "600px", // Ensures dialog width
                     }}
                   >
                     <ShopDialog categories={categories} />
@@ -381,7 +382,7 @@ const CustomAppbar = (props) => {
               margin="normal"
               sx={{
                 display: { xs: "none", md: "flex" },
-                width: "110px",
+                width: { xs: "80px", md: "80px", lg: "120px" },
                 height: "40px",
                 padding: "6px 0px",
                 margin: "0px 10px !important",

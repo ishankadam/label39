@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { getInstagramPosts } from "../../api";
 import "./Slider.css"; // Assuming you have the relevant CSS file here
@@ -37,7 +37,7 @@ const InstagramSection = () => {
           }}
         >
           join us on instagram
-          <div
+          <Box
             className="title-border"
             style={{
               width: "70px",
@@ -48,8 +48,8 @@ const InstagramSection = () => {
             }}
           />
         </Typography>
-        <main className="slider-main">
-          <div
+        <Box className="slider-main">
+          <Box
             className="slider"
             style={{
               "--width": "300px",
@@ -58,10 +58,10 @@ const InstagramSection = () => {
               cursor: "pointer",
             }}
           >
-            <div className="list">
+            <Box className="list">
               {instaPosts.map((post, index) => {
                 return (
-                  <div
+                  <Box
                     className="item"
                     key={index}
                     style={{ "--position": index + 1 }}
@@ -74,20 +74,30 @@ const InstagramSection = () => {
                       alt={`Slide ${index + 1}`}
                       className="slider-img"
                     />
-                    <div className="overlay">
+                    <Box className="overlay">
                       <Typography variant="h6" className="overlay-text">
                         {post.caption}
                       </Typography>
                       <Typography variant="body1" className="overlay-date">
                         {post.date}
                       </Typography>
-                    </div>
-                  </div>
+                    </Box>
+                  </Box>
                 );
               })}
-            </div>
-          </div>
-        </main>
+            </Box>
+          </Box>
+        </Box>
+        <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
+          <Button
+            href="https://www.instagram.com/thelabel39/"
+            variant="contained"
+            color="custom"
+            sx={{ width: "120px", borderRadius: "20px" }}
+          >
+            JOIN US
+          </Button>
+        </Box>
         <hr
           className="footer-line"
           style={{
