@@ -36,6 +36,7 @@ import {
   openCartDrawer,
   setCurrency,
   setFilter,
+  setSizeChart,
   showSnackbar,
 } from "../../store/cartSlice";
 import SelectDropdown from "../select-dropdown/selectDropdown";
@@ -62,7 +63,26 @@ const CustomAppbar = (props) => {
   };
 
   useEffect(() => {
+    if (categories.length > 0) {
+      const sizeChart = categories.map((category) => {
+        return { category: category.value, sizeChart: category.sizeChart };
+      });
+      dispatch(setSizeChart(sizeChart));
+    }
+  }, [categories]);
+
+  useEffect(() => {
+    console.log("view product modal");
+  }, []);
+
+  useEffect(() => {
     setCategories(props.allCategories);
+    if (props.allCategories.length > 0) {
+      const sizeChart = props.allCategories.map((category) => {
+        return { category: category.value, sizeChart: category.sizeChart };
+      });
+      dispatch(setSizeChart(sizeChart));
+    }
   }, [props.allCategories]);
 
   useEffect(() => {

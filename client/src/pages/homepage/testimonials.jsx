@@ -119,7 +119,7 @@ const Testimonials = (props) => {
                 {/* Left Section: Image */}
                 <CardMedia
                   component="img"
-                  image={`${imageUrl}/testimonials/${slide.image}`}
+                  image={`${imageUrl}testimonials/${slide.image}`}
                   alt={`slide-${currentSlide + index}`}
                   sx={{
                     // background: "#fff",

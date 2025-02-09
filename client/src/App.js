@@ -43,6 +43,7 @@ import CustomSnackbar from "./snackbar/customSnackbar";
 import { store } from "./store/store";
 import CelebrityStyle from "./pages/dashboard/celebrityStyle";
 import CelebrityStylePage from "./pages/celebrity-style/celebrityStylePage";
+import SizeChart from "./pages/product/sizeChart";
 const App = () => {
   const [cartDetails, setCartDetails] = useState({
     open: false,
@@ -264,6 +265,7 @@ const App = () => {
             }
           />
           <Route exact path="/product" element={<ViewProduct />} />
+          <Route exact path="/sizeChart" element={<SizeChart />} />
           <Route exact path="/giftCard" element={<GiftCardModal />} />
           <Route
             exact
