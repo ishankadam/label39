@@ -7,6 +7,7 @@ const Testimonial = require("../schema/testimonial");
 const User = require("../schema/user");
 const path = require("path");
 const parentDir = path.join(__dirname, "..");
+const multerS3 = require("multer-s3");
 const fs = require("fs");
 const md5 = require("md5");
 var _ = require("lodash");
@@ -21,88 +22,141 @@ const sendEmail = require("../emailer");
 const discount = require("../schema/discount");
 const jwt = require("jsonwebtoken");
 const Subscriber = require("../schema/subscribers");
+const aws = require("aws-sdk");
+const { S3Client } = require("@aws-sdk/client-s3");
 
-const storage = multer.diskStorage({
-  destination: (req, _file, cb) => {
-    let category;
-    try {
-      if (req.body.products) {
-        category = "products";
-      } else if (req.body.category) {
-        category = "categories";
-      } else if (req.body.clientDiaries) {
-        category = "clientDiaries";
-      } else if (req.body.celebrityStyles) {
-        category = "celebrityStyles";
-      } else if (req.body.testimonials) {
-        category = "testimonials";
-      } else {
-        return cb(
-          new Error(
-            "Either products, categories, or testimonial data is required"
-          )
-        );
-      }
-
-      if (!category) {
-        return cb(new Error("Category is required"));
-      }
-
-      // For products, create separate directories for photos and videos
-      if (category === "products") {
-        const dir = path.join(parentDir, "uploads", category);
-        if (!fs.existsSync(dir)) {
-          fs.mkdirSync(dir, { recursive: true });
-        }
-        cb(null, dir);
-      } else {
-        const dir = path.join(parentDir, "uploads", category);
-        console.log(dir);
-        if (!fs.existsSync(dir)) {
-          fs.mkdirSync(dir, { recursive: true });
-        }
-        cb(null, dir);
-      }
-    } catch (error) {
-      console.error("Error parsing data:", error);
-      return cb(new Error("Invalid data format in request body"));
-    }
-  },
-  filename: (_req, file, cb) => {
-    try {
-      if (!file || !file.originalname) {
-        throw new Error("File or original name is missing.");
-      }
-      cb(null, file.originalname); // Use the original name as the filename
-    } catch (error) {
-      console.error("Error in filename function:", error);
-      cb(new Error("Failed to process file name."));
-    }
+// Initialize S3 client
+const s3 = new S3Client({
+  region: process.env.AWS_REGION,
+  credentials: {
+    accessKeyId: process.env.AWS_S3_ACCESS_KEY,
+    secretAccessKey: process.env.AWS_S3_SECRET_KEY,
   },
 });
-
-const fileFilter = (_req, file, cb) => {
-  // Accept image and video files
-  if (
-    file.mimetype.startsWith("image/") ||
-    file.mimetype.startsWith("video/")
-  ) {
-    cb(null, true);
-  } else {
-    cb(
-      new Error("Unsupported file type. Only images and videos are allowed."),
-      false
-    );
-  }
-};
 
 const upload = multer({
-  storage: storage,
-  fileFilter: fileFilter,
-  limits: {
-    fileSize: 100 * 1024 * 1024, // Limit file size to 100MB
+  storage: multerS3({
+    s3: s3,
+    bucket: process.env.S3_BUCKET_NAME,
+    contentType: multerS3.AUTO_CONTENT_TYPE, // Auto-detect content type
+    metadata: (req, file, cb) => {
+      cb(null, { fieldName: file.fieldname });
+    },
+    key: (req, file, cb) => {
+      let folder = "others"; // Default folder
+
+      if (req.body.products) {
+        folder = "products";
+      } else if (req.body.category) {
+        folder = "categories";
+      } else if (req.body.clientDiaries) {
+        folder = "clientDiaries";
+      } else if (req.body.celebrityStyles) {
+        folder = "celebrityStyles";
+      } else if (req.body.testimonials) {
+        folder = "testimonials";
+      }
+
+      const fileName = `${file.originalname}`;
+      cb(null, `${folder}/${fileName}`); // Store files in respective folders
+    },
+  }),
+  fileFilter: (_req, file, cb) => {
+    if (
+      file.mimetype.startsWith("image/") ||
+      file.mimetype.startsWith("video/")
+    ) {
+      cb(null, true);
+    } else {
+      cb(new Error("Only images and videos are allowed"), false);
+    }
   },
+  limits: { fileSize: 100 * 1024 * 1024 }, // 100MB limit
 });
+
+module.exports = upload;
+
+// const storage = multer.diskStorage({
+//   destination: (req, _file, cb) => {
+//     let category;
+//     try {
+//       if (req.body.products) {
+//         category = "products";
+//       } else if (req.body.category) {
+//         category = "categories";
+//       } else if (req.body.clientDiaries) {
+//         category = "clientDiaries";
+//       } else if (req.body.celebrityStyles) {
+//         category = "celebrityStyles";
+//       } else if (req.body.testimonials) {
+//         category = "testimonials";
+//       } else {
+//         return cb(
+//           new Error(
+//             "Either products, categories, or testimonial data is required"
+//           )
+//         );
+//       }
+
+//       if (!category) {
+//         return cb(new Error("Category is required"));
+//       }
+
+//       // For products, create separate directories for photos and videos
+//       if (category === "products") {
+//         const dir = path.join(parentDir, "uploads", category);
+//         if (!fs.existsSync(dir)) {
+//           fs.mkdirSync(dir, { recursive: true });
+//         }
+//         cb(null, dir);
+//       } else {
+//         const dir = path.join(parentDir, "uploads", category);
+//         console.log(dir);
+//         if (!fs.existsSync(dir)) {
+//           fs.mkdirSync(dir, { recursive: true });
+//         }
+//         cb(null, dir);
+//       }
+//     } catch (error) {
+//       console.error("Error parsing data:", error);
+//       return cb(new Error("Invalid data format in request body"));
+//     }
+//   },
+//   filename: (_req, file, cb) => {
+//     try {
+//       if (!file || !file.originalname) {
+//         throw new Error("File or original name is missing.");
+//       }
+//       cb(null, file.originalname); // Use the original name as the filename
+//     } catch (error) {
+//       console.error("Error in filename function:", error);
+//       cb(new Error("Failed to process file name."));
+//     }
+//   },
+// });
+
+// const fileFilter = (_req, file, cb) => {
+//   // Accept image and video files
+//   if (
+//     file.mimetype.startsWith("image/") ||
+//     file.mimetype.startsWith("video/")
+//   ) {
+//     cb(null, true);
+//   } else {
+//     cb(
+//       new Error("Unsupported file type. Only images and videos are allowed."),
+//       false
+//     );
+//   }
+// };
+
+// const upload = multer({
+//   storage: storage,
+//   fileFilter: fileFilter,
+//   limits: {
+//     fileSize: 100 * 1024 * 1024, // Limit file size to 100MB
+//   },
+// });
 
 const checkLoginInput = (password) => {
   const hashPassword = md5(password);
