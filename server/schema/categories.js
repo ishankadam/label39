@@ -1,3 +1,4 @@
+const { size } = require("lodash");
 const mongoose = require("mongoose");
 
 // Define the schema
@@ -31,6 +32,7 @@ const categorySchema = new mongoose.Schema({
   value: { type: String },
   show: { type: Boolean, default: true },
   dropdownOption: { type: Boolean, default: true },
+  size: { type: Array, default: [] },
 });
 
 // Create the model

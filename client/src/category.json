@@ -8,7 +8,8 @@
     "priority": 1,
     "value": "cord",
     "show": true,
-    "dropdownOption": true
+    "dropdownOption": true,
+    "sizeChart": ["SC-coords-bottom.png", "SC-coords-top.png"]
   },
   {
     "categoryId": 332975476,
@@ -19,7 +20,8 @@
     "priority": 2,
     "value": "kurtas",
     "show": true,
-    "dropdownOption": true
+    "dropdownOption": true,
+    "sizeChart": ["SC-kurtas-bottom.png", "SC-kurtas-top.png"]
   },
   {
     "categoryId": 3225035965,
@@ -30,7 +32,8 @@
     "priority": 3,
     "value": "shirt",
     "show": false,
-    "dropdownOption": true
+    "dropdownOption": true,
+    "sizeChart": ["SC-shirts.png"]
   },
   {
     "categoryId": 1492634508,
@@ -41,7 +44,8 @@
     "priority": 4,
     "value": "festive",
     "show": true,
-    "dropdownOption": true
+    "dropdownOption": true,
+    "sizeChart": ["SC-festive-bottom.png", "SC-festive-top.png"]
   },
   {
     "categoryId": 2223264144,
@@ -52,7 +56,8 @@
     "priority": 5,
     "value": "dress",
     "show": false,
-    "dropdownOption": true
+    "dropdownOption": true,
+    "sizeChart": ["SC-kurtas-bottom.png", "SC-kurtas-top.png"]
   },
   {
     "categoryId": 945895391,
@@ -63,6 +68,7 @@
     "priority": 6,
     "value": "shirtsAndDresses",
     "show": true,
-    "dropdownOption": false
+    "dropdownOption": false,
+    "sizeChart": []
   }
 ]
