@@ -16,6 +16,7 @@ const initialState = {
   },
   snackbars: [],
   currency: "INR",
+  sizeChart: [],
 };
 
 export const cartSlice = createSlice({
@@ -108,6 +109,9 @@ export const cartSlice = createSlice({
     setCurrency: (state, action) => {
       state.currency = action.payload;
     },
+    setSizeChart: (state, action) => {
+      state.sizeChart = action.payload;
+    },
   },
 });
 
@@ -126,6 +130,7 @@ export const {
   showSnackbar,
   hideSnackbar,
   setCurrency,
+  setSizeChart,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

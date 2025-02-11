@@ -457,3 +457,8 @@ export const featured = [
   { label: "Celebrity Style", value: "asSeenOn" },
   // { label: "CLIENTS DAIRY", value: "clientsDiaries" },
 ];
+
+export const getSizeChart = (category, sizeCharts) => {
+  const item = sizeCharts.find((item) => item.category === category);
+  return item ? item.sizeChart : [];
+};

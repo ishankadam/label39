@@ -3,29 +3,42 @@ import ShareIcon from "@mui/icons-material/Share";
 import {
   Box,
   Button,
+  Dialog,
+  DialogContent,
+  DialogTitle,
   Grid,
+  Icon,
   IconButton,
-  Link,
   Modal,
   ToggleButton,
   ToggleButtonGroup,
   Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addProductToCart, appUrl, imageUrl, phoneNumber } from "../../api";
 import {
   addCommaToPrice,
   calculatePriceAfterDiscount,
   getCurrencySymbol,
+  getSizeChart,
   whatsappQueryMessage,
 } from "../../common";
 import { addToCart, showSnackbar } from "../../store/cartSlice";
 import Footer from "../homepage/footer";
 import ShareViaWhatsApp from "../share-via-whatsapp/shareViaWhatsapp";
+import { Link } from "react-router-dom";
+import heroImage1 from "../../assets/sc-upper.jpeg";
+import Slider from "react-slick";
+import heroImage2 from "../../assets/sc-lower.jpeg";
+import { ArrowBackIos, ArrowForwardIos, Close } from "@mui/icons-material";
+import { use } from "react";
 
 const ViewProductModal = (props) => {
+  const [sizeChartOpen, setSizeChartOpen] = useState(false);
+  const sizeChart = useSelector((state) => state.cart.sizeChart);
+
   const { isAdmin, product, open, setShowModal } = props;
   const [modalOpen, setModalOpen] = useState(open);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -39,6 +52,19 @@ const ViewProductModal = (props) => {
   const userId = localStorage.getItem("userId");
   const [price, setPrice] = useState(product.price);
   const [cartProduct, setCartProduct] = useState(product);
+
+  // Sample Size Chart Images (Replace with actual URLs)
+
+  const sizeChartImages = getSizeChart(product.category, sizeChart);
+
+  // Slick Slider Settings
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
 
   const handleClose = () => {
     setShowModal((prev) => ({
@@ -330,13 +356,15 @@ const ViewProductModal = (props) => {
                 <Typography
                   variant="h6"
                   sx={{
-                    fontSize: { xs: "14px", sm: "16px", md: "18px" },
-                    // fontFamily: "'Poppins', sans-serif",
-                    fontFamily: "'Roboto Serif', serif",
-                    color: "#a16149",
+                    marginBottom: "10px",
+                    fontSize: { xs: "17px", sm: "18px", md: "20px" },
+                    color: "rgba(55, 65, 81, 0.85)",
+                    fontFamily: "'Roboto Condensed', serif ",
+                    display: "flex",
+                    justifyContent: { xs: "center", sm: "center", md: "left" },
                   }}
                 >
-                  <span style={{ fontWeight: "600", color: "#a16149" }}>
+                  <span style={{ fontWeight: "600" }}>
                     {getCurrencySymbol(props.country)}{" "}
                     {props.product.sale && props.product.sale.isActive
                       ? calculatePriceAfterDiscount(
@@ -381,16 +409,17 @@ const ViewProductModal = (props) => {
 
                 {/* Size Chart */}
                 <Link
-                  href="#"
+                  // to="/sizeChart"
+                  onClick={() => setSizeChartOpen(true)}
                   color="text.secondary"
-                  sx={{
+                  style={{
+                    color: "rgba(55, 65, 81, 0.85)",
+                    cursor: "pointer",
                     marginBottom: "15px",
                     display: "block",
-                    fontSize: { xs: "14px", sm: "16px" },
+                    fontSize: "16px",
                     fontWeight: "600",
-                    fontFamily: "'Roboto Serif', serif ",
-
-                    // color: "rgba(55, 65, 81, 0.85)",
+                    fontFamily: "'Roboto Serif', serif",
                   }}
                 >
                   Size Chart
@@ -620,6 +649,56 @@ const ViewProductModal = (props) => {
           </Box> */}
         </Box>
       </Modal>
+
+      {/* Size Chart Dialog */}
+      <Dialog
+        open={sizeChartOpen}
+        onClose={() => setSizeChartOpen(false)}
+        // maxWidth="md"
+        fullWidth
+      >
+        <DialogTitle>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Typography variant="h6">Size Chart</Typography>
+            <IconButton onClick={() => setSizeChartOpen(false)}>
+              <Close />
+            </IconButton>
+          </Box>
+        </DialogTitle>
+        <DialogContent sx={{ p: 0 }}>
+          <Box sx={{ p: 0 }}>
+            <Slider {...sliderSettings}>
+              {sizeChartImages.map((image, index) => (
+                <div
+                  key={index}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <img
+                    src={`${imageUrl}categories/${image}`}
+                    alt={`Size Chart ${index + 1}`}
+                    style={{
+                      width: "100%",
+                      height: "auto",
+                      maxHeight: "600px",
+                      borderRadius: "8px",
+                    }}
+                  />
+                </div>
+              ))}
+            </Slider>
+          </Box>
+        </DialogContent>
+      </Dialog>
 
       {/* Footer Section */}
       <Footer topSection={false} />
