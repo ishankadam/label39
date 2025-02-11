@@ -177,11 +177,27 @@ const create_user = async (req, res) => {
       { $match: { userId: newCreatedUser.userId } },
       { $project: { _id: 0 } },
     ]);
-    res.send(userDetails);
+    res.send({
+      user: userDetails,
+      message: "User created successfully",
+      severity: "success",
+    });
     res.end();
   } catch (error) {
     console.log(error);
-    res.status(400).send(error);
+    // dont break frontend show error messahe
+    if (error.code === 11000 && error.keyPattern && error.keyPattern.phone) {
+      res.status(200).send({
+        message: "Phone number already exists",
+        severity: "error",
+      });
+    } else {
+      // Handle other types of errors
+      res.status(500).send({
+        message: "An error occurred while creating the user",
+        severity: "error",
+      });
+    }
     res.end();
   }
 };

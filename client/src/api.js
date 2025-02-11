@@ -17,7 +17,8 @@ export const instagramToken = REACT_APP_INSTAGRAM_ACCESS_TOKEN;
 export const appUrl = REACT_APP_URL;
 export const messageUrl = REACT_APP_MESSAGE_URL;
 // create User
-export const createUser = async ({ userDetails, navigate }) => {
+
+export const createUser = async ({ userDetails }) => {
   const requestOptions = {
     method: "POST",
     headers: {
@@ -25,15 +26,25 @@ export const createUser = async ({ userDetails, navigate }) => {
     },
     body: JSON.stringify(userDetails),
   };
-  fetch(`${apiUrl}/createUser`, requestOptions)
-    .then(async (res) => {
-      if (res.ok) {
-        navigate("/login");
-      }
-    })
-    .catch((e) => {
-      console.log(e);
-    });
+
+  try {
+    const response = await fetch(`${apiUrl}/createUser`, requestOptions);
+
+    // Check if the response is OK (status code 2xx)
+    if (!response.ok) {
+      // Parse the error message from the response
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Something went wrong");
+    }
+
+    // Parse the success data from the response
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    // Log the error and rethrow it so the caller can handle it
+    console.error("Error in createUser:", error.message);
+    throw error; // Rethrow the error for the caller to handle
+  }
 };
 
 export const login = async (user, error, setError) => {

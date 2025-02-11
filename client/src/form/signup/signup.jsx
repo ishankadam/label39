@@ -1,9 +1,9 @@
 import { Box, Button, Card, Link, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import CustomTextfield from "../../components/textfield/customTextfield";
-import signup from "../../assets/signup.png";
 import { useNavigate } from "react-router-dom";
+import signup from "../../assets/signup.png";
 import { hasEmptyField } from "../../common";
+import CustomTextfield from "../../components/textfield/customTextfield";
 
 import { Cancel, CheckCircle } from "@mui/icons-material";
 import { createUser } from "../../api";
@@ -62,8 +62,10 @@ const Signup = () => {
     } else {
       setError({ ...error, confirmPassword: false });
     }
-    createUser({ userDetails: user, navigate });
+    const response = createUser({ userDetails: user });
+    console.log(response);
   };
+
   return (
     <Card
       sx={{

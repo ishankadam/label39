@@ -1,15 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../css/login2.css";
 // import LoginImg from "../../assets/login.jpg";
 import { Button, Typography } from "@mui/material";
-import TextField from "@mui/material/TextField";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { login } from "../../api";
+import { createUser, login } from "../../api";
 import backgroundImage from "../../assets/backgroundfooter.jpg"; // Import your background image
 import SignupImg from "../../assets/signup.jpeg";
 import CustomTextfield from "../../components/textfield/customTextfield";
 import { showSnackbar } from "../../store/cartSlice";
-import { useDispatch } from "react-redux";
 
 const Login = (props) => {
   const dispatch = useDispatch();
@@ -20,6 +19,21 @@ const Login = (props) => {
     email: "",
     password: "",
   });
+  const [signupDisabled, setSignupDisabled] = useState(true);
+
+  const [newUser, setNewUser] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    password: "",
+  });
+
+  const [newUserError, setNewUserError] = useState({
+    name: false,
+    email: false,
+    phone: false,
+    password: false,
+  });
 
   const [error, setError] = useState({
     email: false,
@@ -28,14 +42,31 @@ const Login = (props) => {
 
   const images = [SignupImg];
 
+  useEffect(() => {
+    if (
+      newUser.name !== "" &&
+      newUser.email !== "" &&
+      newUser.password !== "" &&
+      newUser.phone !== ""
+    ) {
+      setSignupDisabled(false);
+    } else {
+      setSignupDisabled(true);
+    }
+  }, [newUser]);
+
   const handleToggle = () => {
     setIsSignUpMode(!isSignUpMode);
   };
 
+  useEffect(() => {
+    console.log(isSignUpMode);
+  }, [isSignUpMode]);
+
   const navigate = useNavigate();
   // Function to automatically slide the images
 
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
@@ -61,8 +92,34 @@ const Login = (props) => {
     }
   };
 
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    const response = await createUser({ userDetails: newUser });
+    console.log(response);
+    if (response.success) {
+      setIsSignUpMode(!isSignUpMode);
+      dispatch(
+        showSnackbar({
+          message: response.message,
+          severity: response.severity,
+        })
+      );
+    } else {
+      dispatch(
+        showSnackbar({
+          message: response.message,
+          severity: response.severity,
+        })
+      );
+    }
+  };
+
   const handleEdit = (value, field) => {
     setUser({ ...user, [field]: value });
+  };
+
+  const handleEditNewUser = (value, field) => {
+    setNewUser({ ...newUser, [field]: value });
   };
 
   return (
@@ -105,7 +162,6 @@ const Login = (props) => {
                 action="index.html"
                 autoComplete="off"
                 className="sign-in-form"
-                onSubmit={handleSubmit}
               >
                 <div className="heading">
                   <Typography
@@ -198,7 +254,6 @@ const Login = (props) => {
                   <Button
                     variant="contained"
                     color="custom"
-                    type="submit"
                     value="Log In"
                     className="sign-btn"
                     sx={
@@ -206,6 +261,7 @@ const Login = (props) => {
                         // marginTop: 5,
                       }
                     }
+                    onClick={handleLogin}
                   >
                     Log In
                   </Button>
@@ -276,55 +332,91 @@ const Login = (props) => {
                       REGISTER
                     </Typography> */}
                     <div className="input-wrap">
-                      <TextField
+                      <CustomTextfield
+                        id="name"
                         label="Name"
                         variant="outlined"
-                        color="success"
+                        margin="normal"
                         fullWidth
-                        sx={{
-                          "& .MuiOutlinedInput-root": {
-                            fontSize: "15px", // Set the font size
-                          },
-                        }}
+                        required
+                        value={newUser.name}
+                        error={newUserError.name}
+                        errorObj={newUserError}
+                        setError={setNewUserError}
+                        helperText={
+                          newUserError.name ? "Please enter correct Name" : ""
+                        }
+                        config={{ field: "name" }}
+                        handleEdit={handleEditNewUser}
+                        sx={{ width: "100%" }}
                       />
                     </div>
                     <div className="input-wrap">
-                      <TextField
-                        label="Email ID"
+                      <CustomTextfield
+                        id="login-email"
+                        label="Email"
                         variant="outlined"
-                        color="success"
+                        margin="normal"
                         fullWidth
-                        sx={{
-                          "& .MuiOutlinedInput-root": {
-                            fontSize: "15px", // Set the font size
-                          },
-                        }}
+                        required
+                        value={newUser.email}
+                        error={newUserError.email}
+                        errorObj={newUserError}
+                        setError={setNewUserError}
+                        helperText={
+                          newUserError.email ? "Please enter correct Email" : ""
+                        }
+                        config={{ field: "email", type: "email" }}
+                        handleEdit={handleEditNewUser}
+                        sx={{ width: "100%" }}
                       />
                     </div>
                     <div className="input-wrap">
-                      <TextField
-                        label="Contact No"
+                      <CustomTextfield
+                        id="phone"
+                        label="Phone Number"
                         variant="outlined"
-                        color="success"
+                        margin="normal"
                         fullWidth
-                        sx={{
-                          "& .MuiOutlinedInput-root": {
-                            fontSize: "15px", // Set the font size
-                          },
-                        }}
+                        required
+                        value={user.phone}
+                        error={error.phone}
+                        errorObj={newUserError}
+                        setError={setNewUserError}
+                        helperText={
+                          newUserError.phone
+                            ? "Please enter correct Phone Number"
+                            : ""
+                        }
+                        config={{ field: "phone", type: "phone" }}
+                        handleEdit={handleEditNewUser}
+                        sx={{ width: "100%" }}
                       />
                     </div>
 
                     <div className="input-wrap">
-                      <TextField
+                      <CustomTextfield
                         label="Password"
                         variant="outlined"
                         color="success"
                         fullWidth
+                        value={newUser.password}
+                        error={newUserError.password}
+                        errorObj={newUserError}
+                        setError={setNewUserError}
+                        helperText={
+                          newUserError.password
+                            ? "Please enter correct password"
+                            : ""
+                        }
+                        config={{ field: "password" }}
+                        handleEdit={handleEditNewUser}
+                        type="password"
                         sx={{
                           "& .MuiOutlinedInput-root": {
                             fontSize: "15px", // Set the font size
                           },
+                          width: "100%",
                         }}
                       />
                     </div>
@@ -334,7 +426,6 @@ const Login = (props) => {
                   <Button
                     variant="contained"
                     color="custom"
-                    type="submit"
                     value="Sign In"
                     className="sign-btn"
                     sx={
@@ -342,6 +433,8 @@ const Login = (props) => {
                         // marginTop: 5,
                       }
                     }
+                    disabled={signupDisabled}
+                    onClick={handleSignup}
                   >
                     GET STARTED
                   </Button>

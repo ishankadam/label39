@@ -65,6 +65,7 @@ const CustomAppbar = (props) => {
   useEffect(() => {
     if (categories.length > 0) {
       const sizeChart = categories.map((category) => {
+        console.log(category);
         return { category: category.value, sizeChart: category.sizeChart };
       });
       dispatch(setSizeChart(sizeChart));
@@ -215,7 +216,10 @@ const CustomAppbar = (props) => {
 
   const logout = () => {
     localStorage.clear();
-    navigate("/");
+    setAdminSettings((prev) => {
+      const filtered = prev.filter((item) => item.label !== "Logout");
+      return filtered;
+    });
     dispatch(clearCart());
     dispatch(
       showSnackbar({
@@ -224,6 +228,7 @@ const CustomAppbar = (props) => {
       })
     );
     props.setUserUpdated(false);
+    navigate("/");
   };
 
   const handleNavigation = (url) => {

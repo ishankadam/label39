@@ -1,3 +1,5 @@
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import CloseIcon from "@mui/icons-material/Close";
 import ShareIcon from "@mui/icons-material/Share";
 import {
@@ -7,16 +9,17 @@ import {
   DialogContent,
   DialogTitle,
   Grid,
-  Icon,
   IconButton,
   Modal,
   ToggleButton,
   ToggleButtonGroup,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { addProductToCart, appUrl, imageUrl, phoneNumber } from "../../api";
 import {
   addCommaToPrice,
@@ -28,16 +31,12 @@ import {
 import { addToCart, showSnackbar } from "../../store/cartSlice";
 import Footer from "../homepage/footer";
 import ShareViaWhatsApp from "../share-via-whatsapp/shareViaWhatsapp";
-import { Link } from "react-router-dom";
-import heroImage1 from "../../assets/sc-upper.jpeg";
-import Slider from "react-slick";
-import heroImage2 from "../../assets/sc-lower.jpeg";
-import { ArrowBackIos, ArrowForwardIos, Close } from "@mui/icons-material";
-import { use } from "react";
 
 const ViewProductModal = (props) => {
   const [sizeChartOpen, setSizeChartOpen] = useState(false);
   const sizeChart = useSelector((state) => state.cart.sizeChart);
+
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const { isAdmin, product, open, setShowModal } = props;
   const [modalOpen, setModalOpen] = useState(open);
@@ -53,9 +52,13 @@ const ViewProductModal = (props) => {
   const [price, setPrice] = useState(product.price);
   const [cartProduct, setCartProduct] = useState(product);
 
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm")); // Checks for mobile screens
+
   // Sample Size Chart Images (Replace with actual URLs)
 
   const sizeChartImages = getSizeChart(product.category, sizeChart);
+  console.log(sizeChartImages);
 
   // Slick Slider Settings
   const sliderSettings = {
@@ -64,6 +67,18 @@ const ViewProductModal = (props) => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+  };
+
+  const handleNext = () => {
+    if (currentImageIndex < sizeChartImages.length - 1) {
+      setCurrentImageIndex((prev) => prev + 1);
+    }
+  };
+
+  const handlePrev = () => {
+    if (currentImageIndex > 0) {
+      setCurrentImageIndex((prev) => prev - 1);
+    }
   };
 
   const handleClose = () => {
@@ -654,49 +669,87 @@ const ViewProductModal = (props) => {
       <Dialog
         open={sizeChartOpen}
         onClose={() => setSizeChartOpen(false)}
-        // maxWidth="md"
         fullWidth
+        maxWidth={isMobile ? false : "md"}
+        scroll="body"
+        fullScreen={isMobile} // Optional: makes dialog fullscreen on mobile
       >
         <DialogTitle>
           <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
           >
-            <Typography variant="h6">Size Chart</Typography>
+            <Typography variant="h6" component="span">
+              Size Chart
+            </Typography>
             <IconButton onClick={() => setSizeChartOpen(false)}>
-              <Close />
+              <CloseIcon />
             </IconButton>
           </Box>
         </DialogTitle>
-        <DialogContent sx={{ p: 0 }}>
-          <Box sx={{ p: 0 }}>
-            <Slider {...sliderSettings}>
+
+        <DialogContent sx={{ p: isMobile ? 0 : 1 }}>
+          {isMobile ? (
+            // Mobile view - show all images stacked vertically
+            <Box display="flex" flexDirection="column" alignItems="center">
               {sizeChartImages.map((image, index) => (
-                <div
+                <img
                   key={index}
+                  src={`${imageUrl}categories/${image}`}
+                  alt={`Size-chart-${index + 1}`}
                   style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
+                    width: "100%",
+                    height: "auto",
+                    objectFit: "contain",
                   }}
-                >
-                  <img
-                    src={`${imageUrl}categories/${image}`}
-                    alt={`Size Chart ${index + 1}`}
-                    style={{
-                      width: "100%",
-                      height: "auto",
-                      maxHeight: "600px",
-                      borderRadius: "8px",
-                    }}
-                  />
-                </div>
+                />
               ))}
-            </Slider>
-          </Box>
+            </Box>
+          ) : (
+            // Desktop view - show carousel with arrows
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="space-between"
+              p={0}
+              position="relative"
+              minHeight="400px"
+            >
+              <IconButton
+                onClick={handlePrev}
+                disabled={currentImageIndex === 0}
+                sx={{ mr: 1 }}
+              >
+                <ArrowBackIosIcon fontSize="large" />
+              </IconButton>
+
+              <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                flexGrow={1}
+              >
+                <img
+                  src={`${imageUrl}categories/${sizeChartImages[currentImageIndex]}`}
+                  alt={`Size-chart-view-${currentImageIndex + 1}`}
+                  style={{
+                    maxWidth: "100%",
+                    maxHeight: "70vh",
+                    objectFit: "contain",
+                  }}
+                />
+              </Box>
+
+              <IconButton
+                onClick={handleNext}
+                disabled={currentImageIndex === sizeChartImages.length - 1}
+                sx={{ ml: 1 }}
+              >
+                <ArrowForwardIosIcon fontSize="large" />
+              </IconButton>
+            </Box>
+          )}
         </DialogContent>
       </Dialog>
 
