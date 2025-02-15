@@ -1,21 +1,11 @@
+import { Box, Container, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import {
-  Box,
-  Button,
-  Card,
-  CardMedia,
-  Container,
-  Grid,
-  Typography,
-} from "@mui/material";
-import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
-import { imageUrl } from "../../api";
-import { NextArrow, PrevArrow } from "../../components/arrow-component"; // Update the import path as needed
+import Footer from "../homepage/footer";
+import ViewProductModal from "../product/viewProduct";
 import "./../../css/categorySection.css";
 import CelebrityStyleCard from "./celebrityStyleCard";
-import ViewProductModal from "../product/viewProduct";
 
 function CelebrityStylePage(props) {
   const [celebrityStyles, setCelebrityStyles] = useState([]);
@@ -86,6 +76,7 @@ function CelebrityStylePage(props) {
           setShowModal={setShowModal}
         ></ViewProductModal>
       ) : null}
+      <Footer />
     </>
   );
 }

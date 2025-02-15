@@ -1,31 +1,28 @@
-import CloseIcon from "@mui/icons-material/Close";
 import { Facebook, Instagram } from "@mui/icons-material";
+import CloseIcon from "@mui/icons-material/Close";
 import {
   Box,
   Button,
   IconButton,
+  Link,
   Modal,
   Typography,
-  Link,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { createSubscription } from "../../api";
 import story from "../../assets/aboutImg.jpeg";
 import CustomTextfield from "../../components/textfield/customTextfield";
-import { showSnackbar } from "../../store/cartSlice";
+import { setSubscribeModal, showSnackbar } from "../../store/cartSlice";
 
 const SubscribeModal = (props) => {
   const dispatch = useDispatch();
-  const [open, setOpen] = useState(props.open || false);
   const [subscriber, setSubscriber] = useState({
     email: "",
     phone: "",
   });
 
-  useEffect(() => {
-    setOpen(props.open);
-  }, [props.open]);
+  const openSubscribeModal = useSelector((state) => state.cart.subscribeModal);
 
   const [error, setError] = useState({
     email: "",
@@ -51,10 +48,14 @@ const SubscribeModal = (props) => {
     );
     handleClose();
   };
-  const handleClose = () => props.setOpenSubscribeModal(false);
+  const handleClose = () => dispatch(setSubscribeModal(false));
 
   return (
-    <Modal open={open} onClose={handleClose} aria-labelledby="subscribe-modal">
+    <Modal
+      open={openSubscribeModal}
+      onClose={handleClose}
+      aria-labelledby="subscribe-modal"
+    >
       <Box
         sx={{
           position: "absolute",

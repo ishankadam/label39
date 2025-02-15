@@ -29,6 +29,7 @@ import CustomLoader from "../../components/customLoader";
 import CustomTextfield from "../../components/textfield/customTextfield";
 import "../../css/shop.css";
 import { setFilter } from "../../store/cartSlice";
+import Footer from "../homepage/footer";
 import ViewProductModal from "../product/viewProduct";
 
 const ProductsPage = (props) => {
@@ -1426,6 +1427,7 @@ const ProductsPage = (props) => {
           setShowModal={setShowModal}
         ></ViewProductModal>
       ) : null}
+      <Footer />
     </div>
   );
 };

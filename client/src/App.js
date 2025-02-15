@@ -23,6 +23,7 @@ import ForgotPassword from "./form/login/sendResetPasswordLimk";
 import Signup from "./form/signup/signup";
 import AboutUs from "./pages/about-us/aboutUs";
 import Cart from "./pages/cart/cart";
+import CelebrityStylePage from "./pages/celebrity-style/celebrityStylePage";
 import Checkout from "./pages/checkout/checkout";
 import ClientDiaryPage from "./pages/client-diary/clientDiaryPage";
 import Dashboard from "./pages/dashboard/dashboard";
@@ -33,6 +34,7 @@ import PageNotFound from "./pages/not-found/pageNotFound";
 import OurStory from "./pages/our-story/ourStory";
 import PaymentPage from "./pages/payment/paymentPage";
 import DeliveryForm from "./pages/product/deliveryForm";
+import SizeChart from "./pages/product/sizeChart";
 import ViewProduct from "./pages/product/viewProduct";
 import ViewProductPage from "./pages/product/viewProductPage";
 import ProfilePage from "./pages/profile/profile";
@@ -41,9 +43,6 @@ import TermsAndConditions from "./pages/termsAndCondition/termsAndCondition";
 import UserOrders from "./pages/user-orders/userOrders";
 import CustomSnackbar from "./snackbar/customSnackbar";
 import { store } from "./store/store";
-import CelebrityStyle from "./pages/dashboard/celebrityStyle";
-import CelebrityStylePage from "./pages/celebrity-style/celebrityStylePage";
-import SizeChart from "./pages/product/sizeChart";
 const App = () => {
   const [cartDetails, setCartDetails] = useState({
     open: false,
@@ -62,8 +61,6 @@ const App = () => {
     isEdit: false,
     data: {},
   });
-
-  const [openSubscribeModal, setOpenSubscribeModal] = useState(false);
 
   const handleOpenGiftModal = () => setIsGiftCardModalOpen(true);
   const handleCloseGiftModal = () => setIsGiftCardModalOpen(false);
@@ -84,10 +81,6 @@ const App = () => {
     getAllCelebrityStyles({
       setCelebrityStyles,
     });
-    const timer = setTimeout(() => {
-      setOpenSubscribeModal(true);
-    }, 100);
-    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -142,7 +135,6 @@ const App = () => {
           userUpdated={userUpdated}
           setUserUpdated={setUserUpdated}
           setIsGiftCardModalOpen={setIsGiftCardModalOpen}
-          setOpenSubscribeModal={setOpenSubscribeModal}
         />
         {pathname === "/dashboard" ? (
           <Fab
@@ -219,10 +211,7 @@ const App = () => {
           </>
         )}
 
-        <SubscribeModal
-          open={openSubscribeModal}
-          setOpenSubscribeModal={setOpenSubscribeModal}
-        ></SubscribeModal>
+        <SubscribeModal></SubscribeModal>
         <GiftCardModal
           open={isGiftCardModalOpen}
           onClose={handleCloseGiftModal}
@@ -237,7 +226,6 @@ const App = () => {
                 allCategories={allCategories}
                 country={country}
                 celebrityStyles={celebrityStyles}
-                setOpenSubscribeModal={setOpenSubscribeModal}
               />
             }
           />

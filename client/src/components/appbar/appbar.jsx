@@ -37,6 +37,7 @@ import {
   setCurrency,
   setFilter,
   setSizeChart,
+  setSubscribeModal,
   showSnackbar,
 } from "../../store/cartSlice";
 import SelectDropdown from "../select-dropdown/selectDropdown";
@@ -786,7 +787,7 @@ const CustomAppbar = (props) => {
               <ListItem
                 button
                 onClick={() => {
-                  props.setOpenSubscribeModal(true);
+                  dispatch(setSubscribeModal(true));
                   toggleDrawer(false)();
                 }}
                 sx={{

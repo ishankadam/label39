@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { getAllTestimonials } from "../../api";
+import { setSubscribeModal } from "../../store/cartSlice";
 import ViewProductModal from "../product/viewProduct";
 import AsSeenOn from "./asSeenOn";
 import BestSellerSection from "./bestSellerSection";
@@ -16,6 +18,7 @@ const Home = (props) => {
   const [celebrityStyles, setCelebrityStyles] = useState(
     props.celebrityStyles || []
   );
+  const dispatch = useDispatch();
   const [allCategories, setAllCategories] = useState(props.allCategories);
   const [bestsellers, setBestsellers] = useState([]);
   const [, setAsSeenOn] = useState([]);
@@ -54,6 +57,10 @@ const Home = (props) => {
 
   useEffect(() => {
     getAllTestimonials({ setTestimonials });
+    const timer = setTimeout(() => {
+      dispatch(setSubscribeModal(true));
+    }, 100);
+    return () => clearTimeout(timer);
   }, []);
 
   const handleViewProduct = (product) => {
@@ -94,10 +101,7 @@ const Home = (props) => {
           setShowModal={setShowModal}
         ></ViewProductModal>
       ) : null}
-      <Footer
-        topSection={true}
-        setOpenSubscribeModal={props.setOpenSubscribeModal}
-      ></Footer>
+      <Footer topSection={true}></Footer>
     </div>
   );
 };

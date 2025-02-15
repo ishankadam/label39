@@ -1,5 +1,6 @@
 import { Box, Container, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import Footer from "../homepage/footer";
 import ViewProductModal from "../product/viewProduct";
 import ClientDiaryCard from "./clientDiaryCard";
 
@@ -64,6 +65,7 @@ const ClientDiaryPage = (props) => {
           setShowModal={setShowModal}
         ></ViewProductModal>
       ) : null}
+      <Footer />
     </>
   );
 };

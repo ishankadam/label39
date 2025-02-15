@@ -1,5 +1,6 @@
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import ChatIcon from "@mui/icons-material/Chat";
 import CloseIcon from "@mui/icons-material/Close";
 import ShareIcon from "@mui/icons-material/Share";
 import {
@@ -10,6 +11,8 @@ import {
   DialogTitle,
   Grid,
   IconButton,
+  Menu,
+  MenuItem,
   Modal,
   ToggleButton,
   ToggleButtonGroup,
@@ -212,6 +215,17 @@ const ViewProductModal = (props) => {
     };
     dispatch(addToCart(newCartProduct));
     navigate("/checkout");
+  };
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const openShareMenu = Boolean(anchorEl);
+
+  const handleShareClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleCloseShareMenu = () => {
+    setAnchorEl(null);
   };
 
   return (
@@ -521,7 +535,7 @@ const ViewProductModal = (props) => {
                       </Button>
                     </Box>
                     <Box sx={{ display: "flex", gap: 2, marginBottom: "25px" }}>
-                      {/* <Button
+                      <Button
                         startIcon={<ChatIcon />}
                         variant="outlined"
                         color="custom"
@@ -531,8 +545,7 @@ const ViewProductModal = (props) => {
                         onClick={handleTalkToUs}
                       >
                         Talk to Us
-                      </Button> */}
-                      <ShareViaWhatsApp product={product} />
+                      </Button>
                       <Button
                         startIcon={<ShareIcon />}
                         variant="outlined"
@@ -540,15 +553,37 @@ const ViewProductModal = (props) => {
                         sx={{
                           width: "50%",
                         }}
-                        onClick={() =>
-                          handleCopy({
-                            link: `${appUrl}/products/${product.productId}`,
-                          })
-                        }
+                        onClick={handleShareClick}
                       >
-                        Copy Url
+                        Share
                       </Button>
                     </Box>
+                    <Menu
+                      anchorEl={anchorEl}
+                      open={openShareMenu}
+                      onClose={handleCloseShareMenu}
+                      sx={{ width: "100%" }}
+                    >
+                      <MenuItem
+                        onClick={() => {
+                          handleCloseShareMenu();
+                          handleCopy({
+                            link: `${appUrl}/products/${product.productId}`,
+                          });
+                        }}
+                      >
+                        Copy URL
+                      </MenuItem>
+                      <MenuItem
+                        onClick={() => {
+                          handleCloseShareMenu();
+                          // This will use your existing ShareViaWhatsApp component's functionality
+                          handleTalkToUs();
+                        }}
+                      >
+                        Share via WhatsApp
+                      </MenuItem>
+                    </Menu>
                   </Box>
                 )}
 
@@ -755,6 +790,11 @@ const ViewProductModal = (props) => {
 
       {/* Footer Section */}
       <Footer topSection={false} />
+
+      {/* Add this hidden component */}
+      <div style={{ display: "none" }}>
+        <ShareViaWhatsApp product={product} />
+      </div>
     </>
   );
 };

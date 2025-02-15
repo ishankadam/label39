@@ -21,7 +21,7 @@ import "../../css/footer.css";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import backgroundImage from "../../assets/backgroundfooter.jpg";
-import { setFilter } from "../../store/cartSlice";
+import { setFilter, setSubscribeModal } from "../../store/cartSlice";
 const Footer = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -335,7 +335,7 @@ const Footer = (props) => {
                   color="custom"
                   type="submit"
                   sx={{ width: "160px", borderRadius: "20px" }}
-                  onClick={() => props.setOpenSubscribeModal(true)}
+                  onClick={() => dispatch(setSubscribeModal(true))}
                 >
                   subscribe
                 </Button>
