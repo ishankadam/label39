@@ -562,7 +562,27 @@ const ViewProductModal = (props) => {
                       anchorEl={anchorEl}
                       open={openShareMenu}
                       onClose={handleCloseShareMenu}
-                      sx={{ width: "100%" }}
+                      PaperProps={{
+                        style: {
+                          width: anchorEl?.clientWidth, // Match button width
+                        },
+                      }}
+                      sx={{
+                        "& .MuiMenuItem-root": {
+                          fontFamily: "'Roboto Serif', serif",
+                          color: "#374151d9",
+                          fontSize: {
+                            xs: "0.7rem",
+                            sm: "0.8rem",
+                            md: "0.9rem",
+                          },
+                          padding: "8px auto",
+                          minHeight: "unset",
+                          "@media (max-width:600px)": {
+                            padding: "6px auto",
+                          },
+                        },
+                      }}
                     >
                       <MenuItem
                         onClick={() => {
@@ -570,6 +590,10 @@ const ViewProductModal = (props) => {
                           handleCopy({
                             link: `${appUrl}/products/${product.productId}`,
                           });
+                        }}
+                        sx={{
+                          fontFamily: "'Roboto Serif', serif",
+                          color: "#374151d9",
                         }}
                       >
                         Copy URL
@@ -580,10 +604,89 @@ const ViewProductModal = (props) => {
                           // This will use your existing ShareViaWhatsApp component's functionality
                           handleTalkToUs();
                         }}
+                        sx={{
+                          fontFamily: "'Roboto Serif', serif",
+                          color: "#374151d9",
+                        }}
                       >
                         Share via WhatsApp
                       </MenuItem>
                     </Menu>
+                    {/* <Menu
+                      anchorEl={anchorEl}
+                      open={openShareMenu}
+                      onClose={handleCloseShareMenu}
+                      PaperProps={{
+                        sx: {
+                          boxShadow: 2,
+                          border: "1px solid #ccc",
+                          backgroundColor: "white",
+                          borderRadius: "0px 0px 5px 5px",
+                          letterSpacing: "1px",
+                          padding: "8px 4px",
+                          width: anchorEl ? anchorEl.offsetWidth : "50%", // Dynamically match button width
+                          minWidth: "50%", // Prevent collapsing on small screens
+                          fontFamily: "'Roboto Serif', serif", // Ensuring menu inherits font-family
+                          "@media (max-width:768px)": {
+                            padding: "8px 2px",
+                          },
+                          "@media (max-width:600px)": {
+                            padding: "8px 2px",
+                          },
+                        },
+                      }}
+                    >
+                      <MenuItem
+                        onClick={() => {
+                          handleCloseShareMenu();
+                          handleCopy({
+                            link: `${appUrl}/products/${product.productId}`,
+                          });
+                        }}
+                        sx={{
+                          fontFamily: "'Roboto Serif', serif",
+                          fontSize: {
+                            xs: "0.8rem",
+                            sm: "0.9rem",
+                            md: "0.9rem",
+                          },
+                          //                           // fontWeight: "600",
+                          color: "#374151d9",
+                          "@media (max-width:768px)": {
+                            fontSize: "0.875rem",
+                          },
+                          "@media (max-width:600px)": {
+                            fontSize: "0.75rem",
+                          },
+                        }}
+                      >
+                        Copy URL
+                      </MenuItem>
+                      <MenuItem
+                        onClick={() => {
+                          handleCloseShareMenu();
+                          handleTalkToUs();
+                        }}
+                        sx={{
+                          fontFamily: "'Roboto Serif', serif",
+                          fontSize: {
+                            xs: "0.8rem",
+                            sm: "0.9rem",
+                            md: "0.9rem",
+                          },
+                          // fontWeight: "600",
+                          color: "#374151d9",
+                          "@media (max-width:768px)": {
+                            fontSize: "0.875rem",
+                          },
+                          "@media (max-width:600px)": {
+                            fontSize: "0.75rem",
+                          },
+                        }}
+                      >
+                        Share via WhatsApp
+                      </MenuItem>
+                    </Menu> */}
                   </Box>
                 )}
 
