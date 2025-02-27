@@ -1,0 +1,7 @@
+.country-flag {
+  width: 20px; /* Adjust width as needed */
+  height: auto; /* Maintain aspect ratio */
+  margin-right: 8px; /* Space between flag and label */
+  vertical-align: middle; /* Aligns flag with text */
+  display: inline-block; /* Ensures it appears inline with text */
+}

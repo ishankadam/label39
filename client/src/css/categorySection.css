@@ -1,0 +1,19 @@
+.title-border {
+  width: 80px; /* Adjust width as needed */
+  height: 3.5px; /* Thickness of the border */
+  border-radius: 100px;
+  background-color: #121212; /* Color of the border */
+  margin: 0 auto; /* Center the border */
+}
+
+.image-container {
+  position: relative; /* Ensure this container is positioned for absolute children */
+}
+
+.image-container img {
+  width: 100%; /* Ensure the image takes full width */
+}
+
+.footer-line {
+  border-top: 1px solid #d6d6d6 !important;
+}

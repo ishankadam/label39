@@ -1,0 +1,30 @@
+[
+  {
+    "testimonialId": 439557518,
+    "comments": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book unchanged.",
+    "name": "- Anthony Bahringer",
+    "rating": 5,
+    "image": "testimonials1.jpeg"
+  },
+  {
+    "testimonialId": 1182785274,
+    "comments": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book unchanged.",
+    "name": "- Jane Doe",
+    "rating": 4,
+    "image": "testimonials2.jpeg"
+  },
+  {
+    "testimonialId": 5908148596,
+    "comments": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book unchanged.",
+    "name": "- Jane Doe",
+    "rating": 4,
+    "image": "testimonials2.jpeg"
+  },
+  {
+    "testimonialId": 604303818,
+    "comments": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book unchanged.",
+    "name": "- Anthony Bahringer",
+    "rating": 5,
+    "image": "testimonials1.jpeg"
+  }
+]

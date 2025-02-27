@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap");
+
+.utilities-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.css-1yo1f1k-MuiFormControl-root {
+  margin-top: 8px !important;
+}
+
+/*  marquee for mobile notification */
+@keyframes scrollLeft {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.nav-options::after {
+  content: ""; /* Necessary for pseudo-element */
+  position: absolute; /* Position relative to .nav-options */
+  left: 0;
+  bottom: -2px; /* Position below the text */
+  width: 100%; /* Full width */
+  height: 3px; /* Height of the line */
+  background-color: #a16149;
+  transform: scaleX(0); /* Start with no width */
+  transition: transform 0.3s ease; /* Smooth transition */
+  color: red !important;
+}
+
+.nav-options:hover {
+  color: #a16149 !important;
+}
+.nav-options:hover::after {
+  transform: scaleX(1); /* Expand to full width on hover */
+}
+
+.nav-options {
+  font-family: "Cinzel", serif !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  margin: 0 10px !important;
+  width: auto;
+}
+
+/* Media Queries */
+
+/* For tablets and larger devices */
+@media (min-width: 600px) {
+  .notification-text {
+    font-size: 14px !important; /* Increase font size for tablets */
+  }
+}
+
+/* For laptops and desktops */
+@media (min-width: 1024px) {
+  .notification-text {
+    font-size: 14px !important; /* Larger font size for desktops */
+  }
+
+  .nav-options {
+    font-family: "Cinzel", serif !important;
+    font-size: 15px !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .nav-options {
+    font-family: "Cinzel", serif !important;
+    font-size: 13px !important;
+    margin: 0 5px !important;
+  }
+}

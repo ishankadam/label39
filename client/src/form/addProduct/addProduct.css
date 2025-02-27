@@ -1,0 +1,151 @@
+.add-product-modal {
+  font-family: "Roboto", sans-serif;
+}
+
+.add-product-modal .MuiDialogTitle-root {
+  background-color: #f7f7f7;
+  border-bottom: 1px solid #ddd;
+}
+
+.add-product-modal .MuiTypography-root {
+  color: #a16149;
+  font-weight: 600;
+}
+
+.add-product-modal .MuiDialogContent-root {
+  padding: 16px;
+  max-height: 80vh; /* Limit the height for scrollable content */
+  overflow-y: auto; /* Allows scrolling inside the content */
+  padding-bottom: 60px; /* Space for the sticky footer */
+}
+
+.add-product-modal .MuiGrid-container {
+  gap: 16px;
+}
+
+.add-product-modal .category-container {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.add-product-modal .category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.add-product-modal .category-header .MuiTypography-h6 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.add-product-modal .category-header button {
+  font-size: 0.9rem;
+  padding: 6px 12px;
+}
+
+.add-product-modal .size-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.add-product-modal .size-container .MuiSelect-root,
+.add-product-modal .size-container .MuiInputBase-root {
+  width: auto;
+  min-width: 100px;
+}
+
+.add-product-modal .size-container .MuiSvgIcon-root {
+  color: #f00;
+  cursor: pointer;
+  margin-left: 12px;
+}
+
+.add-product-modal .add-size-button {
+  background-color: #a16149;
+  color: white;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  padding: 6px 12px;
+  text-transform: capitalize;
+}
+
+.add-product-modal .MuiDialogActions-root {
+  background-color: #f7f7f7;
+  border-top: 1px solid #ddd;
+  padding: 16px;
+  position: sticky; /* Make actions sticky at the bottom */
+  bottom: 0; /* Stick to the bottom of the modal */
+  left: 0;
+  right: 0;
+  z-index: 10; /* Ensure it's on top of content */
+}
+
+.add-product-modal .MuiDialogActions-root .MuiButton-root {
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 10px 20px;
+}
+
+.add-product-modal .MuiDialogActions-root .MuiButton-outlined {
+  color: #a16149;
+  border-color: #a16149;
+}
+
+.add-product-modal .MuiDialogActions-root .MuiButton-contained {
+  background-color: #a16149;
+  color: white;
+}
+
+.add-product-modal .chip-textfield {
+  margin-top: 16px;
+}
+
+.add-product-modal .upload-section {
+  margin-top: 20px;
+}
+
+.add-product-modal .upload-section input {
+  border: none;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+.add-product-modal .sticky-footer {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  z-index: 10;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Position bottom-checkbox after the upper section */
+.add-product-modal .bottom-checkbox {
+  margin-top: 20px; /* Add space between upper section and checkbox */
+  padding: 12px 0;
+  background-color: white; /* Optional: Set background color */
+  display: flex; /* Use flexbox for the checkbox */
+  align-items: center; /* Vertically center the checkbox */
+  justify-content: flex-start; /* Align checkbox to the left */
+}
+
+/* Optional: Style the checkbox input */
+.add-product-modal .bottom-checkbox input {
+  margin-right: 10px; /* Space between checkbox and label */
+}
+
+.add-product-modal .bottom-checkbox label {
+  font-size: 14px; /* Adjust the font size of the label */
+  color: #333; /* Set label color */
+}

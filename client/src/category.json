@@ -1,0 +1,74 @@
+[
+  {
+    "categoryId": 6009689297,
+    "name": "CO-ORDS",
+    "description": "",
+    "image": "C-cords.jpeg",
+    "isActive": true,
+    "priority": 1,
+    "value": "cord",
+    "show": true,
+    "dropdownOption": true,
+    "sizeChart": ["SC-coords-bottom.png", "SC-coords-top.png"]
+  },
+  {
+    "categoryId": 332975476,
+    "name": "KURTAS",
+    "description": "",
+    "image": "C-kurta.jpeg",
+    "isActive": true,
+    "priority": 2,
+    "value": "kurtas",
+    "show": true,
+    "dropdownOption": true,
+    "sizeChart": ["SC-kurtas-bottom.png", "SC-kurtas-top.png"]
+  },
+  {
+    "categoryId": 3225035965,
+    "name": "SHIRTS",
+    "description": "",
+    "image": "C-shirts.jpeg",
+    "isActive": true,
+    "priority": 3,
+    "value": "shirt",
+    "show": false,
+    "dropdownOption": true,
+    "sizeChart": ["SC-shirts.png"]
+  },
+  {
+    "categoryId": 1492634508,
+    "name": "FESTIVE",
+    "description": "",
+    "image": "C-festive.jpeg",
+    "isActive": true,
+    "priority": 4,
+    "value": "festive",
+    "show": true,
+    "dropdownOption": true,
+    "sizeChart": ["SC-festive-bottom.png", "SC-festive-top.png"]
+  },
+  {
+    "categoryId": 2223264144,
+    "name": "DRESSES",
+    "description": "",
+    "image": "C-dress.jpeg",
+    "isActive": true,
+    "priority": 5,
+    "value": "dress",
+    "show": false,
+    "dropdownOption": true,
+    "sizeChart": ["SC-kurtas-bottom.png", "SC-kurtas-top.png"]
+  },
+  {
+    "categoryId": 945895391,
+    "name": "SHIRTS & DRESSES",
+    "description": "",
+    "image": "C-shirts.jpeg",
+    "isActive": true,
+    "priority": 6,
+    "value": "shirtsAndDresses",
+    "show": true,
+    "dropdownOption": false,
+    "sizeChart": []
+  }
+]

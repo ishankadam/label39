@@ -1,0 +1,138 @@
+.container {
+  font-family: Arial, sans-serif;
+  /* padding: 20px; */
+}
+
+.footer-links-header {
+  padding: 0;
+  font-family: "Cinzel", serif !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: rgba(55, 65, 81, 1);
+}
+
+ul {
+  padding: 0;
+  font-family: "Cinzel", serif;
+  font-size: 15px;
+  font-weight: 700;
+  margin: 20px 0;
+  line-height: 35px;
+}
+
+ul li {
+  text-decoration: none !important;
+  list-style-type: none !important;
+  padding-bottom: 15px;
+}
+
+.footer-links {
+  cursor: pointer;
+  color: rgba(35, 42, 54, 0.7) !important;
+  text-decoration: none !important;
+}
+
+ul li:hover,
+.footer-icon:hover,
+.footer-links:hover {
+  color: #a16149 !important;
+}
+
+/* Default styles for larger devices */
+.top-section {
+  display: flex;
+  justify-content: space-around;
+  background-color: rgba(183, 121, 97, 0.7);
+  backdrop-filter: blur(100px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 16px;
+  color: white;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  gap: 16px;
+  position: relative;
+}
+
+.top-item {
+  flex: 0 0 auto;
+  text-align: center;
+  /* width: 150px; */
+}
+.bottom-icons {
+  width: 50px;
+  height: 50px;
+}
+/* .bottom-icons {
+  width: auto;
+  height: auto;
+} */
+
+/* Apply marquee scrolling for mobile devices */
+@media (max-width: 768px) {
+  .top-section {
+    overflow: hidden; /* Ensure only the marquee content is visible */
+    height: auto; /* Let height adjust dynamically */
+    white-space: nowrap;
+    padding: 20px;
+  }
+
+  .top-section > div {
+    gap: 16px; /* Adds space between items */
+    /* animation: marquee 5s linear infinite;  */
+
+    animation: 3s marquee infinite linear;
+    display: inline-block;
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+  .top-item {
+    margin: 0 8px; /* Add some spacing between items */
+    width: auto; /* Adjust width for responsive layout */
+    font-size: 12px; /* Reduce text size on mobile */
+    flex-shrink: 0; /* Prevent shrinking of items */
+  }
+
+  .bottom-icons {
+    width: 34px; /* Reduce icon size for mobile */
+    height: 34px;
+  }
+}
+
+.subscribe {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /* background-color: rgba(204, 161, 144, 0.3); */
+  background-color: rgba(210, 188, 183, 0.7);
+  /* display: flex; */
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.subscribe-title {
+  font-family: "Berkshire Swash", serif;
+  font-weight: 400;
+  font-size: 22px;
+  margin-bottom: 20px !important;
+  margin-top: 0px !important;
+
+  color: #374151;
+}
+
+.subscribe-text {
+  text-align: center;
+  margin-bottom: 30px;
+  font-family: "Cinzel", serif !important;
+  font-size: 16px;
+  font-weight: 600 !important;
+  /* color: #777; */
+  color: rgba(35, 42, 54, 0.7) !important;
+}
