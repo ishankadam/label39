@@ -63,7 +63,6 @@ const Signup = () => {
       setError({ ...error, confirmPassword: false });
     }
     const response = createUser({ userDetails: user });
-    console.log(response);
   };
 
   return (

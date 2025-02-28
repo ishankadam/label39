@@ -66,16 +66,11 @@ const CustomAppbar = (props) => {
   useEffect(() => {
     if (categories.length > 0) {
       const sizeChart = categories.map((category) => {
-        console.log(category);
         return { category: category.value, sizeChart: category.sizeChart };
       });
       dispatch(setSizeChart(sizeChart));
     }
   }, [categories]);
-
-  useEffect(() => {
-    console.log("view product modal");
-  }, []);
 
   useEffect(() => {
     setCategories(props.allCategories);

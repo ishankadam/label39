@@ -17,10 +17,6 @@ function CelebrityStylePage(props) {
     setCelebrityStyles(props.celebrityStyles);
   }, [props.celebrityStyles]);
 
-  useEffect(() => {
-    console.log(celebrityStyles);
-  }, [celebrityStyles]);
-
   return (
     <>
       <Box sx={{ bgcolor: "#FFF8F5", py: 4, borderTop: "1px solid #E5E5E5" }}>

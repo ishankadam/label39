@@ -222,7 +222,7 @@ const GiftCardModal = ({ open, onClose }) => {
             fullWidth
             type="number"
             label="Enter Amount"
-            config={{ field: "amount" }}
+            config={{ field: "balance" }}
             value={giftcardDetails.balance}
             handleEdit={handleEdit}
             inputProps={{ min: 0 }}

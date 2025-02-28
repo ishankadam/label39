@@ -59,10 +59,6 @@ const Login = (props) => {
     setIsSignUpMode(!isSignUpMode);
   };
 
-  useEffect(() => {
-    console.log(isSignUpMode);
-  }, [isSignUpMode]);
-
   const navigate = useNavigate();
   // Function to automatically slide the images
 
@@ -95,7 +91,6 @@ const Login = (props) => {
   const handleSignup = async (e) => {
     e.preventDefault();
     const response = await createUser({ userDetails: newUser });
-    console.log(response);
     if (response.success) {
       setIsSignUpMode(!isSignUpMode);
       dispatch(

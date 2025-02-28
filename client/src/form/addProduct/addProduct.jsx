@@ -15,11 +15,12 @@ import {
 import React, { useEffect, useState } from "react";
 import { createProduct, editProduct } from "../../api";
 import {
-  availableColors,
+  availableColorsForSelection,
   availableSizes,
   deliveryIn,
   garmentDetails,
 } from "../../common";
+import MultiSelectAutocomplete from "../../components/autocomplete/multiAutocomplete";
 import SelectDropdown from "../../components/select-dropdown/selectDropdown";
 import ChipTextfield from "../../components/textfield/chipTextfield";
 import CustomTextfield from "../../components/textfield/customTextfield";
@@ -28,6 +29,8 @@ import "./addProduct.css";
 
 const AddEditProductModal = (props) => {
   const [images, setImages] = useState([]);
+  const [productsArray, setProductsArray] = useState([]);
+  const [products, setProducts] = useState(props.products);
   const [showBottomSection, setShowBottomSection] = useState(false); // Toggle for bottom section
   const [categoryList, setCategoryList] = useState([]);
   const [price, setPrice] = useState();
@@ -44,8 +47,9 @@ const AddEditProductModal = (props) => {
     deliveryIn: [],
     images: [],
     bestseller: false,
-    color: [],
+    color: "",
     priority: 0,
+    relatedProducts: [],
   });
 
   // const colorList = availableColors.map((color) => ({
@@ -61,6 +65,20 @@ const AddEditProductModal = (props) => {
         updatedSizes[index] = { ...updatedSizes[index], [field]: value };
         return { ...prev, sizes: { ...prev.sizes, [section]: updatedSizes } };
       });
+    } else if (field === "relatedProducts") {
+      //dont push if the value is already in the array
+      if (
+        productDetails.relatedProducts.includes(value[value.length - 1].value)
+      ) {
+        return;
+      }
+      setProductDetails((prev) => ({
+        ...prev,
+        relatedProducts: [
+          ...prev.relatedProducts,
+          value && value[value.length - 1].value,
+        ],
+      }));
     } else {
       setProductDetails((prev) => ({
         ...prev,
@@ -211,6 +229,21 @@ const AddEditProductModal = (props) => {
       };
     });
   };
+
+  useEffect(() => {
+    setProducts(props.products);
+  }, [props.products]);
+
+  useEffect(() => {
+    // give me a array of object of product name and id
+    const newProductsArray =
+      products?.length > 0 &&
+      products?.map((product) => ({
+        label: product.name,
+        value: product.productId,
+      }));
+    setProductsArray(newProductsArray);
+  }, [products]);
 
   return (
     <Dialog
@@ -562,9 +595,9 @@ const AddEditProductModal = (props) => {
             </Typography>
           </Grid>
           <Grid item xs={12}>
-            <ChipTextfield
+            <SelectDropdown
               label="Color"
-              predefinedOptions={availableColors}
+              optionList={availableColorsForSelection}
               config={{ field: "color", isRequired: true }}
               value={productDetails.color}
               handleEdit={handleEdit}
@@ -580,6 +613,16 @@ const AddEditProductModal = (props) => {
               acceptedFiles="image/png, image/jpeg"
               singleFile={false}
               category="products"
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <MultiSelectAutocomplete
+              label="Related Products"
+              options={productsArray}
+              handleEdit={handleEdit}
+              config={{ field: "relatedProducts" }}
+              value={productDetails.relatedProducts}
+              sx={{ width: "100%" }}
             />
           </Grid>
           <Grid item xs={12} sm={12}>

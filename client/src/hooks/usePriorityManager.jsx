@@ -1,5 +1,9 @@
-import { useState, useCallback, useMemo } from "react";
-import { updateProductPriorities } from "../api";
+import { useCallback, useMemo, useState } from "react";
+import {
+  updateCelebrityStylePriority,
+  updateClientDiariesPriority,
+  updateProductPriorities,
+} from "../api";
 
 export function usePriorityManager(initialEntities) {
   const [entities, setEntities] = useState(initialEntities);
@@ -29,6 +33,16 @@ export function usePriorityManager(initialEntities) {
         await updateProductPriorities({
           products: items,
           setProducts: setData,
+        });
+      } else if (collection === "celebrityStyle") {
+        await updateCelebrityStylePriority({
+          celebrityStyles: items,
+          setCelebrityStyles: setData,
+        });
+      } else if (collection === "clientDiaries") {
+        await updateClientDiariesPriority({
+          clientDiaries: items,
+          setClientDiaries: setData,
         });
       }
     } catch (error) {

@@ -28,6 +28,7 @@ const clientDiariesSchema = new mongoose.Schema({
     required: true,
   },
   isActive: { type: Boolean, default: true },
+  priority: { type: Number },
 });
 
 // Create the model

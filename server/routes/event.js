@@ -22,6 +22,16 @@ router.put("/product/:id/disable", controller.toggleProductStatus);
 
 router.put("/update-priorities", controller.updateProductPriorities);
 
+router.put(
+  "/update-clientDiaries-priorities",
+  controller.updateClientDiariesPriority
+);
+
+router.put(
+  "/update-celebrityStyles-priorities",
+  controller.updateCelebrityStylePriority
+);
+
 // Routes for categories
 router.get("/getCategories", controller.get_all_categories);
 

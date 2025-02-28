@@ -1,5 +1,5 @@
+import { Autocomplete, Box, Chip, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
-import { Autocomplete, TextField, Box, Typography, Chip } from "@mui/material";
 import { imageUrl } from "../../api";
 
 // Assuming we have a list of products with their names, images, and IDs
@@ -42,7 +42,7 @@ export default function AutocompleteWithImage(props) {
       renderTags={(tagValue, getTagProps) =>
         tagValue.map((option, index) => (
           <Chip
-            key={option.id}
+            key={`${option.id}-${index}`}
             label={option.label}
             {...getTagProps({ index })}
             avatar={
