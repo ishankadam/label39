@@ -4,7 +4,15 @@ import CustomTable from "../../components/custom-table/customTable";
 import ClientDiariesForm from "../../form/clientDiaries/clientDiariesForm";
 import { PriorityModal } from "./updatePriority";
 
-const fields = [{ key: "name", label: "Name", type: "text" }];
+const fields = [
+  { key: "name", label: "Name", type: "text" },
+  {
+    key: "productId",
+    label: "Product name",
+    type: "nestedText",
+    nestedKey: "label",
+  },
+];
 
 const ClientsDiaries = (props) => {
   const [showClientDiariesModal, setShowClienDiariesModal] = useState({

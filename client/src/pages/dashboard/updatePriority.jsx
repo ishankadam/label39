@@ -1,26 +1,25 @@
-import React, { useState, useEffect } from "react";
+import CloseIcon from "@mui/icons-material/Close";
 import {
+  Button,
+  CircularProgress,
   Dialog,
-  DialogTitle,
-  DialogContent,
   DialogActions,
+  DialogContent,
+  IconButton,
+  Paper,
+  Stack,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
   TextField,
-  Button,
   Typography,
-  CircularProgress,
-  IconButton,
-  Stack,
 } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import { imageUrl } from "../../api";
 import { usePriorityManager } from "../../hooks/usePriorityManager";
-import CloseIcon from "@mui/icons-material/Close";
 
 export const PriorityModal = ({
   open,
@@ -127,29 +126,35 @@ export const PriorityModal = ({
             <TableBody>
               {items.map((item) => (
                 <TableRow key={item[idKey]}>
-                  {fields.map((field) => (
-                    <TableCell key={field.key}>
-                      {field.type === "image" ? (
-                        <img
-                          src={
-                            item[field.key] && item[field.key].length > 0
-                              ? `${imageUrl}${folder}/${item[field.key][0]}`
-                              : "/placeholder.svg"
-                          }
-                          alt={item[fields[0].key]}
-                          style={{
-                            width: 50,
-                            height: 50,
-                            objectFit: "contain",
-                          }}
-                        />
-                      ) : (
-                        <Typography variant="body1">
-                          {item[field.key]}
-                        </Typography>
-                      )}
-                    </TableCell>
-                  ))}
+                  {fields.map((field) => {
+                    return (
+                      <TableCell key={field.key}>
+                        {field.type === "image" ? (
+                          <img
+                            src={
+                              item[field.key] && item[field.key].length > 0
+                                ? `${imageUrl}${folder}/${item[field.key][0]}`
+                                : "/placeholder.svg"
+                            }
+                            alt={item[fields[0].key]}
+                            style={{
+                              width: 50,
+                              height: 50,
+                              objectFit: "contain",
+                            }}
+                          />
+                        ) : field.type === "nestedText" ? (
+                          <Typography variant="body1">
+                            {item[field.key][field.nestedKey]}
+                          </Typography>
+                        ) : (
+                          <Typography variant="body1">
+                            {item[field.key]}
+                          </Typography>
+                        )}
+                      </TableCell>
+                    );
+                  })}
                   <TableCell>
                     {editingId === item[idKey] ? (
                       <TextField

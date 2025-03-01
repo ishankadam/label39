@@ -27,6 +27,8 @@ const CustomTextfield = (props) => {
       props.setValidation && props.setValidation(passwordValid);
     } else if (props.config.type === "phone") {
       errObj.isError = !isValidPhoneNumber(inputValue);
+    } else if (props.config.type === "amount") {
+      errObj.isError = inputValue < 2500;
     } else {
       errObj.isError =
         props.type === "number"
