@@ -159,9 +159,9 @@ const ProductsPage = (props) => {
         filter.color !== ""
           ? Array.isArray(product.color)
             ? product.color.some((color) =>
-                color.toLowerCase().includes(filter.color?.toLowerCase())
+                color?.toLowerCase().includes(filter.color?.toLowerCase())
               )
-            : product.color.toLowerCase().includes(filter.color?.toLowerCase())
+            : product.color?.toLowerCase().includes(filter.color?.toLowerCase())
           : true;
 
       // Return true only if both filters match

@@ -602,12 +602,16 @@ const ViewProductModal = (props) => {
                 </Box>
 
                 <Box gap={2} alignItems="center" sx={{ marginBottom: "25px" }}>
-                  <Box display="flex" gap={2} alignItems="center">
+                  <Box
+                    display="flex"
+                    gap={1}
+                    alignItems="flex-end"
+                    sx={{ marginBottom: "8px" }}
+                  >
                     <Typography
                       variant="h6"
                       sx={{
-                        marginBottom: "8px",
-                        fontSize: { xs: "14px", sm: "16px" },
+                        fontSize: "16px",
                         fontWeight: "600",
                         fontFamily: "'Roboto Serif', serif ",
                         color: "rgba(55, 65, 81, 0.85)",
@@ -618,10 +622,14 @@ const ViewProductModal = (props) => {
                     <Typography
                       variant="h6"
                       sx={{
-                        fontSize: { xs: "14px", sm: "16px" },
+                        fontSize: "15px",
+                        fontWeight: "400",
+                        fontFamily: "'Roboto Serif', serif ",
+                        color: "rgba(55, 65, 81, 0.85)",
+                        textTransform: "capitalize",
                       }}
                     >
-                      {displayedProduct.color}
+                      {displayedProduct.color?.toLowerCase()}
                     </Typography>
                   </Box>
                   <Box display="flex" gap={2} alignItems="center">
@@ -637,8 +645,12 @@ const ViewProductModal = (props) => {
                           minWidth: { xs: "50px", sm: "70px" },
                           objectFit: "cover",
                           cursor: "pointer",
+
                           borderRadius: "4px",
                           flexShrink: 0,
+                          "&:hover": {
+                            border: "2px solid #a16149",
+                          },
                         }}
                         onClick={() => handleProductImageClick(image)}
                       />
