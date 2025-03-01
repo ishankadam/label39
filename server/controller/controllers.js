@@ -253,25 +253,55 @@ const get_all_products = async (req, res) => {
     // Fetch all products from the database
     let products;
     if (isActive) {
-      products = await Product.find({ isActive: true }).select("-_id").sort({
-        priority: 1,
-      });
+      products = await Product.find({ isActive: true })
+        .select("-_id")
+        .sort({ priority: 1 });
     } else {
-      products = await Product.find({}).select("-_id").sort({
-        priority: 1,
-      });
+      products = await Product.find({}).select("-_id").sort({ priority: 1 });
     }
+    const productsWithAllColors = await Promise.all(
+      products.map(async (product) => {
+        const productData = product.toObject(); // Ensure proper object conversion
 
-    // If the selected country is INR, no need to convert
+        let allColorsInRelatedProducts = [];
+        let relatedProductsData = [];
+        let relatedProductsImages = [];
+
+        if (product.relatedProducts.length > 0) {
+          relatedProductsData = await Promise.all(
+            product.relatedProducts.map(async (relatedProduct) => {
+              return Product.findOne({ productId: relatedProduct.productId });
+            })
+          );
+
+          allColorsInRelatedProducts = relatedProductsData
+            .filter((relatedProduct) => relatedProduct) // Remove null values
+            .map((relatedProduct) => relatedProduct.color);
+          relatedProductsImages = relatedProductsData
+            .filter((relatedProduct) => relatedProduct) // Remove null values
+            .map((relatedProduct) => relatedProduct.images[0]);
+        }
+
+        return {
+          ...productData,
+          allColors: [
+            ...new Set([product.color, ...allColorsInRelatedProducts]),
+          ], // Include main product's color
+          relatedProductImages: [
+            ...new Set([product.images[0], ...relatedProductsImages]),
+          ],
+          relatedProducts: relatedProductsData,
+        };
+      })
+    );
+
     if (country === "INR") {
-      // Just send the products as they are
-      return res.status(200).json(products);
+      return res.status(200).json(productsWithAllColors);
     }
 
-    // Fetch exchange rates from INR to other currencies (USD, GBP, etc.)
+    // Fetch exchange rates
     const EXCHANGE_API_URL = "https://open.er-api.com/v6/latest/INR";
     const exchangeResponse = await axios.get(EXCHANGE_API_URL);
-
     const rates = exchangeResponse.data.rates;
 
     if (!rates[country]) {
@@ -280,25 +310,37 @@ const get_all_products = async (req, res) => {
         .json({ message: "Exchange rate not found for this country" });
     }
 
-    const exchangeRate = rates[country]; // Get the exchange rate for the requested country
+    const exchangeRate = rates[country];
 
-    // Convert product prices based on the exchange rate
-    const updatedProducts = products.map((product) => ({
-      ...product._doc, // Spread original product data
-      price: Number((product.price * exchangeRate).toFixed(2)), // Convert price from INR to the selected currency
-      currency: country, // Add the currency code (USD, GBP, etc.)
-      sale: product.sale
-        ? {
-            ...product.sale,
-            discountValue:
-              product.sale.discountType === "Amount"
-                ? (product.sale.discountValue * exchangeRate).toFixed(2) // Convert amount if discount type is 'amount'
-                : product.sale.discountValue, // Leave it unchanged for other discount types
-          }
-        : null, // If no sale, set to null or handle as needed
-    }));
+    // Convert product prices
+    const updatedProducts = products.map((product) => {
+      const productData = product.toObject(); // Ensure proper object conversion
+      const allColorsInRelatedProducts = (product.relatedProducts || []) // Handle missing relatedProducts
+        .map((relatedProduct) => relatedProduct?.color)
+        .flat()
+        .filter(Boolean); // Remove null/undefined values
 
-    // Send updated products in the response
+      return {
+        ...productData,
+        price: Number((product.price * exchangeRate).toFixed(2)),
+        currency: country,
+        allColors: [...new Set(allColorsInRelatedProducts)],
+        sale: product.sale
+          ? {
+              ...product.sale,
+              discountValue:
+                product.sale.discountType === "Amount"
+                  ? Number(
+                      (product.sale.discountValue * exchangeRate).toFixed(2)
+                    )
+                  : product.sale.discountValue,
+            }
+          : null,
+      };
+    });
+
+    console.log("Updated Products:", updatedProducts); // Should now log properly
+
     res.status(200).json(updatedProducts);
   } catch (error) {
     console.error("Error fetching products or exchange rates:", error);
@@ -312,7 +354,6 @@ const create_product = async (req, res) => {
   try {
     const productsData = JSON.parse(req.body.products); // This will now be an array
     const images = req.files.map((file) => file.originalname);
-
     const newProduct = {
       productId: Math.floor(Math.random() * 9000000000) + 1,
       name: productsData.name,
@@ -325,6 +366,9 @@ const create_product = async (req, res) => {
       deliveryIn: productsData.deliveryIn,
       isActive: true,
       bestseller: productsData.bestseller || false,
+      relatedProducts: productsData.relatedProducts || [],
+      priority: productsData.priority,
+      color: productsData.color,
     };
 
     if (productsData.asSeenOn) {
@@ -337,6 +381,18 @@ const create_product = async (req, res) => {
       ...newProduct,
       images,
     };
+
+    if (productsData.relatedProducts.length > 0) {
+      // Use Promise.all to wait for all updates to complete
+      await Promise.all(
+        productsData.relatedProducts.map(async (relatedProductId) => {
+          await Product.findOneAndUpdate(
+            { productId: relatedProductId },
+            { $push: { relatedProducts: newProduct.productId } }
+          );
+        })
+      );
+    }
     const newCreatedProduct = new Product(newProductData);
     await newCreatedProduct.save();
 
@@ -931,7 +987,7 @@ const get_all_client_diaries = async (_req, res) => {
       },
       {
         $sort: {
-          _id: -1,
+          priority: 1,
         },
       },
     ]);
@@ -1400,7 +1456,6 @@ const get_user_details = async (req, res) => {
 };
 const create_testimonial = async (req, res) => {
   try {
-    console.log(req.body);
     const testimonialsData = JSON.parse(req.body.testimonials); // Assuming it's a JSON string
     const images = req.files || []; // Safely get images
     if (typeof testimonialsData !== "object" || testimonialsData === null) {
@@ -1436,7 +1491,6 @@ const edit_testimonial = async (req, res) => {
   try {
     const editData = JSON.parse(req.body.testimonials); // Parse incoming category data
     const { testimonialId, ...editedTestimonial } = editData;
-    console.log(req.files);
     const images = Array.isArray(req.files)
       ? req.files // If `req.files` is directly an array
       : req.files.image || []; // Access specific field name if `req.files` is an object
@@ -1463,6 +1517,92 @@ const edit_testimonial = async (req, res) => {
     res.send(allTestimonials); // Send the updated category list
   } catch (error) {
     console.error("Error in edit testimonial:", error);
+    res.status(400).send({ error: error.message });
+  }
+};
+
+const updateCelebrityStylePriority = async (req, res) => {
+  try {
+    // Get the list of products with their updated priorities from the request body
+    const { celebrityStyles } = req.body; // Assuming priorities is an array of objects like [{ productId: 1, priority: 2 }, ...]
+    if (
+      !celebrityStyles ||
+      !Array.isArray(celebrityStyles) ||
+      celebrityStyles.length === 0
+    ) {
+      return res
+        .status(400)
+        .send({ error: "Priorities array is required and cannot be empty" });
+    }
+
+    // Iterate through the priorities and update each product
+    const updatePromises = celebrityStyles.map(async (item) => {
+      const { celebrityStyleId, priority } = item;
+
+      if (!celebrityStyleId || typeof priority !== "number") {
+        throw new Error("Invalid productId or priority in the request");
+      }
+
+      // Update the product with the new priority
+      await CelebrityStyle.updateOne(
+        { celebrityStyleId: celebrityStyleId },
+        { $set: { priority } }
+      );
+    });
+
+    // Wait for all updates to complete
+    await Promise.all(updatePromises);
+
+    // Send updated product list
+    const allCelebrityStyle = await CelebrityStyle.find({}, { _id: 0 }).sort({
+      priority: 1,
+    });
+    res.send(allCelebrityStyle); // Return the list of all products
+  } catch (error) {
+    console.error("Error in update_allCelebrityStyle_priorities:", error);
+    res.status(400).send({ error: error.message });
+  }
+};
+
+const updateClientDiariesPriority = async (req, res) => {
+  try {
+    // Get the list of products with their updated priorities from the request body
+    const { clientDiariesData } = req.body; // Assuming priorities is an array of objects like [{ productId: 1, priority: 2 }, ...]
+    if (
+      !clientDiariesData ||
+      !Array.isArray(clientDiariesData) ||
+      clientDiariesData.length === 0
+    ) {
+      return res
+        .status(400)
+        .send({ error: "Priorities array is required and cannot be empty" });
+    }
+
+    // Iterate through the priorities and update each product
+    const updatePromises = clientDiariesData.map(async (item) => {
+      const { clientDiariesId, priority } = item;
+
+      if (!clientDiariesId || typeof priority !== "number") {
+        throw new Error("Invalid productId or priority in the request");
+      }
+
+      // Update the product with the new priority
+      await clientDiaries.updateOne(
+        { clientDiariesId: clientDiariesId },
+        { $set: { priority } }
+      );
+    });
+
+    // Wait for all updates to complete
+    await Promise.all(updatePromises);
+
+    // Send updated product list
+    const allCelebrityStyle = await clientDiaries.find({}, { _id: 0 }).sort({
+      priority: 1,
+    });
+    res.send(allCelebrityStyle); // Return the list of all products
+  } catch (error) {
+    console.error("Error in update_allCelebrityStyle_priorities:", error);
     res.status(400).send({ error: error.message });
   }
 };
@@ -1511,4 +1651,6 @@ module.exports = {
   get_user_details,
   create_testimonial,
   edit_testimonial,
+  updateCelebrityStylePriority,
+  updateClientDiariesPriority,
 };

@@ -689,6 +689,57 @@ export const updateProductPriorities = async ({ products, setProducts }) => {
   }
 };
 
+export const updateCelebrityStylePriority = async ({
+  celebrityStyles,
+  setCelebrityStyles,
+}) => {
+  try {
+    const response = await fetch(
+      `${apiUrl}/update-celebrityStyles-priorities`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ celebrityStyles }),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to update product priorities");
+    }
+
+    const data = await response.json();
+    setCelebrityStyles(data);
+    return data;
+  } catch (err) {
+    console.error("Error updating product priorities:", err);
+    throw err;
+  }
+};
+
+export const updateClientDiariesPriority = async ({
+  clientDiaries,
+  setClientDiaries,
+}) => {
+  try {
+    const response = await fetch(`${apiUrl}/update-clientDiaries-priorities`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ clientDiariesData: clientDiaries }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to update product priorities");
+    }
+
+    const data = await response.json();
+    setClientDiaries(data);
+    return data;
+  } catch (err) {
+    console.error("Error updating product priorities:", err);
+    throw err;
+  }
+};
+
 export const createClientDiaries = async ({
   clientDiaries,
   setLoading,

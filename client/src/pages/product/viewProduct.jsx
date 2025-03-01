@@ -1,6 +1,8 @@
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ChatIcon from "@mui/icons-material/Chat";
+import ChevronLeft from "@mui/icons-material/ChevronLeft";
+import ChevronRight from "@mui/icons-material/ChevronRight";
 import CloseIcon from "@mui/icons-material/Close";
 import ShareIcon from "@mui/icons-material/Share";
 import {
@@ -38,13 +40,16 @@ import ShareViaWhatsApp from "../share-via-whatsapp/shareViaWhatsapp";
 const ViewProductModal = (props) => {
   const [sizeChartOpen, setSizeChartOpen] = useState(false);
   const sizeChart = useSelector((state) => state.cart.sizeChart);
+  const [startIndex, setStartIndex] = useState(0);
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const { isAdmin, product, open, setShowModal } = props;
+  const [selectedColor, setSelectedColor] = useState(product.allColors[0]);
+  const [displayedProduct, setDisplayedProduct] = useState(product);
   const [modalOpen, setModalOpen] = useState(open);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-  const selectedImage = product.images[selectedImageIndex];
+  const selectedImage = displayedProduct.images[selectedImageIndex];
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [selectedSizes, setSelectedSizes] = useState({
@@ -61,7 +66,6 @@ const ViewProductModal = (props) => {
   // Sample Size Chart Images (Replace with actual URLs)
 
   const sizeChartImages = getSizeChart(product.category, sizeChart);
-  console.log(sizeChartImages);
 
   // Slick Slider Settings
   const sliderSettings = {
@@ -228,6 +232,31 @@ const ViewProductModal = (props) => {
     setAnchorEl(null);
   };
 
+  const handleColorChange = (color) => {
+    setSelectedColor(color);
+    if (color === product.color) {
+      setDisplayedProduct(product);
+    } else {
+      const relatedProduct = product.relatedProducts.find(
+        (item) => item.color === color
+      );
+      setDisplayedProduct(relatedProduct);
+    }
+  };
+
+  const handleProductImageClick = (image) => {
+    if (product.images.includes(image)) {
+      setSelectedColor(product.color);
+      setDisplayedProduct(product);
+    } else {
+      const relatedProduct = product.relatedProducts.find((item) =>
+        item.images.includes(image)
+      );
+      setDisplayedProduct(relatedProduct);
+      setSelectedColor(relatedProduct.color);
+    }
+  };
+
   return (
     <>
       <Modal
@@ -327,30 +356,90 @@ const ViewProductModal = (props) => {
               <Box
                 sx={{
                   display: "flex",
-                  gap: 1,
-                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: { xs: 0.5, sm: 1 },
                   mb: 1,
+                  position: "relative",
+                  width: "100%",
                 }}
               >
-                {product.images.map((img, index) => (
-                  <Box
-                    component="img"
-                    key={index}
-                    src={`${imageUrl}products/${img}`}
-                    alt={`Thumbnail ${index}`}
-                    sx={{
-                      width: { xs: "50px", sm: "70px" },
-                      height: { xs: "70px", sm: "90px" },
-                      objectFit: "cover",
-                      cursor: "pointer",
-                      border:
-                        selectedImageIndex === index
-                          ? "2px solid #a16149"
-                          : "none",
-                    }}
-                    onClick={() => setSelectedImageIndex(index)}
+                {/* Previous Arrow */}
+                <IconButton
+                  onClick={() => setStartIndex((prev) => Math.max(prev - 1, 0))}
+                  sx={{
+                    visibility:
+                      product.images.length > 5 && startIndex > 0
+                        ? "visible"
+                        : "hidden",
+                    flexShrink: 0,
+                    p: { xs: 0.5, sm: 1 },
+                  }}
+                >
+                  <ChevronLeft
+                    fontSize={window.innerWidth < 600 ? "small" : "medium"}
                   />
-                ))}
+                </IconButton>
+
+                {/* Thumbnails Container */}
+                <Box
+                  sx={{
+                    display: "flex",
+                    gap: { xs: 0.5, sm: 1 },
+                    overflow: "hidden",
+                    width: "100%",
+                    justifyContent: { xs: "space-between", sm: "center" },
+                  }}
+                >
+                  {displayedProduct.images
+                    .slice(startIndex, startIndex + 5)
+                    .map((img, index) => {
+                      const originalIndex = startIndex + index;
+                      return (
+                        <Box
+                          component="img"
+                          key={originalIndex}
+                          src={`${imageUrl}products/${img}`}
+                          alt={`Thumbnail ${originalIndex}`}
+                          sx={{
+                            width: { xs: "50px", sm: "70px" },
+                            height: { xs: "70px", sm: "90px" },
+                            minWidth: { xs: "50px", sm: "70px" },
+                            objectFit: "cover",
+                            cursor: "pointer",
+                            border:
+                              selectedImageIndex === originalIndex
+                                ? "2px solid #a16149"
+                                : "1px solid #e0e0e0",
+                            borderRadius: "4px",
+                            flexShrink: 0,
+                          }}
+                          onClick={() => setSelectedImageIndex(originalIndex)}
+                        />
+                      );
+                    })}
+                </Box>
+
+                {/* Next Arrow */}
+                <IconButton
+                  onClick={() =>
+                    setStartIndex((prev) =>
+                      Math.min(prev + 1, displayedProduct.images.length - 5)
+                    )
+                  }
+                  sx={{
+                    visibility:
+                      displayedProduct.images.length > 5 &&
+                      startIndex + 5 < displayedProduct.images.length
+                        ? "visible"
+                        : "hidden",
+                    flexShrink: 0,
+                    p: { xs: 0.5, sm: 1 },
+                  }}
+                >
+                  <ChevronRight
+                    fontSize={window.innerWidth < 600 ? "small" : "medium"}
+                  />
+                </IconButton>
               </Box>
             </Grid>
 
@@ -380,7 +469,7 @@ const ViewProductModal = (props) => {
                     fontFamily: "'Cinzel Serif', serif ",
                   }}
                 >
-                  {product.name}
+                  {displayedProduct.name}
                 </Typography>
                 <Typography
                   variant="h6"
@@ -395,15 +484,15 @@ const ViewProductModal = (props) => {
                 >
                   <span style={{ fontWeight: "600" }}>
                     {getCurrencySymbol(props.country)}{" "}
-                    {props.product.sale && props.product.sale.isActive
+                    {displayedProduct.sale && displayedProduct.sale.isActive
                       ? calculatePriceAfterDiscount(
-                          props.product.price,
-                          props.product.sale.discountType,
-                          props.product.sale.discountValue
+                          displayedProduct.price,
+                          displayedProduct.sale.discountType,
+                          displayedProduct.sale.discountValue
                         )
-                      : addCommaToPrice(props.product.price)}
+                      : addCommaToPrice(displayedProduct.price)}
                   </span>
-                  {props.product.sale && props.product.sale.isActive && (
+                  {displayedProduct.sale && displayedProduct.sale.isActive && (
                     <>
                       <span
                         style={{
@@ -415,7 +504,7 @@ const ViewProductModal = (props) => {
                         }}
                       >
                         {getCurrencySymbol(props.country)}{" "}
-                        {addCommaToPrice(props.product.price)}
+                        {addCommaToPrice(displayedProduct.price)}
                       </span>
                       <span
                         style={{
@@ -426,8 +515,8 @@ const ViewProductModal = (props) => {
                           fontWeight: "500",
                         }}
                       >
-                        {`(${props.product.sale.discountValue}${
-                          props.product.sale.discountType === "Percentage"
+                        {`(${displayedProduct.sale.discountValue}${
+                          displayedProduct.sale.discountType === "Percentage"
                             ? "%"
                             : getCurrencySymbol(props.country)
                         } off)`}
@@ -455,58 +544,106 @@ const ViewProductModal = (props) => {
                 </Link>
 
                 <Box sx={{ marginBottom: "25px" }}>
-                  {Object.entries(product.sizes).map(([category, sizes]) => (
-                    <Box key={category} sx={{ marginBottom: "15px" }}>
-                      <Typography
-                        variant="h6"
-                        sx={{
-                          marginBottom: "8px",
-                          fontSize: { xs: "14px", sm: "16px" },
-                          fontWeight: "600",
-                          fontFamily: "'Roboto Serif', serif ",
-                          color: "rgba(55, 65, 81, 0.85)",
-                        }}
-                      >
-                        {category}
-                      </Typography>
-                      <ToggleButtonGroup
-                        exclusive
-                        value={selectedSizes[category] || ""}
-                        onChange={(_event, newSize) =>
-                          handleSizeChange(category, newSize)
-                        }
-                        aria-label={`${category} sizes`}
-                        sx={{
-                          display: "flex",
-                          gap: 0,
-                          flexWrap: "wrap",
-                        }}
-                      >
-                        {sizes.map(({ size, quantity }) => (
-                          <ToggleButton
-                            size="small"
-                            key={size}
-                            variant="outlined"
-                            color="custom"
-                            value={size}
-                            title={`Quantity: ${quantity}`}
+                  {Object.entries(displayedProduct.sizes).map(
+                    ([category, sizes]) =>
+                      sizes.length > 0 && (
+                        <Box key={category} sx={{ marginBottom: "15px" }}>
+                          <Typography
+                            variant="h6"
                             sx={{
-                              "&.Mui-selected": {
-                                backgroundColor: "#a16149",
-                                color: "white",
-                              },
-                              border: "1px solid #ccc",
-                              fontSize: "12px !important",
-                              textAlign: "center",
-                              width: "50px !important",
+                              marginBottom: "8px",
+                              fontSize: { xs: "14px", sm: "16px" },
+                              fontWeight: "600",
+                              fontFamily: "'Roboto Serif', serif ",
+                              color: "rgba(55, 65, 81, 0.85)",
                             }}
                           >
-                            {size}
-                          </ToggleButton>
-                        ))}
-                      </ToggleButtonGroup>
-                    </Box>
-                  ))}
+                            {category}
+                          </Typography>
+                          <ToggleButtonGroup
+                            exclusive
+                            value={selectedSizes[category] || ""}
+                            onChange={(_event, newSize) =>
+                              handleSizeChange(category, newSize)
+                            }
+                            aria-label={`${category} sizes`}
+                            sx={{
+                              display: "flex",
+                              gap: 0,
+                              flexWrap: "wrap",
+                            }}
+                          >
+                            {sizes.map(({ size, quantity }) => (
+                              <ToggleButton
+                                size="small"
+                                key={size}
+                                variant="outlined"
+                                color="custom"
+                                value={size}
+                                title={`Quantity: ${quantity}`}
+                                sx={{
+                                  "&.Mui-selected": {
+                                    backgroundColor: "#a16149",
+                                    color: "white",
+                                  },
+                                  border: "1px solid #ccc",
+                                  fontSize: "12px !important",
+                                  textAlign: "center",
+                                  width: "50px !important",
+                                }}
+                              >
+                                {size}
+                              </ToggleButton>
+                            ))}
+                          </ToggleButtonGroup>
+                        </Box>
+                      )
+                  )}
+                </Box>
+
+                <Box gap={2} alignItems="center" sx={{ marginBottom: "25px" }}>
+                  <Box display="flex" gap={2} alignItems="center">
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        marginBottom: "8px",
+                        fontSize: { xs: "14px", sm: "16px" },
+                        fontWeight: "600",
+                        fontFamily: "'Roboto Serif', serif ",
+                        color: "rgba(55, 65, 81, 0.85)",
+                      }}
+                    >
+                      Color:
+                    </Typography>
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        fontSize: { xs: "14px", sm: "16px" },
+                      }}
+                    >
+                      {displayedProduct.color}
+                    </Typography>
+                  </Box>
+                  <Box display="flex" gap={2} alignItems="center">
+                    {product.relatedProductImages.map((image, index) => (
+                      <Box
+                        component="img"
+                        key={index}
+                        src={`${imageUrl}products/${image}`}
+                        alt={`Thumbnail ${index}`}
+                        sx={{
+                          width: { xs: "50px", sm: "70px" },
+                          height: { xs: "70px", sm: "90px" },
+                          minWidth: { xs: "50px", sm: "70px" },
+                          objectFit: "cover",
+                          cursor: "pointer",
+                          borderRadius: "4px",
+                          flexShrink: 0,
+                        }}
+                        onClick={() => handleProductImageClick(image)}
+                      />
+                    ))}
+                  </Box>
                 </Box>
 
                 {!isAdmin && (
@@ -711,7 +848,7 @@ const ViewProductModal = (props) => {
                       color: "rgba(55, 65, 81, 0.85)",
                     }}
                   >
-                    {product.description.replace(/<br\/>/g, "")}
+                    {displayedProduct.description.replace(/<br\/>/g, "")}
                   </Typography>
                 </Box>
 
@@ -731,7 +868,7 @@ const ViewProductModal = (props) => {
                     >
                       Garment Details
                     </Typography>
-                    {product["garmentDetails"].map((detail, index) => (
+                    {displayedProduct["garmentDetails"].map((detail, index) => (
                       <Typography
                         key={index}
                         sx={{
@@ -765,7 +902,7 @@ const ViewProductModal = (props) => {
                         color: "rgba(55, 65, 81, 0.85)",
                       }}
                     >
-                      Made to order <br></br> {product["deliveryIn"]}
+                      Made to order <br></br> {displayedProduct["deliveryIn"]}
                     </Typography>
                   </div>
                 </div>
@@ -896,7 +1033,7 @@ const ViewProductModal = (props) => {
 
       {/* Add this hidden component */}
       <div style={{ display: "none" }}>
-        <ShareViaWhatsApp product={product} />
+        <ShareViaWhatsApp product={displayedProduct} />
       </div>
     </>
   );

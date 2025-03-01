@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import CustomTable from "../../components/custom-table/customTable";
-import { categories } from "../../common";
-import AddEditProductModal from "../../form/addProduct/addProduct";
-import { toggleProductStatus } from "../../api";
-import { PriorityModal } from "./updatePriority";
 import { Button, Snackbar } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { toggleProductStatus } from "../../api";
+import { categories } from "../../common";
+import CustomTable from "../../components/custom-table/customTable";
+import AddEditProductModal from "../../form/addProduct/addProduct";
+import { PriorityModal } from "./updatePriority";
 
 const fields = [
   { key: "images", label: "Image", type: "image" },
@@ -203,6 +203,7 @@ const ProductTable = (props) => {
       ></CustomTable>
       {showModal.show && (
         <AddEditProductModal
+          products={props.products}
           open={showModal.show}
           isEdit={showModal.isEdit}
           data={showModal.data}

@@ -56,7 +56,6 @@ const TestimonialModal = (props) => {
 
   const handleTestimonialSubmit = (e) => {
     e.preventDefault();
-    console.log(props.isEdit);
     if (props.isEdit) {
       editTestimonials({
         testimonials: testimonial,

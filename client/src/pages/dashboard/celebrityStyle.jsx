@@ -2,6 +2,17 @@ import { Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import CustomTable from "../../components/custom-table/customTable";
 import CelebrityStyleForm from "../../form/celebrityStyle/celebrityStyleForm";
+import { PriorityModal } from "./updatePriority";
+
+const fields = [
+  { key: "name", label: "Name", type: "text" },
+  {
+    key: "productId",
+    label: "Product name",
+    type: "nestedText",
+    nestedKey: "label",
+  },
+];
 
 const CelebrityStyle = (props) => {
   const [showCelebrityStyleModal, setShowCelebrityStyleModal] = useState({
@@ -9,6 +20,8 @@ const CelebrityStyle = (props) => {
     isEdit: false,
     data: {},
   });
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [celebrityStyles, setCelebrityStyles] = useState([]);
   const [, setLoading] = useState(false);
@@ -19,6 +32,10 @@ const CelebrityStyle = (props) => {
       isEdit: false,
       data: {},
     });
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
   };
 
   useEffect(() => {
@@ -39,6 +56,26 @@ const CelebrityStyle = (props) => {
       isEdit: false,
       data: {},
     });
+  };
+
+  const renderField = (item, field) => {
+    console.log(field.key);
+    switch (field.type) {
+      case "image":
+        return (
+          <img
+            src={`/path/to/images/${item[field.key][0]}`}
+            alt={item.name}
+            style={{ width: 50, height: 50, objectFit: "cover" }}
+          />
+        );
+      case "boolean":
+        return item[field.key] ? "Yes" : "No";
+      case "number":
+      case "text":
+      default:
+        return item[field.key];
+    }
   };
 
   const colDef = [
@@ -86,6 +123,19 @@ const CelebrityStyle = (props) => {
       >
         Create celebrity style
       </Button>
+      <Button
+        color="custom"
+        variant="contained"
+        sx={{
+          width: "410px",
+          marginBottom: "20px",
+          marginLeft: "20px",
+          textWrap: "nowrap",
+        }}
+        onClick={() => setIsModalOpen(true)}
+      >
+        Update celebrity style priority
+      </Button>
       <CustomTable
         colDef={colDef}
         rowData={celebrityStyles}
@@ -106,6 +156,19 @@ const CelebrityStyle = (props) => {
           setCelebrityStyles={props.setCelebrityStyles}
           products={props.products}
         ></CelebrityStyleForm>
+      )}
+      {isModalOpen && (
+        <PriorityModal
+          open={isModalOpen}
+          onClose={handleCloseModal}
+          items={celebrityStyles}
+          fields={fields}
+          renderField={renderField}
+          setData={props.setCelebrityStyles}
+          folder="celebrityStyles"
+          idKey="celebrityStyleId"
+          collection="celebrityStyle"
+        />
       )}
     </div>
   );

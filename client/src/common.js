@@ -292,6 +292,28 @@ export const availableColors = [
   "Print",
 ];
 
+export const availableColorsForSelection = [
+  { label: "Red", value: "Red" },
+  { label: "Blue", value: "Blue" },
+  { label: "Green", value: "Green" },
+  { label: "Yellow", value: "Yellow" },
+  { label: "Orange", value: "Orange" },
+  { label: "Black", value: "Black" },
+  { label: "Ivory", value: "Ivory" },
+  { label: "Gray", value: "Gray" },
+  { label: "Pink", value: "Pink" },
+  { label: "Lilac", value: "Lilac" },
+  { label: "Purple", value: "Purple" },
+  { label: "Beige", value: "Beige" },
+  { label: "Brown", value: "Brown" },
+  { label: "Peach", value: "Peach" },
+  { label: "Off-white", value: "Off-white" },
+  { label: "Maroon", value: "Maroon" },
+  { label: "Gold", value: "Gold" },
+  { label: "Silver", value: "Silver" },
+  { label: "Print", value: "Print" },
+];
+
 export const hasEmptyField = (obj) => {
   return Object.values(obj).some(
     (value) => typeof value === "string" && value.trim() === ""

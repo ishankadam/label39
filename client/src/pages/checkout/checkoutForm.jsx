@@ -8,8 +8,6 @@ import {
   Button,
   Card,
   Checkbox,
-  FormControlLabel,
-  FormGroup,
   Grid,
   Snackbar,
   Switch,
@@ -49,7 +47,6 @@ const CheckoutForm = (props) => {
   const dispatch = useDispatch();
 
   const cartItems = useSelector((state) => state.cart.items);
-  const [paymentDetails, setPaymentDetails] = useState({});
   const [currency, setCurrency] = useState("₹");
   const [billAmount, setBillAmount] = useState(0);
   const [paymentSuccess, setPaymentSuccess] = useState(false);
@@ -61,6 +58,7 @@ const CheckoutForm = (props) => {
   const [billingAddress, setBillingAddress] = useState({});
   const handleCodeChange = (value) => {
     setCode(value);
+    console.log(value);
     if (value.length > 0) {
       setDiscount({
         isValid: false,
@@ -185,10 +183,13 @@ const CheckoutForm = (props) => {
         finalAmount = amount - (amount * discount.value) / 100;
       } else if (discount.discountType === "Fixed") {
         finalAmount = amount - discount.value;
+      } else {
+        finalAmount = amount - discount.value;
       }
     }
 
     setBillAmount(finalAmount);
+    console.log(finalAmount);
   }, [discount, cartItems]);
 
   const handleOrderPlacement = async () => {
@@ -1080,7 +1081,13 @@ const CheckoutForm = (props) => {
                   }}
                 >
                   I acknowledge and agree to the{" "}
-                  <Link to="/termsAndCondition">Terms and Conditions</Link>
+                  <Link
+                    to="/termsAndCondition"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Terms and Conditions
+                  </Link>
                 </Typography>
               </Box>
 
@@ -1250,7 +1257,7 @@ const CheckoutForm = (props) => {
             }}
           >
             <CustomTextfield
-              label="Discount code and Gift card"
+              label="Discount code or Gift card"
               config={{ field: "code", isRequired: true }}
               handleEdit={handleCodeChange}
               sx={{

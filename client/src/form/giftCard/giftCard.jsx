@@ -29,6 +29,7 @@ const GiftCardModal = ({ open, onClose }) => {
     name: false,
     email: false,
     phone: false,
+    balance: false,
   });
 
   const handleEdit = (value, field) => {
@@ -42,7 +43,15 @@ const GiftCardModal = ({ open, onClose }) => {
     const { name, balance, email, phone } = giftcardDetails;
 
     // Check if any field is empty or if any field has an error
-    if (!balance || !email || !phone || !name || error.email || error.phone) {
+    if (
+      !balance ||
+      !email ||
+      !phone ||
+      !name ||
+      error.email ||
+      error.phone ||
+      error.balance
+    ) {
       setButtonDisabled(true);
     } else {
       setButtonDisabled(false);
@@ -222,9 +231,15 @@ const GiftCardModal = ({ open, onClose }) => {
             fullWidth
             type="number"
             label="Enter Amount"
-            config={{ field: "amount" }}
+            config={{ field: "balance", type: "amount" }}
             value={giftcardDetails.balance}
             handleEdit={handleEdit}
+            error={error.balance}
+            errorObj={error}
+            setError={setError}
+            helperText={
+              error.balance ? "Amount should be greater than 2500" : ""
+            }
             inputProps={{ min: 0 }}
             sx={{
               mt: 1,

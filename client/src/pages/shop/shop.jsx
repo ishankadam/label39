@@ -172,6 +172,7 @@ const ProductsPage = (props) => {
       filteredProducts,
       filter.featured
     );
+
     const productList = filteredProductsWithFeatured.slice(startIdx, endIdx);
     setDisplayedProducts(productList);
   }, [allProduct, page, filter]);

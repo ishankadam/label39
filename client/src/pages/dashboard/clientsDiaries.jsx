@@ -2,6 +2,17 @@ import { Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import CustomTable from "../../components/custom-table/customTable";
 import ClientDiariesForm from "../../form/clientDiaries/clientDiariesForm";
+import { PriorityModal } from "./updatePriority";
+
+const fields = [
+  { key: "name", label: "Name", type: "text" },
+  {
+    key: "productId",
+    label: "Product name",
+    type: "nestedText",
+    nestedKey: "label",
+  },
+];
 
 const ClientsDiaries = (props) => {
   const [showClientDiariesModal, setShowClienDiariesModal] = useState({
@@ -9,6 +20,8 @@ const ClientsDiaries = (props) => {
     isEdit: false,
     data: {},
   });
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [clientDiaries, setClientDiaries] = useState([]);
   const [, setLoading] = useState(false);
@@ -19,6 +32,25 @@ const ClientsDiaries = (props) => {
       isEdit: false,
       data: {},
     });
+  };
+
+  const renderField = (item, field) => {
+    switch (field.type) {
+      case "image":
+        return (
+          <img
+            src={`/path/to/images/${item[field.key][0]}`}
+            alt={item.name}
+            style={{ width: 50, height: 50, objectFit: "cover" }}
+          />
+        );
+      case "boolean":
+        return item[field.key] ? "Yes" : "No";
+      case "number":
+      case "text":
+      default:
+        return item[field.key];
+    }
   };
 
   useEffect(() => {
@@ -39,6 +71,10 @@ const ClientsDiaries = (props) => {
       isEdit: false,
       data: {},
     });
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
   };
 
   const colDef = [
@@ -86,6 +122,19 @@ const ClientsDiaries = (props) => {
       >
         Create client diaries
       </Button>
+      <Button
+        color="custom"
+        variant="contained"
+        sx={{
+          width: "410px",
+          marginBottom: "20px",
+          marginLeft: "20px",
+          textWrap: "nowrap",
+        }}
+        onClick={() => setIsModalOpen(true)}
+      >
+        Update client diaries priority
+      </Button>
       <CustomTable
         colDef={colDef}
         rowData={clientDiaries}
@@ -106,6 +155,19 @@ const ClientsDiaries = (props) => {
           setClientDiaries={props.setClientDiaries}
           products={props.products}
         ></ClientDiariesForm>
+      )}
+      {isModalOpen && (
+        <PriorityModal
+          open={isModalOpen}
+          onClose={handleCloseModal}
+          items={clientDiaries}
+          fields={fields}
+          renderField={renderField}
+          setData={props.setClientDiaries}
+          folder="clientDiaries"
+          idKey="clientDiariesId"
+          collection="clientDiaries"
+        />
       )}
     </div>
   );
