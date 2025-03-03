@@ -19,7 +19,6 @@ import {
   keyframes,
 } from "@mui/material";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
-import _ from "lodash";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -29,6 +28,7 @@ import ProductCard from "../../components/card/productCard";
 import CustomLoader from "../../components/customLoader";
 import CustomTextfield from "../../components/textfield/customTextfield";
 import "../../css/shop.css";
+import useDebounce from "../../hooks/useDebounce";
 import { setFilter } from "../../store/cartSlice";
 import Footer from "../homepage/footer";
 import ViewProductModal from "../product/viewProduct";
@@ -40,10 +40,10 @@ const ProductsPage = (props) => {
     products: [],
     totalPages: 1,
   });
+  const [searchTerm, setSearchTerm] = useState("");
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState(props.allCategories || []);
-  const [displayedProducts, setDisplayedProducts] = useState([]);
   const toggleDrawer = (open) => () => {
     setIsDrawerOpen(open);
   };
@@ -70,13 +70,20 @@ const ProductsPage = (props) => {
     setCategories(categoryList);
   }, [props.allCategories]);
 
+  const debouncedSearch = useDebounce(searchTerm, 500);
+
+  useEffect(() => {
+    dispatch(setFilter({ search: debouncedSearch }));
+  }, [debouncedSearch, dispatch]);
+
   const handleFilterChange = (value, field) => {
-    // setFilter((prev) => ({
-    //   ...prev,
-    //   [field]: value,
-    // }));
-    dispatch(setFilter({ [field]: value }));
+    if (field === "search") {
+      setSearchTerm(value); // Update local state for debouncing
+    } else {
+      dispatch(setFilter({ [field]: value }));
+    }
   };
+
   const handleViewProduct = (product) => {
     setShowModal({
       open: true,
@@ -101,88 +108,9 @@ const ProductsPage = (props) => {
       isActive: true,
       page: page,
       limit: 16,
+      filter,
     });
-  }, [page, props.country]);
-
-  const filterProducts = (products, featured) => {
-    if (!featured) {
-      return products; // Return all products if no filter is applied
-    }
-
-    if (featured === "asSeenOn") {
-      dispatch(setFilter({ featured: "" }));
-      navigate("/celebrityStylePage");
-    }
-
-    switch (featured) {
-      case "newArrivals":
-        return products.sort((a, b) => a.priority - b.priority); // Sort by priority (higher priority comes first)
-
-      case "bestSellers":
-        return products.filter((product) => product.bestseller === true); // Only bestsellers
-
-      case "readyToShip":
-        return products.filter((product) => product.readyToShip === true); // Ready-to-ship products
-
-      default:
-        return products; // Return all products if the filter is unknown
-    }
-  };
-
-  useEffect(() => {
-    if (!allProduct.products.length && !loading) {
-      return;
-    }
-    const filteredProducts = allProduct.products.filter((product) => {
-      // Category Filter if filter.category is shirtsAndDresses then filter products with category shirts and also for category dresses
-      const categoryFilter =
-        filter.category !== ""
-          ? filter.category === "shirtsAndDresses"
-            ? ["shirt", "dress"].includes(_.lowerCase(product.category))
-            : _.lowerCase(product.category) === _.lowerCase(filter.category)
-          : true;
-
-      // Price Filter
-      const priceFilter =
-        filter.price !== "" // Check if a price range is selected
-          ? (() => {
-              const price = product.price; // Get product price
-              const range = priceRanges.find(
-                (r) => r.label === filter.price.label
-              ); // Find the selected range
-              // Return true if price falls within the selected range
-              return range && price >= range.min && price <= range.max;
-            })()
-          : true; // Include all if no price filter
-
-      const searchFilter =
-        filter.search !== ""
-          ? product.name.toLowerCase().includes(filter.search?.toLowerCase()) ||
-            product.description
-              .toLowerCase()
-              .includes(filter.search?.toLowerCase())
-          : true;
-
-      const colorFilter =
-        filter.color !== ""
-          ? Array.isArray(product.color)
-            ? product.color.some((color) =>
-                color?.toLowerCase().includes(filter.color?.toLowerCase())
-              )
-            : product.color?.toLowerCase().includes(filter.color?.toLowerCase())
-          : true;
-
-      // Return true only if both filters match
-      return categoryFilter && priceFilter && searchFilter && colorFilter;
-    });
-
-    const filteredProductsWithFeatured = filterProducts(
-      filteredProducts,
-      filter.featured
-    );
-
-    setDisplayedProducts(filteredProductsWithFeatured);
-  }, [allProduct, page, filter]);
+  }, [page, props.country, filter]);
 
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
@@ -190,6 +118,7 @@ const ProductsPage = (props) => {
     setIsSearchOpen((prev) => !prev);
   };
   const closeSearch = () => {
+    setSearchTerm("");
     setIsSearchOpen(false);
   };
   const bounce = keyframes`
@@ -899,7 +828,7 @@ const ProductsPage = (props) => {
               >
                 <CustomLoader />
               </Box>
-            ) : displayedProducts.length < 1 ? (
+            ) : allProduct.products?.length < 1 ? (
               // <Box>
               //   <Typography
               //     variant="h3"
@@ -1051,7 +980,7 @@ const ProductsPage = (props) => {
               //   />
               // </Box>
               <div className="products-container">
-                {displayedProducts.map((product, index) => (
+                {allProduct.products?.map((product, index) => (
                   <ProductCard
                     key={index}
                     product={product}

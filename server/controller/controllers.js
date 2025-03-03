@@ -244,7 +244,7 @@ const checkLoginCredentials = async (req, res) => {
 
 const get_all_products = async (req, res) => {
   try {
-    const { country, isActive, page = 1, limit = 10 } = req.body;
+    const { country, isActive, page = 1, limit = 10, filter = {} } = req.body;
     const skip = (page - 1) * limit;
 
     if (!country) {
@@ -252,18 +252,59 @@ const get_all_products = async (req, res) => {
     }
 
     let query = {};
+
     if (isActive) {
       query.isActive = true;
     }
 
-    // Fetch paginated products
+    // Category Filter
+    if (filter.category) {
+      if (filter.category === "shirtsAndDresses") {
+        query.category = { $in: ["shirt", "dress"] };
+      } else {
+        query.category = filter.category.toLowerCase();
+      }
+    }
+
+    // Price Filter
+    if (filter.price) {
+      const { min, max } = filter.price;
+      query.price = { $gte: min, $lte: max };
+    }
+
+    // Search Filter
+    if (filter.search) {
+      const searchRegex = new RegExp(filter.search, "i");
+      query.$or = [{ name: searchRegex }, { description: searchRegex }];
+    }
+
+    // Color Filter
+    if (filter.color) {
+      query.color = { $regex: new RegExp(filter.color, "i") };
+    }
+
+    // Featured Filter
+    if (filter.featured) {
+      switch (filter.featured) {
+        case "bestSellers":
+          query.bestseller = true;
+          break;
+        case "readyToShip":
+          query.readyToShip = true;
+          break;
+        default:
+          break;
+      }
+    }
+
+    // Fetch paginated products with filtering
     const products = await Product.find(query)
       .select("-_id")
       .sort({ priority: 1 })
       .skip(skip)
       .limit(limit);
 
-    // Get total count of products
+    // Get total count of filtered products
     const totalProducts = await Product.countDocuments(query);
     const totalPages = Math.ceil(totalProducts / limit);
 

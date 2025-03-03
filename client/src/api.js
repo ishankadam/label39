@@ -125,6 +125,7 @@ export const getAllProducts = async ({
   isActive,
   page,
   limit,
+  filter,
 }) => {
   try {
     const response = await fetch(`${apiUrl}/getProducts`, {
@@ -135,6 +136,7 @@ export const getAllProducts = async ({
         isActive: isActive,
         page,
         limit,
+        filter,
       }),
     });
 
