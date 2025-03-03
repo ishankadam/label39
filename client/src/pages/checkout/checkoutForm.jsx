@@ -60,7 +60,6 @@ const CheckoutForm = (props) => {
   const [billingAddress, setBillingAddress] = useState({});
   const handleCodeChange = (value) => {
     setCode(value);
-    console.log(value);
     if (value.length > 0) {
       setDiscount({
         isValid: false,
@@ -193,7 +192,6 @@ const CheckoutForm = (props) => {
     }
 
     setBillAmount(finalAmount);
-    console.log(finalAmount);
   }, [discount, cartItems]);
 
   const handleOrderPlacement = async () => {

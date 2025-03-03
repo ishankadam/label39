@@ -318,7 +318,7 @@ const sendEmail = async ({
     const params = {
       Source: "thelabel39@gmail.com", // Replace with your verified email
       Destination: {
-        ToAddresses: [toEmail],
+        ToAddresses: [toEmail, process.env.EMAILER_ADMIN_EMAIL_ID],
       },
       Message: {
         Body: isHtml

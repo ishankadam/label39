@@ -91,7 +91,6 @@ const ProductTable = (props) => {
 
   useEffect(() => {
     //filter products based on filterOptions
-    console.log(products);
     if (!products) {
       return;
     }

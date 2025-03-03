@@ -59,7 +59,6 @@ const CelebrityStyle = (props) => {
   };
 
   const renderField = (item, field) => {
-    console.log(field.key);
     switch (field.type) {
       case "image":
         return (

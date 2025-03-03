@@ -136,7 +136,6 @@ const ViewProductModal = (props) => {
         product.sizes.Upper?.find(
           (item) => item.size === selectedSizes.Upper
         ) || product.price;
-      console.log(upperSize);
       const bottomSize =
         product.sizes.Bottom?.find(
           (item) => item.size === selectedSizes.Bottom
