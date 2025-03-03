@@ -123,12 +123,19 @@ export const getAllProducts = async ({
   setLoading,
   country,
   isActive,
+  page,
+  limit,
 }) => {
   try {
     const response = await fetch(`${apiUrl}/getProducts`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ country: country, isActive: isActive }),
+      body: JSON.stringify({
+        country: country,
+        isActive: isActive,
+        page,
+        limit,
+      }),
     });
 
     if (!response.ok) {

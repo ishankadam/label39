@@ -1,8 +1,9 @@
-import { Button, Snackbar } from "@mui/material";
+import { Box, Button, Grid2, Snackbar } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { toggleProductStatus } from "../../api";
+import { getAllProducts, toggleProductStatus } from "../../api";
 import { categories } from "../../common";
 import CustomTable from "../../components/custom-table/customTable";
+import SelectDropdown from "../../components/select-dropdown/selectDropdown";
 import AddEditProductModal from "../../form/addProduct/addProduct";
 import { PriorityModal } from "./updatePriority";
 
@@ -11,10 +12,23 @@ const fields = [
   { key: "name", label: "Name", type: "text" },
 ];
 
+const statusList = [
+  { label: "All", value: "all" },
+  { label: "Active", value: true },
+  { label: "Inactive", value: false },
+];
+
 const ProductTable = (props) => {
   const [products, setProducts] = useState(props.products || []);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
+  const [filterDataProducts, setFilterDataProducts] = useState([]);
+  const [productsloading, setProductsLoading] = useState(false);
+  const [productsPage, setProductsPage] = useState(1);
+  const [filterOptions, setFilterOptions] = useState({
+    category: "all",
+    status: "all",
+  });
   const [showModal, setShowModal] = useState(
     props.showModal || {
       show: false,
@@ -58,6 +72,48 @@ const ProductTable = (props) => {
     setIsModalOpen(false);
     setIsSnackbarOpen(true);
   };
+
+  const handleChange = (value, field) => {
+    // set filter options based on vale and field
+    setFilterOptions((prev) => ({ ...prev, [field]: value }));
+  };
+
+  useEffect(() => {
+    setProductsLoading(true);
+    getAllProducts({
+      setProductsData: setProducts,
+      setLoading: setProductsLoading,
+      country: props.country,
+      page: productsPage,
+      limit: 10,
+    });
+  }, [productsPage, props.country]);
+
+  useEffect(() => {
+    //filter products based on filterOptions
+    console.log(products);
+    if (!products) {
+      return;
+    }
+    const productsData = products.products || [];
+    const productFilteredByCategory =
+      filterOptions.category !== "all"
+        ? productsData.filter((product) =>
+            product.category
+              .toLowerCase()
+              .includes(filterOptions.category.toLowerCase())
+          )
+        : productsData;
+
+    const productFilteredByStatus =
+      filterOptions.status !== "all"
+        ? productFilteredByCategory.filter(
+            (product) => product.isActive === filterOptions.status
+          )
+        : productFilteredByCategory;
+
+    setFilterDataProducts(productFilteredByStatus);
+  }, [filterOptions, products]);
 
   const renderField = (item, field) => {
     switch (field.type) {
@@ -189,10 +245,46 @@ const ProductTable = (props) => {
       >
         Update Product Priorities
       </Button>
+      <Box
+        sx={{
+          justifyContent: "flex-end",
+          flexDirection: "row",
+          display: "flex",
+        }}
+      >
+        {" "}
+        <Grid2 item>
+          <SelectDropdown
+            label="status"
+            optionList={statusList}
+            config={{ field: "status" }}
+            handleEdit={handleChange}
+            value={filterOptions.status}
+            sx={{
+              width: { xs: "160px", sm: "200px", md: "200px" },
+              marginRight: "10px",
+              height: "50px",
+            }}
+          />
+        </Grid2>
+        <Grid2 item>
+          <SelectDropdown
+            label="Category"
+            optionList={props.categoryList}
+            config={{ field: "category" }}
+            handleEdit={handleChange}
+            value={filterOptions.category}
+            sx={{
+              width: { xs: "160px", sm: "200px", md: "200px" },
+              height: "50px",
+            }}
+          />
+        </Grid2>
+      </Box>
       <CustomTable
         colDef={colDef}
-        rowData={products}
-        loading={props.loading}
+        rowData={filterDataProducts}
+        loading={productsloading}
         pagination={true}
         setShowModal={setShowModal}
         categories={props.categories}
@@ -200,6 +292,8 @@ const ProductTable = (props) => {
         handleModalClose={handleModalClose}
         page="Products"
         allowView={true}
+        totalItems={products?.totalProducts}
+        setProductsPage={setProductsPage}
       ></CustomTable>
       {showModal.show && (
         <AddEditProductModal

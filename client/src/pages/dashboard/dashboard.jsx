@@ -20,13 +20,11 @@ import {
   getAllDiscounts,
   getAllGiftcard,
   getAllOrders,
-  getAllProducts,
   getAllSales,
   getAllTestimonials,
   getAllUsers,
 } from "../../api";
 import { dashboardTabValue } from "../../common";
-import SelectDropdown from "../../components/select-dropdown/selectDropdown";
 import PageNotFound from "../not-found/pageNotFound";
 import ProfilePage from "../profile/profile";
 import CelebrityStyle from "./celebrityStyle";
@@ -126,7 +124,6 @@ const Dashboard = (props) => {
   const [open, setOpen] = React.useState(false);
   const [options, setOptions] = useState("Products");
   const [products, setProducts] = useState([]);
-  const [filterDataProducts, setFilterDataProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
   const [clientDiaries, setClientDiaries] = useState([]);
@@ -135,7 +132,7 @@ const Dashboard = (props) => {
   const [discountData, setDiscountData] = useState([]);
   const [saleData, setSaleData] = useState([]);
   const [users, setUsers] = useState([]);
-  const [productsloading, setProductsLoading] = useState(false);
+
   const [categoryloading, setCategoryLoading] = useState(false);
   const [testimonialsloading, setTestimonialsLoading] = useState(false);
   const [clientDiariesLoading, setclientDiariesLoading] = useState(false);
@@ -145,10 +142,7 @@ const Dashboard = (props) => {
   const [saleLoading, setsaleLoading] = useState(false);
   const [usersloading, setUsersLoading] = useState(false);
   const [tabValue, setTabValue] = React.useState("one");
-  const [filterOptions, setFilterOptions] = useState({
-    category: "all",
-    status: "all",
-  });
+
   const [allOrders, setAllOrders] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
   const [showCategoryModal, setShowCategoryModal] = useState({
@@ -175,12 +169,6 @@ const Dashboard = (props) => {
   }, [props.showProductModal]);
 
   useEffect(() => {
-    setProductsLoading(true);
-    getAllProducts({
-      setProductsData: setProducts,
-      setLoading: setProductsLoading,
-      country: props.country,
-    });
     getAllCategories({ setCategories, setLoading: setCategoryLoading });
     getAllTestimonials({ setTestimonials, setLoading: setTestimonialsLoading });
     getAllUsers({ setUsers, setLoading: setUsersLoading });
@@ -220,32 +208,6 @@ const Dashboard = (props) => {
     }
   };
 
-  const handleChange = (value, field) => {
-    // set filter options based on vale and field
-    setFilterOptions((prev) => ({ ...prev, [field]: value }));
-  };
-
-  useEffect(() => {
-    //filter products based on filterOptions
-    const productFilteredByCategory =
-      filterOptions.category !== "all"
-        ? products.filter((product) =>
-            product.category
-              .toLowerCase()
-              .includes(filterOptions.category.toLowerCase())
-          )
-        : products;
-
-    const productFilteredByStatus =
-      filterOptions.status !== "all"
-        ? productFilteredByCategory.filter(
-            (product) => product.isActive === filterOptions.status
-          )
-        : productFilteredByCategory;
-
-    setFilterDataProducts(productFilteredByStatus);
-  }, [filterOptions, products]);
-
   useEffect(() => {
     const role = localStorage.getItem("role");
     // Set isAdmin state based on role
@@ -260,12 +222,6 @@ const Dashboard = (props) => {
     newCategoriesList.unshift({ label: "All", value: "all" });
     setCategoryList(newCategoriesList);
   }, [categories]);
-
-  const statusList = [
-    { label: "All", value: "all" },
-    { label: "Active", value: true },
-    { label: "Inactive", value: false },
-  ];
 
   return isAdmin ? (
     <Box>
@@ -379,57 +335,17 @@ const Dashboard = (props) => {
                 </Button>
               )}
             </Grid2>
-            {options === "Products" && (
-              <Box
-                sx={{
-                  justifyContent: "flex-end",
-                  flexDirection: "row",
-                  display: "flex",
-                }}
-              >
-                {" "}
-                <Grid2 item>
-                  <SelectDropdown
-                    label="status"
-                    optionList={statusList}
-                    config={{ field: "status" }}
-                    handleEdit={handleChange}
-                    value={filterOptions.status}
-                    sx={{
-                      width: { xs: "160px", sm: "200px", md: "200px" },
-                      marginRight: "10px",
-                      height: "50px",
-                    }}
-                  />
-                </Grid2>
-                <Grid2 item>
-                  <SelectDropdown
-                    label="Category"
-                    optionList={categoryList}
-                    config={{ field: "category" }}
-                    handleEdit={handleChange}
-                    value={filterOptions.category}
-                    sx={{
-                      width: { xs: "160px", sm: "200px", md: "200px" },
-                      height: "50px",
-                    }}
-                  />
-                </Grid2>
-              </Box>
-            )}
           </Grid2>
           <hr className="footer-line" style={{ marginBottom: "20px" }} />
 
           {/* Render Content Based on Tab Selection */}
           {tabValue === "one" && (
             <ProductTable
-              products={filterDataProducts}
-              setProducts={setProducts}
-              loading={productsloading}
-              setLoading={setProductsLoading}
               showModal={showProductModal}
               setShowModal={props.setShowProductModal}
               categories={categories}
+              categoryList={categoryList}
+              country={props.country}
             />
           )}
           {tabValue === "two" && (

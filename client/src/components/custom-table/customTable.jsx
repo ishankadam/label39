@@ -59,6 +59,7 @@ const CustomTable = (props) => {
   const [loading, setLoading] = useState(props.loading);
   const handleChangePage = (_event, newPage) => {
     setPage(newPage);
+    props.setProductsPage && props.setProductsPage(newPage);
   };
   useEffect(() => {
     setLoading(props.loading);
@@ -73,11 +74,15 @@ const CustomTable = (props) => {
     setRowData(props.rowData);
   }, [props.rowData]);
 
-  const paginatedData = rowData.slice(
-    page * rowsPerPage,
-    page * rowsPerPage + rowsPerPage
-  );
-
+  let paginatedData;
+  if (props.page !== "Products") {
+    paginatedData = rowData.slice(
+      page * rowsPerPage,
+      page * rowsPerPage + rowsPerPage
+    );
+  } else {
+    paginatedData = rowData;
+  }
   const handleView = (data) => {
     switch (props.page) {
       case "Products":
@@ -423,7 +428,7 @@ const CustomTable = (props) => {
           // margin: "5px 20px",
         }}
         component="div"
-        count={rowData.length}
+        count={props.totalItems ? props.totalItems : rowData.length}
         page={page}
         onPageChange={handleChangePage}
         rowsPerPage={rowsPerPage}

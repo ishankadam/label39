@@ -244,25 +244,32 @@ const checkLoginCredentials = async (req, res) => {
 
 const get_all_products = async (req, res) => {
   try {
-    const country = req.body.country;
-    const isActive = req.body.isActive;
+    const { country, isActive, page = 1, limit = 10 } = req.body;
+    const skip = (page - 1) * limit;
+
     if (!country) {
       return res.status(400).json({ message: "Country code is required" });
     }
 
-    // Fetch all products from the database
-    let products;
+    let query = {};
     if (isActive) {
-      products = await Product.find({ isActive: true })
-        .select("-_id")
-        .sort({ priority: 1 });
-    } else {
-      products = await Product.find({}).select("-_id").sort({ priority: 1 });
+      query.isActive = true;
     }
+
+    // Fetch paginated products
+    const products = await Product.find(query)
+      .select("-_id")
+      .sort({ priority: 1 })
+      .skip(skip)
+      .limit(limit);
+
+    // Get total count of products
+    const totalProducts = await Product.countDocuments(query);
+    const totalPages = Math.ceil(totalProducts / limit);
+
     const productsWithAllColors = await Promise.all(
       products.map(async (product) => {
-        const productData = product.toObject(); // Ensure proper object conversion
-
+        const productData = product.toObject();
         let allColorsInRelatedProducts = [];
         let relatedProductsData = [];
         let relatedProductsImages = [];
@@ -275,10 +282,10 @@ const get_all_products = async (req, res) => {
           );
 
           allColorsInRelatedProducts = relatedProductsData
-            .filter((relatedProduct) => relatedProduct) // Remove null values
+            .filter(Boolean)
             .map((relatedProduct) => relatedProduct.color);
           relatedProductsImages = relatedProductsData
-            .filter((relatedProduct) => relatedProduct) // Remove null values
+            .filter(Boolean)
             .map((relatedProduct) => relatedProduct.images[0]);
         }
 
@@ -286,7 +293,7 @@ const get_all_products = async (req, res) => {
           ...productData,
           allColors: [
             ...new Set([product.color, ...allColorsInRelatedProducts]),
-          ], // Include main product's color
+          ],
           relatedProductImages: [
             ...new Set([product.images[0], ...relatedProductsImages]),
           ],
@@ -296,7 +303,12 @@ const get_all_products = async (req, res) => {
     );
 
     if (country === "INR") {
-      return res.status(200).json(productsWithAllColors);
+      return res.status(200).json({
+        products: productsWithAllColors,
+        totalProducts,
+        totalPages,
+        currentPage: page,
+      });
     }
 
     // Fetch exchange rates
@@ -313,35 +325,27 @@ const get_all_products = async (req, res) => {
     const exchangeRate = rates[country];
 
     // Convert product prices
-    const updatedProducts = products.map((product) => {
-      const productData = product.toObject(); // Ensure proper object conversion
-      const allColorsInRelatedProducts = (product.relatedProducts || []) // Handle missing relatedProducts
-        .map((relatedProduct) => relatedProduct?.color)
-        .flat()
-        .filter(Boolean); // Remove null/undefined values
+    const updatedProducts = productsWithAllColors.map((product) => ({
+      ...product,
+      price: Number((product.price * exchangeRate).toFixed(2)),
+      currency: country,
+      sale: product.sale
+        ? {
+            ...product.sale,
+            discountValue:
+              product.sale.discountType === "Amount"
+                ? Number((product.sale.discountValue * exchangeRate).toFixed(2))
+                : product.sale.discountValue,
+          }
+        : null,
+    }));
 
-      return {
-        ...productData,
-        price: Number((product.price * exchangeRate).toFixed(2)),
-        currency: country,
-        allColors: [...new Set(allColorsInRelatedProducts)],
-        sale: product.sale
-          ? {
-              ...product.sale,
-              discountValue:
-                product.sale.discountType === "Amount"
-                  ? Number(
-                      (product.sale.discountValue * exchangeRate).toFixed(2)
-                    )
-                  : product.sale.discountValue,
-            }
-          : null,
-      };
+    res.status(200).json({
+      products: updatedProducts,
+      totalProducts,
+      totalPages,
+      currentPage: page,
     });
-
-    console.log("Updated Products:", updatedProducts); // Should now log properly
-
-    res.status(200).json(updatedProducts);
   } catch (error) {
     console.error("Error fetching products or exchange rates:", error);
     res

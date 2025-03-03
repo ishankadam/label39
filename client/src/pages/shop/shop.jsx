@@ -23,6 +23,7 @@ import _ from "lodash";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { getAllProducts } from "../../api";
 import { availableColors, featured, findLabelByValue } from "../../common";
 import ProductCard from "../../components/card/productCard";
 import CustomLoader from "../../components/customLoader";
@@ -35,9 +36,12 @@ import ViewProductModal from "../product/viewProduct";
 const ProductsPage = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [allProduct, setAllProduct] = useState(props.allProduct || []);
+  const [allProduct, setAllProduct] = useState({
+    products: [],
+    totalPages: 1,
+  });
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [loading, setLoading] = useState(props.loading || false);
+  const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState(props.allCategories || []);
   const [displayedProducts, setDisplayedProducts] = useState([]);
   const toggleDrawer = (open) => () => {
@@ -56,14 +60,6 @@ const ProductsPage = (props) => {
   // });
 
   const filter = useSelector((state) => state.cart.filter);
-
-  useEffect(() => {
-    setAllProduct(props.allProduct);
-  }, [props.allProduct]);
-
-  useEffect(() => {
-    setLoading(props.loading);
-  }, [props.loading]);
 
   useEffect(() => {
     const categoryList = props.allCategories
@@ -97,6 +93,17 @@ const ProductsPage = (props) => {
     setPage(value);
   };
 
+  useEffect(() => {
+    getAllProducts({
+      setProductsData: setAllProduct,
+      setLoading,
+      country: props.country,
+      isActive: true,
+      page: page,
+      limit: 16,
+    });
+  }, [page, props.country]);
+
   const filterProducts = (products, featured) => {
     if (!featured) {
       return products; // Return all products if no filter is applied
@@ -123,9 +130,10 @@ const ProductsPage = (props) => {
   };
 
   useEffect(() => {
-    const startIdx = (page - 1) * 16;
-    const endIdx = startIdx + 16;
-    const filteredProducts = allProduct.filter((product) => {
+    if (!allProduct.products.length && !loading) {
+      return;
+    }
+    const filteredProducts = allProduct.products.filter((product) => {
       // Category Filter if filter.category is shirtsAndDresses then filter products with category shirts and also for category dresses
       const categoryFilter =
         filter.category !== ""
@@ -173,8 +181,7 @@ const ProductsPage = (props) => {
       filter.featured
     );
 
-    const productList = filteredProductsWithFeatured.slice(startIdx, endIdx);
-    setDisplayedProducts(productList);
+    setDisplayedProducts(filteredProductsWithFeatured);
   }, [allProduct, page, filter]);
 
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -1069,7 +1076,7 @@ const ProductsPage = (props) => {
           <Pagination
             variant="outlined"
             shape="circle"
-            count={Math.ceil((allProduct?.length - 12) / 10) + 1}
+            count={allProduct.totalPages}
             page={page}
             onChange={handlePageChange}
             sx={{

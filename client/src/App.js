@@ -71,6 +71,7 @@ const App = () => {
       setLoading,
       country,
       isActive: true,
+      page: 1,
     });
   }, [country]);
 
@@ -232,14 +233,7 @@ const App = () => {
           <Route
             exact
             path="/shop"
-            element={
-              <Shop
-                allProduct={allProduct}
-                allCategories={allCategories}
-                loading={loading}
-                country={country}
-              />
-            }
+            element={<Shop allCategories={allCategories} country={country} />}
           />
           <Route exact path="/loaderTest" element={<LoaderTestPage />} />
           <Route exact path="/aboutus" element={<AboutUs />} />

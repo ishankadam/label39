@@ -132,12 +132,15 @@ const ViewProductModal = (props) => {
       if (upperSize) selectedPrice = upperSize.price;
     } else if (selectedSizes.Bottom) {
       // Find the price for the selected Bottom size
-      const upperSize = product.sizes.Upper?.find(
-        (item) => item.size === selectedSizes.Upper
-      );
-      const bottomSize = product.sizes.Bottom?.find(
-        (item) => item.size === selectedSizes.Bottom
-      );
+      const upperSize =
+        product.sizes.Upper?.find(
+          (item) => item.size === selectedSizes.Upper
+        ) || product.price;
+      console.log(upperSize);
+      const bottomSize =
+        product.sizes.Bottom?.find(
+          (item) => item.size === selectedSizes.Bottom
+        ) || product.price;
       if (
         bottomSize?.price &&
         upperSize?.price &&

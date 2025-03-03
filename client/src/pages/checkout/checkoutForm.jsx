@@ -55,6 +55,8 @@ const CheckoutForm = (props) => {
     country: props.country,
     shippingAddress: {},
   });
+  const [termsAndConditionChecked, setTermsAndConditionChecked] =
+    useState(false);
   const [billingAddress, setBillingAddress] = useState({});
   const handleCodeChange = (value) => {
     setCode(value);
@@ -125,8 +127,10 @@ const CheckoutForm = (props) => {
         typeof value === "object" ? allFieldsFilled(value) : value.trim() !== ""
       );
 
-    setIsButtonDisabled(!allFieldsFilled(checkoutData)); // Disable button if any field is empty
-  }, [checkoutData]);
+    setIsButtonDisabled(
+      !allFieldsFilled(checkoutData) && !termsAndConditionChecked
+    ); // Disable button if any field is empty
+  }, [checkoutData, termsAndConditionChecked]);
 
   const handleEdit = (value, field, index, section) => {
     if (field === "country") {
@@ -1064,8 +1068,10 @@ const CheckoutForm = (props) => {
                 }}
               >
                 <Checkbox
-                  // checked={checked}
-                  // onChange={handleChange}
+                  checked={termsAndConditionChecked}
+                  onChange={(e) =>
+                    setTermsAndConditionChecked(e.target.checked)
+                  }
                   sx={{
                     "&.Mui-checked": {
                       color: "#a16149", // Ensures checked state has the same color
