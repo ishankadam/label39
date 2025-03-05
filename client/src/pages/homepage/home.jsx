@@ -30,10 +30,6 @@ const Home = (props) => {
   });
 
   useEffect(() => {
-    setAllProduct(props.allProduct);
-  }, [props.allProduct]);
-
-  useEffect(() => {
     setCelebrityStyles(props.celebrityStyles);
   }, [props.celebrityStyles]);
 
@@ -45,15 +41,12 @@ const Home = (props) => {
   }, [props.allCategories]);
 
   useEffect(() => {
-    if (allProduct.length > 0) {
-      const bestSellers = allProduct.filter((product) => product.bestseller);
-      setBestsellers(bestSellers);
-      const asSeenOnData = allProduct.filter((product) => product.asSeenOn);
-      setAsSeenOn(asSeenOnData);
-      const videosData = allProduct.filter((product) => product.videoSrc);
-      setshopByVideos(videosData);
+    if (props.allProduct) {
+      setAllProduct(props.allProduct);
+      setBestsellers(props.allProduct.bestsellers);
+      setshopByVideos(props.allProduct.shopByVideos);
     }
-  }, [allProduct]);
+  }, [props.allProduct]);
 
   useEffect(() => {
     getAllTestimonials({ setTestimonials });
@@ -84,7 +77,7 @@ const Home = (props) => {
         handleViewProduct={handleViewProduct}
         country={props.country}
       ></BestSellerSection>
-      {shopByVideos.length > 0 && (
+      {shopByVideos && shopByVideos?.length > 0 && (
         <AsSeenOn
           handleViewProduct={handleViewProduct}
           shopByVideos={shopByVideos}

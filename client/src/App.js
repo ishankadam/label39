@@ -8,7 +8,7 @@ import {
   getAllCategories,
   getAllCelebrityStyles,
   getAllClientDiaries,
-  getAllProducts,
+  getProductsForHomepage,
 } from "./api";
 import "./App.css";
 import { whatsappQueryMessage } from "./common";
@@ -66,12 +66,17 @@ const App = () => {
   const handleCloseGiftModal = () => setIsGiftCardModalOpen(false);
 
   useEffect(() => {
-    getAllProducts({
+    // getAllProducts({
+    //   setProductsData: setAllProduct,
+    //   setLoading,
+    //   country,
+    //   isActive: true,
+    //   page: 1,
+    // });
+    getProductsForHomepage({
       setProductsData: setAllProduct,
-      setLoading,
       country,
-      isActive: true,
-      page: 1,
+      setLoading,
     });
   }, [country]);
 
@@ -95,7 +100,7 @@ const App = () => {
       show: true,
       isEdit: false,
       data: {
-        priority: allProduct.length + 1,
+        priority: allProduct.totalProducts,
       },
     });
   };

@@ -66,7 +66,9 @@ const CustomTable = (props) => {
   }, [props.loading]);
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
+    const rowsPerPage = parseInt(event.target.value, 10);
+    setRowsPerPage(rowsPerPage);
+    props.setProductsPerPage(rowsPerPage);
     setPage(0);
   };
 

@@ -25,6 +25,7 @@ const ProductTable = (props) => {
   const [filterDataProducts, setFilterDataProducts] = useState([]);
   const [productsloading, setProductsLoading] = useState(false);
   const [productsPage, setProductsPage] = useState(1);
+  const [productsPerPage, setProductsPerPage] = useState(10);
   const [filterOptions, setFilterOptions] = useState({
     category: "all",
     status: "all",
@@ -84,10 +85,10 @@ const ProductTable = (props) => {
       setProductsData: setProducts,
       setLoading: setProductsLoading,
       country: props.country,
-      page: productsPage,
-      limit: 10,
+      page: productsPage === 0 ? 1 : productsPage,
+      limit: productsPerPage || 10,
     });
-  }, [productsPage, props.country]);
+  }, [productsPage, props.country, productsPerPage]);
 
   useEffect(() => {
     //filter products based on filterOptions
@@ -293,6 +294,7 @@ const ProductTable = (props) => {
         allowView={true}
         totalItems={products?.totalProducts}
         setProductsPage={setProductsPage}
+        setProductsPerPage={setProductsPerPage}
       ></CustomTable>
       {showModal.show && (
         <AddEditProductModal

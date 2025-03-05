@@ -6,6 +6,10 @@ router.use(express.json()); // Middleware to parse JSON request bodies
 
 // Routes for products
 router.post("/getProducts", controller.get_all_products);
+
+// Route for products to be dsipalyed on homepage
+router.post("/getProductsForHomepage", controller.getProductsForHomepage);
+
 router.post(
   "/createProduct",
   controller.upload.array("images"),

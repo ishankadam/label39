@@ -117,6 +117,36 @@ export const getAllUsers = async ({ setUsers, setLoading }) => {
   }
 };
 
+export const getProductsForHomepage = async ({
+  setProductsData,
+  country,
+  setLoading,
+}) => {
+  try {
+    const response = await fetch(`${apiUrl}/getProductsForHomepage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        country: country,
+      }),
+    });
+
+    if (!response.ok) {
+      if (response.status === 401) {
+        console.error("Unauthorized access");
+      }
+      throw new Error("Failed to fetch products");
+    }
+
+    const data = await response.json();
+    setProductsData(data);
+    setLoading && setLoading(false);
+    return data;
+  } catch (err) {
+    console.error("Error fetching products:", err);
+  }
+};
+
 // Fetch all products
 export const getAllProducts = async ({
   setProductsData,

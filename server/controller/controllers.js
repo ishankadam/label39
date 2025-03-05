@@ -1650,6 +1650,109 @@ const updateClientDiariesPriority = async (req, res) => {
   }
 };
 
+const getProductsForHomepage = async (req, res) => {
+  try {
+    const { country } = req.body;
+    if (!country) {
+      return res.status(400).json({ message: "Country code is required" });
+    }
+
+    const [bestsellers, shopByVideos] = await Promise.all([
+      Product.find({ bestseller: true }).select("-_id"),
+      Product.find({ videoSrc: { $exists: true, $ne: "" } }).select("-_id"),
+    ]);
+
+    const processProducts = async (products) => {
+      return Promise.all(
+        products.map(async (product) => {
+          const productData = product.toObject();
+          let allColorsInRelatedProducts = [];
+          let relatedProductsData = [];
+          let relatedProductsImages = [];
+
+          if (product.relatedProducts.length > 0) {
+            relatedProductsData = await Promise.all(
+              product.relatedProducts.map(async (relatedProduct) => {
+                return Product.findOne({ productId: relatedProduct.productId });
+              })
+            );
+
+            allColorsInRelatedProducts = relatedProductsData
+              .filter(Boolean)
+              .map((relatedProduct) => relatedProduct.color);
+            relatedProductsImages = relatedProductsData
+              .filter(Boolean)
+              .map((relatedProduct) => relatedProduct.images[0]);
+          }
+
+          return {
+            ...productData,
+            allColors: [
+              ...new Set([product.color, ...allColorsInRelatedProducts]),
+            ],
+            relatedProductImages: [
+              ...new Set([product.images[0], ...relatedProductsImages]),
+            ],
+            relatedProducts: relatedProductsData,
+          };
+        })
+      );
+    };
+
+    const bestsellersProcessed = await processProducts(bestsellers);
+    const shopByVideosProcessed = await processProducts(shopByVideos);
+
+    if (country === "INR") {
+      return res.status(200).json({
+        bestsellers: bestsellersProcessed,
+        shopByVideos: shopByVideosProcessed,
+      });
+    }
+
+    // Fetch exchange rates
+    const EXCHANGE_API_URL = "https://open.er-api.com/v6/latest/INR";
+    const exchangeResponse = await axios.get(EXCHANGE_API_URL);
+    const rates = exchangeResponse.data.rates;
+
+    if (!rates[country]) {
+      return res
+        .status(404)
+        .json({ message: "Exchange rate not found for this country" });
+    }
+
+    const exchangeRate = rates[country];
+
+    // Convert product prices
+    const convertPrices = (products) =>
+      products.map((product) => ({
+        ...product,
+        price: Number((product.price * exchangeRate).toFixed(2)),
+        currency: country,
+        sale: product.sale
+          ? {
+              ...product.sale,
+              discountValue:
+                product.sale.discountType === "Amount"
+                  ? Number(
+                      (product.sale.discountValue * exchangeRate).toFixed(2)
+                    )
+                  : product.sale.discountValue,
+            }
+          : null,
+      }));
+
+    res.status(200).json({
+      bestsellers: convertPrices(bestsellersProcessed),
+      shopByVideos: convertPrices(shopByVideosProcessed),
+    });
+  } catch (error) {
+    console.error("Error fetching homepage products or exchange rates:", error);
+    res
+      .status(500)
+      .json({ message: "Error fetching products or exchange rates", error });
+  }
+};
+
 module.exports = {
   get_all_products,
   create_product,
@@ -1696,4 +1799,5 @@ module.exports = {
   edit_testimonial,
   updateCelebrityStylePriority,
   updateClientDiariesPriority,
+  getProductsForHomepage,
 };

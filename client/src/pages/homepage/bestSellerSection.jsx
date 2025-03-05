@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
-import ProductCard from "../../components/card/productCard";
 import { NextArrow, PrevArrow } from "../../components/arrow-component"; // Update the import path as needed
+import ProductCard from "../../components/card/productCard";
 import "../../css/main.css";
-import { bestSellers } from "../../common";
 
 const BestSellerSection = (props) => {
   const [bestsellers, setBestsellers] = useState(props.bestsellers || []);
@@ -84,15 +83,16 @@ const BestSellerSection = (props) => {
         }}
       >
         <Slider {...settings}>
-          {bestsellers.map((product, index) => (
-            <div key={index}>
-              <ProductCard
-                product={product}
-                handleViewProduct={props.handleViewProduct}
-                country={props.country}
-              />
-            </div>
-          ))}
+          {bestsellers &&
+            bestsellers?.map((product, index) => (
+              <div key={index}>
+                <ProductCard
+                  product={product}
+                  handleViewProduct={props.handleViewProduct}
+                  country={props.country}
+                />
+              </div>
+            ))}
         </Slider>
       </Box>
     </Box>
