@@ -33,11 +33,13 @@ import SubscribeModal from "./pages/homepage/subscribeModal";
 import PageNotFound from "./pages/not-found/pageNotFound";
 import OurStory from "./pages/our-story/ourStory";
 import PaymentPage from "./pages/payment/paymentPage";
+import PrivacyPolicy from "./pages/privacy-policy/privacyPolicy";
 import DeliveryForm from "./pages/product/deliveryForm";
 import SizeChart from "./pages/product/sizeChart";
 import ViewProduct from "./pages/product/viewProduct";
 import ViewProductPage from "./pages/product/viewProductPage";
 import ProfilePage from "./pages/profile/profile";
+import ReturnsAndCancellations from "./pages/returnsAndCancellations/returnsAndCancellations";
 import Shop from "./pages/shop/shop";
 import TermsAndConditions from "./pages/termsAndCondition/termsAndCondition";
 import UserOrders from "./pages/user-orders/userOrders";
@@ -286,6 +288,12 @@ const App = () => {
             exact
             path="/termsAndCondition"
             element={<TermsAndConditions />}
+          />
+          <Route exact path="/privacyPolicy" element={<PrivacyPolicy />} />
+          <Route
+            exact
+            path="/returnsAndCancellations"
+            element={<ReturnsAndCancellations />}
           />
           <Route exact path="/profile" element={<ProfilePage />} />
           <Route

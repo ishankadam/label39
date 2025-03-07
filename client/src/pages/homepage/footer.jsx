@@ -251,6 +251,22 @@ const Footer = (props) => {
                     Terms & Condition
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    onClick={handlePageChange("/privacyPolicy")}
+                    className="footer-links"
+                  >
+                    Privacy policy
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    onClick={handlePageChange("/returnsAndCancellations")}
+                    className="footer-links"
+                  >
+                    Refunds and Cancellation policy
+                  </Link>
+                </li>
               </ul>
             </Grid2>
 
