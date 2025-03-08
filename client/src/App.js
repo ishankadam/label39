@@ -40,6 +40,7 @@ import ViewProduct from "./pages/product/viewProduct";
 import ViewProductPage from "./pages/product/viewProductPage";
 import ProfilePage from "./pages/profile/profile";
 import ReturnsAndCancellations from "./pages/returnsAndCancellations/returnsAndCancellations";
+import ShippingPolicy from "./pages/shipping-policy/shippingPolicy";
 import Shop from "./pages/shop/shop";
 import TermsAndConditions from "./pages/termsAndCondition/termsAndCondition";
 import UserOrders from "./pages/user-orders/userOrders";
@@ -290,6 +291,7 @@ const App = () => {
             element={<TermsAndConditions />}
           />
           <Route exact path="/privacyPolicy" element={<PrivacyPolicy />} />
+          <Route exact path="/shippingPolicy" element={<ShippingPolicy />} />
           <Route
             exact
             path="/returnsAndCancellations"

@@ -263,8 +263,17 @@ const Footer = (props) => {
                   <Link
                     onClick={handlePageChange("/returnsAndCancellations")}
                     className="footer-links"
+                    sx={{ textWrap: "nowrap" }}
                   >
                     Refunds and Cancellation policy
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    onClick={handlePageChange("/shippingPolicy")}
+                    className="footer-links"
+                  >
+                    Shipping policy
                   </Link>
                 </li>
               </ul>
