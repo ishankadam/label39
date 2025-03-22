@@ -163,6 +163,8 @@ router.put(
   controller.edit_testimonial
 );
 
+router.post("/send-message", controller.sendWhatsAppMessage);
+
 // edit testimonial
 // router.put("/editTestimonial", controller.edit_testimonial);
 

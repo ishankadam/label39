@@ -45,11 +45,14 @@ const ViewProductModal = (props) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const { isAdmin, product, open, setShowModal } = props;
-  const [selectedColor, setSelectedColor] = useState(product.allColors[0]);
+  console.log(product);
+  const [selectedColor, setSelectedColor] = useState(
+    product && product.allColors[0]
+  );
   const [displayedProduct, setDisplayedProduct] = useState(product);
   const [modalOpen, setModalOpen] = useState(open);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-  const selectedImage = displayedProduct.images[selectedImageIndex];
+  const selectedImage = displayedProduct?.images[selectedImageIndex];
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [selectedSizes, setSelectedSizes] = useState({
@@ -57,7 +60,7 @@ const ViewProductModal = (props) => {
     Bottom: "XS",
   });
   const userId = localStorage.getItem("userId");
-  const [price, setPrice] = useState(product.price);
+  const [price, setPrice] = useState(product?.price);
   const [cartProduct, setCartProduct] = useState(product);
 
   const theme = useTheme();
@@ -65,7 +68,7 @@ const ViewProductModal = (props) => {
 
   // Sample Size Chart Images (Replace with actual URLs)
 
-  const sizeChartImages = getSizeChart(product.category, sizeChart);
+  const sizeChartImages = getSizeChart(product?.category, sizeChart);
 
   // Slick Slider Settings
   const sliderSettings = {
@@ -126,28 +129,32 @@ const ViewProductModal = (props) => {
 
     if (selectedSizes.Upper && !selectedSizes.Bottom) {
       // Find the price for the selected Upper size
-      const upperSize = product.sizes.Upper?.find(
-        (item) => item.size === selectedSizes.Upper
-      );
+      const upperSize =
+        product &&
+        product?.sizes.Upper?.find((item) => item.size === selectedSizes.Upper);
       if (upperSize) selectedPrice = upperSize.price;
     } else if (selectedSizes.Bottom) {
       // Find the price for the selected Bottom size
       const upperSize =
-        product.sizes.Upper?.find(
-          (item) => item.size === selectedSizes.Upper
-        ) || product.price;
+        (product &&
+          product?.sizes.Upper?.find(
+            (item) => item.size === selectedSizes.Upper
+          )) ||
+        product?.price;
       const bottomSize =
-        product.sizes.Bottom?.find(
-          (item) => item.size === selectedSizes.Bottom
-        ) || product.price;
+        (product &&
+          product?.sizes.Bottom?.find(
+            (item) => item.size === selectedSizes.Bottom
+          )) ||
+        product?.price;
       if (
         bottomSize?.price &&
         upperSize?.price &&
         bottomSize?.price > upperSize?.price
       ) {
-        selectedPrice = bottomSize.price;
+        selectedPrice = bottomSize?.price;
       } else {
-        selectedPrice = upperSize.price;
+        selectedPrice = upperSize?.price;
       }
     }
 
@@ -159,8 +166,8 @@ const ViewProductModal = (props) => {
   }, [selectedSizes, product]);
 
   useEffect(() => {
-    setPrice(product.price);
-  }, [product.price]);
+    setPrice(product?.price);
+  }, [product?.price]);
 
   const handleCopy = async ({ link }) => {
     try {
@@ -370,7 +377,7 @@ const ViewProductModal = (props) => {
                   onClick={() => setStartIndex((prev) => Math.max(prev - 1, 0))}
                   sx={{
                     visibility:
-                      product.images.length > 5 && startIndex > 0
+                      product?.images.length > 5 && startIndex > 0
                         ? "visible"
                         : "hidden",
                     flexShrink: 0,
@@ -392,7 +399,7 @@ const ViewProductModal = (props) => {
                     justifyContent: { xs: "space-between", sm: "center" },
                   }}
                 >
-                  {displayedProduct.images
+                  {displayedProduct?.images
                     .slice(startIndex, startIndex + 5)
                     .map((img, index) => {
                       const originalIndex = startIndex + index;
@@ -430,8 +437,8 @@ const ViewProductModal = (props) => {
                   }
                   sx={{
                     visibility:
-                      displayedProduct.images.length > 5 &&
-                      startIndex + 5 < displayedProduct.images.length
+                      displayedProduct?.images.length > 5 &&
+                      startIndex + 5 < displayedProduct?.images.length
                         ? "visible"
                         : "hidden",
                     flexShrink: 0,
@@ -471,7 +478,7 @@ const ViewProductModal = (props) => {
                     fontFamily: "'Cinzel Serif', serif ",
                   }}
                 >
-                  {displayedProduct.name}
+                  {displayedProduct?.name}
                 </Typography>
                 <Typography
                   variant="h6"
@@ -486,45 +493,46 @@ const ViewProductModal = (props) => {
                 >
                   <span style={{ fontWeight: "600" }}>
                     {getCurrencySymbol(props.country)}{" "}
-                    {displayedProduct.sale && displayedProduct.sale.isActive
+                    {displayedProduct?.sale && displayedProduct?.sale.isActive
                       ? calculatePriceAfterDiscount(
-                          displayedProduct.price,
-                          displayedProduct.sale.discountType,
-                          displayedProduct.sale.discountValue
+                          displayedProduct?.price,
+                          displayedProduct?.sale.discountType,
+                          displayedProduct?.sale.discountValue
                         )
-                      : addCommaToPrice(displayedProduct.price)}
+                      : addCommaToPrice(displayedProduct?.price)}
                   </span>
-                  {displayedProduct.sale && displayedProduct.sale.isActive && (
-                    <>
-                      <span
-                        style={{
-                          textDecoration: "line-through",
-                          marginLeft: "8px",
-                          color: "#989898",
-                          fontSize: { xs: "14px", sm: "16px", md: "18px" },
-                          fontFamily: "'Roboto Serif', serif",
-                        }}
-                      >
-                        {getCurrencySymbol(props.country)}{" "}
-                        {addCommaToPrice(displayedProduct.price)}
-                      </span>
-                      <span
-                        style={{
-                          marginLeft: "8px",
-                          color: "#989898",
-                          fontSize: { xs: "12px", sm: "13px", md: "15px" },
-                          fontFamily: "'Roboto Serif', serif",
-                          fontWeight: "500",
-                        }}
-                      >
-                        {`(${displayedProduct.sale.discountValue}${
-                          displayedProduct.sale.discountType === "Percentage"
-                            ? "%"
-                            : getCurrencySymbol(props.country)
-                        } off)`}
-                      </span>
-                    </>
-                  )}
+                  {displayedProduct?.sale &&
+                    displayedProduct?.sale.isActive && (
+                      <>
+                        <span
+                          style={{
+                            textDecoration: "line-through",
+                            marginLeft: "8px",
+                            color: "#989898",
+                            fontSize: { xs: "14px", sm: "16px", md: "18px" },
+                            fontFamily: "'Roboto Serif', serif",
+                          }}
+                        >
+                          {getCurrencySymbol(props.country)}{" "}
+                          {addCommaToPrice(displayedProduct?.price)}
+                        </span>
+                        <span
+                          style={{
+                            marginLeft: "8px",
+                            color: "#989898",
+                            fontSize: { xs: "12px", sm: "13px", md: "15px" },
+                            fontFamily: "'Roboto Serif', serif",
+                            fontWeight: "500",
+                          }}
+                        >
+                          {`(${displayedProduct?.sale.discountValue}${
+                            displayedProduct?.sale.discountType === "Percentage"
+                              ? "%"
+                              : getCurrencySymbol(props.country)
+                          } off)`}
+                        </span>
+                      </>
+                    )}
                 </Typography>
 
                 {/* Size Chart */}
@@ -546,61 +554,62 @@ const ViewProductModal = (props) => {
                 </Link>
 
                 <Box sx={{ marginBottom: "25px" }}>
-                  {Object.entries(displayedProduct.sizes).map(
-                    ([category, sizes]) =>
-                      sizes.length > 0 && (
-                        <Box key={category} sx={{ marginBottom: "15px" }}>
-                          <Typography
-                            variant="h6"
-                            sx={{
-                              marginBottom: "8px",
-                              fontSize: { xs: "14px", sm: "16px" },
-                              fontWeight: "600",
-                              fontFamily: "'Roboto Serif', serif ",
-                              color: "rgba(55, 65, 81, 0.85)",
-                            }}
-                          >
-                            {category}
-                          </Typography>
-                          <ToggleButtonGroup
-                            exclusive
-                            value={selectedSizes[category] || ""}
-                            onChange={(_event, newSize) =>
-                              handleSizeChange(category, newSize)
-                            }
-                            aria-label={`${category} sizes`}
-                            sx={{
-                              display: "flex",
-                              gap: 0,
-                              flexWrap: "wrap",
-                            }}
-                          >
-                            {sizes.map(({ size, quantity }) => (
-                              <ToggleButton
-                                size="small"
-                                key={size}
-                                variant="outlined"
-                                color="custom"
-                                value={size}
-                                title={`Quantity: ${quantity}`}
-                                sx={{
-                                  "&.Mui-selected": {
-                                    backgroundColor: "#a16149",
-                                    color: "white",
-                                  },
-                                  border: "1px solid #ccc",
-                                  fontSize: "12px !important",
-                                  textAlign: "center",
-                                  width: "50px !important",
-                                }}
-                              >
-                                {size}
-                              </ToggleButton>
-                            ))}
-                          </ToggleButtonGroup>
-                        </Box>
-                      )
-                  )}
+                  {displayedProduct &&
+                    Object.entries(displayedProduct?.sizes).map(
+                      ([category, sizes]) =>
+                        sizes.length > 0 && (
+                          <Box key={category} sx={{ marginBottom: "15px" }}>
+                            <Typography
+                              variant="h6"
+                              sx={{
+                                marginBottom: "8px",
+                                fontSize: { xs: "14px", sm: "16px" },
+                                fontWeight: "600",
+                                fontFamily: "'Roboto Serif', serif ",
+                                color: "rgba(55, 65, 81, 0.85)",
+                              }}
+                            >
+                              {category}
+                            </Typography>
+                            <ToggleButtonGroup
+                              exclusive
+                              value={selectedSizes[category] || ""}
+                              onChange={(_event, newSize) =>
+                                handleSizeChange(category, newSize)
+                              }
+                              aria-label={`${category} sizes`}
+                              sx={{
+                                display: "flex",
+                                gap: 0,
+                                flexWrap: "wrap",
+                              }}
+                            >
+                              {sizes.map(({ size, quantity }) => (
+                                <ToggleButton
+                                  size="small"
+                                  key={size}
+                                  variant="outlined"
+                                  color="custom"
+                                  value={size}
+                                  title={`Quantity: ${quantity}`}
+                                  sx={{
+                                    "&.Mui-selected": {
+                                      backgroundColor: "#a16149",
+                                      color: "white",
+                                    },
+                                    border: "1px solid #ccc",
+                                    fontSize: "12px !important",
+                                    textAlign: "center",
+                                    width: "50px !important",
+                                  }}
+                                >
+                                  {size}
+                                </ToggleButton>
+                              ))}
+                            </ToggleButtonGroup>
+                          </Box>
+                        )
+                    )}
                 </Box>
 
                 <Box gap={2} alignItems="center" sx={{ marginBottom: "25px" }}>
@@ -631,11 +640,11 @@ const ViewProductModal = (props) => {
                         textTransform: "capitalize",
                       }}
                     >
-                      {displayedProduct.color?.toLowerCase()}
+                      {displayedProduct?.color?.toLowerCase()}
                     </Typography>
                   </Box>
                   <Box display="flex" gap={2} alignItems="center">
-                    {product.relatedProductImages.map((image, index) => (
+                    {product?.relatedProductImages?.map((image, index) => (
                       <Box
                         component="img"
                         key={index}
@@ -862,7 +871,7 @@ const ViewProductModal = (props) => {
                       color: "rgba(55, 65, 81, 0.85)",
                     }}
                   >
-                    {displayedProduct.description.replace(/<br\/>/g, "")}
+                    {displayedProduct?.description.replace(/<br\/>/g, "")}
                   </Typography>
                 </Box>
 
@@ -882,7 +891,7 @@ const ViewProductModal = (props) => {
                     >
                       Garment Details
                     </Typography>
-                    {displayedProduct["garmentDetails"].map((detail, index) => (
+                    {displayedProduct?.garmentDetails.map((detail, index) => (
                       <Typography
                         key={index}
                         sx={{
@@ -916,7 +925,7 @@ const ViewProductModal = (props) => {
                         color: "rgba(55, 65, 81, 0.85)",
                       }}
                     >
-                      Made to order <br></br> {displayedProduct["deliveryIn"]}
+                      Made to order <br></br> {displayedProduct?.deliveryIn}
                     </Typography>
                   </div>
                 </div>

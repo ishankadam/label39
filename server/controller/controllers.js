@@ -316,7 +316,7 @@ const get_all_products = async (req, res) => {
         if (product.relatedProducts.length > 0) {
           relatedProductsData = await Promise.all(
             product.relatedProducts.map(async (relatedProduct) => {
-              return Product.findOne({ productId: relatedProduct.productId });
+              return Product.findOne({ productId: relatedProduct });
             })
           );
 
@@ -464,6 +464,77 @@ const createPayment = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+const sendWhatsAppMessage = async (req, res) => {
+  const data = {
+    orderId: "order_PqrPNkZigUVijW",
+    checkoutData: {
+      shippingAddress: {
+        firstName: "Ishan",
+        lastName: "Kadam",
+        phone: "+918652241163",
+      },
+    },
+    cartItems: [
+      {
+        productId: 7458689532,
+        name: "IVORY FLEUR CO-ORD SET",
+        price: 13300,
+        quantity: 1,
+        deliveryIn: ["Shipped in 2-3 weeks"],
+      },
+      {
+        productId: 7458689533,
+        name: "BLACK LACE DRESS",
+        price: 8900,
+        quantity: 1,
+        deliveryIn: ["Shipped in 1 week"],
+      },
+    ],
+  };
+
+  const firstName = data.checkoutData.shippingAddress.firstName; // {{1}}
+  const orderNumber = data.orderId; // {{3}}
+  const estimatedDelivery = "2-3 weeks"; // {{5}}
+
+  const productDetails = data.cartItems
+    .map(
+      (item, index) =>
+        `${index + 1}. ${item.name} (₹${item.price}) - ${item.deliveryIn[0]}`
+    )
+    .join("\n"); // Format as a numbered list
+
+  try {
+    const response = await axios.post(
+      process.env.WHATSAPP_API_URL,
+      {
+        messaging_product: "whatsapp",
+        to: data.checkoutData.shippingAddress.phone,
+        type: "template",
+        template: {
+          name: "hello_world", // Use the approved template
+          language: { code: "en_US" },
+          components: [],
+        },
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.WHATSAPP_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    console.log("Message sent successfully:", response.data);
+    res.send({ success: true, response });
+  } catch (error) {
+    console.error(
+      "Error sending WhatsApp message:",
+      error?.response?.data || error.message
+    );
+    res.status(500).send({ success: false, error });
   }
 };
 
@@ -1800,4 +1871,5 @@ module.exports = {
   updateCelebrityStylePriority,
   updateClientDiariesPriority,
   getProductsForHomepage,
+  sendWhatsAppMessage,
 };

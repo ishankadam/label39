@@ -281,7 +281,7 @@ const FeaturedSection = (props) => {
                       }}
                     >
                       {item.name
-                        ? ` ${item.name} in ${item.productDetails[0].name}`
+                        ? ` ${item.name} in ${item.productDetails[0]?.name}`
                         : ""}
                     </Typography>
                     <Button

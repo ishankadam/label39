@@ -14,9 +14,11 @@ app.use(bodyParser.json());
 // CORS configuration with dynamic origin handling
 const allowedOrigins = [
   "http://localhost:3000", // Local frontend
+  "http://localhost:3001", // Local frontend
   "http://ec2-15-206-148-161.ap-south-1.compute.amazonaws.com", // Deployed frontend
   "http://15.206.148.161",
   "http://3.111.19.139",
+  "https://3.111.19.139",
   "http://thelabel39.com",
   "https://thelabel39.com",
   "http://localhost:5000", // Local frontend
@@ -35,7 +37,7 @@ const corsOptions = {
   allowedHeaders: ["Content-Type", "Authorization"],
 };
 
-app.use(cors({ origin: "*" })); // Apply CORS middleware
+app.use(cors(corsOptions)); // Apply CORS middleware
 app.use(express.json()); // Only need to call this once
 
 // MongoDB Connection

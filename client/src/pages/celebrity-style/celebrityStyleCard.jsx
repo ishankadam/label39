@@ -1,12 +1,5 @@
-import {
-  Box,
-  Button,
-  Card,
-  CardActions,
-  CardMedia,
-  Typography,
-} from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { Box, Button, Card, CardMedia, Typography } from "@mui/material";
+import React from "react";
 import { imageUrl } from "../../api";
 
 function CelebrityStyleCard({ celebrityDiary, setShowModal }) {

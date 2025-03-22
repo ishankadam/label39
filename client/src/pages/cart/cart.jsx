@@ -1,23 +1,23 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 import {
   Box,
-  Typography,
-  IconButton,
   Button,
-  TextField,
+  IconButton,
+  Stack,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
+  TextField,
+  Typography,
   useMediaQuery,
-  Stack,
 } from "@mui/material";
-import RemoveIcon from "@mui/icons-material/Remove";
-import AddIcon from "@mui/icons-material/Add";
 import { useTheme } from "@mui/system";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   clearCart,
   removeFromCart,

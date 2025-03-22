@@ -21,7 +21,6 @@ const Home = (props) => {
   const dispatch = useDispatch();
   const [allCategories, setAllCategories] = useState(props.allCategories);
   const [bestsellers, setBestsellers] = useState([]);
-  const [, setAsSeenOn] = useState([]);
   const [shopByVideos, setshopByVideos] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
   const [showModal, setShowModal] = useState({
@@ -95,6 +94,16 @@ const Home = (props) => {
         ></ViewProductModal>
       ) : null}
       <Footer topSection={true}></Footer>
+      {/* <Button
+        onClick={() =>
+          sendWhatsAppMessage({
+            phone: "+918652241163",
+            message: whatsappQueryMessage,
+          })
+        }
+      >
+        Send Whatsapp message
+      </Button> */}
     </div>
   );
 };

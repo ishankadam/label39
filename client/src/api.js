@@ -1405,3 +1405,26 @@ export const deleteTestimonials = async ({
     setLoading(false);
   }
 };
+
+export const sendWhatsAppMessage = async ({ phone, message }) => {
+  try {
+    const response = await fetch(`${apiUrl}/send-message`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ message, phone }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to send message");
+    }
+
+    const data = await response.json();
+    console.log("WhatsApp Message Response:", data);
+    return data;
+  } catch (error) {
+    console.error("Error sending WhatsApp message:", error);
+    return null;
+  }
+};

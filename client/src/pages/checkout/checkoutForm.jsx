@@ -187,10 +187,9 @@ const CheckoutForm = (props) => {
       } else if (discount.discountType === "Fixed") {
         finalAmount = amount - discount.value;
       } else {
-        finalAmount = amount - discount.value;
+        finalAmount = amount;
       }
     }
-
     setBillAmount(finalAmount);
   }, [discount, cartItems]);
 
