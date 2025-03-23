@@ -132,6 +132,7 @@ const AsSeenOn = (props) => {
                     autoPlay
                     loop
                     muted
+                    playsInline
                     sx={{
                       height: {
                         xs: "450px",
