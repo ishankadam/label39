@@ -49,10 +49,15 @@ const Home = (props) => {
 
   useEffect(() => {
     getAllTestimonials({ setTestimonials });
-    const timer = setTimeout(() => {
-      dispatch(setSubscribeModal(true));
-    }, 100);
-    return () => clearTimeout(timer);
+    const isSubscribeViewed = JSON.parse(
+      sessionStorage.getItem("subscribeViewed")
+    );
+    if (!isSubscribeViewed) {
+      const timer = setTimeout(() => {
+        dispatch(setSubscribeModal(true));
+      }, 100);
+      return () => clearTimeout(timer);
+    }
   }, []);
 
   const handleViewProduct = (product) => {

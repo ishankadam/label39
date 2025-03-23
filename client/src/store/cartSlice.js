@@ -115,6 +115,9 @@ export const cartSlice = createSlice({
     },
     setSubscribeModal: (state, action) => {
       state.subscribeModal = action.payload;
+      if (!action.payload) {
+        sessionStorage.setItem("subscribeViewed", JSON.stringify(true));
+      }
     },
   },
 });

@@ -81,6 +81,7 @@ const ProductsPage = (props) => {
       setSearchTerm(value); // Update local state for debouncing
     } else {
       dispatch(setFilter({ [field]: value }));
+      setPage(1);
     }
   };
 
@@ -101,6 +102,7 @@ const ProductsPage = (props) => {
   };
 
   useEffect(() => {
+    setLoading(true);
     getAllProducts({
       setProductsData: setAllProduct,
       setLoading,
@@ -110,6 +112,7 @@ const ProductsPage = (props) => {
       limit: 16,
       filter,
     });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [page, props.country, filter]);
 
   const [isSearchOpen, setIsSearchOpen] = useState(false);
