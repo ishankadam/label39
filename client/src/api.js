@@ -267,6 +267,7 @@ export const editProduct = async ({ products, setProducts, setLoading }) => {
     const response = await fetch(`${apiUrl}/editProduct`, requestOptions);
     if (response.ok) {
       const data = await response.json();
+      console.log(data);
       setProducts(data);
     } else {
       const errorData = await response.json();
@@ -1426,5 +1427,130 @@ export const sendWhatsAppMessage = async ({ phone, message }) => {
   } catch (error) {
     console.error("Error sending WhatsApp message:", error);
     return null;
+  }
+};
+
+export const editClientDiaries = async ({
+  clientDiaries,
+  setClientDiaries,
+  setLoading,
+}) => {
+  setLoading(true);
+
+  const formData = new FormData();
+
+  formData.append("clientDiaries", JSON.stringify(clientDiaries));
+
+  if (clientDiaries.image) {
+    if (Array.isArray(clientDiaries.image)) {
+      for (const img of clientDiaries.image) {
+        if (img instanceof File) {
+          formData.append("image", img); // Append File directly
+        } else if (typeof img === "string") {
+          try {
+            const file = await urlToFile(img, img.split("/").pop());
+            console.log(file);
+            formData.append("image", file);
+          } catch (error) {
+            console.error("Error converting URL to File:", error);
+          }
+        }
+      }
+    } else if (typeof clientDiaries.image === "string") {
+      try {
+        const file = await urlToFile(
+          clientDiaries.image,
+          clientDiaries.image.split("/").pop()
+        );
+        formData.append("image", file);
+      } catch (error) {
+        console.error("Error converting URL to File:", error);
+      }
+    }
+  }
+
+  const requestOptions = {
+    method: "PUT",
+    body: formData,
+  };
+
+  try {
+    const response = await fetch(`${apiUrl}/editClientDiaries`, requestOptions);
+    if (response.ok) {
+      const data = await response.json();
+      setClientDiaries(data);
+    } else {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Network response was not ok.");
+    }
+  } catch (error) {
+    console.log(error);
+    throw error;
+  } finally {
+    setLoading(false);
+  }
+};
+
+export const editcelebrityStyles = async ({
+  celebrityStyles,
+  setCelebrityStyles,
+  setLoading,
+}) => {
+  setLoading(true);
+
+  const formData = new FormData();
+
+  formData.append("celebrityStyles", JSON.stringify(celebrityStyles));
+
+  if (celebrityStyles.image) {
+    if (Array.isArray(celebrityStyles.image)) {
+      for (const img of celebrityStyles.image) {
+        if (img instanceof File) {
+          formData.append("image", img); // Append File directly
+        } else if (typeof img === "string") {
+          try {
+            const file = await urlToFile(img, img.split("/").pop());
+            console.log(file);
+            formData.append("image", file);
+          } catch (error) {
+            console.error("Error converting URL to File:", error);
+          }
+        }
+      }
+    } else if (typeof celebrityStyles.image === "string") {
+      try {
+        const file = await urlToFile(
+          celebrityStyles.image,
+          celebrityStyles.image.split("/").pop()
+        );
+        formData.append("image", file);
+      } catch (error) {
+        console.error("Error converting URL to File:", error);
+      }
+    }
+  }
+
+  const requestOptions = {
+    method: "PUT",
+    body: formData,
+  };
+
+  try {
+    const response = await fetch(
+      `${apiUrl}/editCelebrityStyles`,
+      requestOptions
+    );
+    if (response.ok) {
+      const data = await response.json();
+      setCelebrityStyles(data);
+    } else {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Network response was not ok.");
+    }
+  } catch (error) {
+    console.log(error);
+    throw error;
+  } finally {
+    setLoading(false);
   }
 };

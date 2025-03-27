@@ -7,12 +7,14 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { createClientDiaries } from "../../api";
+import { createClientDiaries, editClientDiaries } from "../../api";
 import CustomAutocomplete from "../../components/autocomplete/autocomplete";
 import CustomTextfield from "../../components/textfield/customTextfield";
 import UploadFiles from "../../components/upload/uploadFiles";
 // import UploadVideos from "../../components/upload/uploadVideos";
 import CloseIcon from "@mui/icons-material/Close";
+import { useDispatch } from "react-redux";
+import { showSnackbar } from "../../store/cartSlice";
 const ClientDiariesForm = (props) => {
   const [clientDiaries, setclientDiaries] = useState({
     name: "",
@@ -27,6 +29,7 @@ const ClientDiariesForm = (props) => {
 
   const [products, setProducts] = useState([]);
   const [productsArray, setProductsArray] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setProducts(props.products);
@@ -72,12 +75,32 @@ const ClientDiariesForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Client Diary submitted successfully!");
-    createClientDiaries({
-      clientDiaries,
-      setLoading,
-      setClientDiaries: props.setClientDiaries,
-    });
+    if (props.isEdit) {
+      console.log(clientDiaries);
+      editClientDiaries({
+        clientDiaries,
+        setClientDiaries: props.setClientDiaries,
+        setLoading,
+      });
+      dispatch(
+        showSnackbar({
+          message: `Client Diary edited successfully!`,
+          severity: "success",
+        })
+      );
+    } else {
+      createClientDiaries({
+        clientDiaries,
+        setLoading,
+        setClientDiaries: props.setClientDiaries,
+      });
+      dispatch(
+        showSnackbar({
+          message: `Client Diary submitted successfully!`,
+          severity: "success",
+        })
+      );
+    }
     props.setShowModal((prev) => ({
       ...prev,
       show: false,

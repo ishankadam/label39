@@ -20,6 +20,7 @@ import {
   getAllDiscounts,
   getAllGiftcard,
   getAllOrders,
+  getAllProducts,
   getAllSales,
   getAllTestimonials,
   getAllUsers,
@@ -142,6 +143,7 @@ const Dashboard = (props) => {
   const [saleLoading, setsaleLoading] = useState(false);
   const [usersloading, setUsersLoading] = useState(false);
   const [tabValue, setTabValue] = React.useState("one");
+  const [productsloading, setProductsLoading] = useState(false);
 
   const [allOrders, setAllOrders] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -184,6 +186,13 @@ const Dashboard = (props) => {
     getAllSales({ setSaleData, setLoading: setsaleLoading });
     getAllGiftcard({ setGiftCards, setLoading: setGiftCardLoading });
     getAllDiscounts({ setDiscountData, setLoading: setDiscountLoading });
+    getAllProducts({
+      setProductsData: setProducts,
+      setLoading: setProductsLoading,
+      country: props.country,
+      page: undefined,
+      limit: undefined,
+    });
   }, []);
 
   const handleOpenForm = (page) => {
@@ -222,6 +231,10 @@ const Dashboard = (props) => {
     newCategoriesList.unshift({ label: "All", value: "all" });
     setCategoryList(newCategoriesList);
   }, [categories]);
+
+  useEffect(() => {
+    console.log(products);
+  }, [products]);
 
   return isAdmin ? (
     <Box>
@@ -393,7 +406,7 @@ const Dashboard = (props) => {
               setClientDiaries={setClientDiaries}
               loading={clientDiariesLoading}
               setLoading={setclientDiariesLoading}
-              products={products}
+              allProducts={products.products}
             />
           )}
           {tabValue === "eight" && (
@@ -402,7 +415,7 @@ const Dashboard = (props) => {
               setCelebrityStyles={setCelebrityStyles}
               loading={celebrityStylesLoading}
               setLoading={setcelebrityStylesLoading}
-              products={products}
+              allProducts={products.products}
             />
           )}
           {tabValue === "nine" && (

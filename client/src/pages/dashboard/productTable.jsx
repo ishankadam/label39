@@ -298,14 +298,14 @@ const ProductTable = (props) => {
       ></CustomTable>
       {showModal.show && (
         <AddEditProductModal
-          products={props.products}
+          products={products.products}
           open={showModal.show}
           isEdit={showModal.isEdit}
           data={showModal.data}
           handleModalClose={handleModalClose}
           setShowModal={props.setShowModal}
-          setLoading={props.setLoading}
-          setProducts={props.setProducts}
+          setLoading={setProductsLoading}
+          setProducts={setProducts}
           categories={props.categories}
         />
       )}

@@ -153,7 +153,7 @@ const CelebrityStyle = (props) => {
           setShowModal={setShowCelebrityStyleModal}
           setLoading={setLoading}
           setCelebrityStyles={props.setCelebrityStyles}
-          products={props.products}
+          products={props.allProducts}
         ></CelebrityStyleForm>
       )}
       {isModalOpen && (

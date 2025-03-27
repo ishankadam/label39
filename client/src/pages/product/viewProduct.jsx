@@ -25,7 +25,13 @@ import {
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { addProductToCart, appUrl, imageUrl, phoneNumber } from "../../api";
+import {
+  addProductToCart,
+  appUrl,
+  imageUrl,
+  messageUrl,
+  phoneNumber,
+} from "../../api";
 import {
   addCommaToPrice,
   calculatePriceAfterDiscount,
@@ -45,7 +51,6 @@ const ViewProductModal = (props) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const { isAdmin, product, open, setShowModal } = props;
-  console.log(product);
   const [selectedColor, setSelectedColor] = useState(
     product && product.allColors[0]
   );
@@ -114,8 +119,16 @@ const ViewProductModal = (props) => {
     // Format the phone number (remove any non-digit characters)
     const formattedNumber = phoneNumber.replace(/\D/g, "");
 
+    // Get product details
+    const { name, productId } = product;
+
+    // Assuming the first image is the primary product image hosted on AWS S3
+    const productUrl = `${messageUrl}/products/${productId}`;
+
     // Encode the message for URL
-    const encodedMessage = encodeURIComponent(whatsappQueryMessage);
+    const encodedMessage = encodeURIComponent(
+      whatsappQueryMessage(name, productUrl)
+    );
 
     // Construct the WhatsApp URL
     const whatsappUrl = `https://wa.me/${formattedNumber}?text=${encodedMessage}`;

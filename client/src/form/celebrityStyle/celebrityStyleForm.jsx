@@ -7,12 +7,14 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { createCelebrityStyles } from "../../api";
+import { createCelebrityStyles, editcelebrityStyles } from "../../api";
 import CustomAutocomplete from "../../components/autocomplete/autocomplete";
 import CustomTextfield from "../../components/textfield/customTextfield";
 import UploadFiles from "../../components/upload/uploadFiles";
 // import UploadVideos from "../../components/upload/uploadVideos";
 import CloseIcon from "@mui/icons-material/Close";
+import { useDispatch } from "react-redux";
+import { showSnackbar } from "../../store/cartSlice";
 
 const CelebrityStyleForm = (props) => {
   const [celebrityStyles, setCelebrityStyles] = useState({
@@ -28,6 +30,7 @@ const CelebrityStyleForm = (props) => {
 
   const [products, setProducts] = useState([]);
   const [productsArray, setProductsArray] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setProducts(props.products);
@@ -74,12 +77,31 @@ const CelebrityStyleForm = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    alert("Celebrity style submitted successfully!");
-    createCelebrityStyles({
-      celebrityStyles,
-      setLoading,
-      setCelebrityStyles: props.setCelebrityStyles,
-    });
+    if (props.isEdit) {
+      editcelebrityStyles({
+        celebrityStyles,
+        setCelebrityStyles: props.setCelebrityStyles,
+        setLoading,
+      });
+      dispatch(
+        showSnackbar({
+          message: `Celebrity Styles edited successfully!`,
+          severity: "success",
+        })
+      );
+    } else {
+      createCelebrityStyles({
+        celebrityStyles,
+        setLoading,
+        setCelebrityStyles: props.setCelebrityStyles,
+      });
+      dispatch(
+        showSnackbar({
+          message: `Celebrity Styles created successfully!`,
+          severity: "success",
+        })
+      );
+    }
     props.setShowModal((prev) => ({
       ...prev,
       show: false,

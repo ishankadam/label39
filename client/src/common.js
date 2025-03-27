@@ -38,8 +38,8 @@ export const dashboardTabValue = [
   { label: "Discount", value: "eleven", icon: <CardGiftcardIcon /> },
 ];
 
-export const whatsappQueryMessage =
-  "I'm excited about your products and have a few questions—can you guide me through?";
+export const whatsappQueryMessage = (productName, productUrl) =>
+  `I'm excited about your product *${productName}* and have a few questions—can you guide me through? Here’s the product link: ${productUrl}`;
 
 export const countries = [
   {
@@ -220,8 +220,9 @@ export const urlToFile = async (url, filename) => {
   const response = await fetch(url);
   const blob = await response.blob();
 
-  const file = new File([blob], filename, { type: blob.type });
-  return file;
+  const mimeType = blob.type.startsWith("image/") ? blob.type : "image/jpeg";
+
+  return new File([blob], filename, { type: mimeType });
 };
 
 export const categories = [
@@ -293,25 +294,25 @@ export const availableColors = [
 ];
 
 export const availableColorsForSelection = [
-  { label: "Red", value: "Red" },
-  { label: "Blue", value: "Blue" },
-  { label: "Green", value: "Green" },
-  { label: "Yellow", value: "Yellow" },
-  { label: "Orange", value: "Orange" },
-  { label: "Black", value: "Black" },
-  { label: "Ivory", value: "Ivory" },
-  { label: "Gray", value: "Gray" },
-  { label: "Pink", value: "Pink" },
-  { label: "Lilac", value: "Lilac" },
-  { label: "Purple", value: "Purple" },
-  { label: "Beige", value: "Beige" },
-  { label: "Brown", value: "Brown" },
-  { label: "Peach", value: "Peach" },
-  { label: "Off-white", value: "Off-white" },
-  { label: "Maroon", value: "Maroon" },
-  { label: "Gold", value: "Gold" },
-  { label: "Silver", value: "Silver" },
-  { label: "Print", value: "Print" },
+  { label: "RED", value: "RED" },
+  { label: "BLUE", value: "BLUE" },
+  { label: "GREEN", value: "GREEN" },
+  { label: "YELLOW", value: "YELLOW" },
+  { label: "ORANGE", value: "ORANGE" },
+  { label: "BLACK", value: "BLACK" },
+  { label: "IVORY", value: "IVORY" },
+  { label: "GRAY", value: "GRAY" },
+  { label: "PINK", value: "PINK" },
+  { label: "LILAC", value: "LILAC" },
+  { label: "PURPLE", value: "PURPLE" },
+  { label: "BEIGE", value: "BEIGE" },
+  { label: "BROWN", value: "BROWN" },
+  { label: "PEACH", value: "PEACH" },
+  { label: "OFF-WHITE", value: "OFF-WHITE" },
+  { label: "MAROON", value: "MAROON" },
+  { label: "GOLD", value: "GOLD" },
+  { label: "SILVER", value: "SILVER" },
+  { label: "PRINT", value: "PRINT" },
 ];
 
 export const hasEmptyField = (obj) => {

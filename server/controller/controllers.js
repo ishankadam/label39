@@ -242,7 +242,7 @@ const checkLoginCredentials = async (req, res) => {
 
 const get_all_products = async (req, res) => {
   try {
-    const { country, isActive, page = 1, limit = 10, filter = {} } = req.body;
+    const { country, isActive, page, limit, filter = {} } = req.body;
     const skip = (page - 1) * limit;
 
     if (!country) {
@@ -316,7 +316,9 @@ const get_all_products = async (req, res) => {
         if (product.relatedProducts.length > 0) {
           relatedProductsData = await Promise.all(
             product.relatedProducts.map(async (relatedProduct) => {
-              return Product.findOne({ productId: relatedProduct });
+              return Product.findOne({ productId: relatedProduct }).select(
+                "-_id"
+              );
             })
           );
 
@@ -749,6 +751,8 @@ const toggleProductStatus = async (req, res) => {
 
 const edit_product = async (req, res) => {
   try {
+    const editData = JSON.parse(req.body.products);
+    const { productId, ...editedProduct } = editData;
     const images = req.files.map((file) => file.originalname);
 
     // Check if productId is defined
@@ -1824,6 +1828,64 @@ const getProductsForHomepage = async (req, res) => {
   }
 };
 
+const edit_client_diaries = async (req, res) => {
+  try {
+    const editData = JSON.parse(req.body.clientDiaries); // Parse incoming category data
+    const { clientDiariesId, ...editedClientDiaries } = editData;
+
+    const images = Array.isArray(req.files) ? req.files : req.files.image || [];
+
+    const updatedClientDiaries = {
+      clientDiariesId,
+      ...editedClientDiaries,
+      image: images.map((image) => image.originalname)[0],
+    };
+
+    await clientDiaries.replaceOne(
+      { clientDiariesId: clientDiariesId },
+      updatedClientDiaries,
+      {
+        upsert: true,
+      }
+    );
+
+    const allClientDiaries = await clientDiaries.find({}, { _id: 0 });
+    res.send(allClientDiaries); // Send the updated category list
+  } catch (error) {
+    console.error("Error in edit_client_diaries:", error);
+    res.status(400).send({ error: error.message });
+  }
+};
+
+const edit_celebrity_Styles = async (req, res) => {
+  try {
+    const editData = JSON.parse(req.body.celebrityStyles); // Parse incoming category data
+    const { celebrityStyleId, ...editedCelebrityStyles } = editData;
+
+    const images = Array.isArray(req.files) ? req.files : req.files.image || [];
+
+    const updatedcelebrityStyles = {
+      celebrityStyleId,
+      ...editedCelebrityStyles,
+      image: images.map((image) => image.originalname)[0],
+    };
+
+    await CelebrityStyle.replaceOne(
+      { celebrityStyleId: celebrityStyleId },
+      updatedcelebrityStyles,
+      {
+        upsert: true,
+      }
+    );
+
+    const allcelebrityStyles = await CelebrityStyle.find({}, { _id: 0 });
+    res.send(allcelebrityStyles); // Send the updated category list
+  } catch (error) {
+    console.error("Error in edit_celebrity_styles:", error);
+    res.status(400).send({ error: error.message });
+  }
+};
+
 module.exports = {
   get_all_products,
   create_product,
@@ -1872,4 +1934,6 @@ module.exports = {
   updateClientDiariesPriority,
   getProductsForHomepage,
   sendWhatsAppMessage,
+  edit_client_diaries,
+  edit_celebrity_Styles,
 };

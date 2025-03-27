@@ -165,6 +165,18 @@ router.put(
 
 router.post("/send-message", controller.sendWhatsAppMessage);
 
+router.put(
+  "/editClientDiaries",
+  controller.upload.array("image"),
+  controller.edit_client_diaries
+);
+
+router.put(
+  "/editCelebrityStyles",
+  controller.upload.array("image"),
+  controller.edit_celebrity_Styles
+);
+
 // edit testimonial
 // router.put("/editTestimonial", controller.edit_testimonial);
 
