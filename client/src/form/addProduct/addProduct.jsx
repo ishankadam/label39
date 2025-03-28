@@ -245,6 +245,10 @@ const AddEditProductModal = (props) => {
     setProductsArray(newProductsArray);
   }, [products]);
 
+  useEffect(() => {
+    console.log(productDetails);
+  }, [productDetails]);
+
   return (
     <Dialog
       // className="add-product-modal"

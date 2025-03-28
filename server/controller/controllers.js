@@ -312,13 +312,15 @@ const get_all_products = async (req, res) => {
         let allColorsInRelatedProducts = [];
         let relatedProductsData = [];
         let relatedProductsImages = [];
+        let relatedProducts = [];
 
         if (product.relatedProducts.length > 0) {
           relatedProductsData = await Promise.all(
-            product.relatedProducts.map(async (relatedProduct) => {
-              return Product.findOne({ productId: relatedProduct }).select(
-                "-_id"
-              );
+            product.relatedProducts.map(async (relatedProductData) => {
+              relatedProducts.push(relatedProductData);
+              return Product.findOne({
+                productId: relatedProductData.productId,
+              }).select("-_id");
             })
           );
 
@@ -329,7 +331,6 @@ const get_all_products = async (req, res) => {
             .filter(Boolean)
             .map((relatedProduct) => relatedProduct.images[0]);
         }
-
         return {
           ...productData,
           allColors: [
@@ -338,7 +339,8 @@ const get_all_products = async (req, res) => {
           relatedProductImages: [
             ...new Set([product.images[0], ...relatedProductsImages]),
           ],
-          relatedProducts: relatedProductsData,
+          relatedProductsData: relatedProductsData,
+          relatedProducts,
         };
       })
     );
@@ -388,7 +390,7 @@ const get_all_products = async (req, res) => {
       currentPage: page,
     });
   } catch (error) {
-    console.error("Error fetching products or exchange rates:", error);
+    // console.error("Error fetching products or exchange rates:", error);
     res
       .status(500)
       .json({ message: "Error fetching products or exchange rates", error });

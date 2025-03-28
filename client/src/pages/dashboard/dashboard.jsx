@@ -232,10 +232,6 @@ const Dashboard = (props) => {
     setCategoryList(newCategoriesList);
   }, [categories]);
 
-  useEffect(() => {
-    console.log(products);
-  }, [products]);
-
   return isAdmin ? (
     <Box>
       {/* Sidebar */}

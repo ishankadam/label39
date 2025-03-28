@@ -20,14 +20,17 @@ const MultiSelectAutocomplete = ({
     </li>
   ),
   config,
+  value,
   ...props
 }) => {
+  console.log(value);
   return (
     <Autocomplete
       multiple
       options={options}
       getOptionLabel={getOptionLabel}
       isOptionEqualToValue={isOptionEqualToValue}
+      value={value || []}
       renderInput={(params) => (
         <TextField
           {...params}
