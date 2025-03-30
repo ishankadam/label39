@@ -13,7 +13,8 @@ const MultiSelectAutocomplete = ({
     const found = options.find((o) => o.value === option);
     return found ? found.label : "";
   },
-  isOptionEqualToValue = (option, value) => option.value === value.value,
+  isOptionEqualToValue = (option, value) =>
+    value ? option.value === value.value : false,
   renderOption = (props, option) => (
     <li {...props} key={option.value}>
       {option.label}
@@ -40,6 +41,7 @@ const MultiSelectAutocomplete = ({
         />
       )}
       onChange={(_event, newValue) => {
+        console.log("Updated Value:", newValue);
         if (onChange) {
           onChange(newValue);
         } else {

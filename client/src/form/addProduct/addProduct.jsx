@@ -67,17 +67,22 @@ const AddEditProductModal = (props) => {
       });
     } else if (field === "relatedProducts") {
       //dont push if the value is already in the array
-      if (
-        productDetails.relatedProducts.includes(value[value.length - 1].value)
-      ) {
+      if (!value || value.length === 0) {
+        setProductDetails((prev) => ({
+          ...prev,
+          relatedProducts: [], // Reset if value is empty
+        }));
         return;
       }
+
+      // Ensure value is a valid array
+      const relatedProductValues = value.map((item) =>
+        item.value ? item.value : item
+      );
+
       setProductDetails((prev) => ({
         ...prev,
-        relatedProducts: [
-          ...prev.relatedProducts,
-          value && value[value.length - 1].value,
-        ],
+        relatedProducts: relatedProductValues, // Directly use value array
       }));
     } else {
       setProductDetails((prev) => ({
@@ -144,12 +149,16 @@ const AddEditProductModal = (props) => {
           products: productDetails,
           setProducts: props.setProducts,
           setLoading: props.setLoading,
+          page: props.page,
+          limit: props.limit,
         });
       } else {
         createProduct({
           products: productDetails,
           setLoading: props.setLoading,
           setAllProduct: props.setProducts,
+          page: props.page,
+          limit: props.limit,
         });
       }
       props.handleModalClose();
@@ -168,14 +177,8 @@ const AddEditProductModal = (props) => {
   };
 
   useEffect(() => {
-    const newCategoriesList = props.categories
-      ?.filter((row) => row.dropdownOption)
-      .map((category) => ({
-        label: category.name,
-        value: category.name.toLowerCase().replace(/\s+/g, ""),
-      }));
-    setCategoryList(newCategoriesList);
-  }, [props.categories]);
+    setCategoryList(props.categoryList);
+  }, [props.categoryList]);
 
   useEffect(() => {
     if (props.isEdit && props.data) {

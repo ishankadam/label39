@@ -1,76 +1,6 @@
 [
   {
-    "productId": 1708487780,
-    "name": "IVORY RUBY CO-ORD SET",
-    "description": "Ivory-ruby applique co-ord features signature applique work on the sleeve and back with subtle embroidery detail. Upgrade your fashion style with this elegant ensemble, perfect for making a statement wherever you go. ",
-    "sizes": {
-      "Upper": [
-        { "size": "XS", "quantity": 10, "price": 13300 },
-        { "size": "S", "quantity": 10, "price": 13300 },
-        { "size": "M", "quantity": 10, "price": 13300 },
-        { "size": "L", "quantity": 10, "price": 13300 },
-        { "size": "XL", "quantity": 10, "price": 13300 }
-      ],
-      "Bottom": [
-        { "size": "XS", "quantity": 10, "price": 13300 },
-        { "size": "S", "quantity": 10, "price": 13300 },
-        { "size": "M", "quantity": 10, "price": 13300 },
-        { "size": "L", "quantity": 10, "price": 13300 },
-        { "size": "XL", "quantity": 10, "price": 13300 }
-      ]
-    },
-    "deliveryIn": "Shipped in 2-3 weeks",
-    "price": 13300,
-    "garmentDetails": ["Fabric: Pure silk chanderi",  "Lining - cotton",  "No. of Components: 2",  "Dispatch Timeline: 2-3 Weeks",  "Wash Care: Dry clean only"],
-    "category": "cord",
-    "images": "['Cord11.jpg','Cord12.jpg','Cord13.jpg','Cord14.jpg','Cord15.jpg']",
-    "bestseller": true,
-    "soldOut": false,
-    "readyToShip": true,
-    "asSeenOn": "DOLLY JAIN, NATASHA LUTHRA",
-    "videoSrc": "CordV1.mov",
-    "isActive": true,
-    "color": "IVORY",
-    "fabric": "Pure silk chanderi",
-    "priority": 3
-  },
-  {
-    "productId": 8415024622,
-    "name": "IVORY FLORAL CO-ORD SET",
-    "description": "Ivory co-ord set features floral embroidery work and hand bead work along with organza detailing on pants. This chic outfit ensures that you look stylish and put together. ",
-    "sizes": {
-      "Upper": [
-        { "size": "XS", "quantity": 10, "price": 12040 },
-        { "size": "S", "quantity": 10, "price": 12040 },
-        { "size": "M", "quantity": 10, "price": 12040 },
-        { "size": "L", "quantity": 10, "price": 12040 },
-        { "size": "XL", "quantity": 10, "price": 12040 }
-      ],
-      "Bottom": [
-        { "size": "XS", "quantity": 10, "price": 12040 },
-        { "size": "S", "quantity": 10, "price": 12040 },
-        { "size": "M", "quantity": 10, "price": 12040 },
-        { "size": "L", "quantity": 10, "price": 12040 },
-        { "size": "XL", "quantity": 10, "price": 12040 }
-      ]
-    },
-    "deliveryIn": "Shipped in 2-3 weeks",
-    "price": 12040,
-    "garmentDetails": ["Fabric: Pure silk chanderi",  "Lining - cotton",  "No. of Components: 2",  "Dispatch Timeline: 2-3 Weeks",  "Wash Care: Dry clean only"],
-    "category": "cord",
-    "images": "['Cord21.jpg','Cord22.jpg','Cord23.jpg','Cord24.jpg']",
-    "bestseller": false,
-    "soldOut": false,
-    "readyToShip": true,
-    "asSeenOn": "NATASHA LUTHRA",
-    "videoSrc": "",
-    "isActive": true,
-    "color": "IVORY",
-    "fabric": "Pure silk chanderi",
-    "priority": 4
-  },
-  {
-    "productId": 4392172822,
+    "productId": 8803951117,
     "name": "IVORY FLEUR CO-ORD SET",
     "description": "Ivory co-ord set features floral embroidery and applique work. Featuring vibrant colours, this co-ord is perfect for both casual outings and special occasions. ",
     "sizes": {
@@ -91,9 +21,14 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 13300,
-    "garmentDetails": ["Fabric: Pure silk chanderi",  "Lining - cotton",  "No. of Components: 2",  "Dispatch Timeline: 2-3 Weeks",  "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi",
+      "Lining - cotton",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "cord",
-    "images": "['Cord30.jpg','Cord31.jpg','Cord32.jpg','Cord33.jpg']",
+    "images": ["Cord30.jpg", "Cord31.jpg", "Cord32.jpg", "Cord33.jpg"],
     "bestseller": true,
     "soldOut": false,
     "readyToShip": true,
@@ -102,395 +37,58 @@
     "isActive": true,
     "color": "IVORY",
     "fabric": "Pure silk chanderi",
-    "priority": 1
+    "priority": 1,
+    "relatedProducts": []
   },
   {
-    "productId": 6363732394,
-    "name": "SAGE GREEN EMBROIDERED CO-ORD SET",
-    "description": "Embrace the warm hues of this radiant sage green co-ord set with floral embroidery work and stitching detailing.",
+    "productId": 2197540620,
+    "name": "IVORY RUBY CO-ORD SET",
+    "description": "Ivory-ruby applique co-ord features signature applique work on the sleeve and back with subtle embroidery detail. Upgrade your fashion style with this elegant ensemble, perfect for making a statement wherever you go. ",
     "sizes": {
       "Upper": [
-        { "size": "XS", "quantity": 10, "price": 11550 },
-        { "size": "S", "quantity": 10, "price": 11550 },
-        { "size": "M", "quantity": 10, "price": 11550 },
-        { "size": "L", "quantity": 10, "price": 11550 },
-        { "size": "XL", "quantity": 10, "price": 11550 }
+        { "size": "XS", "quantity": 10, "price": 13300 },
+        { "size": "S", "quantity": 10, "price": 13300 },
+        { "size": "M", "quantity": 10, "price": 13300 },
+        { "size": "L", "quantity": 10, "price": 13300 },
+        { "size": "XL", "quantity": 10, "price": 13300 }
       ],
       "Bottom": [
-        { "size": "XS", "quantity": 10, "price": 11550 },
-        { "size": "S", "quantity": 10, "price": 11550 },
-        { "size": "M", "quantity": 10, "price": 11550 },
-        { "size": "L", "quantity": 10, "price": 11550 },
-        { "size": "XL", "quantity": 10, "price": 11550 }
+        { "size": "XS", "quantity": 10, "price": 13300 },
+        { "size": "S", "quantity": 10, "price": 13300 },
+        { "size": "M", "quantity": 10, "price": 13300 },
+        { "size": "L", "quantity": 10, "price": 13300 },
+        { "size": "XL", "quantity": 10, "price": 13300 }
       ]
     },
     "deliveryIn": "Shipped in 2-3 weeks",
-    "price": 11550,
-    "garmentDetails": ["Fabric: Pure silk chanderi",  "Lining - cotton",  "No. of Components: 2",  "Dispatch Timeline: 2-3 Weeks",  "Wash Care: Dry clean only"],
+    "price": 13300,
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi",
+      "Lining - cotton",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "cord",
-    "images": "['Cord41.jpg','Cord42.jpg','Cord43.jpg','Cord44.jpg']",
-    "bestseller": false,
-    "soldOut": false,
-    "readyToShip": true,
-    "asSeenOn": "AMBIKA",
-    "videoSrc": "",
-    "isActive": true,
-    "color": "GREEN",
-    "fabric": "Pure silk chanderi",
-    "priority": 11
-  },
-  {
-    "productId": 1776598315,
-    "name": "MYSTIC IVORY CO-ORD",
-    "description": "This refreshing Ivory co-ord set features vibrant applique colours with a subtle touch of embroidery.The look of vibrant applique colours is enhanced by delicate stitch lines along the pants.  ",
-    "sizes": {
-      "Upper": [
-        { "size": "XS", "quantity": 10, "price": 12530 },
-        { "size": "S", "quantity": 10, "price": 12530 },
-        { "size": "M", "quantity": 10, "price": 12530 },
-        { "size": "L", "quantity": 10, "price": 12530 },
-        { "size": "XL", "quantity": 10, "price": 12530 }
-      ],
-      "Bottom": [
-        { "size": "XS", "quantity": 10, "price": 12530 },
-        { "size": "S", "quantity": 10, "price": 12530 },
-        { "size": "M", "quantity": 10, "price": 12530 },
-        { "size": "L", "quantity": 10, "price": 12530 },
-        { "size": "XL", "quantity": 10, "price": 12530 }
-      ]
-    },
-    "deliveryIn": "Shipped in 2-3 weeks",
-    "price": 12530,
-    "garmentDetails": ["Fabric: Pure silk chanderi",  "Lining - cotton",  "No. of Components: 2",  "Dispatch Timeline: 2-3 Weeks",  "Wash Care: Dry clean only"],
-    "category": "cord",
-    "images": "['Cord50.jpg','Cord51.jpg','Cord52.jpg','Cord55.jpg','Cord54.jpg']",
-    "bestseller": false,
-    "soldOut": false,
-    "readyToShip": true,
-    "asSeenOn": "DOLLY JAIN",
-    "videoSrc": "",
-    "isActive": true,
-    "color": "IVORY",
-    "fabric": "Pure silk chanderi",
-    "priority": 12
-  },
-  {
-    "productId": 3340958095,
-    "name": "OLIVE GREEN APPLIQUE CO-ORD SET",
-    "description": "Olive green co-ord set features applique work along the sleeves and back. The pants have some subtle applique work. A fashionable style that easily blends comfort and sophistication. ",
-    "sizes": {
-      "Upper": [
-        { "size": "XS", "quantity": 10, "price": 11480 },
-        { "size": "S", "quantity": 10, "price": 11480 },
-        { "size": "M", "quantity": 10, "price": 11480 },
-        { "size": "L", "quantity": 10, "price": 11480 },
-        { "size": "XL", "quantity": 10, "price": 11480 }
-      ],
-      "Bottom": [
-        { "size": "XS", "quantity": 10, "price": 11480 },
-        { "size": "S", "quantity": 10, "price": 11480 },
-        { "size": "M", "quantity": 10, "price": 11480 },
-        { "size": "L", "quantity": 10, "price": 11480 },
-        { "size": "XL", "quantity": 10, "price": 11480 }
-      ]
-    },
-    "deliveryIn": "Shipped in 2-3 weeks",
-    "price": 11480,
-    "garmentDetails": ["Fabric: Cotton fabric",  "No. of Components: 2",  "Dispatch Timeline: 2-3 Weeks",  "Wash Care: Dry clean only"],
-    "category": "cord",
-    "images": "['Cord60.jpg','Cord61.jpg','Cord62.jpg','Cord63.jpg']",
+    "images": [
+      "Cord11.jpg",
+      "Cord12.jpg",
+      "Cord13.jpg",
+      "Cord14.jpg",
+      "Cord15.jpg"
+    ],
     "bestseller": true,
     "soldOut": false,
     "readyToShip": true,
-    "asSeenOn": "",
-    "videoSrc": "CordV3.mov",
-    "isActive": true,
-    "color": "GREEN",
-    "fabric": "Cotton",
-    "priority": 6
-  },
-  {
-    "productId": 5724350945,
-    "name": "IVORY CROCHET CO-ORD SET",
-    "description": "The crochet co-ord set is paired with hand woven crochet work and printed stripe, perfect for making a statement wherever you go. ",
-    "sizes": {
-      "Upper": [
-        { "size": "XS", "quantity": 10, "price": 10654 },
-        { "size": "S", "quantity": 10, "price": 10654 },
-        { "size": "M", "quantity": 10, "price": 10654 },
-        { "size": "L", "quantity": 10, "price": 10654 },
-        { "size": "XL", "quantity": 10, "price": 10654 }
-      ],
-      "Bottom": [
-        { "size": "XS", "quantity": 10, "price": 10654 },
-        { "size": "S", "quantity": 10, "price": 10654 },
-        { "size": "M", "quantity": 10, "price": 10654 },
-        { "size": "L", "quantity": 10, "price": 10654 },
-        { "size": "XL", "quantity": 10, "price": 10654 }
-      ]
-    },
-    "deliveryIn": "Shipped in 2-3 weeks",
-    "price": 10654,
-    "garmentDetails": ["Fabric: Textured cotton fabric",  "Lining - cotton", "No. of Components: 2",  "Dispatch Timeline: 2-3 Weeks",  "Wash Care: Dry clean only"],
-    "category": "cord",
-    "images": "['Cord70.jpg','Cord71.jpg','Cord72.JPG','Cord73.jpg']",
-    "bestseller": false,
-    "soldOut": false,
-    "readyToShip": true,
-    "asSeenOn": "",
-    "videoSrc": "",
-    "isActive": true,
-    "color": "IVORY, PRINT",
-    "fabric": "Cotton",
-    "priority": 21
-  },
-  {
-    "productId": 3697019815,
-    "name": "SOFT PEACH PEARL CO-ORD SET",
-    "description": "Soft peach co-ord with intricate hand pearl work and organza cutwork detailing.  This co-ord set in stunning peach colour is sure to make a statement feeling confident and elegent. ",
-    "sizes": {
-      "Upper": [
-        { "size": "XS", "quantity": 10, "price": 10900 },
-        { "size": "S", "quantity": 10, "price": 10900 },
-        { "size": "M", "quantity": 10, "price": 10900 },
-        { "size": "L", "quantity": 10, "price": 10900 },
-        { "size": "XL", "quantity": 10, "price": 10900 }
-      ],
-      "Bottom": [
-        { "size": "XS", "quantity": 10, "price": 10900 },
-        { "size": "S", "quantity": 10, "price": 10900 },
-        { "size": "M", "quantity": 10, "price": 10900 },
-        { "size": "L", "quantity": 10, "price": 10900 },
-        { "size": "XL", "quantity": 10, "price": 10900 }
-      ]
-    },
-    "deliveryIn": "Shipped in 2-3 weeks",
-    "price": 10900,
-    "garmentDetails": ["Fabric: Pure silk chanderi",  "Lining - cotton", "No. of Components: 2",  "Dispatch Timeline: 2-3 Weeks",  "Wash Care: Dry clean only"],
-    "category": "cord",
-    "images": "['Cord80.jpg','Cord81.jpg','Cord82.jpg']",
-    "bestseller": false,
-    "soldOut": false,
-    "readyToShip": true,
-    "asSeenOn": "",
-    "videoSrc": "",
-    "isActive": true,
-    "color": "PINK",
-    "fabric": "Pure silk chanderi",
-    "priority": 10
-  },
-  {
-    "productId": 5909829872,
-    "name": "HEART CO-ORD SET",
-    "description": "Heart co-ord set features elegant hand embroidery on the shirt, adding a refined touch to its design",
-    "sizes": {
-      "Upper": [
-        { "size": "XS", "quantity": 10, "price": 9940 },
-        { "size": "S", "quantity": 10, "price": 9940 },
-        { "size": "M", "quantity": 10, "price": 9940 },
-        { "size": "L", "quantity": 10, "price": 9940 },
-        { "size": "XL", "quantity": 10, "price": 9940 }
-      ],
-      "Bottom": [
-        { "size": "XS", "quantity": 10, "price": 9940 },
-        { "size": "S", "quantity": 10, "price": 9940 },
-        { "size": "M", "quantity": 10, "price": 9940 },
-        { "size": "L", "quantity": 10, "price": 9940 },
-        { "size": "XL", "quantity": 10, "price": 9940 }
-      ]
-    },
-    "deliveryIn": "Shipped in 2-3 weeks",
-    "price": 9940,
-    "garmentDetails": ["Fabric: Pure silk chanderi", "Lining - cotton", "No. of Components: 2", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
-    "category": "cord",
-    "images": "['Cord100.jpg','Cord101.jpg','Cord102.jpg']",
-    "bestseller": false,
-    "soldOut": false,
-    "readyToShip": true,
-    "asSeenOn": "",
-    "videoSrc": "",
-    "isActive": true,
-    "color": "BLUE",
-    "fabric": "Pure silk chanderi",
-    "priority": 8
-  },
-  {
-    "productId": 8424390446,
-    "name": "HEART CO-ORD SET",
-    "description": "Heart co-ord set features elegant hand embroidery on the shirt, adding a refined touch to its design",
-    "sizes": {
-      "Upper": [
-        { "size": "XS", "quantity": 10, "price": 9940 },
-        { "size": "S", "quantity": 10, "price": 9940 },
-        { "size": "M", "quantity": 10, "price": 9940 },
-        { "size": "L", "quantity": 10, "price": 9940 },
-        { "size": "XL", "quantity": 10, "price": 9940 }
-      ],
-      "Bottom": [
-        { "size": "XS", "quantity": 10, "price": 9940 },
-        { "size": "S", "quantity": 10, "price": 9940 },
-        { "size": "M", "quantity": 10, "price": 9940 },
-        { "size": "L", "quantity": 10, "price": 9940 },
-        { "size": "XL", "quantity": 10, "price": 9940 }
-      ]
-    },
-    "deliveryIn": "Shipped in 2-3 weeks",
-    "price": 9940,
-    "garmentDetails": ["Fabric: Pure silk chanderi", "Lining - cotton", "No. of Components: 2", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
-    "category": "cord",
-    "images": "['Cord103.jpg]",
-    "bestseller": false,
-    "soldOut": false,
-    "readyToShip": true,
-    "asSeenOn": "AAKRITI DALMIA-IVORY",
-    "videoSrc": "",
+    "asSeenOn": "DOLLY JAIN, NATASHA LUTHRA",
+    "videoSrc": "CordV1.mov",
     "isActive": true,
     "color": "IVORY",
     "fabric": "Pure silk chanderi",
-    "priority": 8
+    "priority": 2,
+    "relatedProducts": []
   },
   {
-    "productId": 5047727951,
-    "name": "PISTACHIO GREEN CO-ORD SET",
-    "description": "Pistachio green set features abstract floral and leafy embroidery along the front, back and sleeve. The shirt is paired with flared pants giving it a contemporary edge.  ",
-    "sizes": {
-      "Upper": [
-        { "size": "XS", "quantity": 10, "price": 12155 },
-        { "size": "S", "quantity": 10, "price": 12155 },
-        { "size": "M", "quantity": 10, "price": 12155 },
-        { "size": "L", "quantity": 10, "price": 12155 },
-        { "size": "XL", "quantity": 10, "price": 12155 }
-      ],
-      "Bottom": [
-        { "size": "XS", "quantity": 10, "price": 12155 },
-        { "size": "S", "quantity": 10, "price": 12155 },
-        { "size": "M", "quantity": 10, "price": 12155 },
-        { "size": "L", "quantity": 10, "price": 12155 },
-        { "size": "XL", "quantity": 10, "price": 12155 }
-      ]
-    },
-    "deliveryIn": "Shipped in 2-3 weeks",
-    "price": 12155,
-    "garmentDetails": ["Fabric: Pure silk chanderi", "Lining - cotton", "No. of Components: 2", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
-    "category": "cord",
-    "images": "['Cord120.jpg','Cord121.jpg','Cord122.jpg','Cord123.jpg','Cord124.jpg']",
-    "bestseller": false,
-    "soldOut": false,
-    "readyToShip": true,
-    "asSeenOn": "",
-    "videoSrc": "",
-    "isActive": true,
-    "color": "GREEN",
-    "fabric": "Pure silk chanderi",
-    "priority": 7
-  },
-  {
-    "productId": 2183839985,
-    "name": "BISQUE CO-ORD WITH HALF JACKET",
-    "description": "The Bisque co-ord paired with the half jacket is perfect for a effortless elegant and stylish look. This three piece set features embroidery work on the front and back of the jacket and side tie knots. The half jacket is adorned with handmade hangings. The straight pants give a very comfortable fit with contrast stitching detailing on sides. ",
-    "sizes": {
-      "Upper": [
-        { "size": "XS", "quantity": 10, "price": 13510 },
-        { "size": "S", "quantity": 10, "price": 13510 },
-        { "size": "M", "quantity": 10, "price": 13510 },
-        { "size": "L", "quantity": 10, "price": 13510 },
-        { "size": "XL", "quantity": 10, "price": 13510 }
-      ],
-      "Bottom": [
-        { "size": "XS", "quantity": 10, "price": 13510 },
-        { "size": "S", "quantity": 10, "price": 13510 },
-        { "size": "M", "quantity": 10, "price": 13510 },
-        { "size": "L", "quantity": 10, "price": 13510 },
-        { "size": "XL", "quantity": 10, "price": 13510 }
-      ]
-    },
-    "deliveryIn": "Shipped in 2-3 weeks",
-    "price": 13510,
-    "garmentDetails": ["Fabric: Cotton shirt and pant", "Denim Cotton jacket", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
-    "category": "cord",
-    "images": "['Cord150.jpg','Cord151.jpg','Cord152.jpg','Cord153.jpg','Cord154.jpg']",
-    "bestseller": false,
-    "soldOut": false,
-    "readyToShip": true,
-    "asSeenOn": "",
-    "videoSrc": "",
-    "isActive": true,
-    "color": "BEIGE",
-    "fabric": "Cotton",
-    "priority": 15
-  },
-  {
-    "productId": 7479314633,
-    "name": "BOTTLE GREEN CO-ORD SET",
-    "description": "A vibrant ensemble in bottle green colour is a perfect blend of comfort and chic. Bottle green co-ord features contrast embroidery work on the shirt front and sleeves with subtle stitching detailing on collar and button line. Its paired with straight pants with cutwork detailing. It's a perfect pick for your evening outfit. ",
-    "sizes": {
-      "Upper": [
-        { "size": "XS", "quantity": 10, "price": 8960 },
-        { "size": "S", "quantity": 10, "price": 8960 },
-        { "size": "M", "quantity": 10, "price": 8960 },
-        { "size": "L", "quantity": 10, "price": 8960 },
-        { "size": "XL", "quantity": 10, "price": 8960 }
-      ],
-      "Bottom": [
-        { "size": "XS", "quantity": 10, "price": 8960 },
-        { "size": "S", "quantity": 10, "price": 8960 },
-        { "size": "M", "quantity": 10, "price": 8960 },
-        { "size": "L", "quantity": 10, "price": 8960 },
-        { "size": "XL", "quantity": 10, "price": 8960 }
-      ]
-    },
-    "deliveryIn": "Shipped in 2-3 weeks",
-    "price": 8960,
-    "garmentDetails": ["Fabric: Pure silk chanderi", "Lining - cotton", "No. of Components: 2", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
-    "category": "cord",
-    "images": "['Cord160.jpg','Cord161.jpg','Cord162.jpg','Cord163.jpg','Cord164.jpg']",
-    "bestseller": false,
-    "soldOut": false,
-    "readyToShip": true,
-    "asSeenOn": "",
-    "videoSrc": "",
-    "isActive": true,
-    "color": "GREEN",
-    "fabric": "Pure silk chanderi",
-    "priority": 16
-  },
-  {
-    "productId": 7339084412,
-    "name": "BLACK APPLIQUE CO-ORD SET",
-    "description": "The black applique co-ord set exudes luxury, craftsmanship and elegance. The intricate applique and embroidery  work can help you uplift your fashion game effortlessly. The co-ord is adorned with pastel applique and embroidery work.",
-    "sizes": {
-      "Upper": [
-        { "size": "XS", "quantity": 10, "price": 9875 },
-        { "size": "S", "quantity": 10, "price": 9875 },
-        { "size": "M", "quantity": 10, "price": 9875 },
-        { "size": "L", "quantity": 10, "price": 9875 },
-        { "size": "XL", "quantity": 10, "price": 9875 }
-      ],
-      "Bottom": [
-        { "size": "XS", "quantity": 10, "price": 9875 },
-        { "size": "S", "quantity": 10, "price": 9875 },
-        { "size": "M", "quantity": 10, "price": 9875 },
-        { "size": "L", "quantity": 10, "price": 9875 },
-        { "size": "XL", "quantity": 10, "price": 9875 }
-      ]
-    },
-    "deliveryIn": "Shipped in 2-3 weeks",
-    "price": 9875,
-    "garmentDetails": ["Fabric: Pure silk chanderi", "Lining - cotton", "No. of Components: 2", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
-    "category": "cord",
-    "images": "['Cord170.jpg','Cord171.jpg','Cord172.jpg','Cord173.jpg','Cord174.jpg']",
-    "bestseller": true,
-    "soldOut": false,
-    "readyToShip": true,
-    "asSeenOn": "",
-    "videoSrc": "",
-    "isActive": true,
-    "color": "BLACK",
-    "fabric": "Pure silk chanderi",
-    "priority": 17
-  },
-  {
-    "productId": 2652352063,
+    "productId": 5819196272,
     "name": "IVORY BLOOM CO-ORD SET",
     "description": "Ivory bloom set features floral embroidery work and contrast stripe embroidery. The cascading embroidery work makes it perfect for sunny outings. ",
     "sizes": {
@@ -511,9 +109,20 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 8960,
-    "garmentDetails": ["Fabric: Pure silk chanderi", "Lining - cotton", "No. of Components: 2", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi",
+      "Lining - cotton",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "cord",
-    "images": "['Cord130.jpg','Cord131.jpg','Cor 132.jpg','Cord133.jpg','Cord134.jpg']",
+    "images": [
+      "Cord130.jpg",
+      "Cord131.jpg",
+      "Cord132.jpg",
+      "Cord133.jpg",
+      "Cord134.jpg"
+    ],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -522,10 +131,58 @@
     "isActive": true,
     "color": "IVORY",
     "fabric": "Pure silk chanderi",
-    "priority": 5
+    "priority": 3,
+    "relatedProducts": [447935404]
   },
   {
-    "productId": 4493938835,
+    "productId": 8523742054,
+    "name": "SCARLET PEARL WORK CO-ORD SET",
+    "description": "Immerse yourself in this vibrant red ensemble adorned with intricate net cutwork flowers with hand pearl embellishments.This look is a celebration feminine allure, making you turn heads wherever you go. ",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10, "price": 12600 },
+        { "size": "S", "quantity": 10, "price": 12600 },
+        { "size": "M", "quantity": 10, "price": 12600 },
+        { "size": "L", "quantity": 10, "price": 12600 },
+        { "size": "XL", "quantity": 10, "price": 12600 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10, "price": 12600 },
+        { "size": "S", "quantity": 10, "price": 12600 },
+        { "size": "M", "quantity": 10, "price": 12600 },
+        { "size": "L", "quantity": 10, "price": 12600 },
+        { "size": "XL", "quantity": 10, "price": 12600 }
+      ]
+    },
+    "deliveryIn": "Shipped in 2-3 weeks",
+    "price": 12600,
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi",
+      "Lining - cotton",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
+    "category": "cord",
+    "images": [
+      "Cord130.jpg",
+      "Cord131.jpg",
+      "Cord132.jpg",
+      "Cord133.jpg",
+      "Cord134.jpg"
+    ],
+    "bestseller": false,
+    "soldOut": false,
+    "readyToShip": true,
+    "asSeenOn": "",
+    "videoSrc": "",
+    "isActive": true,
+    "color": "RED",
+    "fabric": "Pure silk chanderi",
+    "priority": 4,
+    "relatedProducts": []
+  },
+  {
+    "productId": 447935404,
     "name": "VIOLET BLOOM CO-ORD SET",
     "description": "Violet bloom set features floral embroidery work and contrast stripe embroidery. The cascading embroidery work makes it perfect for day to night outings. ",
     "sizes": {
@@ -546,9 +203,14 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 8960,
-    "garmentDetails": ["Fabric: Pure silk chanderi", "Lining - cotton", "No. of Components: 2", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi",
+      "Lining - cotton",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "cord",
-    "images": "['Cord1300.jpg','Cord1311.jpg','Cor 1322.jpg','Cord1333.jpg']",
+    "images": ["Cord1300.jpg", "Cord1311.jpg", "Cor 1322.jpg", "Cord1333.jpg"],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -557,12 +219,101 @@
     "isActive": true,
     "color": "PURPLE",
     "fabric": "Pure silk chanderi",
-    "priority": 5
+    "priority": 5,
+    "relatedProducts": [5819196272]
   },
   {
-    "productId": 1491189541,
+    "productId": 4539510993,
+    "name": "PISTACHIO GREEN CO-ORD SET",
+    "description": "Pistachio green set features abstract floral and leafy embroidery along the front, back and sleeve. The shirt is paired with flared pants giving it a contemporary edge.  ",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10, "price": 12155 },
+        { "size": "S", "quantity": 10, "price": 12155 },
+        { "size": "M", "quantity": 10, "price": 12155 },
+        { "size": "L", "quantity": 10, "price": 12155 },
+        { "size": "XL", "quantity": 10, "price": 12155 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10, "price": 12155 },
+        { "size": "S", "quantity": 10, "price": 12155 },
+        { "size": "M", "quantity": 10, "price": 12155 },
+        { "size": "L", "quantity": 10, "price": 12155 },
+        { "size": "XL", "quantity": 10, "price": 12155 }
+      ]
+    },
+    "deliveryIn": "Shipped in 2-3 weeks",
+    "price": 12155,
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi",
+      "Lining - cotton",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
+    "category": "cord",
+    "images": [
+      "Cord120.jpg",
+      "Cord121.jpg",
+      "Cord122.jpg",
+      "Cord123.jpg",
+      "Cord124.jpg"
+    ],
+    "bestseller": false,
+    "soldOut": false,
+    "readyToShip": true,
+    "asSeenOn": "",
+    "videoSrc": "",
+    "isActive": true,
+    "color": "GREEN",
+    "fabric": "Pure silk chanderi",
+    "priority": 7,
+    "relatedProducts": []
+  },
+  {
+    "productId": 3930097298,
+    "name": "BLUE HEART CO-ORD SET",
+    "description": "Heart co-ord set features elegant hand embroidery on the shirt, adding a refined touch to its design",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10, "price": 9940 },
+        { "size": "S", "quantity": 10, "price": 9940 },
+        { "size": "M", "quantity": 10, "price": 9940 },
+        { "size": "L", "quantity": 10, "price": 9940 },
+        { "size": "XL", "quantity": 10, "price": 9940 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10, "price": 9940 },
+        { "size": "S", "quantity": 10, "price": 9940 },
+        { "size": "M", "quantity": 10, "price": 9940 },
+        { "size": "L", "quantity": 10, "price": 9940 },
+        { "size": "XL", "quantity": 10, "price": 9940 }
+      ]
+    },
+    "deliveryIn": "Shipped in 2-3 weeks",
+    "price": 9940,
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi",
+      "Lining - cotton",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
+    "category": "cord",
+    "images": ["Cord100.jpg", "Cord101.jpg", "Cord102.jpg"],
+    "bestseller": false,
+    "soldOut": false,
+    "readyToShip": true,
+    "asSeenOn": "",
+    "videoSrc": "",
+    "isActive": true,
+    "color": "BLUE",
+    "fabric": "Pure silk chanderi",
+    "priority": 8,
+    "relatedProducts": [3988091261]
+  },
+  {
+    "productId": 7716484374,
     "name": "DENIM CO-ORD SET",
-    "description": "Denim co-ord set features contrast embroidery work with zip detailing.<br/> The intricate zip detailing elevates the look of the ensemble.  ",
+    "description": "Denim co-ord set features contrast embroidery work with zip detailing.<br/>The intricate zip detailing elevates the look of the ensemble.  ",
     "sizes": {
       "Upper": [
         { "size": "XS", "quantity": 10, "price": 11788 },
@@ -581,9 +332,19 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 11788,
-    "garmentDetails": ["Fabric: Denim Cotton", "No. of Components: 2", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Denim Cotton",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "cord",
-    "images": "['Cord90.jpg','Cord91.jpg','Cord92.jpg','Cord93.jpg','Cord94.jpg']",
+    "images": [
+      "Cord90.jpg",
+      "Cord91.jpg",
+      "Cord92.jpg",
+      "Cord93.jpg",
+      "Cord94.jpg"
+    ],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -592,80 +353,181 @@
     "isActive": true,
     "color": "BLUE",
     "fabric": "Denim Cotton",
-    "priority": 9
+    "priority": 9,
+    "relatedProducts": []
   },
   {
-    "productId": 6824602617,
-    "name": "FLORAL CANDY STRIPE HAND PAINTED CO-ORD SET",
-    "description": "Floral Candy Stripe Set combines captivating hand painted florals along the sleeve, pocket, back and pants and tie up detailing on the shirt. This elegant piece is perfect for a sunny day or an evening night out. ",
+    "productId": 3174511699,
+    "name": "SOFT PEACH PEARL CO-ORD SET",
+    "description": "Soft peach co-ord with intricate hand pearl work and organza cutwork detailing.  This co-ord set in stunning peach colour is sure to make a statement feeling confident and elegent. ",
     "sizes": {
       "Upper": [
-        { "size": "XS", "quantity": 10, "price": 15105 },
-        { "size": "S", "quantity": 10, "price": 15105 },
-        { "size": "M", "quantity": 10, "price": 15105 },
-        { "size": "L", "quantity": 10, "price": 15105 },
-        { "size": "XL", "quantity": 10, "price": 15105 }
+        { "size": "XS", "quantity": 10, "price": 10900 },
+        { "size": "S", "quantity": 10, "price": 10900 },
+        { "size": "M", "quantity": 10, "price": 10900 },
+        { "size": "L", "quantity": 10, "price": 10900 },
+        { "size": "XL", "quantity": 10, "price": 10900 }
       ],
       "Bottom": [
-        { "size": "XS", "quantity": 10, "price": 15105 },
-        { "size": "S", "quantity": 10, "price": 15105 },
-        { "size": "M", "quantity": 10, "price": 15105 },
-        { "size": "L", "quantity": 10, "price": 15105 },
-        { "size": "XL", "quantity": 10, "price": 15105 }
+        { "size": "XS", "quantity": 10, "price": 10900 },
+        { "size": "S", "quantity": 10, "price": 10900 },
+        { "size": "M", "quantity": 10, "price": 10900 },
+        { "size": "L", "quantity": 10, "price": 10900 },
+        { "size": "XL", "quantity": 10, "price": 10900 }
       ]
     },
     "deliveryIn": "Shipped in 2-3 weeks",
-    "price": 15105,
-    "garmentDetails": ["Fabric: Cotton Silk fabric", "No. of Components: 2", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "price": 10900,
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi",
+      "Lining - cotton",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "cord",
-    "images": "['Cord110.jpg','Cord111.jpg','Cord112.jpg','Cord113.jpg']",
+    "images": ["Cord80.jpg", "Cord81.jpg", "Cord82.jpg"],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
     "asSeenOn": "",
     "videoSrc": "",
     "isActive": true,
-    "color": "PRINT",
-    "fabric": "Cotton Silk",
-    "priority": 19
+    "color": "PINK",
+    "fabric": "Pure silk chanderi",
+    "priority": 10,
+    "relatedProducts": [6308161879, 1392149631, 5646849281]
   },
   {
-    "productId": 12061550,
-    "name": "SPRING GREEN CO-ORD SET",
-    "description": "The elegant spring green co-ord set features cascading applique work. This set is perfect from day brunches to evening outings. ",
+    "productId": 5851883563,
+    "name": "SAGE GREEN EMBROIDERED CO-ORD SET",
+    "description": "Embrace the warm hues of this radiant sage green co-ord set with floral embroidery work and stitching detailing.",
     "sizes": {
       "Upper": [
-        { "size": "XS", "quantity": 10, "price": 9525 },
-        { "size": "S", "quantity": 10, "price": 9525 },
-        { "size": "M", "quantity": 10, "price": 9525 },
-        { "size": "L", "quantity": 10, "price": 9525 },
-        { "size": "XL", "quantity": 10, "price": 9525 }
+        { "size": "XS", "quantity": 10, "price": 11550 },
+        { "size": "S", "quantity": 10, "price": 11550 },
+        { "size": "M", "quantity": 10, "price": 11550 },
+        { "size": "L", "quantity": 10, "price": 11550 },
+        { "size": "XL", "quantity": 10, "price": 11550 }
       ],
       "Bottom": [
-        { "size": "XS", "quantity": 10, "price": 9525 },
-        { "size": "S", "quantity": 10, "price": 9525 },
-        { "size": "M", "quantity": 10, "price": 9525 },
-        { "size": "L", "quantity": 10, "price": 9525 },
-        { "size": "XL", "quantity": 10, "price": 9525 }
+        { "size": "XS", "quantity": 10, "price": 11550 },
+        { "size": "S", "quantity": 10, "price": 11550 },
+        { "size": "M", "quantity": 10, "price": 11550 },
+        { "size": "L", "quantity": 10, "price": 11550 },
+        { "size": "XL", "quantity": 10, "price": 11550 }
       ]
     },
     "deliveryIn": "Shipped in 2-3 weeks",
-    "price": 9525,
-    "garmentDetails": ["Fabric- Pure silk chanderi",  "Dry clean only",  "DO NOT WASH",  "Lined with 100% cotton"] ,
+    "price": 11550,
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi",
+      "Lining - cotton",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "cord",
-    "images": "['Cord190.jpg','Cord191.jpg','Cord192.jpg','Cord193.jpg','Cord194.jpg']",
+    "images": ["Cord41.jpg", "Cord42.jpg", "Cord43.jpg", "Cord44.jpg"],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
-    "asSeenOn": "",
+    "asSeenOn": "AMBIKA",
     "videoSrc": "",
     "isActive": true,
     "color": "GREEN",
     "fabric": "Pure silk chanderi",
-    "priority": 14
+    "priority": 11,
+    "relatedProducts": []
   },
   {
-    "productId": 5845029883,
+    "productId": 578331038,
+    "name": "MYSTIC IVORY CO-ORD",
+    "description": "This refreshing Ivory co-ord set features vibrant applique colours with a subtle touch of embroidery.The look of vibrant applique colours is enhanced by delicate stitch lines along the pants.  ",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10, "price": 12530 },
+        { "size": "S", "quantity": 10, "price": 12530 },
+        { "size": "M", "quantity": 10, "price": 12530 },
+        { "size": "L", "quantity": 10, "price": 12530 },
+        { "size": "XL", "quantity": 10, "price": 12530 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10, "price": 12530 },
+        { "size": "S", "quantity": 10, "price": 12530 },
+        { "size": "M", "quantity": 10, "price": 12530 },
+        { "size": "L", "quantity": 10, "price": 12530 },
+        { "size": "XL", "quantity": 10, "price": 12530 }
+      ]
+    },
+    "deliveryIn": "Shipped in 2-3 weeks",
+    "price": 12530,
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi",
+      "Lining - cotton",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
+    "category": "cord",
+    "images": [
+      "Cord50.jpg",
+      "Cord51.jpg",
+      "Cord52.jpg",
+      "Cord55.jpg",
+      "Cord54.jpg"
+    ],
+    "bestseller": false,
+    "soldOut": false,
+    "readyToShip": true,
+    "asSeenOn": "DOLLY JAIN",
+    "videoSrc": "",
+    "isActive": true,
+    "color": "IVORY",
+    "fabric": "Pure silk chanderi",
+    "priority": 12,
+    "relatedProducts": []
+  },
+  {
+    "productId": 3988091261,
+    "name": "IVORY HEART CO-ORD SET",
+    "description": "Heart co-ord set features elegant hand embroidery on the shirt, adding a refined touch to its design",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10, "price": 9940 },
+        { "size": "S", "quantity": 10, "price": 9940 },
+        { "size": "M", "quantity": 10, "price": 9940 },
+        { "size": "L", "quantity": 10, "price": 9940 },
+        { "size": "XL", "quantity": 10, "price": 9940 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10, "price": 9940 },
+        { "size": "S", "quantity": 10, "price": 9940 },
+        { "size": "M", "quantity": 10, "price": 9940 },
+        { "size": "L", "quantity": 10, "price": 9940 },
+        { "size": "XL", "quantity": 10, "price": 9940 }
+      ]
+    },
+    "deliveryIn": "Shipped in 2-3 weeks",
+    "price": 9940,
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi",
+      "Lining - cotton",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
+    "category": "cord",
+    "images": ["Cord103.jpg"],
+    "bestseller": false,
+    "soldOut": false,
+    "readyToShip": true,
+    "asSeenOn": "AAKRITI DALMIA-IVORY",
+    "videoSrc": "",
+    "isActive": true,
+    "color": "IVORY",
+    "fabric": "Pure silk chanderi",
+    "priority": 13,
+    "relatedProducts": [3930097298]
+  },
+  {
+    "productId": 1716761575,
     "name": "IVORY-LEAFY CO-ORD SET",
     "description": "The Ivory Leafy Set features floral blooms with embroidery and hand beadwork spread across the shirt with stripe embroidery detailing along the collar and sleeves. To complete this look, it is paired with straight pants with multi colour embroidery and bead work, perfect for day to night transitions. ",
     "sizes": {
@@ -686,9 +548,20 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 8960,
-    "garmentDetails": ["Fabric- Pure silk chanderi",  "Dry clean only",  "DO NOT WASH",  "Lined with 100% cotton"] ,
+    "garmentDetails": [
+      "Fabric- Pure silk chanderi",
+      "Fabric: Denim Cotton",
+      "DO NOT WASH",
+      "Lined with 100% cotton"
+    ],
     "category": "cord",
-    "images": "['Cord200.jpg','Cord201.jpg','Cord202.jpg','Cord203.jpg','Cord204.jpg']",
+    "images": [
+      "Cord200.jpg",
+      "Cord201.jpg",
+      "Cord202.jpg",
+      "Cord203.jpg",
+      "Cord204.jpg"
+    ],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -697,68 +570,268 @@
     "isActive": true,
     "color": "IVORY",
     "fabric": "Pure silk chanderi",
-    "priority": 13
+    "priority": 14,
+    "relatedProducts": []
   },
   {
-    "productId": 4830987897,
-    "name": "PRINTED HAND CROCHET CO-ORD SET",
-    "description": "Embrace the warm hues of this printed co-ord with hand woven crochet embroidery and handmade hangings. Upgrade your fashion game with this statement co-ords turning heads wherever you go.",
+    "productId": 801710935,
+    "name": "SPRING GREEN CO-ORD SET",
+    "description": "The elegant spring green co-ord set features cascading applique work. This set is perfect from day brunches to evening outings. ",
     "sizes": {
       "Upper": [
-        { "size": "XS", "quantity": 10, "price": 11650 },
-        { "size": "S", "quantity": 10, "price": 11650 },
-        { "size": "M", "quantity": 10, "price": 11650 },
-        { "size": "L", "quantity": 10, "price": 11650 },
-        { "size": "XL", "quantity": 10, "price": 11650 }
+        { "size": "XS", "quantity": 10, "price": 9525 },
+        { "size": "S", "quantity": 10, "price": 9525 },
+        { "size": "M", "quantity": 10, "price": 9525 },
+        { "size": "L", "quantity": 10, "price": 9525 },
+        { "size": "XL", "quantity": 10, "price": 9525 }
       ],
       "Bottom": [
-        { "size": "XS", "quantity": 10, "price": 11650 },
-        { "size": "S", "quantity": 10, "price": 11650 },
-        { "size": "M", "quantity": 10, "price": 11650 },
-        { "size": "L", "quantity": 10, "price": 11650 },
-        { "size": "XL", "quantity": 10, "price": 11650 }
+        { "size": "XS", "quantity": 10, "price": 9525 },
+        { "size": "S", "quantity": 10, "price": 9525 },
+        { "size": "M", "quantity": 10, "price": 9525 },
+        { "size": "L", "quantity": 10, "price": 9525 },
+        { "size": "XL", "quantity": 10, "price": 9525 }
       ]
     },
     "deliveryIn": "Shipped in 2-3 weeks",
-    "price": 11650,
-    "garmentDetails": ["Fabric: Cotton", "No. of Components: 2", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "price": 9525,
+    "garmentDetails": [
+      "Fabric- Pure silk chanderi",
+      "Fabric: Denim Cotton",
+      "DO NOT WASH",
+      "Lined with 100% cotton"
+    ],
     "category": "cord",
-    "images": "['Cord220.JPG','Cord221.JPG','Cord222.JPG','Cord223.JPG']",
+    "images": [
+      "Cord190.jpg",
+      "Cord191.jpg",
+      "Cord192.jpg",
+      "Cord193.jpg",
+      "Cord194.jpg"
+    ],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
     "asSeenOn": "",
     "videoSrc": "",
     "isActive": true,
-    "color": "PRINT, GREEN",
-    "fabric": "Cotton",
-    "priority": 20
+    "color": "GREEN",
+    "fabric": "Pure silk chanderi",
+    "priority": 15,
+    "relatedProducts": []
   },
   {
-    "productId": 5429302571,
-    "name": "LUNA CO-ORD SET",
-    "description": "The Luna Set features abstract embroidery along the front and back of shirt with flare pants with belt. This set is perfectt for intimate celebrations. ",
+    "productId": 5056450971,
+    "name": "BOTTLE GREEN CO-ORD SET",
+    "description": "A vibrant ensemble in bottle green colour is a perfect blend of comfort and chic. Bottle green co-ord features contrast embroidery work on the shirt front and sleeves with subtle stitching detailing on collar and button line. Its paired with straight pants with cutwork detailing. It's a perfect pick for your evening outfit. ",
     "sizes": {
       "Upper": [
-        { "size": "XS", "quantity": 10, "price": 14265 },
-        { "size": "S", "quantity": 10, "price": 14265 },
-        { "size": "M", "quantity": 10, "price": 14265 },
-        { "size": "L", "quantity": 10, "price": 14265 },
-        { "size": "XL", "quantity": 10, "price": 14265 }
+        { "size": "XS", "quantity": 10, "price": 8960 },
+        { "size": "S", "quantity": 10, "price": 8960 },
+        { "size": "M", "quantity": 10, "price": 8960 },
+        { "size": "L", "quantity": 10, "price": 8960 },
+        { "size": "XL", "quantity": 10, "price": 8960 }
       ],
       "Bottom": [
-        { "size": "XS", "quantity": 10, "price": 14265 },
-        { "size": "S", "quantity": 10, "price": 14265 },
-        { "size": "M", "quantity": 10, "price": 14265 },
-        { "size": "L", "quantity": 10, "price": 14265 },
-        { "size": "XL", "quantity": 10, "price": 14265 }
+        { "size": "XS", "quantity": 10, "price": 8960 },
+        { "size": "S", "quantity": 10, "price": 8960 },
+        { "size": "M", "quantity": 10, "price": 8960 },
+        { "size": "L", "quantity": 10, "price": 8960 },
+        { "size": "XL", "quantity": 10, "price": 8960 }
       ]
     },
     "deliveryIn": "Shipped in 2-3 weeks",
-    "price": 14265,
-    "garmentDetails": ["Fabric: Cotton Silk", "No. of Components: 2", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "price": 8960,
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi",
+      "Lining - cotton",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "cord",
-    "images": "['Cord230.jpg','Cord231.jpg','Cord232.jpg','Cord233.jpg','Cord234.jpg']",
+    "images": [
+      "Cord160.jpg",
+      "Cord161.jpg",
+      "Cord162.jpg",
+      "Cord163.jpg",
+      "Cord164.jpg"
+    ],
+    "bestseller": false,
+    "soldOut": false,
+    "readyToShip": true,
+    "asSeenOn": "",
+    "videoSrc": "",
+    "isActive": true,
+    "color": "GREEN",
+    "fabric": "Pure silk chanderi",
+    "priority": 16,
+    "relatedProducts": []
+  },
+  {
+    "productId": 1632546903,
+    "name": "BLACK APPLIQUE CO-ORD SET",
+    "description": "The black applique co-ord set exudes luxury, craftsmanship and elegance. The intricate applique and embroidery  work can help you uplift your fashion game effortlessly. The co-ord is adorned with pastel applique and embroidery work.",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10, "price": 9875 },
+        { "size": "S", "quantity": 10, "price": 9875 },
+        { "size": "M", "quantity": 10, "price": 9875 },
+        { "size": "L", "quantity": 10, "price": 9875 },
+        { "size": "XL", "quantity": 10, "price": 9875 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10, "price": 9875 },
+        { "size": "S", "quantity": 10, "price": 9875 },
+        { "size": "M", "quantity": 10, "price": 9875 },
+        { "size": "L", "quantity": 10, "price": 9875 },
+        { "size": "XL", "quantity": 10, "price": 9875 }
+      ]
+    },
+    "deliveryIn": "Shipped in 2-3 weeks",
+    "price": 9875,
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi",
+      "Lining - cotton",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
+    "category": "cord",
+    "images": [
+      "Cord170.jpg",
+      "Cord171.jpg",
+      "Cord172.jpg",
+      "Cord173.jpg",
+      "Cord174.jpg"
+    ],
+    "bestseller": true,
+    "soldOut": false,
+    "readyToShip": true,
+    "asSeenOn": "",
+    "videoSrc": "",
+    "isActive": true,
+    "color": "BLACK",
+    "fabric": "Pure silk chanderi",
+    "priority": 17,
+    "relatedProducts": []
+  },
+  {
+    "productId": 1392149631,
+    "name": "RUBY PEARL CO-ORD SET",
+    "description": "Unleash your inner elegance with this Ruby Pearl Set, a stunning fusion of bold colour and luxurious detail. This set features a rich, vibrant hue complemented by delicate Pearl embellishments that Adda touch of opulence. Experience comfort, style and timeless beauty with every wear. ",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10, "price": 14070 },
+        { "size": "S", "quantity": 10, "price": 14070 },
+        { "size": "M", "quantity": 10, "price": 14070 },
+        { "size": "L", "quantity": 10, "price": 14070 },
+        { "size": "XL", "quantity": 10, "price": 14070 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10, "price": 14070 },
+        { "size": "S", "quantity": 10, "price": 14070 },
+        { "size": "M", "quantity": 10, "price": 14070 },
+        { "size": "L", "quantity": 10, "price": 14070 },
+        { "size": "XL", "quantity": 10, "price": 14070 }
+      ]
+    },
+    "deliveryIn": "Shipped in 2-3 weeks",
+    "price": 14070,
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi",
+      "Lining - cotton",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
+    "category": "cord",
+    "images": ["Cord171.jpg", "Cord172.jpg", "Cord173.jpg", "Cord174.jpg"],
+    "bestseller": false,
+    "soldOut": false,
+    "readyToShip": true,
+    "asSeenOn": "",
+    "videoSrc": "",
+    "isActive": true,
+    "color": "RED",
+    "fabric": "Pure silk chanderi",
+    "priority": 18,
+    "relatedProducts": [3174511699, 5646849281, 6308161879]
+  },
+  {
+    "productId": 128384541,
+    "name": "BISQUE CO-ORD WITH HALF JACKET",
+    "description": "The Bisque co-ord paired with the half jacket is perfect for a effortless elegant and stylish look. This three piece set features embroidery work on the front and back of the jacket and side tie knots. The half jacket is adorned with handmade hangings. The straight pants give a very comfortable fit with contrast stitching detailing on sides. ",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10, "price": 13510 },
+        { "size": "S", "quantity": 10, "price": 13510 },
+        { "size": "M", "quantity": 10, "price": 13510 },
+        { "size": "L", "quantity": 10, "price": 13510 },
+        { "size": "XL", "quantity": 10, "price": 13510 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10, "price": 13510 },
+        { "size": "S", "quantity": 10, "price": 13510 },
+        { "size": "M", "quantity": 10, "price": 13510 },
+        { "size": "L", "quantity": 10, "price": 13510 },
+        { "size": "XL", "quantity": 10, "price": 13510 }
+      ]
+    },
+    "deliveryIn": "Shipped in 2-3 weeks",
+    "price": 13510,
+    "garmentDetails": [
+      "Fabric: Cotton shirt and pant",
+      "Denim Cotton jacket",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
+    "category": "cord",
+    "images": [
+      "Cord150.jpg",
+      "Cord151.jpg",
+      "Cord152.jpg",
+      "Cord153.jpg",
+      "Cord154.jpg"
+    ],
+    "bestseller": false,
+    "soldOut": false,
+    "readyToShip": true,
+    "asSeenOn": "",
+    "videoSrc": "",
+    "isActive": true,
+    "color": "BEIGE",
+    "fabric": "Cotton",
+    "priority": 19,
+    "relatedProducts": []
+  },
+  {
+    "productId": 8241847370,
+    "name": "IVORY BEADED CO-ORD SET",
+    "description": "Ivory Beaded Co-ord Set features elegant embroidery work with hand bead work. It's a perfect pick for day to night transitions. ",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10, "price": 12600 },
+        { "size": "S", "quantity": 10, "price": 12600 },
+        { "size": "M", "quantity": 10, "price": 12600 },
+        { "size": "L", "quantity": 10, "price": 12600 },
+        { "size": "XL", "quantity": 10, "price": 12600 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10, "price": 12600 },
+        { "size": "S", "quantity": 10, "price": 12600 },
+        { "size": "M", "quantity": 10, "price": 12600 },
+        { "size": "L", "quantity": 10, "price": 12600 },
+        { "size": "XL", "quantity": 10, "price": 12600 }
+      ]
+    },
+    "deliveryIn": "Shipped in 2-3 weeks",
+    "price": 11200,
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi",
+      "Lining - cotton",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
+    "category": "cord",
+    "images": ["Cord150.jpg", "Cord151.jpg", "Cord152.jpg", "Cord153.jpg"],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -766,11 +839,94 @@
     "videoSrc": "",
     "isActive": true,
     "color": "IVORY",
-    "fabric": "Cotton silk",
-    "priority": 21
+    "fabric": "Pure silk chanderi",
+    "priority": 20,
+    "relatedProducts": [4326063781, 1306167839]
   },
   {
-    "productId": 7802213642,
+    "productId": 8821644048,
+    "name": "IVORY CROCHET CO-ORD SET",
+    "description": "The crochet co-ord set is paired with hand woven crochet work and printed stripe, perfect for making a statement wherever you go. ",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10, "price": 10654 },
+        { "size": "S", "quantity": 10, "price": 10654 },
+        { "size": "M", "quantity": 10, "price": 10654 },
+        { "size": "L", "quantity": 10, "price": 10654 },
+        { "size": "XL", "quantity": 10, "price": 10654 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10, "price": 10654 },
+        { "size": "S", "quantity": 10, "price": 10654 },
+        { "size": "M", "quantity": 10, "price": 10654 },
+        { "size": "L", "quantity": 10, "price": 10654 },
+        { "size": "XL", "quantity": 10, "price": 10654 }
+      ]
+    },
+    "deliveryIn": "Shipped in 2-3 weeks",
+    "price": 10654,
+    "garmentDetails": [
+      "Fabric: Textured cotton fabric",
+      "Lining - cotton",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
+    "category": "cord",
+    "images": ["Cord70.jpg", "Cord71.jpg", "Cord72.JPG", "Cord73.jpg"],
+    "bestseller": false,
+    "soldOut": false,
+    "readyToShip": true,
+    "asSeenOn": "",
+    "videoSrc": "",
+    "isActive": true,
+    "color": "IVORY, PRINT",
+    "fabric": "Cotton",
+    "priority": 21,
+    "relatedProducts": []
+  },
+  {
+    "productId": 4023971969,
+    "name": "BLUE OASIS CO-ORD SET",
+    "description": "Blue Oasis Co-ord Set features pastel elegance with signature appliqué, embroidery and embroidery work. Crafted from soft, breathable fabric, this ensemble ensures both style and comfort for day-to-night wear. ",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10, "price": 10780 },
+        { "size": "S", "quantity": 10, "price": 10780 },
+        { "size": "M", "quantity": 10, "price": 10780 },
+        { "size": "L", "quantity": 10, "price": 10780 },
+        { "size": "XL", "quantity": 10, "price": 10780 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10, "price": 10780 },
+        { "size": "S", "quantity": 10, "price": 10780 },
+        { "size": "M", "quantity": 10, "price": 10780 },
+        { "size": "L", "quantity": 10, "price": 10780 },
+        { "size": "XL", "quantity": 10, "price": 10780 }
+      ]
+    },
+    "deliveryIn": "Shipped in 2-3 weeks",
+    "price": 10780,
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi",
+      "Lining - cotton",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
+    "category": "cord",
+    "images": ["Cord70.jpg", "Cord71.jpg", "Cord73.JPG", "Cord74.jpg"],
+    "bestseller": false,
+    "soldOut": false,
+    "readyToShip": true,
+    "asSeenOn": "",
+    "videoSrc": "",
+    "isActive": true,
+    "color": "BLUE",
+    "fabric": "Pure silk chanderi",
+    "priority": 22,
+    "relatedProducts": []
+  },
+  {
+    "productId": 5993925269,
     "name": "DAFFODIL YELLOW CO-ORD SET",
     "description": "The Daffodil Yellow Set featuresintricate applique and cutwork detailing along the shirt, sleeve, hemline and pants. Embrace the perfect blend of comfort and fashion with this set. ",
     "sizes": {
@@ -791,9 +947,13 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 9660,
-    "garmentDetails": ["Fabric: Cotton Silk fabric", "No. of Components: 2", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Cotton Silk fabric",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "cord",
-    "images": "['Cord211.jpg','Cord212.jpg','Cord213.jpg','Cord214.jpg']",
+    "images": ["Cord211.jpg", "Cord212.jpg", "Cord213.jpg", "Cord214.jpg"],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -802,10 +962,515 @@
     "isActive": true,
     "color": "YELLOW",
     "fabric": "Pure silk chanderi",
-    "priority": 18
+    "priority": 23,
+    "relatedProducts": []
   },
   {
-    "productId": 3688593863,
+    "productId": 6310514181,
+    "name": "MYSTIC ZESTY ORANGE CO-ORD SET",
+    "description": "Elevate your style with this stunning orange set, designed to blend sophistication with a touch of artistry. This set features signature appliqué and embroidery work exudes timeless elegance with a modern twist, making it an essential addition to your wardrobe. ",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10, "price": 12460 },
+        { "size": "S", "quantity": 10, "price": 12460 },
+        { "size": "M", "quantity": 10, "price": 12460 },
+        { "size": "L", "quantity": 10, "price": 12460 },
+        { "size": "XL", "quantity": 10, "price": 12460 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10, "price": 12460 },
+        { "size": "S", "quantity": 10, "price": 12460 },
+        { "size": "M", "quantity": 10, "price": 12460 },
+        { "size": "L", "quantity": 10, "price": 12460 },
+        { "size": "XL", "quantity": 10, "price": 12460 }
+      ]
+    },
+    "deliveryIn": "Shipped in 2-3 weeks",
+    "price": 12460,
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi",
+      "Lining - cotton",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
+    "category": "cord",
+    "images": ["Cord211.jpg", "Cord212.jpg", "Cord213.jpg", "Cord214.jpg"],
+    "bestseller": false,
+    "soldOut": false,
+    "readyToShip": true,
+    "asSeenOn": "",
+    "videoSrc": "",
+    "isActive": true,
+    "color": "ORANGE",
+    "fabric": "Pure silk chanderi",
+    "priority": 24,
+    "relatedProducts": []
+  },
+  {
+    "productId": 2479849255,
+    "name": "MYSTIC TEAL CO-ORD SET",
+    "description": "Elevate your style with this stunning teal blue set, designed to blend sophistication with a touch of artistry. This set features signature appliqué and embroidery work exudes timeless elegance with a modern twist, making it an essential addition to your wardrobe. ",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10, "price": 12460 },
+        { "size": "S", "quantity": 10, "price": 12460 },
+        { "size": "M", "quantity": 10, "price": 12460 },
+        { "size": "L", "quantity": 10, "price": 12460 },
+        { "size": "XL", "quantity": 10, "price": 12460 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10, "price": 12460 },
+        { "size": "S", "quantity": 10, "price": 12460 },
+        { "size": "M", "quantity": 10, "price": 12460 },
+        { "size": "L", "quantity": 10, "price": 12460 },
+        { "size": "XL", "quantity": 10, "price": 12460 }
+      ]
+    },
+    "deliveryIn": "Shipped in 2-3 weeks",
+    "price": 12460,
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi",
+      "Lining - cotton",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
+    "category": "cord",
+    "images": ["Cord2211.jpg", "Cord2212.jpg", "Cord2213.jpg", "Cord2214.jpg"],
+    "bestseller": false,
+    "soldOut": false,
+    "readyToShip": true,
+    "asSeenOn": "",
+    "videoSrc": "",
+    "isActive": true,
+    "color": "BLUE",
+    "fabric": "Pure silk chanderi",
+    "priority": 25,
+    "relatedProducts": []
+  },
+  {
+    "productId": 5646849281,
+    "name": "ONYX PEARL CO-ORD SET",
+    "description": "Unleash your inner elegance with this Onyx Pearl Set, a stunning fusion of bold colour and luxurious detail. This set features a rich, vibrant hue complemented by delicate Pearl embellishments that Adda touch of opulence. Experience comfort, style and timeless beauty with every wear. ",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10, "price": 14070 },
+        { "size": "S", "quantity": 10, "price": 14070 },
+        { "size": "M", "quantity": 10, "price": 14070 },
+        { "size": "L", "quantity": 10, "price": 14070 },
+        { "size": "XL", "quantity": 10, "price": 14070 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10, "price": 14070 },
+        { "size": "S", "quantity": 10, "price": 14070 },
+        { "size": "M", "quantity": 10, "price": 14070 },
+        { "size": "L", "quantity": 10, "price": 14070 },
+        { "size": "XL", "quantity": 10, "price": 14070 }
+      ]
+    },
+    "deliveryIn": "Shipped in 2-3 weeks",
+    "price": 14070,
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi",
+      "Lining - cotton",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
+    "category": "cord",
+    "images": ["Cord1771.jpg", "Cord1772.jpg", "Cord1773.jpg", "Cord1774.jpg"],
+    "bestseller": false,
+    "soldOut": false,
+    "readyToShip": true,
+    "asSeenOn": "",
+    "videoSrc": "",
+    "isActive": true,
+    "color": "BLACK",
+    "fabric": "Pure silk chanderi",
+    "priority": 26,
+    "relatedProducts": [3174511699, 1392149631]
+  },
+  {
+    "productId": 808702124,
+    "name": "SEA BREEZE CO-ORD SET",
+    "description": "Dive into elegance with the Sea Breeze Set. The soothing soft ivory set features whimsical marine inspired floral embroidery, applique and signature cutwork detailing with hand embelishments. Perfect for any occasion, it blends casual elegance and seaside flair.",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10, "price": 13720 },
+        { "size": "S", "quantity": 10, "price": 13720 },
+        { "size": "M", "quantity": 10, "price": 13720 },
+        { "size": "L", "quantity": 10, "price": 13720 },
+        { "size": "XL", "quantity": 10, "price": 13720 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10, "price": 13720 },
+        { "size": "S", "quantity": 10, "price": 13720 },
+        { "size": "M", "quantity": 10, "price": 13720 },
+        { "size": "L", "quantity": 10, "price": 13720 },
+        { "size": "XL", "quantity": 10, "price": 13720 }
+      ]
+    },
+    "deliveryIn": "Shipped in 2-3 weeks",
+    "price": 13720,
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi",
+      "Lining - cotton",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
+    "category": "cord",
+    "images": [],
+    "bestseller": false,
+    "soldOut": false,
+    "readyToShip": true,
+    "asSeenOn": "",
+    "videoSrc": "",
+    "isActive": true,
+    "color": "IVORY",
+    "fabric": "Pure silk chanderi",
+    "priority": 27,
+    "relatedProducts": []
+  },
+  {
+    "productId": 8462900713,
+    "name": "IVORY FLORAL CO-ORD SET",
+    "description": "Ivory co-ord set features floral embroidery work and hand bead work along with organza detailing on pants. This chic outfit ensures that you look stylish and put together. ",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10, "price": 12040 },
+        { "size": "S", "quantity": 10, "price": 12040 },
+        { "size": "M", "quantity": 10, "price": 12040 },
+        { "size": "L", "quantity": 10, "price": 12040 },
+        { "size": "XL", "quantity": 10, "price": 12040 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10, "price": 12040 },
+        { "size": "S", "quantity": 10, "price": 12040 },
+        { "size": "M", "quantity": 10, "price": 12040 },
+        { "size": "L", "quantity": 10, "price": 12040 },
+        { "size": "XL", "quantity": 10, "price": 12040 }
+      ]
+    },
+    "deliveryIn": "Shipped in 2-3 weeks",
+    "price": 12040,
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi",
+      "Lining - cotton",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
+    "category": "cord",
+    "images": ["Cord21.jpg", "Cord22.jpg", "Cord23.jpg", "Cord24.jpg"],
+    "bestseller": false,
+    "soldOut": false,
+    "readyToShip": true,
+    "asSeenOn": "NATASHA LUTHRA",
+    "videoSrc": "",
+    "isActive": true,
+    "color": "IVORY",
+    "fabric": "Pure silk chanderi",
+    "priority": 28,
+    "relatedProducts": []
+  },
+  {
+    "productId": 8368132810,
+    "name": "FLORAL CANDY STRIPE HAND PAINTED CO-ORD SET",
+    "description": "Floral Candy Stripe Set combines captivating hand painted florals along the sleeve, pocket, back and pants and tie up detailing on the shirt. This elegant piece is perfect for a sunny day or an evening night out. ",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10, "price": 15105 },
+        { "size": "S", "quantity": 10, "price": 15105 },
+        { "size": "M", "quantity": 10, "price": 15105 },
+        { "size": "L", "quantity": 10, "price": 15105 },
+        { "size": "XL", "quantity": 10, "price": 15105 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10, "price": 15105 },
+        { "size": "S", "quantity": 10, "price": 15105 },
+        { "size": "M", "quantity": 10, "price": 15105 },
+        { "size": "L", "quantity": 10, "price": 15105 },
+        { "size": "XL", "quantity": 10, "price": 15105 }
+      ]
+    },
+    "deliveryIn": "Shipped in 2-3 weeks",
+    "price": 15105,
+    "garmentDetails": [
+      "Fabric: Cotton Silk fabric",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
+    "category": "cord",
+    "images": ["Cord110.jpg", "Cord111.jpg", "Cord112.jpg", "Cord113.jpg"],
+    "bestseller": false,
+    "soldOut": false,
+    "readyToShip": true,
+    "asSeenOn": "",
+    "videoSrc": "",
+    "isActive": true,
+    "color": "PRINT",
+    "fabric": "Cotton Silk",
+    "priority": 29,
+    "relatedProducts": []
+  },
+  {
+    "productId": 97123481,
+    "name": "OLIVE GREEN APPLIQUE CO-ORD SET",
+    "description": "Olive green co-ord set features applique work along the sleeves and back. The pants have some subtle applique work. A fashionable style that easily blends comfort and sophistication. ",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10, "price": 11480 },
+        { "size": "S", "quantity": 10, "price": 11480 },
+        { "size": "M", "quantity": 10, "price": 11480 },
+        { "size": "L", "quantity": 10, "price": 11480 },
+        { "size": "XL", "quantity": 10, "price": 11480 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10, "price": 11480 },
+        { "size": "S", "quantity": 10, "price": 11480 },
+        { "size": "M", "quantity": 10, "price": 11480 },
+        { "size": "L", "quantity": 10, "price": 11480 },
+        { "size": "XL", "quantity": 10, "price": 11480 }
+      ]
+    },
+    "deliveryIn": "Shipped in 2-3 weeks",
+    "price": 11480,
+    "garmentDetails": [
+      "Fabric: Cotton fabric",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
+    "category": "cord",
+    "images": ["Cord60.jpg", "Cord61.jpg", "Cord62.jpg", "Cord63.jpg"],
+    "bestseller": true,
+    "soldOut": false,
+    "readyToShip": true,
+    "asSeenOn": "",
+    "videoSrc": "CordV3.mov",
+    "isActive": true,
+    "color": "GREEN",
+    "fabric": "Cotton",
+    "priority": 30,
+    "relatedProducts": []
+  },
+  {
+    "productId": 4326063781,
+    "name": "EMERALD BEADED CO-ORD SET",
+    "description": "Emerald Beaded Co-ord Set features elegant embroidery work with hand bead work. It's a perfect pick for day to night transitions. ",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10, "price": 11200 },
+        { "size": "S", "quantity": 10, "price": 11200 },
+        { "size": "M", "quantity": 10, "price": 11200 },
+        { "size": "L", "quantity": 10, "price": 11200 },
+        { "size": "XL", "quantity": 10, "price": 11200 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10, "price": 11200 },
+        { "size": "S", "quantity": 10, "price": 11200 },
+        { "size": "M", "quantity": 10, "price": 11200 },
+        { "size": "L", "quantity": 10, "price": 11200 },
+        { "size": "XL", "quantity": 10, "price": 11200 }
+      ]
+    },
+    "deliveryIn": "Shipped in 2-3 weeks",
+    "price": 11200,
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi",
+      "Lining - cotton",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
+    "category": "cord",
+    "images": ["Cord1150.jpg", "Cord1151.jpg", "Cord1152.jpg", "Cord1153.jpg"],
+    "bestseller": false,
+    "soldOut": false,
+    "readyToShip": true,
+    "asSeenOn": "",
+    "videoSrc": "",
+    "isActive": true,
+    "color": "GREEN",
+    "fabric": "Pure silk chanderi",
+    "priority": 31,
+    "relatedProducts": [8241847370, 1306167839]
+  },
+  {
+    "productId": 1306167839,
+    "name": "BLACK BEADED CO-ORD SET",
+    "description": "Black Beaded Co-ord Set features elegant embroidery work with hand bead work. It's a perfect pick for day to night transitions.",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10, "price": 11200 },
+        { "size": "S", "quantity": 10, "price": 11200 },
+        { "size": "M", "quantity": 10, "price": 11200 },
+        { "size": "L", "quantity": 10, "price": 11200 },
+        { "size": "XL", "quantity": 10, "price": 11200 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10, "price": 11200 },
+        { "size": "S", "quantity": 10, "price": 11200 },
+        { "size": "M", "quantity": 10, "price": 11200 },
+        { "size": "L", "quantity": 10, "price": 11200 },
+        { "size": "XL", "quantity": 10, "price": 11200 }
+      ]
+    },
+    "deliveryIn": "Shipped in 2-3 weeks",
+    "price": 11200,
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi",
+      "Lining - cotton",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
+    "category": "cord",
+    "images": [
+      "Cord11550.jpg",
+      "Cord11551.jpg",
+      "Cord11552.jpg",
+      "Cor11553.jpg"
+    ],
+    "bestseller": false,
+    "soldOut": false,
+    "readyToShip": true,
+    "asSeenOn": "",
+    "videoSrc": "",
+    "isActive": true,
+    "color": "BLACK",
+    "fabric": "Pure silk chanderi",
+    "priority": 32,
+    "relatedProducts": [8241847370, 4326063781]
+  },
+  {
+    "productId": 5483233647,
+    "name": "PRINTED HAND CROCHET CO-ORD SET",
+    "description": "Embrace the warm hues of this printed co-ord with hand woven crochet embroidery and handmade hangings. Upgrade your fashion game with this statement co-ords turning heads wherever you go.",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10, "price": 11650 },
+        { "size": "S", "quantity": 10, "price": 11650 },
+        { "size": "M", "quantity": 10, "price": 11650 },
+        { "size": "L", "quantity": 10, "price": 11650 },
+        { "size": "XL", "quantity": 10, "price": 11650 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10, "price": 11650 },
+        { "size": "S", "quantity": 10, "price": 11650 },
+        { "size": "M", "quantity": 10, "price": 11650 },
+        { "size": "L", "quantity": 10, "price": 11650 },
+        { "size": "XL", "quantity": 10, "price": 11650 }
+      ]
+    },
+    "deliveryIn": "Shipped in 2-3 weeks",
+    "price": 11650,
+    "garmentDetails": [
+      "Fabric: Cotton",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
+    "category": "cord",
+    "images": ["Cord220.JPG", "Cord221.JPG", "Cord222.JPG", "Cord223.JPG"],
+    "bestseller": false,
+    "soldOut": false,
+    "readyToShip": true,
+    "asSeenOn": "",
+    "videoSrc": "",
+    "isActive": true,
+    "color": "PRINT, GREEN",
+    "fabric": "Cotton",
+    "priority": 33,
+    "relatedProducts": []
+  },
+  {
+    "productId": 8246245608,
+    "name": "LUNA CO-ORD SET",
+    "description": "The Luna Set features abstract embroidery along the front and back of shirt with flare pants with belt. This set is perfectt for intimate celebrations. ",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10, "price": 14265 },
+        { "size": "S", "quantity": 10, "price": 14265 },
+        { "size": "M", "quantity": 10, "price": 14265 },
+        { "size": "L", "quantity": 10, "price": 14265 },
+        { "size": "XL", "quantity": 10, "price": 14265 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10, "price": 14265 },
+        { "size": "S", "quantity": 10, "price": 14265 },
+        { "size": "M", "quantity": 10, "price": 14265 },
+        { "size": "L", "quantity": 10, "price": 14265 },
+        { "size": "XL", "quantity": 10, "price": 14265 }
+      ]
+    },
+    "deliveryIn": "Shipped in 2-3 weeks",
+    "price": 14265,
+    "garmentDetails": [
+      "Fabric: Cotton Silk",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
+    "category": "cord",
+    "images": [
+      "Cord230.jpg",
+      "Cord231.jpg",
+      "Cord232.jpg",
+      "Cord233.jpg",
+      "Cord234.jpg"
+    ],
+    "bestseller": false,
+    "soldOut": false,
+    "readyToShip": true,
+    "asSeenOn": "",
+    "videoSrc": "",
+    "isActive": true,
+    "color": "IVORY",
+    "fabric": "Cotton silk",
+    "priority": 34,
+    "relatedProducts": []
+  },
+  {
+    "productId": 6308161879,
+    "name": "EMERALD PEARL CO-ORD SET",
+    "description": "Unleash your inner elegance with this Emerald Pearl Set, a stunning fusion of bold colour and luxurious detail. This set features a rich, vibrant hue complemented by delicate Pearl embellishments that Adda touch of opulence. Experience comfort, style and timeless beauty with every wear. ",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10, "price": 14070 },
+        { "size": "S", "quantity": 10, "price": 14070 },
+        { "size": "M", "quantity": 10, "price": 14070 },
+        { "size": "L", "quantity": 10, "price": 14070 },
+        { "size": "XL", "quantity": 10, "price": 14070 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10, "price": 14070 },
+        { "size": "S", "quantity": 10, "price": 14070 },
+        { "size": "M", "quantity": 10, "price": 14070 },
+        { "size": "L", "quantity": 10, "price": 14070 },
+        { "size": "XL", "quantity": 10, "price": 14070 }
+      ]
+    },
+    "deliveryIn": "Shipped in 2-3 weeks",
+    "price": 14070,
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi",
+      "Lining - cotton",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
+    "category": "cord",
+    "images": [
+      "Cord11771.jpg",
+      "Cord11772.jpg",
+      "Cord11773.jpg",
+      "Cord11774.jpg"
+    ],
+    "bestseller": false,
+    "soldOut": false,
+    "readyToShip": true,
+    "asSeenOn": "",
+    "videoSrc": "",
+    "isActive": true,
+    "color": "GREEN",
+    "fabric": "Pure silk chanderi",
+    "priority": 113,
+    "relatedProducts": [3174511699, 5646849281, 1392149631]
+  },
+  {
+    "productId": 5460016916,
     "name": "CHERRY BLOSSOM KURTA SET",
     "description": "Cherry Blossom kurta set features a soft cherry blossom hue with cutwork cutwork and intricate floral applique work spread across the front and sides of the kurta. Paired with matching pants with cutwork and embroidery work and a soft organza dupatta with cutwork flowers spread across the dupatta and colourful scallop border. ",
     "sizes": {
@@ -826,9 +1491,15 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 13090,
-    "garmentDetails": ["Fabric: Pure silk chanderi kurta pant", "pure organza dupatta", "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi kurta pant",
+      "pure organza dupatta",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta01.jpg','kurta02.jpg','kurta03.jpg','kurta04.jpg']",
+    "images": ["kurta01.jpg", "kurta02.jpg", "kurta03.jpg", "kurta04.jpg"],
     "bestseller": true,
     "soldOut": false,
     "readyToShip": true,
@@ -837,10 +1508,11 @@
     "isActive": true,
     "color": "PINK",
     "fabric": "Pure silk chanderi",
-    "priority": 1
+    "priority": 1,
+    "relatedProducts": [5278256310]
   },
   {
-    "productId": 6856196363,
+    "productId": 5278256310,
     "name": "IVORY BLOSSOM KURTA SET",
     "description": "Ivory Blossom kurta set features a soft cherry blossom hue with detailing cutwork and intricate floral applique work spread across the front and sides of the kurta. Paired with matching pants with cutwork and embroidery work and a soft organza dupatta with cutwork flowers spread across the dupatta and colourful scallop border. ",
     "sizes": {
@@ -861,9 +1533,15 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 13090,
-    "garmentDetails": ["Fabric: Pure silk chanderi" kurta pant, pure organza dupatta, "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi kurta pant",
+      "pure organza dupatta",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta11.jpg','kurta12.jpg','kurta13.jpg','kurta14.jpg']",
+    "images": ["kurta11.jpg", "kurta12.jpg", "kurta13.jpg", "kurta14.jpg"],
     "bestseller": true,
     "soldOut": false,
     "readyToShip": true,
@@ -872,33 +1550,45 @@
     "isActive": true,
     "color": "IVORY",
     "fabric": "Pure silk chanderi",
-    "priority": 1
+    "priority": 11,
+    "relatedProducts": [5460016916]
   },
   {
-    "productId": 1111879109,
-    "name": "GARDEN OF EDEN KURTA SET",
-    "description": "Embrace the elegance of this timeless Ivory Organza Set, featuring delicate details of applique and embroidery spread across the kurta, back, sleeves and pants with a silk top giving an elegant sheer look, harmonizing traditional craftsmanship and modern style. Complete this look with a soft organza dupatta with signature applique work, perfect for special occasions. ",
+    "productId": 4073717952,
+    "name": "IVORY GARDEN OF EDEN KURTA SET",
+    "description": "Embrace the elegance of this timeless Ivory Organza Set, featuring delicate details of applique and embroidery spread across the kurta, back, sleeves and pants with a Silk top giving an elegant sheer look, harmonizing traditional craftsmanship and modern style. Complete this look with a soft organza dupatta with signature applique work, perfect for special occasions. ",
     "sizes": {
       "Upper": [
-        { "size": "XS", "quantity": 10, "price": 28895 },
-        { "size": "S", "quantity": 10, "price": 28895 },
-        { "size": "M", "quantity": 10, "price": 28895 },
-        { "size": "L", "quantity": 10, "price": 28895 },
-        { "size": "XL", "quantity": 10, "price": 28895 }
+        { "size": "XS", "quantity": 10, "price": 24100 },
+        { "size": "S", "quantity": 10, "price": 24100 },
+        { "size": "M", "quantity": 10, "price": 24100 },
+        { "size": "L", "quantity": 10, "price": 24100 },
+        { "size": "XL", "quantity": 10, "price": 24100 }
       ],
       "Bottom": [
-        { "size": "XS", "quantity": 10, "price": 28895 },
-        { "size": "S", "quantity": 10, "price": 28895 },
-        { "size": "M", "quantity": 10, "price": 28895 },
-        { "size": "L", "quantity": 10, "price": 28895 },
-        { "size": "XL", "quantity": 10, "price": 28895 }
+        { "size": "XS", "quantity": 10, "price": 24100 },
+        { "size": "S", "quantity": 10, "price": 24100 },
+        { "size": "M", "quantity": 10, "price": 24100 },
+        { "size": "L", "quantity": 10, "price": 24100 },
+        { "size": "XL", "quantity": 10, "price": 24100 }
       ]
     },
     "deliveryIn": "Shipped in 2-3 weeks",
-    "price": 28895,
-    "garmentDetails": [Fabric: Pure organza, Silk top, No. of Components: 4, "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "price": 24100,
+    "garmentDetails": [
+      "Fabric: Pure organza",
+      "Silk top",
+      "No. of Components: 4",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta391.jpg','kurta392.jpg','kurta393.jpg','kurta394.jpg','kurta395.jpg']",
+    "images": [
+      "kurta391.jpg",
+      "kurta392.jpg",
+      "kurta393.jpg",
+      "kurta394.jpg",
+      "kurta395.jpg"
+    ],
     "bestseller": true,
     "soldOut": false,
     "readyToShip": true,
@@ -907,33 +1597,45 @@
     "isActive": true,
     "color": "IVORY",
     "fabric": "Pure silk chanderi",
-    "priority": 2
+    "priority": 2,
+    "relatedProducts": [7605280426]
   },
   {
-    "productId": 3948271798,
-    "name": "GARDEN OF EDEN KURTA SET",
-    "description": "Embrace the elegance of this timeless Black Organza Set, featuring delicate details of applique and embroidery spread across the kurta, back, sleeves and pants with a silk top giving an elegant sheer look, harmonizing traditional craftsmanship and modern style. Complete this look with a soft organza dupatta with signature applique work, perfect for special occasions. ",
+    "productId": 7605280426,
+    "name": "ONYX GARDEN OF EDEN KURTA SET",
+    "description": "Embrace the elegance of this timeless Black Organza Set, featuring delicate details of applique and embroidery spread across the kurta, back, sleeves and pants with a Silk top giving an elegant sheer look, harmonizing traditional craftsmanship and modern style. Complete this look with a soft organza dupatta with signature applique work, perfect for special occasions. ",
     "sizes": {
       "Upper": [
-        { "size": "XS", "quantity": 10, "price": 28895 },
-        { "size": "S", "quantity": 10, "price": 28895 },
-        { "size": "M", "quantity": 10, "price": 28895 },
-        { "size": "L", "quantity": 10, "price": 28895 },
-        { "size": "XL", "quantity": 10, "price": 28895 }
+        { "size": "XS", "quantity": 10, "price": 24100 },
+        { "size": "S", "quantity": 10, "price": 24100 },
+        { "size": "M", "quantity": 10, "price": 24100 },
+        { "size": "L", "quantity": 10, "price": 24100 },
+        { "size": "XL", "quantity": 10, "price": 24100 }
       ],
       "Bottom": [
-        { "size": "XS", "quantity": 10, "price": 28895 },
-        { "size": "S", "quantity": 10, "price": 28895 },
-        { "size": "M", "quantity": 10, "price": 28895 },
-        { "size": "L", "quantity": 10, "price": 28895 },
-        { "size": "XL", "quantity": 10, "price": 28895 }
+        { "size": "XS", "quantity": 10, "price": 24100 },
+        { "size": "S", "quantity": 10, "price": 24100 },
+        { "size": "M", "quantity": 10, "price": 24100 },
+        { "size": "L", "quantity": 10, "price": 24100 },
+        { "size": "XL", "quantity": 10, "price": 24100 }
       ]
     },
     "deliveryIn": "Shipped in 2-3 weeks",
-    "price": 28895,
-    "garmentDetails": [Fabric: Pure organza, Silk top, No. of Components: 4, "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "price": 24100,
+    "garmentDetails": [
+      "Fabric: Pure organza",
+      "Silk top",
+      "No. of Components: 4",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta3991.jpg','kurta3992.jpg','kurta3993.jpg','kurta3994.jpg','kurta3995.jpg']",
+    "images": [
+      "kurta3991.jpg",
+      "kurta3992.jpg",
+      "kurta3993.jpg",
+      "kurta3994.jpg",
+      "kurta3995.jpg"
+    ],
     "bestseller": true,
     "soldOut": false,
     "readyToShip": true,
@@ -942,10 +1644,11 @@
     "isActive": true,
     "color": "BLACK",
     "fabric": "Pure silk chanderi",
-    "priority": 2
+    "priority": 10,
+    "relatedProducts": [4073717952]
   },
   {
-    "productId": 3632354263,
+    "productId": 1157360608,
     "name": "SAPPHIRE BLUE APPLIQUE KURTA SET",
     "description": "A vibrant ensemble in sapphire blue colour effortlessly combines classic charm with contemporary flair. Crafted in pure silk chanderi fabric, this kurta set features contrast signature applique work along the sleeves and hemline. Paired with matching pants featuring small applique motifs and organza dupatta that exudes elegance.",
     "sizes": {
@@ -966,9 +1669,15 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 17955,
-    "garmentDetails": ["Fabric: Pure silk chanderi" kurta pant, pure organza dupatta, "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi kurta pant",
+      "pure organza dupatta",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta21.jpg','kurta22.jpg','kurta23.jpg','kurta24.jpg']",
+    "images": ["kurta21.jpg", "kurta22.jpg", "kurta23.jpg", "kurta24.jpg"],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -977,10 +1686,11 @@
     "isActive": true,
     "color": "BLUE",
     "fabric": "Pure silk chanderi",
-    "priority": 20
+    "priority": 12,
+    "relatedProducts": [4141146113, 4995882223]
   },
   {
-    "productId": 6730928286,
+    "productId": 4141146113,
     "name": "MARIGOLD MUSTARD APPLIQUE KURTA SET",
     "description": "A vibrant ensemble in marigold mustard colour effortlessly combines classic charm with contemporary flair. Crafted in pure silk chanderi fabric, this kurta set features contrast signature applique work along the sleeves and hemline. Paired with matching pants featuring small applique motifs and organza dupatta that exudes elegance.",
     "sizes": {
@@ -1001,9 +1711,15 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 17955,
-    "garmentDetails": ["Fabric: Pure silk chanderi" kurta pant, pure organza dupatta, "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi kurta pant",
+      "pure organza dupatta",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta31.jpg','kurta32.jpg','kurta33.jpg','kurta34.jpg']",
+    "images": ["kurta31.jpg", "kurta32.jpg", "kurta33.jpg", "kurta34.jpg"],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -1012,10 +1728,11 @@
     "isActive": true,
     "color": "YELLOW",
     "fabric": "Pure silk chanderi",
-    "priority": 20
+    "priority": 39,
+    "relatedProducts": [1157360608, 4995882223]
   },
   {
-    "productId": 1581978754,
+    "productId": 4995882223,
     "name": "BISQUE BEIGE APPLIQUE KURTA SET",
     "description": "A vibrant ensemble in bisque colour effortlessly combines classic charm with contemporary flair. Crafted in pure silk chanderi fabric, this kurta set features contrast signature applique work along the sleeves and hemline. Paired with matching pants featuring small applique motifs and organza dupatta that exudes elegance.",
     "sizes": {
@@ -1036,9 +1753,15 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 17955,
-    "garmentDetails": ["Fabric: Pure silk chanderi" kurta pant, pure organza dupatta, "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi kurta pant",
+      "pure organza dupatta",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta41.jpg','kurta42.jpg','kurta43.jpg','kurta44.jpg']",
+    "images": ["kurta41.jpg", "kurta42.jpg", "kurta43.jpg", "kurta44.jpg"],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -1047,10 +1770,11 @@
     "isActive": true,
     "color": "[BEIGE, RED]",
     "fabric": "Pure silk chanderi",
-    "priority": 20
+    "priority": 20,
+    "relatedProducts": [1157360608, 4141146113]
   },
   {
-    "productId": 300862699,
+    "productId": 7062276931,
     "name": "POWDER BLUE EMBROIDERED KURTA SET",
     "description": "Powder Blue embroidered kurta set features floral embroidery applique work on the sleeve, sides and hemline of the kurta and pants.The look is finished by hand pearl highlights along the neckline and kurta. Paired with a two-tone dupatta, powder blue and ivory colour adorned with embroidery work.  ",
     "sizes": {
@@ -1071,9 +1795,21 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 14560,
-    "garmentDetails": ["Fabric: Pure silk chanderi" kurta pant, pure organza dupatta, "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi kurta pant",
+      "pure organza dupatta",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta51.jpg','kurta52.jpg','kurta53.jpg','kurta54.jpg','kurta55.jpg']",
+    "images": [
+      "kurta51.jpg",
+      "kurta52.jpg",
+      "kurta53.jpg",
+      "kurta54.jpg",
+      "kurta55.jpg"
+    ],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -1082,10 +1818,13 @@
     "isActive": true,
     "color": "BLUE",
     "fabric": "Pure silk chanderi",
-    "priority": 21
+    "priority": 40,
+    "relatedProducts": [
+      5096462356, 6957625147, 1027603422, 7235465541, 2461263200
+    ]
   },
   {
-    "productId": 2904269350,
+    "productId": 5096462356,
     "name": "AMBER YELLOW EMBROIDERED KURTA SET",
     "description": "Amber Yellow embroidered kurta set features floral embroidery applique work on the sleeve, sides and hemline of the kurta and pants.The look is finished by hand pearl highlights along the neckline and kurta. Paired with a two-tone dupatta, Amber yellow and ivory colour adorned with embroidery work.  ",
     "sizes": {
@@ -1106,9 +1845,21 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 14560,
-    "garmentDetails": ["Fabric: Pure silk chanderi" kurta pant, pure organza dupatta, "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi kurta pant",
+      "pure organza dupatta",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta61.jpg','kurta62.jpg','kurta63.jpg','kurta64.jpg','kurta65.jpg']",
+    "images": [
+      "kurta61.jpg",
+      "kurta62.jpg",
+      "kurta63.jpg",
+      "kurta64.jpg",
+      "kurta65.jpg"
+    ],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -1117,10 +1868,13 @@
     "isActive": true,
     "color": "YELLOW",
     "fabric": "Pure silk chanderi",
-    "priority": 21
+    "priority": 21,
+    "relatedProducts": [
+      7062276931, 6957625147, 1027603422, 7235465541, 2461263200
+    ]
   },
   {
-    "productId": 3901546126,
+    "productId": 1029517536,
     "name": "THREE TONED BLUE KURTA SET",
     "description": "Three toned blue kurta set features applique work with intricate embroidery and hand pearl work. Paired with matching pants with stitching detailing and a soft organza dupatta with floral motifs on the ends and scallop border. This outfit is perfect to elevate your look with unmatched elegance. ",
     "sizes": {
@@ -1141,9 +1895,15 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 15125,
-    "garmentDetails": ["Fabric: Pure silk chanderi" kurta pant, pure organza dupatta, "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi kurta pant",
+      "pure organza dupatta",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta71.jpg','kurta72.jpg','kurta73.jpg','kurta74.jpg']",
+    "images": ["kurta71.jpg", "kurta72.jpg", "kurta73.jpg", "kurta74.jpg"],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -1152,10 +1912,11 @@
     "isActive": true,
     "color": "BLUE",
     "fabric": "Pure silk chanderi",
-    "priority": 22
+    "priority": 22,
+    "relatedProducts": []
   },
   {
-    "productId": 3273105230,
+    "productId": 4867818559,
     "name": "EMERALD GREEN KURTA SET",
     "description": "The Emerald green kurta set offers a fresh and vibrant hue and in a rich green hue. The kurta set features applique work along the neckline and sides of the kurta and hand work detailing with handmade hangings along the hemline and pants. The sides of the kurta and sleeve is adorned with contrast applique work. Paired with a self emerald green colour dupatta with intricate handmade motifs and hangings on both sides with scallop border. This set is a perfect pick for the festive season. ",
     "sizes": {
@@ -1176,9 +1937,21 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 11690,
-    "garmentDetails": ["Fabric: Pure silk chanderi" kurta pant, pure organza dupatta, "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi kurta pant",
+      "pure organza dupatta",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta81.jpg','kurta82.jpg','kurta83.jpg','kurta84.jpg','kurta85.jpg']",
+    "images": [
+      "kurta81.jpg",
+      "kurta82.jpg",
+      "kurta83.jpg",
+      "kurta84.jpg",
+      "kurta85.jpg"
+    ],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -1187,10 +1960,11 @@
     "isActive": true,
     "color": "GREEN",
     "fabric": "Pure silk chanderi",
-    "priority": 23
+    "priority": 23,
+    "relatedProducts": []
   },
   {
-    "productId": 7365921812,
+    "productId": 4268277598,
     "name": "OLD ROSE KURTA SET",
     "description": "Adorn yourself in this elegant old rose kurta featuring heavily hand embroidered and embellished bold and abstract motif, finished with intricate stitching detailing. Paired with matching pants and a soft organza dupatta with detailed embroidered cutwork border, this set is sure to make a statement and leave you feeling confident and beautiful. ",
     "sizes": {
@@ -1211,9 +1985,21 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 20160,
-    "garmentDetails": ["Fabric: Pure silk chanderi" kurta pant, pure organza dupatta, "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi kurta pant",
+      "pure organza dupatta",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta91.jpg','kurta92.jpg','kurta93.jpg','kurta94.jpg','kurta95.jpg']",
+    "images": [
+      "kurta91.jpg",
+      "kurta92.jpg",
+      "kurta93.jpg",
+      "kurta94.jpg",
+      "kurta95.jpg"
+    ],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -1222,10 +2008,11 @@
     "isActive": true,
     "color": "PINK",
     "fabric": "Pure silk chanderi",
-    "priority": 3
+    "priority": 41,
+    "relatedProducts": []
   },
   {
-    "productId": 628699647,
+    "productId": 6567762340,
     "name": "COAL HAND PAINTED KURTA SET",
     "description": "The Coal hand painted kurta set features intricate hand painted florals spread all over the skurta, adding a touch of elegance to the rich dark hue. The kurta along with the sleeve and neckline is finished with handmade tassels. Paired with matching scallop organza dupatta with hand painted florals and finished with handmade hangings, this look is perfect for evening festivities. ",
     "sizes": {
@@ -1246,9 +2033,21 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 15575,
-    "garmentDetails": ["Fabric: Pure silk chanderi" kurta pant, pure organza dupatta, "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi kurta pant",
+      "pure organza dupatta",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta101.jpg','kurta102.jpg','kurta103.jpg','kurta104.jpg','kurta105.jpg']",
+    "images": [
+      "kurta101.jpg",
+      "kurta102.jpg",
+      "kurta103.jpg",
+      "kurta104.jpg",
+      "kurta105.jpg"
+    ],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -1257,10 +2056,11 @@
     "isActive": true,
     "color": "BLACK",
     "fabric": "Pure silk chanderi",
-    "priority": 24
+    "priority": 24,
+    "relatedProducts": []
   },
   {
-    "productId": 1023202113,
+    "productId": 3153463393,
     "name": "OASIS HAND PAINTED KURTA SET",
     "description": "The Oasis Hand painted kurta set glows with rich hand painted flowers in shades of pink and green along the front and back of the kurta, adorned with handmade hangings and brown beige contrast colour along the sides with stitching detailing. Paired with matching pants with stitching detailing and a soft organza dupatta with signature hand painted florals, making it perfect for your sunny or evening outings. ",
     "sizes": {
@@ -1281,9 +2081,21 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 21910,
-    "garmentDetails": ["Fabric: Pure silk chanderi" kurta pant, pure organza dupatta, "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi kurta pant",
+      "pure organza dupatta",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta111.jpg','kurta112.jpg','kurta113.jpg','kurta114.jpg','kurta115.jpg']",
+    "images": [
+      "kurta111.jpg",
+      "kurta112.jpg",
+      "kurta113.jpg",
+      "kurta114.jpg",
+      "kurta115.jpg"
+    ],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -1292,10 +2104,11 @@
     "isActive": true,
     "color": "BEIGE",
     "fabric": "Pure silk chanderi",
-    "priority": 25
+    "priority": 25,
+    "relatedProducts": []
   },
   {
-    "productId": 5009979690,
+    "productId": 4857850438,
     "name": "LILAC SUNFLOWER CROCHET KURTA SET",
     "description": "Embrace yourself in this classic kurta set featuring hand painted sunflowers and hand woven crochet detailing, adorned with handmade hangings. Complete your celebratory look with matching pants and organza dupatta adorned vibrant painted sunflowers and cutwork detailing. ",
     "sizes": {
@@ -1316,9 +2129,21 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 18550,
-    "garmentDetails": ["Fabric: Pure silk chanderi" kurta pant, pure organza dupatta, "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi kurta pant",
+      "pure organza dupatta",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta121.jpg','kurta122.jpg','kurta123.jpg','kurta124.jpg','kurta125.jpg']",
+    "images": [
+      "kurta121.jpg",
+      "kurta122.jpg",
+      "kurta123.jpg",
+      "kurta124.jpg",
+      "kurta125.jpg"
+    ],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -1327,10 +2152,11 @@
     "isActive": true,
     "color": "PURPLE",
     "fabric": "Pure silk chanderi",
-    "priority": 26
+    "priority": 26,
+    "relatedProducts": []
   },
   {
-    "productId": 2757805856,
+    "productId": 3799561584,
     "name": "RED FLORAL APPLIQUE KURTA SET",
     "description": "The Red floral applique kurta set features scattered floral motifs with details of applique and embroidery. The look is completed with matching bottoms with stitching detailing and soft organza dupatta adorned with signature floral applique work. ",
     "sizes": {
@@ -1351,9 +2177,15 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 13790,
-    "garmentDetails": ["Fabric: Pure silk chanderi" kurta pant, pure organza dupatta, "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi kurta pant",
+      "pure organza dupatta",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta131.jpg','kurta132.jpg','kurta133.jpg','kurta134.jpg']",
+    "images": ["kurta131.jpg", "kurta132.jpg", "kurta133.jpg", "kurta134.jpg"],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -1362,10 +2194,11 @@
     "isActive": true,
     "color": "RED",
     "fabric": "Pure silk chanderi",
-    "priority": 6
+    "priority": 44,
+    "relatedProducts": [3926471264]
   },
   {
-    "productId": 2807485107,
+    "productId": 3926471264,
     "name": "EMERALD GREEN FLORAL APPLIQUE KURTA SET",
     "description": "The Emerald green floral applique kurta set features scattered floral motifs with details of applique and embroidery. The look is completed with matching bottoms with stitching detailing and soft organza dupatta adorned with signature floral applique work. ",
     "sizes": {
@@ -1386,9 +2219,15 @@
     },
     "deliveryIn": "Made to order, shipped in 2-3 weeks",
     "price": 13790,
-    "garmentDetails": ["Fabric: Pure silk chanderi" kurta pant, pure organza dupatta, "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi kurta pant",
+      "pure organza dupatta",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "[\"S40green.jpg\"]",
+    "images": ["S40green.jpg", "S41green.jpg", "S42green.jpg", "S43green.jpg"],
     "bestseller": null,
     "soldOut": null,
     "readyToShip": true,
@@ -1397,10 +2236,11 @@
     "isActive": true,
     "color": "GREEN",
     "fabric": "Pure silk chanderi",
-    "priority": null
+    "priority": 42,
+    "relatedProducts": [3799561584]
   },
   {
-    "productId": 7464645299,
+    "productId": 122391629,
     "name": "SCARLET PEARL WORK KURTA SET",
     "description": "Immerse yourself in this vibrant red ensemble adorned with intricate net cutwork flowers with hand pearl embellishments along the front, back, sleeve and pants giving a sheer look. To complete the look, it is paired with a heavily embellished soft mul cotton dupatta. This look is a celebration of joy and feminine charm, making you turn heads wherever you go. ",
     "sizes": {
@@ -1421,9 +2261,21 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 23625,
-    "garmentDetails": ["Fabric: Pure silk chanderi" kurta pant, pure mul cotton dupatta, "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi kurta pant",
+      "pure mul cotton dupatta",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta171.jpg','kurta172.jpg','kurta173.jpg','kurta174.jpg','kurta175.jpg']",
+    "images": [
+      "kurta171.jpg",
+      "kurta172.jpg",
+      "kurta173.jpg",
+      "kurta174.jpg",
+      "kurta175.jpg"
+    ],
     "bestseller": true,
     "soldOut": false,
     "readyToShip": true,
@@ -1432,10 +2284,11 @@
     "isActive": true,
     "color": "RED",
     "fabric": "Pure silk chanderi",
-    "priority": 5
+    "priority": 5,
+    "relatedProducts": []
   },
   {
-    "productId": 5757716196,
+    "productId": 6957625147,
     "name": "PLUM EMBROIDERED KURTA SET",
     "description": "The Plum Kurta Set features embroidery work along the neckline, sleeves and bodice with stitching detailing on the pants. Complete this look with a printed dupatta perfect for your day-to-night transitions. ",
     "sizes": {
@@ -1456,9 +2309,21 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 9200,
-    "garmentDetails": ["Fabric: Pure silk chanderi" kurta. Cotton pants, Chanderi dupatta, "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi kurta. Cotton pants",
+      "Chanderi dupatta",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta181.jpg','kurta182.jpg','kurta183.jpg','kurta184.jpg','kurta185.jpg']",
+    "images": [
+      "kurta181.jpg",
+      "kurta182.jpg",
+      "kurta183.jpg",
+      "kurta184.jpg",
+      "kurta185.jpg"
+    ],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -1467,10 +2332,13 @@
     "isActive": true,
     "color": "PURPLE",
     "fabric": "Pure silk chanderi",
-    "priority": 28
+    "priority": 28,
+    "relatedProducts": [
+      7062276931, 5096462356, 1027603422, 7235465541, 2461263200
+    ]
   },
   {
-    "productId": 2688755322,
+    "productId": 1270604058,
     "name": "OASIS APPLIQUE KURTA SET",
     "description": "The graceful Oasis Applique Kurta Set is adorned with blooming florals in our signature applique work and intricate thread work. Complete this classic day to evening look with matching pants with stitching detailing and scalloped border soft organza dupatta with floral blooms. ",
     "sizes": {
@@ -1491,9 +2359,21 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 12320,
-    "garmentDetails": ["Fabric: Pure silk chanderi" kurta pant, pure organza dupatta, "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi kurta pant",
+      "pure organza dupatta",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta191.jpg','kurta192.jpg','kurta193.jpg','kurta194.jpg','kurta195.jpg']",
+    "images": [
+      "kurta191.jpg",
+      "kurta192.jpg",
+      "kurta193.jpg",
+      "kurta194.jpg",
+      "kurta195.jpg"
+    ],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -1502,10 +2382,11 @@
     "isActive": true,
     "color": "BEIGE",
     "fabric": "Pure silk chanderi",
-    "priority": 32
+    "priority": 32,
+    "relatedProducts": []
   },
   {
-    "productId": 2176978762,
+    "productId": 6811104426,
     "name": "CITRINE LEMON KURTA SET",
     "description": "The Citrine Lemon Kurta Set features a vibrant yellow kurta with contrast ivory thread embroidery work along the neckline,sleeves and hemline. Paired with matching pants with stitching detailing and a contrast ivory dupatta with embroidery work in yellow. Create an effortless day celebration. ",
     "sizes": {
@@ -1526,9 +2407,21 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 13000,
-    "garmentDetails": ["Fabric: Pure silk chanderi" kurta pant, pure organza dupatta, "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi kurta pant",
+      "pure organza dupatta",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta201.jpg','kurta202.jpg','kurta203.jpg','kurta204.jpg','kurta205.jpg']",
+    "images": [
+      "kurta201.jpg",
+      "kurta202.jpg",
+      "kurta203.jpg",
+      "kurta204.jpg",
+      "kurta205.jpg"
+    ],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -1537,10 +2430,11 @@
     "isActive": true,
     "color": "YELLOW",
     "fabric": "Pure silk chanderi",
-    "priority": 33
+    "priority": 33,
+    "relatedProducts": []
   },
   {
-    "productId": 2242279132,
+    "productId": 1027603422,
     "name": "BISQUE BEIGE EMBROIDERED KURTA SET",
     "description": "The Bisque Beige Kurta Set echoes festive elegance with delicate floral embroidery gracing all over the bodice and the sleeves. It is beautifully complimented by the dupatta featuring vibrant red embroidered border with small motifs spread across the dupatta.  ",
     "sizes": {
@@ -1561,9 +2455,15 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 14165,
-    "garmentDetails": ["Fabric: Pure silk chanderi" kurta pant, pure organza dupatta, "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi kurta pant",
+      "pure organza dupatta",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta211.jpg','kurta212.jpg']",
+    "images": ["kurta211.jpg", "kurta212.jpg"],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -1572,10 +2472,13 @@
     "isActive": true,
     "color": "BEIGE",
     "fabric": "Pure silk chanderi",
-    "priority": 34
+    "priority": 43,
+    "relatedProducts": [
+      7062276931, 5096462356, 6957625147, 7235465541, 2461263200
+    ]
   },
   {
-    "productId": 7321616071,
+    "productId": 7235465541,
     "name": "IVORY EMBROIDERED KURTA SET",
     "description": "The Ivory Kurta Set echoes festive elegance with delicate floral embroidery gracing all over the bodice and the sleeves. It is beautifully complimented by the dupatta featuring vibrant red embroidered border with small motifs spread across the dupatta.  ",
     "sizes": {
@@ -1596,9 +2499,21 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 14165,
-    "garmentDetails": ["Fabric: Pure silk chanderi" kurta pant, pure organza dupatta, "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi kurta pant",
+      "pure organza dupatta",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta221.jpg','kurta222.jpg','kurta223.jpg','kurta224.jpg','kurta225.jpg']",
+    "images": [
+      "kurta221.jpg",
+      "kurta222.jpg",
+      "kurta223.jpg",
+      "kurta224.jpg",
+      "kurta225.jpg"
+    ],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -1607,10 +2522,13 @@
     "isActive": true,
     "color": "IVORY",
     "fabric": "Pure silk chanderi",
-    "priority": 34
+    "priority": 34,
+    "relatedProducts": [
+      7062276931, 5096462356, 6957625147, 1027603422, 2461263200
+    ]
   },
   {
-    "productId": 6859852740,
+    "productId": 5204541301,
     "name": "SCARLET RED KURTA SET",
     "description": "Embrace the warmth and festive allure of the Scarlet Red kurta set featuring bunches of floral blooms adorned with hand pearl highlights spread across both the bodice and the sleeves. Paired with matching pants with stitching detailing and self organza dupatta with detailed pearl work along the border and the body of dupatta, this look is perfect for chic day to night festivities. ",
     "sizes": {
@@ -1631,9 +2549,21 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 13415,
-    "garmentDetails": ["Fabric: Pure silk chanderi" kurta pant, pure organza dupatta, "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi kurta pant",
+      "pure organza dupatta",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta231.jpg','kurta232.jpg','kurta233.jpg','kurta234.jpg','kurta235.jpg']",
+    "images": [
+      "kurta231.jpg",
+      "kurta232.jpg",
+      "kurta233.jpg",
+      "kurta234.jpg",
+      "kurta235.jpg"
+    ],
     "bestseller": true,
     "soldOut": false,
     "readyToShip": true,
@@ -1642,10 +2572,11 @@
     "isActive": true,
     "color": "RED",
     "fabric": "Pure silk chanderi",
-    "priority": 7
+    "priority": 7,
+    "relatedProducts": []
   },
   {
-    "productId": 1046660884,
+    "productId": 7118487297,
     "name": "PEARL IVORY KURTA SET",
     "description": "Immerse yourself in the warm hues of this Ivory Pearl Kurta Set adorned with contrasting details of applique and thread work. It is paired with self colour pants with our signature stitching detailing and matching scalloped dupatta with embroidery and applique work. The intricate details makes it perfect for your day brunches to evening strolls. ",
     "sizes": {
@@ -1666,9 +2597,21 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 13230,
-    "garmentDetails": ["Fabric: Pure silk chanderi" kurta pant, pure organza dupatta, "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi kurta pant",
+      "pure organza dupatta",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta241.jpg','kurta242.jpg','kurta243.jpg','kurta244.jpg','kurta245.jpg']",
+    "images": [
+      "kurta241.jpg",
+      "kurta242.jpg",
+      "kurta243.jpg",
+      "kurta244.jpg",
+      "kurta245.jpg"
+    ],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -1677,10 +2620,11 @@
     "isActive": true,
     "color": "IVORY",
     "fabric": "Pure silk chanderi",
-    "priority": 29
+    "priority": 29,
+    "relatedProducts": [3519230395]
   },
   {
-    "productId": 7864333674,
+    "productId": 3519230395,
     "name": "LILAC KURTA SET",
     "description": "Immerse yourself in the warm hues of this Lilac Kurta Set adorned with contrasting details of applique and thread work. It is paired with self colour pants with our signature stitching detailing and matching scalloped dupatta with embroidery and applique work. The intricate details makes it perfect for your day brunches to evening strolls. ",
     "sizes": {
@@ -1701,9 +2645,21 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 13230,
-    "garmentDetails": ["Fabric: Pure silk chanderi" kurta pant, pure organza dupatta, "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi kurta pant",
+      "pure organza dupatta",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta251.jpg','kurta252.jpg','kurta253.jpg','kurta254.jpg','kurta255.jpg']",
+    "images": [
+      "kurta251.jpg",
+      "kurta252.jpg",
+      "kurta253.jpg",
+      "kurta254.jpg",
+      "kurta255.jpg"
+    ],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -1712,10 +2668,11 @@
     "isActive": true,
     "color": "PURPLE",
     "fabric": "Pure silk chanderi",
-    "priority": 30
+    "priority": 30,
+    "relatedProducts": [7118487297]
   },
   {
-    "productId": 5504083902,
+    "productId": 5066666592,
     "name": "TAUPE BROWN KURTA SET",
     "description": "Elevate your festive elegance and charm with The Taupe Brown Kurta Set featuring applique, embroidery and hand bead work along the sleeves, neckline, front and back of the kurta. Paired with straight bottoms and mul cotton dupatta adorned with detailed floral motifs with cutwork detailing.  ",
     "sizes": {
@@ -1736,9 +2693,21 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 15575,
-    "garmentDetails": ["Fabric: Pure silk chanderi" kurta pant, pure mul dupatta, "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi kurta pant",
+      "pure mul dupatta",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta261.jpg','kurta262.jpg','kurta263.jpg','kurta264.jpg','kurta265.jpg']",
+    "images": [
+      "kurta261.jpg",
+      "kurta262.jpg",
+      "kurta263.jpg",
+      "kurta264.jpg",
+      "kurta265.jpg"
+    ],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -1747,10 +2716,11 @@
     "isActive": true,
     "color": "BROWN",
     "fabric": "Pure silk chanderi",
-    "priority": 4
+    "priority": 4,
+    "relatedProducts": []
   },
   {
-    "productId": 6576623625,
+    "productId": 4461854959,
     "name": "IVORY-RUBY APPLIQUE KURTA SET",
     "description": "Ivory-Red Applique Kurta Set features signature applique work on the sleeve and bodice of the kurta with subtle embroidery detail. Elevate your fashion game with this elegant ensemble, perfect for making a statement wherever you go. ",
     "sizes": {
@@ -1771,9 +2741,14 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 15260,
-    "garmentDetails": ["Fabric: Pure silk chanderi" kurta pant, "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi kurta pant",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta271.jpg','kurta272.jpg','kurta273.jpg','kurta274.jpg']",
+    "images": ["kurta271.jpg", "kurta272.jpg", "kurta273.jpg", "kurta274.jpg"],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -1782,10 +2757,11 @@
     "isActive": true,
     "color": "IVORY",
     "fabric": "Pure silk chanderi",
-    "priority": 27
+    "priority": 27,
+    "relatedProducts": []
   },
   {
-    "productId": 2815774841,
+    "productId": 5637362015,
     "name": "LIME GREEN KURTA SET",
     "description": "A beautiful combination of sage green and contrast signature applique work throughout the kurta and minimal stitching detailing on the pants. Paired with a stripe printed dupatta, creating a seamless blend of festive charm and modern chic. ",
     "sizes": {
@@ -1806,9 +2782,20 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 13265,
-    "garmentDetails": ["Fabric: Pure silk chanderi", "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta281.jpg','kurta282.jpg','kurta283.jpg','kurta284.jpg','kurta285.jpg']",
+    "images": [
+      "kurta281.jpg",
+      "kurta282.jpg",
+      "kurta283.jpg",
+      "kurta284.jpg",
+      "kurta285.jpg"
+    ],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -1817,10 +2804,11 @@
     "isActive": true,
     "color": "GREEN",
     "fabric": "Pure silk chanderi",
-    "priority": 36
+    "priority": 36,
+    "relatedProducts": []
   },
   {
-    "productId": 4102151312,
+    "productId": 54326176,
     "name": "MIDNIGHT BLUE KURTA SET",
     "description": "Midnight Blue Kurta Set features delicate organza fabric detailing along the neckline and sleeve and signature applique and embroidery work along the kurta and pants. Complete this look with a soft mul cotton dupatta in our signature applique and embroidery style, perfect for your intimate celebrations. ",
     "sizes": {
@@ -1841,9 +2829,21 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 15575,
-    "garmentDetails": ["Fabric: Pure silk chanderi" kurta pant, pure mul cotton dupatta, "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi kurta pant",
+      "pure mul cotton dupatta",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta291.jpg','kurta292.jpg','kurta293.jpg','kurta294.jpg','kurta295.jpg']",
+    "images": [
+      "kurta291.jpg",
+      "kurta292.jpg",
+      "kurta293.jpg",
+      "kurta294.jpg",
+      "kurta295.jpg"
+    ],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -1852,10 +2852,11 @@
     "isActive": true,
     "color": "BLUE",
     "fabric": "Pure silk chanderi",
-    "priority": 37
+    "priority": 37,
+    "relatedProducts": []
   },
   {
-    "productId": 5019106609,
+    "productId": 1481637389,
     "name": "SCARLET RED ZARI-DORI KURTA SET",
     "description": "The Scarlet Red Kurta Set features hand zari and dori work with signature applique detailing. Complete this look with straight pants with signature stitching detailing and scalloped soft organza dupatta with hand zari work, making it perfect for festive occasions. ",
     "sizes": {
@@ -1876,9 +2877,21 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 14420,
-    "garmentDetails": ["Fabric: Pure silk chanderi" kurta pant, pure organza dupatta, "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi kurta pant",
+      "pure organza dupatta",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta301.jpg','kurta302.jpg','kurta303.jpg','kurta304.jpg','kurta305.jpg']",
+    "images": [
+      "kurta301.jpg",
+      "kurta302.jpg",
+      "kurta303.jpg",
+      "kurta304.jpg",
+      "kurta305.jpg"
+    ],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -1887,10 +2900,11 @@
     "isActive": true,
     "color": "RED",
     "fabric": "Pure silk chanderi",
-    "priority": 12
+    "priority": 16,
+    "relatedProducts": []
   },
   {
-    "productId": 776692408,
+    "productId": 4724867814,
     "name": "MUSTARD-GREEN KURTA SET",
     "description": "The Mustard-Green Kurta Set in a vibrant yellow shade featuring embroidery along the sleeves, bodice and back of kurta and pant with subtle detailing, creating an effortless festive look. Complete this look with a soft organza dupatta with embroidery motifs on both sides. ",
     "sizes": {
@@ -1911,9 +2925,21 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 12320,
-    "garmentDetails": ["Fabric: Pure silk chanderi" kurta pant, pure organza dupatta, "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi kurta pant",
+      "pure organza dupatta",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta311.jpg','kurta312.jpg','kurta313.jpg','kurta314.jpg','kurta315.jpg']",
+    "images": [
+      "kurta311.jpg",
+      "kurta312.jpg",
+      "kurta313.jpg",
+      "kurta314.jpg",
+      "kurta315.jpg"
+    ],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -1922,10 +2948,11 @@
     "isActive": true,
     "color": "YELLOW",
     "fabric": "Pure silk chanderi",
-    "priority": 14
+    "priority": 17,
+    "relatedProducts": []
   },
   {
-    "productId": 2111495524,
+    "productId": 4415575466,
     "name": "BREEZY BEIGE HAND PAINTED KURTA SET",
     "description": "Immerse yourself in the festive charm and allure of this Breezy Beige Kurta Set in tissue fabric with hand painted floral blooms scattered all over the sleeves, front, back and pants. The look is finished with subtle handmade tassels along the neckline and sleeves with a soft tissue dupatta adorned with hand painted flowers. ",
     "sizes": {
@@ -1946,9 +2973,20 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 15540,
-    "garmentDetails": [Fabric: tissue fabric, "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: tissue fabric",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta321.jpg','kurta322.jpg','kurta323.jpg','kurta324.jpg','kurta325.jpg']",
+    "images": [
+      "kurta321.jpg",
+      "kurta322.jpg",
+      "kurta323.jpg",
+      "kurta324.jpg",
+      "kurta325.jpg"
+    ],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -1957,10 +2995,11 @@
     "isActive": true,
     "color": "BEIGE",
     "fabric": "Tissue",
-    "priority": 15
+    "priority": 45,
+    "relatedProducts": []
   },
   {
-    "productId": 2147967689,
+    "productId": 5142309835,
     "name": "PEARL IVORY embellished KURTA SET",
     "description": "Adorn yourself in this Pearl Ivory embellished Kurta Set with heavily hand embroidered yoke and floral blooms along the hemline and sleeves creating an elegant timeless ensemble. Paired with straight pants with minimal stitching detailing and a heavily embroidered soft organza dupatta with scalloped border, perfect for your day festivities. ",
     "sizes": {
@@ -1981,9 +3020,21 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 14630,
-    "garmentDetails": ["Fabric: Pure silk chanderi" kurta pant, pure organza dupatta, "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi kurta pant",
+      "pure organza dupatta",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta331.jpg','kurta332.jpg','kurta333.jpg','kurta334.jpg','kurta335.jpg']",
+    "images": [
+      "kurta331.jpg",
+      "kurta332.jpg",
+      "kurta333.jpg",
+      "kurta334.jpg",
+      "kurta335.jpg"
+    ],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -1992,10 +3043,11 @@
     "isActive": true,
     "color": "IVORY",
     "fabric": "Pure silk chanderi",
-    "priority": 16
+    "priority": 18,
+    "relatedProducts": []
   },
   {
-    "productId": 414940782,
+    "productId": 2461263200,
     "name": "SAGE GREEN EMBROIDERED KURTA SET",
     "description": "The Sage Green Embroidered Kurta Set in a refreshing green hue showcases intricate embroidery work along the yoke, sleeves and hemline with subtle stitching detailing. Paired with straight bottoms with intricate cutwork detailing and soft organza dupatta with scattered floral blooms, this look is perfect for effortless day to night transitions. ",
     "sizes": {
@@ -2016,9 +3068,21 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 14630,
-    "garmentDetails": ["Fabric: Pure silk chanderi" kurta pant, pure organza dupatta, "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi kurta pant",
+      "pure organza dupatta",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta341.jpg','kurta342.jpg','kurta343.jpg','kurta344.jpg','kurta345.jpg']",
+    "images": [
+      "kurta341.jpg",
+      "kurta342.jpg",
+      "kurta343.jpg",
+      "kurta344.jpg",
+      "kurta345.jpg"
+    ],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -2027,10 +3091,13 @@
     "isActive": true,
     "color": "GREEN",
     "fabric": "Pure silk chanderi",
-    "priority": 17
+    "priority": 19,
+    "relatedProducts": [
+      7062276931, 5096462356, 6957625147, 1027603422, 7235465541
+    ]
   },
   {
-    "productId": 8927405776,
+    "productId": 1325677355,
     "name": "TEAL-PEARL KURTA SET",
     "description": "The Teal-Pearl Kurta Set exudes luxury, elegance and festive allure. This kurta set features applique and embroidery work scattered all over the kurta with hand pearl detailing. Complete this look with pants with signature stitching detailing and a soft organza dupatta with embroidery, applique and pearl dupatta. ",
     "sizes": {
@@ -2051,9 +3118,21 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 13230,
-    "garmentDetails": ["Fabric: Pure silk chanderi" kurta pant, pure organza dupatta, "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi kurta pant",
+      "pure organza dupatta",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta351.jpg','kurta352.jpg','kurta353.jpg','kurta354.jpg','kurta355.jpg']",
+    "images": [
+      "kurta351.jpg",
+      "kurta352.jpg",
+      "kurta353.jpg",
+      "kurta354.jpg",
+      "kurta355.jpg"
+    ],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -2062,10 +3141,11 @@
     "isActive": true,
     "color": "BLUE",
     "fabric": "Pure silk chanderi",
-    "priority": 18
+    "priority": 46,
+    "relatedProducts": []
   },
   {
-    "productId": 3395464774,
+    "productId": 4389934857,
     "name": "SAGE-FLORA POPPY KURTA SET",
     "description": "The Sage-Flora-Poppy Kurta Set exudes elegance with hand painted florals adorning the fabric. Paired with straight pants with minimal stitching detailing, this ensemble harmonizes art and nature. The dupatta has hand painted florals with handmade hangings, making it perfect for both casual and formal occasions. ",
     "sizes": {
@@ -2086,9 +3166,15 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 13230,
-    "garmentDetails": ["Fabric: Pure silk chanderi" kurta pant, pure organza dupatta, "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi kurta pant",
+      "pure organza dupatta",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta361.jpg','kurta362.jpg','kurta363.jpg']",
+    "images": ["kurta361.jpg", "kurta362.jpg", "kurta363.jpg"],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -2097,10 +3183,11 @@
     "isActive": true,
     "color": "GREEN",
     "fabric": "Pure silk chanderi",
-    "priority": 10
+    "priority": 14,
+    "relatedProducts": []
   },
   {
-    "productId": 8967200097,
+    "productId": 4594629911,
     "name": "MARIGOLD BLOOM HAND BEADWORK SET",
     "description": "Marigold Hand Beadwork Kurta Set features subtle embroidery all over the kurta and pants with embroidery and hand bead work. The silhouette, colour and embroidery makes it perfect for festivities. ",
     "sizes": {
@@ -2121,9 +3208,14 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 11970,
-    "garmentDetails": ["Fabric: Cotton" kurta and pant, Organza sleeves,  "No. of Components: 2", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Cotton kurta and pant",
+      "Organza sleeves",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta371.jpg','kurta372.jpg','kurta373.jpg']",
+    "images": ["kurta371.jpg", "kurta372.jpg", "kurta373.jpg"],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -2132,10 +3224,11 @@
     "isActive": true,
     "color": "YELLOW",
     "fabric": "Pure silk chanderi",
-    "priority": 11
+    "priority": 13,
+    "relatedProducts": []
   },
   {
-    "productId": 5362092157,
+    "productId": 478591102,
     "name": "IVORY DORI AND PEARL KURTA SET",
     "description": "An elegant Ivory kurta crafted in pure silk chanderi fabric featuring intricate dori and pearl work, blending tradition and modernity. The pants and dupatta are beautifully adorned with delicate hand embroidery, adding a touch of artisan charm. This outfit is perfect for intimate gatherings to festive occasions. ",
     "sizes": {
@@ -2156,9 +3249,15 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 13320,
-    "garmentDetails": ["Fabric: Pure silk chanderi" kurta pant, pure organza dupatta, "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi kurta pant",
+      "pure organza dupatta",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta381.jpg','kurta382.jpg','kurta383.jpg','kurta384.jpg']",
+    "images": ["kurta381.jpg", "kurta382.jpg", "kurta383.jpg", "kurta384.jpg"],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -2167,10 +3266,11 @@
     "isActive": true,
     "color": "IVORY",
     "fabric": "Pure silk chanderi",
-    "priority": 8
+    "priority": 8,
+    "relatedProducts": []
   },
   {
-    "productId": 7428101573,
+    "productId": 1526443666,
     "name": "RED DORI AND PEARL KURTA SET",
     "description": "An elegant Red kurta crafted in pure silk chanderi fabric featuring intricate dori and pearl work, blending tradition and modernity. The pants and dupatta are beautifully adorned with delicate hand embroidery, adding a touch of artisan charm. This outfit is perfect for intimate gatherings to festive occasions. ",
     "sizes": {
@@ -2191,9 +3291,15 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 13230,
-    "garmentDetails": ["Fabric: Pure silk chanderi" kurta pant, pure organza dupatta, "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi kurta pant",
+      "pure organza dupatta",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta401.jpg','kurta402.jpg','kurta403.jpg','kurta404.jpg']",
+    "images": ["kurta401.jpg", "kurta402.jpg", "kurta403.jpg", "kurta404.jpg"],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -2202,10 +3308,11 @@
     "isActive": true,
     "color": "RED",
     "fabric": "Pure silk chanderi",
-    "priority": 9
+    "priority": 9,
+    "relatedProducts": []
   },
   {
-    "productId": 2445093936,
+    "productId": 6543161249,
     "name": "IVORY-DENIM APPLIQUE KURTA SET",
     "description": "The Ivory-Denim Kurta Set features applique work along the yoke and sleeves with stitching detailing. Complete this look with straight pants with stitching detailing a soft mul cotton dupatta with applique work, perfect for making a statement wherever you go. ",
     "sizes": {
@@ -2226,9 +3333,15 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 13710,
-    "garmentDetails": ["Fabric: Pure silk chanderi" kurta pant, pure mul cotton dupatta, "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi kurta pant",
+      "pure mul cotton dupatta",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta431.jpg','kurta432.jpg','kurta433.jpg','kurta434.jpg']",
+    "images": ["kurta431.jpg", "kurta432.jpg", "kurta433.jpg", "kurta434.jpg"],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -2237,10 +3350,11 @@
     "isActive": true,
     "color": "IVORY",
     "fabric": "Pure silk chanderi",
-    "priority": 31
+    "priority": 31,
+    "relatedProducts": []
   },
   {
-    "productId": 7908143068,
+    "productId": 7497428236,
     "name": "IVORY CHECKED KURTA SET",
     "description": "Embrace the elegance of this Ivory Checked Kurta Set featuring subtle embroidery work all over the kurta with straight cut pants. Complete this look with scalloped soft organza dupatta with scattered embroidered motifs. ",
     "sizes": {
@@ -2261,9 +3375,21 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 11650,
-    "garmentDetails": ["Fabric: Pure silk chanderi" kurta pant, pure organza dupatta, "Lining - cotton", "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi kurta pant",
+      "pure organza dupatta",
+      "Lining - cotton",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta411.jpg','kurta412.jpg','kurta413.jpg','kurta414.jpg','kurta415.jpg']",
+    "images": [
+      "kurta411.jpg",
+      "kurta412.jpg",
+      "kurta413.jpg",
+      "kurta414.jpg",
+      "kurta415.jpg"
+    ],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -2272,10 +3398,11 @@
     "isActive": true,
     "color": "IVORY",
     "fabric": "Pure silk chanderi",
-    "priority": 35
+    "priority": 35,
+    "relatedProducts": []
   },
   {
-    "productId": 926368600,
+    "productId": 4836918903,
     "name": "RED HAND BEAD WORK JACKET SET",
     "description": "The Red Hand Bead Work Jacket Set features subtle embroidery across the kurta and pants with a pure organza jacket with embroidery and bead work. This set beautifully blends traditional embroidery with contemporary flair. ",
     "sizes": {
@@ -2296,9 +3423,14 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 15095,
-    "garmentDetails": ["Fabric: Cotton" kurta pant, pure organza Jacket, "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Cotton kurta pant",
+      "pure organza Jacket",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta421.jpg','kurta423.jpg']",
+    "images": ["kurta421.jpg", "kurta423.jpg"],
     "bestseller": true,
     "soldOut": false,
     "readyToShip": true,
@@ -2307,10 +3439,11 @@
     "isActive": true,
     "color": "RED",
     "fabric": "Pure silk chanderi",
-    "priority": 12
+    "priority": 15,
+    "relatedProducts": []
   },
   {
-    "productId": null,
+    "productId": 3213490779,
     "name": "CARBON APPLIQUE KURTA SET",
     "description": "The Carbon Appliquel Kurta Set exudes festive elegance. It features contrasting applique work all over the lurta with intricate cutwork detailing. Perfect for evening night outs, this kurta set is a perfect stand out piece for any occasion. ",
     "sizes": {
@@ -2331,9 +3464,20 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 15400,
-    "garmentDetails": ["Fabric: Cotton" kurta pant, pure organza Jacket, "No. of Components: 3", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Cotton kurta pant",
+      "pure organza Jacket",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "kurtas",
-    "images": "['kurta4110.jpg','kurta4120.jpg','kurta4130.jpg','kurta4140.jpg','kurta4150.jpg']",
+    "images": [
+      "kurta4110.jpg",
+      "kurta4120.jpg",
+      "kurta4130.jpg",
+      "kurta4140.jpg",
+      "kurta4150.jpg"
+    ],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -2342,10 +3486,93 @@
     "isActive": true,
     "color": "BLUE",
     "fabric": "Pure silk chanderi",
-    "priority": 19
+    "priority": 6,
+    "relatedProducts": []
   },
   {
-    "productId": 6234701348,
+    "productId": 868983002,
+    "name": "TANGERINE MIRAGE KURTA SET",
+    "description": "Elevate your style with this Tangerine Mirage Kurta Set, featuring a rich, vibrant hue complemented by intricate embroidery and cutwork detailing. The expertly crafted kurta offers a flattering fit, while the matching bottoms provide a sleek and sophisticated look. ",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10, "price": 14700 },
+        { "size": "S", "quantity": 10, "price": 14700 },
+        { "size": "M", "quantity": 10, "price": 14700 },
+        { "size": "L", "quantity": 10, "price": 14700 },
+        { "size": "XL", "quantity": 10, "price": 14700 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10, "price": 14700 },
+        { "size": "S", "quantity": 10, "price": 14700 },
+        { "size": "M", "quantity": 10, "price": 14700 },
+        { "size": "L", "quantity": 10, "price": 14700 },
+        { "size": "XL", "quantity": 10, "price": 14700 }
+      ]
+    },
+    "deliveryIn": "Shipped in 2-3 weeks",
+    "price": 14700,
+    "garmentDetails": [
+      "Fabric: Cotton kurta pant",
+      "pure organza Jacket",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
+    "category": "kurtas",
+    "images": [],
+    "bestseller": true,
+    "soldOut": false,
+    "readyToShip": true,
+    "asSeenOn": "",
+    "videoSrc": "",
+    "isActive": true,
+    "color": "ORANGE",
+    "fabric": "Pure silk chanderi",
+    "priority": 3,
+    "relatedProducts": []
+  },
+  {
+    "productId": 6869150405,
+    "name": "RUBY MIRAGE KURTA SET",
+    "description": "Elevate your style with this Ruby Mirage Kurta Set, featuring a rich, vibrant hue complemented by intricate embroidery and cutwork detailing. The expertly crafted kurta offers a flattering fit, while the matching bottoms provide a sleek and sophisticated look. ",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10, "price": 14700 },
+        { "size": "S", "quantity": 10, "price": 14700 },
+        { "size": "M", "quantity": 10, "price": 14700 },
+        { "size": "L", "quantity": 10, "price": 14700 },
+        { "size": "XL", "quantity": 10, "price": 14700 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10, "price": 14700 },
+        { "size": "S", "quantity": 10, "price": 14700 },
+        { "size": "M", "quantity": 10, "price": 14700 },
+        { "size": "L", "quantity": 10, "price": 14700 },
+        { "size": "XL", "quantity": 10, "price": 14700 }
+      ]
+    },
+    "deliveryIn": "Shipped in 2-3 weeks",
+    "price": 14700,
+    "garmentDetails": [
+      "Fabric: Cotton kurta pant",
+      "pure organza Jacket",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
+    "category": "kurtas",
+    "images": [],
+    "bestseller": true,
+    "soldOut": false,
+    "readyToShip": true,
+    "asSeenOn": "",
+    "videoSrc": "",
+    "isActive": true,
+    "color": "RED",
+    "fabric": "Pure silk chanderi",
+    "priority": 38,
+    "relatedProducts": []
+  },
+  {
+    "productId": 5386592981,
     "name": "SEABREEZE DRESS",
     "description": "Dive into elegance with the Seabreeze Dress! The soothing soft ivory dres features whimsical marine inspired floral and fish embroidery, applique and signature cutwork detailing with hand embelishments. Perfect for any occasion, it blends casual elegance and seaside flair. It has perfect for a casual stroll along the beach or a beachside dinner. ",
     "sizes": {
@@ -2359,9 +3586,20 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 16070,
-    "garmentDetails": ["Fabric: Pure silk chanderi", Lining: cotton, No. of Components: 1, "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only" ],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi",
+      "Lining: cotton",
+      "No. of Components: 1",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "dress",
-    "images": "['dress11.jpg','dress12.jpg','dress13.jpg','dress14.jpg'.'dress15.jpg']",
+    "images": [
+      "Dress11.jpg",
+      "Dress12.jpg",
+      "Dress13.jpg",
+      "Dress14.jpg",
+      "Dress15.jpg"
+    ],
     "bestseller": true,
     "soldOut": false,
     "readyToShip": true,
@@ -2370,10 +3608,11 @@
     "isActive": true,
     "color": "IVORY",
     "fabric": "Pure silk chanderi",
-    "priority": 1
+    "priority": 1,
+    "relatedProducts": []
   },
   {
-    "productId": 7331857061,
+    "productId": 6850463558,
     "name": "KAI DRESS MIDI",
     "description": "Capture the elegance of this sage green midi dress paired with black jacket featuring intricate cutwork detailing with hand embelishments. The fit and style make this dress a standout piece for any occasion. ",
     "sizes": {
@@ -2387,9 +3626,14 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 14185,
-    "garmentDetails": [Fabric: Silk blend cotton dress, Pure silk chanderi jacket, "No. of Components: 2", "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Silk blend cotton dress",
+      "Pure silk chanderi jacket",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "dress",
-    "images": "['dress21.jpg','dress22.jpg','dress23.jpg','dress24.jpg']",
+    "images": ["Dress21.jpg", "Dress22.jpg", "Dress23.jpg", "Dress24.jpg"],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -2398,10 +3642,11 @@
     "isActive": true,
     "color": "BLACK, GREEN",
     "fabric": "Cotton Silk",
-    "priority": 2
+    "priority": 2,
+    "relatedProducts": []
   },
   {
-    "productId": 6793096439,
+    "productId": 3724251479,
     "name": "COAL DENIM DRESS",
     "description": "The Coal Denim Dress blends comfort and style effortlessly in a rich black hue witn contrasting bold embroidery and stitching detailing along the sleeve and back around the waist, Perfect for day to night transitions, this dress promises effortless comfort and style. ",
     "sizes": {
@@ -2415,9 +3660,13 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 11536,
-    "garmentDetails": ["Fabric: Denim Cotton", No. of Components: 1, "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Denim Cotton",
+      "No. of Components: 1",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "dress",
-    "images": "['dress31.jpg','dress32.jpg','dress33.jpg']",
+    "images": ["Dress31.jpg", "Dress32.jpg", "Dress33.jpg"],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -2426,10 +3675,11 @@
     "isActive": true,
     "color": "BLACK, GREEN",
     "fabric": "Denim Cotton",
-    "priority": 3
+    "priority": 3,
+    "relatedProducts": []
   },
   {
-    "productId": 865734167,
+    "productId": 2739458080,
     "name": "PARADISE DRESS",
     "description": "The Sunflower Hand Beadwork Dress is adorned with subtle self embroidery all over the dress and embroidery and hand bead work detailing along the sleeves and hemline. The frill and silhouette, puffy sleeves and stitching detailing with delicate embroidery along the neckline makes this dress perfect for a sunny day out. ",
     "sizes": {
@@ -2443,9 +3693,19 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 14995,
-    "garmentDetails": ["Fabric: Cotton", No. of Components: 1, "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Cotton",
+      "No. of Components: 1",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "dress",
-    "images": "['dress41.jpg','dress42.jpg','dress43.jpg','dress44.jpg','dress45.jpg']",
+    "images": [
+      "Dress41.jpg",
+      "Dress42.jpg",
+      "Dress43.jpg",
+      "Dress44.jpg",
+      "Dress45.jpg"
+    ],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -2454,10 +3714,11 @@
     "isActive": true,
     "color": "YELLOW",
     "fabric": "Cotton",
-    "priority": 4
+    "priority": 4,
+    "relatedProducts": []
   },
   {
-    "productId": 8913568782,
+    "productId": 5016296990,
     "name": "Puppy Linen Shirt",
     "description": "Puppy Linen Shirt in 100% pure linen fabric with embroidery work. ",
     "sizes": {
@@ -2471,9 +3732,13 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 7255,
-    "garmentDetails": [Fabric: 100% Pure Linen, No. of Components: 1, "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: 100% Pure Linen",
+      "No. of Components: 1",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "shirt",
-    "images": "['shirt10.jpg','shirt11.jpg']",
+    "images": ["Shirt10.jpg", "Shirt11.jpg"],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -2482,10 +3747,11 @@
     "isActive": true,
     "color": "WHIITE",
     "fabric": "Linen",
-    "priority": 5
+    "priority": 5,
+    "relatedProducts": []
   },
   {
-    "productId": 6390870620,
+    "productId": 8450826617,
     "name": "Disney Denim Shirt",
     "description": "Disney Denim Shirt features embroideery work. ",
     "sizes": {
@@ -2499,9 +3765,19 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 5265,
-    "garmentDetails": "Fabric: Denim Cotton", No. of Components: 1, "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only",
+    "garmentDetails": [
+      "Fabric: Denim Cotton",
+      "No. of Components: 1",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "shirt",
-    "images": "['shirt20.jpg','shirt21.jpg','shirt22.jpg','shirt23.jpg','shirt24.jpg']",
+    "images": [
+      "Shirt20.jpg",
+      "Shirt21.jpg",
+      "Shirt22.jpg",
+      "Shirt23.jpg",
+      "Shirt24.jpg"
+    ],
     "bestseller": true,
     "soldOut": false,
     "readyToShip": true,
@@ -2510,10 +3786,11 @@
     "isActive": true,
     "color": "BLUE",
     "fabric": "Linen",
-    "priority": 6
+    "priority": 6,
+    "relatedProducts": []
   },
   {
-    "productId": 782342289,
+    "productId": 1726073095,
     "name": "POWDER BLUE APPLIQUE SHIRT",
     "description": "Powder Blue Applique Shirt features embroidery and applique work. ",
     "sizes": {
@@ -2527,9 +3804,13 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 7380,
-    "garmentDetails": "Fabric: Cotton", No. of Components: 1, "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only",
+    "garmentDetails": [
+      "Fabric: Cotton",
+      "No. of Components: 1",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "shirt",
-    "images": "['shirt30.jpg','shirt31.jpg','shirt32.jpg','shirt33.jpg']",
+    "images": ["Shirt30.jpg", "Shirt31.jpg", "Shirt32.jpg", "Shirt33.jpg"],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -2538,10 +3819,11 @@
     "isActive": true,
     "color": "BLUE",
     "fabric": "Cotton",
-    "priority": 13
+    "priority": 13,
+    "relatedProducts": []
   },
   {
-    "productId": 2564886711,
+    "productId": 6691469125,
     "name": "SUNFLOWER CROTCHET SHIRT",
     "description": "Sunflower Crotchet Shirt is beautiful blend of signature applique, hand painting and hand crotchet work with handmade tassels. ",
     "sizes": {
@@ -2555,9 +3837,19 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 11300,
-    "garmentDetails": [Fabric: 100% Pure Linen, No. of Components: 1, "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: 100% Pure Linen",
+      "No. of Components: 1",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "shirt",
-    "images": "['shirt40.jpg','shirt41.jpg','shirt42.jpg','shirt43.jpg','shirt44.jpg']",
+    "images": [
+      "Shirt40.jpg",
+      "Shirt41.jpg",
+      "Shirt42.jpg",
+      "Shirt43.jpg",
+      "Shirt44.jpg"
+    ],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -2566,10 +3858,11 @@
     "isActive": true,
     "color": "WHITE",
     "fabric": "Linen",
-    "priority": 12
+    "priority": 12,
+    "relatedProducts": []
   },
   {
-    "productId": 227080341,
+    "productId": 7909341284,
     "name": "CUPCAKE LINEN SHIRT",
     "description": "Cupacke Linen Shirt in 100% pure linen fabric with embroidery work. ",
     "sizes": {
@@ -2583,9 +3876,13 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 7255,
-    "garmentDetails": [Fabric: 100% Pure Linen, No. of Components: 1, "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: 100% Pure Linen",
+      "No. of Components: 1",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "shirt",
-    "images": "['shirt50.jpg','shirt51.jpg','shirt52.jpg']",
+    "images": ["Shirt50.jpg", "Shirt51.jpg", "Shirt52.jpg"],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -2594,10 +3891,11 @@
     "isActive": true,
     "color": "WHITE",
     "fabric": "Linen",
-    "priority": 11
+    "priority": 11,
+    "relatedProducts": []
   },
   {
-    "productId": 3204369397,
+    "productId": 6276278589,
     "name": "FRUIT LINEN SHIRT",
     "description": "Cupacke Linen Shirt in 100% pure linen fabric with embroidery work. ",
     "sizes": {
@@ -2611,9 +3909,13 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 7255,
-    "garmentDetails": [Fabric: 100% Pure Linen, No. of Components: 1, "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: 100% Pure Linen",
+      "No. of Components: 1",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "shirt",
-    "images": "['shirt60.jpg','shirt61.jpg','shirt62.jpg']",
+    "images": ["Shirt60.jpg", "Shirt61.jpg", "Shirt62.jpg"],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -2622,10 +3924,11 @@
     "isActive": true,
     "color": "BLUE",
     "fabric": "Linen",
-    "priority": 10
+    "priority": 10,
+    "relatedProducts": []
   },
   {
-    "productId": 3276013645,
+    "productId": 7212295491,
     "name": "FRUIT LINEN SHIRT",
     "description": "Cupacke Linen Shirt in 100% pure linen fabric with embroidery work. ",
     "sizes": {
@@ -2639,9 +3942,13 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 7255,
-    "garmentDetails": [Fabric: 100% Pure Linen, No. of Components: 1, "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: 100% Pure Linen",
+      "No. of Components: 1",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "shirt",
-    "images": "['shirt63.jpg']",
+    "images": ["Shirt63.jpg"],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -2650,10 +3957,11 @@
     "isActive": true,
     "color": "PURPLE, WHITE",
     "fabric": "Linen",
-    "priority": 9
+    "priority": 9,
+    "relatedProducts": []
   },
   {
-    "productId": 7952925111,
+    "productId": 2746260740,
     "name": "MUSHROOM LINEN SHIRT",
     "description": "Mushroom Linen Shirt in 100% pure lienn fabric with embroidery work. ",
     "sizes": {
@@ -2667,9 +3975,13 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 7255,
-    "garmentDetails": [Fabric: 100% Pure Linen, No. of Components: 1, "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: 100% Pure Linen",
+      "No. of Components: 1",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "shirt",
-    "images": "['shirt80.jpg','shirt81.jpg']",
+    "images": ["Shirt80.jpg", "Shirt81.jpg"],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -2678,10 +3990,11 @@
     "isActive": true,
     "color": "GREY",
     "fabric": "Linen",
-    "priority": 8
+    "priority": 8,
+    "relatedProducts": []
   },
   {
-    "productId": 3655113664,
+    "productId": 2931437732,
     "name": "UNICORN LINEN SHIRT",
     "description": "Unicorn Linen Shirt in 100% pure lienn fabric with embroidery work. ",
     "sizes": {
@@ -2695,9 +4008,13 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 7255,
-    "garmentDetails": [Fabric: 100% Pure Linen, No. of Components: 1, "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: 100% Pure Linen",
+      "No. of Components: 1",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "shirt",
-    "images": "['shirt90.jpg']",
+    "images": ["Shirt90.jpg"],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -2706,10 +4023,11 @@
     "isActive": true,
     "color": "BLUE",
     "fabric": "Linen",
-    "priority": 7
+    "priority": 7,
+    "relatedProducts": []
   },
   {
-    "productId": 4806264258,
+    "productId": 1945193120,
     "name": "PANDA LINEN SHIRT",
     "description": "Panda Linen Shirt in 100% pure lienn fabric with embroidery work. ",
     "sizes": {
@@ -2723,9 +4041,13 @@
     },
     "deliveryIn": "Shipped in 2-3 weeks",
     "price": 7255,
-    "garmentDetails": [Fabric: 100% Pure Linen, No. of Components: 1, "Dispatch Timeline: 2-3 Weeks", "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: 100% Pure Linen",
+      "No. of Components: 1",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "shirt",
-    "images": "['shirt100.jpg','shirt101.jpg']",
+    "images": ["shirt100.jpg", "shirt101.jpg"],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -2734,33 +4056,45 @@
     "isActive": true,
     "color": "GREY, WHITE",
     "fabric": "Linen",
-    "priority": 14
+    "priority": 14,
+    "relatedProducts": []
   },
   {
-    "productId": 6998783600,
+    "productId": 3425292649,
     "name": "CAPE, LONG DRAPE AND PANT SET",
-    "description": "Pure Organza cape with long drape and pants in silk fabric with embroidery work. ",
+    "description": "Pure organza cape with long drape and pants in silk fabric with embroidery work. ",
     "sizes": {
       "Upper": [
-        { "size": "XS", "quantity": 10, "price": 21895 },
-        { "size": "S", "quantity": 10, "price": 21895 },
-        { "size": "M", "quantity": 10, "price": 21895 },
-        { "size": "L", "quantity": 10, "price": 21895 },
-        { "size": "XL", "quantity": 10, "price": 21895 }
+        { "size": "XS", "quantity": 10, "price": 26575 },
+        { "size": "S", "quantity": 10, "price": 26575 },
+        { "size": "M", "quantity": 10, "price": 26575 },
+        { "size": "L", "quantity": 10, "price": 26575 },
+        { "size": "XL", "quantity": 10, "price": 26575 }
       ],
       "Bottom": [
-        { "size": "XS", "quantity": 10, "price": 21895 },
-        { "size": "S", "quantity": 10, "price": 21895 },
-        { "size": "M", "quantity": 10, "price": 21895 },
-        { "size": "L", "quantity": 10, "price": 21895 },
-        { "size": "XL", "quantity": 10, "price": 21895 }
+        { "size": "XS", "quantity": 10, "price": 26575 },
+        { "size": "S", "quantity": 10, "price": 26575 },
+        { "size": "M", "quantity": 10, "price": 26575 },
+        { "size": "L", "quantity": 10, "price": 26575 },
+        { "size": "XL", "quantity": 10, "price": 26575 }
       ]
     },
-    "deliveryIn": "Shipped in 4-5 weeks. ",
-    "price": 21895,
-    "garmentDetails": [Fabric: Silk drape and pants, organza cape, "No. of Components: 3", Dispatch Timeline: 3-4 Weeks, "Wash Care: Dry clean only"],
+    "deliveryIn": "Made to order, shipped in 4-5 weeks. ",
+    "price": 26575,
+    "garmentDetails": [
+      "Fabric: Silk drape and pants",
+      "organza cape",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "festive",
-    "images": "['more11.jpg','more12.jpg','more13.jpg','more14.jpg','more15.jpg']",
+    "images": [
+      "more11.jpg",
+      "more12.jpg",
+      "more13.jpg",
+      "more14.jpg",
+      "more15.jpg"
+    ],
     "bestseller": true,
     "soldOut": false,
     "readyToShip": true,
@@ -2769,33 +4103,44 @@
     "isActive": true,
     "color": "IVORY",
     "fabric": "[SILK, ORGANZA]",
-    "priority": 8
+    "priority": 8,
+    "relatedProducts": []
   },
   {
-    "productId": 2637169723,
-    "name": "EMBROIDERED JACKET, BUSTIER AND DRAPE SKIRT ",
+    "productId": 5836735848,
+    "name": "NOIR DRAPE SET",
     "description": "Black embroideered jacket with handmade tassels paired with bustier and drape skirt. ",
     "sizes": {
       "Upper": [
-        { "size": "XS", "quantity": 10, "price": 39490 },
-        { "size": "S", "quantity": 10, "price": 39490 },
-        { "size": "M", "quantity": 10, "price": 39490 },
-        { "size": "L", "quantity": 10, "price": 39490 },
-        { "size": "XL", "quantity": 10, "price": 39490 }
+        { "size": "XS", "quantity": 10, "price": 42590 },
+        { "size": "S", "quantity": 10, "price": 42590 },
+        { "size": "M", "quantity": 10, "price": 42590 },
+        { "size": "L", "quantity": 10, "price": 42590 },
+        { "size": "XL", "quantity": 10, "price": 42590 }
       ],
       "Bottom": [
-        { "size": "XS", "quantity": 10, "price": 39490 },
-        { "size": "S", "quantity": 10, "price": 39490 },
-        { "size": "M", "quantity": 10, "price": 39490 },
-        { "size": "L", "quantity": 10, "price": 39490 },
-        { "size": "XL", "quantity": 10, "price": 39490 }
+        { "size": "XS", "quantity": 10, "price": 42590 },
+        { "size": "S", "quantity": 10, "price": 42590 },
+        { "size": "M", "quantity": 10, "price": 42590 },
+        { "size": "L", "quantity": 10, "price": 42590 },
+        { "size": "XL", "quantity": 10, "price": 42590 }
       ]
     },
-    "deliveryIn": "Shipped in 4-5 weeks. ",
-    "price": 39490,
-    "garmentDetails": [Fabric: Silk fabric, "No. of Components: 3", Dispatch Timeline: 4-5 Weeks, "Wash Care: Dry clean only"],
+    "deliveryIn": "Made to order, shipped in 4-5 weeks. ",
+    "price": 42590,
+    "garmentDetails": [
+      "Fabric: Silk fabric",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "festive",
-    "images": "['more21.jpg','more22.jpg','more23.jpg','more24.jpg','more25.jpg']",
+    "images": [
+      "more21.jpg",
+      "more22.jpg",
+      "more23.jpg",
+      "more24.jpg",
+      "more25.jpg"
+    ],
     "bestseller": true,
     "soldOut": false,
     "readyToShip": true,
@@ -2804,33 +4149,38 @@
     "isActive": true,
     "color": "BLACK",
     "fabric": "SILK ",
-    "priority": 1
+    "priority": 1,
+    "relatedProducts": []
   },
   {
-    "productId": 6964667496,
-    "name": "PAISLEY JACKEET, BUSTIER AND DRAPE SKIRT ",
+    "productId": 3673673677,
+    "name": "BLACK PAISLEY DRAPE SET",
     "description": "Black embelished jacket with red tasseels paired with drape skirt and bustier.",
     "sizes": {
       "Upper": [
-        { "size": "XS", "quantity": 10, "price": 37254 },
-        { "size": "S", "quantity": 10, "price": 37254 },
-        { "size": "M", "quantity": 10, "price": 37254 },
-        { "size": "L", "quantity": 10, "price": 37254 },
-        { "size": "XL", "quantity": 10, "price": 37254 }
+        { "size": "XS", "quantity": 10, "price": 37660 },
+        { "size": "S", "quantity": 10, "price": 37660 },
+        { "size": "M", "quantity": 10, "price": 37660 },
+        { "size": "L", "quantity": 10, "price": 37660 },
+        { "size": "XL", "quantity": 10, "price": 37660 }
       ],
       "Bottom": [
-        { "size": "XS", "quantity": 10, "price": 37254 },
-        { "size": "S", "quantity": 10, "price": 37254 },
-        { "size": "M", "quantity": 10, "price": 37254 },
-        { "size": "L", "quantity": 10, "price": 37254 },
-        { "size": "XL", "quantity": 10, "price": 37254 }
+        { "size": "XS", "quantity": 10, "price": 37660 },
+        { "size": "S", "quantity": 10, "price": 37660 },
+        { "size": "M", "quantity": 10, "price": 37660 },
+        { "size": "L", "quantity": 10, "price": 37660 },
+        { "size": "XL", "quantity": 10, "price": 37660 }
       ]
     },
-    "deliveryIn": "Shipped in 4-5 weeks. ",
-    "price": 37254,
-    "garmentDetails": [Fabric: Silk fabric, "No. of Components: 3", Dispatch Timeline: 4-5 Weeks, "Wash Care: Dry clean only"],
+    "deliveryIn": "Made to order, shipped in 4-5 weeks. ",
+    "price": 37660,
+    "garmentDetails": [
+      "Fabric: Silk fabric",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "festive",
-    "images": "['more31.jpg','more32.jpg','more33.jpg','more34.jpg']",
+    "images": ["more31.jpg", "more32.jpg", "more33.jpg", "more34.jpg"],
     "bestseller": true,
     "soldOut": false,
     "readyToShip": true,
@@ -2839,33 +4189,44 @@
     "isActive": true,
     "color": "BLACK",
     "fabric": "SILK",
-    "priority": 2
+    "priority": 2,
+    "relatedProducts": [3643989389]
   },
   {
-    "productId": 6155785691,
-    "name": "PAISLEY JACKEET, BUSTIER AND DRAPE SKIRT ",
+    "productId": 3643989389,
+    "name": "CHERRY MAROON PAISLEY DRAPE SET",
     "description": "Maroon embelished jacket with red tasseels paired with drape skirt and bustier.",
     "sizes": {
       "Upper": [
-        { "size": "XS", "quantity": 10, "price": 37254 },
-        { "size": "S", "quantity": 10, "price": 37254 },
-        { "size": "M", "quantity": 10, "price": 37254 },
-        { "size": "L", "quantity": 10, "price": 37254 },
-        { "size": "XL", "quantity": 10, "price": 37254 }
+        { "size": "XS", "quantity": 10, "price": 37660 },
+        { "size": "S", "quantity": 10, "price": 37660 },
+        { "size": "M", "quantity": 10, "price": 37660 },
+        { "size": "L", "quantity": 10, "price": 37660 },
+        { "size": "XL", "quantity": 10, "price": 37660 }
       ],
       "Bottom": [
-        { "size": "XS", "quantity": 10, "price": 37254 },
-        { "size": "S", "quantity": 10, "price": 37254 },
-        { "size": "M", "quantity": 10, "price": 37254 },
-        { "size": "L", "quantity": 10, "price": 37254 },
-        { "size": "XL", "quantity": 10, "price": 37254 }
+        { "size": "XS", "quantity": 10, "price": 37660 },
+        { "size": "S", "quantity": 10, "price": 37660 },
+        { "size": "M", "quantity": 10, "price": 37660 },
+        { "size": "L", "quantity": 10, "price": 37660 },
+        { "size": "XL", "quantity": 10, "price": 37660 }
       ]
     },
-    "deliveryIn": "Shipped in 4-5 weeks. ",
-    "price": 37254,
-    "garmentDetails": [Fabric: Silk fabric, "No. of Components: 3", Dispatch Timeline: 4-5 Weeks, "Wash Care: Dry clean only"],
+    "deliveryIn": "Made to order, shipped in 4-5 weeks. ",
+    "price": 37660,
+    "garmentDetails": [
+      "Fabric: Silk fabric",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "festive",
-    "images": "['more41.jpg','more42.jpg','more43.jpg','more44.jpg','more45.jpg']",
+    "images": [
+      "more41.jpg",
+      "more42.jpg",
+      "more43.jpg",
+      "more44.jpg",
+      "more45.jpg"
+    ],
     "bestseller": true,
     "soldOut": false,
     "readyToShip": true,
@@ -2874,33 +4235,38 @@
     "isActive": true,
     "color": "MAROON",
     "fabric": "SILK",
-    "priority": 3
+    "priority": 4,
+    "relatedProducts": [3673673677]
   },
   {
-    "productId": 1198434985,
-    "name": "PRINTED SHIRT AND DRAPE SKIRT SET",
+    "productId": 4001841601,
+    "name": "RED STRIPE SHIRT-SKIRT SET",
     "description": "Printed stripe shirt paired with drape skirt features embrpidery work and hand embelishments. ",
     "sizes": {
       "Upper": [
-        { "size": "XS", "quantity": 10, "price": 27440 },
-        { "size": "S", "quantity": 10, "price": 27440 },
-        { "size": "M", "quantity": 10, "price": 27440 },
-        { "size": "L", "quantity": 10, "price": 27440 },
-        { "size": "XL", "quantity": 10, "price": 27440 }
+        { "size": "XS", "quantity": 10, "price": 29245 },
+        { "size": "S", "quantity": 10, "price": 29245 },
+        { "size": "M", "quantity": 10, "price": 29245 },
+        { "size": "L", "quantity": 10, "price": 29245 },
+        { "size": "XL", "quantity": 10, "price": 29245 }
       ],
       "Bottom": [
-        { "size": "XS", "quantity": 10, "price": 27440 },
-        { "size": "S", "quantity": 10, "price": 27440 },
-        { "size": "M", "quantity": 10, "price": 27440 },
-        { "size": "L", "quantity": 10, "price": 27440 },
-        { "size": "XL", "quantity": 10, "price": 27440 }
+        { "size": "XS", "quantity": 10, "price": 29245 },
+        { "size": "S", "quantity": 10, "price": 29245 },
+        { "size": "M", "quantity": 10, "price": 29245 },
+        { "size": "L", "quantity": 10, "price": 29245 },
+        { "size": "XL", "quantity": 10, "price": 29245 }
       ]
     },
-    "deliveryIn": "Shipped in 4-5 weeks. ",
-    "price": 27440,
-    "garmentDetails": [Fabric: Silk, "No. of Components: 2", Dispatch Timeline: 4-5 Weeks, "Wash Care: Dry clean only"],
+    "deliveryIn": "Made to order, shipped in 4-5 weeks. ",
+    "price": 29245,
+    "garmentDetails": [
+      "Fabric: Silk",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "festive",
-    "images": "['more51.jpg','more52.jpg','more53.jpg','more54.jpg']",
+    "images": ["more51.jpg", "more52.jpg", "more53.jpg", "more54.jpg"],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -2909,33 +4275,38 @@
     "isActive": true,
     "color": "[PRINT, RED]",
     "fabric": "SILK",
-    "priority": 9
+    "priority": 9,
+    "relatedProducts": [6017369433, 8612871300]
   },
   {
-    "productId": 6530144791,
-    "name": "PRINTED SHIRT AND DRAPE SKIRT SET",
+    "productId": 6017369433,
+    "name": "BLACK STRIPE SHIRT-SKIRT SET",
     "description": "Printed stripe shirt paired with drape skirt features embrpidery work and hand embelishments. ",
     "sizes": {
       "Upper": [
-        { "size": "XS", "quantity": 10, "price": 27440 },
-        { "size": "S", "quantity": 10, "price": 27440 },
-        { "size": "M", "quantity": 10, "price": 27440 },
-        { "size": "L", "quantity": 10, "price": 27440 },
-        { "size": "XL", "quantity": 10, "price": 27440 }
+        { "size": "XS", "quantity": 10, "price": 29245 },
+        { "size": "S", "quantity": 10, "price": 29245 },
+        { "size": "M", "quantity": 10, "price": 29245 },
+        { "size": "L", "quantity": 10, "price": 29245 },
+        { "size": "XL", "quantity": 10, "price": 29245 }
       ],
       "Bottom": [
-        { "size": "XS", "quantity": 10, "price": 27440 },
-        { "size": "S", "quantity": 10, "price": 27440 },
-        { "size": "M", "quantity": 10, "price": 27440 },
-        { "size": "L", "quantity": 10, "price": 27440 },
-        { "size": "XL", "quantity": 10, "price": 27440 }
+        { "size": "XS", "quantity": 10, "price": 29245 },
+        { "size": "S", "quantity": 10, "price": 29245 },
+        { "size": "M", "quantity": 10, "price": 29245 },
+        { "size": "L", "quantity": 10, "price": 29245 },
+        { "size": "XL", "quantity": 10, "price": 29245 }
       ]
     },
-    "deliveryIn": "Shipped in 4-5 weeks. ",
-    "price": 27440,
-    "garmentDetails": [Fabric: Silk, "No. of Components: 2", Dispatch Timeline: 4-5 Weeks, "Wash Care: Dry clean only"],
+    "deliveryIn": "Made to order, shipped in 4-5 weeks. ",
+    "price": 29245,
+    "garmentDetails": [
+      "Fabric: Silk",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "festive",
-    "images": "['more61.jpg','more62.jpg','more63.jpg','more64.jpg']",
+    "images": ["more61.jpg", "more62.jpg", "more63.jpg", "more64.jpg"],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -2944,33 +4315,38 @@
     "isActive": true,
     "color": "[PRINT, BLACK]",
     "fabric": "SILK",
-    "priority": 9
+    "priority": 17,
+    "relatedProducts": [4001841601, 8612871300]
   },
   {
-    "productId": 4054083069,
-    "name": "PRINTED SHIRT AND DRAPE SKIRT SET",
+    "productId": 8612871300,
+    "name": "SEA GREEN STRIPE SHIRT-SKIRT SET",
     "description": "Printed stripe shirt paired with drape skirt features embrpidery work and hand embelishments. ",
     "sizes": {
       "Upper": [
-        { "size": "XS", "quantity": 10, "price": 27440 },
-        { "size": "S", "quantity": 10, "price": 27440 },
-        { "size": "M", "quantity": 10, "price": 27440 },
-        { "size": "L", "quantity": 10, "price": 27440 },
-        { "size": "XL", "quantity": 10, "price": 27440 }
+        { "size": "XS", "quantity": 10, "price": 29245 },
+        { "size": "S", "quantity": 10, "price": 29245 },
+        { "size": "M", "quantity": 10, "price": 29245 },
+        { "size": "L", "quantity": 10, "price": 29245 },
+        { "size": "XL", "quantity": 10, "price": 29245 }
       ],
       "Bottom": [
-        { "size": "XS", "quantity": 10, "price": 27440 },
-        { "size": "S", "quantity": 10, "price": 27440 },
-        { "size": "M", "quantity": 10, "price": 27440 },
-        { "size": "L", "quantity": 10, "price": 27440 },
-        { "size": "XL", "quantity": 10, "price": 27440 }
+        { "size": "XS", "quantity": 10, "price": 29245 },
+        { "size": "S", "quantity": 10, "price": 29245 },
+        { "size": "M", "quantity": 10, "price": 29245 },
+        { "size": "L", "quantity": 10, "price": 29245 },
+        { "size": "XL", "quantity": 10, "price": 29245 }
       ]
     },
-    "deliveryIn": "Shipped in 4-5 weeks. ",
-    "price": 27440,
-    "garmentDetails": [Fabric: Silk, "No. of Components: 2", Dispatch Timeline: 4-5 Weeks, "Wash Care: Dry clean only"],
+    "deliveryIn": "Made to order, shipped in 4-5 weeks. ",
+    "price": 29245,
+    "garmentDetails": [
+      "Fabric: Silk",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "festive",
-    "images": "['more71.jpg','more72.jpg','more73.jpg','more74.jpg']",
+    "images": ["more71.jpg", "more72.jpg", "more73.jpg", "more74.jpg"],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -2979,33 +4355,44 @@
     "isActive": true,
     "color": "[PRINT, GREEN]",
     "fabric": "SILK",
-    "priority": 9
+    "priority": 19,
+    "relatedProducts": [4001841601, 6017369433]
   },
   {
-    "productId": 3425289079,
-    "name": "COAL BEADWORK TOP AND RUFFLE SKIRT SET",
+    "productId": 1174372910,
+    "name": "ONYX BEADWORK DRAPE SET",
     "description": "Coal top and drape skirt with organza ruffles features hand beadwork with hand embelishments. ",
     "sizes": {
       "Upper": [
-        { "size": "XS", "quantity": 10, "price": 23900 },
-        { "size": "S", "quantity": 10, "price": 23900 },
-        { "size": "M", "quantity": 10, "price": 23900 },
-        { "size": "L", "quantity": 10, "price": 23900 },
-        { "size": "XL", "quantity": 10, "price": 23900 }
+        { "size": "XS", "quantity": 10, "price": 21925 },
+        { "size": "S", "quantity": 10, "price": 21925 },
+        { "size": "M", "quantity": 10, "price": 21925 },
+        { "size": "L", "quantity": 10, "price": 21925 },
+        { "size": "XL", "quantity": 10, "price": 21925 }
       ],
       "Bottom": [
-        { "size": "XS", "quantity": 10, "price": 23900 },
-        { "size": "S", "quantity": 10, "price": 23900 },
-        { "size": "M", "quantity": 10, "price": 23900 },
-        { "size": "L", "quantity": 10, "price": 23900 },
-        { "size": "XL", "quantity": 10, "price": 23900 }
+        { "size": "XS", "quantity": 10, "price": 21925 },
+        { "size": "S", "quantity": 10, "price": 21925 },
+        { "size": "M", "quantity": 10, "price": 21925 },
+        { "size": "L", "quantity": 10, "price": 21925 },
+        { "size": "XL", "quantity": 10, "price": 21925 }
       ]
     },
     "deliveryIn": "Shipped in 4-5 weeks. ",
-    "price": 23900,
-    "garmentDetails": [Fabric: Silk, "No. of Components: 2", Dispatch Timeline: 4-5 Weeks, "Wash Care: Dry clean only"],
+    "price": 21925,
+    "garmentDetails": [
+      "Fabric: Silk",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "festive",
-    "images": "['more81.jpg','more82.jpg','more83.jpg','more84.jpg','more85.jpg']",
+    "images": [
+      "more81.jpg",
+      "more82.jpg",
+      "more83.jpg",
+      "more84.jpg",
+      "more85.jpg"
+    ],
     "bestseller": true,
     "soldOut": false,
     "readyToShip": true,
@@ -3014,10 +4401,11 @@
     "isActive": true,
     "color": "BLACK",
     "fabric": "SILK",
-    "priority": 4
+    "priority": 5,
+    "relatedProducts": []
   },
   {
-    "productId": 8581755798,
+    "productId": 7055987423,
     "name": "ONE SHOULDER STRIPE PRINT DRESS WITH SKIRT",
     "description": "One side shoulder dress and skirt set features hand embroidery and belt detailing.",
     "sizes": {
@@ -3038,9 +4426,13 @@
     },
     "deliveryIn": "Shipped in 4-5 weeks. ",
     "price": 29700,
-    "garmentDetails": [Fabric: Silk, "No. of Components: 2", Dispatch Timeline: 4-5 Weeks, "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Silk",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "festive",
-    "images": "['more91.jpg','more92.jpg','more93.jpg']",
+    "images": ["more91.jpg", "more92.jpg", "more93.jpg"],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -3049,10 +4441,11 @@
     "isActive": true,
     "color": "PRINT",
     "fabric": "SILK",
-    "priority": 13
+    "priority": 13,
+    "relatedProducts": []
   },
   {
-    "productId": 2446924483,
+    "productId": 987012389,
     "name": "EMBELISHED KAFTAN WITH KNOTTED SKIRT SET",
     "description": "Printed kaftan and knotted skirt set with hand embroidered yoke and handmade hangings. ",
     "sizes": {
@@ -3073,9 +4466,19 @@
     },
     "deliveryIn": "Shipped in 4-5 weeks. ",
     "price": 42295,
-    "garmentDetails": [Fabric: Silk, "No. of Components: 2", Dispatch Timeline: 4-5 Weeks, "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure Silk Chander",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "festive",
-    "images": "['more101.jpg','more102.jpg','more103.jpg','more104.jpg','more105.jpg']",
+    "images": [
+      "more101.jpg",
+      "more102.jpg",
+      "more103.jpg",
+      "more104.jpg",
+      "more105.jpg"
+    ],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -3084,10 +4487,11 @@
     "isActive": true,
     "color": "PRINT",
     "fabric": "SILK",
-    "priority": 12
+    "priority": 12,
+    "relatedProducts": []
   },
   {
-    "productId": 6818846187,
+    "productId": 1571250531,
     "name": "ABSTRACT PRINT KAFTAN KURTA WITH PANT SET",
     "description": "Printed kaftan kurta and pant set with heavily embroidered yoke and hand embelishments. ",
     "sizes": {
@@ -3108,9 +4512,13 @@
     },
     "deliveryIn": "Shipped in 4-5 weeks. ",
     "price": 27615,
-    "garmentDetails": [Fabric: Silk, "No. of Components: 2", Dispatch Timeline: 4-5 Weeks, "Wash Care: Dry clean only"],
+    "garmentDetails": [
+      "Fabric: Pure silk chanderi",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "festive",
-    "images": "['more111.jpg','more112.jpg']",
+    "images": ["more111.jpg", "more112.jpg"],
     "bestseller": true,
     "soldOut": false,
     "readyToShip": true,
@@ -3119,33 +4527,45 @@
     "isActive": true,
     "color": "PRINT",
     "fabric": "SILK",
-    "priority": 11
+    "priority": 11,
+    "relatedProducts": []
   },
   {
-    "productId": 7800613919,
-    "name": "HAULTER STRIPE TOP AND PANT WITH ORGANZA CAPE",
-    "description": "Stripe silk top and pant set paired with pure organza cape with embroidery detailing. ",
+    "productId": 4640674538,
+    "name": "ONYX AND IVORY TOP, PANT AND CAPE SET",
+    "description": "Stripe Silk top and pant set paired with pure organza cape with embroidery detailing. ",
     "sizes": {
       "Upper": [
-        { "size": "XS", "quantity": 10, "price": 23800 },
-        { "size": "S", "quantity": 10, "price": 23800 },
-        { "size": "M", "quantity": 10, "price": 23800 },
-        { "size": "L", "quantity": 10, "price": 23800 },
-        { "size": "XL", "quantity": 10, "price": 23800 }
+        { "size": "XS", "quantity": 10, "price": 28715 },
+        { "size": "S", "quantity": 10, "price": 28715 },
+        { "size": "M", "quantity": 10, "price": 28715 },
+        { "size": "L", "quantity": 10, "price": 28715 },
+        { "size": "XL", "quantity": 10, "price": 28715 }
       ],
       "Bottom": [
-        { "size": "XS", "quantity": 10, "price": 23800 },
-        { "size": "S", "quantity": 10, "price": 23800 },
-        { "size": "M", "quantity": 10, "price": 23800 },
-        { "size": "L", "quantity": 10, "price": 23800 },
-        { "size": "XL", "quantity": 10, "price": 23800 }
+        { "size": "XS", "quantity": 10, "price": 28715 },
+        { "size": "S", "quantity": 10, "price": 28715 },
+        { "size": "M", "quantity": 10, "price": 28715 },
+        { "size": "L", "quantity": 10, "price": 28715 },
+        { "size": "XL", "quantity": 10, "price": 28715 }
       ]
     },
     "deliveryIn": "Shipped in 4-5 weeks. ",
-    "price": 23800,
-    "garmentDetails": [Fabric: Silk drape and pants, organza cape, "No. of Components: 3", Dispatch Timeline: 4-5 Weeks, "Wash Care: Dry clean only"],
+    "price": 28715,
+    "garmentDetails": [
+      "Fabric: Silk drape and pants",
+      "organza cape",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "festive",
-    "images": "['more131.jpg','more132.jpg','more133.jpg','more134.jpg','more135.jpg']",
+    "images": [
+      "more131.jpg",
+      "more132.jpg",
+      "more133.jpg",
+      "more134.jpg",
+      "more135.jpg"
+    ],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -3154,33 +4574,44 @@
     "isActive": true,
     "color": "PRINT",
     "fabric": "SILK",
-    "priority": 10
+    "priority": 10,
+    "relatedProducts": []
   },
   {
-    "productId": 3209835218,
+    "productId": 8127144249,
     "name": "BLACK`+ GREEN HAND BEADWORK JACKET AND PANT SET",
     "description": "Silk top and pant set with heavily embelished jacket. ",
     "sizes": {
       "Upper": [
-        { "size": "XS", "quantity": 10, "price": 29890 },
-        { "size": "S", "quantity": 10, "price": 29890 },
-        { "size": "M", "quantity": 10, "price": 29890 },
-        { "size": "L", "quantity": 10, "price": 29890 },
-        { "size": "XL", "quantity": 10, "price": 29890 }
+        { "size": "XS", "quantity": 10, "price": 34100 },
+        { "size": "S", "quantity": 10, "price": 34100 },
+        { "size": "M", "quantity": 10, "price": 34100 },
+        { "size": "L", "quantity": 10, "price": 34100 },
+        { "size": "XL", "quantity": 10, "price": 34100 }
       ],
       "Bottom": [
-        { "size": "XS", "quantity": 10, "price": 29890 },
-        { "size": "S", "quantity": 10, "price": 29890 },
-        { "size": "M", "quantity": 10, "price": 29890 },
-        { "size": "L", "quantity": 10, "price": 29890 },
-        { "size": "XL", "quantity": 10, "price": 29890 }
+        { "size": "XS", "quantity": 10, "price": 34100 },
+        { "size": "S", "quantity": 10, "price": 34100 },
+        { "size": "M", "quantity": 10, "price": 34100 },
+        { "size": "L", "quantity": 10, "price": 34100 },
+        { "size": "XL", "quantity": 10, "price": 34100 }
       ]
     },
     "deliveryIn": "Shipped in 4-5 weeks. ",
-    "price": 29890,
-    "garmentDetails": [Fabric: Silk, "No. of Components: 3", Dispatch Timeline: 4-5 Weeks, "Wash Care: Dry clean only"],
+    "price": 34100,
+    "garmentDetails": [
+      "Fabric: Silk",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "festive",
-    "images": "['more121.jpg','more122.jpg','more123.jpg','more124.jpg','more125.jpg']",
+    "images": [
+      "more121.jpg",
+      "more122.jpg",
+      "more123.jpg",
+      "more124.jpg",
+      "more125.jpg"
+    ],
     "bestseller": true,
     "soldOut": false,
     "readyToShip": true,
@@ -3189,68 +4620,44 @@
     "isActive": true,
     "color": "BLACK",
     "fabric": "SILK",
-    "priority": 5
+    "priority": 3,
+    "relatedProducts": []
   },
   {
-    "productId": 6506493173,
+    "productId": 7463845691,
     "name": "CHECKED DRESS WITH JACKET SET",
     "description": "Haulter neck Checked Print Dress paired with long jacket adorned with hand embelishments. ",
     "sizes": {
       "Upper": [
-        { "size": "XS", "quantity": 10, "price": 29095 },
-        { "size": "S", "quantity": 10, "price": 29095 },
-        { "size": "M", "quantity": 10, "price": 29095 },
-        { "size": "L", "quantity": 10, "price": 29095 },
-        { "size": "XL", "quantity": 10, "price": 29095 }
+        { "size": "XS", "quantity": 10, "price": 33450 },
+        { "size": "S", "quantity": 10, "price": 33450 },
+        { "size": "M", "quantity": 10, "price": 33450 },
+        { "size": "L", "quantity": 10, "price": 33450 },
+        { "size": "XL", "quantity": 10, "price": 33450 }
       ],
       "Bottom": [
-        { "size": "XS", "quantity": 10, "price": 29095 },
-        { "size": "S", "quantity": 10, "price": 29095 },
-        { "size": "M", "quantity": 10, "price": 29095 },
-        { "size": "L", "quantity": 10, "price": 29095 },
-        { "size": "XL", "quantity": 10, "price": 29095 }
+        { "size": "XS", "quantity": 10, "price": 33450 },
+        { "size": "S", "quantity": 10, "price": 33450 },
+        { "size": "M", "quantity": 10, "price": 33450 },
+        { "size": "L", "quantity": 10, "price": 33450 },
+        { "size": "XL", "quantity": 10, "price": 33450 }
       ]
     },
     "deliveryIn": "Shipped in 4-5 weeks. ",
-    "price": 29095,
-    "garmentDetails": [Fabric: Silk, "No. of Components: 2", Dispatch Timeline: 4-5 Weeks, "Wash Care: Dry clean only"],
+    "price": 33450,
+    "garmentDetails": [
+      "Fabric: Silk",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "festive",
-    "images": "['more141.jpg','more142.jpg','more143.jpg','more144.jpg','more145.jpg']",
-    "bestseller": false,
-    "soldOut": false,
-    "readyToShip": true,
-    "asSeenOn": "",
-    "videoSrc": "",
-    "isActive": true,
-    "color": "PRINY",
-    "fabric": "SILK",
-    "priority": 14
-  },
-  {
-    "productId": 712706611,
-    "name": "FLORAL TOP AND PANT SET WITH ORGANZA RUFFLE CAPE",
-    "description": "Floral rpint top and pant set paired with pure organza cape with signature applique, embroidery and hand embelishments. ",
-    "sizes": {
-      "Upper": [
-        { "size": "XS", "quantity": 10, "price": 26995 },
-        { "size": "S", "quantity": 10, "price": 26995 },
-        { "size": "M", "quantity": 10, "price": 26995 },
-        { "size": "L", "quantity": 10, "price": 26995 },
-        { "size": "XL", "quantity": 10, "price": 26995 }
-      ],
-      "Bottom": [
-        { "size": "XS", "quantity": 10, "price": 26995 },
-        { "size": "S", "quantity": 10, "price": 26995 },
-        { "size": "M", "quantity": 10, "price": 26995 },
-        { "size": "L", "quantity": 10, "price": 26995 },
-        { "size": "XL", "quantity": 10, "price": 26995 }
-      ]
-    },
-    "deliveryIn": "Shipped in 4-5 weeks. ",
-    "price": 26995,
-    "garmentDetails": [Fabric: Silk drape and pants, organza cape, "No. of Components: 3", Dispatch Timeline: 4-5 Weeks, "Wash Care: Dry clean only"],
-    "category": "festive",
-    "images": "['more151.jpg','more152.jpg','more153.jpg','more154.jpg','more155.jpg']",
+    "images": [
+      "more141.jpg",
+      "more142.jpg",
+      "more143.jpg",
+      "more144.jpg",
+      "more145.jpg"
+    ],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -3259,33 +4666,85 @@
     "isActive": true,
     "color": "PRINT",
     "fabric": "SILK",
-    "priority": 16
+    "priority": 14,
+    "relatedProducts": []
   },
   {
-    "productId": 1301962561,
+    "productId": 5158285074,
+    "name": "FLORAL TOP AND PANT SET WITH ORGANZA RUFFLE CAPE",
+    "description": "Floral rpint top and pant set paired with pure organza cape with signature applique, embroidery and hand embelishments. ",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10, "price": 29859 },
+        { "size": "S", "quantity": 10, "price": 29859 },
+        { "size": "M", "quantity": 10, "price": 29859 },
+        { "size": "L", "quantity": 10, "price": 29859 },
+        { "size": "XL", "quantity": 10, "price": 29859 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10, "price": 29859 },
+        { "size": "S", "quantity": 10, "price": 29859 },
+        { "size": "M", "quantity": 10, "price": 29859 },
+        { "size": "L", "quantity": 10, "price": 29859 },
+        { "size": "XL", "quantity": 10, "price": 29859 }
+      ]
+    },
+    "deliveryIn": "Shipped in 4-5 weeks. ",
+    "price": 29859,
+    "garmentDetails": [
+      "Fabric: Silk drape and pants",
+      "organza cape",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
+    "category": "festive",
+    "images": [
+      "more151.jpg",
+      "more152.jpg",
+      "more153.jpg",
+      "more154.jpg",
+      "more155.jpg"
+    ],
+    "bestseller": false,
+    "soldOut": false,
+    "readyToShip": true,
+    "asSeenOn": "",
+    "videoSrc": "",
+    "isActive": true,
+    "color": "PRINT",
+    "fabric": "SILK",
+    "priority": 15,
+    "relatedProducts": []
+  },
+  {
+    "productId": 7684059243,
     "name": "MUSTARD KAFTAN WITH KNOTTED SKIRT",
     "description": "Bright mustard kaftan with knotted skirt featuring hand embroidery and handmade tassels. ",
     "sizes": {
       "Upper": [
-        { "size": "XS", "quantity": 10, "price": 23875 },
-        { "size": "S", "quantity": 10, "price": 23875 },
-        { "size": "M", "quantity": 10, "price": 23875 },
-        { "size": "L", "quantity": 10, "price": 23875 },
-        { "size": "XL", "quantity": 10, "price": 23875 }
+        { "size": "XS", "quantity": 10, "price": 28590 },
+        { "size": "S", "quantity": 10, "price": 28590 },
+        { "size": "M", "quantity": 10, "price": 28590 },
+        { "size": "L", "quantity": 10, "price": 28590 },
+        { "size": "XL", "quantity": 10, "price": 28590 }
       ],
       "Bottom": [
-        { "size": "XS", "quantity": 10, "price": 23875 },
-        { "size": "S", "quantity": 10, "price": 23875 },
-        { "size": "M", "quantity": 10, "price": 23875 },
-        { "size": "L", "quantity": 10, "price": 23875 },
-        { "size": "XL", "quantity": 10, "price": 23875 }
+        { "size": "XS", "quantity": 10, "price": 28590 },
+        { "size": "S", "quantity": 10, "price": 28590 },
+        { "size": "M", "quantity": 10, "price": 28590 },
+        { "size": "L", "quantity": 10, "price": 28590 },
+        { "size": "XL", "quantity": 10, "price": 28590 }
       ]
     },
     "deliveryIn": "Shipped in 4-5 weeks. ",
-    "price": 23875,
-    "garmentDetails": [Fabric: Crepe, "No. of Components: 2", Dispatch Timeline: 4-5 Weeks, "Wash Care: Dry clean only"],
+    "price": 28590,
+    "garmentDetails": [
+      "Fabric: Crepe",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "festive",
-    "images": "['more161.jpg','more162.jpg','more163.jpg','more164.jpg']",
+    "images": ["more161.jpg", "more162.jpg", "more163.jpg", "more164.jpg"],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -3294,33 +4753,44 @@
     "isActive": true,
     "color": "YELLOW",
     "fabric": "CREPE",
-    "priority": 7
+    "priority": 7,
+    "relatedProducts": []
   },
   {
-    "productId": 5079719589,
+    "productId": 8532278555,
     "name": "BLACK + GOLD TOP AND PANT SET WITH JACKET",
     "description": "Black top and pant set with hand embelished jacket. ",
     "sizes": {
       "Upper": [
-        { "size": "XS", "quantity": 10, "price": 38545 },
-        { "size": "S", "quantity": 10, "price": 38545 },
-        { "size": "M", "quantity": 10, "price": 38545 },
-        { "size": "L", "quantity": 10, "price": 38545 },
-        { "size": "XL", "quantity": 10, "price": 38545 }
+        { "size": "XS", "quantity": 10, "price": 46735 },
+        { "size": "S", "quantity": 10, "price": 46735 },
+        { "size": "M", "quantity": 10, "price": 46735 },
+        { "size": "L", "quantity": 10, "price": 46735 },
+        { "size": "XL", "quantity": 10, "price": 46735 }
       ],
       "Bottom": [
-        { "size": "XS", "quantity": 10, "price": 38545 },
-        { "size": "S", "quantity": 10, "price": 38545 },
-        { "size": "M", "quantity": 10, "price": 38545 },
-        { "size": "L", "quantity": 10, "price": 38545 },
-        { "size": "XL", "quantity": 10, "price": 38545 }
+        { "size": "XS", "quantity": 10, "price": 46735 },
+        { "size": "S", "quantity": 10, "price": 46735 },
+        { "size": "M", "quantity": 10, "price": 46735 },
+        { "size": "L", "quantity": 10, "price": 46735 },
+        { "size": "XL", "quantity": 10, "price": 46735 }
       ]
     },
     "deliveryIn": "Shipped in 4-5 weeks. ",
-    "price": 38545,
-    "garmentDetails": [Fabric: Silk, "No. of Components: 3", Dispatch Timeline: 4-5 Weeks, "Wash Care: Dry clean only"],
+    "price": 46735,
+    "garmentDetails": [
+      "Fabric: Silk",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "festive",
-    "images": "['more171.jpg','more172.jpg','more173.jpg','more174.jpg','more175.jpg']",
+    "images": [
+      "more171.jpg",
+      "more172.jpg",
+      "more173.jpg",
+      "more174.jpg",
+      "more175.jpg"
+    ],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -3329,33 +4799,44 @@
     "isActive": true,
     "color": "BLACK",
     "fabric": "SILK",
-    "priority": 6
+    "priority": 6,
+    "relatedProducts": []
   },
   {
-    "productId": 1683461321,
+    "productId": 1444744114,
     "name": "DRAPE DRESS WITH STATEMENT CAPE",
     "description": "Printed off-shoulder dress with hand embroidered cape with handmade hangings. ",
     "sizes": {
       "Upper": [
-        { "size": "XS", "quantity": 10, "price": 30285 },
-        { "size": "S", "quantity": 10, "price": 30285 },
-        { "size": "M", "quantity": 10, "price": 30285 },
-        { "size": "L", "quantity": 10, "price": 30285 },
-        { "size": "XL", "quantity": 10, "price": 30285 }
+        { "size": "XS", "quantity": 10, "price": 34500 },
+        { "size": "S", "quantity": 10, "price": 34500 },
+        { "size": "M", "quantity": 10, "price": 34500 },
+        { "size": "L", "quantity": 10, "price": 34500 },
+        { "size": "XL", "quantity": 10, "price": 34500 }
       ],
       "Bottom": [
-        { "size": "XS", "quantity": 10, "price": 30285 },
-        { "size": "S", "quantity": 10, "price": 30285 },
-        { "size": "M", "quantity": 10, "price": 30285 },
-        { "size": "L", "quantity": 10, "price": 30285 },
-        { "size": "XL", "quantity": 10, "price": 30285 }
+        { "size": "XS", "quantity": 10, "price": 34500 },
+        { "size": "S", "quantity": 10, "price": 34500 },
+        { "size": "M", "quantity": 10, "price": 34500 },
+        { "size": "L", "quantity": 10, "price": 34500 },
+        { "size": "XL", "quantity": 10, "price": 34500 }
       ]
     },
     "deliveryIn": "Shipped in 4-5 weeks. ",
-    "price": 30285,
-    "garmentDetails": [Fabric: Silk, "No. of Components: 2", Dispatch Timeline: 4-5 Weeks, "Wash Care: Dry clean only"],
+    "price": 34500,
+    "garmentDetails": [
+      "Fabric: Silk",
+      "No. of Components: 2",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
     "category": "festive",
-    "images": "['more181.jpg','more182.jpg','more183.jpg','more184.jpg','more185.jpg']",
+    "images": [
+      "more181.jpg",
+      "more182.jpg",
+      "more183.jpg",
+      "more184.jpg",
+      "more185.jpg"
+    ],
     "bestseller": false,
     "soldOut": false,
     "readyToShip": true,
@@ -3364,6 +4845,47 @@
     "isActive": true,
     "color": "PRINT",
     "fabric": "SILK",
-    "priority": 15
+    "priority": 18,
+    "relatedProducts": []
+  },
+  {
+    "productId": 7159870380,
+    "name": "CHECKERED TWIRL KURTA SET",
+    "description": "Printed kurta set with embroidery and hand embellishments. ",
+    "sizes": {
+      "Upper": [
+        { "size": "XS", "quantity": 10, "price": 23500 },
+        { "size": "S", "quantity": 10, "price": 23500 },
+        { "size": "M", "quantity": 10, "price": 23500 },
+        { "size": "L", "quantity": 10, "price": 23500 },
+        { "size": "XL", "quantity": 10, "price": 23500 }
+      ],
+      "Bottom": [
+        { "size": "XS", "quantity": 10, "price": 23500 },
+        { "size": "S", "quantity": 10, "price": 23500 },
+        { "size": "M", "quantity": 10, "price": 23500 },
+        { "size": "L", "quantity": 10, "price": 23500 },
+        { "size": "XL", "quantity": 10, "price": 23500 }
+      ]
+    },
+    "deliveryIn": "Shipped in 4-5 weeks. ",
+    "price": 23500,
+    "garmentDetails": [
+      "Fabric: Silk",
+      "No. of Components: 3",
+      "Wash Care: Fabric: Denim Cotton"
+    ],
+    "category": "festive",
+    "images": ["more191.jpg", "more192.jpg", "more193.jpg"],
+    "bestseller": false,
+    "soldOut": false,
+    "readyToShip": true,
+    "asSeenOn": "",
+    "videoSrc": "",
+    "isActive": true,
+    "color": "PRINT",
+    "fabric": "[SILK, ORGANZA]",
+    "priority": 16,
+    "relatedProducts": []
   }
 ]

@@ -400,6 +400,9 @@ const get_all_products = async (req, res) => {
 const create_product = async (req, res) => {
   try {
     const productsData = JSON.parse(req.body.products); // This will now be an array
+    const limit = Number(req.body.limit);
+    const skip = (page - 1) * limit;
+
     const images = req.files.map((file) => file.originalname);
     const newProduct = {
       productId: Math.floor(Math.random() * 9000000000) + 1,
@@ -443,7 +446,12 @@ const create_product = async (req, res) => {
     const newCreatedProduct = new Product(newProductData);
     await newCreatedProduct.save();
 
-    const allProduct = await Product.find({}, { _id: 0 });
+    const allProduct = await Product.find({})
+      .select("-_id")
+      .sort({ priority: 1 })
+      .skip(skip)
+      .limit(limit);
+
     res.send(allProduct);
   } catch (error) {
     console.log(error);
@@ -723,6 +731,8 @@ const get_all_testimonials = async (_req, res) => {
 
 const toggleProductStatus = async (req, res) => {
   try {
+    const { page = 1, limit = 10 } = req.query;
+
     const productToBeUpdated = await Product.find({
       productId: Number(req.params.id),
     });
@@ -737,10 +747,17 @@ const toggleProductStatus = async (req, res) => {
       return res.status(404).json({ message: "Product not found" });
     }
 
-    const allProduct = await Product.find({}, { _id: 0 });
+    const totalProducts = await Product.countDocuments({});
+
+    const allProducts = await Product.find({})
+      .select("-_id")
+      .sort({ priority: 1 })
+      .skip((page - 1) * limit) // Skip previous pages
+      .limit(Number(limit));
+
     res.status(200).json({
-      message: "Product disabled successfully",
-      allProduct,
+      allProducts,
+      totalProducts,
     });
   } catch (error) {
     console.error("Error disabling product:", error);
@@ -754,6 +771,10 @@ const toggleProductStatus = async (req, res) => {
 const edit_product = async (req, res) => {
   try {
     const editData = JSON.parse(req.body.products);
+    const limit = Number(req.body.limit);
+    const page = Number(req.body.page);
+    const skip = (page - 1) * limit;
+
     const { productId, ...editedProduct } = editData;
     const images = req.files.map((file) => file.originalname);
 
@@ -777,9 +798,14 @@ const edit_product = async (req, res) => {
     await Product.replaceOne({ productId: productId }, updatedProduct, {
       upsert: true,
     });
+    const totalProducts = await Product.countDocuments({});
 
-    const allProducts = await Product.find({}, { _id: 0 });
-    res.send(allProducts); // Send the updated product list
+    const allProducts = await Product.find({})
+      .select("-_id")
+      .sort({ priority: 1 })
+      .skip(skip)
+      .limit(limit);
+    res.send({ allProducts, totalProducts }); // Send the updated product list
   } catch (error) {
     console.error("Error in edit_product:", error);
     res.status(400).send({ error: error.message });
@@ -917,7 +943,9 @@ const add_to_cart = async (req, res) => {
     const user = await User.findOne({ userId: userId });
 
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res
+        .status(200)
+        .json({ message: "User not found, Cart won't be saved" });
     }
 
     // Find the index of the item in the cart
@@ -1025,7 +1053,9 @@ const get_all_orders = async (req, res) => {
 const updateProductPriorities = async (req, res) => {
   try {
     // Get the list of products with their updated priorities from the request body
-    const { products } = req.body; // Assuming priorities is an array of objects like [{ productId: 1, priority: 2 }, ...]
+    const { products, page, limit } = req.body; // Assuming priorities is an array of objects like [{ productId: 1, priority: 2 }, ...]
+    const skip = (page - 1) * limit;
+
     if (!products || !Array.isArray(products) || products.length === 0) {
       return res
         .status(400)
@@ -1048,10 +1078,15 @@ const updateProductPriorities = async (req, res) => {
     await Promise.all(updatePromises);
 
     // Send updated product list
-    const allProducts = await Product.find({}, { _id: 0 }).sort({
-      priority: 1,
-    });
-    res.send(allProducts); // Return the list of all products
+    const allProducts = await Product.find({}, { _id: 0 })
+      .sort({
+        priority: 1,
+      })
+      .skip(skip)
+      .limit(limit);
+    const totalProducts = await Product.countDocuments({});
+
+    res.send({ allProducts, totalProducts }); // Return the list of all products
   } catch (error) {
     console.error("Error in update_product_priorities:", error);
     res.status(400).send({ error: error.message });
@@ -1331,7 +1366,7 @@ const checkDiscountCode = async (req, res) => {
       }
 
       // Special validation for "WELCOME10" (new users only)
-      if (discountData.code === "WELCOME10") {
+      if (userId && discountData.code === "WELCOME10") {
         const previousOrders = await orders.findOne({ userId });
         if (previousOrders) {
           return res.status(200).json({

@@ -191,6 +191,8 @@ export const createProduct = async ({
   products,
   setLoading,
   setAllProduct,
+  page,
+  limit,
 }) => {
   setLoading(true);
 
@@ -202,6 +204,14 @@ export const createProduct = async ({
     formData.append(
       "products",
       JSON.stringify(products) // Wrap the product in an array
+    );
+    formData.append(
+      "page",
+      JSON.stringify(page) // Wrap the product in an array
+    );
+    formData.append(
+      "limit",
+      JSON.stringify(limit) // Wrap the product in an array
     );
 
     if (products.images && Array.isArray(products.images)) {
@@ -235,13 +245,21 @@ export const createProduct = async ({
   }
 };
 
-export const editProduct = async ({ products, setProducts, setLoading }) => {
+export const editProduct = async ({
+  products,
+  setProducts,
+  setLoading,
+  page,
+  limit,
+}) => {
   setLoading(true);
 
   const formData = new FormData();
 
   // Append the product without images to FormData
   formData.append("products", JSON.stringify(products));
+  formData.append("page", JSON.stringify(page));
+  formData.append("limit", JSON.stringify(limit));
 
   if (products.images.length > 0) {
     products.images.map(async (image) => {
@@ -267,7 +285,6 @@ export const editProduct = async ({ products, setProducts, setLoading }) => {
     const response = await fetch(`${apiUrl}/editProduct`, requestOptions);
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
       setProducts(data);
     } else {
       const errorData = await response.json();
@@ -466,12 +483,14 @@ export const toggleProductStatus = async ({
   product,
   setProductsData,
   setLoading,
+  page,
+  limit,
 }) => {
   try {
     if (setLoading) setLoading(true);
 
     const response = await fetch(
-      `${apiUrl}/product/${product.productId}/disable`,
+      `${apiUrl}/product/${product.productId}/disable?page=${page}&limit=${limit}`,
       {
         method: "PUT", // Change to PUT for updates
         headers: { "Content-Type": "application/json" },
@@ -488,7 +507,7 @@ export const toggleProductStatus = async ({
     }
 
     const data = await response.json();
-    setProductsData(data.allProduct); // Update state with the API response
+    setProductsData(data); // Update state with the API response
     if (setLoading) setLoading(false);
     return data;
   } catch (err) {
@@ -708,12 +727,17 @@ export const getAllOrders = async ({
   }
 };
 
-export const updateProductPriorities = async ({ products, setProducts }) => {
+export const updateProductPriorities = async ({
+  products,
+  setProducts,
+  page,
+  limit,
+}) => {
   try {
     const response = await fetch(`${apiUrl}/update-priorities`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ products }),
+      body: JSON.stringify({ products, page, limit }),
     });
 
     if (!response.ok) {

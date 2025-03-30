@@ -1,7 +1,6 @@
 import { Box, Button, Grid2, Snackbar } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { getAllProducts, toggleProductStatus } from "../../api";
-import { categories } from "../../common";
 import CustomTable from "../../components/custom-table/customTable";
 import SelectDropdown from "../../components/select-dropdown/selectDropdown";
 import AddEditProductModal from "../../form/addProduct/addProduct";
@@ -54,10 +53,13 @@ const ProductTable = (props) => {
   };
 
   const handleDisableProduct = (row) => {
+    setProductsLoading(true);
     toggleProductStatus({
       product: row,
-      setLoading: props.setLoading,
-      setProductsData: props.setProducts,
+      setLoading: setProductsLoading,
+      setProductsData: setProducts,
+      page: productsPage === 0 ? 1 : productsPage,
+      limit: productsPerPage || 10,
     });
   };
 
@@ -95,7 +97,8 @@ const ProductTable = (props) => {
     if (!products) {
       return;
     }
-    const productsData = products.products || [];
+    const productsData = products?.products || products?.allProducts || [];
+
     const productFilteredByCategory =
       filterOptions.category !== "all"
         ? productsData.filter((product) =>
@@ -160,7 +163,7 @@ const ProductTable = (props) => {
     {
       id: "deliveryIn",
       label: "Delivery In",
-      key: "delivery In",
+      key: "deliveryIn",
       type: "text",
       align: "left",
     },
@@ -178,7 +181,7 @@ const ProductTable = (props) => {
       key: "category",
       type: "dropdown",
       align: "left",
-      optionList: categories,
+      optionList: props.categoryList,
     },
     {
       id: "garmentDetails",
@@ -288,7 +291,7 @@ const ProductTable = (props) => {
         pagination={true}
         setShowModal={setShowModal}
         categories={props.categories}
-        setProducts={props.setProducts}
+        setProducts={setProducts}
         handleModalClose={handleModalClose}
         page="Products"
         allowView={true}
@@ -307,19 +310,24 @@ const ProductTable = (props) => {
           setLoading={setProductsLoading}
           setProducts={setProducts}
           categories={props.categories}
+          categoryList={props.categoryList}
+          page={productsPage}
+          limit={productsPerPage}
         />
       )}
       {isModalOpen && (
         <PriorityModal
           open={isModalOpen}
           onClose={handleCloseModal}
-          items={products}
+          items={products?.products || products?.allProducts || []}
           fields={fields}
           renderField={renderField}
-          setData={props.setProducts}
+          setData={setProducts}
           folder="products"
           idKey="productId"
           collection="products"
+          page={productsPage}
+          limit={productsPerPage}
         />
       )}
       {isSnackbarOpen && (

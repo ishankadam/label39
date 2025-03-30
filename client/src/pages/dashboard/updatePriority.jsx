@@ -30,6 +30,8 @@ export const PriorityModal = ({
   idKey,
   collection,
   setData,
+  page,
+  limit,
 }) => {
   const [items, setItems] = useState(initialItems);
   const [editingId, setEditingId] = useState(null);
@@ -68,7 +70,7 @@ export const PriorityModal = ({
   const handleSave = async () => {
     setIsSaving(true);
     try {
-      await saveEntities(items, collection, setData);
+      await saveEntities(items, collection, setData, page, limit);
       onClose();
     } catch (error) {
       console.error("Error saving changes:", error);

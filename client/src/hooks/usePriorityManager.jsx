@@ -27,29 +27,34 @@ export function usePriorityManager(initialEntities) {
     });
   }, []);
 
-  const saveEntities = useCallback(async (items, collection, setData) => {
-    try {
-      if (collection === "products") {
-        await updateProductPriorities({
-          products: items,
-          setProducts: setData,
-        });
-      } else if (collection === "celebrityStyle") {
-        await updateCelebrityStylePriority({
-          celebrityStyles: items,
-          setCelebrityStyles: setData,
-        });
-      } else if (collection === "clientDiaries") {
-        await updateClientDiariesPriority({
-          clientDiaries: items,
-          setClientDiaries: setData,
-        });
+  const saveEntities = useCallback(
+    async (items, collection, setData, page, limit) => {
+      try {
+        if (collection === "products") {
+          await updateProductPriorities({
+            products: items,
+            setProducts: setData,
+            page,
+            limit,
+          });
+        } else if (collection === "celebrityStyle") {
+          await updateCelebrityStylePriority({
+            celebrityStyles: items,
+            setCelebrityStyles: setData,
+          });
+        } else if (collection === "clientDiaries") {
+          await updateClientDiariesPriority({
+            clientDiaries: items,
+            setClientDiaries: setData,
+          });
+        }
+      } catch (error) {
+        console.error("Error saving entities:", error);
+        throw error; // Propagate the error so it can be handled by calling code
       }
-    } catch (error) {
-      console.error("Error saving entities:", error);
-      throw error; // Propagate the error so it can be handled by calling code
-    }
-  }, []);
+    },
+    []
+  );
 
   return { entities: sortedEntities, updatePriority, saveEntities };
 }

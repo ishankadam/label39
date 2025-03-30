@@ -197,25 +197,30 @@ const ViewProductModal = (props) => {
   };
 
   const handleAddToCart = () => {
+    const newCartProduct = {
+      productId: cartProduct.productId,
+      name: cartProduct.name,
+      price: cartProduct.price,
+      quantity: 1,
+      deliveryIn: cartProduct.deliveryIn,
+      images: [cartProduct.images[0]],
+      sizes: {
+        Upper: cartProduct.sizes.Upper,
+        Bottom: cartProduct.sizes.Bottom,
+      },
+      sale: cartProduct.sale,
+    };
+    dispatch(addToCart(newCartProduct));
+    handleClose();
+    addProductToCart({ cartProduct: newCartProduct, userId: userId });
     if (!userId) {
-      navigate("/login");
+      dispatch(
+        showSnackbar({
+          message: `${cartProduct.name} ADDED TO CART, LOGIN TO SAVE CART FOR FURTHER USE`,
+          severity: "success",
+        })
+      );
     } else {
-      const newCartProduct = {
-        productId: cartProduct.productId,
-        name: cartProduct.name,
-        price: cartProduct.price,
-        quantity: 1,
-        deliveryIn: cartProduct.deliveryIn,
-        images: [cartProduct.images[0]],
-        sizes: {
-          Upper: cartProduct.sizes.Upper,
-          Bottom: cartProduct.sizes.Bottom,
-        },
-        sale: cartProduct.sale,
-      };
-      dispatch(addToCart(newCartProduct));
-      handleClose();
-      addProductToCart({ cartProduct: newCartProduct, userId: userId });
       dispatch(
         showSnackbar({
           message: `${cartProduct.name} ADDED TO CART`,
