@@ -321,7 +321,7 @@ const ProductTable = (props) => {
         <PriorityModal
           open={isModalOpen}
           onClose={handleCloseModal}
-          items={filterDataProducts || []}
+          items={products?.allProducts || []}
           fields={fields}
           renderField={renderField}
           setData={setProducts}

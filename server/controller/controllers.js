@@ -304,6 +304,10 @@ const get_all_products = async (req, res) => {
       .skip(skip)
       .limit(limit);
 
+    const allProducts = await Product.find(query)
+      .select("name productId priority images")
+      .sort({ priority: 1 });
+
     // Get total count of filtered products
     const totalProducts = await Product.countDocuments(query);
     const totalPages = Math.ceil(totalProducts / limit);
@@ -353,6 +357,7 @@ const get_all_products = async (req, res) => {
         totalProducts,
         totalPages,
         currentPage: page,
+        allProducts,
       });
     }
 
@@ -390,6 +395,7 @@ const get_all_products = async (req, res) => {
       totalProducts,
       totalPages,
       currentPage: page,
+      allProducts,
     });
   } catch (error) {
     // console.error("Error fetching products or exchange rates:", error);
