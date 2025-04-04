@@ -24,7 +24,6 @@ const MultiSelectAutocomplete = ({
   value,
   ...props
 }) => {
-  console.log(value);
   return (
     <Autocomplete
       multiple
@@ -41,7 +40,6 @@ const MultiSelectAutocomplete = ({
         />
       )}
       onChange={(_event, newValue) => {
-        console.log("Updated Value:", newValue);
         if (onChange) {
           onChange(newValue);
         } else {

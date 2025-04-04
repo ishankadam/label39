@@ -226,7 +226,7 @@ const Dashboard = (props) => {
   useEffect(() => {
     const newCategoriesList = categories?.map((category) => ({
       label: category.name,
-      value: category.name.toLowerCase().replace(/\s+/g, ""),
+      value: category.value,
     }));
     newCategoriesList.unshift({ label: "All", value: "all" });
     setCategoryList(newCategoriesList);

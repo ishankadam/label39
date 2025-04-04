@@ -83,7 +83,6 @@ const ProductTable = (props) => {
 
   useEffect(() => {
     setProductsLoading(true);
-    console.log(productsPage);
     getAllProducts({
       setProductsData: setProducts,
       setLoading: setProductsLoading,

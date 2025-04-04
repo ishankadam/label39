@@ -34,10 +34,6 @@ const ClientsDiaries = (props) => {
     });
   };
 
-  useEffect(() => {
-    console.log(props.products);
-  }, [props.products]);
-
   const renderField = (item, field) => {
     switch (field.type) {
       case "image":

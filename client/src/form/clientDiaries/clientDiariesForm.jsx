@@ -76,7 +76,6 @@ const ClientDiariesForm = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (props.isEdit) {
-      console.log(clientDiaries);
       editClientDiaries({
         clientDiaries,
         setClientDiaries: props.setClientDiaries,
