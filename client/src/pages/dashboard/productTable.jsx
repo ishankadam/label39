@@ -83,14 +83,17 @@ const ProductTable = (props) => {
 
   useEffect(() => {
     setProductsLoading(true);
+    console.log(productsPage);
     getAllProducts({
       setProductsData: setProducts,
       setLoading: setProductsLoading,
       country: props.country,
       page: productsPage === 0 ? 1 : productsPage,
       limit: productsPerPage || 10,
+      isActive: filterOptions.status,
+      filter: { category: filterOptions.category },
     });
-  }, [productsPage, props.country, productsPerPage]);
+  }, [productsPage, props.country, productsPerPage, filterOptions]);
 
   useEffect(() => {
     //filter products based on filterOptions
@@ -319,7 +322,7 @@ const ProductTable = (props) => {
         <PriorityModal
           open={isModalOpen}
           onClose={handleCloseModal}
-          items={products?.products || products?.allProducts || []}
+          items={filterDataProducts || []}
           fields={fields}
           renderField={renderField}
           setData={setProducts}
@@ -328,6 +331,7 @@ const ProductTable = (props) => {
           collection="products"
           page={productsPage}
           limit={productsPerPage}
+          filterOptions={filterOptions}
         />
       )}
       {isSnackbarOpen && (

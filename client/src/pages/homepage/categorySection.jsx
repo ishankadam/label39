@@ -64,8 +64,11 @@ const CategorySection = (props) => {
         }}
       >
         {allCategories.length > 0 &&
-          allCategories.map((category) => (
-            <Grid2 size={{ xs: 6, sm: 6, md: 3 }} key={category.label}>
+          allCategories.map((category, index) => (
+            <Grid2
+              size={{ xs: 6, sm: 6, md: 3 }}
+              key={`${category.value}-${index}`}
+            >
               <Box sx={{ margin: "8px" }}>
                 <Card
                   sx={{

@@ -52,7 +52,7 @@ const ViewProductModal = (props) => {
 
   const { isAdmin, product, open, setShowModal } = props;
   const [selectedColor, setSelectedColor] = useState(
-    product && product.allColors[0]
+    product.allColors && product.allColors[0]
   );
   const [displayedProduct, setDisplayedProduct] = useState(product);
   const [modalOpen, setModalOpen] = useState(open);
@@ -134,6 +134,13 @@ const ViewProductModal = (props) => {
     const whatsappUrl = `https://wa.me/${formattedNumber}?text=${encodedMessage}`;
 
     // Redirect to WhatsApp
+    window.open(whatsappUrl, "_blank");
+  };
+
+  const handleShare = () => {
+    const message = `Check out this product: ${product.name} - ${product.description}.\nBuy here: ${window.location.origin}/product/${product.productId}`;
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+
     window.open(whatsappUrl, "_blank");
   };
 
@@ -780,7 +787,7 @@ const ViewProductModal = (props) => {
                         onClick={() => {
                           handleCloseShareMenu();
                           // This will use your existing ShareViaWhatsApp component's functionality
-                          handleTalkToUs();
+                          handleShare();
                         }}
                         sx={{
                           fontFamily: "'Roboto Serif', serif",

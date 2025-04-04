@@ -259,8 +259,10 @@ const get_all_products = async (req, res) => {
     if (filter.category) {
       if (filter.category === "shirtsAndDresses") {
         query.category = { $in: ["shirt", "dress"] };
-      } else {
+      } else if (filter.category !== "all") {
         query.category = filter.category.toLowerCase();
+      } else {
+        query = {};
       }
     }
 
@@ -479,74 +481,55 @@ const createPayment = async (req, res) => {
   }
 };
 
-const sendWhatsAppMessage = async (req, res) => {
-  const data = {
-    orderId: "order_PqrPNkZigUVijW",
-    checkoutData: {
-      shippingAddress: {
-        firstName: "Ishan",
-        lastName: "Kadam",
-        phone: "+918652241163",
-      },
-    },
-    cartItems: [
-      {
-        productId: 7458689532,
-        name: "IVORY FLEUR CO-ORD SET",
-        price: 13300,
-        quantity: 1,
-        deliveryIn: ["Shipped in 2-3 weeks"],
-      },
-      {
-        productId: 7458689533,
-        name: "BLACK LACE DRESS",
-        price: 8900,
-        quantity: 1,
-        deliveryIn: ["Shipped in 1 week"],
-      },
-    ],
-  };
-
-  const firstName = data.checkoutData.shippingAddress.firstName; // {{1}}
-  const orderNumber = data.orderId; // {{3}}
-  const estimatedDelivery = "2-3 weeks"; // {{5}}
-
-  const productDetails = data.cartItems
-    .map(
-      (item, index) =>
-        `${index + 1}. ${item.name} (₹${item.price}) - ${item.deliveryIn[0]}`
-    )
-    .join("\n"); // Format as a numbered list
-
+const sendWhatsAppMessage = async (recipientNumber, orderDetails) => {
   try {
+    const {
+      customerName,
+      purchaseType,
+      orderNumber,
+      productName,
+      estimatedDelivery,
+    } = orderDetails;
+
     const response = await axios.post(
-      process.env.WHATSAPP_API_URL,
+      `https://graph.facebook.com/v18.0/${process.env.WHATSAPP_PHONE_NUMBER_ID}/messages`,
       {
         messaging_product: "whatsapp",
-        to: data.checkoutData.shippingAddress.phone,
+        to: "918652241163",
         type: "template",
         template: {
-          name: "hello_world", // Use the approved template
-          language: { code: "en_US" },
-          components: [],
+          name: "order_confirmation", // Replace with your actual template name
+          language: { code: "en_US" }, // Change if your template uses a different language
+          components: [
+            {
+              type: "body",
+              parameters: [
+                { type: "text", text: "customerName" }, // {{1}} - Customer Name
+                { type: "text", text: "purchaseType" }, // {{2}} - Purchase Type (e.g., Order, Subscription)
+                { type: "text", text: "orderNumber" }, // {{3}} - Order Number
+                { type: "text", text: "productName" }, // {{4}} - Product Name
+                { type: "text", text: "estimatedDelivery" }, // {{5}} - Estimated Delivery Date
+              ],
+            },
+          ],
         },
       },
       {
         headers: {
-          Authorization: `Bearer ${process.env.WHATSAPP_TOKEN}`,
+          Authorization: `Bearer ${process.env.WHATSAPP_ACCESS_TOKEN}`,
           "Content-Type": "application/json",
         },
       }
     );
 
     console.log("Message sent successfully:", response.data);
-    res.send({ success: true, response });
+    return response.data;
   } catch (error) {
     console.error(
       "Error sending WhatsApp message:",
-      error?.response?.data || error.message
+      error.response ? error.response.data : error.message
     );
-    res.status(500).send({ success: false, error });
+    return { error: error.response ? error.response.data : error.message };
   }
 };
 
@@ -1053,8 +1036,9 @@ const get_all_orders = async (req, res) => {
 const updateProductPriorities = async (req, res) => {
   try {
     // Get the list of products with their updated priorities from the request body
-    const { products, page, limit } = req.body; // Assuming priorities is an array of objects like [{ productId: 1, priority: 2 }, ...]
+    const { products, page, limit, filter, isActive } = req.body; // Assuming priorities is an array of objects like [{ productId: 1, priority: 2 }, ...]
     const skip = (page - 1) * limit;
+    console.log(filter);
 
     if (!products || !Array.isArray(products) || products.length === 0) {
       return res
@@ -1077,14 +1061,31 @@ const updateProductPriorities = async (req, res) => {
     // Wait for all updates to complete
     await Promise.all(updatePromises);
 
-    // Send updated product list
-    const allProducts = await Product.find({}, { _id: 0 })
-      .sort({
-        priority: 1,
-      })
+    let query = {};
+
+    if (isActive) {
+      query.isActive = true;
+    }
+
+    // Category Filter
+    if (filter.category) {
+      if (filter.category === "shirtsAndDresses") {
+        query.category = { $in: ["shirt", "dress"] };
+      } else if (filter.category !== "all") {
+        query.category = filter.category.toLowerCase();
+      } else {
+        query = {};
+      }
+    }
+
+    const allProducts = await Product.find(query)
+      .select("-_id")
+      .sort({ priority: 1 })
       .skip(skip)
       .limit(limit);
-    const totalProducts = await Product.countDocuments({});
+
+    // Get total count of filtered products
+    const totalProducts = await Product.countDocuments(query);
 
     res.send({ allProducts, totalProducts }); // Return the list of all products
   } catch (error) {

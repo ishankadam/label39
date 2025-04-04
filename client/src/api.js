@@ -732,12 +732,13 @@ export const updateProductPriorities = async ({
   setProducts,
   page,
   limit,
+  filter,
 }) => {
   try {
     const response = await fetch(`${apiUrl}/update-priorities`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ products, page, limit }),
+      body: JSON.stringify({ products, page, limit, filter }),
     });
 
     if (!response.ok) {

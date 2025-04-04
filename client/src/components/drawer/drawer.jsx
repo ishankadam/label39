@@ -90,8 +90,8 @@ const CustomDrawer = (props) => {
             >
               cart
             </Typography>
-            <IconButton>
-              <CloseIcon sx={{ color: "#2f3e4e" }} onClick={onClose} />
+            <IconButton onClick={onClose}>
+              <CloseIcon sx={{ color: "#2f3e4e" }} />
             </IconButton>
           </Box>
 
@@ -101,7 +101,7 @@ const CustomDrawer = (props) => {
               cartItems.map((item) => {
                 return (
                   <Box
-                    key={`${item.id}-cart-item`}
+                    key={`${item.productId}-cart-item`}
                     sx={{
                       display: "flex",
                       mt: 2,

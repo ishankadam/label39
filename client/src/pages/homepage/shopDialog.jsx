@@ -106,7 +106,7 @@ const ShopDialog = (props) => {
           </Typography>
           {featured.map((feature) => (
             <Button
-              key={feature}
+              key={feature.value}
               sx={{
                 textAlign: "center",
                 width: "100%",

@@ -1,11 +1,10 @@
-import { Box, Typography, Button } from "@mui/material";
-import Slider from "react-slick";
+import { Box, Button, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 import React, { useEffect, useState } from "react";
-import { getInstagramPosts } from "../../api";
-import "slick-carousel/slick/slick.css";
+import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
+import { getInstagramPosts } from "../../api";
 import { NextArrow, PrevArrow } from "../../components/arrow-component"; // Update the import path as needed
 
 const InstagramSection = () => {
@@ -21,7 +20,7 @@ const InstagramSection = () => {
   }, []);
 
   useEffect(() => {
-    const instagramPostData = instagramData.filter(
+    const instagramPostData = instagramData?.filter(
       (row) => row.media_type === "IMAGE" || row.media_type === "CAROUSEL_ALBUM"
     );
     setInstaPosts(instagramPostData);
@@ -105,95 +104,96 @@ const InstagramSection = () => {
         }}
       >
         <Slider {...settings}>
-          {instaPosts.map((post, index) => (
-            <Box
-              key={index}
-              sx={{
-                px: 1,
-                position: "relative",
-                cursor: "pointer",
-                "&:hover .overlay": { opacity: 1 },
-                maskImage:
-                  "linear-gradient(to right, transparent, #000 10% 90%, transparent)",
-              }}
-              onClick={() => window.open(post.permalink)}
-            >
+          {instaPosts?.length > 0 &&
+            instaPosts.map((post, index) => (
               <Box
+                key={index}
                 sx={{
-                  border: "1px solid #d6d6d6",
+                  px: 1,
                   position: "relative",
-                  paddingTop: "100%",
-
-                  // width: { xs: 200, md: 250 },
-                  // height: { xs: 200, md: 250 },
-                  borderRadius: 1,
-                  overflow: "hidden",
-
-                  "&:hover": {
-                    boxShadow: 6, // Increase shadow on hover
-                    transition: "box-shadow 0.3s ease-in-out",
-                  },
+                  cursor: "pointer",
+                  "&:hover .overlay": { opacity: 1 },
+                  maskImage:
+                    "linear-gradient(to right, transparent, #000 10% 90%, transparent)",
                 }}
+                onClick={() => window.open(post.permalink)}
               >
-                <img
-                  src={post.media_url}
-                  alt={`Instagram post ${index + 1}`}
-                  style={{
-                    objectPosition: "top",
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                  }}
-                />
                 <Box
-                  className="overlay"
                   sx={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    backgroundColor: "rgba(0,0,0,0.5)",
-                    opacity: 0,
-                    transition: "opacity 0.3s ease",
-                    color: "white",
-                    p: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    textAlign: "center",
+                    border: "1px solid #d6d6d6",
+                    position: "relative",
+                    paddingTop: "100%",
+
+                    // width: { xs: 200, md: 250 },
+                    // height: { xs: 200, md: 250 },
+                    borderRadius: 1,
+                    overflow: "hidden",
+
+                    "&:hover": {
+                      boxShadow: 6, // Increase shadow on hover
+                      transition: "box-shadow 0.3s ease-in-out",
+                    },
                   }}
                 >
-                  <Typography
-                    variant="h6"
+                  <img
+                    src={post.media_url}
+                    alt={`Instagram post ${index + 1}`}
+                    style={{
+                      objectPosition: "top",
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
+                  <Box
+                    className="overlay"
                     sx={{
-                      // padding: "10px",
-                      fontFamily: "'cinzel', serif",
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      backgroundColor: "rgba(0,0,0,0.5)",
+                      opacity: 0,
+                      transition: "opacity 0.3s ease",
                       color: "white",
+                      p: 2,
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
                       textAlign: "center",
-                      fontSize: {
-                        xs: "15px",
-                        sm: "15px",
-                        md: "15px",
-                        lg: "16px",
-                      },
                     }}
                   >
-                    {post.caption?.substring(0, 100)}...
-                  </Typography>
-                  <Typography variant="body1" className="overlay-date">
-                    {post.date}
-                  </Typography>
-                  {/* <Typography variant="body2" sx={{ paddingTop: "5px" }}>
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        // padding: "10px",
+                        fontFamily: "'cinzel', serif",
+                        color: "white",
+                        textAlign: "center",
+                        fontSize: {
+                          xs: "15px",
+                          sm: "15px",
+                          md: "15px",
+                          lg: "16px",
+                        },
+                      }}
+                    >
+                      {post.caption?.substring(0, 100)}...
+                    </Typography>
+                    <Typography variant="body1" className="overlay-date">
+                      {post.date}
+                    </Typography>
+                    {/* <Typography variant="body2" sx={{ paddingTop: "5px" }}>
                     {{post.date?.substring(0, 10)}}
                   </Typography> */}
+                  </Box>
                 </Box>
               </Box>
-            </Box>
-          ))}
+            ))}
         </Slider>
       </Box>
 

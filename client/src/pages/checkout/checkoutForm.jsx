@@ -280,7 +280,7 @@ const CheckoutForm = (props) => {
             {/* Cart item */}
             {cartItems.map((item) => (
               <Grid
-                key={item.id}
+                key={item.productId}
                 item
                 xs={12}
                 sx={{
@@ -1162,7 +1162,7 @@ const CheckoutForm = (props) => {
           {/* Cart item */}
           {cartItems.map((item) => (
             <Grid
-              key={item.id}
+              key={item.productId}
               item
               xs={12}
               sx={{

@@ -212,7 +212,7 @@ const CustomAppbar = (props) => {
 
   const logout = () => {
     localStorage.clear();
-    setAdminSettings({ label: "login", type: "navigate", url: "/login" });
+    setAdminSettings([{ label: "login", type: "navigate", url: "/login" }]);
     dispatch(clearCart());
     dispatch(
       showSnackbar({

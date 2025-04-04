@@ -28,7 +28,7 @@ export function usePriorityManager(initialEntities) {
   }, []);
 
   const saveEntities = useCallback(
-    async (items, collection, setData, page, limit) => {
+    async (items, collection, setData, page, limit, filterOptions) => {
       try {
         if (collection === "products") {
           await updateProductPriorities({
@@ -36,6 +36,8 @@ export function usePriorityManager(initialEntities) {
             setProducts: setData,
             page,
             limit,
+            isActive: filterOptions.isActive,
+            filter: { category: filterOptions.category },
           });
         } else if (collection === "celebrityStyle") {
           await updateCelebrityStylePriority({
