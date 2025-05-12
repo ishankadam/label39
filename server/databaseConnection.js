@@ -22,7 +22,7 @@ const allowedOrigins = [
   "http://thelabel39.com",
   "https://thelabel39.com",
   "http://localhost:5000", // Local frontend
-  "https://label39-1.onrender.com",
+  "https://label39-ishankadam-19-sakecacins-projects.vercel.app/",
 ];
 
 const corsOptions = {
