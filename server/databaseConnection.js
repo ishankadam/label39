@@ -22,7 +22,7 @@ const allowedOrigins = [
   "https://thelabel39.com",
   "http://thelabel39.com",
   "http://localhost:5000",
-  "https://label39-ishankadam-19-sakecacins-projects.vercel.app",
+  "https://label39-git-main-ishankadam-19-sakecacins-projects.vercel.app",
   "https://label39-1.onrender.com",
 ];
 
