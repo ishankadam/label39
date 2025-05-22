@@ -20,6 +20,7 @@ const allowedOrigins = [
   "https://3.111.19.139",
   "http://3.111.19.139",
   "https://thelabel39.com",
+  "https://www.thelabel39.com",
   "http://thelabel39.com",
   "http://localhost:5000",
   "https://label39-git-main-ishankadam-19-sakecacins-projects.vercel.app",
