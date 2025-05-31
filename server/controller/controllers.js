@@ -390,6 +390,8 @@ const get_all_products = async (req, res) => {
         : null,
     }));
 
+    Product.updateMany({ sale: { $exists: true } }, { $unset: { sale: "" } });
+
     res.status(200).json({
       products: updatedProducts,
       totalProducts,
