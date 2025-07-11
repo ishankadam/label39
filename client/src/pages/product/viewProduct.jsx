@@ -37,7 +37,7 @@ import {
   calculatePriceAfterDiscount,
   getCurrencySymbol,
   getSizeChart,
-  whatsappQueryMessage,
+  whatsappProductQueryMessage,
 } from "../../common";
 import { addToCart, showSnackbar } from "../../store/cartSlice";
 import Footer from "../homepage/footer";
@@ -127,7 +127,7 @@ const ViewProductModal = (props) => {
 
     // Encode the message for URL
     const encodedMessage = encodeURIComponent(
-      whatsappQueryMessage(name, productUrl)
+      whatsappProductQueryMessage(name, productUrl)
     );
 
     // Construct the WhatsApp URL

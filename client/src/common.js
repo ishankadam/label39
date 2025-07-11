@@ -38,8 +38,10 @@ export const dashboardTabValue = [
   { label: "Discount", value: "eleven", icon: <CardGiftcardIcon /> },
 ];
 
-export const whatsappQueryMessage = (productName, productUrl) =>
-  `I'm excited about your product *${productName}* and have a few questions—can you guide me through? Here’s the product link: ${productUrl}`;
+export const whatsappProductQueryMessage = (productName, productUrl) =>
+  `I'm excited about your products *${productName}* and have a few questions—can you guide me through? Here’s the product link: ${productUrl}`;
+
+export const whatsappQueryMessage = `I'm excited about your products and have a few questions—can you guide me through?`;
 
 export const countries = [
   {
