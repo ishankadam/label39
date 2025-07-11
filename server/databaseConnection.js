@@ -28,7 +28,6 @@ const allowedOrigins = [
 const corsOptions = {
   origin: (origin, callback) => {
     const normalizedOrigin = origin?.replace(/\/$/, "");
-    console.log("Request Origin:", origin);
 
     if (!origin || allowedOrigins.includes(normalizedOrigin)) {
       callback(null, true);

@@ -28,8 +28,8 @@ import SelectDropdown from "../../components/select-dropdown/selectDropdown";
 import CustomTextfield from "../../components/textfield/customTextfield";
 import { clearCart } from "../../store/cartSlice";
 
-const { RAZORPAY_KEY_ID } = process.env;
-export const razorpayId = RAZORPAY_KEY_ID;
+const { REACT_APP_RAZORPAY_KEY_ID } = process.env;
+export const razorpayId = REACT_APP_RAZORPAY_KEY_ID;
 
 const CheckoutForm = (props) => {
   const navigate = useNavigate();
@@ -175,22 +175,27 @@ const CheckoutForm = (props) => {
 
   useEffect(() => {
     // Calculate the total amount before discount
-    const amount = cartItems.reduce(
-      (total, item) => total + item.price * item.quantity,
-      0
-    );
+    if (cartItems.length > 0) {
+      const amount = cartItems.reduce(
+        (total, item) => total + item.price * item.quantity,
+        0
+      );
 
-    let finalAmount = amount;
-    if (discount.isValid) {
-      if (discount.discountType === "Percentage") {
-        finalAmount = amount - (amount * discount.value) / 100;
-      } else if (discount.discountType === "Fixed") {
-        finalAmount = amount - discount.value;
-      } else {
-        finalAmount = amount;
+      let finalAmount = amount;
+      if (discount.isValid) {
+        if (discount.discountType === "Percentage") {
+          finalAmount = amount - (amount * discount.value) / 100;
+        } else if (discount.discountType === "Fixed") {
+          finalAmount = amount - discount.value;
+        } else {
+          finalAmount = amount;
+        }
       }
+      setBillAmount(finalAmount);
+    } else {
+      setBillAmount(0);
+      navigate("/shop");
     }
-    setBillAmount(finalAmount);
   }, [discount, cartItems]);
 
   const handleOrderPlacement = async () => {

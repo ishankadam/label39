@@ -117,6 +117,7 @@ const App = () => {
   useEffect(() => {
     getAllCategories({
       setCategories: setAllCategories,
+      display: true,
     });
   }, [country]);
 

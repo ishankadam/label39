@@ -432,11 +432,16 @@ export const trackDeliveryOrder = async (trackingId) => {
 };
 
 // Fetch all categories
-export const getAllCategories = async ({ setCategories, setLoading }) => {
+export const getAllCategories = async ({
+  setCategories,
+  setLoading,
+  display,
+}) => {
   try {
     const response = await fetch(`${apiUrl}/getCategories`, {
-      method: "GET",
+      method: "POST",
       headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ display }),
     });
 
     if (!response.ok) {
@@ -1577,5 +1582,25 @@ export const editcelebrityStyles = async ({
     throw error;
   } finally {
     setLoading(false);
+  }
+};
+
+export const sendTestEmail = async () => {
+  try {
+    const response = await fetch(`${apiUrl}/send-test-email`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to send test email");
+    }
+
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error("Error sending test email:", error);
+    return null;
   }
 };

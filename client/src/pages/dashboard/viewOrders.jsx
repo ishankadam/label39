@@ -1,28 +1,19 @@
-import React, { useEffect } from "react";
+import { CreditCard, Email, Home, Person, Phone } from "@mui/icons-material";
+import CheckCircleIcon from "@mui/icons-material/CheckCircleOutline";
 import {
-  Container,
-  Typography,
+  Box,
   Card,
   CardContent,
-  Grid,
   Chip,
+  Container,
   Divider,
+  Grid,
   List,
   ListItem,
   ListItemText,
-  Box,
-  Avatar,
+  Typography,
 } from "@mui/material";
-import {
-  ShoppingBag,
-  CreditCard,
-  LocalShipping,
-  Person,
-  Email,
-  Phone,
-  Home,
-} from "@mui/icons-material";
-import CheckCircleIcon from "@mui/icons-material/CheckCircleOutline";
+import React from "react";
 function ViewOrders(props) {
   const {
     orderId,
@@ -32,6 +23,9 @@ function ViewOrders(props) {
     cartItems,
     createdAt,
   } = props.data;
+
+  console.log("cartItems", cartItems);
+  console.log("checkoutData", checkoutData);
 
   const totalAmount = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
@@ -177,7 +171,7 @@ function ViewOrders(props) {
                           fontWeight: "500",
                           color: "#333",
                         }}
-                      >{`${checkoutData.firstName} ${checkoutData.lastName}`}</span>
+                      >{`${checkoutData.shippingAddress.firstName} ${checkoutData.shippingAddress.lastName}`}</span>
                     }
                   />
                 </ListItem>
@@ -193,7 +187,7 @@ function ViewOrders(props) {
                           color: "#333",
                         }}
                       >
-                        {checkoutData.email}{" "}
+                        {checkoutData.shippingAddress.email}{" "}
                       </span>
                     }
                   />
@@ -246,7 +240,7 @@ function ViewOrders(props) {
                         fontWeight: "500",
                         color: "#333",
                       }}
-                    >{`${checkoutData.address}, ${checkoutData.apartment}, ${checkoutData.city}, ${checkoutData.state} ${checkoutData.pincode}`}</span>
+                    >{`${checkoutData.shippingAddress.address}, ${checkoutData.shippingAddress.apartment}, ${checkoutData.shippingAddress.city}, ${checkoutData.shippingAddress.state} ${checkoutData.shippingAddress.pincode}`}</span>
                   </ListItemText>
                 </ListItem>
               </List>

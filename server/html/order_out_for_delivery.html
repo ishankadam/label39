@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Order Out for Delivery - TheLabel39</title>
+  </head>
+  <body
+    style="
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+    "
+  >
+    <table role="presentation" style="width: 100%; border-collapse: collapse">
+      <tr>
+        <td align="center" style="padding: 20px 0">
+          <table
+            role="presentation"
+            style="
+              width: 600px;
+              border-collapse: collapse;
+              border: 1px solid #e0e0e0;
+              background-color: #ffffff;
+            "
+          >
+            <!-- Header -->
+            <tr>
+              <td
+                style="
+                  padding: 30px 0;
+                  background-color: #f7ece9;
+                  text-align: center;
+                "
+              >
+                <h1 style="margin: 0; font-size: 24px; color: #a16149">
+                  TheLabel39
+                </h1>
+              </td>
+            </tr>
+
+            <!-- Main Content -->
+            <tr>
+              <td style="padding: 30px">
+                <h2 style="font-size: 18px; color: #333; margin: 0 0 20px 0">
+                  Dear <span id="user_name"></span>,
+                </h2>
+                <p
+                  style="
+                    font-size: 16px;
+                    line-height: 1.5;
+                    color: #555;
+                    margin: 0 0 20px 0;
+                  "
+                >
+                  Exciting news! Your order is out for delivery and will reach
+                  you soon. Please keep your phone handy and ensure someone is
+                  available to receive the package.
+                </p>
+
+                <!-- Order Details -->
+                <div style="margin: 25px 0">
+                  <h3 style="font-size: 16px; color: #333; margin: 0 0 15px 0">
+                    Order #<span id="order_id"></span>
+                  </h3>
+                  <p style="margin: 5px 0; font-size: 14px; color: #666">
+                    <span id="created_at"></span>
+                  </p>
+                </div>
+
+                <!-- Address Sections -->
+                <table
+                  style="width: 100%; margin: 20px 0; border-collapse: collapse"
+                >
+                  <tr>
+                    <td
+                      style="
+                        width: 48%;
+                        vertical-align: top;
+                        padding: 15px;
+                        background-color: #f9f9f9;
+                      "
+                    >
+                      <h4
+                        style="font-size: 14px; margin: 0 0 10px 0; color: #333"
+                      >
+                        Billing Address
+                      </h4>
+                      <p
+                        style="
+                          margin: 0;
+                          font-size: 13px;
+                          line-height: 1.4;
+                          color: #666;
+                        "
+                      >
+                        <span id="shipping_apartment_address"></span><br />
+                        <span id="shipping_address"></span><br />
+                        <span id="shipping_city"></span>,
+                        <span id="shipping_state"></span>,
+                        <span id="shipping_pincode"></span><br />
+                        <span id="country"></span><br />
+                        Phone: <span id="shipping_phone"></span><br />
+                      </p>
+                    </td>
+                    <td style="width: 4%"></td>
+                    <td
+                      style="
+                        width: 48%;
+                        vertical-align: top;
+                        padding: 15px;
+                        background-color: #f9f9f9;
+                      "
+                    >
+                      <h4
+                        style="font-size: 14px; margin: 0 0 10px 0; color: #333"
+                      >
+                        Shipping Address
+                      </h4>
+                      <p
+                        style="
+                          margin: 0;
+                          font-size: 13px;
+                          line-height: 1.4;
+                          color: #666;
+                        "
+                      >
+                        <span id="billing_apartment_address"></span><br />
+                        <span id="billing_address"></span><br />
+                        <span id="billing_city"></span>,
+                        <span id="billing_state"></span>,
+                        <span id="billing_pincode"></span><br />
+                        <span id="country"></span><br />
+                        Phone: <span id="billing_phone"></span><br />
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- Order Items -->
+                <table
+                  style="width: 100%; border-collapse: collapse; margin: 20px 0"
+                >
+                  <tr>
+                    <th
+                      style="
+                        text-align: left;
+                        padding: 10px;
+                        border-bottom: 2px solid #eee;
+                        font-size: 14px;
+                        color: #333;
+                      "
+                    >
+                      Items
+                    </th>
+                    <th
+                      style="
+                        text-align: left;
+                        padding: 10px;
+                        border-bottom: 2px solid #eee;
+                        font-size: 14px;
+                        color: #333;
+                      "
+                    >
+                      Qty
+                    </th>
+                    <th
+                      style="
+                        text-align: left;
+                        padding: 10px;
+                        border-bottom: 2px solid #eee;
+                        font-size: 14px;
+                        color: #333;
+                      "
+                    >
+                      Price
+                    </th>
+                  </tr>
+                  <tr id="cart_items_placeholder"></tr>
+                  <!-- Add other items similarly -->
+                </table>
+
+                <!-- Totals -->
+
+                <!-- Footer Text -->
+                <p
+                  style="
+                    font-size: 14px;
+                    color: #666;
+                    line-height: 1.5;
+                    border-top: 1px solid #eee;
+                    padding-top: 20px;
+                  "
+                >
+                  Thank you for shopping with us! <br />
+                  <br />
+                  If you have questions about your order, email us at
+                  <a href="" style="color: #a16149; text-decoration: none">
+                    thelabel39@gmail.com
+                  </a>
+                </p>
+              </td>
+            </tr>
+
+            <!-- Company Footer -->
+            <tr>
+              <td style="padding: 10px; background-color: #f7ece9">
+                <table
+                  role="presentation"
+                  style="
+                    width: 100%;
+                    border-collapse: collapse;
+                    border: 0;
+                    border-spacing: 0;
+                    font-size: 9px;
+                    font-family: Arial, sans-serif;
+                  "
+                >
+                  <tr>
+                    <td style="padding: 5px; width: 100%" align="center">
+                      <a
+                        href="https://www.thelabel39.com/"
+                        style="font-size: 13px; color: #666"
+                      >
+                        <img
+                          src="https://d3utcmyu0xsm2o.cloudfront.net/assets/logo 1.png"
+                          alt="Gift Card"
+                          width="120"
+                          style="
+                            height: auto;
+                            display: block;
+                            mix-blend-mode: multiply;
+                          "
+                      /></a>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

@@ -37,7 +37,7 @@ router.put(
 );
 
 // Routes for categories
-router.get("/getCategories", controller.get_all_categories);
+router.post("/getCategories", controller.get_all_categories);
 
 // Routes for Testimonials
 router.get("/getTestimonials", controller.get_all_testimonials);
@@ -176,6 +176,8 @@ router.put(
   controller.upload.array("image"),
   controller.edit_celebrity_Styles
 );
+
+router.post("/send-test-email", controller.send_test_email);
 
 // edit testimonial
 // router.put("/editTestimonial", controller.edit_testimonial);

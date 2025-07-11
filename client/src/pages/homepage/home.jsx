@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { getAllTestimonials } from "../../api";
+import {
+  getAllTestimonials,
+  sendTestEmail as sendTestEmailApi,
+} from "../../api";
 import { setSubscribeModal } from "../../store/cartSlice";
 import ViewProductModal from "../product/viewProduct";
 import AsSeenOn from "./asSeenOn";
@@ -67,6 +70,11 @@ const Home = (props) => {
     });
   };
 
+  const sendTestEmail = async () => {
+    const response = await sendTestEmailApi();
+    console.log(response);
+  };
+
   return (
     <div>
       <MainCorousel></MainCorousel>
@@ -109,6 +117,7 @@ const Home = (props) => {
       >
         Send Whatsapp message
       </Button> */}
+      {/* <Button onClick={() => sendTestEmail()}>Send Test Email</Button> */}
     </div>
   );
 };

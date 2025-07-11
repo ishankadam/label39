@@ -22,6 +22,8 @@ const jwt = require("jsonwebtoken");
 const Subscriber = require("../schema/subscribers");
 const aws = require("aws-sdk");
 const { S3Client } = require("@aws-sdk/client-s3");
+const { Resend } = require("resend");
+const resend = new Resend(process.env.RESEND_EMAIL_API_KEY);
 
 // Initialize S3 client
 const s3 = new S3Client({
@@ -411,6 +413,7 @@ const create_product = async (req, res) => {
   try {
     const productsData = JSON.parse(req.body.products); // This will now be an array
     const limit = Number(req.body.limit);
+    const page = Number(req.body.page);
     const skip = (page - 1) * limit;
 
     const images = req.files.map((file) => file.originalname);
@@ -478,6 +481,8 @@ const createPayment = async (req, res) => {
       currency: currency || "INR",
       receipt: receipt || "receipt#1",
     });
+
+    console.log("order", order);
 
     res.status(200).json({
       success: true,
@@ -699,12 +704,20 @@ const trackDeliveryOrder = async (req, res) => {
   }
 };
 
-const get_all_categories = async (_req, res) => {
+const get_all_categories = async (req, res) => {
+  const { display } = req.body;
   try {
-    const category = await Category.find({})
-      .select("-_id -__v")
-      .sort({ priority: 1 }); // Exclude _id and __v fields
-    res.status(200).json(category); // Send the result as JSON
+    if (display) {
+      const category = await Category.find({ isActive: true })
+        .select("-_id -__v")
+        .sort({ priority: 1 }); // Exclude _id and __v fields
+      res.status(200).json(category); // Send the result as JSON
+    } else {
+      const category = await Category.find({})
+        .select("-_id -__v")
+        .sort({ priority: 1 }); // Exclude _id and __v fields
+      res.status(200).json(category); // Send the result as JSON
+    }
   } catch (error) {
     res.status(500).json({ message: "Error fetching events", error });
   }
@@ -1524,13 +1537,17 @@ const change_order_status = async (req, res) => {
   try {
     const orderId = req.body.orderId;
     const orderStatus = req.body.orderStatus;
+    const orderDetails = await orders.findOne({ orderId });
+    if (!orderDetails) {
+      return res.status(404).json({ message: "Order not found" });
+    }
     const order = await orders.findOneAndUpdate(
       { orderId },
       { $set: { status: orderStatus } },
       { new: true }
     );
     if (orderStatus === "delivered") {
-      const toEmail = order.checkoutData.shippingAddress.email;
+      const toEmail = orderDetails.checkoutData.shippingAddress.email;
       const subject = "THE LABEL 39 - Order Delivered";
       const htmlFilePath = "./html/order_delivered_email.html";
 
@@ -1540,6 +1557,19 @@ const change_order_status = async (req, res) => {
         emailBody: htmlFilePath,
         isHtml: true,
         type: "order_delivered",
+        data: orderDetails,
+      });
+    } else if (orderStatus === "shipped") {
+      const toEmail = order.checkoutData.shippingAddress.email;
+      const subject = "THE LABEL 39 - Order Shipped";
+      const htmlFilePath = "./html/order_out_for_delivery.html";
+
+      await sendEmail({
+        to: toEmail,
+        subject,
+        emailBody: htmlFilePath,
+        isHtml: true,
+        type: "order_out_for_delivery",
         data: order,
       });
     }
@@ -1932,6 +1962,82 @@ const edit_celebrity_Styles = async (req, res) => {
   }
 };
 
+const send_test_email = async (req, res) => {
+  try {
+    const toEmail = "sangeetamane239@gmail.com";
+    const subject = "THE LABEL 39 - Order Confirmed";
+    const htmlFilePath = "./html/order_confirm_email.html";
+
+    const order = {
+      orderId: "order_PqrPNkZigUVijW",
+      userId: "5600728180",
+      paymentId: "pay_PqrPVgJZ8suI9w",
+      checkoutData: {
+        country: "INR",
+        shippingAddress: {
+          firstName: "Ishan",
+          lastName: "Kadam",
+          address: "qeuih",
+          apartment: "heoihqoih",
+          email: "ishan.kadam_19@sakec.ac.in",
+          state: "Maharastra",
+          city: "Mumbai",
+          pincode: "983284",
+        },
+        phone: "9837248724",
+        billingAddress: {
+          firstName: "Tanvi",
+          lastName: "ganaga",
+          address: "khwoi",
+          apartment: "qwejoiqj",
+          email: "tanvi@gmail.com",
+          state: "Maharastra",
+          city: "Mumbai",
+          pincode: "827342",
+        },
+      },
+      paymentInfo: {
+        status: "success",
+        method: "razorpay",
+      },
+      cartItems: [
+        {
+          productId: 7458689532,
+          name: "IVORY FLEUR CO-ORD SET",
+          price: 13300,
+          quantity: 1,
+          deliveryIn: ["Shipped in 2-3 weeks"],
+          images: ["Cord30.jpg"],
+          sizes: {
+            Upper: "XS",
+            Bottom: "XS",
+          },
+          sale: {
+            discountType: "Percentage",
+            discountValue: 10,
+            isActive: true,
+          },
+        },
+      ],
+      status: "delivered",
+      createdAt: new Date("2025-02-02T13:35:56.339Z"),
+    };
+
+    await sendEmail({
+      to: toEmail,
+      subject,
+      emailBody: htmlFilePath,
+      isHtml: true,
+      type: "order_confirm",
+      data: order,
+    });
+    res.status(200).json({ message: "Email sent successfully" });
+  } catch (error) {
+    console.error("Error in send_test_email:", error);
+    res.status(400).send({ error: error.message });
+  }
+};
+
 module.exports = {
   get_all_products,
   create_product,
@@ -1982,4 +2088,5 @@ module.exports = {
   sendWhatsAppMessage,
   edit_client_diaries,
   edit_celebrity_Styles,
+  send_test_email,
 };

@@ -72,6 +72,13 @@ function ManageOrders(props) {
       optionList: orderStatus,
     },
     {
+      id: "orderDate",
+      label: "Order Date",
+      key: "createdAt",
+      type: "date",
+      align: "left",
+    },
+    {
       id: "notification-icon",
       label: "Change order status",
       key: "editAction",
