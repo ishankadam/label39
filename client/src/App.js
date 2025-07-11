@@ -78,7 +78,7 @@ const App = () => {
     data: {},
   });
 
-  const [underMaintainance, setUnderMaintainance] = useState(true);
+  const [underMaintainance, setUnderMaintainance] = useState(false);
 
   const [isShaking, setIsShaking] = useState(false);
 
