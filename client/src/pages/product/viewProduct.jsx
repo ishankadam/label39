@@ -138,7 +138,7 @@ const ViewProductModal = (props) => {
   };
 
   const handleShare = () => {
-    const message = `Check out this product: ${product.name} - ${product.description}.\nBuy here: ${window.location.origin}/product/${product.productId}`;
+    const message = `Check out this product: ${product.name} - ${product.description}.\nBuy here: ${window.location.origin}/products/${product.productId}`;
     const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
 
     window.open(whatsappUrl, "_blank");

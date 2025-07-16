@@ -294,6 +294,9 @@ const get_all_products = async (req, res) => {
         case "readyToShip":
           query.readyToShip = true;
           break;
+        case "asSeenOn":
+          query.asSeenOn = { $exists: true, $ne: null, $ne: "" };
+          break;
         default:
           break;
       }
